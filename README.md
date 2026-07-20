@@ -1,20 +1,25 @@
-# mazos-site
+# Manazir Hussain — portfolio
 
-Public one-pager for **MAZos — the loop cockpit**: the control plane for supervised AI agent loops with machine-verified receipts.
+Public engineering portfolio at [mazos-site.vercel.app](https://mazos-site.vercel.app).
 
-Built as its own three-iteration loop (scaffold → evidence → ship quality), each iteration verified with `npm run build` and committed with the result — the site practices what it pitches.
+The homepage is a recruiter-readable CV led by the live JobFilter product, followed by selected supporting work whose descriptions are sourced from the corresponding repositories. `/mazos` is a separate factual case study for the local-first agent-loop cockpit.
+
+## Structure
+
+- `/` — profile, flagship JobFilter case study, supporting projects, engineering approach, and contact
+- `/mazos` — MAZos scope, workflow, verification receipt, safety model, and implementation links
 
 ## Stack
 
-Next.js (App Router, static export) · TypeScript · plain CSS. No other dependencies.
+Next.js App Router · TypeScript · plain CSS · static export
 
 ## Run
 
 ```bash
 npm install
-npm run dev     # local
-npm run build   # static export to out/
-npm run lint    # tsc --noEmit
+npm run dev
+npm run lint
+npm run build
 ```
 
-Deployed on Vercel.
+The repository has no runtime analytics or form submission. External product and repository links open their respective public sources.

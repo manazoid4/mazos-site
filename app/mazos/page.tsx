@@ -1,141 +1,147 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'MAZos — the loop cockpit',
+  title: 'MAZos case study — Manazir Hussain',
   description:
-    'The control plane for AI agent loops: gate them before launch, verify them mechanically, and keep machine-filled receipts.',
+    'A factual case study of MAZos, a local-first cockpit for gating, verifying, and recording supervised coding-agent work.',
 };
 
 const LOOP_STEPS = [
-  { n: '01', t: 'Discover', d: 'A scheduled triage reads repo state, CI, and the shipping spine, and proposes what deserves a loop.' },
-  { n: '02', t: 'Gate', d: 'Every proposed loop is scored before launch. No verify command, no loop — hard rule.' },
-  { n: '03', t: 'Prompt', d: 'Plan and build passes are separate prompts. The agent that decides is never the agent that does.' },
-  { n: '04', t: 'Verify', d: 'The build/test command runs mechanically inside the cockpit. A failing check can never produce a pass.' },
-  { n: '05', t: 'Receipt', d: 'Each iteration ends in a machine-filled receipt: exit code, commit range, diff size, tamper check.' },
+  { n: '01', title: 'Define', detail: 'Choose one outcome, repository, acceptance criteria, and an allowlisted verify command.' },
+  { n: '02', title: 'Gate', detail: 'Score the proposed task before launch. A loop without a verification action cannot be saved.' },
+  { n: '03', title: 'Separate', detail: 'Use distinct planning and building prompts so deciding and changing code remain explicit stages.' },
+  { n: '04', title: 'Verify', detail: 'Run the registered build or test command outside the agent response and capture its real exit code.' },
+  { n: '05', title: 'Record', detail: 'Store the commit range, diff size, criteria state, tamper check, and outcome in a receipt.' },
 ];
 
-const PROOF = [
-  'Loops cannot mark themselves complete — completion requires a passing receipt and every criterion green',
-  'Criteria files are hash-checked; an agent editing its own success conditions renders the iteration failed',
-  'A morning triage loop discovers work and proposes new loops unattended; a human approves every one',
-  'Repeated identical failures trip a circuit breaker; silent zombie loops auto-stop after three days',
-  'Built on the published playbooks: Anthropic harness engineering, generator–evaluator splits, plan/build loops',
+const GUARANTEES = [
+  'A loop cannot complete unless its latest receipt passes and every criterion is green.',
+  'Criteria files are hash-checked; changing the success conditions invalidates the iteration.',
+  'Repeated identical failures open a circuit breaker instead of running forever.',
+  'The shell surface is limited to registered verification and operations commands.',
+  'Agents are launched through operator-approved prompts; MAZos does not autonomously execute them.',
 ];
 
 function Receipt() {
   return (
-    <pre className="receipt" aria-label="Example loop receipt">
+    <pre className="receipt" aria-label="Example MAZos verification receipt">
 {`{
-  `}<span className="k">{'"kind"'}</span>{`: "run",
-  `}<span className="k">{'"loopId"'}</span>{`: "custom_jobfilter_dogfood_…_89ab2546",
-  `}<span className="k">{'"verify"'}</span>{`: [{ "actionId": "verify_jobfilter", "exitCode": 0, "passed": `}<span className="ok">true</span>{` }],
-  `}<span className="k">{'"commitRange"'}</span>{`: { "from": null, "to": "49019e2", "count": 0 },
-  `}<span className="k">{'"criteriaTampered"'}</span>{`: false,
-  `}<span className="k">{'"outcome"'}</span>{`: `}<span className="ok">{'"pass"'}</span>{`,
-  `}<span className="k">{'"note"'}</span>{`: "dogfood: first machine receipt"
+  `}<span className="receipt-key">{`"kind"`}</span>{`: "run",
+  `}<span className="receipt-key">{`"verify"`}</span>{`: [{ "actionId": "verify_jobfilter", "exitCode": 0, "passed": `}<span className="receipt-pass">true</span>{` }],
+  `}<span className="receipt-key">{`"commitRange"`}</span>{`: { "from": null, "to": "49019e2", "count": 0 },
+  `}<span className="receipt-key">{`"criteriaTampered"`}</span>{`: false,
+  `}<span className="receipt-key">{`"outcome"`}</span>{`: `}<span className="receipt-pass">{`"pass"`}</span>{`
 }`}
     </pre>
   );
 }
 
-import Link from 'next/link';
-
 export default function Page() {
   return (
     <main>
-      <Link className="back-link" href="/">← Manazir Hussain</Link>
-      <section aria-label="Introduction">
-        <p className="kicker">MAZos — the loop cockpit</p>
-        <h1>AI agents write the code. Someone has to keep the score.</h1>
-        <p className="lede">
-          MAZos turns <strong>&ldquo;what ships next&rdquo;</strong> into supervised agent loops with{' '}
-          <strong>machine-verified receipts</strong>. Agents generate; MAZos gates, verifies, and remembers.
-        </p>
-      </section>
+      <header className="site-nav">
+        <Link className="wordmark" href="/" aria-label="Manazir Hussain portfolio">MH</Link>
+        <nav aria-label="Case study navigation">
+          <Link href="/">Portfolio</Link>
+          <a href="https://mazos-command-centre.vercel.app" target="_blank" rel="noreferrer">Live product</a>
+          <a href="https://github.com/manazoid4/mazos-ui" target="_blank" rel="noreferrer">Repository</a>
+        </nav>
+      </header>
 
-      <section aria-label="How a loop works">
-        <p className="kicker">The primitive</p>
-        <h2>One loop, five moves</h2>
-        <div className="loop-strip">
-          {LOOP_STEPS.map((s) => (
-            <div className="loop-step" key={s.n}>
-              <div className="n">{s.n}</div>
-              <div className="t">{s.t}</div>
-              <div className="d">{s.d}</div>
-            </div>
-          ))}
+      <section className="hero mazos-hero" aria-labelledby="mazos-title">
+        <p className="identity">Product case study · Local-first operator tooling</p>
+        <h1 id="mazos-title">MAZos keeps agent work bounded and verifiable.</h1>
+        <p className="hero-copy">
+          It is a control surface for deciding what ships next, preparing a supervised agent loop, running a
+          registered check, and recording hard evidence. It supports product delivery; it does not replace human
+          approval or execute agents on its own.
+        </p>
+        <div className="hero-actions">
+          <a className="button primary" href="https://mazos-command-centre.vercel.app" target="_blank" rel="noreferrer">Open the cockpit</a>
+          <a className="button secondary" href="https://github.com/manazoid4/mazos-ui" target="_blank" rel="noreferrer">Inspect the code</a>
         </div>
       </section>
 
-      <section aria-label="Receipts">
-        <p className="kicker">The artifact</p>
-        <h2>No receipt, it didn&rsquo;t happen</h2>
-        <Receipt />
-        <p className="receipt-caption">
-          A real receipt from the cockpit&rsquo;s own logs. The verify command ran, the exit code was captured, the
-          commit was recorded, and the success criteria were hash-checked against tampering. You cannot click your
-          way to a completed loop.
-        </p>
+      <section className="scope-section" aria-labelledby="scope-title">
+        <div className="section-intro">
+          <p className="section-label">Current scope</p>
+          <h2 id="scope-title">One screen for decisions, loops, evidence, and shipped work.</h2>
+        </div>
+        <div className="scope-columns">
+          <div>
+            <h3>What exists</h3>
+            <ul className="evidence-list">
+              <li>A shipping spine across products with the next action, evidence, and blocker.</li>
+              <li>A loop deck with plan/build prompts, criteria, registered checks, and receipts.</li>
+              <li>Open human decisions, recent commits, repository state, and run history.</li>
+              <li>Fourteen API routes plus an allowlisted local command registry.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>What it deliberately does not do</h3>
+            <ul className="evidence-list muted-list">
+              <li>No autonomous agent execution.</li>
+              <li>No unrestricted shell access.</li>
+              <li>No model calls, email, or cron from the cockpit.</li>
+              <li>No claim that a generated response equals verified completion.</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
-      <section aria-label="Design guarantees">
-        <p className="kicker">Design guarantees</p>
-        <h2>Trust is structural, not vibes</h2>
-        <ul className="proof">
-          {PROOF.map((p) => (
-            <li key={p}>{p}</li>
+      <section className="loop-section" aria-labelledby="loop-title">
+        <div className="section-intro">
+          <p className="section-label">The loop</p>
+          <h2 id="loop-title">Five moves from intent to evidence.</h2>
+        </div>
+        <ol className="loop-steps">
+          {LOOP_STEPS.map((step) => (
+            <li key={step.n}>
+              <span>{step.n}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.detail}</p>
+              </div>
+            </li>
           ))}
+        </ol>
+      </section>
+
+      <section className="receipt-section" aria-labelledby="receipt-title">
+        <div className="section-intro">
+          <p className="section-label">The artifact</p>
+          <h2 id="receipt-title">The verdict comes from the check, not the agent.</h2>
+          <p>Receipts join mechanical verification to the code change and the criteria that defined success.</p>
+        </div>
+        <Receipt />
+      </section>
+
+      <section className="guarantees-section" aria-labelledby="guarantees-title">
+        <div className="section-intro">
+          <p className="section-label">Safety model</p>
+          <h2 id="guarantees-title">Constraints built into the workflow.</h2>
+        </div>
+        <ul className="guarantee-list">
+          {GUARANTEES.map((guarantee) => <li key={guarantee}>{guarantee}</li>)}
         </ul>
       </section>
 
-      <section aria-label="Why now">
-        <p className="kicker">Why now</p>
-        <h2>Generation became free. Judgment didn&rsquo;t.</h2>
-        <div className="grafs">
-          <div className="graf">
-            <h3>The loop-engineering wave</h3>
-            <p>
-              In mid-2026 the people building coding agents converged on the same conclusion: stop prompting agents,
-              design the loops that prompt them. The tooling exists. The control plane doesn&rsquo;t.
-            </p>
-          </div>
-          <div className="graf">
-            <h3>Verification is the bottleneck</h3>
-            <p>
-              Agents produce plausible work at machine speed. The scarce resource is knowing what is actually done,
-              actually verified, actually safe to ship. MAZos makes that mechanical.
-            </p>
-          </div>
-          <div className="graf">
-            <h3>Solo-operator leverage</h3>
-            <p>
-              MAZos runs daily as the control plane for a five-product portfolio built by one person. It is dogfooded
-              infrastructure, not a demo.
-            </p>
-          </div>
+      <aside className="case-conclusion" aria-labelledby="conclusion-title">
+        <div>
+          <p className="section-label">Why it belongs here</p>
+          <h2 id="conclusion-title">MAZos shows how I operate; JobFilter shows what I ship.</h2>
         </div>
-      </section>
-
-      <section aria-label="Operator">
-        <p className="kicker">Operator</p>
-        <div className="operator">
-          <p>
-            Built and run daily by <strong>Manazir Hussain</strong> — shipping FlowLens, JobFilter, and MAZos itself
-            through the loops it supervises.
-          </p>
-          <p className="role">system architect · founder · AI engineer</p>
-        </div>
-      </section>
-
-      <section aria-label="Contact">
-        <p className="kicker">Contact</p>
-        <a className="cta" href="mailto:manazoid4@gmail.com">manazoid4@gmail.com</a>
-        <p className="contact-note">Deck, live walkthrough, and receipts on request.</p>
-      </section>
+        <p>
+          The cockpit is useful portfolio evidence because it turns my delivery standards into a working system.
+          The main portfolio keeps it secondary so a recruiter can understand the products first.
+        </p>
+        <Link className="text-link" href="/">Return to the portfolio →</Link>
+      </aside>
 
       <footer>
-        <span>MAZos © 2026</span>
-        <span>every claim on this page is receipt-backed</span>
+        <span>MAZos case study © 2026</span>
+        <a href="mailto:manazoid4@gmail.com">manazoid4@gmail.com</a>
       </footer>
     </main>
   );
