@@ -3,12 +3,12 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mazos-site.vercel.app'),
-  title: 'MAZos — the loop cockpit',
+  title: 'Manazir Hussain — System Architect & Founder',
   description:
-    'The control plane for AI agent loops: gate them before launch, verify them mechanically, and keep machine-filled receipts. Agents generate; MAZos keeps the score.',
+    'Portfolio: FlowLens, JobFilter, and MAZos — a control plane for supervised AI agent loops with machine-verified receipts.',
   openGraph: {
-    title: 'MAZos — the loop cockpit',
-    description: 'Supervised AI agent loops with machine-verified receipts.',
+    title: 'Manazir Hussain — System Architect & Founder',
+    description: 'FlowLens, JobFilter, MAZos, and the loop-engineering method behind them.',
     type: 'website',
   },
 };
