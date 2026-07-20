@@ -37,9 +37,8 @@ export default function Page() {
         <p className="kicker">MAZos — the loop cockpit</p>
         <h1>AI agents write the code. Someone has to keep the score.</h1>
         <p className="lede">
-          MAZos is an operating console where a solo founder turns <strong>&ldquo;what ships next&rdquo;</strong> into
-          supervised agent loops with <strong>machine-verified receipts</strong>. Agents generate; MAZos gates,
-          verifies, and remembers.
+          MAZos turns <strong>&ldquo;what ships next&rdquo;</strong> into supervised agent loops with{' '}
+          <strong>machine-verified receipts</strong>. Agents generate; MAZos gates, verifies, and remembers.
         </p>
       </section>
 
