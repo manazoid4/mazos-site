@@ -2,9 +2,32 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'MAZos case study — Manazir Hussain',
+  title: 'MAZos case study',
   description:
     'A factual case study of MAZos, a local-first cockpit for gating, verifying, and recording supervised coding-agent work.',
+  alternates: {
+    canonical: '/mazos',
+  },
+  openGraph: {
+    title: 'MAZos case study — Manazir Hussain',
+    description: 'A local-first control surface for bounded, supervised, and mechanically verified coding-agent work.',
+    url: '/mazos',
+    type: 'article',
+    images: [
+      {
+        url: '/social-card.png',
+        width: 1200,
+        height: 630,
+        alt: 'Manazir Hussain — operational B2B and applied-AI product engineer',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'MAZos case study — Manazir Hussain',
+    description: 'Bounded coding-agent work with allowlisted verification and evidence receipts.',
+    images: ['/social-card.png'],
+  },
 };
 
 const LOOP_STEPS = [
@@ -25,7 +48,9 @@ const GUARANTEES = [
 
 function Receipt() {
   return (
-    <pre className="receipt" aria-label="Example MAZos verification receipt">
+    <figure>
+      <figcaption className="sr-only">Example MAZos verification receipt</figcaption>
+      <pre className="receipt">
 {`{
   `}<span className="receipt-key">{`"kind"`}</span>{`: "run",
   `}<span className="receipt-key">{`"verify"`}</span>{`: [{ "actionId": "verify_jobfilter", "exitCode": 0, "passed": `}<span className="receipt-pass">true</span>{` }],
@@ -33,13 +58,14 @@ function Receipt() {
   `}<span className="receipt-key">{`"criteriaTampered"`}</span>{`: false,
   `}<span className="receipt-key">{`"outcome"`}</span>{`: `}<span className="receipt-pass">{`"pass"`}</span>{`
 }`}
-    </pre>
+      </pre>
+    </figure>
   );
 }
 
 export default function Page() {
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <header className="site-nav">
         <Link className="wordmark" href="/" aria-label="Manazir Hussain portfolio">MH</Link>
         <nav aria-label="Case study navigation">
@@ -130,7 +156,7 @@ export default function Page() {
       <aside className="case-conclusion" aria-labelledby="conclusion-title">
         <div>
           <p className="section-label">Why it belongs here</p>
-          <h2 id="conclusion-title">MAZos shows how I operate; JobFilter shows what I ship.</h2>
+          <h2 id="conclusion-title">MAZos shows how I operate; Agent Nudge shows what I ship.</h2>
         </div>
         <p>
           The cockpit is useful portfolio evidence because it turns my delivery standards into a working system.

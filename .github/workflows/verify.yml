@@ -1,0 +1,43 @@
+name: Verify portfolio
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - 'agents/**'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install exact dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Build static export
+        run: npm run build
+
+      - name: Run deterministic HTML and link tests
+        run: npm test
+
+      - name: Smoke-test local static server
+        run: npm run smoke
