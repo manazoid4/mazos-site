@@ -2,12 +2,12 @@
 
 Public engineering portfolio at [mazos-site.vercel.app](https://mazos-site.vercel.app).
 
-The homepage is a recruiter-readable engineering evidence surface. It leads with the released Agent Nudge Windows MVP and describes JobFilter as being in source repair and product validation. `/mazos` is a separate factual case study for the local-first agent-loop cockpit.
+The homepage is a recruiter-readable evidence surface for junior applied-AI engineering roles. It maps Agent Nudge, JobFilter, and OpenFlowKit directly to agent infrastructure, data pipelines, integrations, evaluation, and production reliability.
 
 ## Structure
 
-- `/` — positioning, Agent Nudge technical flagship, truth-aligned product evidence, engineering approach, and contact
-- `/mazos` — MAZos scope, workflow, verification receipt, safety model, and implementation links
+- `/` — role positioning, applied-AI evidence, three project case studies, demonstrated capabilities, growth direction, and contact
+- `/mazos` — no-index legacy handoff into the main portfolio; the internal MAZos concept is no longer part of recruiter navigation
 
 ## Stack
 

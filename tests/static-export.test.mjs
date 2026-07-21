@@ -41,13 +41,19 @@ async function internalTargetExists(urlPath) {
   return false;
 }
 
-test('homepage is truth-aligned and exposes a direct evidence path', async () => {
+test('homepage is role-specific, truth-aligned, and exposes direct evidence paths', async () => {
   const html = await readPage('/');
-  assert.match(html, /Current technical flagship/);
-  assert.match(html, /Source repair/);
+  assert.match(html, /junior applied-AI engineering roles/);
+  assert.match(html, /dependable software around AI agents and data/);
+  assert.match(html, /Agent Nudge/);
+  assert.match(html, /JobFilter/);
+  assert.match(html, /OpenFlowKit/);
   assert.match(html, /Find a Tender/);
-  assert.match(html, /Inspect release evidence/);
-  assert.doesNotMatch(html, /<span class="status live">Production<\/span>/);
+  assert.match(html, /jobfilter-scan-result\.webp/);
+  assert.match(html, /jobfilter-scan-result-mobile\.webp/);
+  assert.match(html, /My strongest public evidence today is product and systems engineering around AI in TypeScript/);
+  assert.doesNotMatch(html, /MAZos/);
+  assert.doesNotMatch(html, /Operational B2B/);
 });
 
 test('metadata and accessible navigation are present on both pages', async () => {
@@ -84,6 +90,16 @@ test('same-page fragment links point to existing IDs', async () => {
   for (const fragment of fragments) {
     assert.match(html, new RegExp(`id="${fragment}"`), `Missing fragment target #${fragment}`);
   }
+});
+
+test('legacy case-study route is removed from discovery and redirects attention to outcomes', async () => {
+  const home = await readPage('/');
+  const moved = await readPage('/mazos');
+  const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
+  assert.doesNotMatch(home, /href="\/mazos"/);
+  assert.doesNotMatch(sitemap, /<loc>[^<]+\/mazos(?:\/)?<\/loc>/);
+  assert.match(moved, /This case study has moved/);
+  assert.match(moved, /noindex/);
 });
 
 test('new-tab links declare a safe opener relationship', async () => {
