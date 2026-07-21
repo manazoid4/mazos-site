@@ -2,15 +2,15 @@ import Link from 'next/link';
 
 const SELECTED_WORK = [
   {
-    name: 'Agent Nudge',
-    status: 'Windows MVP',
+    name: 'JobFilter',
+    status: 'Source repair · validation',
     summary:
-      'A local-first coordination layer that warns coding agents about conflicting edits, changed decisions, and failed approaches before they act.',
+      'An opportunity-intelligence product for UK trade businesses, currently being repaired around the post-2025 public-procurement data path.',
     proof:
-      'Ships a SQLite ledger, CLI, MCP server, hook bridge, desktop shell, integration tests, and a public two-agent proof with HOLD / REVIEW / CLEAR outcomes.',
-    stack: 'TypeScript · SQLite · MCP · Windows desktop',
-    repo: 'https://github.com/manazoid4/agent-nudge',
-    live: 'https://agent-nudge-bay.vercel.app/#demo',
+      'The implemented system covers ingestion, normalisation, scoring, server-side access controls, regression gates, Supabase, Stripe, and delivery adapters. Contracts Finder coverage did not yield sellable leads, so migration to the current Find a Tender data path and renewed relevance testing come before launch claims.',
+    stack: 'Next.js · TypeScript · public procurement data · Supabase',
+    repo: 'https://github.com/manazoid4/JobFilterV1',
+    live: 'https://jobfilter.uk',
   },
   {
     name: 'OpenFlowKit',
@@ -38,7 +38,7 @@ const SELECTED_WORK = [
 
 export default function Page() {
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <header className="site-nav">
         <a className="wordmark" href="#top" aria-label="Manazir Hussain, back to top">
           MH
@@ -52,83 +52,94 @@ export default function Page() {
       </header>
 
       <section className="hero" id="top" aria-labelledby="intro-title">
-        <p className="identity">Manazir Hussain · Product-minded TypeScript engineer</p>
-        <h1 id="intro-title">I turn messy operating problems into working software.</h1>
+        <p className="identity">Manazir Hussain · Operational B2B and applied-AI product engineer</p>
+        <h1 id="intro-title">I turn messy workflows into bounded, verifiable software.</h1>
         <p className="hero-copy">
-          I design, build, test, and ship full-stack products—usually where data, automation, and human judgment
-          meet. My strongest project is <strong>JobFilter</strong>, a live opportunity-intelligence product for UK
-          trades.
+          I design and ship full-stack TypeScript systems where data, automation, and human judgment meet. My
+          clearest current technical evidence is <strong>Agent Nudge</strong>: a released, local-first coordination
+          layer for coding agents.
         </p>
         <div className="hero-actions">
-          <a className="button primary" href="#jobfilter">See the flagship project</a>
-          <a className="button secondary" href="https://github.com/manazoid4" target="_blank" rel="noreferrer">
-            GitHub profile
+          <a className="button primary" href="#agent-nudge">See the technical flagship</a>
+          <a
+            className="button secondary"
+            href="https://github.com/manazoid4/agent-nudge#live-product-proof"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Inspect release evidence
           </a>
         </div>
-        <p className="availability">Based in the UK · Open to product engineering, AI systems, and technical founder roles</p>
+        <p className="availability">
+          Based in the UK · Open to product engineering and applied-AI work in operational B2B teams
+        </p>
       </section>
 
       <section className="work-section" id="work" aria-labelledby="work-title">
         <div className="section-intro">
           <p className="section-label">Selected work</p>
-          <h2 id="work-title">One flagship, then the supporting systems.</h2>
-          <p>Each description below reflects what is implemented in the linked repository—not a future pitch.</p>
+          <h2 id="work-title">Technical evidence first, with product status kept explicit.</h2>
+          <p>Each description separates what works now from what remains unproven.</p>
         </div>
 
-        <article className="flagship" id="jobfilter">
+        <article className="flagship" id="agent-nudge">
           <div className="flagship-copy">
             <div className="project-meta">
-              <span className="status live">Production</span>
-              <span>Flagship case study</span>
+              <span className="status live">Released Windows MVP</span>
+              <span>Current technical flagship</span>
             </div>
-            <h3>JobFilter</h3>
+            <h3>Agent Nudge</h3>
             <p className="project-lede">
-              Opportunity intelligence for UK trades. It ingests public procurement data, normalises and scores
-              opportunities, protects paid buyer details, and presents the strongest work for a trade and postcode.
+              A local-first preflight and receipt layer that helps coding agents surface overlapping work, changed
+              decisions, and failed approaches before another agent acts on stale context.
             </p>
 
             <h4>What I built</h4>
             <ul className="evidence-list">
-              <li>A source pipeline for ingestion, normalisation, deduplication, scoring, ranking, and partial failures.</li>
-              <li>Server-side free/paid redaction for buyer identity, exact value, deadlines, actions, and score depth.</li>
-              <li>Next.js account and API surfaces with Supabase, Stripe, WhatsApp, and provider activation checks.</li>
-              <li>Release gates covering security, type safety, postcode rules, privacy, lead quality, hidden routes, and production builds.</li>
+              <li>A TypeScript CLI, localhost daemon, MCP server, provider hooks, and sandboxed Electron shell.</li>
+              <li>A project-scoped SQLite ledger for agent presence, expiring path claims, facts, cursors, and receipts.</li>
+              <li>Deterministic HOLD / REVIEW / CLEAR decisions with acknowledgement tracked separately from delivery.</li>
+              <li>Unit, integration, end-to-end, packaging, security, and release-smoke checks for the Windows MVP.</li>
             </ul>
 
             <div className="project-links">
-              <a className="button primary" href="https://jobfilter.uk" target="_blank" rel="noreferrer">Open live product</a>
-              <a className="text-link" href="https://github.com/manazoid4/JobFilterV1" target="_blank" rel="noreferrer">Read the repository →</a>
+              <a className="button primary" href="https://agent-nudge-bay.vercel.app/#demo" target="_blank" rel="noreferrer">
+                Try the evidence demo
+              </a>
+              <a className="text-link" href="https://github.com/manazoid4/agent-nudge" target="_blank" rel="noreferrer">
+                Inspect code and release checks →
+              </a>
             </div>
           </div>
 
           <figure className="product-shot">
-            {/* The image is served from the product repository so this case study stays tied to shipped work. */}
             <img
-              src="https://raw.githubusercontent.com/manazoid4/JobFilterV1/main/docs/screenshots/home-desktop.png"
-              alt="JobFilter homepage showing its yellow and black opportunity-intelligence interface"
+              src="/agent-nudge-demo.webp"
+              alt="Agent Nudge interactive demo showing two coding agents and a conflict review outcome"
               width="1440"
               height="900"
+              loading="lazy"
+              decoding="async"
             />
-            <figcaption>Live Next.js product · deployed on Vercel</figcaption>
+            <figcaption>Local-first runtime · public fixture demo · released Windows MVP</figcaption>
           </figure>
 
           <div className="case-notes">
             <div>
               <h4>Engineering focus</h4>
-              <p>Next.js · TypeScript · Supabase · Stripe · data ingestion · scoring · privacy gates · GitHub Actions</p>
+              <p>TypeScript · SQLite · MCP · Electron · provider hooks · deterministic coordination · release checks</p>
             </div>
             <div>
               <h4>Current truth</h4>
               <p>
-                The product is live, but source coverage still needs proving before a broad launch: a 42-scan audit
-                returned no sellable lead. Provider credentials and payment/delivery activation remain explicit
-                dependencies rather than hidden claims.
+                Version 0.4 proves the coordination loop and ships a Windows package. It does not infer hidden model
+                state, guarantee coverage of every provider action, or yet provide evidence of external adoption.
               </p>
             </div>
           </div>
         </article>
 
-        <div className="project-list" aria-label="Supporting projects">
+        <div className="project-list">
           {SELECTED_WORK.map((project) => (
             <article className="project-row" key={project.name}>
               <div className="project-title">
@@ -141,7 +152,7 @@ export default function Page() {
                 <p>{project.proof}</p>
               </div>
               <div className="row-links">
-                <a href={project.live} target="_blank" rel="noreferrer">Live demo ↗</a>
+                <a href={project.live} target="_blank" rel="noreferrer">Open current build ↗</a>
                 <a href={project.repo} target="_blank" rel="noreferrer">Repository ↗</a>
               </div>
             </article>
@@ -161,18 +172,18 @@ export default function Page() {
           </div>
           <div>
             <h3>Data and automation</h3>
-            <p>Build ingestion and scoring pipelines, deterministic agent tooling, provider integrations, and privacy-aware access boundaries.</p>
+            <p>Build ingestion and scoring pipelines, applied-AI workflows, deterministic agent tooling, and privacy-aware access boundaries.</p>
           </div>
           <div>
             <h3>Delivery discipline</h3>
-            <p>Use regression tests, dependency audits, protected branches, CI, deployment checks, and honest limitation notes as part of the product.</p>
+            <p>Use regression tests, dependency audits, CI checks, deployment checks, and honest limitation notes as part of the product.</p>
           </div>
         </div>
 
         <aside className="method-note" aria-labelledby="mazos-note-title">
           <div>
             <p className="section-label">Operator tooling</p>
-            <h3 id="mazos-note-title">MAZos is the method, not the headline.</h3>
+            <h3 id="mazos-note-title">MAZos is supporting method evidence, not the headline.</h3>
           </div>
           <p>
             I built a local-first loop cockpit to gate agent tasks, run allowlisted verification commands, and record
@@ -184,9 +195,12 @@ export default function Page() {
 
       <section className="contact" id="contact" aria-labelledby="contact-title">
         <p className="section-label">Contact</p>
-        <h2 id="contact-title">Let&rsquo;s talk about the system you need to make real.</h2>
+        <h2 id="contact-title">Need an operational workflow turned into reliable software?</h2>
         <a className="contact-email" href="mailto:manazoid4@gmail.com">manazoid4@gmail.com</a>
-        <p>Code and detailed implementation evidence are available through the repositories above.</p>
+        <p>
+          Start with the Agent Nudge repository for release evidence, or use the project links above to inspect the
+          implementation behind each claim.
+        </p>
       </section>
 
       <footer>
