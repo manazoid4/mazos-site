@@ -65,7 +65,7 @@ function Receipt() {
 
 export default function Page() {
   return (
-    <main id="main-content" tabIndex={-1}>
+    <main>
       <header className="site-nav">
         <Link className="wordmark" href="/" aria-label="Manazir Hussain portfolio">MH</Link>
         <nav aria-label="Case study navigation">
@@ -75,7 +75,7 @@ export default function Page() {
         </nav>
       </header>
 
-      <section className="hero mazos-hero" aria-labelledby="mazos-title">
+      <section className="hero mazos-hero" id="main-content" tabIndex={-1} aria-labelledby="mazos-title">
         <p className="identity">Product case study · Local-first operator tooling</p>
         <h1 id="mazos-title">MAZos keeps agent work bounded and verifiable.</h1>
         <p className="hero-copy">
@@ -101,7 +101,7 @@ export default function Page() {
               <li>A shipping spine across products with the next action, evidence, and blocker.</li>
               <li>A loop deck with plan/build prompts, criteria, registered checks, and receipts.</li>
               <li>Open human decisions, recent commits, repository state, and run history.</li>
-              <li>Fourteen API routes plus an allowlisted local command registry.</li>
+              <li>API routes backed by an allowlisted local command registry.</li>
             </ul>
           </div>
           <div>

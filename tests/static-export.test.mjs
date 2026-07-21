@@ -54,7 +54,12 @@ test('metadata and accessible navigation are present on both pages', async () =>
   for (const route of ['/', '/mazos']) {
     const html = await readPage(route);
     assert.match(html, /href="#main-content">Skip to main content/);
-    assert.match(html, /id="main-content"/);
+    const target = /<([a-z]+)\b(?=[^>]*\bid="main-content")(?=[^>]*\btabindex="-1")[^>]*>/i.exec(html);
+    assert.ok(target, 'Skip target must be programmatically focusable');
+    assert.equal(target[1].toLowerCase(), 'section', 'Skip target should be the first content section');
+    const navigationEnd = html.indexOf('</header>');
+    assert.notEqual(navigationEnd, -1, 'Page must include its navigation header');
+    assert.ok(target.index > navigationEnd, 'Skip target must follow the navigation header in document order');
     assert.match(html, /rel="canonical"/);
     assert.match(html, /property="og:image"/);
     assert.match(html, /name="twitter:card" content="summary_large_image"/);
