@@ -47,12 +47,14 @@ try {
   await assertRoute('/sitemap.xml', 'application/xml');
   await assertRoute('/social-card.png', 'image/png');
   await assertRoute('/agent-nudge-demo.webp', 'image/webp');
+  await assertRoute('/jobfilter-scan-result.webp', 'image/webp');
+  await assertRoute('/jobfilter-scan-result-mobile.webp', 'image/webp');
 
-  if (!home.includes('Current technical flagship') || !home.includes('Source repair')) {
-    throw new Error('Homepage smoke check did not find the truth-aligned evidence copy.');
+  if (!home.includes('dependable software around AI agents and data') || !home.includes('junior applied-AI')) {
+    throw new Error('Homepage smoke check did not find the role-specific evidence copy.');
   }
-  if (!mazos.includes('MAZos keeps agent work bounded and verifiable')) {
-    throw new Error('MAZos case-study smoke check failed.');
+  if (!mazos.includes('This case study has moved')) {
+    throw new Error('Legacy case-study handoff smoke check failed.');
   }
   console.log('Local static HTML and asset smoke checks passed.');
 } finally {

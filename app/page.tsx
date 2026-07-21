@@ -1,211 +1,313 @@
-import Link from 'next/link';
+const ROLE_EVIDENCE = [
+  {
+    capability: 'Agent and tool workflows',
+    evidence: 'Agent Nudge: MCP server, provider hooks, shared state, and deterministic pre-action decisions.',
+    href: '#agent-nudge',
+  },
+  {
+    capability: 'Data pipelines',
+    evidence: 'JobFilter: official APIs, OCDS normalisation, amendment merging, deduplication, and CPV filtering.',
+    href: '#jobfilter',
+  },
+  {
+    capability: 'Production reliability',
+    evidence: 'Abortable requests, explicit failure states, regression fixtures, CI gates, and packaged releases.',
+    href: '#evidence',
+  },
+  {
+    capability: 'Full-stack delivery',
+    evidence: 'TypeScript, React, Next.js, Node.js, SQLite, Supabase, Electron, REST APIs, and Vercel.',
+    href: '#work',
+  },
+];
 
-const SELECTED_WORK = [
-  {
-    name: 'JobFilter',
-    status: 'Source repair · validation',
-    summary:
-      'An opportunity-intelligence product for UK trade businesses, currently being repaired around the post-2025 public-procurement data path.',
-    proof:
-      'The implemented system covers ingestion, normalisation, scoring, server-side access controls, regression gates, Supabase, Stripe, and delivery adapters. Contracts Finder coverage did not yield sellable leads, so migration to the current Find a Tender data path and renewed relevance testing come before launch claims.',
-    stack: 'Next.js · TypeScript · public procurement data · Supabase',
-    repo: 'https://github.com/manazoid4/JobFilterV1',
-    live: 'https://jobfilter.uk',
-  },
-  {
-    name: 'OpenFlowKit',
-    status: 'Working web MVP',
-    summary:
-      'An open-source, provider-neutral voice layer for dictation and text refinement across browser, terminal, IDE, and LLM workflows.',
-    proof:
-      'Implements browser voice capture, a terminal bridge, typed provider contracts, refinement rules, latency tracking, and test coverage. Native desktop injection is the next milestone.',
-    stack: 'React · TypeScript · Web Speech · WebSocket',
-    repo: 'https://github.com/manazoid4/openflowkit',
-    live: 'https://openflowkit-dusky.vercel.app',
-  },
-  {
-    name: 'Recall',
-    status: 'Product prototype',
-    summary:
-      'A user-owned memory layer that turns authorised saves, notes, links, and thoughts into traceable context for future assistants.',
-    proof:
-      'Defines a typed memory and profile model, universal capture flow, editable graph, privacy controls, exports, and deterministic demo agents. Persistence and live ingestion remain future work.',
-    stack: 'Next.js · TypeScript · Graph data · Privacy controls',
-    repo: 'https://github.com/manazoid4/recall',
-    live: 'https://saved-brain.vercel.app',
-  },
+const AGENT_NUDGE_BUILD = [
+  'TypeScript CLI, localhost daemon, MCP server, provider hooks, and a sandboxed Electron shell.',
+  'Project-scoped SQLite state for agent presence, expiring path claims, facts, cursors, and receipts.',
+  'Deterministic HOLD / REVIEW / CLEAR decisions with acknowledgement tracked separately from delivery.',
+  'Unit, integration, end-to-end, packaging, security, and release-smoke checks for the Windows MVP.',
+];
+
+const JOBFILTER_BUILD = [
+  'Bounded Find a Tender OCDS retrieval with safe pagination, retries, cancellation, and source health.',
+  'Notice normalisation, latest-amendment merging, deduplication, deadline validation, and ranked output.',
+  'CPV-first trade matching that rejects medical or IT maintenance notices when authoritative classifications conflict with building work.',
+  'Fail-closed radius checks: a buyer headquarters postcode is never treated as proof of job delivery.',
 ];
 
 export default function Page() {
   return (
     <main>
       <header className="site-nav">
-        <a className="wordmark" href="#main-content" aria-label="Manazir Hussain, back to top">
-          MH
+        <a className="nameplate" href="#main-content" aria-label="Manazir Hussain, back to top">
+          Manazir Hussain
         </a>
         <nav aria-label="Primary navigation">
-          <a href="#work">Work</a>
-          <a href="#approach">Approach</a>
+          <a href="#work">Projects</a>
+          <a href="#evidence">Evidence</a>
+          <a href="#about">About</a>
           <a href="#contact">Contact</a>
-          <Link href="/mazos">MAZos</Link>
+          <a href="https://github.com/manazoid4">GitHub</a>
         </nav>
       </header>
 
       <section className="hero" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
-        <p className="identity">Manazir Hussain · Operational B2B and applied-AI product engineer</p>
-        <h1 id="intro-title">I turn messy workflows into bounded, verifiable software.</h1>
-        <p className="hero-copy">
-          I design and ship full-stack TypeScript systems where data, automation, and human judgment meet. My
-          clearest current technical evidence is <strong>Agent Nudge</strong>: a released, local-first coordination
-          layer for coding agents.
-        </p>
-        <div className="hero-actions">
-          <a className="button primary" href="#agent-nudge">See the technical flagship</a>
-          <a
-            className="button secondary"
-            href="https://github.com/manazoid4/agent-nudge#live-product-proof"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Inspect release evidence
-          </a>
+        <div className="hero-statement">
+          <p className="identity">UK-based · Seeking junior applied-AI engineering roles</p>
+          <h1 id="intro-title">I build dependable software around AI agents and data.</h1>
+          <p className="hero-copy">
+            I turn real workflows into agent infrastructure, data pipelines, and full-stack products—with tool
+            integrations, explicit failure handling, and tests that make the result inspectable.
+          </p>
+          <div className="hero-actions">
+            <a className="button primary" href="#agent-nudge">See the agent system</a>
+            <a className="button secondary" href="https://github.com/manazoid4">
+              Inspect my GitHub
+            </a>
+          </div>
         </div>
-        <p className="availability">
-          Based in the UK · Open to product engineering and applied-AI work in operational B2B teams
-        </p>
+
+        <aside className="hero-dossier" aria-label="Current engineering evidence">
+          <p>Current public proof</p>
+          <ul>
+            <li><span>Agents</span>MCP, hooks, shared context, deterministic controls</li>
+            <li><span>Data</span>Official APIs, normalisation, scoring, provenance</li>
+            <li><span>Delivery</span>CI, regression gates, releases, live deployments</li>
+            <li><span>Stack</span>TypeScript, Next.js, Node.js, SQLite, Supabase</li>
+          </ul>
+        </aside>
       </section>
 
-      <section className="work-section" id="work" aria-labelledby="work-title">
-        <div className="section-intro">
-          <p className="section-label">Selected work</p>
-          <h2 id="work-title">Technical evidence first, with product status kept explicit.</h2>
-          <p>Each description separates what works now from what remains unproven.</p>
+      <section className="role-fit" aria-labelledby="role-fit-title">
+        <div className="section-intro compact">
+          <h2 id="role-fit-title">The engineering behind useful AI.</h2>
+          <p>
+            Agents still need trustworthy context, clean data, safe integrations, verification, recovery paths,
+            and decisions a person can inspect.
+          </p>
         </div>
-
-        <article className="flagship" id="agent-nudge">
-          <div className="flagship-copy">
-            <div className="project-meta">
-              <span className="status live">Released Windows MVP</span>
-              <span>Current technical flagship</span>
-            </div>
-            <h3>Agent Nudge</h3>
-            <p className="project-lede">
-              A local-first preflight and receipt layer that helps coding agents surface overlapping work, changed
-              decisions, and failed approaches before another agent acts on stale context.
-            </p>
-
-            <h4>What I built</h4>
-            <ul className="evidence-list">
-              <li>A TypeScript CLI, localhost daemon, MCP server, provider hooks, and sandboxed Electron shell.</li>
-              <li>A project-scoped SQLite ledger for agent presence, expiring path claims, facts, cursors, and receipts.</li>
-              <li>Deterministic HOLD / REVIEW / CLEAR decisions with acknowledgement tracked separately from delivery.</li>
-              <li>Unit, integration, end-to-end, packaging, security, and release-smoke checks for the Windows MVP.</li>
-            </ul>
-
-            <div className="project-links">
-              <a className="button primary" href="https://agent-nudge-bay.vercel.app/#demo" target="_blank" rel="noreferrer">
-                Try the evidence demo
-              </a>
-              <a className="text-link" href="https://github.com/manazoid4/agent-nudge" target="_blank" rel="noreferrer">
-                Inspect code and release checks →
-              </a>
-            </div>
-          </div>
-
-          <figure className="product-shot">
-            <img
-              src="/agent-nudge-demo.webp"
-              alt="Agent Nudge interactive demo showing two coding agents and a conflict review outcome"
-              width="1440"
-              height="900"
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption>Local-first runtime · public fixture demo · released Windows MVP</figcaption>
-          </figure>
-
-          <div className="case-notes">
-            <div>
-              <h4>Engineering focus</h4>
-              <p>TypeScript · SQLite · MCP · Electron · provider hooks · deterministic coordination · release checks</p>
-            </div>
-            <div>
-              <h4>Current truth</h4>
-              <p>
-                Version 0.4 proves the coordination loop and ships a Windows package. It does not infer hidden model
-                state, guarantee coverage of every provider action, or yet provide evidence of external adoption.
-              </p>
-            </div>
-          </div>
-        </article>
-
-        <div className="project-list">
-          {SELECTED_WORK.map((project) => (
-            <article className="project-row" key={project.name}>
-              <div className="project-title">
-                <span className="status">{project.status}</span>
-                <h3>{project.name}</h3>
-                <p className="stack">{project.stack}</p>
-              </div>
-              <div className="project-detail">
-                <p className="project-summary">{project.summary}</p>
-                <p>{project.proof}</p>
-              </div>
-              <div className="row-links">
-                <a href={project.live} target="_blank" rel="noreferrer">Open current build ↗</a>
-                <a href={project.repo} target="_blank" rel="noreferrer">Repository ↗</a>
-              </div>
-            </article>
+        <div className="fit-list">
+          {ROLE_EVIDENCE.map((item) => (
+            <a href={item.href} key={item.capability}>
+              <strong>{item.capability}</strong>
+              <span>{item.evidence}</span>
+              <span aria-hidden="true">↓</span>
+            </a>
           ))}
         </div>
       </section>
 
-      <section className="approach" id="approach" aria-labelledby="approach-title">
+      <section className="work-section" id="work" aria-labelledby="work-title">
         <div className="section-intro">
-          <p className="section-label">How I work</p>
-          <h2 id="approach-title">Product judgment backed by release evidence.</h2>
-        </div>
-        <div className="capability-list">
-          <div>
-            <h3>Product engineering</h3>
-            <p>Translate an unclear operating problem into a focused user journey, typed data model, APIs, and a deployable interface.</p>
-          </div>
-          <div>
-            <h3>Data and automation</h3>
-            <p>Build ingestion and scoring pipelines, applied-AI workflows, deterministic agent tooling, and privacy-aware access boundaries.</p>
-          </div>
-          <div>
-            <h3>Delivery discipline</h3>
-            <p>Use regression tests, dependency audits, CI checks, deployment checks, and honest limitation notes as part of the product.</p>
-          </div>
+          <p className="section-label">Selected engineering work</p>
+          <h2 id="work-title">Three systems. Agent, data, and integration evidence.</h2>
+          <p>Agent coordination, public-data qualification, and voice capture/refinement—each with its boundary stated plainly.</p>
         </div>
 
-        <aside className="method-note" aria-labelledby="mazos-note-title">
-          <div>
-            <p className="section-label">Operator tooling</p>
-            <h3 id="mazos-note-title">MAZos is supporting method evidence, not the headline.</h3>
+        <article className="case-study agent-case" id="agent-nudge" aria-labelledby="agent-title">
+          <header className="case-heading">
+            <div>
+              <p className="case-index">Agent infrastructure</p>
+              <h3 id="agent-title">Agent Nudge</h3>
+            </div>
+            <p>
+              A released Windows application and local service that warns coding agents before they act on stale
+              decisions or collide on the same files.
+            </p>
+          </header>
+
+          <figure className="artifact artifact-dark">
+            <img
+              src="/agent-nudge-demo.webp"
+              alt="Agent Nudge scenario demo showing two coding agents and a conflict review outcome"
+              width="1440"
+              height="900"
+              loading="eager"
+              decoding="async"
+            />
+            <figcaption>Public fixture demo · desktop runtime stays local · released Windows MVP</figcaption>
+          </figure>
+
+          <div className="case-body">
+            <div className="case-problem">
+              <h4>The problem</h4>
+              <p>
+                Parallel agents move quickly while their context quietly diverges. A changed decision or overlapping
+                edit can arrive after another agent has already planned from stale information.
+              </p>
+              <h4>The decision</h4>
+              <p>
+                Keep the verdict deterministic. Agent Nudge routes relevant project facts into a preflight decision;
+                it does not pretend to read hidden model state or replace human approval.
+              </p>
+            </div>
+            <div>
+              <h4>What I built</h4>
+              <ul className="evidence-list">
+                {AGENT_NUDGE_BUILD.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </div>
           </div>
+
+          <footer className="case-footer">
+            <div>
+              <strong>Current boundary</strong>
+              <span>It coordinates model-driven agents but does not call a model itself; provider hooks can still be bypassed.</span>
+            </div>
+            <div className="project-links">
+              <a href="https://agent-nudge-bay.vercel.app/#demo">Try the scenario demo</a>
+              <a href="https://github.com/manazoid4/agent-nudge">Source and release checks</a>
+            </div>
+          </footer>
+        </article>
+
+        <article className="case-study jobfilter-case" id="jobfilter" aria-labelledby="jobfilter-title">
+          <header className="case-heading">
+            <div>
+              <p className="case-index">Data and integration</p>
+              <h3 id="jobfilter-title">JobFilter</h3>
+            </div>
+            <p>
+              A full-stack pipeline that turns inconsistent UK procurement notices into ranked opportunities for
+              small construction and maintenance teams.
+            </p>
+          </header>
+
+          <figure className="artifact">
+            <picture>
+              <source media="(max-width: 680px)" srcSet="/jobfilter-scan-result-mobile.webp" />
+              <img
+                src="/jobfilter-scan-result.webp"
+                alt="JobFilter reporting no verified local matches for a B14 building search after checking configured sources"
+                width="1440"
+                height="900"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <figcaption>Repaired branch · B14 building scan · honest zero when locality is unproven · 21 July 2026</figcaption>
+          </figure>
+
+          <div className="case-body">
+            <div className="case-problem">
+              <h4>The failure I found</h4>
+              <p>
+                The original current-notice source was stale, keyword matching could admit convincing false
+                positives, and buyer headquarters could masquerade as the delivery location.
+              </p>
+              <h4>The result</h4>
+              <p>
+                In a 21 July 2026 smoke test, Find a Tender returned 84 current notices: five authoritative electrical
+                matches and thirteen building matches. A B14 radius search returned an honest zero when locality
+                could not be proven.
+              </p>
+            </div>
+            <div>
+              <h4>What I changed</h4>
+              <ul className="evidence-list">
+                {JOBFILTER_BUILD.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </div>
+          </div>
+
+          <footer className="case-footer">
+            <div>
+              <strong>Current boundary</strong>
+              <span>The migration works; local coverage, buyer demand, and willingness to pay still need SME validation.</span>
+            </div>
+            <div className="project-links">
+              <a href="https://github.com/manazoid4/JobFilterV1/pull/383">Review the Find a Tender migration</a>
+              <a href="https://jobfilter.uk/find-jobs">Open the pre-migration production UI</a>
+              <a href="https://github.com/manazoid4/JobFilterV1">View JobFilter code</a>
+            </div>
+          </footer>
+        </article>
+
+        <article className="supporting-project" aria-labelledby="openflow-title">
+          <div>
+            <p className="case-index">Provider integration</p>
+            <h3 id="openflow-title">OpenFlowKit</h3>
+          </div>
+          <div>
+            <p className="supporting-lede">
+              A browser voice-capture and deterministic text-refinement MVP, with typed boundaries for future local
+              and hosted AI providers.
+            </p>
+            <p>
+              The working web MVP includes browser speech capture, a WebSocket terminal bridge, typed transcription
+              and refinement contracts, deterministic cleanup rules, latency tracking, and tests. Native desktop
+              injection and production provider routing remain future milestones.
+            </p>
+          </div>
+          <div className="project-links vertical">
+            <a href="https://openflowkit-dusky.vercel.app">Try OpenFlowKit</a>
+            <a href="https://github.com/manazoid4/openflowkit">View OpenFlowKit code</a>
+          </div>
+        </article>
+      </section>
+
+      <section className="evidence-section" id="evidence" aria-labelledby="evidence-title">
+        <div className="section-intro">
+          <p className="section-label">What I can contribute</p>
+          <h2 id="evidence-title">Software engineering around the model.</h2>
+          <p>Every capability below points to something implemented—not a keyword added for a recruiter.</p>
+        </div>
+        <dl className="evidence-matrix">
+          <div>
+            <dt>Agent workflows</dt>
+            <dd>MCP tools, provider hooks, scoped context, shared state, and targeted pre-action decisions.</dd>
+          </div>
+          <div>
+            <dt>Data preparation</dt>
+            <dd>Schema mapping, source provenance, classification, normalisation, deduplication, and invalid-record rejection.</dd>
+          </div>
+          <div>
+            <dt>System integration</dt>
+            <dd>REST and OCDS APIs, SQLite, Supabase, Stripe, WebSockets, Electron, and deployment boundaries.</dd>
+          </div>
+          <div>
+            <dt>Software verification and reliability</dt>
+            <dd>Deterministic fixtures, regression suites, failure taxonomy, timeouts, retries, CI, packaging, and smoke checks.</dd>
+          </div>
+          <div>
+            <dt>Technical communication</dt>
+            <dd>Plain-English decisions, reproducible demos, architecture notes, source-linked claims, and explicit limitations.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section className="about" id="about" aria-labelledby="about-title">
+        <div>
+          <p className="section-label">About</p>
+          <h2 id="about-title">Curious about the system. Practical about the outcome.</h2>
+        </div>
+        <div className="about-copy">
           <p>
-            I built a local-first loop cockpit to gate agent tasks, run allowlisted verification commands, and record
-            receipts. It supports the portfolio; the shipped products remain the proof.
+            I am an early-career engineer interested in applied AI: systems where models, structured data, and
+            software integrations have to work together outside a notebook.
           </p>
-          <Link className="text-link" href="/mazos">Read the MAZos case study →</Link>
-        </aside>
+          <p>
+            My strongest public evidence today is product and systems engineering around AI in TypeScript. I am
+            looking for a collaborative junior role where I can contribute that foundation while deepening Python,
+            model evaluation, data science, and cloud operations with experienced engineers.
+          </p>
+        </div>
       </section>
 
       <section className="contact" id="contact" aria-labelledby="contact-title">
-        <p className="section-label">Contact</p>
-        <h2 id="contact-title">Need an operational workflow turned into reliable software?</h2>
-        <a className="contact-email" href="mailto:manazoid4@gmail.com">manazoid4@gmail.com</a>
-        <p>
-          Start with the Agent Nudge repository for release evidence, or use the project links above to inspect the
-          implementation behind each claim.
-        </p>
+        <p className="section-label">Get in touch</p>
+        <h2 id="contact-title">Looking for an early-career engineer who can bridge agents, data, and dependable software?</h2>
+        <p>I am open to junior AI engineer, applied-AI engineer, and AI product-engineering roles across the UK.</p>
+        <div className="contact-actions">
+          <a className="button light" href="mailto:manazoid4@gmail.com">Email Manazir</a>
+          <a className="button outline-light" href="https://github.com/manazoid4">View GitHub</a>
+        </div>
       </section>
 
-      <footer>
+      <footer className="site-footer">
         <span>Manazir Hussain © 2026</span>
-        <a href="https://github.com/manazoid4" target="_blank" rel="noreferrer">github.com/manazoid4</a>
+        <span>UK-based · Applied AI and product engineering</span>
+        <a href="mailto:manazoid4@gmail.com">manazoid4@gmail.com</a>
       </footer>
     </main>
   );
