@@ -38,9 +38,9 @@ const SELECTED_WORK = [
 
 export default function Page() {
   return (
-    <main id="main-content" tabIndex={-1}>
+    <main>
       <header className="site-nav">
-        <a className="wordmark" href="#top" aria-label="Manazir Hussain, back to top">
+        <a className="wordmark" href="#main-content" aria-label="Manazir Hussain, back to top">
           MH
         </a>
         <nav aria-label="Primary navigation">
@@ -51,7 +51,7 @@ export default function Page() {
         </nav>
       </header>
 
-      <section className="hero" id="top" aria-labelledby="intro-title">
+      <section className="hero" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
         <p className="identity">Manazir Hussain · Operational B2B and applied-AI product engineer</p>
         <h1 id="intro-title">I turn messy workflows into bounded, verifiable software.</h1>
         <p className="hero-copy">
