@@ -353,6 +353,28 @@ export default function Page() {
         </dl>
       </section>
 
+      <section className="evidence-section" id="experience" aria-labelledby="experience-title">
+        <div className="section-intro">
+          <p className="section-label">Experience</p>
+          <h2 id="experience-title">What&rsquo;s actually true, no invented CV.</h2>
+          <p>No job titles, employers, or dates here that I can&rsquo;t stand behind &mdash; just what&rsquo;s verifiable from the work above.</p>
+        </div>
+        <dl className="evidence-matrix">
+          <div>
+            <dt>Shipped, solo</dt>
+            <dd>Four products built and released end-to-end by one person: JobFilter, Scrap Finance Partners, Agent Nudge, and OpenFlowKit.</dd>
+          </div>
+          <div>
+            <dt>Full-stack ownership</dt>
+            <dd>Frontend, backend, data, and packaging on every one of them &mdash; TypeScript, React, Next.js, Node.js, SQLite, and Supabase, as shown in Technical capability above.</dd>
+          </div>
+          <div>
+            <dt>Currently building</dt>
+            <dd>Actively shipping and maintaining these projects now &mdash; this page tracks their real, current status, not a fixed portfolio snapshot.</dd>
+          </div>
+        </dl>
+      </section>
+
       <section className="about" id="about" aria-labelledby="about-title">
         <div>
           <p className="section-label">About</p>
@@ -378,19 +400,32 @@ export default function Page() {
         <h2 id="contact-title">Got a role, a project, or an idea worth building?</h2>
         <p>UK-based and open to employment, freelance projects, and partnerships. Pick whichever fits:</p>
         <div className="contact-routes">
-          <a className="contact-route" href="mailto:manazoid4@gmail.com?subject=Role%20enquiry">
+          <a
+            className="contact-route"
+            href="mailto:manazoid4@gmail.com?subject=Role%20enquiry&body=Hi%20Manazir%2C%0A%0AWe%27re%20hiring%20for%20a%20role%20that%20might%20fit%20your%20background%3A%0A%0ARole%3A%20%0ACompany%3A%20%0AWhere%20you%27d%20be%20based%2Fremote%3A%20%0A%0A"
+          >
             <strong>Hire me</strong>
             <span>Full-time or contract roles in software or applied AI.</span>
           </a>
-          <a className="contact-route" href="mailto:manazoid4@gmail.com?subject=Project%20enquiry">
+          <a
+            className="contact-route"
+            href="mailto:manazoid4@gmail.com?subject=Project%20enquiry&body=Hi%20Manazir%2C%0A%0AI%27ve%20got%20a%20problem%20I%27d%20like%20turned%20into%20working%20software%3A%0A%0AWhat%20it%20is%3A%20%0AWho%20it%27s%20for%3A%20%0ARough%20timeline%2Fbudget%3A%20%0A%0A"
+          >
             <strong>Commission a project</strong>
             <span>You&rsquo;ve got a business problem and want it turned into working software.</span>
           </a>
-          <a className="contact-route" href="mailto:manazoid4@gmail.com?subject=Collaboration">
+          <a
+            className="contact-route"
+            href="mailto:manazoid4@gmail.com?subject=Collaboration&body=Hi%20Manazir%2C%0A%0AI%27m%20building%20something%20and%20thought%20you%27d%20be%20a%20good%20technical%20partner%3A%0A%0AWhat%20we%27re%20building%3A%20%0AWhat%20I%27m%20looking%20for%3A%20%0A%0A"
+          >
             <strong>Collaborate</strong>
             <span>You&rsquo;re building something and want a technical partner.</span>
           </a>
         </div>
+        <p className="contact-note">
+          There&rsquo;s no form here on purpose &mdash; a working lead-capture backend is a pattern I&rsquo;ve
+          already built and shipped on Scrap Finance Partners, just not needed on this site yet.
+        </p>
         <div className="contact-actions">
           <a className="button light" href="mailto:manazoid4@gmail.com">Email Manazir</a>
           <a className="button outline-light" href="https://github.com/manazoid4">View GitHub</a>

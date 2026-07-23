@@ -19,6 +19,7 @@
     "verify": "npm run typecheck && npm run build && npm test && npm run smoke"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "next": "^16.2.11",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
