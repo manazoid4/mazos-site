@@ -6,7 +6,7 @@ const BUILT_INDEX = [
   },
   {
     name: 'Scrap Finance Partners',
-    summary: 'A consultancy-style business site I designed and built end-to-end, lead capture included.',
+    summary: 'A contract build: a full consultancy website with a working lead pipeline, designed and shipped end-to-end.',
     href: '#scrap-finance-partners',
   },
   {
@@ -154,7 +154,7 @@ export default function Page() {
         <div className="section-intro">
           <p className="section-label">Selected work</p>
           <h2 id="work-title">Four things I&rsquo;ve actually shipped.</h2>
-          <p>A live public product, a self-built consultancy site, a released Windows app, and an open-source browser tool &mdash; each with its status stated plainly.</p>
+          <p>A live public product, a contract-built consultancy site, a released Windows app, and an open-source browser tool &mdash; each with its status stated plainly.</p>
         </div>
 
         <article className="case-study jobfilter-case" id="jobfilter" aria-labelledby="jobfilter-title">
@@ -220,12 +220,12 @@ export default function Page() {
         <article className="case-study scrap-case" id="scrap-finance-partners" aria-labelledby="scrap-title">
           <header className="case-heading">
             <div>
-              <p className="case-index">Self-initiated &middot; consultancy-style build</p>
+              <p className="case-index">Contract build &middot; consultancy website</p>
               <h3 id="scrap-title">Scrap Finance Partners</h3>
             </div>
             <p>
               Scrap yards run on thin, informal bookkeeping and rarely get financial advice built for their trade. I
-              designed and built a complete consultancy website end-to-end to show what that offer could look like:
+              was contracted to design and build a complete consultancy website end-to-end for a real client:
               services, pricing, a health-check pathway, and a working enquiry pipeline.
             </p>
           </header>
@@ -250,10 +250,10 @@ export default function Page() {
           <footer className="case-footer">
             <div>
               <strong>Current limitation</strong>
-              <span>This is a self-directed concept, not a real client engagement &mdash; the founder bio and case studies on the site are illustrative content, not a real business.</span>
+              <span>The founder-bio and case-study figures shown on the live site are illustrative brand copy, not independently confirmed client figures.</span>
             </div>
             <div className="project-links">
-              <a href="https://scrap-finance-partners.vercel.app">View the live concept</a>
+              <a href="https://scrap-finance-partners.vercel.app">View the live site</a>
               <a href="https://github.com/manazoid4/scrap-finance-partners">View code</a>
             </div>
           </footer>
