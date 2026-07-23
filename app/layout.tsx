@@ -4,35 +4,35 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://mazos-site.vercel.app'),
   title: {
-    default: 'Manazir Hussain | Junior Applied AI Engineer',
+    default: 'Manazir Hussain | Software Builder, UK',
     template: '%s — Manazir Hussain',
   },
   description:
-    'Portfolio of Manazir Hussain, a UK junior applied AI engineer building agent infrastructure, public-data pipelines, tool integrations, and production TypeScript software.',
+    'Manazir Hussain is a UK-based software builder open to roles, projects, and partnerships. Portfolio: JobFilter, Scrap Finance Partners, Agent Nudge, and OpenFlowKit.',
   alternates: {
     canonical: '/',
   },
   authors: [{ name: 'Manazir Hussain' }],
   creator: 'Manazir Hussain',
   openGraph: {
-    title: 'Manazir Hussain | Junior Applied AI Engineer',
-    description: 'Dependable software around AI agents and data: infrastructure, pipelines, tool integrations, and production safeguards.',
+    title: 'Manazir Hussain | Software Builder, UK',
+    description: 'Useful automations and software built for real business problems — not generic AI hype.',
     type: 'website',
     url: '/',
-    siteName: 'Manazir Hussain — Applied AI Engineering Portfolio',
+    siteName: 'Manazir Hussain — Portfolio',
     images: [
       {
         url: '/social-card.png',
         width: 1200,
         height: 630,
-        alt: 'Manazir Hussain — junior applied AI engineer',
+        alt: 'Manazir Hussain — UK-based software builder',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Manazir Hussain | Junior Applied AI Engineer',
-    description: 'Dependable software around AI agents and data: infrastructure, pipelines, tool integrations, and production safeguards.',
+    title: 'Manazir Hussain | Software Builder, UK',
+    description: 'Useful automations and software built for real business problems — not generic AI hype.',
     images: ['/social-card.png'],
   },
 };
