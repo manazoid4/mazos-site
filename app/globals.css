@@ -231,17 +231,24 @@ section {
   list-style: none;
 }
 
-.hero-dossier li {
-  padding: 18px 20px;
+.hero-dossier li + li {
+  border-top: 1px solid var(--line);
+}
+
+.hero-dossier li a {
+  min-height: 64px;
+  padding: 16px 20px;
   display: grid;
   gap: 5px;
   color: var(--muted);
   font-size: 0.86rem;
   line-height: 1.45;
+  text-decoration: none;
 }
 
-.hero-dossier li + li {
-  border-top: 1px solid var(--line);
+.hero-dossier li a:hover,
+.hero-dossier li a:focus-visible {
+  background: var(--blue-light);
 }
 
 .hero-dossier li span {
@@ -361,6 +368,18 @@ section {
 .jobfilter-case .case-heading > p,
 .jobfilter-case .case-index {
   color: #ffffff;
+}
+
+.scrap-case .case-heading {
+  background: #e4f0ea;
+}
+
+.scrap-case .case-index {
+  color: var(--green);
+}
+
+.scrap-case .case-body {
+  grid-template-columns: minmax(280px, 1fr) minmax(360px, 1fr);
 }
 
 .artifact {
@@ -583,6 +602,37 @@ section {
   font-size: 1.05rem;
 }
 
+.contact-routes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.contact-route {
+  padding: 20px;
+  display: grid;
+  gap: 8px;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.contact-route:hover,
+.contact-route:focus-visible {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.contact-route strong {
+  font-size: 1.02rem;
+}
+
+.contact-route span {
+  color: #e3e9ff;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
 .button.light {
   background: #ffffff;
   color: var(--blue-dark);
@@ -688,25 +738,32 @@ section {
 
   .site-nav {
     padding: 12px 0;
+    flex-direction: column;
     align-items: flex-start;
+    gap: 10px;
+    border-bottom: none;
   }
 
   .site-nav nav {
-    max-width: 230px;
-    gap: 0 16px;
-  }
-
-  .site-nav nav a:nth-child(3) {
-    display: none;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 4px 18px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--line);
   }
 
   .hero {
     min-height: auto;
-    padding: 68px 0;
+    padding: 40px 0 56px;
   }
 
   h1 {
-    font-size: clamp(2.8rem, 14vw, 4rem);
+    font-size: clamp(2.15rem, 9vw, 2.75rem);
+    max-width: 100%;
+  }
+
+  .hero-copy {
+    font-size: 1.05rem;
   }
 
   .button {
@@ -778,6 +835,24 @@ section {
 
   .site-footer {
     flex-direction: column;
+  }
+
+  .contact-routes {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 380px) {
+  h1 {
+    font-size: clamp(1.85rem, 9.5vw, 2.3rem);
+  }
+
+  .site-nav nav {
+    gap: 4px 14px;
+  }
+
+  .site-nav nav a {
+    font-size: 0.82rem;
   }
 }
 
