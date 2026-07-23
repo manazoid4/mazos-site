@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { access, readFile } from 'node:fs/promises';
+import { access, readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
 
@@ -130,6 +130,54 @@ test('new-tab links declare a safe opener relationship', async () => {
       assert.match(anchor, /rel="[^"]*noreferrer[^"]*"/);
     }
   }
+});
+
+test('Vercel Analytics is bundled into the static export', async () => {
+  const chunksDir = path.join(exportRoot, '_next', 'static', 'chunks');
+  const files = await readdir(chunksDir);
+  let found = false;
+  for (const file of files) {
+    if (!file.endsWith('.js')) continue;
+    const contents = await readFile(path.join(chunksDir, file), 'utf8');
+    if (contents.includes('_vercel/insights/script.js')) {
+      found = true;
+      break;
+    }
+  }
+  assert.ok(found, 'No static chunk references the Vercel Analytics script endpoint');
+});
+
+test('structured data and analytics are present on both pages', async () => {
+  for (const route of ['/', '/mazos']) {
+    const html = await readPage(route);
+    const ldMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+    assert.ok(ldMatch, `${route} is missing a JSON-LD script tag`);
+    const data = JSON.parse(ldMatch[1]);
+    const graph = data['@graph'];
+    assert.ok(Array.isArray(graph), `${route} JSON-LD must declare an @graph`);
+    const person = graph.find((node) => node['@type'] === 'Person');
+    assert.ok(person, `${route} JSON-LD is missing a Person node`);
+    assert.equal(person.name, 'Manazir Hussain');
+    assert.equal(person.jobTitle, 'Software Builder');
+    assert.ok(person.sameAs.includes('https://github.com/manazoid4'));
+    assert.doesNotMatch(html, /Junior Applied AI Engineer/);
+  }
+});
+
+test('homepage states real experience facts without inventing a CV', async () => {
+  const html = await readPage('/');
+  assert.match(html, /id="experience"/);
+  assert.match(html, /no invented CV/i);
+  assert.doesNotMatch(html, /\b(19|20)\d{2}\s*[-–—]\s*(19|20)\d{2}\b/, 'Experience section must not fabricate employment date ranges');
+});
+
+test('contact CTAs are enriched mailto links with a note on the form-backend pattern', async () => {
+  const html = await readPage('/');
+  assert.match(html, /mailto:manazoid4@gmail\.com\?subject=Role%20enquiry&(?:amp;)?body=/);
+  assert.match(html, /mailto:manazoid4@gmail\.com\?subject=Project%20enquiry&(?:amp;)?body=/);
+  assert.match(html, /mailto:manazoid4@gmail\.com\?subject=Collaboration&(?:amp;)?body=/);
+  assert.match(html, /Scrap Finance Partners/);
+  assert.match(html, /class="contact-note"/);
 });
 
 test('runtime and static-host hardening stay explicit', async () => {

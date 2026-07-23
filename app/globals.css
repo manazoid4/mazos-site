@@ -633,6 +633,14 @@ section {
   line-height: 1.45;
 }
 
+.contact-note {
+  max-width: 65ch;
+  margin-top: 20px;
+  color: #e3e9ff;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
 .button.light {
   background: #ffffff;
   color: var(--blue-dark);
