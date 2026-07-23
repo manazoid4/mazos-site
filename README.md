@@ -1,13 +1,13 @@
 # Manazir Hussain — portfolio
 
-Public engineering portfolio at [mazos-site.vercel.app](https://mazos-site.vercel.app).
+Public portfolio and digital CV at [mazos-site.vercel.app](https://mazos-site.vercel.app).
 
-The homepage is a recruiter-readable evidence surface for junior applied-AI engineering roles. It maps Agent Nudge, JobFilter, and OpenFlowKit directly to agent infrastructure, data pipelines, integrations, evaluation, and production reliability.
+The homepage positions Manazir as a UK-based software builder open to roles, contract projects, and partnerships. It features four shipped projects — JobFilter, Scrap Finance Partners, Agent Nudge, and OpenFlowKit — each with a stated status, evidence link, and limitation, plus routes for hiring, commissioning work, and collaborating.
 
 ## Structure
 
-- `/` — role positioning, applied-AI evidence, three project case studies, demonstrated capabilities, growth direction, and contact
-- `/mazos` — no-index legacy handoff into the main portfolio; the internal MAZos concept is no longer part of recruiter navigation
+- `/` — hero, what-I-can-build categories, four project case studies (in order: JobFilter, Scrap Finance Partners, Agent Nudge, OpenFlowKit), plain technical capability list, about, and three-route contact section
+- `/mazos` — no-index legacy handoff for the retired internal MAZos concept page; not part of site navigation or the sitemap
 
 ## Stack
 
