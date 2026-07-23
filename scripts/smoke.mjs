@@ -50,11 +50,11 @@ try {
   await assertRoute('/jobfilter-scan-result.webp', 'image/webp');
   await assertRoute('/jobfilter-scan-result-mobile.webp', 'image/webp');
 
-  if (!home.includes('dependable software around AI agents and data') || !home.includes('junior applied-AI')) {
-    throw new Error('Homepage smoke check did not find the role-specific evidence copy.');
+  if (!home.includes('JobFilter') || !home.includes('Scrap Finance Partners')) {
+    throw new Error('Homepage smoke check did not find the featured-project copy.');
   }
-  if (!mazos.includes('This case study has moved')) {
-    throw new Error('Legacy case-study handoff smoke check failed.');
+  if (!mazos.includes('This page has moved')) {
+    throw new Error('Legacy /mazos handoff smoke check failed.');
   }
   console.log('Local static HTML and asset smoke checks passed.');
 } finally {

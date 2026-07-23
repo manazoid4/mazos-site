@@ -41,19 +41,39 @@ async function internalTargetExists(urlPath) {
   return false;
 }
 
-test('homepage is role-specific, truth-aligned, and exposes direct evidence paths', async () => {
+test('homepage names every featured project and stays clear of retired junior-AI positioning', async () => {
   const html = await readPage('/');
-  assert.match(html, /junior applied-AI engineering roles/);
-  assert.match(html, /dependable software around AI agents and data/);
-  assert.match(html, /Agent Nudge/);
   assert.match(html, /JobFilter/);
+  assert.match(html, /Scrap Finance Partners/);
+  assert.match(html, /Agent Nudge/);
   assert.match(html, /OpenFlowKit/);
-  assert.match(html, /Find a Tender/);
   assert.match(html, /jobfilter-scan-result\.webp/);
   assert.match(html, /jobfilter-scan-result-mobile\.webp/);
-  assert.match(html, /My strongest public evidence today is product and systems engineering around AI in TypeScript/);
+  assert.doesNotMatch(html, /junior applied-AI/i);
+  assert.doesNotMatch(html, /Junior Applied AI Engineer/);
   assert.doesNotMatch(html, /MAZos/);
   assert.doesNotMatch(html, /Operational B2B/);
+});
+
+test('homepage exposes employment, project, and collaboration contact paths', async () => {
+  const html = await readPage('/');
+  assert.match(html, /Hire me/);
+  assert.match(html, /Commission a project/);
+  assert.match(html, /Collaborate/);
+  assert.match(html, /mailto:manazoid4@gmail\.com/);
+});
+
+test('every featured project case study has a stated limitation and at least one evidence link', async () => {
+  const html = await readPage('/');
+  for (const id of ['jobfilter', 'scrap-finance-partners', 'agent-nudge']) {
+    const marker = `id="${id}"`;
+    const start = html.indexOf(marker);
+    assert.notEqual(start, -1, `Missing project section #${id}`);
+    const end = html.indexOf('</article>', start);
+    const section = html.slice(start, end);
+    assert.match(section, /Current limitation/, `#${id} is missing a stated limitation`);
+    assert.match(section, /href="https?:\/\//, `#${id} is missing an external evidence link`);
+  }
 });
 
 test('metadata and accessible navigation are present on both pages', async () => {
@@ -98,7 +118,7 @@ test('legacy case-study route is removed from discovery and redirects attention 
   const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
   assert.doesNotMatch(home, /href="\/mazos"/);
   assert.doesNotMatch(sitemap, /<loc>[^<]+\/mazos(?:\/)?<\/loc>/);
-  assert.match(moved, /This case study has moved/);
+  assert.match(moved, /This page has moved/);
   assert.match(moved, /noindex/);
 });
 
