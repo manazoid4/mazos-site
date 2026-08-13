@@ -1,30 +1,28 @@
-# Manazir Hussain — portfolio
+# Maz Works
 
-Public portfolio and digital CV at [mazos-site.vercel.app](https://mazos-site.vercel.app).
+Public portfolio and client-acquisition site for [Maz Works](https://mazos-site.vercel.app), Manazir Hussain's umbrella identity for useful software, AI tools, automation, products, experiments, and client work.
 
-The homepage positions Manazir as a UK-based software builder open to roles, contract projects, and partnerships. It features four shipped projects — JobFilter, Scrap Finance Partners, Agent Nudge, and OpenFlowKit — each with a stated status, evidence link, and limitation, plus routes for hiring, commissioning work, and collaborating.
+The homepage leads with shipped evidence rather than a technology list. JobFilter and Scrap Finance Partners are flagships; Agent Nudge and OpenFlowKit are featured work. It also explains the bounded free-demo route, the founding implementation offer, and separate hire, client, and collaboration pathways.
 
 ## Structure
 
-- `/` — hero, what-I-can-build categories, four project case studies (in order: JobFilter, Scrap Finance Partners, Agent Nudge, OpenFlowKit), plain technical capability list, about, and three-route contact section
-- `/mazos` — no-index legacy handoff for the retired internal MAZos concept page; not part of site navigation or the sitemap
+- `/` — Maz Works identity, proof ledger, flagship and featured projects, build areas, process, founding client offer, about, and contact pathways
+- `/mazos` — no-index legacy handoff for the retired internal MAZos concept page; omitted from navigation and sitemap
+- `app/projects.ts` — typed project content and evidence links
+- `docs/maz-works/` — persistent progress, handoff, plan, next steps, and browser review captures
+- `DESIGN.md` — FRAMEWORK visual-direction contract
 
 ## Stack
 
-Next.js App Router · TypeScript · plain CSS · static export
+Next.js App Router · TypeScript · plain CSS · static export · Vercel Analytics
 
 ## Run
 
 ```bash
 npm ci
 npm run dev
-npm run typecheck
-npm run build
-npm test
-npm run smoke
+npm run verify
 npm start
 ```
 
-`npm start` serves the generated `out/` directory after a build. `npm run verify` runs the local typecheck, build, deterministic HTML/link tests, and local-server smoke check. CI also audits production dependencies.
-
-The repository has no runtime analytics or form submission. External product and repository links open their respective public sources. Vercel headers restrict framing, sensitive browser capabilities, MIME sniffing, referrer leakage, and unexpected content sources.
+`npm run verify` runs typecheck, production build, deterministic static HTML/link tests, and a local-server smoke check. Security headers are defined in `vercel.json`. The site has no form backend; contact pathways use explicit `mailto:` links.
