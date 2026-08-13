@@ -55,17 +55,17 @@ test('homepage names every featured project and stays clear of retired junior-AI
   assert.doesNotMatch(html, /Operational B2B/);
 });
 
-test('homepage exposes employment, project, and collaboration contact paths', async () => {
+test('homepage exposes employment, free-demo, and collaboration contact paths', async () => {
   const html = await readPage('/');
   assert.match(html, /Hire me/);
-  assert.match(html, /Commission a project/);
+  assert.match(html, /Get a free demo/);
   assert.match(html, /Collaborate/);
   assert.match(html, /mailto:manazoid4@gmail\.com/);
 });
 
 test('every featured project case study has a stated limitation and at least one evidence link', async () => {
   const html = await readPage('/');
-  for (const id of ['jobfilter', 'scrap-finance-partners', 'agent-nudge']) {
+  for (const id of ['jobfilter', 'scrap-finance-partners', 'agent-nudge', 'openflowkit']) {
     const marker = `id="${id}"`;
     const start = html.indexOf(marker);
     assert.notEqual(start, -1, `Missing project section #${id}`);
@@ -164,20 +164,23 @@ test('structured data and analytics are present on both pages', async () => {
   }
 });
 
-test('homepage states real experience facts without inventing a CV', async () => {
+test('homepage keeps Manazir identifiable without inventing a CV', async () => {
   const html = await readPage('/');
-  assert.match(html, /id="experience"/);
-  assert.match(html, /no invented CV/i);
-  assert.doesNotMatch(html, /\b(19|20)\d{2}\s*[-–—]\s*(19|20)\d{2}\b/, 'Experience section must not fabricate employment date ranges');
+  assert.match(html, /id="about"/);
+  assert.match(html, /About \/ Manazir Hussain/);
+  assert.match(html, /not a pretend agency/);
+  assert.doesNotMatch(html, /\b(19|20)\d{2}\s*[-–—]\s*(19|20)\d{2}\b/, 'About section must not fabricate employment date ranges');
 });
 
-test('contact CTAs are enriched mailto links with a note on the form-backend pattern', async () => {
+test('commercial route states the bounded demo, split founding price, and scope protection', async () => {
   const html = await readPage('/');
   assert.match(html, /mailto:manazoid4@gmail\.com\?subject=Role%20enquiry&(?:amp;)?body=/);
-  assert.match(html, /mailto:manazoid4@gmail\.com\?subject=Project%20enquiry&(?:amp;)?body=/);
+  assert.match(html, /mailto:manazoid4@gmail\.com\?subject=Free%20tailored%20demo&(?:amp;)?body=/);
   assert.match(html, /mailto:manazoid4@gmail\.com\?subject=Collaboration&(?:amp;)?body=/);
-  assert.match(html, /Scrap Finance Partners/);
-  assert.match(html, /class="contact-note"/);
+  assert.match(html, /£150 total/);
+  assert.match(html, /£75 upfront/);
+  assert.match(html, /£75 after execution/);
+  assert.match(html, /quoted separately/);
 });
 
 test('runtime and static-host hardening stay explicit', async () => {

@@ -1,441 +1,157 @@
-const BUILT_INDEX = [
-  {
-    name: 'JobFilter',
-    summary: 'Live tool that scans UK public tenders so small trade firms don’t have to.',
-    href: '#jobfilter',
-  },
-  {
-    name: 'Scrap Finance Partners',
-    summary: 'A contract build: a full consultancy website with a working lead pipeline, designed and shipped end-to-end.',
-    href: '#scrap-finance-partners',
-  },
-  {
-    name: 'Agent Nudge',
-    summary: 'Windows app that stops AI coding agents colliding or acting on stale information.',
-    href: '#agent-nudge',
-  },
-  {
-    name: 'OpenFlowKit',
-    summary: 'Browser voice-to-text tool with rule-based cleanup. Open source, still growing.',
-    href: '#openflowkit',
-  },
+import { FEATURED_PROJECTS, FLAGSHIP_PROJECTS, type Project } from './projects';
+
+const BUILD_AREAS = [
+  ['Workflow automation', 'Replace repetitive handoffs, copy-paste work, and fragile admin with a small dependable system.'],
+  ['AI tools with boundaries', 'Use models where judgment helps, and deterministic rules where correctness matters more.'],
+  ['Opportunity and data tools', 'Turn scattered feeds or records into a ranked answer someone can act on.'],
+  ['Websites that do a job', 'Explain a specialist offer, establish trust, and move the right person toward an enquiry.'],
 ];
 
-const HELP_CATEGORIES = [
-  {
-    title: 'Repetitive-work automation',
-    body: 'Scripts and small apps that take over the manual, boring parts of a job.',
-    href: '#agent-nudge',
-  },
-  {
-    title: 'Business websites and lead generation',
-    body: 'Sites that explain what you do, look credible, and capture enquiries automatically.',
-    href: '#scrap-finance-partners',
-  },
-  {
-    title: 'Opportunity and data-matching tools',
-    body: 'Pulling scattered public data into one ranked, useful list instead of a manual search.',
-    href: '#jobfilter',
-  },
-  {
-    title: 'AI-assisted workflows, with limits stated',
-    body: 'Using AI where it earns its place, with plain fallbacks for when it doesn’t.',
-    href: '#openflowkit',
-  },
+const PROCESS = [
+  ['01', 'Problem', 'Start with the awkward workflow, missed opportunity, or bottleneck — not a technology shopping list.'],
+  ['02', 'Demo', 'Build one bounded, tailored demonstration so the idea can be judged before a larger commitment.'],
+  ['03', 'Build', 'Agree the implementation scope, payment points, and what explicitly sits outside the work.'],
+  ['04', 'Proof', 'Present the working result, verify the path that matters, and capture reusable lessons with permission.'],
 ];
 
-const JOBFILTER_BUILD = [
-  'Retrieval from the official Find a Tender OCDS feed, with pagination, retries, and cancellation.',
-  'Notice normalisation, latest-amendment merging, and deduplication across releases.',
-  'CPV-first trade matching that rejects medical or IT-maintenance notices misfiled as building work.',
-  'Fail-closed location checks: a buyer’s head-office postcode is never treated as proof a job is local.',
-];
+function ProjectLinks({ project }: { project: Project }) {
+  return (
+    <nav className="project-links" aria-label={`${project.name} evidence links`}>
+      {project.links.map((link) => (
+        <a href={link.href} key={link.href}>{link.label}<span aria-hidden="true"> ↗</span></a>
+      ))}
+    </nav>
+  );
+}
 
-const AGENT_NUDGE_BUILD = [
-  'A local Windows app, a background service, and hooks into Claude Code, Codex, and OpenCode.',
-  'A project-scoped record of what each agent is doing, so a second agent can check before it acts.',
-  'Three plain outcomes per check: continue, review first, or stop — never a silent guess.',
-  'Packaged Windows installer and portable build, with checksums, for the current MVP release.',
-];
-
-const SCRAP_FINANCE_BUILD = [
-  'A full page set: services, pricing, health-check offer, case studies, and a founder page.',
-  'A working enquiry endpoint that emails new leads through Resend, with spam honeypot protection.',
-  'A restrained, paper-and-serif design system built for a finance-advisory audience.',
-];
-
-const TECH_CAPABILITY = [
-  {
-    label: 'Frontend and product',
-    detail: 'TypeScript, React, Next.js — building interfaces people can actually use, not just demo well.',
-  },
-  {
-    label: 'Backend and data',
-    detail: 'Node.js, REST and OCDS APIs, SQLite, Supabase — moving and shaping data reliably.',
-  },
-  {
-    label: 'Desktop and packaging',
-    detail: 'Electron, Windows installers, release checksums, and versioned builds.',
-  },
-  {
-    label: 'AI integration',
-    detail: 'MCP tools and provider hooks where they add real value, kept separate from anything unverified.',
-  },
-  {
-    label: 'Shipping discipline',
-    detail: 'Tests, CI gates, staging smoke checks, and deployment on Vercel — so releases are boring, not risky.',
-  },
-];
+function ProjectImage({ project, eager = false }: { project: Project; eager?: boolean }) {
+  if (!project.image) return null;
+  return (
+    <figure className="project-frame">
+      <picture>
+        {project.image.mobileSrc ? <source media="(max-width: 680px)" srcSet={project.image.mobileSrc} /> : null}
+        <img src={project.image.src} alt={project.image.alt} width="1440" height="900" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+      </picture>
+      <figcaption>{project.image.caption}</figcaption>
+    </figure>
+  );
+}
 
 export default function Page() {
   return (
     <main>
-      <header className="site-nav">
-        <a className="nameplate" href="#main-content" aria-label="Manazir Hussain, back to top">
-          Manazir Hussain
+      <header className="site-header">
+        <a className="brand" href="#main-content" aria-label="Maz Works, back to top">
+          <span className="brand-mark">MW</span>
+          <span><strong>Maz Works</strong><small>by Manazir Hussain</small></span>
         </a>
         <nav aria-label="Primary navigation">
-          <a href="#work">Work</a>
-          <a href="#build">What I build</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-          <a href="https://github.com/manazoid4">GitHub</a>
+          <a href="#work">Work</a><a href="#services">What I build</a><a href="#about">About</a>
+          <a href="#client">Client</a><a href="#contact">Contact</a><a href="https://github.com/manazoid4">GitHub <span aria-hidden="true">↗</span></a>
         </nav>
       </header>
 
       <section className="hero" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
-        <div className="hero-statement">
-          <p className="identity">UK-based &middot; Open to roles, projects and partnerships</p>
-          <h1 id="intro-title">I build useful automations that actually work, specific to your business.</h1>
-          <p className="hero-copy">
-            I turn repetitive work, scattered information, and difficult processes into straightforward digital
-            tools. If you&rsquo;ve got a problem software could fix, I&rsquo;d like to hear about it.
-          </p>
-          <div className="hero-actions">
-            <a className="button primary" href="#work">View my work</a>
-            <a className="button secondary" href="#contact">Discuss a project</a>
-          </div>
+        <div className="hero-copy-block">
+          <p className="eyebrow">Independent software builder / Birmingham, UK</p>
+          <h1 id="intro-title">Useful software, AI tools and automation around real problems.</h1>
+          <p className="hero-copy">Maz Works is the umbrella for what I build as Manazir Hussain: shipped products, client systems, practical experiments, and the thinking behind them.</p>
+          <div className="actions"><a className="button button-dark" href="#work">See selected work</a><a className="button button-signal" href="#client">Show me the problem</a></div>
         </div>
-
-        <aside className="hero-dossier" aria-label="What I have built">
-          <p>What I&rsquo;ve built</p>
-          <ul>
-            {BUILT_INDEX.map((item) => (
-              <li key={item.name}>
-                <a href={item.href}>
-                  <span>{item.name}</span>
-                  {item.summary}
-                </a>
-              </li>
-            ))}
-          </ul>
+        <aside className="proof-ledger" aria-label="Current proof">
+          <div className="ledger-head"><span>Proof / 2026</span><span className="live-mark">Built and shipped</span></div>
+          <ol>
+            <li><span>01</span><strong>Live product</strong><small>JobFilter</small></li>
+            <li><span>02</span><strong>Commissioned client work</strong><small>Scrap Finance Partners</small></li>
+            <li><span>03</span><strong>Windows release</strong><small>Agent Nudge</small></li>
+            <li><span>04</span><strong>Open-source MVP</strong><small>OpenFlowKit</small></li>
+          </ol>
         </aside>
       </section>
 
-      <section className="role-fit" id="build" aria-labelledby="build-title">
-        <div className="section-intro compact">
-          <h2 id="build-title">What I can build for you.</h2>
-          <p>
-            Four broad categories, each backed by something already shipped &mdash; not a keyword list.
-          </p>
-        </div>
-        <div className="fit-list">
-          {HELP_CATEGORIES.map((item) => (
-            <a href={item.href} key={item.title}>
-              <strong>{item.title}</strong>
-              <span>{item.body}</span>
-              <span aria-hidden="true">&darr;</span>
-            </a>
-          ))}
-        </div>
+      <section className="proof-strip" aria-label="Maz Works principles">
+        <p><strong>Four shipped builds</strong><span>Product, client, desktop, and open source.</span></p>
+        <p><strong>Evidence over claims</strong><span>Live work, code, releases, and stated limits.</span></p>
+        <p><strong>One person, clearly</strong><span>Maz Works is Manazir Hussain — not a pretend agency.</span></p>
       </section>
 
       <section className="work-section" id="work" aria-labelledby="work-title">
-        <div className="section-intro">
-          <p className="section-label">Selected work</p>
-          <h2 id="work-title">Four things I&rsquo;ve actually shipped.</h2>
-          <p>A live public product, a contract-built consultancy site, a released Windows app, and an open-source browser tool &mdash; each with its status stated plainly.</p>
-        </div>
-
-        <article className="case-study jobfilter-case" id="jobfilter" aria-labelledby="jobfilter-title">
-          <header className="case-heading">
-            <div>
-              <p className="case-index">Live product &middot; public sector</p>
-              <h3 id="jobfilter-title">JobFilter</h3>
-            </div>
-            <p>
-              Small builders and maintenance firms miss winnable public-sector contracts because notices are
-              scattered across procurement portals in inconsistent formats. JobFilter scans the official feed and
-              hands back a ranked, trade-matched shortlist.
-            </p>
-          </header>
-
-          <figure className="artifact">
-            <picture>
-              <source media="(max-width: 680px)" srcSet="/jobfilter-scan-result-mobile.webp" />
-              <img
-                src="/jobfilter-scan-result.webp"
-                alt="JobFilter reporting no verified local matches for a B14 building search after checking configured sources"
-                width="1440"
-                height="900"
-                loading="eager"
-                decoding="async"
-              />
-            </picture>
-            <figcaption>Live scan result &middot; honest zero when a match can&rsquo;t be verified</figcaption>
-          </figure>
-
-          <div className="case-body">
-            <div className="case-problem">
-              <h4>Who it&rsquo;s for</h4>
-              <p>UK construction and maintenance small businesses who want public-sector work but don&rsquo;t have time to trawl procurement sites daily.</p>
-              <h4>What I changed</h4>
-              <p>
-                The original source was stale and keyword matching let through false positives &mdash; a buyer&rsquo;s
-                head-office postcode could pass as proof a job was local. I rebuilt retrieval on the official Find a
-                Tender feed and made every match fail closed rather than guess.
-              </p>
-            </div>
-            <div>
-              <h4>What I built</h4>
-              <ul className="evidence-list">
-                {JOBFILTER_BUILD.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-            </div>
-          </div>
-
-          <footer className="case-footer">
-            <div>
-              <strong>Current limitation</strong>
-              <span>The migration to the official feed works; how many small firms will actually pay for it is still unproven.</span>
-            </div>
-            <div className="project-links">
-              <a href="https://jobfilter.uk/find-jobs">Try a free scan</a>
-              <a href="https://github.com/manazoid4/JobFilterV1/pull/383">Review the Find a Tender migration</a>
-              <a href="https://github.com/manazoid4/JobFilterV1">View code</a>
-            </div>
-          </footer>
-        </article>
-
-        <article className="case-study scrap-case" id="scrap-finance-partners" aria-labelledby="scrap-title">
-          <header className="case-heading">
-            <div>
-              <p className="case-index">Contract build &middot; consultancy website</p>
-              <h3 id="scrap-title">Scrap Finance Partners</h3>
-            </div>
-            <p>
-              Scrap yards run on thin, informal bookkeeping and rarely get financial advice built for their trade. I
-              was contracted to design and build a complete consultancy website end-to-end for a real client:
-              services, pricing, a health-check pathway, and a working enquiry pipeline.
-            </p>
-          </header>
-
-          <div className="case-body">
-            <div className="case-problem">
-              <h4>What I built</h4>
-              <ul className="evidence-list">
-                {SCRAP_FINANCE_BUILD.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-            </div>
-            <div>
-              <h4>Outcome</h4>
-              <p>
-                A shipped, deployed site with a real backend: enquiries submitted through the contact form send an
-                email through Resend, with spam protection built in. It demonstrates the full build &mdash; strategy,
-                design, copy, and a working lead pipeline &mdash; not just a static mockup.
-              </p>
-            </div>
-          </div>
-
-          <footer className="case-footer">
-            <div>
-              <strong>Current limitation</strong>
-              <span>The founder-bio and case-study figures shown on the live site are illustrative brand copy, not independently confirmed client figures.</span>
-            </div>
-            <div className="project-links">
-              <a href="https://scrap-finance-partners.vercel.app">View the live site</a>
-              <a href="https://github.com/manazoid4/scrap-finance-partners">View code</a>
-            </div>
-          </footer>
-        </article>
-
-        <article className="case-study agent-case" id="agent-nudge" aria-labelledby="agent-title">
-          <header className="case-heading">
-            <div>
-              <p className="case-index">Released Windows app</p>
-              <h3 id="agent-title">Agent Nudge</h3>
-            </div>
-            <p>
-              When two AI coding agents work on the same project at once, one can act on information that&rsquo;s
-              already out of date, or edit a file the other is already mid-change on. Agent Nudge checks in before an
-              agent acts and stops it when something&rsquo;s changed or another agent has already claimed the file.
-            </p>
-          </header>
-
-          <figure className="artifact artifact-dark">
-            <img
-              src="/agent-nudge-demo.webp"
-              alt="Agent Nudge scenario demo showing two coding agents and a conflict review outcome"
-              width="1440"
-              height="900"
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption>Public fixture demo &middot; desktop runtime stays local &middot; released Windows MVP</figcaption>
-          </figure>
-
-          <div className="case-body">
-            <div className="case-problem">
-              <h4>What I built</h4>
-              <ul className="evidence-list">
-                {AGENT_NUDGE_BUILD.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-            </div>
-            <div>
-              <h4>How it decides</h4>
-              <p>
-                The verdict stays deterministic: Agent Nudge routes project facts into a preflight check. It doesn&rsquo;t
-                read hidden model state and it doesn&rsquo;t replace a human approving the change.
-              </p>
-            </div>
-          </div>
-
-          <footer className="case-footer">
-            <div>
-              <strong>Current limitation</strong>
-              <span>It coordinates agents but doesn&rsquo;t call a model itself, and provider hooks can still be bypassed if an agent skips them.</span>
-            </div>
-            <div className="project-links">
-              <a href="https://agent-nudge-bay.vercel.app/#demo">Try the scenario demo</a>
-              <a href="https://github.com/manazoid4/agent-nudge/releases">Download the Windows release</a>
-              <a href="https://github.com/manazoid4/agent-nudge">View code</a>
-            </div>
-          </footer>
-        </article>
-
-        <article className="supporting-project" id="openflowkit" aria-labelledby="openflow-title">
-          <div>
-            <p className="case-index">Open-source browser MVP</p>
-            <h3 id="openflow-title">OpenFlowKit</h3>
-          </div>
-          <div>
-            <p className="supporting-lede">
-              Typing is slow for a lot of writing work. OpenFlowKit lets you talk instead, then cleans up the
-              transcript with rule-based text refinement, right in the browser.
-            </p>
-            <p>
-              The working web MVP covers browser speech capture, a WebSocket terminal bridge, typed transcription and
-              refinement contracts, deterministic cleanup rules, latency tracking, and test coverage. It&rsquo;s
-              unreleased and open source; native desktop injection and hosted AI provider routing are the next
-              milestones, not built yet.
-            </p>
-          </div>
-          <div className="project-links vertical">
-            <a href="https://openflowkit-dusky.vercel.app">Try OpenFlowKit</a>
-            <a href="https://github.com/manazoid4/openflowkit">View code</a>
-          </div>
-        </article>
-      </section>
-
-      <section className="evidence-section" id="capability" aria-labelledby="capability-title">
-        <div className="section-intro">
-          <p className="section-label">Technical capability</p>
-          <h2 id="capability-title">What&rsquo;s actually behind the projects above.</h2>
-          <p>No enormous keyword wall &mdash; every line below is something used in a shipped project on this page.</p>
-        </div>
-        <dl className="evidence-matrix">
-          {TECH_CAPABILITY.map((item) => (
-            <div key={item.label}>
-              <dt>{item.label}</dt>
-              <dd>{item.detail}</dd>
-            </div>
+        <header className="section-heading">
+          <p className="eyebrow">Selected work / Flagships</p><h2 id="work-title">Real problems, framed by proof.</h2>
+          <p>Each project is presented by what changed, how it works, what can be inspected, and what remains unproven.</p>
+        </header>
+        <div className="flagship-list">
+          {FLAGSHIP_PROJECTS.map((project, index) => (
+            <article className="flagship" id={project.id} key={project.id} aria-labelledby={`${project.id}-title`}>
+              <header className="project-heading">
+                <div><p className="eyebrow">{project.eyebrow}</p><p className="status">{project.status}</p></div>
+                <div><h3 id={`${project.id}-title`}>{project.name}</h3><p className="project-summary">{project.summary}</p></div>
+              </header>
+              <ProjectImage project={project} eager={index === 0} />
+              <div className="story-grid">
+                <div><h4>Problem</h4><p>{project.problem}</p></div><div><h4>Insight</h4><p>{project.insight}</p></div>
+                <div className="built-cell"><h4>What I built</h4><ul>{project.built.map((item) => <li key={item}>{item}</li>)}</ul></div>
+                <div><h4>Proof</h4><p>{project.proof}</p><ProjectLinks project={project} /></div>
+              </div>
+              <footer className="limitation"><strong>Current limitation</strong><span>{project.limitation}</span></footer>
+            </article>
           ))}
-        </dl>
+        </div>
+        <div className="featured-heading"><p className="eyebrow">Selected work / Featured</p><h3>Smaller builds, still inspectable.</h3></div>
+        <div className="featured-grid">
+          {FEATURED_PROJECTS.map((project) => (
+            <article className="featured" id={project.id} key={project.id} aria-labelledby={`${project.id}-title`}>
+              <header><p className="eyebrow">{project.eyebrow}</p><p className="status">{project.status}</p><h3 id={`${project.id}-title`}>{project.name}</h3><p className="project-summary">{project.summary}</p></header>
+              <ProjectImage project={project} />
+              <div className="featured-copy"><h4>Build</h4><ul>{project.built.map((item) => <li key={item}>{item}</li>)}</ul><h4>Current limitation</h4><p>{project.limitation}</p></div>
+              <ProjectLinks project={project} />
+            </article>
+          ))}
+        </div>
       </section>
 
-      <section className="evidence-section" id="experience" aria-labelledby="experience-title">
-        <div className="section-intro">
-          <p className="section-label">Experience</p>
-          <h2 id="experience-title">What&rsquo;s actually true, no invented CV.</h2>
-          <p>No job titles, employers, or dates here that I can&rsquo;t stand behind &mdash; just what&rsquo;s verifiable from the work above.</p>
+      <section className="services" id="services" aria-labelledby="services-title">
+        <header className="section-heading compact"><p className="eyebrow">What I build</p><h2 id="services-title">Systems that remove friction.</h2></header>
+        <div className="service-list">{BUILD_AREAS.map(([title, body], index) => <div key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{body}</p></div>)}</div>
+      </section>
+
+      <section className="process" aria-labelledby="process-title">
+        <header><p className="eyebrow">Maz Works process</p><h2 id="process-title">Problem → Demo → Build → Proof</h2></header>
+        <ol>{PROCESS.map(([number, title, body]) => <li key={number}><span>{number}</span><strong>{title}</strong><p>{body}</p></li>)}</ol>
+      </section>
+
+      <section className="client" id="client" aria-labelledby="client-title">
+        <div className="client-intro">
+          <p className="eyebrow">For clients / Founding offer</p><h2 id="client-title">Show me the problem. I&rsquo;ll build a small tailored demonstration first.</h2>
+          <p>The free demo is one bounded way to make the solution tangible. It is not production delivery and it should not turn into days of unpaid bespoke work.</p>
+          <a className="button button-signal" href="mailto:manazoid4@gmail.com?subject=Free%20tailored%20demo&body=Hi%20Manazir%2C%0A%0AHere%27s%20the%20problem%3A%20%0AWhat%20happens%20today%3A%20%0AWho%20does%20it%3A%20%0AWhat%20a%20better%20outcome%20looks%20like%3A%20%0A">Request a free demo</a>
         </div>
-        <dl className="evidence-matrix">
-          <div>
-            <dt>Shipped, solo</dt>
-            <dd>Four products built and released end-to-end by one person: JobFilter, Scrap Finance Partners, Agent Nudge, and OpenFlowKit.</dd>
-          </div>
-          <div>
-            <dt>Full-stack ownership</dt>
-            <dd>Frontend, backend, data, and packaging on every one of them &mdash; TypeScript, React, Next.js, Node.js, SQLite, and Supabase, as shown in Technical capability above.</dd>
-          </div>
-          <div>
-            <dt>Currently building</dt>
-            <dd>Actively shipping and maintaining these projects now &mdash; this page tracks their real, current status, not a fixed portfolio snapshot.</dd>
-          </div>
-        </dl>
+        <div className="offer-frame">
+          <div className="offer-title"><span>Founding implementation</span><strong>£150 total</strong></div>
+          <div className="payment-row"><span>01</span><p><strong>£75 upfront</strong>After the demo and a written scope agreement.</p></div>
+          <div className="payment-row"><span>02</span><p><strong>£75 after execution</strong>When the agreed implementation is complete and presented.</p></div>
+          <div className="scope-note"><strong>Separate scope</strong><p>Additional workflows, complex integrations, dashboards, migrations, ongoing support, maintenance, major features, and extra revision rounds are quoted separately.</p></div>
+        </div>
       </section>
 
       <section className="about" id="about" aria-labelledby="about-title">
-        <div>
-          <p className="section-label">About</p>
-          <h2 id="about-title">I like turning messy problems into software that just works.</h2>
-        </div>
-        <div className="about-copy">
-          <p>
-            A manual process, a pile of scattered data, a slow workflow &mdash; that&rsquo;s the kind of problem I want
-            to look at. I&rsquo;ve shipped four different products solo: a released Windows app, a live
-            procurement-matching tool, a full consultancy-style website with a working lead pipeline, and a
-            voice-to-text browser tool.
-          </p>
-          <p>
-            I use AI where it earns its place in a build, and I say plainly where it doesn&rsquo;t belong yet. I work
-            best with people who care whether something actually solves the problem, not whether it sounds
-            impressive.
-          </p>
-        </div>
+        <div><p className="eyebrow">About / Manazir Hussain</p><h2 id="about-title">Builder first. Technology second.</h2></div>
+        <div className="about-copy"><p>I&rsquo;m a UK-based software builder drawn to messy processes, scattered information, and small problems that quietly waste time. Maz Works gives that work one home without pretending it came from a large studio.</p><p>I work across product thinking, interface design, data, backend systems, AI integration, testing, and deployment. The common thread is choosing the smallest system that can prove the idea, then making its limits visible.</p></div>
       </section>
 
-      <section className="contact" id="contact" aria-labelledby="contact-title">
-        <p className="section-label">Get in touch</p>
-        <h2 id="contact-title">Got a role, a project, or an idea worth building?</h2>
-        <p>UK-based and open to employment, freelance projects, and partnerships. Pick whichever fits:</p>
-        <div className="contact-routes">
-          <a
-            className="contact-route"
-            href="mailto:manazoid4@gmail.com?subject=Role%20enquiry&body=Hi%20Manazir%2C%0A%0AWe%27re%20hiring%20for%20a%20role%20that%20might%20fit%20your%20background%3A%0A%0ARole%3A%20%0ACompany%3A%20%0AWhere%20you%27d%20be%20based%2Fremote%3A%20%0A%0A"
-          >
-            <strong>Hire me</strong>
-            <span>Full-time or contract roles in software or applied AI.</span>
-          </a>
-          <a
-            className="contact-route"
-            href="mailto:manazoid4@gmail.com?subject=Project%20enquiry&body=Hi%20Manazir%2C%0A%0AI%27ve%20got%20a%20problem%20I%27d%20like%20turned%20into%20working%20software%3A%0A%0AWhat%20it%20is%3A%20%0AWho%20it%27s%20for%3A%20%0ARough%20timeline%2Fbudget%3A%20%0A%0A"
-          >
-            <strong>Commission a project</strong>
-            <span>You&rsquo;ve got a business problem and want it turned into working software.</span>
-          </a>
-          <a
-            className="contact-route"
-            href="mailto:manazoid4@gmail.com?subject=Collaboration&body=Hi%20Manazir%2C%0A%0AI%27m%20building%20something%20and%20thought%20you%27d%20be%20a%20good%20technical%20partner%3A%0A%0AWhat%20we%27re%20building%3A%20%0AWhat%20I%27m%20looking%20for%3A%20%0A%0A"
-          >
-            <strong>Collaborate</strong>
-            <span>You&rsquo;re building something and want a technical partner.</span>
-          </a>
-        </div>
-        <p className="contact-note">
-          There&rsquo;s no form here on purpose &mdash; a working lead-capture backend is a pattern I&rsquo;ve
-          already built and shipped on Scrap Finance Partners, just not needed on this site yet.
-        </p>
-        <div className="contact-actions">
-          <a className="button light" href="mailto:manazoid4@gmail.com">Email Manazir</a>
-          <a className="button outline-light" href="https://github.com/manazoid4">View GitHub</a>
+      <section className="pathways" id="contact" aria-labelledby="contact-title">
+        <header><p className="eyebrow">Work with me</p><h2 id="contact-title">Three clear ways in.</h2></header>
+        <div className="pathway-grid">
+          <a href="mailto:manazoid4@gmail.com?subject=Role%20enquiry&body=Hi%20Manazir%2C%0A%0ARole%3A%20%0ACompany%3A%20%0ALocation%2Fremote%3A%20%0A"><span>01 / Employment</span><strong>Hire me</strong><p>For software, product, automation, or applied-AI roles where shipping judgment matters.</p><em>Start a role conversation →</em></a>
+          <a href="mailto:manazoid4@gmail.com?subject=Free%20tailored%20demo&body=Hi%20Manazir%2C%0A%0AThe%20problem%20is%3A%20%0AWho%20it%20affects%3A%20%0AWhat%20happens%20today%3A%20%0A"><span>02 / Client</span><strong>Get a free demo</strong><p>Bring a real workflow or business problem. I&rsquo;ll look for one bounded way to demonstrate a solution.</p><em>Show me the problem →</em></a>
+          <a href="mailto:manazoid4@gmail.com?subject=Collaboration&body=Hi%20Manazir%2C%0A%0AWhat%20we%27re%20building%3A%20%0AWhat%20I%27m%20looking%20for%3A%20%0A"><span>03 / Partnership</span><strong>Collaborate</strong><p>For useful products, experiments, or technical work that becomes stronger with another perspective.</p><em>Explore a collaboration →</em></a>
         </div>
       </section>
 
       <footer className="site-footer">
-        <span>Manazir Hussain &copy; 2026</span>
-        <span>UK-based &middot; Open to roles, projects and partnerships</span>
-        <a href="mailto:manazoid4@gmail.com">manazoid4@gmail.com</a>
+        <div><strong>Maz Works</strong><span>Useful systems around real problems.</span></div>
+        <div><span>Manazir Hussain / Birmingham, UK</span><a href="mailto:manazoid4@gmail.com">manazoid4@gmail.com</a></div>
+        <div><a href="https://github.com/manazoid4">GitHub ↗</a><span>© 2026</span></div>
       </footer>
     </main>
   );
