@@ -23,6 +23,20 @@ The current FRAMEWORK build is the foundation. The refinement is subtraction and
 
 These are principles, not templates. Do not imitate another studio's identity, scale, claims, or visual assets.
 
+## Founder-led peer translation
+
+`docs/maz-works/PEER-BENCHMARK.md` compares ten current small/founder-led software and automation firms using their first-party sites. The repeated patterns worth applying are structural rather than stylistic:
+
+- work appears before a services catalogue;
+- the founder is named early instead of hidden behind invented studio scale;
+- one or two case studies carry most of the proof;
+- services are expressed through recognizable workflow problems;
+- the commercial next step is bounded and concrete;
+- client ownership and handoff are stated;
+- contact is simple and singular.
+
+Maz Works adapts those patterns to its own evidence and settled offer. It does not copy peer layouts, brand assets, language, testimonials, claims, or agency posture.
+
 ## Visual system
 
 - Warm ivory/off-white canvas and near-black ink remain the base.
