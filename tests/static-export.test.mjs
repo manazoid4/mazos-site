@@ -77,12 +77,12 @@ test('every featured project case study has a stated limitation and at least one
 });
 
 test('metadata and accessible navigation are present on both pages', async () => {
-  for (const route of ['/', '/mazos']) {
+  for (const route of ['/', '/mazos', '/work/jobfilter', '/work/scrap-finance-partners']) {
     const html = await readPage(route);
     assert.match(html, /href="#main-content">Skip to main content/);
     const target = /<([a-z]+)\b(?=[^>]*\bid="main-content")(?=[^>]*\btabindex="-1")[^>]*>/i.exec(html);
     assert.ok(target, 'Skip target must be programmatically focusable');
-    assert.equal(target[1].toLowerCase(), 'section', 'Skip target should be the first content section');
+    assert.ok(['section', 'article'].includes(target[1].toLowerCase()), 'Skip target should be the first content region');
     const navigationEnd = html.indexOf('</header>');
     assert.notEqual(navigationEnd, -1, 'Page must include its navigation header');
     assert.ok(target.index > navigationEnd, 'Skip target must follow the navigation header in document order');
@@ -94,7 +94,7 @@ test('metadata and accessible navigation are present on both pages', async () =>
 });
 
 test('internal links and assets resolve inside the static export', async () => {
-  for (const route of ['/', '/mazos']) {
+  for (const route of ['/', '/mazos', '/work/jobfilter', '/work/scrap-finance-partners']) {
     const html = await readPage(route);
     const references = [...html.matchAll(/(?:href|src)="([^"]+)"/g)].map((match) => match[1]);
     for (const reference of references) {
@@ -123,7 +123,7 @@ test('legacy case-study route is removed from discovery and redirects attention 
 });
 
 test('new-tab links declare a safe opener relationship', async () => {
-  for (const route of ['/', '/mazos']) {
+  for (const route of ['/', '/mazos', '/work/jobfilter', '/work/scrap-finance-partners']) {
     const html = await readPage(route);
     const newTabLinks = [...html.matchAll(/<a\b[^>]*target="_blank"[^>]*>/g)].map((match) => match[0]);
     for (const anchor of newTabLinks) {
@@ -148,7 +148,7 @@ test('Vercel Analytics is bundled into the static export', async () => {
 });
 
 test('structured data and analytics are present on both pages', async () => {
-  for (const route of ['/', '/mazos']) {
+  for (const route of ['/', '/mazos', '/work/jobfilter', '/work/scrap-finance-partners']) {
     const html = await readPage(route);
     const ldMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
     assert.ok(ldMatch, `${route} is missing a JSON-LD script tag`);
@@ -168,7 +168,7 @@ test('homepage keeps Manazir identifiable without inventing a CV', async () => {
   const html = await readPage('/');
   assert.match(html, /id="about"/);
   assert.match(html, /About \/ Manazir Hussain/);
-  assert.match(html, /not a pretend agency/);
+  assert.match(html, /One builder, accountable from problem to proof/);
   assert.doesNotMatch(html, /\b(19|20)\d{2}\s*[-–—]\s*(19|20)\d{2}\b/, 'About section must not fabricate employment date ranges');
 });
 
@@ -180,9 +180,40 @@ test('commercial route states the bounded demo, split founding price, and scope 
   assert.match(html, /£150 total/);
   assert.match(html, /£75 upfront/);
   assert.match(html, /£75 after execution/);
-  assert.match(html, /quoted separately/);
+  assert.match(html, /quoted separately/i);
 });
 
+
+test('flagship case studies export with deep proof, limitations, and unique metadata', async () => {
+  for (const [route, project] of [
+    ['/work/jobfilter', 'JobFilter'],
+    ['/work/scrap-finance-partners', 'Scrap Finance Partners'],
+  ]) {
+    const html = await readPage(route);
+    assert.match(html, new RegExp(`${project} case study`));
+    assert.match(html, /Problem and insight/);
+    assert.match(html, /How it works/);
+    assert.match(html, /Key decisions/);
+    assert.match(html, /Current limitation/);
+    assert.match(html, /rel="canonical"/);
+    assert.match(html, /href="https?:\/\//);
+  }
+
+  const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
+  assert.match(sitemap, /\/work\/jobfilter/);
+  assert.match(sitemap, /\/work\/scrap-finance-partners/);
+});
+
+test('homepage uses the quiet proof hierarchy and explicit project relationships', async () => {
+  const html = await readPage('/');
+  assert.doesNotMatch(html, /proof-ledger/);
+  assert.doesNotMatch(html, /proof-strip/);
+  assert.match(html, />Product</);
+  assert.match(html, />Client work</);
+  assert.match(html, />Lab</);
+  assert.match(html, /Read case study/);
+  assert.match(html, /You keep ownership/);
+});
 test('runtime and static-host hardening stay explicit', async () => {
   const packageJson = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
   const vercelConfig = JSON.parse(await readFile(path.join(root, 'vercel.json'), 'utf8'));
@@ -200,4 +231,15 @@ test('runtime and static-host hardening stay explicit', async () => {
   ]) {
     assert.equal(headerNames.has(name), true, `Missing static-host header ${name}`);
   }
+});
+
+test('project memory keeps the Maz Works Knowledge Vault identity canonical', async () => {
+  const [readme, handoff] = await Promise.all([
+    readFile(path.join(root, 'README.md'), 'utf8'),
+    readFile(path.join(root, 'docs', 'maz-works', 'HANDOFF.md'), 'utf8'),
+  ]);
+
+  assert.match(readme, /Maz Works Knowledge Vault/);
+  assert.match(handoff, /Maz Works Knowledge Vault/);
+  assert.match(handoff, /JobFilter is one project inside it/);
 });

@@ -1,52 +1,40 @@
 # Maz Works Quiet Framework Checklist
 
-## Checkpoint 1 — Homepage refinement
+## Implementation — Complete
 
-- [ ] Simplify header and mobile navigation.
-- [ ] Shorten hero; replace ledger/strip with one proof line.
-- [ ] Make JobFilter and Scrap image-led flagships.
-- [ ] Compact Agent Nudge and OpenFlowKit.
-- [ ] Merge What I Build with Process.
-- [ ] Consolidate contact pathways without losing intent.
-- [ ] Keep free demo, £75 + £75, and scope boundaries intact but quieter.
-- [ ] Run `npm run verify`.
-- [ ] Capture 390px and 1280px views.
-- [ ] Update all four memory files and stop for review.
+- [x] Simplify header, mobile navigation, hero, and proof hierarchy.
+- [x] Make JobFilter and Scrap image-led flagships.
+- [x] Compact Agent Nudge and OpenFlowKit after evidence audit.
+- [x] Merge What I Build with Process and consolidate contact pathways.
+- [x] Keep the bounded demo, £75 + £75 terms, scope boundaries, ownership, and handoff intact.
+- [x] Reduce yellow surfaces, unnecessary boxes, and repeated copy.
+- [x] Capture and optimize real Scrap Finance Partners desktop/mobile evidence.
+- [x] Add reusable typed JobFilter and Scrap case-study routes.
+- [x] Add route metadata, sitemap entries, tests, and maintenance documentation.
+- [x] Update the canonical shared-memory identity to Maz Works Knowledge Vault.
 
-## Checkpoint 2 — Proof and depth
+## Quality — Complete locally
 
-- [ ] Reduce large yellow surfaces, unnecessary boxes, and repeated copy.
-- [ ] Capture/approve and optimize a real Scrap Finance Partners screenshot.
-- [ ] Add a reusable flagship case-study template.
-- [ ] Ship JobFilter and Scrap case-study routes with truthful metadata.
-- [ ] Audit selected-work candidates before changing hierarchy.
+- [x] Run TypeScript, production build, 16 tests, and static smoke.
+- [x] Run dependency audit: 0 vulnerabilities.
+- [x] Check 12 public evidence links: all HTTP 200.
+- [x] Verify 360/390/768/1280/1440 widths, images, console, requests, and overflow.
+- [x] Verify skip link, focus, heading order, alt text, 44px links, and reduced-motion rules.
+- [x] Refresh desktop, mobile, client, and case-study captures.
+- [x] Update all four persistent repository memory files.
 
-## Checkpoint 3 — Quality gate
+## Delivery gates
 
-- [ ] Verify real-browser keyboard order, focus, semantics, contrast, alt text, targets, and reduced motion.
-- [ ] Check 360/390/768/1280/1440 widths, console, overflow, and image crops.
-- [ ] Recheck claims, limitations, statuses, external links, and mailto paths.
-- [ ] Run `npm ci`, `npm run verify`, and `npm audit --omit=dev`.
-- [ ] Refresh screenshots and update persistent memory.
+- [ ] Publish branch and open PR.
+- [ ] Confirm GitHub/Vercel checks and record preview.
+- [ ] Next agent completes independent multi-perspective review and resolves only reproduced P0/P1 findings.
+- [ ] Merge through GitHub after approval and verify production separately.
 
-## Checkpoint 4 — Review and launch
+## Human inputs
 
-- [ ] Get Claude's independent refinement review.
-- [ ] Resolve reproducible P0/P1 findings.
-- [ ] Apply confirmed domain/LinkedIn inputs or document deferral.
-- [ ] Reconcile PR #8 with current `main` and dependency automation.
-- [ ] Confirm GitHub/Vercel checks and merge through GitHub.
-- [ ] Verify production routes, metadata, assets, contact, analytics, mobile, and accessibility.
-- [ ] Update repository and Knowledge Vault handoffs.
+- [ ] Confirm custom domain or retain `mazos-site.vercel.app`.
+- [ ] Supply exact LinkedIn URL or intentionally omit it.
 
-## Later
+## Stop rule
 
-- [ ] Prepare one approved proof-led LinkedIn post.
-- [ ] Document typed project/client/case-study maintenance.
-- [ ] Run periodic evidence/link/pricing/dependency audits.
-
-## Stop conditions
-
-- [ ] Stop and checkpoint after each major visual or quality milestone.
-- [ ] If a blocker survives two sensible methods, document it and change strategy.
-- [ ] Do not guess domains, profiles, claims, outcomes, or private information.
+Do not invent extra work after the local definition of done. The next pass is review, not another redesign.

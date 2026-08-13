@@ -53,6 +53,16 @@ async function resolveRequest(requestUrl) {
 
 const server = createServer(async (request, response) => {
   try {
+    const requestPath = new URL(request.url ?? '/', 'http://localhost').pathname;
+    if (requestPath === '/_vercel/insights/script.js') {
+      response.writeHead(200, {
+        'Cache-Control': 'no-store',
+        'Content-Type': 'text/javascript; charset=utf-8',
+      });
+      response.end('window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};');
+      return;
+    }
+
     const filePath = await resolveRequest(request.url ?? '/');
     if (!filePath) {
       response.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
