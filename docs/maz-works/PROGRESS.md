@@ -2,7 +2,7 @@
 
 ## Current state
 
-The Quiet Framework refinement is live on `main`. PR [#9](https://github.com/manazoid4/mazos-site/pull/9) was merged by `manazoid4` at commit `c10dc7b`; the main-branch GitHub workflow and Vercel production deployment pass. Production was then verified at 390px and 1440px across the homepage, both flagship case studies, `/mazos`, robots, and sitemap. No known P0/P1 engineering issue remains. This documentation reconciliation is on `agents/maz-works-production-handoff`.
+The Quiet Framework refinement is live on `main`. PR [#9](https://github.com/manazoid4/mazos-site/pull/9) was merged by `manazoid4` at commit `c10dc7b`; the main-branch GitHub workflow and Vercel production deployment pass. Production was then verified at 390px and 1440px across the homepage, both flagship case studies, `/mazos`, robots, and sitemap. No known P0/P1 engineering issue remains. Documentation reconciliation PR [#10](https://github.com/manazoid4/mazos-site/pull/10) is open with green GitHub/Vercel checks.
 
 ## Completed
 

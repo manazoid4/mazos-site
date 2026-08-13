@@ -8,6 +8,7 @@ Maintain Maz Works as Manazir Hussain's evidence-led umbrella for useful softwar
 
 - Repository: `manazoid4/mazos-site`
 - Current documentation branch: `agents/maz-works-production-handoff`
+- Current documentation PR: [#10 — Record Maz Works production handoff](https://github.com/manazoid4/mazos-site/pull/10) — checks green
 - Production branch: `main`
 - Merged pull request: [#9 — Complete Maz Works Quiet Framework refinement](https://github.com/manazoid4/mazos-site/pull/9)
 - Merge commit: `c10dc7b`
