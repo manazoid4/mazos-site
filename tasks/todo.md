@@ -1,55 +1,52 @@
-# Maz Works Launch Checklist
+# Maz Works Quiet Framework Checklist
 
-## P0 — Make PR #8 merge-ready
+## Checkpoint 1 — Homepage refinement
 
-- [ ] Claude reviews PR diff, Vercel preview, and all three browser captures.
-- [ ] Record only reproducible P0/P1 findings in `docs/maz-works/HANDOFF.md`.
-- [ ] Capture and optimize a real Scrap Finance Partners screenshot with a different method.
-- [ ] Add factual alt text/caption and verify the Scrap flagship at 390px, 768px, and laptop width.
-- [ ] Complete real-browser keyboard, focus, heading, landmark, contrast, touch-target, and reduced-motion checks.
-- [ ] Recheck every project claim, limitation, and external evidence link.
-- [ ] Run `npm run verify` and `npm audit --omit=dev`.
-- [ ] Refresh browser review captures after the final visual change.
+- [ ] Simplify header and mobile navigation.
+- [ ] Shorten hero; replace ledger/strip with one proof line.
+- [ ] Make JobFilter and Scrap image-led flagships.
+- [ ] Compact Agent Nudge and OpenFlowKit.
+- [ ] Merge What I Build with Process.
+- [ ] Consolidate contact pathways without losing intent.
+- [ ] Keep free demo, £75 + £75, and scope boundaries intact but quieter.
+- [ ] Run `npm run verify`.
+- [ ] Capture 390px and 1280px views.
+- [ ] Update all four memory files and stop for review.
 
-## Human gate
+## Checkpoint 2 — Proof and depth
 
-- [ ] Manazir confirms final domain or continued use of `mazos-site.vercel.app`.
-- [ ] Manazir supplies exact LinkedIn URL or confirms omission.
-- [ ] Manazir approves the Scrap screenshot or explicitly approves launch without it.
+- [ ] Reduce large yellow surfaces, unnecessary boxes, and repeated copy.
+- [ ] Capture/approve and optimize a real Scrap Finance Partners screenshot.
+- [ ] Add a reusable flagship case-study template.
+- [ ] Ship JobFilter and Scrap case-study routes with truthful metadata.
+- [ ] Audit selected-work candidates before changing hierarchy.
 
-## P1 — Finish launch identity
+## Checkpoint 3 — Quality gate
 
-- [ ] Update canonical, metadata base, robots sitemap, sitemap, JSON-LD IDs, OpenGraph URL, and tests together if the domain changes.
-- [ ] Add LinkedIn to visible links and JSON-LD `sameAs` only if verified.
-- [ ] Reconcile PR #8 with `main` and any Dependabot lockfile changes.
-- [ ] Update PR description and handoff with final scope/deferrals.
-- [ ] Confirm all GitHub and Vercel checks pass with no actionable review comments.
+- [ ] Verify real-browser keyboard order, focus, semantics, contrast, alt text, targets, and reduced motion.
+- [ ] Check 360/390/768/1280/1440 widths, console, overflow, and image crops.
+- [ ] Recheck claims, limitations, statuses, external links, and mailto paths.
+- [ ] Run `npm ci`, `npm run verify`, and `npm audit --omit=dev`.
+- [ ] Refresh screenshots and update persistent memory.
 
-## Merge gate
+## Checkpoint 4 — Review and launch
 
-- [ ] PR is clean and reviewed.
-- [ ] `git diff --check` passes.
-- [ ] `npm ci && npm run verify && npm audit --omit=dev` pass.
-- [ ] Merge through GitHub; never push directly to `main`.
+- [ ] Get Claude's independent refinement review.
+- [ ] Resolve reproducible P0/P1 findings.
+- [ ] Apply confirmed domain/LinkedIn inputs or document deferral.
+- [ ] Reconcile PR #8 with current `main` and dependency automation.
+- [ ] Confirm GitHub/Vercel checks and merge through GitHub.
+- [ ] Verify production routes, metadata, assets, contact, analytics, mobile, and accessibility.
+- [ ] Update repository and Knowledge Vault handoffs.
 
-## P1 — Production verification
+## Later
 
-- [ ] Wait for the Vercel production deployment to succeed.
-- [ ] Smoke-test `/`, `/mazos`, `robots.txt`, sitemap, social card, and project assets.
-- [ ] Inspect production at mobile and desktop widths for overflow and console errors.
-- [ ] Confirm canonical, OpenGraph, JSON-LD, and Analytics behavior in production HTML.
-- [ ] Confirm Hire, free-demo, and Collaborate mailto links.
-- [ ] Update the four repository memory files and Maz Works Knowledge Vault status.
-
-## P2 — Distribution and maintenance
-
-- [ ] Draft one proof-led LinkedIn post for a flagship; do not publish without Manazir approval.
-- [ ] Make the post resolve to a stable Maz Works project anchor and live evidence.
-- [ ] Document how to add a project/client, proof asset, status, and limitation through `app/projects.ts`.
-- [ ] Establish a lightweight monthly manual audit for links, status, visuals, pricing language, and dependencies.
+- [ ] Prepare one approved proof-led LinkedIn post.
+- [ ] Document typed project/client/case-study maintenance.
+- [ ] Run periodic evidence/link/pricing/dependency audits.
 
 ## Stop conditions
 
-- [ ] If a blocker survives two sensible attempts, update `PROGRESS.md`, `HANDOFF.md`, and `NEXT-STEPS.md` with the exact blocker and next action.
-- [ ] If context becomes constrained, checkpoint before starting another task.
-- [ ] If a requested change conflicts with truth boundaries or settled commercial rules, stop and ask Manazir rather than guessing.
+- [ ] Stop and checkpoint after each major visual or quality milestone.
+- [ ] If a blocker survives two sensible methods, document it and change strategy.
+- [ ] Do not guess domains, profiles, claims, outcomes, or private information.

@@ -1,376 +1,272 @@
-# Implementation Plan: Maz Works — Review, Launch, and Evidence Completion
+# Implementation Plan: Maz Works Quiet Framework Refinement
 
-## Overview
+## Outcome
 
-PR #8 already delivers the coherent Maz Works redesign. The next stage is not another redesign: it is a controlled path from a green preview to a trusted production launch, followed by a small evidence and distribution loop. Work must preserve the settled FRAMEWORK system, the project hierarchy, the bounded founding offer, and the truth boundaries in `docs/maz-works/HANDOFF.md`.
+Refine the tested Maz Works preview into a calm, minimal, evidence-led portfolio that serves employers, clients, collaborators, and LinkedIn visitors without reading like a low-cost agency sales page. Evolve the current implementation; do not restart it.
 
-## Current baseline
+## Baseline
 
 - Branch: `agents/maz-works-framework`
-- Pull request: https://github.com/manazoid4/mazos-site/pull/8
+- PR: https://github.com/manazoid4/mazos-site/pull/8
 - Preview: https://mazos-site-git-agents-maz-works-framework-manazir-s-projects1.vercel.app
-- GitHub checks: two `verify` jobs and Vercel preview all pass
-- Local verification: `npm run verify` passes; 13/13 tests; production audit has 0 vulnerabilities
-- Responsive evidence: `docs/maz-works/review-desktop.png`, `review-mobile.png`, and `review-mobile-client.png`
+- Existing build/tests/preview: green before this plan
+- Current captures: `docs/maz-works/review-desktop.png`, `review-mobile.png`, `review-mobile-client.png`
+- Visual contract: `DESIGN.md`
 
-## Definition of done
+## Why refine
 
-Maz Works is launch-complete when:
+The current build is truthful, structured, and distinctive, but the same ideas are repeated across the hero ledger, proof strip, project story cells, service list, process, client section, and pathway cards. Yellow occupies too much area in the client section, the mobile hero/header are crowded, and real product visuals do not yet carry enough of the story.
 
-- the final review has no unresolved P0/P1 findings;
-- Scrap Finance Partners has truthful visual evidence or a documented decision to launch without it;
-- keyboard navigation, focus, headings, landmarks, contrast, touch targets, and reduced-motion behavior are verified in a real browser;
-- final domain and LinkedIn inputs are applied atomically, or explicitly deferred without publishing false URLs;
-- `npm run verify` and `npm audit --omit=dev` pass on the final commit;
-- PR checks pass, the PR is reviewed and merged through GitHub, and production is smoke-tested;
-- persistent repository and Knowledge Vault handoffs match production reality.
+The refinement should cut roughly one third of homepage copy, remove redundant containers, and move confidence from claims to project evidence.
 
-## Architecture and product decisions
-
-- Keep the current static Next.js App Router architecture and plain CSS.
-- Keep project content in `app/projects.ts`; do not introduce a CMS.
-- Keep JobFilter and Scrap Finance Partners as flagships; keep Agent Nudge and OpenFlowKit featured.
-- Preserve the evidence sequence: problem → insight → build → proof → status → limitation.
-- Treat `mazos-site.vercel.app` as the current canonical until Manazir confirms a replacement domain.
-- Do not add LinkedIn until the exact public profile URL is verified.
-- Do not add a contact backend merely to replace working `mailto:` pathways.
-- Do not reopen the £150 founding-offer decision without a genuine implementation constraint.
-
-## Dependency order
+## Target architecture
 
 ```text
-Final review
-    ├── Evidence asset completion
-    ├── Accessibility/runtime audit
-    └── Copy/truth/link audit
-             │
-             └── Merge-ready checkpoint
-                      │
-              Human launch inputs
-                      │
-              Canonical/social update
-                      │
-               Final PR verification
-                      │
-                 Merge + production
-                      │
-             Post-launch proof/distribution
+Compact identity/header
+Short hero + one proof line
+JobFilter flagship
+Scrap Finance Partners client flagship
+Selected work index
+What I build / How I work
+Bounded client offer
+About + one contact block
+Footer
 ```
 
-## Task 1: Independent final review
+## Task 1 — Simplify the homepage information architecture
 
-**Description:** Claude reviews the PR diff, preview, screenshots, copy, and information hierarchy. The review should identify concrete defects, not reopen settled positioning by preference.
+This is the exact next task and one coherent visual checkpoint.
 
-**Acceptance criteria:**
+### Work
 
-- [ ] Findings are classified as P0, P1, P2, or non-actionable.
-- [ ] Each actionable finding cites a file, viewport, copy passage, or reproducible behavior.
-- [ ] No change weakens the flagship hierarchy, truth boundaries, or bounded commercial offer.
+- Reduce the header to the essential internal destinations; keep external links in the footer on narrow screens.
+- Replace the hero's proof ledger and two competing large buttons with a shorter statement, one primary action, one quiet secondary route, and one concise proof line.
+- Remove the separate proof strip.
+- Keep JobFilter first and Scrap Finance Partners second, but use larger media and shorter factual summaries.
+- Render Agent Nudge and OpenFlowKit as a compact selected-work index rather than equal flagship cards.
+- Merge “What I build” and “Process” into one short section.
+- Replace the three large Hire / Client / Collaborate cards with one contact block that preserves three distinct links/intents.
+- Keep the client offer after Scrap proof and make its visual hierarchy quieter without changing any commercial wording.
 
-**Verification:**
+### Acceptance
 
-- [ ] Review PR #8 and all three `docs/maz-works/review-*.png` captures.
-- [ ] Inspect the Vercel preview at mobile and desktop widths.
-- [ ] Record accepted findings in `docs/maz-works/HANDOFF.md` before implementation.
+- A first-time visitor understands who Manazir is, what he builds, sees shipped proof, and can reach work from the first screen.
+- No important project truth, limitation, external link, email intent, or scope protection is lost.
+- No section repeats an earlier section's primary purpose.
+- The commercial offer remains fully readable but is not the largest colored object on the page.
+- Mobile navigation and hero fit comfortably without tiny crowded links or an excessively tall first screen.
 
-**Dependencies:** None
-
-**Files likely touched:**
-
-- `docs/maz-works/HANDOFF.md`
-- `docs/maz-works/NEXT-STEPS.md`
-
-**Estimated scope:** S
-
-## Task 2: Complete Scrap Finance Partners visual evidence
-
-**Description:** Capture a real first-party screenshot from the live Scrap Finance Partners site using a method different from the failed in-app-browser CDP capture. Crop it to show the actual positioning and service path, then optimize it for the portfolio.
-
-**Acceptance criteria:**
-
-- [ ] Asset is a real screenshot of the live client site, not a recreation or invented mockup.
-- [ ] Screenshot contains no private data, browser chrome, credentials, or unverified performance claims.
-- [ ] Optimized WebP/PNG is sharp at its rendered size and reasonably small (target under 250 KB).
-- [ ] `app/projects.ts` supplies accurate alt text and a factual caption through the existing optional `image` field.
-
-**Verification:**
-
-- [ ] Compare the asset with the live site before committing.
-- [ ] Run `npm run build` and `npm test`.
-- [ ] Inspect the Scrap Finance Partners flagship at 390px, 768px, and laptop width.
-
-**Dependencies:** Task 1
-
-**Files likely touched:**
-
-- `public/scrap-finance-partners.webp`
-- `app/projects.ts`
-- `tests/static-export.test.mjs`
-
-**Estimated scope:** S
-
-## Task 3: Close the accessibility verification gap
-
-**Description:** Verify the actual keyboard and assistive structure of the final preview. Fix only observed accessibility defects.
-
-**Acceptance criteria:**
-
-- [ ] Skip link becomes visible on focus and moves focus to `#main-content`.
-- [ ] All navigation, project evidence, pricing CTA, and contact pathways are reachable in a logical Tab order with visible focus.
-- [ ] Heading order and landmarks communicate the page structure without visual context.
-- [ ] Text/background contrast, 44px minimum touch targets, alt text, and reduced-motion behavior pass review.
-
-**Verification:**
-
-- [ ] Real-browser keyboard pass at desktop and mobile emulation.
-- [ ] Automated accessibility scan if an existing browser tool supports it; do not add a permanent dependency solely for one scan.
-- [ ] `npm run verify` passes after any fixes.
-
-**Dependencies:** Task 1; repeat the relevant portion after Task 2 if the screenshot is added
-
-**Files likely touched:**
+### Likely files
 
 - `app/page.tsx`
 - `app/globals.css`
 - `tests/static-export.test.mjs`
 
-**Estimated scope:** S–M
+### Verification
 
-## Task 4: Truth, proof, and link audit
+- `npm run verify`
+- Inspect 390px and 1280px views with no overflow or console errors.
+- Save new captures beside the existing review images with clear `quiet-framework` names.
+- Update `PROGRESS.md`, `HANDOFF.md`, `PLAN.md`, and `NEXT-STEPS.md`.
+- Stop for visual review before Task 2.
 
-**Description:** Perform one final evidence audit of every public statement and destination. Prefer removing or qualifying a weak claim over adding promotional copy.
+## Task 2 — Refine the visual system
 
-**Acceptance criteria:**
+### Work
 
-- [ ] Every project status, proof statement, limitation, and link agrees with the live product/repository.
-- [ ] Scrap Finance Partners remains `CLIENT WORK / SHIPPED` without revenue, lead, conversion, testimonial, or financial-outcome claims.
-- [ ] OpenFlowKit does not imply native injection or hosted AI routing is shipped.
-- [ ] All external links return a valid response and labels describe their destination.
+- Reduce yellow to status/focus/one-action accents; remove large yellow surfaces.
+- Use whitespace and section rules before adding frames.
+- Establish a measured 12-column desktop grid and clean single-column mobile flow.
+- Tune hero and section typography so the mobile headline is large but not viewport-dominating.
+- Keep square geometry and near-black structure; avoid adding shadows, rounded SaaS cards, gradients, or decorative motion.
+- Evaluate a self-hosted OFL grotesk plus existing mono labels only if the current font is clearly holding the result back; measure the added weight before keeping it.
 
-**Verification:**
+### Acceptance
 
-- [ ] Run the external-link status check recorded in `docs/maz-works/PROGRESS.md`.
-- [ ] Review `app/projects.ts`, the rendered page, and live destinations side by side.
-- [ ] Update deterministic tests for any new truth boundary that should not regress.
+- Screenshots, not yellow panels or borders, are the strongest visual objects after the hero text.
+- The page has obvious rhythm without every item becoming a card.
+- Focus styles remain more visible, not less.
+- The page remains complete with reduced motion and JavaScript disabled where applicable.
 
-**Dependencies:** Tasks 1–2
+### Verification
 
-**Files likely touched:**
+- Compare 360/390/768/1280/1440 widths.
+- Check focus, contrast, text wrapping, image crops, and touch targets.
+- Run `npm run verify`.
 
+## Task 3 — Complete flagship visual evidence
+
+### Work
+
+- Capture the real Scrap Finance Partners site using local Chrome/OS capture, a safe screenshot utility, or an asset approved by Manazir; do not retry the failed in-app CDP path unchanged.
+- Crop away browser chrome and private data, optimize the asset, write factual alt text/caption, and store it under `public/`.
+- Confirm JobFilter's chosen screenshot shows the product rather than decorative framing.
+- Keep captions factual; do not imply revenue, lead, conversion, or testimonial outcomes.
+
+### Acceptance
+
+- Both flagships have crisp real visuals at their rendered sizes.
+- Scrap's asset visibly supports its verified services/enquiry/client-work story.
+- Assets are responsive, appropriately sized, and ideally under 250 KB each where quality permits.
+
+### Verification
+
+- Compare each asset with the live source.
+- Run build/tests and inspect mobile/tablet/laptop crops.
+
+## Task 4 — Add two deep case studies
+
+### Work
+
+- Add a reusable static case-study template and routes only for JobFilter and Scrap Finance Partners.
+- Drive shared content from typed data rather than duplicating facts.
+- Use Problem → Insight → What I built → How it works → Proof → Status → Limitation.
+- Include meaningful live/repository links, a clear return to selected work, and a relevant contact route.
+- Add project-specific title, description, canonical, and social data; use a project social card only if it can be generated truthfully and cleanly.
+
+### Acceptance
+
+- Each route adds depth beyond the homepage rather than repeating it verbatim.
+- Every claim has a real evidence source or is clearly framed as a limitation/current status.
+- Routes work in the existing static export and provide stable LinkedIn destinations.
+- No CMS, database, or new routing abstraction is introduced.
+
+### Likely files
+
+- `app/work/[slug]/page.tsx` or explicit static route equivalents
 - `app/projects.ts`
-- `app/page.tsx`
+- `app/globals.css`
 - `tests/static-export.test.mjs`
 
-**Estimated scope:** S
+### Verification
 
-## Checkpoint A: Merge-ready product
+- `npm run verify`
+- Check generated routes and metadata in `out/`.
+- Keyboard/mobile review of both case studies.
 
-- [ ] Tasks 1–4 are complete or explicitly waived in the handoff.
-- [ ] No unresolved P0/P1 review findings remain.
-- [ ] `npm run verify` passes.
-- [ ] `npm audit --omit=dev` reports 0 vulnerabilities.
-- [ ] Browser review captures reflect the final UI.
-- [ ] PR #8 remains clean and all required checks pass.
+## Task 5 — Audit selected work and human voice
 
-## Task 5: Resolve launch inputs with Manazir
+### Work
 
-**Description:** Collect only the inputs that cannot be inferred safely. This is a human gate, not a reason to block Tasks 1–4.
+- Review only plausible current repository candidates against problem, shipped proof, technical depth, originality, commercial relevance, evidence quality, and current relevance.
+- Promote nothing solely because it exists on GitHub.
+- Keep Agent Nudge/OpenFlowKit unless another project clearly strengthens the story.
+- Add a concise About/current-interests paragraph that sounds like one person, avoids biography inflation, and gives collaborators a reason to engage.
 
-**Acceptance criteria:**
+### Acceptance
 
-- [ ] Manazir confirms either a final domain or continued use of `mazos-site.vercel.app`.
-- [ ] Manazir supplies the exact public LinkedIn profile URL or confirms LinkedIn should remain omitted.
-- [ ] Manazir approves the Scrap visual or explicitly approves launch without it if Task 2 cannot be completed.
+- Flagship remains 1–2 projects, selected work remains roughly 2–4, and experiments do not dilute the page.
+- Every visible project has a status, evidence route, and limitation.
+- Manazir remains clearly identifiable; Maz Works never sounds like a team or agency.
 
-**Verification:**
+## Task 6 — Make the client path confident and bounded
 
-- [ ] Decisions are recorded in `docs/maz-works/HANDOFF.md` and the Knowledge Vault.
-- [ ] No guessed domain, redirect, handle, or profile URL is committed.
+### Work
 
-**Dependencies:** None for asking; Task 6 depends on the answers
+- Keep the free-demo offer after client proof.
+- Present £150 total / £75 + £75 as founding implementation terms in restrained typography.
+- Keep the bounded-demo definition and separately quoted out-of-scope examples adjacent enough to be understood on mobile.
+- Preserve distinct Hire, Client, and Collaborate email intents while consolidating their visual presentation.
+- Confirm mailto subjects/bodies are useful and truthful.
 
-**Files likely touched:**
+### Acceptance
 
-- `docs/maz-works/HANDOFF.md`
-- `docs/maz-works/NEXT-STEPS.md`
+- A client sees the actual commissioned project before pricing.
+- No reasonable reading implies unlimited custom software for £150.
+- Employers and collaborators can reach their path without passing through a sales funnel.
 
-**Estimated scope:** XS
+## Task 7 — Accessibility, performance, SEO, and truth gate
 
-## Task 6: Apply canonical domain and social identity atomically
+### Accessibility
 
-**Description:** If a new domain is confirmed, update every source of public identity in one change. Add LinkedIn only when the exact URL is verified.
+- Verify skip link, Tab order, visible focus, landmarks, heading order, meaningful link names, alt text, contrast, 44px targets, and reduced motion in a real browser.
+- Fix observed problems without hiding content from assistive technology.
 
-**Acceptance criteria:**
+### Performance
 
-- [ ] `metadataBase`, canonical, OpenGraph URL, sitemap, robots sitemap, and JSON-LD IDs all use the same final origin.
-- [ ] Old production URLs redirect intentionally or remain documented; no split canonical identity exists.
-- [ ] LinkedIn appears in visible navigation/contact and `sameAs` only when verified.
-- [ ] Social card title, description, and image remain truthful after the domain change.
+- Keep runtime JavaScript and dependencies minimal.
+- Optimize screenshots and any added fonts; prevent avoidable layout shift.
+- Preserve static rendering/export and security headers.
 
-**Verification:**
+### SEO and identity
 
-- [ ] `npm run verify` passes.
-- [ ] Inspect generated `out/index.html`, `out/robots.txt`, and `out/sitemap.xml`.
-- [ ] Validate the final social preview URL and structured-data JSON.
+- Keep titles/descriptions/JSON-LD truthful and aligned with Maz Works and Manazir.
+- Apply a confirmed domain across canonical, sitemap, robots, JSON-LD, OpenGraph, and tests in one change, or explicitly retain the Vercel domain.
+- Add LinkedIn only when the exact public profile is verified.
+- Add case-study sitemap entries and project metadata if Task 4 ships.
 
-**Dependencies:** Task 5
+### Truth
 
-**Files likely touched:**
+- Recheck every project status, limitation, link, and client claim against live evidence.
+- Remove or qualify anything that cannot be supported.
 
-- `app/layout.tsx`
-- `app/robots.ts`
-- `app/sitemap.ts`
-- `app/page.tsx`
-- `tests/static-export.test.mjs`
+### Verification
 
-**Estimated scope:** M
+- `npm ci`
+- `npm run verify`
+- `npm audit --omit=dev`
+- External-link status check
+- Generated HTML/robots/sitemap/metadata inspection
+- Real-browser accessibility and console pass
 
-## Task 7: Final PR and dependency reconciliation
+## Task 8 — Independent refinement review and launch
 
-**Description:** Reconcile PR #8 with any intervening `main` or Dependabot changes, run the complete gate, and prepare one reviewable final diff.
+### Work
 
-**Acceptance criteria:**
+- Have Claude review the final diff, refreshed captures, preview, and case studies.
+- Accept only reproducible P0/P1 findings before launch; record lower-priority ideas separately.
+- Reconcile PR #8 with `main` and dependency automation without losing useful local work.
+- Update PR description and all persistent memory.
+- Merge through GitHub only after review and green checks; never push directly to `main`.
+- Verify production independently of preview.
 
-- [ ] No duplicate or conflicting dependency update remains between PR #8 and open Dependabot work.
-- [ ] Branch is current enough to merge cleanly without discarding either side's useful changes.
-- [ ] PR description and `docs/maz-works/HANDOFF.md` reflect the final scope and known deferrals.
+### Launch gate
 
-**Verification:**
+- No unresolved P0/P1 findings.
+- Full local verification and audit pass.
+- GitHub and Vercel checks pass.
+- 360/390/768/1280/1440 browser review passes with no overflow or console errors.
+- Production homepage, both case studies, `/mazos`, robots, sitemap, social assets, project assets, and contact links behave as expected.
 
-- [ ] `git diff --check` passes.
-- [ ] `npm ci && npm run verify && npm audit --omit=dev` pass.
-- [ ] GitHub checks and Vercel preview pass on the final commit.
-- [ ] No unresolved actionable PR comments remain.
+## Task 9 — Distribution and maintenance
 
-**Dependencies:** Checkpoint A; Task 6 if launch inputs are available, otherwise an explicit deferral
+- After production stabilizes, draft one proof-led flagship LinkedIn post; Manazir must approve before publishing.
+- Link post → case study → live product/code → contact.
+- Document how to add a project, client, proof asset, status, limitation, and case study through the typed data/template.
+- Run a lightweight periodic audit of links, project status, screenshots, pricing wording, and dependency security.
 
-**Files likely touched:**
+## Dependency order
 
-- `package-lock.json`
-- `docs/maz-works/HANDOFF.md`
-- `docs/maz-works/PROGRESS.md`
-
-**Estimated scope:** S–M
-
-## Checkpoint B: Approved to merge
-
-- [ ] Final PR diff has been reviewed.
-- [ ] Required checks are green.
-- [ ] Human-gated domain/LinkedIn decisions are applied or documented as deferred.
-- [ ] Production rollback is available by redeploying the previous Vercel deployment.
-- [ ] Merge proceeds through GitHub; no direct push to `main`.
-
-## Task 8: Merge and verify production
-
-**Description:** Merge the reviewed PR through GitHub, allow Vercel production deployment to complete, then verify the public site rather than assuming preview parity.
-
-**Acceptance criteria:**
-
-- [ ] PR #8 is merged through GitHub with all required checks passing.
-- [ ] Production deployment completes successfully.
-- [ ] Homepage, `/mazos`, `robots.txt`, sitemap, social asset, and project assets return expected statuses.
-- [ ] Hire, free-demo, and collaboration mailto links contain the intended subjects/bodies.
-
-**Verification:**
-
-- [ ] Smoke-test the production URL at mobile and desktop widths.
-- [ ] Confirm no horizontal overflow or console errors.
-- [ ] Confirm canonical/OG/JSON-LD values from production HTML.
-- [ ] Confirm Vercel Analytics loads without breaking Content Security Policy.
-
-**Dependencies:** Checkpoint B
-
-**Files likely touched:**
-
-- `docs/maz-works/PROGRESS.md`
-- `docs/maz-works/HANDOFF.md`
-- Knowledge Vault Maz Works status/session note
-
-**Estimated scope:** S
-
-## Task 9: Prepare the first proof-led distribution loop
-
-**Description:** After production is stable, prepare—not automatically publish—the first LinkedIn-to-case-study loop. Start with one flagship and make every claim resolve to live evidence.
-
-**Acceptance criteria:**
-
-- [ ] Draft covers one problem, one key judgment, what shipped, one limitation, and one link to the relevant Maz Works anchor.
-- [ ] No invented business result, testimonial, engagement promise, or inflated agency language appears.
-- [ ] Link resolves to a stable production anchor and its case-study evidence remains visible on mobile.
-
-**Verification:**
-
-- [ ] Compare every draft claim with `app/projects.ts` and the live destination.
-- [ ] Manazir approves wording before anything is posted externally.
-- [ ] Record the reusable post → case study → product/code → contact pattern in the vault.
-
-**Dependencies:** Task 8; verified LinkedIn URL from Task 5
-
-**Files likely touched:**
-
-- Knowledge Vault Maz Works notes
-- Optional `docs/maz-works/` content brief
-
-**Estimated scope:** S
-
-## Task 10: Establish lightweight maintenance
-
-**Description:** Keep the portfolio current without creating a CMS or recurring busywork. Document how to add proof and how to detect drift.
-
-**Acceptance criteria:**
-
-- [ ] README or handoff explains how to add a project/client, status, proof link, screenshot, and limitation through `app/projects.ts`.
-- [ ] A monthly manual check covers live links, project status, screenshots, pricing wording, and dependency/security health.
-- [ ] Future projects are not promoted until they have a real problem, inspectable proof, current status, and stated limitation.
-
-**Verification:**
-
-- [ ] A fresh agent can identify the exact files and commands without prior conversation.
-- [ ] `npm run verify` remains the single local launch gate.
-- [ ] Maintenance guidance does not require a CMS or new runtime dependency.
-
-**Dependencies:** Task 8
-
-**Files likely touched:**
-
-- `README.md`
-- `docs/maz-works/HANDOFF.md`
-- Knowledge Vault Maz Works status
-
-**Estimated scope:** S
-
-## Checkpoint C: Stable operating state
-
-- [ ] Production is healthy and documented.
-- [ ] First distribution draft is ready for human approval.
-- [ ] Maintenance instructions are sufficient for a fresh agent.
-- [ ] `PROGRESS.md`, `HANDOFF.md`, `PLAN.md`, and `NEXT-STEPS.md` agree.
-- [ ] The Maz Works Knowledge Vault and GitHub repository hold the same current state.
-
-## Risks and mitigations
-
-| Risk | Impact | Mitigation |
-|---|---|---|
-| Review drifts into a second redesign | High | Treat settled design/commercial decisions as constraints; require evidence for changes. |
-| Screenshot capture continues failing | Medium | Use local Chrome/OS capture, Vercel preview tooling, or an approved manually supplied image; launch can be explicitly approved without it. |
-| Domain migration creates split identity | High | Update canonical, robots, sitemap, JSON-LD, OG, tests, and redirects atomically. |
-| Evidence becomes stale | High | Keep statuses and limitations in typed project data; run periodic live-link/status checks. |
-| £150 offer reads as unlimited pricing | High | Preserve scope exclusions adjacent to price and review them at mobile width. |
-| Dependency PR conflicts with #8 | Medium | Reconcile lockfiles once, keep the secure compatible versions, and close superseded automation PRs only after merge. |
-| LinkedIn work starts before the site is stable | Medium | Make distribution depend on production verification. |
-| Agent context is interrupted | Medium | Update the four persistent docs after each checkpoint; exact next action always lives in `HANDOFF.md`. |
-
-## Open human decisions
-
-- Final public domain: new Maz Works domain or keep `mazos-site.vercel.app`?
-- Exact public LinkedIn profile URL, or intentional omission?
-- If automated capture remains blocked, may the site launch without a Scrap screenshot, or will Manazir supply/approve one?
-
-## Explicit non-goals
-
-- No CMS, database, or admin dashboard.
-- No invented projects, clients, outcomes, testimonials, or CV history.
-- No full contact backend unless real demand shows mailto is inadequate.
-- No separate MAZos marketing page.
-- No broad technology badge wall, animation layer, or generic AI redesign.
+```text
+Task 1 homepage checkpoint
+  → Task 2 visual refinement
+  → Task 3 real proof assets
+  → Task 4 flagship case studies
+  → Tasks 5–6 content/commercial refinement
+  → Task 7 quality gate
+  → Task 8 review + launch
+  → Task 9 distribution
+```
+
+Task 3 may begin alongside Task 2 only if it does not delay the Task 1 visual checkpoint. Domain and LinkedIn inputs are human gates for Task 7/8, not reasons to block Tasks 1–6.
+
+## Risks and controls
+
+| Risk | Control |
+|---|---|
+| Refinement becomes a disconnected redesign | Preserve typed data, truth, hierarchy, static architecture, and existing useful components |
+| Minimalism removes necessary proof | Cut repetition, not evidence; every flagship keeps status, limitation, and destinations |
+| Site reads as a cheap agency | Put work before pricing, reduce yellow, and keep Manazir explicit |
+| Case studies duplicate homepage | Homepage summarizes; routes explain decisions/how/proof in depth |
+| Screenshot capture loops | Change capture method after the two recorded failures or request an approved source asset |
+| New font/assets harm performance | Self-host only OFL assets, measure weight, optimize, and revert if the benefit is marginal |
+| Reviewer reopens settled truths | Require reproducible findings and preserve commercial/truth rules |
+| Context interruption | Update the four memory files at every visual/quality/launch checkpoint |
+
+## Non-goals
+
+- No new brand detached from Maz Works.
+- No invented clients, results, testimonials, CV history, or team scale.
+- No CMS, database, contact backend, animation library, technology badge wall, or generic AI visual layer.
+- No major LinkedIn effort before the site and case-study story are stable.
 - No direct push to `main`.

@@ -2,35 +2,35 @@
 
 ## Now
 
-1. Claude reviews PR #8, its Vercel preview, the full diff, and all three browser captures; record only reproducible P0/P1 findings.
-2. Capture a real Scrap Finance Partners screenshot using a different method, optimize it, wire it into `app/projects.ts`, and verify it at mobile/tablet/laptop widths.
-3. Complete the real-browser accessibility pass: skip link, Tab order, focus visibility, headings, landmarks, contrast, touch targets, alt text, and reduced motion.
-4. Recheck every project status, proof claim, limitation, and external link.
-5. Run Checkpoint A: `npm run verify`, `npm audit --omit=dev`, responsive captures, and green PR/Vercel checks.
+- Implement the Quiet Framework homepage restructure in `app/page.tsx` and the minimum supporting CSS.
+- Shorten the hero, remove the proof ledger/proof strip, and retain one concise proof line.
+- Make JobFilter and Scrap the visual focus; compact Agent Nudge and OpenFlowKit.
+- Merge What I Build with Process and consolidate contact pathways.
+- Keep the free demo, £75 + £75 terms, scope protection, project claims, and limitations unchanged.
+- Run `npm run verify`, capture 390px and 1280px screenshots, update the four memory files, and stop for review.
 
 ## Next
 
-1. Get Manazir's final domain, LinkedIn, and Scrap-visual decisions.
-2. Update canonical/social/structured URLs atomically if the domain changes; add LinkedIn only when verified.
-3. Reconcile PR #8 with `main` and dependency automation.
-4. Update the PR description/handoff, clear actionable review comments, and merge through GitHub.
-5. Verify the production deployment, routes, assets, metadata, mailto pathways, Analytics, responsive layout, and console.
+- Capture and optimize a real Scrap Finance Partners screenshot using a new method.
+- Add reusable case-study routes for JobFilter and Scrap only.
+- Complete the project truth/link audit and the real-browser accessibility pass.
+- Review responsive hierarchy at 360/390/768/1280/1440 widths and fix only observed issues.
+- Have Claude review the refinement and resolve reproducible P0/P1 findings.
 
 ## Later
 
-1. Draft one proof-led flagship LinkedIn post after production stabilizes; require Manazir approval before publishing.
-2. Document the maintenance flow for adding projects/clients and proof through `app/projects.ts`.
-3. Run a lightweight monthly manual audit for links, project status, screenshots, pricing language, and dependencies.
-4. Add deeper case studies or Lab work only when evidence quality justifies them.
+- Apply the confirmed domain and LinkedIn URL, or explicitly defer them.
+- Reconcile and merge PR #8 through GitHub after green verification.
+- Verify production independently of preview.
+- Prepare one proof-led LinkedIn post and the lightweight maintenance flow.
+- Consider more Lab work only after a fresh evidence audit.
 
 ## Needs Manazir
 
-- Final Maz Works domain or approval to keep `mazos-site.vercel.app`.
-- Exact public LinkedIn URL or confirmation to omit it.
-- Approval of the Scrap Finance Partners visual, or a decision to launch without it / supply an approved asset.
+- Final domain or approval to keep `mazos-site.vercel.app`.
+- Exact public LinkedIn URL or intentional omission.
+- Approval or provision of a real Scrap Finance Partners visual if capture remains blocked.
 
-## Execution source
+## Exact next-agent action
 
-- Full task detail: `tasks/plan.md`
-- Checklist: `tasks/todo.md`
-- Current constraints and exact handoff: `docs/maz-works/HANDOFF.md`
+Execute Task 1 in `tasks/plan.md` only, then stop at the visual checkpoint. Do not start case-study routes until the new homepage screenshots have been reviewed.
