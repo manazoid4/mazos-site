@@ -2,7 +2,7 @@
 
 ## Current state
 
-A coherent Maz Works redesign is complete on `agents/maz-works-framework`. The static site builds, tests, and smokes cleanly and has been visually checked at mobile, tablet, and laptop widths.
+A coherent Maz Works redesign is complete on `agents/maz-works-framework`, and PR #8 remains open, clean, and fully green. The remaining work is now decomposed into an implementation-ready review, launch, production-verification, distribution, and maintenance plan.
 
 ## Completed
 
@@ -19,6 +19,9 @@ A coherent Maz Works redesign is complete on `agents/maz-works-framework`. The s
 - Updated metadata, JSON-LD, favicon, sitemap date, README, and social preview for Maz Works.
 - Preserved and restyled the no-index `/mazos` legacy handoff.
 - Updated production dependencies through the lockfile to clear the current audit findings.
+- Added `tasks/plan.md` with ten task-sized steps, acceptance criteria, verification, dependencies, risks, human gates, and three checkpoints.
+- Added `tasks/todo.md` as the executable launch checklist.
+- Expanded HANDOFF.md, PLAN.md, and NEXT-STEPS.md to cover the full path through production and post-launch maintenance.
 
 ## Partial
 
@@ -62,7 +65,9 @@ A coherent Maz Works redesign is complete on `agents/maz-works-framework`. The s
 - `public/social-card.png`
 - `tests/static-export.test.mjs`
 - `docs/maz-works/`
+- `tasks/plan.md`
+- `tasks/todo.md`
 
 ## Immediate next action
 
-Have Claude review the branch and browser captures, then add a Scrap Finance Partners screenshot only with a different reliable capture method.
+Claude executes Task 1 in `tasks/plan.md`: review PR #8, the preview, diff, and browser captures; record reproducible P0/P1 findings, then continue to the Scrap screenshot task with a different capture method.
