@@ -2,35 +2,27 @@
 
 ## Now
 
-- Implement the Quiet Framework homepage restructure in `app/page.tsx` and the minimum supporting CSS.
-- Shorten the hero, remove the proof ledger/proof strip, and retain one concise proof line.
-- Make JobFilter and Scrap the visual focus; compact Agent Nudge and OpenFlowKit.
-- Merge What I Build with Process and consolidate contact pathways.
-- Keep the free demo, £75 + £75 terms, scope protection, project claims, and limitations unchanged.
-- Run `npm run verify`, capture 390px and 1280px screenshots, update the four memory files, and stop for review.
+- Commit and push `agents/maz-works-quiet-framework`.
+- Open the PR against `main` and wait for GitHub/Vercel checks.
+- Record the PR/preview in `HANDOFF.md` and the Maz Works Knowledge Vault status note.
 
 ## Next
 
-- Capture and optimize a real Scrap Finance Partners screenshot using a new method.
-- Add reusable case-study routes for JobFilter and Scrap only.
-- Complete the project truth/link audit and the real-browser accessibility pass.
-- Review responsive hierarchy at 360/390/768/1280/1440 widths and fix only observed issues.
-- Have Claude review the refinement and resolve reproducible P0/P1 findings.
+- Next agent reads `HANDOFF.md` and `PEER-BENCHMARK.md`, reviews the PR/runtime through employer, client, collaborator, LinkedIn, editorial, conversion, accessibility, performance, and maintainability lenses, and patches only reproducible P0/P1 findings.
+- If clean, recommend merge; after approval, merge through GitHub and verify production separately.
 
 ## Later
 
-- Apply the confirmed domain and LinkedIn URL, or explicitly defer them.
-- Reconcile and merge PR #8 through GitHub after green verification.
-- Verify production independently of preview.
-- Prepare one proof-led LinkedIn post and the lightweight maintenance flow.
-- Consider more Lab work only after a fresh evidence audit.
+- Apply a confirmed custom domain and LinkedIn URL, or deliberately keep them omitted/deferred.
+- Prepare one proof-led LinkedIn post after production is stable.
+- Re-audit links, statuses, screenshots, pricing wording, and dependencies periodically.
 
 ## Needs Manazir
 
-- Final domain or approval to keep `mazos-site.vercel.app`.
+- Final domain decision.
 - Exact public LinkedIn URL or intentional omission.
-- Approval or provision of a real Scrap Finance Partners visual if capture remains blocked.
+- Merge approval after independent review.
 
 ## Exact next-agent action
 
-Execute Task 1 in `tasks/plan.md` only, then stop at the visual checkpoint. Do not start case-study routes until the new homepage screenshots have been reviewed.
+Open the new PR and preview, then execute the acceptance table in `HANDOFF.md` as an adversarial refinement review. Do not reopen the settled hierarchy, vault identity, or commercial model without new evidence. Make a small patch only for a reproduced P0/P1 issue; otherwise approve the build for merge.
