@@ -2,14 +2,14 @@
 
 ## Now
 
-- Commit and push `agents/maz-works-quiet-framework`.
-- Open the PR against `main` and wait for GitHub/Vercel checks.
-- Record the PR/preview in `HANDOFF.md` and the Maz Works Knowledge Vault status note.
+- Next agent reviews current `main`, [merged PR #9](https://github.com/manazoid4/mazos-site/pull/9), `https://mazos-site.vercel.app`, `HANDOFF.md`, and `PEER-BENCHMARK.md`.
+- Review the live result through employer, client, collaborator, LinkedIn, editorial, conversion, accessibility, performance, and maintainability lenses.
+- Create a follow-up `agents/` branch only if a reproducible P0/P1 issue is found.
 
 ## Next
 
 - Next agent reads `HANDOFF.md` and `PEER-BENCHMARK.md`, reviews the PR/runtime through employer, client, collaborator, LinkedIn, editorial, conversion, accessibility, performance, and maintainability lenses, and patches only reproducible P0/P1 findings.
-- If clean, recommend merge; after approval, merge through GitHub and verify production separately.
+- If clean, record the release-review result and stop. If patched, merge only through a new PR and verify production again.
 
 ## Later
 
@@ -21,8 +21,7 @@
 
 - Final domain decision.
 - Exact public LinkedIn URL or intentional omission.
-- Merge approval after independent review.
 
 ## Exact next-agent action
 
-Open the new PR and preview, then execute the acceptance table in `HANDOFF.md` as an adversarial refinement review. Do not reopen the settled hierarchy, vault identity, or commercial model without new evidence. Make a small patch only for a reproduced P0/P1 issue; otherwise approve the build for merge.
+Review production and execute the acceptance table in `HANDOFF.md` once. Do not reopen the settled hierarchy, vault identity, or commercial model without new evidence. Open a follow-up branch only for a reproduced P0/P1 issue; otherwise record a clean review and stop.

@@ -2,7 +2,7 @@
 
 ## Current state
 
-The Quiet Framework refinement is implementation-complete on `agents/maz-works-quiet-framework`, based on the merged Maz Works foundation in `origin/main`. The homepage, two flagship case studies, real Scrap Finance Partners evidence, structured project data, commercial route, metadata, mobile behavior, accessibility safeguards, tests, and reviewer captures are all in place. No known P0/P1 engineering issue remains locally. Publishing the branch and opening the independent-refinement PR is the exact next operation.
+The Quiet Framework refinement is live on `main`. PR [#9](https://github.com/manazoid4/mazos-site/pull/9) was merged by `manazoid4` at commit `c10dc7b`; the main-branch GitHub workflow and Vercel production deployment pass. Production was then verified at 390px and 1440px across the homepage, both flagship case studies, `/mazos`, robots, and sitemap. No known P0/P1 engineering issue remains. This documentation reconciliation is on `agents/maz-works-production-handoff`.
 
 ## Completed
 
@@ -18,12 +18,13 @@ The Quiet Framework refinement is implementation-complete on `agents/maz-works-q
 - Added case-study routes to metadata, canonical output, and sitemap; documented the project maintenance path.
 - Verified keyboard entry, focus visibility, headings, alt text, 44px targets, responsive images, overflow, console, and request health in a visible browser.
 - Refreshed desktop, mobile, client-offer, and case-study captures under `docs/maz-works/`.
+- Published PR #9 and replaced the stale GitHub repository description with the canonical Maz Works positioning.
 
 ## Partial
 
 - None in the agreed website implementation scope.
 - A final public domain and LinkedIn URL remain intentionally unguessed human identity inputs, not engineering gaps.
-- Independent review, PR checks, merge, and production verification are external delivery gates.
+- Independent post-merge refinement review remains by request; it is a review gate, not an unfinished implementation item.
 
 ## Broken / blockers
 
@@ -49,6 +50,10 @@ The Quiet Framework refinement is implementation-complete on `agents/maz-works-q
 - External evidence audit — 12/12 public links returned HTTP 200.
 - Visible-browser pass — 360×800, 390×844, 768×1024, 1280×720, and 1440×1000; no horizontal overflow, console errors, or failed requests.
 - Browser accessibility checks — first Tab reaches a visible skip link; focus outline is visible; heading order is valid; all rendered links are at least 44px high; all project images load with meaningful alt text.
+- GitHub/Vercel — both `verify` jobs, Vercel deployment, and Vercel preview-comment checks pass on PR #9.
+- Preview deployment — Ready at the recorded Vercel URL; anonymous access is protected by Vercel login, so visual review requires authentication or the verified local export/captures.
+- Main/production — merge commit `c10dc7b`; main `verify` workflow and Vercel deployment pass.
+- Production browser — `https://mazos-site.vercel.app` returns HTTP 200 for `/`, both case studies, `/mazos`, robots, and sitemap at 390px/1440px; correct titles/headings/images, no overflow or console errors.
 
 ## Current files/areas
 
@@ -63,4 +68,4 @@ The Quiet Framework refinement is implementation-complete on `agents/maz-works-q
 
 ## Immediate next action
 
-Commit and push `agents/maz-works-quiet-framework`, open a PR against `main`, wait for GitHub/Vercel checks, then hand that PR and `docs/maz-works/HANDOFF.md` to the next agent for an independent multi-perspective refinement review. The next agent should patch only reproducible P0/P1 findings; if none are found, recommend merge.
+The next agent reviews current `main` and production, then reads `docs/maz-works/HANDOFF.md` and `PEER-BENCHMARK.md`. Perform the independent multi-perspective refinement review against the live result. Open a follow-up `agents/` branch only for a reproducible P0/P1 finding; otherwise record that the release is clean and stop.
