@@ -25,10 +25,11 @@
 
 ## Delivery gates
 
-- [ ] Publish branch and open PR.
-- [ ] Confirm GitHub/Vercel checks and record preview.
-- [ ] Next agent completes independent multi-perspective review and resolves only reproduced P0/P1 findings.
-- [ ] Merge through GitHub after approval and verify production separately.
+- [x] Publish branch and open PR #9.
+- [x] Confirm GitHub/Vercel checks and record the protected preview.
+- [x] Merge PR #9 through GitHub.
+- [x] Verify main GitHub/Vercel checks and production separately.
+- [ ] Next agent completes one independent post-merge multi-perspective review and opens a follow-up branch only for reproduced P0/P1 findings.
 
 ## Human inputs
 

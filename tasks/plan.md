@@ -2,7 +2,7 @@
 
 ## Outcome
 
-The Maz Works site has been refined into a calm, minimal, evidence-led portfolio without discarding the merged foundation. The implementation is complete locally on `agents/maz-works-quiet-framework`; the only remaining gates are independent review, PR merge, production verification, and two explicit human identity inputs.
+The Maz Works site has been refined into a calm, minimal, evidence-led portfolio without discarding the merged foundation. PR #9 is merged into `main`; main GitHub/Vercel checks and production verification pass. No known implementation gap remains. The next agent performs the requested independent post-merge review, while domain and LinkedIn remain explicit human identity inputs.
 
 ## Delivered work
 
@@ -39,4 +39,4 @@ The next agent should inspect the PR, preview, diff, and `docs/maz-works/quiet-f
 
 ## Exact next action
 
-Publish the current branch, open the PR, wait for GitHub/Vercel checks, record the URLs in `docs/maz-works/HANDOFF.md`, and hand the independent review protocol to the next agent.
+Review current `main` and production through the acceptance table in `docs/maz-works/HANDOFF.md`. Open a follow-up branch only for a reproduced P0/P1 finding; otherwise record a clean release review and stop.
