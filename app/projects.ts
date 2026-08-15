@@ -132,6 +132,22 @@ export const FEATURED_PROJECTS: Project[] = [
     limitation: 'Native desktop text injection and hosted AI-provider routing are future work, not shipped capabilities.',
     links: [{ label: 'Try the MVP', href: 'https://openflowkit-dusky.vercel.app' }, { label: 'View code', href: 'https://github.com/manazoid4/openflowkit' }],
   },
+  {
+    id: 'maz-pocket', name: 'MAZ Pocket', eyebrow: 'Featured / Hardware', status: 'v0.1 built, hardware test pending',
+    relationship: 'Lab',
+    summary: 'Firmware for a card-sized handheld that turns a held key into a captured thought.',
+    problem: 'Ideas arrive away from a desk, and reaching for a phone to record one costs a lock screen, a feed, and often the thought itself.',
+    insight: 'A physical push-to-talk button on a device with nothing else running is the only real advantage this hardware has over a phone, so the firmware is built around that gesture rather than around a menu.',
+    built: [
+      'A native TCA8418 keyboard driver for the Cardputer ADV, whose keyboard moved behind an I2C expander that older firmware cannot read.',
+      'A voice pipeline behind a sink interface, streamed to storage because the board has no PSRAM.',
+      'A modular shell with a command palette, one notification path, and a focus timer that survives navigation.',
+      'Storage that degrades cleanly from SD card to internal flash to settings-only.',
+    ],
+    proof: 'Public firmware source with a clean build, a pin map cross-checked against vendor code, and a verification document that separates what is tested from what is not.',
+    limitation: 'It compiles and the hardware facts came from vendor source, but no device was attached during the build, so no behaviour has been observed running. Network handoff to OpenFlowKit is designed for, not shipped.',
+    links: [{ label: 'View code', href: 'https://github.com/manazoid4/maz-pocket' }],
+  },
 ];
 export const CASE_STUDY_PROJECTS = FLAGSHIP_PROJECTS.filter(
   (project): project is CaseStudyProject => Boolean(project.caseStudy),
