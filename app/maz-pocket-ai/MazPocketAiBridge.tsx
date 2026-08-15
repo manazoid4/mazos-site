@@ -125,10 +125,10 @@ export default function MazPocketAiBridge() {
       ],
     };
     await navigator.clipboard.writeText(JSON.stringify(pack, null, 2));
-    setMessage("AI access pack copied. Paste it only into an AI/agent you trust with this capability token.");
+    setMessage("AI access pack copied. Paste it only into an AI client you trust with this capability token.");
   }
 
-  async function copyChatGptBridgePrompt() {
+  async function copyGitHubBridgePrompt() {
     const repo = health?.bridge?.repo?.trim();
     if (!health?.bridge?.enabled || !repo) {
       setMessage("The private GitHub bridge is not enabled in MAZ Core. Configure the private bridge first.");
@@ -136,7 +136,7 @@ export default function MazPocketAiBridge() {
     }
     const prompt = `You have GitHub access. Use the private repository ${repo} as my MAZ Core command queue. To reach my local PC/Cardputer, inspect the current manazoid4/maz-pocket MAZ Core bridge contract, then create a private issue titled [MAZ CORE] <short request> whose body is a JSON object using only a currently supported MazCore.dispatch command. Never request or invent arbitrary shell execution, secret-file reads, destructive git operations, or firmware partition writes. MAZ Core will process the issue locally, post factual JSON evidence, and close it. Read that result before taking another action. For live Cardputer status/screen or synchronous chat, use the separate authenticated MAZ Pocket capability pack when your environment supports bearer HTTPS. M5Launcher remains the only firmware-install owner.`;
     await navigator.clipboard.writeText(prompt);
-    setMessage(`ChatGPT/GitHub bridge prompt copied for ${repo}. It uses the existing private issue queue rather than exposing MAZ Core publicly.`);
+    setMessage(`GitHub AI bridge prompt copied for ${repo}. It uses the existing private issue queue rather than exposing MAZ Core publicly.`);
   }
 
   useEffect(() => {
@@ -222,11 +222,11 @@ export default function MazPocketAiBridge() {
 
         <section className="bridgeCard">
           <h2>AI capability</h2>
-          <p>Create a private link for a trusted AI-capable client, copy a machine-readable bearer-HTTPS pack, or copy the private GitHub queue instructions for ChatGPT with GitHub access.</p>
+          <p>Create a private link for a trusted AI-capable client, copy a machine-readable bearer-HTTPS pack, or copy the private GitHub queue instructions for an AI with GitHub access.</p>
           <div className="buttons">
             <button onClick={buildCapabilityLink}>Create private link</button>
             <button onClick={copyCapabilityPack}>Copy AI access pack</button>
-            <button onClick={copyChatGptBridgePrompt} disabled={!health?.bridge?.enabled}>Copy ChatGPT bridge prompt</button>
+            <button onClick={copyGitHubBridgePrompt} disabled={!health?.bridge?.enabled}>Copy GitHub AI prompt</button>
           </div>
           {shareUrl && <textarea readOnly value={shareUrl} rows={4} />}
         </section>
