@@ -1,1 +1,1 @@
-READY PREVIEW - browser flasher uses a locally selected, hash-pinned CI release ZIP. No private firmware binary or GitHub credential is hosted by the public site. Keep preview status until the exact v0.03 package passes physical Cardputer ADV acceptance.
+READY PREVIEW - v0.03 has now booted on physical Cardputer ADV hardware. Browser flasher remains preview-only because the local ZIP selection flow still needs a UX fix. No private firmware binary or GitHub credential is hosted by the public site.
