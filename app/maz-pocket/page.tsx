@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'MAZ Pocket — Install',
-  description: 'Install the latest MAZ Pocket Cardputer ADV firmware through M5Launcher.',
+  description: 'Install MAZ Pocket on Cardputer ADV and set up its local PC assistant.',
   alternates: { canonical: '/maz-pocket' },
 };
 
@@ -32,13 +32,16 @@ export default function MazPocketInstall() {
           <a className="button button-dark" href="/maz-pocket/latest.bin" download>
             Download latest.bin
           </a>
+          <a className="button" href="/maz-pocket/install-core.ps1" download>
+            Download Core Setup
+          </a>
           <a className="button" href="/maz-pocket/rollback-v0.5.bin" download>
             Rollback v0.5
           </a>
         </div>
 
         <div style={{ marginTop: 34, maxWidth: 720 }}>
-          <p className="eyebrow">Fast install</p>
+          <p className="eyebrow">1 · Cardputer</p>
           <ol className="hero-copy" style={{ paddingLeft: 22 }}>
             <li>Connect M5Launcher to Wi-Fi.</li>
             <li>Use its WebUI/OTA flow and install <strong>latest.bin</strong>.</li>
@@ -48,6 +51,18 @@ export default function MazPocketInstall() {
             Permanent firmware URL: <code>https://mazos-site.vercel.app/maz-pocket/latest.bin</code>.
             Save that URL in M5Launcher Favorites where supported; future releases keep the same address.
           </p>
+
+          <p className="eyebrow" style={{ marginTop: 30 }}>2 · PC brain</p>
+          <p className="hero-copy">
+            Download <strong>Core Setup</strong> and run it with PowerShell once. It verifies the published package,
+            installs MAZ Core, preserves the existing LFM2.5 primary model, and adds MAZ Pocket Lite as the lower-VRAM local fallback.
+          </p>
+          <p className="hero-copy">
+            Normal local order is <code>LFM2.5 → MAZ Pocket Lite</code>. The Cardputer LOCAL route stays local;
+            AUTO can use the configured cloud only after both local models are unavailable.
+          </p>
+
+          <p className="eyebrow" style={{ marginTop: 30 }}>Recovery</p>
           <p className="hero-copy">
             Never flash this app-only image at address <code>0x0</code>. If a build misbehaves, install the v0.5 rollback above through M5Launcher.
           </p>
