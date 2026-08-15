@@ -9,7 +9,8 @@
     "warning": "Never place a MAZ Core token in public site source, logs, indexed pages or query parameters."
   },
   "transport": {
-    "core": "user-supplied private HTTPS MAZ Core endpoint",
+    "direct": "user-supplied private HTTPS MAZ Core endpoint with bearer authentication",
+    "github_queue": "optional private [MAZ CORE] issue queue for AI clients with GitHub access",
     "cardputer": "proxied through MAZ Core for remote-safe status/screen access"
   },
   "documented_capabilities": [
@@ -24,6 +25,7 @@
   ],
   "safety": [
     "MAZ Core uses an allow-list; there is no arbitrary remote shell.",
+    "The optional GitHub queue accepts only private-repository [MAZ CORE] requests that pass the same allow-list.",
     "Firmware installation remains owned by M5Launcher.",
     "The public Maz Works site stores no Core endpoint or token."
   ]
