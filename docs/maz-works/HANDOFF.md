@@ -7,10 +7,16 @@ Maintain Maz Works as Manazir Hussain's evidence-led umbrella for useful softwar
 ## Current state
 
 - Repository: `manazoid4/mazos-site`
-- Branch: `agents/maz-works-quiet-framework`
-- Base: merged Maz Works foundation at `origin/main` (`8871ede`)
-- Implementation: complete locally; no known P0/P1 engineering issue
-- Publishing: commit, push, PR, and remote checks are the next operation
+- Current documentation branch: `agents/maz-works-production-handoff`
+- Current documentation PR: [#10 — Record Maz Works production handoff](https://github.com/manazoid4/mazos-site/pull/10) — checks green
+- Production branch: `main`
+- Merged pull request: [#9 — Complete Maz Works Quiet Framework refinement](https://github.com/manazoid4/mazos-site/pull/9)
+- Merge commit: `c10dc7b`
+- Production: `https://mazos-site.vercel.app`
+- Preview: `https://mazos-site-git-agents-maz-works-quie-fc7f31-manazir-s-projects1.vercel.app`
+- Implementation: merged and live; no known P0/P1 engineering issue
+- Remote state: PR, main-branch GitHub `verify`, Vercel production deployment, and production browser checks pass
+- Preview access: deployment is Ready but anonymous requests are redirected to Vercel login; use an authenticated session or verified local export/captures
 - Visual direction: Quiet Framework
 - Flagships: JobFilter (Product); Scrap Finance Partners (Client work)
 - Selected work: Agent Nudge (Product); OpenFlowKit (Lab)
@@ -94,15 +100,14 @@ There is no known unfinished engineering item in the agreed build. The items bel
 
 ## P0
 
-- Next agent independently reviews the PR, live preview, diff, and four final captures through the nine lenses above.
+- Next agent independently reviews current `main`, production, the merged PR diff, and four final captures through the nine lenses above.
 - Patch only a reproducible truth, accessibility, responsive, broken-link, or visual-hierarchy regression.
-- If no P0/P1 finding reproduces, recommend merge instead of inventing polish work.
+- If no P0/P1 finding reproduces, record a clean release review instead of inventing polish work.
 
 ## P1
 
-- Confirm GitHub verification and Vercel preview are green.
-- Merge through GitHub after independent review; never push directly to `main`.
-- Verify production separately: homepage, both case studies, `/mazos`, robots, sitemap, assets, contact routes, metadata, analytics, mobile, and console.
+- If a P0/P1 finding reproduces, fix it on a new `agents/` branch, run the relevant full checks, and merge only through a follow-up PR.
+- Re-verify production after any follow-up merge.
 
 ## P2
 
@@ -162,18 +167,21 @@ There is no known unfinished engineering item in the agreed build. The items bel
 - `npm audit --omit=dev` — 0 vulnerabilities.
 - `git diff --check` — pass.
 - 12/12 public evidence URLs — HTTP 200.
+- PR #9 — both GitHub `verify` jobs, Vercel deployment, and Vercel preview-comment checks pass.
+- Vercel preview — Ready, but anonymous access is protected by Vercel login; this is deployment policy, not an application failure.
+- Main — GitHub `verify` and Vercel production deployment pass at merge commit `c10dc7b`.
+- Production — homepage, JobFilter case study, Scrap case study, `/mazos`, robots, and sitemap return 200 at 390px/1440px; titles, headings, responsive images, canonical output, overflow, and console pass.
 - Visible browser — 360×800, 390×844, 768×1024, 1280×720, 1440×1000; no overflow, console errors, or failed requests.
 - Keyboard/focus — first Tab reaches visible skip link; outline visible; rendered links at least 44px.
 - Structure/media — valid heading sequence; responsive images load at intended 390/780/1440 sources with meaningful alt text.
 
 ## Exact next action
 
-After the PR URL is recorded here, the next agent opens the PR, reads this file and `PEER-BENCHMARK.md`, then performs one independent review pass using the Multi-perspective acceptance table. Re-run `npm run verify` and the relevant browser width after any edit. Resolve only reproduced P0/P1 issues; otherwise leave a concise approval/merge recommendation and update this handoff with the review result.
+Review current `main` and `https://mazos-site.vercel.app`, then read this file and `PEER-BENCHMARK.md` and execute the Multi-perspective acceptance table once. If a P0/P1 issue reproduces, create a new `agents/` branch, patch narrowly, and re-run `npm run verify` plus the affected browser width. If clean, update this handoff with a concise release-review result and stop.
 
 ## Needs Manazir
 
 - Final custom domain or explicit approval to keep `mazos-site.vercel.app`.
 - Exact public LinkedIn URL or deliberate omission.
-- Merge approval after independent review.
 
 No previous conversation transcript is required.
