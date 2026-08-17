@@ -23,6 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: `${project.name} case study — Maz Works`,
       description: project.caseStudy.lede,
       url: `/work/${project.id}`,
+      images: project.image ? [{ url: project.image.src, width: project.image.width, height: project.image.height, alt: project.image.alt }] : [{ url: '/social-card.png', width: 1200, height: 630, alt: `${project.name} — Maz Works` }],
     },
   };
 }
