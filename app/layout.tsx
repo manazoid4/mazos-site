@@ -30,7 +30,7 @@ const structuredData = {
       name: SITE_NAME,
       url: `${SITE_URL}/`,
       founder: { '@id': `${SITE_URL}/#person` },
-      description: 'Web development, business automation and practical AI tools for UK small businesses.',
+      description: 'Web development, business automation and practical AI tools that reduce admin, improve follow-up and help UK small-business teams work more effectively.',
     },
   ],
 };
@@ -38,13 +38,13 @@ const structuredData = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: 'Maz Works | Web Development, Automation & AI', template: '%s — Maz Works' },
-  description: 'Maz Works builds websites, business automations and practical AI-powered software for small businesses, from problem discovery through design, implementation and deployment.',
+  description: 'Maz Works builds websites, business automations and practical AI software that reduce repetitive admin, improve lead follow-up and help small-business teams work more effectively.',
   alternates: { canonical: '/' },
   authors: [{ name: PERSON_NAME }],
   creator: PERSON_NAME,
   openGraph: {
     title: 'Maz Works | Web Development, Automation & AI',
-    description: 'Websites, automation and AI tools built around real business problems.',
+    description: 'Websites and automation built to reduce admin, improve follow-up and make everyday business workflows faster.',
     type: 'website',
     url: '/',
     siteName: SITE_NAME,
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Maz Works | Web Development, Automation & AI',
-    description: 'Websites, automation and AI tools built around real business problems.',
+    description: 'Websites and automation built to reduce admin, improve follow-up and make everyday business workflows faster.',
     images: ['/social-card.png'],
   },
 };

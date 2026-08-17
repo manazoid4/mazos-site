@@ -85,9 +85,26 @@ test('services and starting points are framed around business outcomes', async (
   const html = await readPage('/');
   assert.match(html, /Get more enquiries/);
   assert.match(html, /Reduce repetitive admin/);
+  assert.match(html, /Improve sales follow-up/);
   assert.match(html, /Improve customer operations/);
   assert.match(html, /Find and manage opportunities/);
   assert.match(html, /Add AI safely/);
+});
+
+test('business impact section gives owners, team leaders and sales teams measurable targets', async () => {
+  const html = await readPage('/');
+  assert.match(html, /Less waiting\. Less admin\. More useful work/);
+  assert.match(html, /business owners, team leaders and sales teams/i);
+  assert.match(html, /Respond faster/);
+  assert.match(html, /Give hours back to the team/);
+  assert.match(html, /Make sales follow-up consistent/);
+  assert.match(html, /Increase team capacity/);
+  assert.match(html, /Reduce dropped work/);
+  assert.match(html, /See where time and sales are leaking/);
+  assert.match(html, /admin hours per week/i);
+  assert.match(html, /follow-up coverage/i);
+  assert.match(html, /work handled per person/i);
+  assert.match(html, /time-to-quote/i);
 });
 
 test('professional background connects operations experience to Maz Works', async () => {
@@ -105,7 +122,7 @@ test('professional background connects operations experience to Maz Works', asyn
 
 test('process, AI guardrails and FAQ stay easy to understand', async () => {
   const html = await readPage('/');
-  for (const id of ['services', 'work', 'process', 'client', 'about', 'contact']) {
+  for (const id of ['services', 'impact', 'work', 'process', 'client', 'about', 'contact']) {
     assert.match(html, new RegExp(`id="${id}"`));
   }
   assert.match(html, /Tell me the problem/);
@@ -117,10 +134,15 @@ test('process, AI guardrails and FAQ stay easy to understand', async () => {
   assert.match(html, /Do I need to know what technology I need/);
   assert.match(html, /What does the free live demo include/);
   assert.match(html, /Can you show me the demo live/);
+  assert.match(html, /Can this help sales and team productivity/);
 });
 
-test('contact request is short, static-safe and supports a Teams walkthrough preference', async () => {
+test('contact request submits in-page instead of depending on the visitor email app', async () => {
   const html = await readPage('/');
+  const formSource = await readFile(path.join(root, 'app', 'demo-request-form.tsx'), 'utf8');
+  const vercelConfig = JSON.parse(await readFile(path.join(root, 'vercel.json'), 'utf8'));
+  const csp = vercelConfig.headers[0].headers.find((header) => header.key === 'Content-Security-Policy')?.value || '';
+
   assert.match(html, /Send demo request/);
   assert.match(html, /name="name"/);
   assert.match(html, /name="email"/);
@@ -129,7 +151,13 @@ test('contact request is short, static-safe and supports a Teams walkthrough pre
   assert.match(html, /name="demoPreference"/);
   assert.match(html, /Send me a live demo link/);
   assert.match(html, /Microsoft Teams walkthrough/);
-  assert.match(html, /No account or booking system/);
+  assert.match(html, /sent directly from this form/i);
+  assert.match(formSource, /https:\/\/formsubmit\.co\/ajax\//);
+  assert.match(formSource, /fetch\(FORM_ENDPOINT/);
+  assert.match(formSource, /role="status"/);
+  assert.match(formSource, /_honey/);
+  assert.doesNotMatch(formSource, /window\.location\.href\s*=\s*`mailto:/);
+  assert.match(csp, /connect-src 'self' https:\/\/formsubmit\.co/);
 });
 
 test('metadata and accessible navigation are present on public pages', async () => {
