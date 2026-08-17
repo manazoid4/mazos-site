@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import './simplified.css';
+import './credibility.css';
 import { GITHUB_URL, PERSON_NAME, SITE_NAME, SITE_URL } from './site';
 
 const structuredData = {
@@ -29,7 +30,7 @@ const structuredData = {
       name: SITE_NAME,
       url: `${SITE_URL}/`,
       founder: { '@id': `${SITE_URL}/#person` },
-      description: 'Web development, automation and practical AI tools for small businesses and individuals.',
+      description: 'Web development, business automation and practical AI tools for UK small businesses.',
     },
   ],
 };
@@ -37,7 +38,7 @@ const structuredData = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: 'Maz Works | Web Development, Automation & AI', template: '%s — Maz Works' },
-  description: 'Maz Works builds websites, automations and practical AI-powered software for small businesses and individuals, from design through deployment.',
+  description: 'Maz Works builds websites, business automations and practical AI-powered software for small businesses, from problem discovery through design, implementation and deployment.',
   alternates: { canonical: '/' },
   authors: [{ name: PERSON_NAME }],
   creator: PERSON_NAME,
