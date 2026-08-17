@@ -47,7 +47,7 @@ test('homepage makes the Maz Works offer obvious in plain language', async () =>
   assert.match(html, /small businesses/);
   assert.match(html, /marketing implementation/);
   assert.match(html, /Direct with the builder/);
-  assert.match(html, /Clear scope first/);
+  assert.match(html, /Live demo first/);
   assert.match(html, /AI with guardrails/);
 });
 
@@ -66,10 +66,11 @@ test('homepage keeps selected work concise and positions the flagships accuratel
   assert.doesNotMatch(html, /deterministic qualification/i);
 });
 
-test('homepage offers a free entry point and transparent competitive pricing', async () => {
+test('homepage leads with a free live demo and transparent competitive pricing', async () => {
   const html = await readPage('/');
-  assert.match(html, /Get a free problem map \+ demo/);
-  assert.match(html, /Free%20problem%20map%20%2B%20demo/);
+  assert.match(html, /Request a free live demo/);
+  assert.match(html, /near-working demo/i);
+  assert.match(html, /Microsoft Teams/);
   assert.match(html, /£150 fixed/);
   assert.match(html, /From £299/);
   assert.match(html, /From £499/);
@@ -77,6 +78,7 @@ test('homepage offers a free entry point and transparent competitive pricing', a
   assert.match(html, /£75 on completion/);
   assert.match(html, /support from £49\/month/i);
   assert.match(html, /No long contract/i);
+  assert.doesNotMatch(html, /problem map/i);
 });
 
 test('services and starting points are framed around business outcomes', async () => {
@@ -107,12 +109,27 @@ test('process, AI guardrails and FAQ stay easy to understand', async () => {
     assert.match(html, new RegExp(`id="${id}"`));
   }
   assert.match(html, /Tell me the problem/);
-  assert.match(html, /See the direction/);
+  assert.match(html, /See a live demo/);
+  assert.match(html, /Walk through it together/);
   assert.match(html, /Agree the build/);
-  assert.match(html, /Handover and next steps/);
+  assert.match(html, /finish, test and hand it over/i);
   assert.match(html, /AI where it helps\. Human control where it matters/);
   assert.match(html, /Do I need to know what technology I need/);
-  assert.match(html, /What does the free demo include/);
+  assert.match(html, /What does the free live demo include/);
+  assert.match(html, /Can you show me the demo live/);
+});
+
+test('contact request is short, static-safe and supports a Teams walkthrough preference', async () => {
+  const html = await readPage('/');
+  assert.match(html, /Send demo request/);
+  assert.match(html, /name="name"/);
+  assert.match(html, /name="email"/);
+  assert.match(html, /name="business"/);
+  assert.match(html, /name="problem"/);
+  assert.match(html, /name="demoPreference"/);
+  assert.match(html, /Send me a live demo link/);
+  assert.match(html, /Microsoft Teams walkthrough/);
+  assert.match(html, /No account or booking system/);
 });
 
 test('metadata and accessible navigation are present on public pages', async () => {
