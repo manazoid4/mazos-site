@@ -8,7 +8,8 @@ Maz Works is positioned around a simple idea: start with the real business probl
 
 - Hero — websites, automation and AI tools around real business problems
 - Services — Websites, Automation, AI & software
-- Useful starting points — enquiries, admin, customer operations, opportunities and controlled AI
+- Useful starting points — enquiries, admin, sales follow-up, customer operations, opportunities and controlled AI
+- Measurable impact — response time, admin hours, follow-up coverage, team capacity, dropped work and pipeline/workload signals
 - Selected work — JobFilter, Scrap Finance Partners, Agent Nudge and MAZ Pocket
 - How it works — problem → live demo → Teams/demo walkthrough → agreed scope → finish/test/handover
 - Founding offers — transparent entry pricing
@@ -31,9 +32,25 @@ Large project screenshots are deliberately omitted from the homepage so the work
 
 Larger, unusual or ongoing builds are quoted separately after scope is understood. Pricing is intentionally transparent and should never be presented as covering unlimited work.
 
+## Measurable business outcomes
+
+The homepage now frames automation around operational measures a business owner, team leader or sales team can understand.
+
+Examples include:
+
+- lead and customer response time
+- admin hours spent on repetitive work each week
+- sales follow-up coverage and time to next action
+- workload handled per employee
+- overdue tasks and missed handoffs
+- time-to-quote
+- pipeline movement and recurring bottlenecks
+
+These are targets to measure, not fabricated promises. Maz Works should never publish invented percentage improvements, guaranteed sales increases or ROI without real evidence.
+
 ## Live-demo contact flow
 
-The public site stays a static export with no contact database or required account.
+The site remains a static Next.js export, but the contact form no longer depends on the visitor having a working local email application.
 
 The contact section asks only for:
 
@@ -43,7 +60,11 @@ The contact section asks only for:
 - what the visitor wants to improve
 - whether they prefer a demo link, Microsoft Teams walkthrough or either
 
-Submitting the form opens a ready-to-send email addressed to Maz Works with those details already structured. This deliberately avoids adding a booking platform, CRM or Resend/API dependency before one is needed. A hosted form or Resend endpoint can be added later if enquiry volume justifies the extra infrastructure.
+`app/demo-request-form.tsx` sends the request in-page to the FormSubmit AJAX endpoint and shows clear sending, success and failure states. Email remains visible as a fallback. A honeypot field is included for basic spam reduction, and the CSP explicitly permits only the required FormSubmit connection in addition to same-origin requests.
+
+FormSubmit requires the receiving email address to confirm a form on first use. After that one-time activation, submissions are forwarded to the Maz Works inbox. No Vercel credential, client-side secret, CRM login or visitor email application is required for normal submissions.
+
+If enquiry volume later justifies dedicated infrastructure, the same front-end can be moved to a first-party Vercel endpoint plus a transactional email provider without redesigning the contact experience.
 
 ## Flagship positioning
 
@@ -74,6 +95,7 @@ Core rules:
 
 - sell the outcome before the technology
 - research the prospect before outreach
+- identify one or two measurable operational targets when possible
 - use a tailored live demo as the low-friction first step where suitable
 - offer a Microsoft Teams screen-share walkthrough when seeing the workflow live will help
 - show only the most relevant proof
@@ -88,13 +110,13 @@ Core rules:
 - `/work/jobfilter` — JobFilter case study
 - `/work/scrap-finance-partners` — Scrap Finance Partners case study
 - `/mazos` — no-index legacy handoff; omitted from navigation and sitemap
-- `app/demo-request-form.tsx` — low-friction live-demo request form that prepares a structured email without a backend
+- `app/demo-request-form.tsx` — live-demo form with in-page AJAX delivery and status feedback
 - `app/projects.ts` — typed project truth and detailed case-study content
 - `app/project-elements.tsx` — shared project evidence links and optional media helper
 - `app/site-chrome.tsx` — shared header/footer
 - `app/site.ts` — canonical identity and contact constants
 - `app/simplified.css` — client-first layout
-- `app/credibility.css` — pricing, outcomes, background, FAQ and live-demo form refinements
+- `app/credibility.css` — pricing, measurable outcomes, background, FAQ and live-demo form refinements
 - `docs/maz-works/` — persistent project state and acquisition playbook
 
 ## Content rules
@@ -116,7 +138,7 @@ npm run verify
 npm start
 ```
 
-`npm run verify` runs typecheck, production build, deterministic static HTML/link tests and a local-server smoke check. Security headers are defined in `vercel.json`. The current contact form intentionally uses a structured `mailto:` handoff rather than storing visitor data or requiring a server-side email secret.
+`npm run verify` runs typecheck, production build, deterministic static HTML/link tests and a local-server smoke check. Security headers are defined in `vercel.json`.
 
 ## Project memory
 
