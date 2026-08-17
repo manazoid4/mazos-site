@@ -215,9 +215,125 @@
   font-size: .9rem;
 }
 
+.mw-hero-note {
+  max-width: 650px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+.mw-contact {
+  grid-template-columns: minmax(0, .8fr) minmax(360px, 1.2fr);
+  align-items: start;
+}
+
+.mw-contact-intro {
+  max-width: 620px;
+}
+
+.mw-demo-points {
+  margin-top: 28px;
+  display: grid;
+  gap: 9px;
+}
+
+.mw-demo-points span {
+  padding-left: 18px;
+  position: relative;
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+.mw-demo-points span::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--ink);
+}
+
+.mw-contact-fallback {
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.mw-demo-form {
+  padding: 28px;
+  display: grid;
+  gap: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.24);
+}
+
+.mw-form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.mw-demo-form label {
+  display: grid;
+  gap: 8px;
+}
+
+.mw-demo-form label > span {
+  font-family: var(--mono);
+  font-size: .68rem;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.mw-demo-form label small {
+  color: var(--muted);
+  font-size: .62rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.mw-demo-form input,
+.mw-demo-form textarea,
+.mw-demo-form select {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 13px;
+  border: 1px solid var(--soft-line);
+  border-radius: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+}
+
+.mw-demo-form textarea {
+  min-height: 132px;
+  resize: vertical;
+}
+
+.mw-demo-form input:focus,
+.mw-demo-form textarea:focus,
+.mw-demo-form select:focus {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.mw-form-submit {
+  padding-top: 4px;
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+
+.mw-form-submit p {
+  max-width: 500px;
+  color: var(--muted);
+  font-size: .72rem;
+}
+
 @media (max-width: 900px) {
   .mw-outcomes,
-  .mw-pricing-foot {
+  .mw-pricing-foot,
+  .mw-contact {
     grid-template-columns: 1fr;
   }
 
@@ -240,11 +356,16 @@
   .mw-price-option > small {
     margin-top: 22px;
   }
+
+  .mw-demo-form {
+    padding: 24px;
+  }
 }
 
 @media (max-width: 620px) {
   .mw-outcome-list > div,
-  .mw-background-grid {
+  .mw-background-grid,
+  .mw-form-row {
     grid-template-columns: 1fr;
   }
 
@@ -264,7 +385,12 @@
     border-bottom: 0;
   }
 
-  .mw-pricing-foot .button {
+  .mw-pricing-foot .button,
+  .mw-form-submit .button {
     width: 100%;
+  }
+
+  .mw-demo-form {
+    padding: 20px;
   }
 }
