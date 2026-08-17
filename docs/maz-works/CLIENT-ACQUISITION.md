@@ -16,6 +16,41 @@ Good starting problems:
 - business-development opportunities are difficult to research or track
 - AI could help, but important actions still need human control
 
+## Sell measurable improvements
+
+Do not promise an invented percentage. Ask what happens today, choose one or two useful measures, then compare after implementation.
+
+Useful measures by audience:
+
+### Business owners
+
+- staff/admin hours spent on the process each week
+- customer or lead response time
+- time from enquiry to quote or next action
+- number of overdue or dropped tasks
+- workload handled without adding extra manual steps
+- recurring bottlenecks that create avoidable cost
+
+### Sales teams
+
+- time to first lead response
+- percentage of leads receiving a follow-up
+- time between follow-ups
+- number of qualified opportunities with a clear next action
+- time spent manually updating CRM/pipeline records
+- pipeline movement or conversion where enough real data exists to measure it honestly
+
+### Team leaders / operations
+
+- work handled per person
+- queue or customer wait time
+- manual handoffs between people or systems
+- overdue work and missed ownership
+- reporting/admin time
+- repeated questions or information searches slowing the team down
+
+The sales message is not "AI will increase revenue by X%." It is: **we can remove delays, make follow-up more consistent, give staff time back and measure whether the workflow actually improved.**
+
 ## Weekly loop
 
 ### 1. Target
@@ -31,6 +66,7 @@ Spend a few minutes understanding:
 - where the obvious friction is
 - which systems or channels they already use
 - which Maz Works project is the closest proof
+- which one or two operational measures would show whether the fix worked
 
 ### 3. Outreach
 
@@ -55,6 +91,7 @@ For a suitable problem:
 
 - understand what happens now
 - choose the smallest useful slice of the workflow
+- identify the current measure if available: time, waiting, follow-up, workload or admin effort
 - build a near-working demonstration around the real use case
 - use realistic inputs where safe, without exposing private client data
 - show what remains mocked, manual or out of scope
@@ -84,6 +121,14 @@ Use the public offers as entry anchors:
 
 Agree the actual scope before paid work starts. Larger, unusual or third-party-heavy builds are quoted separately.
 
+Where possible, write one measurable success target into the scope, for example:
+
+- reduce manual lead routing steps
+- shorten time-to-first-response
+- automate a recurring report
+- ensure every qualified lead gets a visible next action
+- reduce duplicated data entry
+
 Do not quietly expand a starter package into unlimited work.
 
 ### 7. Delivery
@@ -96,6 +141,7 @@ During the build:
 - test the real path the client will use
 - add approval, validation, suppression or fallback controls where automation can create meaningful risk
 - leave a simple handover
+- record enough before/after information to judge whether the workflow improved
 
 ### 8. After successful delivery
 
@@ -118,6 +164,7 @@ Keep a small tracker with:
 - problem spotted
 - contact route
 - most relevant proof
+- current pain / measurable baseline
 - first contact date
 - follow-up date
 - response
@@ -176,6 +223,6 @@ For AI-assisted work, prefer controlled partial automation when judgment or cust
 
 ## Simple outreach template
 
-> Hi — I noticed [specific thing]. It looks like [specific process/problem] may be creating extra admin or missed follow-up. I build small websites and automations around problems like this. If useful, I can put together a small live demo around that exact workflow before you commit to anything, and I can walk you through it on Teams if that is easier. Here is the closest example of my work: [one relevant link].
+> Hi — I noticed [specific thing]. It looks like [specific process/problem] may be creating extra admin, slower response or missed follow-up. I build small websites and automations around problems like this. If useful, I can put together a small live demo around that exact workflow before you commit to anything, and I can walk you through it on Teams if that is easier. Here is the closest example of my work: [one relevant link].
 
 Rewrite this for every prospect. Do not mass-send it unchanged.
