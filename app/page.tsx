@@ -20,9 +20,43 @@ const SERVICES = [
 const OUTCOMES = [
   ['Get more enquiries', 'Improve a website, enquiry path, follow-up process or lead flow.'],
   ['Reduce repetitive admin', 'Connect systems and remove repeated copying, chasing and updating.'],
+  ['Improve sales follow-up', 'Capture leads, prompt the next action and keep opportunities moving instead of relying on memory.'],
   ['Improve customer operations', 'Build clearer workflows around enquiries, support, complaints and internal handoffs.'],
   ['Find and manage opportunities', 'Research, qualify and organise business-development opportunities with less manual work.'],
   ['Add AI safely', 'Use AI where it helps, with validation, approval steps and manual fallbacks where judgment matters.'],
+];
+
+const IMPACT = [
+  {
+    title: 'Respond faster',
+    measure: 'Measure: lead & customer response time',
+    body: 'Route enquiries quickly, alert the right person and prepare the next action so customers and prospects spend less time waiting.',
+  },
+  {
+    title: 'Give hours back to the team',
+    measure: 'Measure: admin hours per week',
+    body: 'Automate repeat data entry, copying, reporting, reminders and handoffs so employees can spend more time on useful work.',
+  },
+  {
+    title: 'Make sales follow-up consistent',
+    measure: 'Measure: follow-up coverage & time to next action',
+    body: 'Capture, qualify, remind and update pipeline stages so fewer warm opportunities go quiet and sales teams know what to do next.',
+  },
+  {
+    title: 'Increase team capacity',
+    measure: 'Measure: work handled per person',
+    body: 'Remove repetitive steps and surface the information people need so an existing team can handle more without simply working longer.',
+  },
+  {
+    title: 'Reduce dropped work',
+    measure: 'Measure: overdue tasks & missed handoffs',
+    body: 'Use clear ownership, reminders and escalation rules so next steps are visible before a forgotten task becomes a customer problem.',
+  },
+  {
+    title: 'See where time and sales are leaking',
+    measure: 'Measure: response, pipeline & workload signals',
+    body: 'Track useful signals such as response time, time-to-quote, follow-up coverage, pipeline movement and recurring bottlenecks.',
+  },
 ];
 
 const WORK = [
@@ -108,6 +142,7 @@ const FAQS = [
   ['Do I need to know what technology I need?', 'No. Start with the business problem. I choose the simplest appropriate approach rather than forcing a particular tool.'],
   ['What does the free live demo include?', 'For a suitable problem, I build a small near-working demo around the intended workflow so you can understand the experience before paying for the full implementation. It is not the finished production build.'],
   ['Can you show me the demo live?', 'Yes. I am available for a Microsoft Teams screen-share walkthrough where I can show the demo, explain the workflow and answer questions. Choose Teams in the demo request form.'],
+  ['Can this help sales and team productivity?', 'Yes when the workflow is suitable. Common targets include faster lead response, more consistent follow-up, fewer admin hours, fewer missed handoffs and more capacity from the existing team. I prefer measuring the starting point and the change rather than promising an invented percentage.'],
   ['Do you use AI in client systems?', 'Where it is useful. Important workflows should not be blindly autonomous, so I use limits, validation, approval steps or manual fallbacks when the risk calls for them.'],
   ['Can you work with systems we already use?', 'Often, yes. Existing software, APIs and workflows are checked during scoping so we can reuse what already works instead of rebuilding unnecessarily.'],
   ['What happens after launch?', 'I hand over the agreed work clearly. Ongoing support, extra features or further automation can be quoted separately.'],
@@ -165,6 +200,23 @@ export default function Page() {
               <div key={title}><strong>{title}</strong><span>{body}</span></div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="mw-section mw-impact" id="impact" aria-labelledby="impact-title">
+        <header className="mw-section-heading">
+          <p className="eyebrow">What to improve</p>
+          <h2 id="impact-title">Less waiting. Less admin. More useful work.</h2>
+          <p>For business owners, team leaders and sales teams, automation is most useful when it changes something you can actually measure. I scope work around practical operational targets instead of vague transformation claims.</p>
+        </header>
+        <div className="mw-impact-grid">
+          {IMPACT.map((item) => (
+            <article key={item.title}>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+              <small>{item.measure}</small>
+            </article>
+          ))}
         </div>
       </section>
 
