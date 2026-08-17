@@ -10,25 +10,40 @@ Maz Works is positioned around a simple idea: start with the real business probl
 - Services — Websites, Automation, AI & software
 - Useful starting points — enquiries, admin, customer operations, opportunities and controlled AI
 - Selected work — JobFilter, Scrap Finance Partners, Agent Nudge and MAZ Pocket
-- How it works — problem → direction/demo → agreed scope → build/test → handover
+- How it works — problem → live demo → Teams/demo walkthrough → agreed scope → finish/test/handover
 - Founding offers — transparent entry pricing
 - About — operations and investigations background behind the build
 - Professional background — ManyPets and Glide experience kept compact and relevant
 - Practical AI — guardrails and human control where decisions matter
 - FAQ — removes common first-contact objections
-- Contact — one primary free problem-map/demo route
+- Contact — short live-demo request form with demo-link or Microsoft Teams walkthrough preference
 
 Large project screenshots are deliberately omitted from the homepage so the work stays easy to scan. Deeper detail remains available through case-study and project links.
 
 ## Current founding offers
 
-- **Free problem map + demo — £0** for a suitable first problem
+- **Free live demo — £0** for a suitable first problem. The aim is a near-working demonstration around the real use case, not an abstract problem map.
+- **Microsoft Teams walkthrough — available** for screen-sharing the demo, explaining the workflow and answering questions before a paid build is agreed.
 - **Quick Win — £150 fixed** for one tightly scoped website, workflow or automation improvement; £75 to start and £75 on completion
 - **Website Launch — from £299** for a focused small-business website or landing experience with a clear enquiry route and deployment
 - **Growth System — from £499** for a website/customer journey plus one useful automation or AI-assisted workflow with sensible controls
 - **Optional support — from £49/month** for agreed maintenance or small ongoing improvements; third-party usage costs are separate
 
 Larger, unusual or ongoing builds are quoted separately after scope is understood. Pricing is intentionally transparent and should never be presented as covering unlimited work.
+
+## Live-demo contact flow
+
+The public site stays a static export with no contact database or required account.
+
+The contact section asks only for:
+
+- name
+- email
+- optional business name
+- what the visitor wants to improve
+- whether they prefer a demo link, Microsoft Teams walkthrough or either
+
+Submitting the form opens a ready-to-send email addressed to Maz Works with those details already structured. This deliberately avoids adding a booking platform, CRM or Resend/API dependency before one is needed. A hosted form or Resend endpoint can be added later if enquiry volume justifies the extra infrastructure.
 
 ## Flagship positioning
 
@@ -59,7 +74,8 @@ Core rules:
 
 - sell the outcome before the technology
 - research the prospect before outreach
-- use a small tailored problem map/demo as the low-friction first step
+- use a tailored live demo as the low-friction first step where suitable
+- offer a Microsoft Teams screen-share walkthrough when seeing the workflow live will help
 - show only the most relevant proof
 - agree scope and price before implementation
 - use AI with validation, approval or fallback controls where risk requires it
@@ -72,12 +88,13 @@ Core rules:
 - `/work/jobfilter` — JobFilter case study
 - `/work/scrap-finance-partners` — Scrap Finance Partners case study
 - `/mazos` — no-index legacy handoff; omitted from navigation and sitemap
+- `app/demo-request-form.tsx` — low-friction live-demo request form that prepares a structured email without a backend
 - `app/projects.ts` — typed project truth and detailed case-study content
 - `app/project-elements.tsx` — shared project evidence links and optional media helper
 - `app/site-chrome.tsx` — shared header/footer
 - `app/site.ts` — canonical identity and contact constants
 - `app/simplified.css` — client-first layout
-- `app/credibility.css` — pricing, outcomes, background and FAQ refinements
+- `app/credibility.css` — pricing, outcomes, background, FAQ and live-demo form refinements
 - `docs/maz-works/` — persistent project state and acquisition playbook
 
 ## Content rules
@@ -99,7 +116,7 @@ npm run verify
 npm start
 ```
 
-`npm run verify` runs typecheck, production build, deterministic static HTML/link tests and a local-server smoke check. Security headers are defined in `vercel.json`. Contact pathways use explicit `mailto:` links; the site has no contact backend.
+`npm run verify` runs typecheck, production build, deterministic static HTML/link tests and a local-server smoke check. Security headers are defined in `vercel.json`. The current contact form intentionally uses a structured `mailto:` handoff rather than storing visitor data or requiring a server-side email secret.
 
 ## Project memory
 

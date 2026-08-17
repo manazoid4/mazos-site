@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL, CONTACT_LINKS, GITHUB_URL } from './site';
+import { CONTACT_EMAIL, GITHUB_URL } from './site';
 
 export function SiteHeader() {
   return (
@@ -12,7 +12,7 @@ export function SiteHeader() {
         <a href="/#services">Services</a>
         <a href="/#process">How it works</a>
         <a href="/#about">About</a>
-        <a className="mw-nav-cta" href={CONTACT_LINKS.client}>Free problem map</a>
+        <a className="mw-nav-cta" href="/#contact">Request live demo</a>
       </nav>
     </header>
   );

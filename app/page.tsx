@@ -1,4 +1,5 @@
-import { CONTACT_EMAIL, CONTACT_LINKS } from './site';
+import { CONTACT_EMAIL } from './site';
+import { DemoRequestForm } from './demo-request-form';
 import { SiteFooter, SiteHeader } from './site-chrome';
 
 const SERVICES = [
@@ -63,10 +64,10 @@ const WORK = [
 
 const PROCESS = [
   ['01', 'Tell me the problem', 'Explain what is taking too much time, what you want built or what currently does not work.'],
-  ['02', 'See the direction', 'For suitable projects, I map a useful starting point and make a small demonstration before you commit.'],
-  ['03', 'Agree the build', 'We agree exactly what is being delivered, the price and the important requirements.'],
-  ['04', 'I build and test it', 'I handle design, development, integrations, testing and deployment.'],
-  ['05', 'Handover and next steps', 'You receive the agreed working result, a clear handover and an honest view of what is worth improving next.'],
+  ['02', 'See a live demo', 'For suitable projects, I build a near-working demo around your real use case before you commit to the full build.'],
+  ['03', 'Walk through it together', 'I can send the demo link or run a Microsoft Teams screen-share walkthrough so you can see exactly how it works.'],
+  ['04', 'Agree the build', 'We agree exactly what is being delivered, the price and the important requirements.'],
+  ['05', 'I finish, test and hand it over', 'I handle the agreed implementation, testing, deployment and a clear handover.'],
 ];
 
 const OFFERS = [
@@ -105,7 +106,8 @@ const BACKGROUND = [
 
 const FAQS = [
   ['Do I need to know what technology I need?', 'No. Start with the business problem. I choose the simplest appropriate approach rather than forcing a particular tool.'],
-  ['What does the free demo include?', 'A small demonstration or clear problem map for one suitable issue. It makes the direction tangible; it is not an entire production build for free.'],
+  ['What does the free live demo include?', 'For a suitable problem, I build a small near-working demo around the intended workflow so you can understand the experience before paying for the full implementation. It is not the finished production build.'],
+  ['Can you show me the demo live?', 'Yes. I am available for a Microsoft Teams screen-share walkthrough where I can show the demo, explain the workflow and answer questions. Choose Teams in the demo request form.'],
   ['Do you use AI in client systems?', 'Where it is useful. Important workflows should not be blindly autonomous, so I use limits, validation, approval steps or manual fallbacks when the risk calls for them.'],
   ['Can you work with systems we already use?', 'Often, yes. Existing software, APIs and workflows are checked during scoping so we can reuse what already works instead of rebuilding unnecessarily.'],
   ['What happens after launch?', 'I hand over the agreed work clearly. Ongoing support, extra features or further automation can be quoted separately.'],
@@ -124,13 +126,14 @@ export default function Page() {
             I help small businesses turn awkward manual processes and ideas into simple working systems — from design and development to automation, AI integrations, marketing implementation and deployment.
           </p>
           <div className="mw-actions">
-            <a className="button button-signal" href={CONTACT_LINKS.client}>Get a free problem map + demo</a>
+            <a className="button button-signal" href="#contact">Request a free live demo</a>
             <a className="text-link" href="#work">See my work <span aria-hidden="true">↓</span></a>
           </div>
+          <p className="mw-hero-note">For suitable projects, I can build a near-working demo first and walk you through it live on Microsoft Teams with screen sharing.</p>
         </div>
         <div className="mw-capabilities" aria-label="Core capabilities">
           <span>Direct with the builder</span>
-          <span>Clear scope first</span>
+          <span>Live demo first</span>
           <span>Web development</span>
           <span>Automation</span>
           <span>AI with guardrails</span>
@@ -194,7 +197,7 @@ export default function Page() {
       <section className="mw-process" id="process" aria-labelledby="process-title">
         <header>
           <p className="eyebrow">How it works</p>
-          <h2 id="process-title">From problem to working result.</h2>
+          <h2 id="process-title">From problem to something you can actually see.</h2>
         </header>
         <ol>
           {PROCESS.map(([number, title, body]) => (
@@ -209,8 +212,8 @@ export default function Page() {
       <section className="mw-section mw-pricing" id="client" aria-labelledby="client-title">
         <header className="mw-section-heading">
           <p className="eyebrow">Founding offers</p>
-          <h2 id="client-title">Competitive pricing. Clear finish lines.</h2>
-          <p>Start with a free problem map and, where suitable, a small demo. Paid work is scoped before I start, with larger or unusual builds quoted separately.</p>
+          <h2 id="client-title">Competitive pricing. See the direction first.</h2>
+          <p>Start with a free live demo for a suitable problem. I can send you the demo or walk through it with you on Microsoft Teams before we agree the paid build.</p>
         </header>
         <div className="mw-price-grid">
           {OFFERS.map((offer) => (
@@ -223,9 +226,9 @@ export default function Page() {
           ))}
         </div>
         <div className="mw-pricing-foot">
-          <div><strong>£0 first step</strong><span>Tell me the problem. I will identify a useful starting point and, where suitable, show a small demonstration.</span></div>
+          <div><strong>£0 first step</strong><span>Send me the problem. For suitable projects, I will turn the idea into a near-working live demo so you can see the direction before paying for the full build.</span></div>
           <div><strong>Optional support from £49/month</strong><span>For agreed maintenance or small ongoing improvements. No long contract; third-party usage costs are separate.</span></div>
-          <a className="button button-signal" href={CONTACT_LINKS.client}>Get a free problem map + demo</a>
+          <a className="button button-signal" href="#contact">Request a free live demo</a>
         </div>
       </section>
 
@@ -288,15 +291,18 @@ export default function Page() {
       </section>
 
       <section className="mw-contact" id="contact" aria-labelledby="contact-title">
-        <div>
-          <p className="eyebrow">Have something in mind?</p>
-          <h2 id="contact-title">Tell me what is slowing you down.</h2>
-          <p className="mw-contact-copy">You do not need to know the solution yet. Send the problem, what happens now and what you would rather happen.</p>
+        <div className="mw-contact-intro">
+          <p className="eyebrow">Free live demo</p>
+          <h2 id="contact-title">Show me the problem. I&apos;ll show you the direction.</h2>
+          <p className="mw-contact-copy">Send a short description. For suitable projects, I will build a near-working live demo around your use case. I can send the demo link or walk you through it over Microsoft Teams with screen sharing.</p>
+          <div className="mw-demo-points" aria-label="Live demo options">
+            <span>No sales call required first</span>
+            <span>Teams walkthrough available</span>
+            <span>Scope and price agreed before paid work</span>
+          </div>
+          <p className="mw-contact-fallback">Prefer email? <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
         </div>
-        <div className="mw-contact-action">
-          <a className="button button-dark" href={CONTACT_LINKS.client}>Get a free problem map + demo</a>
-          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-        </div>
+        <DemoRequestForm />
       </section>
 
       <SiteFooter />
