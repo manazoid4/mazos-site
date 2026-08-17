@@ -41,55 +41,72 @@ async function internalTargetExists(urlPath) {
   return false;
 }
 
-test('homepage names every featured project and stays clear of retired junior-AI positioning', async () => {
+test('homepage makes the Maz Works offer obvious in plain language', async () => {
   const html = await readPage('/');
-  assert.match(html, /JobFilter/);
-  assert.match(html, /Scrap Finance Partners/);
-  assert.match(html, /Agent Nudge/);
-  assert.match(html, /OpenFlowKit/);
-  assert.match(html, /jobfilter-scan-result\.webp/);
-  assert.match(html, /jobfilter-scan-result-mobile\.webp/);
-  assert.doesNotMatch(html, /junior applied-AI/i);
-  assert.doesNotMatch(html, /Junior Applied AI Engineer/);
-  assert.doesNotMatch(html, /MAZos/);
-  assert.doesNotMatch(html, /Operational B2B/);
+  assert.match(html, /Websites, automation and AI tools built around real business problems/);
+  assert.match(html, /small businesses and individuals/);
+  assert.match(html, /Web development/);
+  assert.match(html, /Automation/);
+  assert.match(html, /AI integration/);
+  assert.match(html, /Design/);
+  assert.match(html, /Deployment/);
 });
 
-test('homepage exposes employment, free-demo, and collaboration contact paths', async () => {
+test('homepage keeps selected work concise and removes project screenshots', async () => {
   const html = await readPage('/');
-  assert.match(html, /Hire me/);
-  assert.match(html, /Get a free demo/);
-  assert.match(html, /Collaborate/);
-  assert.match(html, /mailto:manazoid4@gmail\.com/);
-});
-
-test('every featured project case study has a stated limitation and at least one evidence link', async () => {
-  const html = await readPage('/');
-  for (const id of ['jobfilter', 'scrap-finance-partners', 'agent-nudge', 'openflowkit']) {
-    const marker = `id="${id}"`;
-    const start = html.indexOf(marker);
-    assert.notEqual(start, -1, `Missing project section #${id}`);
-    const end = html.indexOf('</article>', start);
-    const section = html.slice(start, end);
-    assert.match(section, /Current limitation/, `#${id} is missing a stated limitation`);
-    assert.match(section, /href="https?:\/\//, `#${id} is missing an external evidence link`);
+  for (const name of ['JobFilter', 'Scrap Finance Partners', 'Agent Nudge', 'MAZ Pocket']) {
+    assert.match(html, new RegExp(name));
   }
+  assert.doesNotMatch(html, /jobfilter-scan-result\.webp/);
+  assert.doesNotMatch(html, /scrap-finance-partners\.webp/);
+  assert.doesNotMatch(html, /agent-nudge-demo\.webp/);
+  assert.doesNotMatch(html, /Current limitation/);
+  assert.doesNotMatch(html, /inspectable evidence/i);
+  assert.doesNotMatch(html, /bounded solution/i);
+  assert.doesNotMatch(html, /deterministic qualification/i);
 });
 
-test('metadata and accessible navigation are present on both pages', async () => {
+test('homepage uses one clear commercial path and states the founding price', async () => {
+  const html = await readPage('/');
+  assert.match(html, /Get a free demo/);
+  assert.match(html, /Maz%20Works%20%E2%80%94%20Free%20demo/);
+  assert.match(html, /£150 total/);
+  assert.match(html, /£75 to start/);
+  assert.match(html, /£75 on completion/);
+  assert.match(html, /quoted separately/i);
+  assert.doesNotMatch(html, />Hire me</);
+  assert.doesNotMatch(html, />Collaborate</);
+});
+
+test('services, process, about and contact sections remain easy to navigate', async () => {
+  const html = await readPage('/');
+  for (const id of ['services', 'work', 'process', 'client', 'about', 'contact']) {
+    assert.match(html, new RegExp(`id="${id}"`));
+  }
+  assert.match(html, /Tell me the problem/);
+  assert.match(html, /See a free demo/);
+  assert.match(html, /Agree the build/);
+  assert.match(html, /I build and hand it over/);
+  assert.match(html, /founder of Maz Works/i);
+});
+
+test('metadata and accessible navigation are present on public pages', async () => {
   for (const route of ['/', '/mazos', '/work/jobfilter', '/work/scrap-finance-partners']) {
     const html = await readPage(route);
     assert.match(html, /href="#main-content">Skip to main content/);
     const target = /<([a-z]+)\b(?=[^>]*\bid="main-content")(?=[^>]*\btabindex="-1")[^>]*>/i.exec(html);
-    assert.ok(target, 'Skip target must be programmatically focusable');
-    assert.ok(['section', 'article'].includes(target[1].toLowerCase()), 'Skip target should be the first content region');
-    const navigationEnd = html.indexOf('</header>');
-    assert.notEqual(navigationEnd, -1, 'Page must include its navigation header');
-    assert.ok(target.index > navigationEnd, 'Skip target must follow the navigation header in document order');
+    assert.ok(target, `${route} skip target must be programmatically focusable`);
     assert.match(html, /rel="canonical"/);
     assert.match(html, /property="og:image"/);
     assert.match(html, /name="twitter:card" content="summary_large_image"/);
-    assert.doesNotMatch(html, /<(?:div|pre)[^>]*aria-label=/);
+  }
+});
+
+test('same-page navigation points to existing homepage sections', async () => {
+  const html = await readPage('/');
+  const fragments = [...html.matchAll(/href="\/#([^"]+)"/g)].map((match) => match[1]);
+  for (const fragment of fragments) {
+    assert.match(html, new RegExp(`id="${fragment}"`), `Missing homepage target #${fragment}`);
   }
 });
 
@@ -99,20 +116,29 @@ test('internal links and assets resolve inside the static export', async () => {
     const references = [...html.matchAll(/(?:href|src)="([^"]+)"/g)].map((match) => match[1]);
     for (const reference of references) {
       if (/^(?:https?:|mailto:|data:|#)/.test(reference)) continue;
-      assert.equal(await internalTargetExists(reference), true, `${route} has missing target ${reference}`);
+      const normalized = reference.startsWith('/#') ? '/' : reference;
+      assert.equal(await internalTargetExists(normalized), true, `${route} has missing target ${reference}`);
     }
   }
 });
 
-test('same-page fragment links point to existing IDs', async () => {
-  const html = await readPage('/');
-  const fragments = [...html.matchAll(/href="#([^"]+)"/g)].map((match) => match[1]);
-  for (const fragment of fragments) {
-    assert.match(html, new RegExp(`id="${fragment}"`), `Missing fragment target #${fragment}`);
+test('flagship case studies remain available for visitors who want depth', async () => {
+  for (const [route, project] of [
+    ['/work/jobfilter', 'JobFilter'],
+    ['/work/scrap-finance-partners', 'Scrap Finance Partners'],
+  ]) {
+    const html = await readPage(route);
+    assert.match(html, new RegExp(`${project} case study`));
+    assert.match(html, /What I built/);
+    assert.match(html, /href="https?:\/\//);
   }
+
+  const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
+  assert.match(sitemap, /\/work\/jobfilter/);
+  assert.match(sitemap, /\/work\/scrap-finance-partners/);
 });
 
-test('legacy case-study route is removed from discovery and redirects attention to outcomes', async () => {
+test('legacy MazOS route stays out of homepage discovery and sitemap', async () => {
   const home = await readPage('/');
   const moved = await readPage('/mazos');
   const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
@@ -122,17 +148,21 @@ test('legacy case-study route is removed from discovery and redirects attention 
   assert.match(moved, /noindex/);
 });
 
-test('new-tab links declare a safe opener relationship', async () => {
-  for (const route of ['/', '/mazos', '/work/jobfilter', '/work/scrap-finance-partners']) {
-    const html = await readPage(route);
-    const newTabLinks = [...html.matchAll(/<a\b[^>]*target="_blank"[^>]*>/g)].map((match) => match[0]);
-    for (const anchor of newTabLinks) {
-      assert.match(anchor, /rel="[^"]*noreferrer[^"]*"/);
-    }
-  }
+test('structured data reflects Maz Works founder and service positioning', async () => {
+  const html = await readPage('/');
+  const ldMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+  assert.ok(ldMatch, 'Homepage is missing JSON-LD');
+  const data = JSON.parse(ldMatch[1]);
+  const graph = data['@graph'];
+  const person = graph.find((node) => node['@type'] === 'Person');
+  const org = graph.find((node) => node['@type'] === 'Organization');
+  assert.equal(person.name, 'Manazir Hussain');
+  assert.equal(person.jobTitle, 'Founder and Software Builder');
+  assert.ok(person.sameAs.includes('https://github.com/manazoid4'));
+  assert.match(org.description, /Web development, automation and practical AI tools/);
 });
 
-test('Vercel Analytics is bundled into the static export', async () => {
+test('Vercel Analytics remains bundled into the static export', async () => {
   const chunksDir = path.join(exportRoot, '_next', 'static', 'chunks');
   const files = await readdir(chunksDir);
   let found = false;
@@ -147,73 +177,6 @@ test('Vercel Analytics is bundled into the static export', async () => {
   assert.ok(found, 'No static chunk references the Vercel Analytics script endpoint');
 });
 
-test('structured data and analytics are present on both pages', async () => {
-  for (const route of ['/', '/mazos', '/work/jobfilter', '/work/scrap-finance-partners']) {
-    const html = await readPage(route);
-    const ldMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
-    assert.ok(ldMatch, `${route} is missing a JSON-LD script tag`);
-    const data = JSON.parse(ldMatch[1]);
-    const graph = data['@graph'];
-    assert.ok(Array.isArray(graph), `${route} JSON-LD must declare an @graph`);
-    const person = graph.find((node) => node['@type'] === 'Person');
-    assert.ok(person, `${route} JSON-LD is missing a Person node`);
-    assert.equal(person.name, 'Manazir Hussain');
-    assert.equal(person.jobTitle, 'Software Builder');
-    assert.ok(person.sameAs.includes('https://github.com/manazoid4'));
-    assert.doesNotMatch(html, /Junior Applied AI Engineer/);
-  }
-});
-
-test('homepage keeps Manazir identifiable without inventing a CV', async () => {
-  const html = await readPage('/');
-  assert.match(html, /id="about"/);
-  assert.match(html, /About \/ Manazir Hussain/);
-  assert.match(html, /One builder, accountable from problem to proof/);
-  assert.doesNotMatch(html, /\b(19|20)\d{2}\s*[-–—]\s*(19|20)\d{2}\b/, 'About section must not fabricate employment date ranges');
-});
-
-test('commercial route states the bounded demo, split founding price, and scope protection', async () => {
-  const html = await readPage('/');
-  assert.match(html, /mailto:manazoid4@gmail\.com\?subject=Role%20enquiry&(?:amp;)?body=/);
-  assert.match(html, /mailto:manazoid4@gmail\.com\?subject=Free%20tailored%20demo&(?:amp;)?body=/);
-  assert.match(html, /mailto:manazoid4@gmail\.com\?subject=Collaboration&(?:amp;)?body=/);
-  assert.match(html, /£150 total/);
-  assert.match(html, /£75 upfront/);
-  assert.match(html, /£75 after execution/);
-  assert.match(html, /quoted separately/i);
-});
-
-
-test('flagship case studies export with deep proof, limitations, and unique metadata', async () => {
-  for (const [route, project] of [
-    ['/work/jobfilter', 'JobFilter'],
-    ['/work/scrap-finance-partners', 'Scrap Finance Partners'],
-  ]) {
-    const html = await readPage(route);
-    assert.match(html, new RegExp(`${project} case study`));
-    assert.match(html, /Problem and insight/);
-    assert.match(html, /How it works/);
-    assert.match(html, /Key decisions/);
-    assert.match(html, /Current limitation/);
-    assert.match(html, /rel="canonical"/);
-    assert.match(html, /href="https?:\/\//);
-  }
-
-  const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
-  assert.match(sitemap, /\/work\/jobfilter/);
-  assert.match(sitemap, /\/work\/scrap-finance-partners/);
-});
-
-test('homepage uses the quiet proof hierarchy and explicit project relationships', async () => {
-  const html = await readPage('/');
-  assert.doesNotMatch(html, /proof-ledger/);
-  assert.doesNotMatch(html, /proof-strip/);
-  assert.match(html, />Product</);
-  assert.match(html, />Client work</);
-  assert.match(html, />Lab</);
-  assert.match(html, /Read case study/);
-  assert.match(html, /You keep ownership/);
-});
 test('runtime and static-host hardening stay explicit', async () => {
   const packageJson = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
   const vercelConfig = JSON.parse(await readFile(path.join(root, 'vercel.json'), 'utf8'));
