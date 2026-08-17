@@ -44,50 +44,75 @@ async function internalTargetExists(urlPath) {
 test('homepage makes the Maz Works offer obvious in plain language', async () => {
   const html = await readPage('/');
   assert.match(html, /Websites, automation and AI tools built around real business problems/);
-  assert.match(html, /small businesses and individuals/);
-  assert.match(html, /Web development/);
-  assert.match(html, /Automation/);
-  assert.match(html, /AI integration/);
-  assert.match(html, /Design/);
-  assert.match(html, /Deployment/);
+  assert.match(html, /small businesses/);
+  assert.match(html, /marketing implementation/);
+  assert.match(html, /Direct with the builder/);
+  assert.match(html, /Clear scope first/);
+  assert.match(html, /AI with guardrails/);
 });
 
-test('homepage keeps selected work concise and removes project screenshots', async () => {
+test('homepage keeps selected work concise and positions the flagships accurately', async () => {
   const html = await readPage('/');
   for (const name of ['JobFilter', 'Scrap Finance Partners', 'Agent Nudge', 'MAZ Pocket']) {
     assert.match(html, new RegExp(name));
   }
+  assert.match(html, /construction-focused growth and automation product/i);
+  assert.match(html, /Contract client build/);
+  assert.match(html, /secure client workspace/i);
+  assert.match(html, /approval and suppression controls/i);
   assert.doesNotMatch(html, /jobfilter-scan-result\.webp/);
   assert.doesNotMatch(html, /scrap-finance-partners\.webp/);
   assert.doesNotMatch(html, /agent-nudge-demo\.webp/);
-  assert.doesNotMatch(html, /Current limitation/);
-  assert.doesNotMatch(html, /inspectable evidence/i);
-  assert.doesNotMatch(html, /bounded solution/i);
   assert.doesNotMatch(html, /deterministic qualification/i);
 });
 
-test('homepage uses one clear commercial path and states the founding price', async () => {
+test('homepage offers a free entry point and transparent competitive pricing', async () => {
   const html = await readPage('/');
-  assert.match(html, /Get a free demo/);
-  assert.match(html, /Maz%20Works%20%E2%80%94%20Free%20demo/);
-  assert.match(html, /£150 total/);
+  assert.match(html, /Get a free problem map \+ demo/);
+  assert.match(html, /Free%20problem%20map%20%2B%20demo/);
+  assert.match(html, /£150 fixed/);
+  assert.match(html, /From £299/);
+  assert.match(html, /From £499/);
   assert.match(html, /£75 to start/);
   assert.match(html, /£75 on completion/);
-  assert.match(html, /quoted separately/i);
-  assert.doesNotMatch(html, />Hire me</);
-  assert.doesNotMatch(html, />Collaborate</);
+  assert.match(html, /support from £49\/month/i);
+  assert.match(html, /No long contract/i);
 });
 
-test('services, process, about and contact sections remain easy to navigate', async () => {
+test('services and starting points are framed around business outcomes', async () => {
+  const html = await readPage('/');
+  assert.match(html, /Get more enquiries/);
+  assert.match(html, /Reduce repetitive admin/);
+  assert.match(html, /Improve customer operations/);
+  assert.match(html, /Find and manage opportunities/);
+  assert.match(html, /Add AI safely/);
+});
+
+test('professional background connects operations experience to Maz Works', async () => {
+  const html = await readPage('/');
+  assert.match(html, /Professional background/);
+  assert.match(html, /ManyPets/);
+  assert.match(html, /Complaints Specialist/);
+  assert.match(html, /FCA\/DISP/);
+  assert.match(html, /Glide/);
+  assert.match(html, /Complaints &amp; Escalations Coordinator/);
+  assert.match(html, /Problem investigation/);
+  assert.match(html, /Process improvement/);
+  assert.match(html, /Regulated environments/);
+});
+
+test('process, AI guardrails and FAQ stay easy to understand', async () => {
   const html = await readPage('/');
   for (const id of ['services', 'work', 'process', 'client', 'about', 'contact']) {
     assert.match(html, new RegExp(`id="${id}"`));
   }
   assert.match(html, /Tell me the problem/);
-  assert.match(html, /See a free demo/);
+  assert.match(html, /See the direction/);
   assert.match(html, /Agree the build/);
-  assert.match(html, /I build and hand it over/);
-  assert.match(html, /founder of Maz Works/i);
+  assert.match(html, /Handover and next steps/);
+  assert.match(html, /AI where it helps\. Human control where it matters/);
+  assert.match(html, /Do I need to know what technology I need/);
+  assert.match(html, /What does the free demo include/);
 });
 
 test('metadata and accessible navigation are present on public pages', async () => {
@@ -122,16 +147,18 @@ test('internal links and assets resolve inside the static export', async () => {
   }
 });
 
-test('flagship case studies remain available for visitors who want depth', async () => {
-  for (const [route, project] of [
-    ['/work/jobfilter', 'JobFilter'],
-    ['/work/scrap-finance-partners', 'Scrap Finance Partners'],
-  ]) {
-    const html = await readPage(route);
-    assert.match(html, new RegExp(`${project} case study`));
-    assert.match(html, /What I built/);
-    assert.match(html, /href="https?:\/\//);
-  }
+test('flagship case studies remain available and use the expanded positioning', async () => {
+  const jobfilter = await readPage('/work/jobfilter');
+  assert.match(jobfilter, /JobFilter case study/);
+  assert.match(jobfilter, /construction-focused opportunity and workflow product/i);
+  assert.match(jobfilter, /Trade-fit qualification/);
+  assert.match(jobfilter, /does not guarantee/i);
+
+  const scrap = await readPage('/work/scrap-finance-partners');
+  assert.match(scrap, /Scrap Finance Partners case study/);
+  assert.match(scrap, /contract client engagement/i);
+  assert.match(scrap, /Guarded acquisition automation/);
+  assert.match(scrap, /approval/i);
 
   const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
   assert.match(sitemap, /\/work\/jobfilter/);
@@ -159,7 +186,7 @@ test('structured data reflects Maz Works founder and service positioning', async
   assert.equal(person.name, 'Manazir Hussain');
   assert.equal(person.jobTitle, 'Founder and Software Builder');
   assert.ok(person.sameAs.includes('https://github.com/manazoid4'));
-  assert.match(org.description, /Web development, automation and practical AI tools/);
+  assert.match(org.description, /Web development, business automation and practical AI tools/);
 });
 
 test('Vercel Analytics remains bundled into the static export', async () => {

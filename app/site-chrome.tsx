@@ -12,7 +12,7 @@ export function SiteHeader() {
         <a href="/#services">Services</a>
         <a href="/#process">How it works</a>
         <a href="/#about">About</a>
-        <a className="mw-nav-cta" href={CONTACT_LINKS.client}>Get a free demo</a>
+        <a className="mw-nav-cta" href={CONTACT_LINKS.client}>Free problem map</a>
       </nav>
     </header>
   );
