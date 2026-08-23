@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL, GITHUB_URL } from './site';
+import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL } from './site';
 
 export function SiteHeader() {
   return (
@@ -23,7 +23,11 @@ export function SiteFooter() {
     <footer className="site-footer mw-site-footer">
       <div><strong>Maz Works</strong><span>Websites, automation and AI tools for real business problems.</span></div>
       <div><span>Manazir Hussain / UK</span><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></div>
-      <div><a href={GITHUB_URL}>GitHub <span aria-hidden="true">↗</span></a><span>© 2026</span></div>
+      <div>
+        <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+        <a href={GITHUB_URL} target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        <span>© 2026</span>
+      </div>
     </footer>
   );
 }
