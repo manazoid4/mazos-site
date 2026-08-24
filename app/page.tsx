@@ -148,6 +148,13 @@ const FAQS = [
   ['What happens after launch?', 'I hand over the agreed work clearly. Ongoing support, extra features or further automation can be quoted separately.'],
 ];
 
+const CLIENT_PROOF_STEPS = [
+  ['01', 'Evidence note', 'One reviewed website or workflow gap, written in plain English.'],
+  ['02', 'Free live demo', 'For a suitable problem, see a near-working direction before any paid build.'],
+  ['03', '15-minute screen-share', 'Walk through the demo and confirm whether the problem is worth fixing.'],
+  ['04', 'Website Rescue Sprint', 'One agreed improvement, delivered with a clear handoff for £150.'],
+];
+
 export default function Page() {
   return (
     <main>
@@ -282,6 +289,9 @@ export default function Page() {
           <div><strong>Optional support from £49/month</strong><span>For agreed maintenance or small ongoing improvements. No long contract; third-party usage costs are separate.</span></div>
           <a className="button button-signal" href="#contact">Request a free live demo</a>
         </div>
+        <ol className="client-proof-steps" aria-label="Client first-step sequence">
+          {CLIENT_PROOF_STEPS.map(([number, title, body]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}
+        </ol>
       </section>
 
       <section className="mw-section mw-about" id="about" aria-labelledby="about-title">
