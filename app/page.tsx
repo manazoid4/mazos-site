@@ -150,8 +150,9 @@ const FAQS = [
 
 const CLIENT_PROOF_STEPS = [
   ['01', 'Evidence note', 'One reviewed website or workflow gap, written in plain English.'],
-  ['02', '15-minute screen-share', 'A short conversation to confirm whether the problem is worth fixing.'],
-  ['03', 'Website Rescue Sprint', 'One agreed improvement, delivered with a clear handoff for £150.'],
+  ['02', 'Free live demo', 'For a suitable problem, see a near-working direction before any paid build.'],
+  ['03', '15-minute screen-share', 'Walk through the demo and confirm whether the problem is worth fixing.'],
+  ['04', 'Website Rescue Sprint', 'One agreed improvement, delivered with a clear handoff for £150.'],
 ];
 
 export default function Page() {
