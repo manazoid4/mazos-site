@@ -16,6 +16,12 @@ const PROCESS = [
   ['04', 'Proof', 'Present the working result and verify the path that matters.'],
 ];
 
+const CLIENT_PROOF_STEPS = [
+  ['01', 'Evidence note', 'One reviewed website or workflow gap, written in plain English.'],
+  ['02', '15-minute screen-share', 'A short conversation to confirm whether the problem is worth fixing.'],
+  ['03', 'Website Rescue Sprint', 'One agreed improvement, delivered with a clear handoff for £150.'],
+];
+
 export default function Page() {
   return (
     <main>
@@ -103,6 +109,9 @@ export default function Page() {
           <h2 id="client-title">Show me the problem. I&rsquo;ll build a small tailored demonstration first.</h2>
           <p>The free demo makes one solution tangible. It is not production delivery or days of unpaid bespoke work. You keep ownership of the agreed implementation and receive a clear handoff.</p>
           <a className="button button-signal" href={CONTACT_LINKS.client}>Request a free demo</a>
+          <ol className="client-proof-steps" aria-label="Client first-step sequence">
+            {CLIENT_PROOF_STEPS.map(([number, title, body]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}
+          </ol>
         </div>
         <div className="offer-frame offer-quiet">
           <div className="offer-title"><span>Founding implementation</span><strong>£150 total</strong></div>
