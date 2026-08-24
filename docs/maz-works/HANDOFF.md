@@ -2,178 +2,157 @@
 
 ## Mission
 
-Maintain Maz Works as Manazir Hussain's evidence-led umbrella for useful software, AI tools, automation, products, experiments, and client work. The site must turn claims into visible proof quickly, serve employers/clients/collaborators without pretending to be an agency, and remain truthful about what is shipped and what is limited.
+Maintain Maz Works as Manazir Hussain's independent web, automation and AI/software studio. The site should make it easy for a non-technical business owner, sales lead or team leader to understand what Maz can improve, see real work, request a live demo and contact him without unnecessary friction.
 
-## Current state
+## Current product direction
 
-- Repository: `manazoid4/mazos-site`
-- Branch: `agents/maz-works-quiet-framework`
-- Base: merged Maz Works foundation at `origin/main` (`8871ede`)
-- Implementation: complete locally; no known P0/P1 engineering issue
-- Publishing: commit, push, PR, and remote checks are the next operation
-- Visual direction: Quiet Framework
-- Flagships: JobFilter (Product); Scrap Finance Partners (Client work)
-- Selected work: Agent Nudge (Product); OpenFlowKit (Lab)
-- Deep routes: `/work/jobfilter`; `/work/scrap-finance-partners`
-- Canonical knowledge system: **Maz Works Knowledge Vault**, covering all projects; JobFilter is one project inside it
+- Production branch: `main`
+- Production site: `https://mazos-site.vercel.app`
+- Primary CTA: **Request a free live demo**
+- Demo delivery: shareable demo link or Microsoft Teams screen-share walkthrough
+- Founding offers: Quick Win £150 fixed; Website Launch from £299; Growth System from £499; optional support from £49/month
+- Flagship project proof: JobFilter and Scrap Finance Partners
+- Additional selected work: Agent Nudge and MAZ Pocket
+- Canonical cross-project knowledge system: **Maz Works Knowledge Vault**; JobFilter is one project inside it
 
-## Preserve
+## Positioning
 
-- Maz Works and Manazir Hussain named in the first screen.
-- Canonical promise: useful software, AI tools, and automation around real problems.
-- Work-before-services hierarchy and explicit Product / Client work / Lab labels.
-- JobFilter and Scrap Finance Partners as disproportionate flagships.
-- Real project screenshots, evidence links, statuses, and limitations.
-- Scrap Finance Partners as verified commissioned/shipped client work with no invented commercial outcomes.
-- One bounded demo, £150 founding implementation, £75 + £75 split, separate scope, client ownership, and clear handoff.
-- Hire / Client / Collaborate as distinct intents inside one contact block.
-- Static Next.js architecture, typed project data, few dependencies, security headers, analytics, and no-index `/mazos` route.
-- Canonical Maz Works Knowledge Vault identity. Never call the whole vault a JobFilter vault.
+Lead with business outcomes, not technology.
 
-## What changed
+Maz Works helps businesses:
 
-- Replaced the crowded explanatory homepage with a shorter proof-first Quiet Framework composition.
-- Removed the hero proof ledger, separate proof strip, repeated service cards, large yellow sales surface, and three oversized pathway cards.
-- Made screenshots larger than supporting copy and moved the client offer after commissioned-work proof.
-- Added reusable site chrome, project media/links, shared site constants, and typed case-study data.
-- Added statically generated flagship case studies with unique metadata and sitemap entries.
-- Captured the live Scrap Finance Partners homepage at desktop/mobile and shipped optimized WebP sources.
-- Added client ownership/handoff language and retained every settled commercial boundary.
-- Benchmarked ten current founder-led software/automation peers from their first-party sites and translated the strongest repeated patterns without copying identity or visual assets.
-- Audited plausible repository candidates before retaining the current four-project hierarchy.
-- Expanded tests and completed a visible multi-width browser/accessibility pass.
-- Updated the shared Obsidian vault so Maz Works Knowledge Vault is the active cross-project identity.
+- reduce repetitive admin
+- shorten customer and lead wait times
+- improve sales follow-up consistency
+- reduce dropped tasks and missed handoffs
+- give employees more time for useful work
+- increase operational capacity without simply asking staff to work longer
+- improve websites, lead journeys and customer workflows
+- add AI where useful with validation, approval and fallback controls
 
-## Peer patterns applied
+Do not promise invented percentages, guaranteed sales, guaranteed contracts, guaranteed revenue or ROI without evidence.
 
-The detailed source-backed comparison is in `PEER-BENCHMARK.md`. The build applies these useful patterns:
+## Measurable outcome model
 
-- lead with work, not a services catalogue;
-- name the founder early;
-- make one or two projects carry most of the proof;
-- describe services through recognizable problems;
-- show a bounded next step rather than a vague discovery funnel;
-- state client ownership and handoff;
-- use one obvious contact destination;
-- keep editorial restraint and honest limitations.
+When possible, scope each build against one or two practical measures:
 
-It avoids agency-scale claims, invented metrics, generic AI language, logo walls, excessive motion, and vague “we transform businesses” copy.
+- lead/customer response time
+- admin hours per week
+- time-to-quote or next action
+- follow-up coverage
+- overdue tasks / missed handoffs
+- workload handled per person
+- pipeline movement
+- recurring operational bottlenecks
 
-## Project hierarchy audit
+The goal is to show whether a workflow genuinely improved rather than publishing generic AI transformation claims.
 
-| Level | Project | Evidence judgment |
-|---|---|---|
-| Flagship | JobFilter | Real product, live workflow, public repository/release evidence, meaningful system depth, honest current source-coverage limitation |
-| Flagship | Scrap Finance Partners | Verified commissioned client site, live deployment, real visual evidence, services/pricing structure, and working enquiry path |
-| Selected | Agent Nudge | Shipped Windows release and practical multi-agent coordination problem; kept compact because adoption proof is early |
-| Selected | OpenFlowKit | Working live/browser/repository proof; correctly labelled Lab because native integrations and hosted routing are not shipped |
-| Hold back | FlowLens | Private-pilot foundation with mock/in-memory portions; insufficient public shipped proof for promotion |
-| Hold back | VoxPane | Technically interesting but lacks a strong current public release/homepage proof chain |
-| Hold back | Khutba.io | Prototype; production speech-to-text, auth, and durable backend remain incomplete |
-| Hold back | Furby AI | Hardware plan/experiment without equivalent shipped physical proof |
-| Hold back | Recall | Mock agents/demo data weaken portfolio trust at flagship level |
-| Hold back | SecureShift | Public plan still identifies core agent endpoints as unbuilt |
+## Live-demo funnel
 
-## Multi-perspective acceptance
+1. Prospect describes the problem in the short form.
+2. For a suitable problem, Maz creates a near-working demonstration around the real use case.
+3. Prospect can receive the demo link or request a Microsoft Teams walkthrough.
+4. Scope, price and important requirements are agreed before paid work begins.
+5. Maz completes, tests, deploys and hands over the agreed implementation.
 
-| Lens | Current result | Next reviewer should challenge only if reproducible |
-|---|---|---|
-| Employer | Manazir, shipped work, technical decisions, code/live proof, and limitations appear before commercial detail | Can a hiring visitor identify judgment and depth within one scroll? |
-| Client | Commissioned work precedes the offer; demo, ownership, price split, and scope limits are explicit | Does any wording still imply unlimited work or agency scale? |
-| Collaborator | Individual voice, Lab classification, current constraints, and collaboration contact remain visible | Does the site feel human without becoming biography-heavy? |
-| LinkedIn | Both flagships have stable, shareable deep routes with unique titles/descriptions | Does a shared case-study route stand alone without homepage context? |
-| Editorial | Real work, whitespace, thin rules, square geometry, and restrained yellow carry the system | Is any section visually louder than its evidence value warrants? |
-| Conversion | One primary action per major section and a consolidated contact close | Is the free-demo route obvious after proof without dominating the brand? |
-| Accessibility | Semantic landmarks/headings, skip link, visible focus, 44px links, alt text, reduced motion, and responsive images verified | Re-run keyboard and browser checks after any reviewer patch |
-| Performance | Static output, optimized screenshots, no added framework/font/animation dependency | Keep new assets justified and prevent client-JS growth |
-| Maintainability | Project/case-study truth lives in typed data; shared chrome/media are reusable | Add future work through `app/projects.ts`, not copied page markup |
+The free demo is not an unlimited free production build.
 
-## Remaining priorities
+## Contact implementation
 
-There is no known unfinished engineering item in the agreed build. The items below are delivery/review gates.
+`app/demo-request-form.tsx` submits directly in-page through the FormSubmit AJAX endpoint instead of depending on the visitor's local email application.
 
-## P0
+Preserve:
 
-- Next agent independently reviews the PR, live preview, diff, and four final captures through the nine lenses above.
-- Patch only a reproducible truth, accessibility, responsive, broken-link, or visual-hierarchy regression.
-- If no P0/P1 finding reproduces, recommend merge instead of inventing polish work.
+- name + email required
+- business optional
+- one plain-language problem field
+- demo preference: link / Teams / either
+- visible sending, success and error states
+- direct email fallback
+- honeypot spam field
+- no credentials committed to source
 
-## P1
+`vercel.json` must continue to permit the FormSubmit endpoint in `connect-src` while keeping the rest of the current security headers intact.
 
-- Confirm GitHub verification and Vercel preview are green.
-- Merge through GitHub after independent review; never push directly to `main`.
-- Verify production separately: homepage, both case studies, `/mazos`, robots, sitemap, assets, contact routes, metadata, analytics, mobile, and console.
+FormSubmit requires a one-time receiving-email activation on first use. If the form ever stops delivering, verify activation and spam folders before changing the UI.
 
-## P2
+## Project positioning
 
-- Apply a confirmed custom domain atomically across site constants/tests, or deliberately retain `mazos-site.vercel.app`.
-- Add LinkedIn only when Manazir supplies the exact public profile URL.
+### JobFilter
 
-## P3
+Construction-focused growth and automation product for trades and maintenance teams. It supports finding, qualifying, following and organising relevant contract opportunities with less manual admin. It must not be described as guaranteeing contract awards.
 
-- After production is stable, draft one proof-led LinkedIn post: post → case study → live product/code → contact.
-- Periodically review public links, project status, screenshots, pricing language, and dependencies.
-- Promote new Lab work only when its evidence improves the hierarchy.
+### Scrap Finance Partners
 
-## Important files
+Real contract client build for a specialist finance practice serving UK scrap and recycling firms. Maz Works' contribution spans positioning, marketing implementation, web development, launch, lead capture, secure client workspace and guarded acquisition automation. Do not invent revenue, conversion or lead-volume results.
 
-- `app/page.tsx` — proof-first homepage composition.
-- `app/work/[slug]/page.tsx` — reusable deep-case template.
-- `app/projects.ts` — canonical project status, proof, limitation, and case-study data.
-- `app/site.ts` — canonical URL, identity, and contact routes.
-- `app/site-chrome.tsx` — shared header/footer.
-- `app/project-elements.tsx` — shared evidence media and links.
-- `app/globals.css` — Quiet Framework and responsive/accessibility rules.
-- `tests/static-export.test.mjs` — truth, links, metadata, routes, commercial, and static-host guardrails.
-- `docs/maz-works/PEER-BENCHMARK.md` — peer research and emulate/adapt/avoid synthesis.
-- `docs/maz-works/quiet-framework-*.png` — final reviewer captures.
-- `public/scrap-finance-partners*.webp` — optimized real client evidence.
-- `README.md` — maintenance workflow.
+### Agent Nudge
+
+Desktop product for coordinating multiple AI coding agents and reducing stale or overlapping work.
+
+### MAZ Pocket
+
+Hardware + software project focused on a pocket AI assistant, voice interaction, reminders and remote AI access.
+
+## Professional-background story
+
+Keep ManyPets and Glide concise and relevant. The point is not to turn the homepage into a CV; it is to show the operating experience behind Maz Works:
+
+- complex problem investigation
+- complaints and escalations
+- regulated customer environments
+- process improvement
+- stakeholder communication
+- operational ownership
+
+Narrative: **investigate the real failure point → understand the workflow → build the simplest useful fix.**
 
 ## Design rules
 
-- Warm ivory canvas, near-black structure, crisp 1px dividers, square geometry, large real media, and very small areas of signal yellow.
-- Whitespace and alignment should do more work than containers.
-- Project media and decisions outrank technology badges and marketing prose.
-- Keep type direct, human, and readable; do not add generic AI gradients, glass, glow, rounded SaaS cards, fake terminals, decorative 3D, or novelty motion.
-- Do not imitate the identity, assets, or scale of peer references.
+Preserve the current restrained Maz Works visual language:
 
-## Commercial rules
+- warm ivory canvas
+- near-black structure
+- small signal-yellow accents
+- strong typography and whitespace
+- text-first project presentation
+- no large project screenshot galleries on the homepage
+- no stock imagery, fake browser mockups or generic AI graphics
+- mobile-first scanning
 
-- Lead with: “Show me the problem. I'll build a small tailored demonstration first.”
-- The free demo demonstrates one bounded problem; it is not full production delivery or days of unpaid bespoke work.
-- Founding implementation is £150 total: £75 after demo/written scope agreement and £75 when the agreed implementation is complete and presented.
-- Additional workflows, complex integrations, dashboards, migrations, ongoing support, maintenance, major features, and extra revision rounds are separately quoted.
-- The client owns the agreed implementation and receives a clear handoff.
+Do not add sections unless they materially improve trust, comprehension or conversion.
 
-## Truth boundaries
+## Client-acquisition rules
 
-- Scrap Finance Partners is real client work and shipped. Do not add revenue, lead, conversion, testimonial, or financial-outcome claims without evidence.
-- Maz Works is one builder, not a large agency.
-- £150 is a bounded founding offer, not unlimited permanent custom-software pricing.
-- OpenFlowKit is a Lab; do not describe unbuilt native injection or hosted AI routing as shipped.
-- Do not promote prototypes merely because a repository exists.
-- Do not guess a domain, LinkedIn URL, employment history, client result, or private detail.
-- The canonical shared vault is Maz Works Knowledge Vault. Legacy `JobFilter-Obsidian-Vault` naming may remain only as historical repository/archive provenance.
+See `docs/maz-works/CLIENT-ACQUISITION.md`.
 
-## Verification state
+Core approach:
 
-- `npm run verify` — pass: TypeScript, production build, 16/16 tests, static smoke.
-- `npm audit --omit=dev` — 0 vulnerabilities.
-- `git diff --check` — pass.
-- 12/12 public evidence URLs — HTTP 200.
-- Visible browser — 360×800, 390×844, 768×1024, 1280×720, 1440×1000; no overflow, console errors, or failed requests.
-- Keyboard/focus — first Tab reaches visible skip link; outline visible; rendered links at least 44px.
-- Structure/media — valid heading sequence; responsive images load at intended 390/780/1440 sources with meaningful alt text.
+**target → research → identify measurable pain → personalised outreach → live demo → Teams walkthrough if useful → scoped paid build → delivery → feedback/testimonial/referral**
 
-## Exact next action
+## Technical guardrails
 
-After the PR URL is recorded here, the next agent opens the PR, reads this file and `PEER-BENCHMARK.md`, then performs one independent review pass using the Multi-perspective acceptance table. Re-run `npm run verify` and the relevant browser width after any edit. Resolve only reproduced P0/P1 issues; otherwise leave a concise approval/merge recommendation and update this handoff with the review result.
+- Next.js App Router + TypeScript
+- static export remains intentional
+- Vercel deployment
+- Vercel Analytics
+- no secrets in GitHub
+- security headers stay explicit
+- tests must cover public positioning, internal links, contact delivery source, CSP and static export
+- `/mazos` remains no-index legacy handoff
 
-## Needs Manazir
+## Before merging future changes
 
-- Final custom domain or explicit approval to keep `mazos-site.vercel.app`.
-- Exact public LinkedIn URL or deliberate omission.
-- Merge approval after independent review.
+Run the repository verification workflow and check:
 
-No previous conversation transcript is required.
+- typecheck
+- production/static build
+- deterministic tests
+- internal links
+- contact form rendering
+- security headers
+- mobile layout
+- truthful project claims
+- production deployment after merge
+
+If a proposed change adds more complexity without making Maz Works easier to understand, trust or hire, reject it.

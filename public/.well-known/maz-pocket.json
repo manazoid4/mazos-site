@@ -1,0 +1,32 @@
+{
+  "name": "MAZ Pocket",
+  "kind": "personal-device-capability-bridge",
+  "version": 1,
+  "human_client": "/maz-pocket-ai/",
+  "authentication": {
+    "type": "bearer",
+    "delivery": "out-of-band capability link or access pack",
+    "warning": "Never place a MAZ Core token in public site source, logs, indexed pages or query parameters."
+  },
+  "transport": {
+    "direct": "user-supplied private HTTPS MAZ Core endpoint with bearer authentication",
+    "github_queue": "optional private [MAZ CORE] issue queue for AI clients with GitHub access",
+    "cardputer": "proxied through MAZ Core for remote-safe status/screen access"
+  },
+  "documented_capabilities": [
+    "GET /health",
+    "GET /core/cardputer/status",
+    "GET /core/cardputer/screen",
+    "POST /session/start",
+    "POST /turn/text",
+    "GET /core/projects",
+    "POST /core/job",
+    "GET /core/job/{id}"
+  ],
+  "safety": [
+    "MAZ Core uses an allow-list; there is no arbitrary remote shell.",
+    "The optional GitHub queue accepts only private-repository [MAZ CORE] requests that pass the same allow-list.",
+    "Firmware installation remains owned by M5Launcher.",
+    "The public Maz Works site stores no Core endpoint or token."
+  ]
+}
