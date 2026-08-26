@@ -4,35 +4,35 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://mazos-site.vercel.app'),
   title: {
-    default: 'Manazir Hussain | Junior Applied AI Engineer',
-    template: '%s — Manazir Hussain',
+    default: 'Maz Works | Fixed-price websites & automation',
+    template: '%s — Maz Works',
   },
   description:
-    'Portfolio of Manazir Hussain, a UK junior applied AI engineer building agent infrastructure, public-data pipelines, tool integrations, and production TypeScript software.',
+    'Fixed-price websites, automation and AI systems for UK small businesses. Free live demo before you pay.',
   alternates: {
     canonical: '/',
   },
-  authors: [{ name: 'Manazir Hussain' }],
-  creator: 'Manazir Hussain',
+  authors: [{ name: 'Maz Works' }],
+  creator: 'Maz Works',
   openGraph: {
-    title: 'Manazir Hussain | Junior Applied AI Engineer',
-    description: 'Dependable software around AI agents and data: infrastructure, pipelines, tool integrations, and production safeguards.',
+    title: 'Maz Works | Fixed-price websites & automation',
+    description: '£299 fixed, your rebuilt page working live on this call, done in days, no contract.',
     type: 'website',
     url: '/',
-    siteName: 'Manazir Hussain — Applied AI Engineering Portfolio',
+    siteName: 'Maz Works',
     images: [
       {
         url: '/social-card.png',
         width: 1200,
         height: 630,
-        alt: 'Manazir Hussain — junior applied AI engineer',
+        alt: 'Maz Works — fixed-price websites, automation and AI systems',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Manazir Hussain | Junior Applied AI Engineer',
-    description: 'Dependable software around AI agents and data: infrastructure, pipelines, tool integrations, and production safeguards.',
+    title: 'Maz Works | Fixed-price websites & automation',
+    description: '£299 fixed, your rebuilt page working live on this call, done in days, no contract.',
     images: ['/social-card.png'],
   },
 };
