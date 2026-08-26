@@ -41,17 +41,16 @@ async function internalTargetExists(urlPath) {
   return false;
 }
 
-test('homepage is role-specific, truth-aligned, and exposes direct evidence paths', async () => {
+test('homepage is the Maz Works client-acquisition pitch, not a job-seeking portfolio', async () => {
   const html = await readPage('/');
-  assert.match(html, /junior applied-AI engineering roles/);
-  assert.match(html, /dependable software around AI agents and data/);
-  assert.match(html, /Agent Nudge/);
+  assert.match(html, /£299 fixed, your rebuilt page working live on this call, done in days, no contract/);
+  assert.match(html, /Fixed-price websites, automation and AI systems for UK small businesses/);
+  assert.match(html, /Scrap Finance Partners/);
   assert.match(html, /JobFilter/);
-  assert.match(html, /OpenFlowKit/);
-  assert.match(html, /Find a Tender/);
-  assert.match(html, /jobfilter-scan-result\.webp/);
-  assert.match(html, /jobfilter-scan-result-mobile\.webp/);
-  assert.match(html, /My strongest public evidence today is product and systems engineering around AI in TypeScript/);
+  assert.match(html, /formsubmit\.co/);
+  assert.doesNotMatch(html, /junior applied-AI engineering roles/);
+  assert.doesNotMatch(html, /Agent Nudge/);
+  assert.doesNotMatch(html, /OpenFlowKit/);
   assert.doesNotMatch(html, /MAZos/);
   assert.doesNotMatch(html, /Operational B2B/);
 });

@@ -1,312 +1,167 @@
-const ROLE_EVIDENCE = [
+const PRICES = [
+  { label: 'Quick fix', price: '£150', detail: 'Flat rate. Fix what is broken on your current site or booking flow.' },
+  { label: 'Full site build', price: 'from £299', detail: 'Fixed price. Live demo before you pay. In days, not weeks.' },
+  { label: 'Automation / AI system', price: 'from £499', detail: 'The follow-up work that turns enquiries into paying customers.' },
+  { label: 'Support', price: 'from £49/mo', detail: 'Ongoing changes and monitoring. Cancel any time.' },
+];
+
+const GAPS = [
   {
-    capability: 'Agent and tool workflows',
-    evidence: 'Agent Nudge: MCP server, provider hooks, shared state, and deterministic pre-action decisions.',
-    href: '#agent-nudge',
+    title: 'Certainty',
+    body: 'Most agencies hide their price behind a sales call. Most cheap freelancers hide the risk. Every price on this page is public, and you see a working demo before you pay anything.',
   },
   {
-    capability: 'Data pipelines',
-    evidence: 'JobFilter: official APIs, OCDS normalisation, amendment merging, deduplication, and CPV filtering.',
-    href: '#jobfilter',
+    title: 'The missing middle',
+    body: 'Builders stop at launch. Agencies stop at design. Automation consultants want a retainer. Your broken enquiry follow-up sits in the gap between all three — that is what I fix.',
   },
   {
-    capability: 'Production reliability',
-    evidence: 'Abortable requests, explicit failure states, regression fixtures, CI gates, and packaged releases.',
-    href: '#evidence',
-  },
-  {
-    capability: 'Full-stack delivery',
-    evidence: 'TypeScript, React, Next.js, Node.js, SQLite, Supabase, Electron, REST APIs, and Vercel.',
-    href: '#work',
+    title: 'A named human',
+    body: 'Fiverr sits at 2.3/5 on Trustpilot across nearly 15,000 reviews. I am one UK-based person, I answer my own emails, and I do not disappear mid-project.',
   },
 ];
 
-const AGENT_NUDGE_BUILD = [
-  'TypeScript CLI, localhost daemon, MCP server, provider hooks, and a sandboxed Electron shell.',
-  'Project-scoped SQLite state for agent presence, expiring path claims, facts, cursors, and receipts.',
-  'Deterministic HOLD / REVIEW / CLEAR decisions with acknowledgement tracked separately from delivery.',
-  'Unit, integration, end-to-end, packaging, security, and release-smoke checks for the Windows MVP.',
-];
-
-const JOBFILTER_BUILD = [
-  'Bounded Find a Tender OCDS retrieval with safe pagination, retries, cancellation, and source health.',
-  'Notice normalisation, latest-amendment merging, deduplication, deadline validation, and ranked output.',
-  'CPV-first trade matching that rejects medical or IT maintenance notices when authoritative classifications conflict with building work.',
-  'Fail-closed radius checks: a buyer headquarters postcode is never treated as proof of job delivery.',
+const CASE_STUDIES = [
+  {
+    name: 'Scrap Finance Partners',
+    result: 'Full digital presence, lead journey, and guarded acquisition automation for a UK scrap-yard finance consultancy.',
+    href: 'https://github.com/manazoid4/scrap-finance-partners',
+  },
+  {
+    name: 'JobFilter',
+    result: 'Procurement-scanning product for UK trades: opportunity detection, fit scoring, alerts, and a bid workflow.',
+    href: 'https://github.com/manazoid4/JobFilterV1',
+  },
 ];
 
 export default function Page() {
   return (
     <main>
       <header className="site-nav">
-        <a className="nameplate" href="#main-content" aria-label="Manazir Hussain, back to top">
-          Manazir Hussain
+        <a className="nameplate" href="#main-content" aria-label="Maz Works, back to top">
+          Maz Works
         </a>
         <nav aria-label="Primary navigation">
-          <a href="#work">Projects</a>
-          <a href="#evidence">Evidence</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-          <a href="https://github.com/manazoid4">GitHub</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#work">Work</a>
+          <a href="#contact">Get a demo</a>
         </nav>
       </header>
 
       <section className="hero" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
         <div className="hero-statement">
-          <p className="identity">UK-based · Seeking junior applied-AI engineering roles</p>
-          <h1 id="intro-title">I build dependable software around AI agents and data.</h1>
+          <p className="identity">UK-based · Fixed-price websites, automation and AI systems for small businesses</p>
+          <h1 id="intro-title">
+            £299 fixed, your rebuilt page working live on this call, done in days, no contract.
+          </h1>
           <p className="hero-copy">
-            I turn real workflows into agent infrastructure, data pipelines, and full-stack products—with tool
-            integrations, explicit failure handling, and tests that make the result inspectable.
+            Before you pay anything, I build a near-working demo around your actual business problem and walk you
+            through it live. No sales calls. No retainers to escape. No eight-week timelines.
           </p>
           <div className="hero-actions">
-            <a className="button primary" href="#agent-nudge">See the agent system</a>
-            <a className="button secondary" href="https://github.com/manazoid4">
-              Inspect my GitHub
-            </a>
+            <a className="button primary" href="#contact">Get your free demo</a>
+            <a className="button secondary" href="#pricing">See prices</a>
           </div>
         </div>
 
-        <aside className="hero-dossier" aria-label="Current engineering evidence">
-          <p>Current public proof</p>
+        <aside className="hero-dossier" aria-label="Why Maz Works">
+          <p>Why this beats the alternatives</p>
           <ul>
-            <li><span>Agents</span>MCP, hooks, shared context, deterministic controls</li>
-            <li><span>Data</span>Official APIs, normalisation, scoring, provenance</li>
-            <li><span>Delivery</span>CI, regression gates, releases, live deployments</li>
-            <li><span>Stack</span>TypeScript, Next.js, Node.js, SQLite, Supabase</li>
+            <li><span>GoDaddy</span>6–8 weeks, price behind a call</li>
+            <li><span>Yell</span>subscription lock-in, no public price</li>
+            <li><span>Fiverr</span>2.3/5 on Trustpilot, 14,838 reviews</li>
+            <li><span>Maz Works</span>fixed price, demo first, days not weeks</li>
           </ul>
         </aside>
       </section>
 
-      <section className="role-fit" aria-labelledby="role-fit-title">
+      <section className="role-fit" id="pricing" aria-labelledby="pricing-title">
         <div className="section-intro compact">
-          <h2 id="role-fit-title">The engineering behind useful AI.</h2>
-          <p>
-            Agents still need trustworthy context, clean data, safe integrations, verification, recovery paths,
-            and decisions a person can inspect.
-          </p>
+          <h2 id="pricing-title">The entire price list. No hidden calls.</h2>
+          <p>Pick a starting point. Every £150 quick fix is also an honest audition for the bigger £499 system.</p>
         </div>
         <div className="fit-list">
-          {ROLE_EVIDENCE.map((item) => (
-            <a href={item.href} key={item.capability}>
-              <strong>{item.capability}</strong>
-              <span>{item.evidence}</span>
+          {PRICES.map((item) => (
+            <a href="#contact" key={item.label}>
+              <strong>{item.label} — {item.price}</strong>
+              <span>{item.detail}</span>
               <span aria-hidden="true">↓</span>
             </a>
           ))}
         </div>
       </section>
 
-      <section className="work-section" id="work" aria-labelledby="work-title">
+      <section className="evidence-section" aria-labelledby="gaps-title">
         <div className="section-intro">
-          <p className="section-label">Selected engineering work</p>
-          <h2 id="work-title">Three systems. Agent, data, and integration evidence.</h2>
-          <p>Agent coordination, public-data qualification, and voice capture/refinement—each with its boundary stated plainly.</p>
-        </div>
-
-        <article className="case-study agent-case" id="agent-nudge" aria-labelledby="agent-title">
-          <header className="case-heading">
-            <div>
-              <p className="case-index">Agent infrastructure</p>
-              <h3 id="agent-title">Agent Nudge</h3>
-            </div>
-            <p>
-              A released Windows application and local service that warns coding agents before they act on stale
-              decisions or collide on the same files.
-            </p>
-          </header>
-
-          <figure className="artifact artifact-dark">
-            <img
-              src="/agent-nudge-demo.webp"
-              alt="Agent Nudge scenario demo showing two coding agents and a conflict review outcome"
-              width="1440"
-              height="900"
-              loading="eager"
-              decoding="async"
-            />
-            <figcaption>Public fixture demo · desktop runtime stays local · released Windows MVP</figcaption>
-          </figure>
-
-          <div className="case-body">
-            <div className="case-problem">
-              <h4>The problem</h4>
-              <p>
-                Parallel agents move quickly while their context quietly diverges. A changed decision or overlapping
-                edit can arrive after another agent has already planned from stale information.
-              </p>
-              <h4>The decision</h4>
-              <p>
-                Keep the verdict deterministic. Agent Nudge routes relevant project facts into a preflight decision;
-                it does not pretend to read hidden model state or replace human approval.
-              </p>
-            </div>
-            <div>
-              <h4>What I built</h4>
-              <ul className="evidence-list">
-                {AGENT_NUDGE_BUILD.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-            </div>
-          </div>
-
-          <footer className="case-footer">
-            <div>
-              <strong>Current boundary</strong>
-              <span>It coordinates model-driven agents but does not call a model itself; provider hooks can still be bypassed.</span>
-            </div>
-            <div className="project-links">
-              <a href="https://agent-nudge-bay.vercel.app/#demo">Try the scenario demo</a>
-              <a href="https://github.com/manazoid4/agent-nudge">Source and release checks</a>
-            </div>
-          </footer>
-        </article>
-
-        <article className="case-study jobfilter-case" id="jobfilter" aria-labelledby="jobfilter-title">
-          <header className="case-heading">
-            <div>
-              <p className="case-index">Data and integration</p>
-              <h3 id="jobfilter-title">JobFilter</h3>
-            </div>
-            <p>
-              A full-stack pipeline that turns inconsistent UK procurement notices into ranked opportunities for
-              small construction and maintenance teams.
-            </p>
-          </header>
-
-          <figure className="artifact">
-            <picture>
-              <source media="(max-width: 680px)" srcSet="/jobfilter-scan-result-mobile.webp" />
-              <img
-                src="/jobfilter-scan-result.webp"
-                alt="JobFilter reporting no verified local matches for a B14 building search after checking configured sources"
-                width="1440"
-                height="900"
-                loading="lazy"
-                decoding="async"
-              />
-            </picture>
-            <figcaption>Repaired branch · B14 building scan · honest zero when locality is unproven · 21 July 2026</figcaption>
-          </figure>
-
-          <div className="case-body">
-            <div className="case-problem">
-              <h4>The failure I found</h4>
-              <p>
-                The original current-notice source was stale, keyword matching could admit convincing false
-                positives, and buyer headquarters could masquerade as the delivery location.
-              </p>
-              <h4>The result</h4>
-              <p>
-                In a 21 July 2026 smoke test, Find a Tender returned 84 current notices: five authoritative electrical
-                matches and thirteen building matches. A B14 radius search returned an honest zero when locality
-                could not be proven.
-              </p>
-            </div>
-            <div>
-              <h4>What I changed</h4>
-              <ul className="evidence-list">
-                {JOBFILTER_BUILD.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-            </div>
-          </div>
-
-          <footer className="case-footer">
-            <div>
-              <strong>Current boundary</strong>
-              <span>The migration works; local coverage, buyer demand, and willingness to pay still need SME validation.</span>
-            </div>
-            <div className="project-links">
-              <a href="https://github.com/manazoid4/JobFilterV1/pull/383">Review the Find a Tender migration</a>
-              <a href="https://jobfilter.uk/find-jobs">Open the pre-migration production UI</a>
-              <a href="https://github.com/manazoid4/JobFilterV1">View JobFilter code</a>
-            </div>
-          </footer>
-        </article>
-
-        <article className="supporting-project" aria-labelledby="openflow-title">
-          <div>
-            <p className="case-index">Provider integration</p>
-            <h3 id="openflow-title">OpenFlowKit</h3>
-          </div>
-          <div>
-            <p className="supporting-lede">
-              A browser voice-capture and deterministic text-refinement MVP, with typed boundaries for future local
-              and hosted AI providers.
-            </p>
-            <p>
-              The working web MVP includes browser speech capture, a WebSocket terminal bridge, typed transcription
-              and refinement contracts, deterministic cleanup rules, latency tracking, and tests. Native desktop
-              injection and production provider routing remain future milestones.
-            </p>
-          </div>
-          <div className="project-links vertical">
-            <a href="https://openflowkit-dusky.vercel.app">Try OpenFlowKit</a>
-            <a href="https://github.com/manazoid4/openflowkit">View OpenFlowKit code</a>
-          </div>
-        </article>
-      </section>
-
-      <section className="evidence-section" id="evidence" aria-labelledby="evidence-title">
-        <div className="section-intro">
-          <p className="section-label">What I can contribute</p>
-          <h2 id="evidence-title">Software engineering around the model.</h2>
-          <p>Every capability below points to something implemented—not a keyword added for a recruiter.</p>
+          <p className="section-label">Why it works</p>
+          <h2 id="gaps-title">Three gaps every funded competitor leaves open.</h2>
+          <p>Verified against live UK competitor research, not marketing copy.</p>
         </div>
         <dl className="evidence-matrix">
-          <div>
-            <dt>Agent workflows</dt>
-            <dd>MCP tools, provider hooks, scoped context, shared state, and targeted pre-action decisions.</dd>
-          </div>
-          <div>
-            <dt>Data preparation</dt>
-            <dd>Schema mapping, source provenance, classification, normalisation, deduplication, and invalid-record rejection.</dd>
-          </div>
-          <div>
-            <dt>System integration</dt>
-            <dd>REST and OCDS APIs, SQLite, Supabase, Stripe, WebSockets, Electron, and deployment boundaries.</dd>
-          </div>
-          <div>
-            <dt>Software verification and reliability</dt>
-            <dd>Deterministic fixtures, regression suites, failure taxonomy, timeouts, retries, CI, packaging, and smoke checks.</dd>
-          </div>
-          <div>
-            <dt>Technical communication</dt>
-            <dd>Plain-English decisions, reproducible demos, architecture notes, source-linked claims, and explicit limitations.</dd>
-          </div>
+          {GAPS.map((gap) => (
+            <div key={gap.title}>
+              <dt>{gap.title}</dt>
+              <dd>{gap.body}</dd>
+            </div>
+          ))}
         </dl>
       </section>
 
-      <section className="about" id="about" aria-labelledby="about-title">
-        <div>
-          <p className="section-label">About</p>
-          <h2 id="about-title">Curious about the system. Practical about the outcome.</h2>
+      <section className="work-section" id="work" aria-labelledby="work-title">
+        <div className="section-intro">
+          <p className="section-label">Shipped, not promised</p>
+          <h2 id="work-title">Recent work for real businesses.</h2>
+          <p>Proof that the £299/£499 ladder produces working systems, not just a landing page.</p>
         </div>
-        <div className="about-copy">
-          <p>
-            I am an early-career engineer interested in applied AI: systems where models, structured data, and
-            software integrations have to work together outside a notebook.
-          </p>
-          <p>
-            My strongest public evidence today is product and systems engineering around AI in TypeScript. I am
-            looking for a collaborative junior role where I can contribute that foundation while deepening Python,
-            model evaluation, data science, and cloud operations with experienced engineers.
-          </p>
-        </div>
+
+        {CASE_STUDIES.map((study) => (
+          <article className="supporting-project" aria-labelledby={study.name} key={study.name}>
+            <div>
+              <p className="case-index">Delivered</p>
+              <h3 id={study.name}>{study.name}</h3>
+            </div>
+            <div>
+              <p className="supporting-lede">{study.result}</p>
+            </div>
+            <div className="project-links vertical">
+              <a href={study.href}>View the work</a>
+            </div>
+          </article>
+        ))}
       </section>
 
       <section className="contact" id="contact" aria-labelledby="contact-title">
-        <p className="section-label">Get in touch</p>
-        <h2 id="contact-title">Looking for an early-career engineer who can bridge agents, data, and dependable software?</h2>
-        <p>I am open to junior AI engineer, applied-AI engineer, and AI product-engineering roles across the UK.</p>
+        <p className="section-label">Free live demo. Real offer, no catch.</p>
+        <h2 id="contact-title">Send the most annoying manual process in your business.</h2>
+        <p>
+          For suitable problems I will build a near-working demo around your actual workflow, then send the link or
+          walk you through it live. You see the direction before spending a penny.
+        </p>
+        <form
+          className="contact-actions"
+          action="https://formsubmit.co/manazoid4@gmail.com"
+          method="POST"
+        >
+          <input type="hidden" name="_subject" value="New Maz Works enquiry" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input
+            className="button light"
+            style={{ border: '1px solid currentColor', background: 'transparent', color: 'inherit' }}
+            type="email"
+            name="email"
+            placeholder="Your email"
+            required
+            aria-label="Your email"
+          />
+          <button className="button light" type="submit">Send it</button>
+        </form>
         <div className="contact-actions">
-          <a className="button light" href="mailto:manazoid4@gmail.com">Email Manazir</a>
-          <a className="button outline-light" href="https://github.com/manazoid4">View GitHub</a>
+          <a className="button primary" href="mailto:manazoid4@gmail.com">Email instead</a>
         </div>
       </section>
 
       <footer className="site-footer">
-        <span>Manazir Hussain © 2026</span>
-        <span>UK-based · Applied AI and product engineering</span>
+        <span>Maz Works © 2026</span>
+        <span>UK-based · Fixed-price websites, automation and AI systems</span>
         <a href="mailto:manazoid4@gmail.com">manazoid4@gmail.com</a>
       </footer>
     </main>
