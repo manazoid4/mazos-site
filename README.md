@@ -4,6 +4,13 @@ Public portfolio and client-acquisition site for [Maz Works](https://mazos-site.
 
 Maz Works is positioned around a simple idea: start with the real business problem, then build the smallest useful system that solves it. The site combines practical project proof with Manazir's earlier background in complaints, escalations and operations.
 
+## Public routes
+
+- `/` — digital services, selected work, founding offers and live-demo enquiry
+- `/3d-printing` — Maz Works Objects, the Touch collection, interaction demonstration and product enquiry
+- `/work/jobfilter` and `/work/scrap-finance-partners` — static case studies
+- `/mazos` — no-index legacy handoff
+
 ## Homepage structure
 
 - Hero — websites, automation and AI tools around real business problems
@@ -20,6 +27,19 @@ Maz Works is positioned around a simple idea: start with the real business probl
 - Contact — short live-demo request form with demo-link or Microsoft Teams walkthrough preference
 
 Large project screenshots are deliberately omitted from the homepage so the work stays easy to scan. Deeper detail remains available through case-study and project links.
+
+## Maz Works Objects — Touch
+
+- **Touch One — £29:** one compact stand, one removable NFC disc, one destination, matching QR backup, plain-text business name, black-and-white finish and link setup.
+- **Touch Three — £49:** one stand, three removable NFC discs, up to three destinations, one matching QR backup per destination, plain-text business name, black-and-white finish and link setup.
+- **Touch + Carry — £79:** everything in Touch Three plus five matching NFC keyrings sharing one destination. Keyrings do not include QR codes.
+- **Artwork add-on — +£10 per bundle:** one supplied artwork design reused across the bundle, basic placement and one proof revision. Complex redrawing, extra designs and detailed imagery are quoted separately.
+
+Prices cover standard designs. Delivery and nonstandard requests are confirmed separately. Direct links to existing pages have no subscription; website creation, hosted pages, redirect services and ongoing changes are separate quotes.
+
+Remaining manufacturing checks before physical-product delivery: print and fit the prototype; confirm the actual PLA filament; test disc retention and replacement; validate NFC read position across representative phones and cases; confirm the tag rewrite/lock policy; test every production NFC destination and printed QR backup; then agree packaging, delivery cost and timing. Product imagery on the page is labelled as a concept visual until those checks are complete.
+
+The Objects display face is **Fredoka**, loaded through `next/font` and scoped to `/3d-printing`. Fredoka is released under the [SIL Open Font License 1.1](https://openfontlicense.org/open-font-license-official-text/) and permits commercial use, modification and redistribution under its licence terms.
 
 ## Current founding offers
 
