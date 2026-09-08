@@ -1,5 +1,22 @@
 # Maz Works Design Direction
 
+## Maz Works Objects — Tactile Signal Studio
+
+The `/3d-printing` route is a deliberate sub-brand surface inside Maz Works rather than a global restyle.
+
+| Decision | Objects contract |
+| --- | --- |
+| Product mode | Experience first, then persuade toward a short enquiry |
+| Audience and cadence | Small hospitality, retail and service businesses making an occasional, non-technical product decision |
+| Visual world | **Tactile Signal Studio** — an art-school product catalogue with useful, countable objects |
+| Palette family | Existing Maz Works neon signal green with black, white and cool neutral studio surfaces |
+| Type treatment | Fredoka for thick rounded display moments; the existing readable sans/mono system for body, labels and form copy |
+| Composition | Oversized product photography, asymmetric editorial pairs, alternating range rows and a progressive enquiry |
+| Shape language | Product-led circular cuts and low rounded masses; surrounding UI stays mostly crisp and structural |
+| Anti-references | Generic SaaS cards, a conventional pricing table, stock installations, excessive glow, dense e-commerce controls and competitor imagery |
+
+All object imagery is original generated concept work and must remain visibly labelled **Concept visual** until physical prototypes replace it. Fredoka is available under the SIL Open Font License 1.1; its use is scoped through `next/font` so the existing site typography does not regress.
+
 ## Chosen direction — Quiet Framework
 
 Maz Works should feel like a calm architectural portfolio for a hands-on software builder. The page is an evidence surface, not an agency funnel and not a product dashboard.
