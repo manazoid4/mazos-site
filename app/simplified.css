@@ -132,6 +132,16 @@
   font-size: .95rem;
 }
 
+.mw-service-link {
+  min-height: 44px;
+  margin-top: 22px;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: .68rem;
+  font-weight: 800;
+}
+
 .mw-work-list {
   border-top: 2px solid var(--line);
 }
@@ -357,7 +367,7 @@
 }
 
 @media (max-width: 900px) {
-  .mw-site-header nav a:not(.mw-nav-cta) {
+  .mw-site-header nav a:not(.mw-nav-cta):not(.mw-nav-objects) {
     display: none;
   }
 

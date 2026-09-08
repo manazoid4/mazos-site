@@ -15,6 +15,19 @@ Maintain Maz Works as Manazir Hussain's independent web, automation and AI/softw
 - Additional selected work: Agent Nudge and MAZ Pocket
 - Canonical cross-project knowledge system: **Maz Works Knowledge Vault**; JobFilter is one project inside it
 
+## Maz Works Objects
+
+`/3d-printing` presents the Touch collection. Product pricing is defined once in `app/3d-printing/touch-config.ts` and reused by the collection, selection summary and enquiry payload.
+
+- **Touch One — £29:** one compact stand, one removable NFC disc, one destination, matching QR backup, plain-text business name, black-and-white finish and link setup.
+- **Touch Three — £49:** one stand, three removable NFC discs, up to three destinations, one matching QR backup per destination, plain-text business name, black-and-white finish and link setup.
+- **Touch + Carry — £79:** everything in Touch Three plus five matching NFC keyrings sharing one destination. Keyrings do not include QR codes.
+- **Artwork add-on — +£10 per bundle:** one supplied design reused across the bundle, basic placement and one proof revision. Complex redrawing, extra designs and detailed imagery are quoted separately.
+
+Prices cover standard designs. Delivery and nonstandard requests are confirmed separately. Direct links to existing pages have no subscription; website creation, hosted landing pages and ongoing updates are separate quotes.
+
+Current product images are clearly labelled concept visuals, not photographs of production units. Before selling physical units, print and test the actual PLA parts on the intended Ender 5 workflow, confirm filament, fit and disc retention, test NFC tags and QR assets, agree delivery costs and timing, and decide whether production tags remain rewritable. Do not claim magnets, exact dimensions, waterproofing, outdoor durability, food contact suitability or production-tested fits until verified.
+
 ## Positioning
 
 Lead with business outcomes, not technology.

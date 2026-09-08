@@ -1,0 +1,233 @@
+@media (max-width: 980px) {
+  .objects-hero,
+  .objects-demo,
+  .objects-heading-row,
+  .objects-portfolio-edition,
+  .objects-enquiry-layout,
+  .objects-other {
+    grid-template-columns: 1fr;
+  }
+
+  .objects-hero {
+    min-height: auto;
+  }
+
+  .objects-hero-visual {
+    margin-right: -8vw;
+    margin-left: 6vw;
+  }
+
+  .objects-bundle {
+    grid-template-columns: 34px 1fr;
+  }
+
+  .objects-bundle-visual,
+  .objects-bundle:nth-child(even) .objects-bundle-visual {
+    grid-column: 2;
+    grid-row: auto;
+  }
+
+  .objects-bundle-copy,
+  .objects-bundle:nth-child(even) .objects-bundle-copy {
+    grid-column: 2;
+    grid-row: auto;
+  }
+
+  .objects-bundle-number {
+    grid-row: 1 / span 2;
+  }
+
+  .objects-gallery figure {
+    min-height: 430px;
+  }
+
+  .objects-gallery-full {
+    min-height: 520px !important;
+  }
+
+  .objects-selection-summary {
+    position: static;
+    grid-row: 1;
+  }
+
+  .objects-other {
+    align-items: start;
+  }
+}
+
+@media (max-width: 680px) {
+  .objects-hero {
+    padding-top: 58px;
+    gap: 46px;
+  }
+
+  .objects-hero h1 {
+    font-size: clamp(3.75rem, 20vw, 5.4rem);
+  }
+
+  .objects-hero-visual {
+    width: 118%;
+    margin-inline: -9%;
+    border-radius: 50% 50% 12px 12px;
+  }
+
+  .objects-hero-visual figcaption {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+  }
+
+  .objects-hero-visual figcaption span:last-child,
+  .objects-hero-side-note {
+    display: none;
+  }
+
+  .objects-section {
+    padding-block: 82px;
+  }
+
+  .objects-section-heading h2,
+  .objects-how h2,
+  .objects-other h2 {
+    font-size: clamp(2.8rem, 15vw, 4.3rem);
+  }
+
+  .objects-bundle {
+    padding-block: 34px 52px;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .objects-bundle-number,
+  .objects-bundle-visual,
+  .objects-bundle-copy,
+  .objects-bundle:nth-child(even) .objects-bundle-visual,
+  .objects-bundle:nth-child(even) .objects-bundle-copy {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .objects-bundle-visual {
+    aspect-ratio: 1 / 1;
+  }
+
+  .objects-bundle:nth-child(2) .objects-bundle-visual {
+    aspect-ratio: 4 / 3;
+  }
+
+  .objects-bundle-title {
+    align-items: end;
+  }
+
+  .objects-bundle-copy .objects-button,
+  .objects-continue .objects-button,
+  .objects-submit-row .objects-button,
+  .objects-other .objects-button {
+    width: 100%;
+  }
+
+  .objects-artwork-note,
+  .objects-journeys,
+  .objects-gallery,
+  .objects-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .objects-demo-discs {
+    grid-template-columns: 1fr;
+  }
+
+  .objects-demo-discs button {
+    min-height: 64px;
+    padding: 8px 14px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 14px;
+  }
+
+  .objects-demo-discs button span {
+    width: 42px;
+    height: 42px;
+  }
+
+  .objects-destination {
+    min-height: 430px;
+    box-shadow: 8px 8px 0 var(--objects-green);
+  }
+
+  .objects-gallery figure,
+  .objects-gallery-full {
+    min-height: 390px !important;
+    grid-column: 1;
+    border-radius: 0;
+  }
+
+  .objects-gallery figcaption {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .objects-portfolio-edition a {
+    grid-template-columns: 34px 1fr;
+  }
+
+  .objects-portfolio-edition a small {
+    grid-column: 2;
+  }
+
+  .objects-how {
+    padding-block: 82px;
+  }
+
+  .objects-journeys {
+    gap: 55px;
+  }
+
+  .objects-choice-grid,
+  .objects-use-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .objects-choice-grid label:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .objects-submit-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .objects-selection-summary {
+    padding: 20px;
+    box-shadow: 6px 6px 0 var(--objects-black);
+  }
+
+  .objects-faq-list summary {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .objects-faq-list details p {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 390px) {
+  .objects-choice-grid,
+  .objects-use-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .objects-choice-grid label:last-child {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .objects-button:hover,
+  .objects-demo-discs button:hover,
+  .objects-demo-discs button.is-active {
+    transform: none;
+  }
+}

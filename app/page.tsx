@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { CONTACT_EMAIL } from './site';
 import { DemoRequestForm } from './demo-request-form';
 import { SiteFooter, SiteHeader } from './site-chrome';
@@ -14,6 +15,11 @@ const SERVICES = [
   {
     title: 'AI & software',
     body: 'Useful AI features, internal tools and custom software built around a specific business problem.',
+  },
+  {
+    title: '3D Printing & Objects',
+    body: 'Tactile custom objects that connect customers to useful digital destinations.',
+    href: '/3d-printing',
   },
 ];
 
@@ -193,6 +199,7 @@ export default function Page() {
             <article className="mw-service-card" key={service.title}>
               <h3>{service.title}</h3>
               <p>{service.body}</p>
+              {'href' in service && service.href && <a className="mw-service-link" href={service.href}>Explore Maz Works Objects <span aria-hidden="true">→</span></a>}
             </article>
           ))}
         </div>
@@ -207,6 +214,19 @@ export default function Page() {
               <div key={title}><strong>{title}</strong><span>{body}</span></div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="mw-objects-showcase" aria-labelledby="objects-showcase-title">
+        <figure>
+          <Image src="/objects/touch-three-hero.webp" alt="Concept visual of the black-and-white Touch Three NFC stand" width={1536} height={1024} sizes="(max-width: 760px) 100vw, 48vw" unoptimized />
+          <figcaption>Concept visual / Touch Three</figcaption>
+        </figure>
+        <div>
+          <p className="eyebrow">Maz Works Objects / New service</p>
+          <h2 id="objects-showcase-title">Small objects. Useful connections.</h2>
+          <p>Meet Touch: custom 3D-printed NFC stands for menus, reviews, bookings and the next useful action.</p>
+          <a className="button button-dark" href="/3d-printing">Explore the Touch collection</a>
         </div>
       </section>
 
