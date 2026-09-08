@@ -60,6 +60,7 @@ test('Objects enquiry reuses delivery, accepts missing links, and builds its est
   assert.match(formSource, /estimated_product_price: `£\$\{estimate\}/);
   assert.match(formSource, /response\.ok/);
   assert.match(formSource, /setSubmitState\('error'\)/);
+  assert.match(formSource, /submitEnquiry[\s\S]+intendedUses\.length === 0/);
   assert.doesNotMatch(formSource, /required[^>]+destinationLinks|destinationLinks[^>]+required/);
   assert.match(configSource, /artworkAddOnPrice: 10/);
   assert.match(configSource, /basePrice: 29/);

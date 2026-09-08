@@ -49,7 +49,13 @@ export function TouchEnquiryForm() {
     const helpFindingLinks = data.get('helpFindingLinks') === 'yes';
     const honey = String(data.get('_honey') || '').trim();
 
+    if (intendedUses.length === 0) {
+      setSelectionError('Choose at least one use before sending the enquiry.');
+      window.setTimeout(() => document.querySelector<HTMLInputElement>('input[name="intendedUses"]')?.focus(), 0);
+      return;
+    }
     if (!name || !email || !businessName.trim()) return;
+    setSelectionError('');
     setSubmitState('sending');
 
     try {
@@ -136,12 +142,12 @@ export function TouchEnquiryForm() {
             </label>
           </fieldset>
 
-          {!detailsOpen && (
-            <div className="objects-continue">
+          <div className="objects-continue">
+            {!detailsOpen && (
               <button className="objects-button objects-button-signal" type="button" onClick={continueToDetails}>Continue to contact details</button>
-              <p role="alert">{selectionError}</p>
-            </div>
-          )}
+            )}
+            <p role="alert">{selectionError}</p>
+          </div>
 
           {detailsOpen && (
             <fieldset className="objects-contact-fields" id="enquiry-details" tabIndex={-1}>
