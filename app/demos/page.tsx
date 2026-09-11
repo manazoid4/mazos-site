@@ -1,10 +1,22 @@
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 
+const DEMO_DESCRIPTION = 'See how Maz Works turns a real business problem into a private working demo before a full build is agreed.';
+
 export const metadata: Metadata = {
-  title: 'Private business demos — Maz Works',
-  description: 'See how Maz Works turns a real business problem into a private working demo before a full build is agreed.',
+  title: 'Private business demos',
+  description: DEMO_DESCRIPTION,
   alternates: { canonical: '/demos' },
+  openGraph: {
+    title: 'Private business demos — Maz Works',
+    description: 'See the useful part working before committing to the full build.',
+    url: '/demos',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Private business demos — Maz Works',
+    description: 'See the useful part working before committing to the full build.',
+  },
 };
 
 const DEMO_TYPES = [
