@@ -160,12 +160,30 @@ async function logout(admin: ReturnType<typeof getAdminClient>, body: Record<str
   const slug = normalizeSlug(body.slug);
   const token = typeof body.token === 'string' ? body.token : '';
   if (!slug || !token || token.length > MAX_TOKEN_CHARS) return json({ ok: true });
+
   const tokenHash = await sha256Hex(token);
-  const { data: session } = await admin.from('client_demo_sessions').select('id,client_demo_id').eq('token_hash', tokenHash).maybeSingle();
-  if (session) {
-    const { data: demo } = await admin.from('client_demos').select('slug').eq('id', session.client_demo_id).maybeSingle();
-    if (demo?.slug === slug) await admin.from('client_demo_sessions').update({ revoked_at: new Date().toISOString() }).eq('id', session.id);
-  }
+  const { data: session, error: sessionError } = await admin
+    .from('client_demo_sessions')
+    .select('id,client_demo_id')
+    .eq('token_hash', tokenHash)
+    .maybeSingle();
+  if (sessionError) throw sessionError;
+  if (!session) return json({ ok: true });
+
+  const { data: demo, error: demoError } = await admin
+    .from('client_demos')
+    .select('slug')
+    .eq('id', session.client_demo_id)
+    .maybeSingle();
+  if (demoError) throw demoError;
+  if (demo?.slug !== slug) return json({ ok: true });
+
+  const { error: updateError } = await admin
+    .from('client_demo_sessions')
+    .update({ revoked_at: new Date().toISOString() })
+    .eq('id', session.id);
+  if (updateError) throw updateError;
+
   return json({ ok: true });
 }
 
