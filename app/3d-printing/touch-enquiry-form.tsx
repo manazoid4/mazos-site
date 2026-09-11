@@ -28,7 +28,7 @@ export function TouchEnquiryForm() {
 
   function continueToDetails() {
     if (intendedUses.length === 0 || !businessName.trim()) {
-      setSelectionError('Choose at least one use and add the business-name text for the object.');
+      setSelectionError('Choose what you want the stand to help with and add the business name or wording you want on it.');
       return;
     }
     setSelectionError('');
@@ -50,7 +50,7 @@ export function TouchEnquiryForm() {
     const honey = String(data.get('_honey') || '').trim();
 
     if (intendedUses.length === 0) {
-      setSelectionError('Choose at least one use before sending the enquiry.');
+      setSelectionError('Choose at least one customer action before sending.');
       window.setTimeout(() => document.querySelector<HTMLInputElement>('input[name="intendedUses"]')?.focus(), 0);
       return;
     }
@@ -73,10 +73,10 @@ export function TouchEnquiryForm() {
             ? `Yes — £${TOUCH_PRICING.artworkAddOnPrice}; one supplied design, basic placement and one proof revision`
             : 'No',
           business_name: businessName.trim(),
-          destination_links: destinationLinks || 'Not supplied at enquiry stage',
+          destination_links: destinationLinks || 'Not supplied yet',
           help_finding_links: helpFindingLinks ? 'Yes' : 'No',
           notes: notes || 'None supplied',
-          estimated_product_price: `£${estimate} before delivery or nonstandard requests`,
+          estimated_product_price: `£${estimate} before delivery or unusual requests`,
           _replyto: email,
           _subject: `Maz Works Objects enquiry — ${bundle.name} — £${estimate} estimate`,
           _template: 'table',
@@ -99,15 +99,15 @@ export function TouchEnquiryForm() {
   return (
     <section className="objects-section objects-personalise" id="personalise" aria-labelledby="personalise-title">
       <header className="objects-section-heading">
-        <p className="objects-kicker">Personalise / Enquire</p>
-        <h2 id="personalise-title">Start with the object. Send the links later if needed.</h2>
-        <p>Your choices stay visible as you move through the form. Artwork is requested by email reply—there is no upload step here.</p>
+        <p className="objects-kicker">Get yours</p>
+        <h2 id="personalise-title">Tell me what you want customers to do.</h2>
+        <p>You do not need every link or technical detail ready. Pick the stand, tell me the job, and I can help with the rest.</p>
       </header>
 
       <div className="objects-enquiry-layout">
         <form className="objects-form" onSubmit={submitEnquiry}>
           <fieldset>
-            <legend><span>01</span> Choose the object</legend>
+            <legend><span>01</span> Choose your stand</legend>
             <div className="objects-choice-grid">
               {TOUCH_PRICING.bundles.map((option) => (
                 <label key={option.id} className={bundleId === option.id ? 'is-selected' : ''}>
@@ -119,7 +119,7 @@ export function TouchEnquiryForm() {
           </fieldset>
 
           <fieldset>
-            <legend><span>02</span> What should it help with?</legend>
+            <legend><span>02</span> What should customers be able to do?</legend>
             <div className="objects-use-grid">
               {INTENDED_USES.map((use) => (
                 <label key={use.id} className={intendedUses.includes(use.id) ? 'is-selected' : ''}>
@@ -131,20 +131,20 @@ export function TouchEnquiryForm() {
           </fieldset>
 
           <fieldset>
-            <legend><span>03</span> Add your text</legend>
+            <legend><span>03</span> What should it say?</legend>
             <label className="objects-field">
-              <span>Business-name text</span>
+              <span>Business name or wording</span>
               <input name="businessName" value={businessName} onChange={(event) => setBusinessName(event.target.value)} required placeholder="For example: North Street Coffee" />
             </label>
             <label className="objects-artwork-toggle">
               <input type="checkbox" name="artwork" value="yes" checked={artwork} onChange={(event) => setArtwork(event.target.checked)} />
-              <span><strong>Add my logo or image</strong><small>+£10 · one supplied design reused across the bundle</small></span>
+              <span><strong>Add my logo or artwork</strong><small>+£10 · one supplied design used across the bundle</small></span>
             </label>
           </fieldset>
 
           <div className="objects-continue">
             {!detailsOpen && (
-              <button className="objects-button objects-button-signal" type="button" onClick={continueToDetails}>Continue to contact details</button>
+              <button className="objects-button objects-button-signal" type="button" onClick={continueToDetails}>Add contact details</button>
             )}
             <p role="alert">{selectionError}</p>
           </div>
@@ -157,40 +157,40 @@ export function TouchEnquiryForm() {
                 <label className="objects-field"><span>Email</span><input name="email" type="email" autoComplete="email" required disabled={submitState === 'sending'} /></label>
               </div>
               <label className="objects-field">
-                <span>Destination links <small>optional at enquiry stage</small></span>
-                <textarea name="destinationLinks" rows={3} disabled={submitState === 'sending'} placeholder="Paste any menu, review, booking, social or website links you already have." />
+                <span>Links you already have <small>optional</small></span>
+                <textarea name="destinationLinks" rows={3} disabled={submitState === 'sending'} placeholder="Paste your review, menu, booking, social or website links if you have them." />
               </label>
               <label className="objects-help-toggle">
                 <input type="checkbox" name="helpFindingLinks" value="yes" disabled={submitState === 'sending'} />
-                <span>I need help finding my links</span>
+                <span>I want help finding the right links</span>
               </label>
               <label className="objects-field">
-                <span>Notes <small>optional</small></span>
-                <textarea name="notes" rows={4} disabled={submitState === 'sending'} placeholder="Colours to ask about, quantity, delivery area or anything unusual." />
+                <span>Anything else? <small>optional</small></span>
+                <textarea name="notes" rows={4} disabled={submitState === 'sending'} placeholder="Quantity, delivery area, colours to ask about or anything unusual." />
               </label>
               <label className="objects-honeypot" aria-hidden="true"><span>Website</span><input name="_honey" tabIndex={-1} autoComplete="off" /></label>
               <div className="objects-submit-row">
-                <button className="objects-button objects-button-signal" type="submit" disabled={submitState === 'sending'}>{submitState === 'sending' ? 'Sending enquiry…' : 'Send enquiry'}</button>
-                <p>No payment now. Design and final quote agreed first.</p>
+                <button className="objects-button objects-button-signal" type="submit" disabled={submitState === 'sending'}>{submitState === 'sending' ? 'Sending…' : 'Send my enquiry'}</button>
+                <p>No payment now. You see the design and final price first.</p>
               </div>
               <p className="objects-form-status" role="status" aria-live="polite">
-                {submitState === 'sent' && 'Enquiry sent. I’ll reply by email to confirm the design questions, delivery and final quote.'}
+                {submitState === 'sent' && 'Sent. I’ll reply by email with any questions, the design direction and the next step.'}
                 {submitState === 'error' && <>That did not send. Your entries are still here—try again or email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</>}
               </p>
             </fieldset>
           )}
         </form>
 
-        <aside className="objects-selection-summary" aria-label="Current product estimate">
-          <p>Your selection</p>
+        <aside className="objects-selection-summary" aria-label="Current price estimate">
+          <p>Your choice</p>
           <h3>{bundle.name}</h3>
           <dl>
-            <div><dt>Base bundle</dt><dd>£{bundle.basePrice}</dd></div>
+            <div><dt>Stand</dt><dd>£{bundle.basePrice}</dd></div>
             <div><dt>Artwork</dt><dd>{artwork ? `+£${TOUCH_PRICING.artworkAddOnPrice}` : 'Not added'}</dd></div>
-            <div className="objects-estimate"><dt>Product estimate</dt><dd>£{estimate}</dd></div>
+            <div className="objects-estimate"><dt>Estimated product price</dt><dd>£{estimate}</dd></div>
           </dl>
-          <p>{businessName.trim() || 'Business-name text not added yet'}</p>
-          <small>Delivery and nonstandard requests are confirmed separately.</small>
+          <p>{businessName.trim() || 'Add the business name or wording above'}</p>
+          <small>Delivery and unusual requests are confirmed before you approve the order.</small>
         </aside>
       </div>
     </section>
