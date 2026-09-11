@@ -2,17 +2,20 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-const [gate, edge, schema, vercel] = await Promise.all([
+const [gate, edge, schema, vercel, registry, dessertLane] = await Promise.all([
   readFile(new URL('../api/demo-gate.js', import.meta.url), 'utf8'),
   readFile(new URL('../supabase/functions/client-demo-access/index.ts', import.meta.url), 'utf8'),
   readFile(new URL('../supabase/client-demo-schema.sql', import.meta.url), 'utf8'),
   readFile(new URL('../vercel.json', import.meta.url), 'utf8'),
+  readFile(new URL('../api/demo-content/index.js', import.meta.url), 'utf8'),
+  readFile(new URL('../api/demo-content/dessert-lane.js', import.meta.url), 'utf8'),
 ]);
 
 test('client demo routes are isolated behind the server gate', () => {
   assert.match(vercel, /"source": "\/demos\/:slug"/);
   assert.match(vercel, /"destination": "\/api\/demo-gate\?slug=:slug"/);
   assert.match(vercel, /"source": "\/demos\/:slug\/:path\*"/);
+  assert.doesNotMatch(dessertLane, /public\/demos/i);
 });
 
 test('demo cookie is opaque, secure, HttpOnly and scoped to the client slug', () => {
@@ -23,10 +26,22 @@ test('demo cookie is opaque, secure, HttpOnly and scoped to the client slug', ()
   assert.doesNotMatch(gate, /NEXT_PUBLIC_.*SERVICE/i);
 });
 
-test('validated demos fail closed until protected content is installed', () => {
-  assert.match(gate, /Protected client assets are deliberately served by this function/);
-  assert.match(gate, /Private demo content bundle is not installed on this deployment yet/);
+test('protected content is served only after session validation', () => {
+  const validateAt = gate.indexOf("action: 'validate'");
+  const serveAt = gate.indexOf('serveProtectedContent(req, res, slug)');
+  assert.ok(validateAt >= 0 && serveAt > validateAt);
+  assert.match(gate, /getDemoContent\(slug, req\.query\?\.path\)/);
+  assert.match(gate, /if \(!token\) return sendHtml\(res, gateHtml\(slug\)/);
   assert.doesNotMatch(gate, /public\/demos/i);
+});
+
+test('registry makes each client bundle explicit and slug-addressable', () => {
+  assert.match(registry, /new Map\(\[\[dessertLane\.slug, dessertLane\]\]\)/);
+  assert.match(registry, /getDemoContent/);
+  assert.match(dessertLane, /slug: 'dessert-lane'/);
+  assert.match(dessertLane, /relationshipStatus: 'potential'/);
+  assert.match(dessertLane, /\/demos\/dessert-lane\/kit/);
+  assert.match(dessertLane, /assets\/review-tap\.svg/);
 });
 
 test('database credential and session tables are default-deny to browser roles', () => {
@@ -34,6 +49,7 @@ test('database credential and session tables are default-deny to browser roles',
   assert.match(schema, /revoke all on table public\.client_demos from public, anon, authenticated/i);
   assert.match(schema, /revoke all on table public\.client_demo_sessions from public, anon, authenticated/i);
   assert.match(schema, /grant select, insert, update, delete on table public\.client_demos to service_role/i);
+  assert.match(schema, /relationship_status text not null default 'potential'/i);
   assert.doesNotMatch(schema, /insert into public\.client_demos/i);
   assert.doesNotMatch(schema, /crypt\(['"]password['"]/i);
 });
