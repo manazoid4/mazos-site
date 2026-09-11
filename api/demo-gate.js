@@ -39,6 +39,12 @@ function gateHtml(slug, error = '') {
   return `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Private client demo — Maz Works</title><style>*{box-sizing:border-box}body{margin:0;min-height:100svh;background:#f4f3ed;color:#111;font-family:Arial,Helvetica,sans-serif;display:grid;place-items:center;padding:24px}.gate{width:min(100%,540px);border-top:4px solid #111;padding:28px 0}.mark{font-weight:950;letter-spacing:-.05em;font-size:30px}.eyebrow{margin-top:56px;font:700 11px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:#686868}h1{font-size:clamp(44px,9vw,76px);line-height:.9;letter-spacing:-.07em;margin:15px 0 22px}.copy{max-width:420px;color:#555;line-height:1.6}form{margin-top:38px;display:grid;gap:12px}label{font-size:12px;font-weight:800}input{min-height:56px;border:2px solid #111;background:#fff;padding:0 15px;font:inherit;border-radius:0}button{min-height:56px;border:2px solid #111;background:#111;color:#fff;font-weight:850;padding:0 18px;cursor:pointer}button:hover{background:#d8ff36;color:#111}.error{margin:8px 0 0;color:#9d1c1c;font-weight:700;font-size:13px}.small{font-size:11px;color:#777;margin-top:22px}</style></head><body><main class="gate"><div class="mark">MAZ WORKS</div><p class="eyebrow">Private client demo</p><h1>Built for the<br>conversation.</h1><p class="copy">Enter the unique passcode Maz Works sent you to open this private concept.</p>${errorHtml}<form method="post" action="/demos/${safeSlug}"><label for="passcode">Demo passcode</label><input id="passcode" name="passcode" type="password" autocomplete="current-password" required maxlength="72"><button type="submit">Open private demo →</button></form><p class="small">Client-specific access · Noindex · Revocable sessions</p></main></body></html>`;
 }
 
+function injectDemoExit(html, slug) {
+  const safeSlug = escapeHtml(slug);
+  const form = `<form method="post" action="/demos/${safeSlug}" aria-label="Exit private demo" style="position:fixed;right:14px;top:14px;z-index:2147483647;margin:0"><input type="hidden" name="action" value="logout"><button type="submit" style="min-height:36px;border:1px solid #111;background:#fff;color:#111;padding:7px 11px;font:700 11px/1.1 Arial,sans-serif;cursor:pointer;box-shadow:2px 2px 0 #111">Exit demo</button></form>`;
+  return html.includes('</body>') ? html.replace('</body>', `${form}</body>`) : `${html}${form}`;
+}
+
 function setSecurityHeaders(res, cacheControl = 'private, no-store, max-age=0') {
   res.setHeader('cache-control', cacheControl);
   res.setHeader('x-robots-tag', 'noindex, nofollow');
@@ -109,6 +115,22 @@ export default async function handler(req, res) {
       const raw = await readRawBody(req);
       if (raw === null || Buffer.byteLength(raw) > MAX_BODY_BYTES) return sendHtml(res, gateHtml(slug, 'Access denied.'), 400);
       const params = new URLSearchParams(raw);
+      const action = params.get('action') || 'login';
+
+      if (action === 'logout') {
+        const token = parseCookies(req.headers.cookie || '')[cookieName(slug)] || '';
+        if (token) {
+          const logoutResult = await accessRequest({ action: 'logout', slug, token });
+          if (!logoutResult.data?.ok) return sendHtml(res, gateHtml(slug, 'Could not end this demo session. Try again.'), 503);
+        }
+        clearSessionCookie(res, slug);
+        res.statusCode = 303;
+        res.setHeader('location', `/demos/${slug}`);
+        res.setHeader('cache-control', 'no-store');
+        return res.end();
+      }
+
+      if (action !== 'login') return sendHtml(res, gateHtml(slug, 'Invalid request.'), 400);
       const passcode = params.get('passcode') || '';
       const result = await accessRequest({ action: 'login', slug, passcode });
       if (!result.data?.ok || typeof result.data.token !== 'string') return sendHtml(res, gateHtml(slug, 'That passcode was not accepted.'), result.status === 401 ? 401 : 503);
@@ -145,7 +167,9 @@ export default async function handler(req, res) {
     res.statusCode = 200;
     res.setHeader('content-type', result.data.contentType || 'text/plain; charset=utf-8');
     setSecurityHeaders(res);
-    return req.method === 'HEAD' ? res.end() : res.end(result.data.body);
+    if (req.method === 'HEAD') return res.end();
+    const body = String(result.data.body ?? '');
+    return res.end((result.data.contentType || '').startsWith('text/html') ? injectDemoExit(body, slug) : body);
   } catch (error) {
     console.error('demo-gate failed', error instanceof Error ? error.message : 'unknown error');
     return sendHtml(res, gateHtml(slug, 'The private demo service is temporarily unavailable.'), 503, req.method === 'HEAD');
