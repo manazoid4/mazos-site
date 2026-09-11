@@ -1,6 +1,5 @@
--- Reference bootstrap SQL for the Maz Works client-demo platform.
--- Apply through the connected Supabase project only after the target project is identified.
--- Once verified, generate the canonical migration using the Supabase CLI workflow.
+-- Reference schema for the Maz Works client-demo platform.
+-- Client passcodes are operational secrets: seed them in Supabase, never in Git.
 
 create extension if not exists pgcrypto with schema extensions;
 
@@ -42,37 +41,10 @@ create index if not exists client_demo_sessions_expiry_idx
 alter table public.client_demos enable row level security;
 alter table public.client_demo_sessions enable row level security;
 
--- These tables contain password hashes and live-session material. They are not
--- browser-facing Data API tables. Public/user roles get no direct privileges and
--- therefore need no permissive RLS policies.
-revoke all on table public.client_demos from anon, authenticated;
-revoke all on table public.client_demo_sessions from anon, authenticated;
+-- Default-deny browser access. These credential/session tables are accessed only
+-- by the server-side Edge Function using the service role.
+revoke all on table public.client_demos from public, anon, authenticated;
+revoke all on table public.client_demo_sessions from public, anon, authenticated;
 
 grant select, insert, update, delete on table public.client_demos to service_role;
 grant select, insert, update, delete on table public.client_demo_sessions to service_role;
-
--- First client seed. `password` is intentionally demo-only and must never be
--- presented as a production-strength credential.
-insert into public.client_demos (
-  slug,
-  business_name,
-  passcode_hash,
-  active,
-  expires_at,
-  session_ttl_minutes
-)
-values (
-  'dessert-lane',
-  'Dessert Lane',
-  extensions.crypt('password', extensions.gen_salt('bf', 12)),
-  true,
-  null,
-  720
-)
-on conflict (slug) do update set
-  business_name = excluded.business_name,
-  passcode_hash = excluded.passcode_hash,
-  active = excluded.active,
-  expires_at = excluded.expires_at,
-  session_ttl_minutes = excluded.session_ttl_minutes,
-  updated_at = now();
