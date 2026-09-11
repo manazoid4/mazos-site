@@ -81,12 +81,9 @@ export default async function handler(req, res) {
   const slug = cleanSlug(req.query?.slug);
   if (!slug) return sendHtml(res, gateHtml('invalid', 'This demo link is not valid.'), 404);
 
-  if (!ACCESS_URL) {
-    return sendHtml(res, gateHtml(slug, 'This private demo is not available yet.'), 503);
-  }
-
   try {
     if (req.method === 'POST') {
+      if (!ACCESS_URL) return sendHtml(res, gateHtml(slug, 'This private demo is not available yet.'), 503);
       const raw = await readRawBody(req);
       if (raw === null || Buffer.byteLength(raw) > MAX_BODY_BYTES) return sendHtml(res, gateHtml(slug, 'Access denied.'), 400);
       const params = new URLSearchParams(raw);
@@ -111,6 +108,10 @@ export default async function handler(req, res) {
     const cookies = parseCookies(req.headers.cookie || '');
     const token = cookies[cookieName(slug)] || '';
     if (!token) return sendHtml(res, gateHtml(slug));
+    if (!ACCESS_URL) {
+      clearSessionCookie(res, slug);
+      return sendHtml(res, gateHtml(slug, 'Your demo session is not available on this deployment.'), 503);
+    }
 
     const result = await accessRequest({ action: 'validate', slug, token });
     if (!result.data?.ok) {
