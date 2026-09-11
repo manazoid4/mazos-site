@@ -17,22 +17,9 @@ function json(body: unknown, status = 200) {
   });
 }
 
-function getSecretKey() {
-  const modern = Deno.env.get('SUPABASE_SECRET_KEYS');
-  if (modern) {
-    try {
-      const keys = JSON.parse(modern) as Record<string, string>;
-      if (keys.default) return keys.default;
-    } catch {
-      // Fall through to the legacy compatibility key while it remains supported.
-    }
-  }
-  return Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
-}
-
 function getAdminClient() {
   const url = Deno.env.get('SUPABASE_URL') ?? '';
-  const key = getSecretKey();
+  const key = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
   if (!url || !key) throw new Error('Supabase server credentials are unavailable');
   return createClient(url, key, {
     auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
@@ -90,7 +77,7 @@ async function login(admin: ReturnType<typeof getAdminClient>, body: Record<stri
 
   if (error) throw error;
 
-  // Keep unknown, inactive, expired and wrong-passcode responses intentionally identical.
+  // Unknown, inactive, expired and wrong-passcode attempts are intentionally indistinguishable.
   if (!demo || !demoIsAvailable(demo)) {
     await new Promise((resolve) => setTimeout(resolve, 250));
     return json({ ok: false, error: 'Access denied' }, 401);
@@ -171,16 +158,15 @@ async function logout(admin: ReturnType<typeof getAdminClient>, body: Record<str
   if (session) {
     const { data: demo } = await admin.from('client_demos').select('slug').eq('id', session.client_demo_id).maybeSingle();
     if (demo?.slug === slug) {
-      await admin
-        .from('client_demo_sessions')
-        .update({ revoked_at: new Date().toISOString() })
-        .eq('id', session.id);
+      await admin.from('client_demo_sessions').update({ revoked_at: new Date().toISOString() }).eq('id', session.id);
     }
   }
 
   return json({ ok: true });
 }
 
+// This function intentionally accepts unauthenticated HTTP requests. It performs
+// its own passcode + opaque-session authentication and never exposes the service key.
 Deno.serve(async (req: Request) => {
   if (req.method !== 'POST') return json({ ok: false, error: 'Method not allowed' }, 405);
 
