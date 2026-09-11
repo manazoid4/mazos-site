@@ -1,6 +1,7 @@
 import crypto from 'node:crypto';
 
-const ACCESS_URL = process.env.SUPABASE_DEMO_ACCESS_URL || '';
+const DEFAULT_ACCESS_URL = 'https://hkzlsyxcpxcambakdaws.supabase.co/functions/v1/client-demo-access';
+const ACCESS_URL = process.env.SUPABASE_DEMO_ACCESS_URL || DEFAULT_ACCESS_URL;
 const MAX_BODY_BYTES = 4096;
 const COOKIE_PREFIX = 'mw_demo_';
 
@@ -55,7 +56,6 @@ async function readRawBody(req) {
 }
 
 async function accessRequest(payload) {
-  if (!ACCESS_URL) throw new Error('Client-demo access service is not configured');
   const response = await fetch(ACCESS_URL, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
@@ -83,7 +83,6 @@ export default async function handler(req, res) {
 
   try {
     if (req.method === 'POST') {
-      if (!ACCESS_URL) return sendHtml(res, gateHtml(slug, 'This private demo is not available yet.'), 503);
       const raw = await readRawBody(req);
       if (raw === null || Buffer.byteLength(raw) > MAX_BODY_BYTES) return sendHtml(res, gateHtml(slug, 'Access denied.'), 400);
       const params = new URLSearchParams(raw);
@@ -108,10 +107,6 @@ export default async function handler(req, res) {
     const cookies = parseCookies(req.headers.cookie || '');
     const token = cookies[cookieName(slug)] || '';
     if (!token) return sendHtml(res, gateHtml(slug));
-    if (!ACCESS_URL) {
-      clearSessionCookie(res, slug);
-      return sendHtml(res, gateHtml(slug, 'Your demo session is not available on this deployment.'), 503);
-    }
 
     const result = await accessRequest({ action: 'validate', slug, token });
     if (!result.data?.ok) {
