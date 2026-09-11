@@ -20,9 +20,9 @@ export function TouchCollection() {
   return (
     <section className="objects-section objects-collection" id="collection" aria-labelledby="collection-title">
       <header className="objects-section-heading">
-        <p className="objects-kicker">The Touch collection / Three bundles</p>
-        <h2 id="collection-title">Choose the amount of connection you need.</h2>
-        <p>Each bundle is a physical object with link setup included. Prices cover the standard black-and-white designs shown.</p>
+        <p className="objects-kicker">Three simple choices</p>
+        <h2 id="collection-title">Choose how many customer actions you want.</h2>
+        <p>Every option arrives set up for the links we agree. You approve the wording and final price before anything is made.</p>
       </header>
 
       <div className="objects-bundle-list">
@@ -36,12 +36,12 @@ export function TouchCollection() {
             <div className="objects-bundle-copy">
               <div className="objects-bundle-title">
                 <div><p>Touch / {index + 1}</p><h3 id={`${bundle.id}-title`}>{bundle.name}</h3></div>
-                <div className="objects-bundle-price"><strong>£{bundle.basePrice}</strong><small>With artwork £{bundle.basePrice + TOUCH_PRICING.artworkAddOnPrice}</small></div>
+                <div className="objects-bundle-price"><strong>£{bundle.basePrice}</strong><small>With your artwork £{bundle.basePrice + TOUCH_PRICING.artworkAddOnPrice}</small></div>
               </div>
               <p className="objects-bundle-short">{bundle.short}</p>
               <ul>{bundle.contents.map((item) => <li key={item}>{item}</li>)}</ul>
               <button className="objects-button objects-button-dark" type="button" onClick={() => personalise(bundle.id)} aria-pressed={bundleId === bundle.id}>
-                Personalise {bundle.name}
+                Choose {bundle.name}
               </button>
             </div>
           </article>
@@ -49,10 +49,10 @@ export function TouchCollection() {
       </div>
 
       <aside className="objects-artwork-note">
-        <span>Optional add-on</span>
-        <div><h3>Your logo or image — +£10 per bundle.</h3><p>One supplied artwork design reused across the bundle, basic placement and one proof revision. Artwork must suit the production method; complex redrawing, extra designs and detailed imagery are quoted separately. This is not full-colour photographic printing.</p></div>
+        <span>Optional +£10</span>
+        <div><h3>Add your logo or supplied artwork.</h3><p>Send one design you want used across the bundle. Basic placement and one proof revision are included. If the artwork needs redrawing or something more involved, I will tell you before quoting it.</p></div>
       </aside>
-      <p className="objects-price-note">Prices cover standard designs. Delivery and nonstandard requests are confirmed separately.</p>
+      <p className="objects-price-note">Delivery and unusual requests are confirmed before you approve the order.</p>
     </section>
   );
 }
