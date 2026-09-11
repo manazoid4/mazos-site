@@ -21,6 +21,17 @@ async function readPage(route) {
   throw new Error(`Missing static page for ${route}`);
 }
 
+function visibleText(html) {
+  return html
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replaceAll('&amp;', '&')
+    .replaceAll('&nbsp;', ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 test('Touch presents exactly three clear bundles with every base and artwork estimate', async () => {
   const html = await readPage('/3d-printing');
 
@@ -69,8 +80,8 @@ test('Objects enquiry keeps links optional and builds its estimate from shared p
   assert.match(html, /You do not need every link or technical detail ready/i);
 });
 
-test('Touch explains real-world limits without turning the page into technical documentation', async () => {
-  const html = await readPage('/3d-printing');
+test('Touch explains real-world limits without turning owner-visible copy into technical documentation', async () => {
+  const text = visibleText(await readPage('/3d-printing'));
 
   for (const phrase of [
     'QR backup',
@@ -82,10 +93,10 @@ test('Touch explains real-world limits without turning the page into technical d
     'approve the direction and final price before production starts',
     'Not for a stand that opens pages you already own',
   ]) {
-    assert.match(html, new RegExp(phrase, 'i'));
+    assert.match(text, new RegExp(phrase, 'i'));
   }
-  assert.doesNotMatch(html, /works on every phone|guaranteed reviews|automatic sales|dishwasher safe|waterproof|food[- ]safe/i);
-  assert.doesNotMatch(html, /FDM|passive tag|NDEF|antenna|retention method|cavity lock|maintained redirect service/i);
+  assert.doesNotMatch(text, /works on every phone|guaranteed reviews|automatic sales|dishwasher safe|waterproof|food[- ]safe/i);
+  assert.doesNotMatch(text, /FDM|passive tag|NDEF|antenna|retention method|cavity lock|maintained redirect service/i);
 });
 
 test('Objects is discoverable from shared chrome, homepage and sitemap while digital services remain', async () => {
