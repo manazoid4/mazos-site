@@ -14,7 +14,7 @@ create table if not exists public.client_demos (
   session_ttl_minutes integer not null default 720,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
-  constraint client_demos_slug_format check (slug ~ '^[a-z0-9]+(?:-[a-z0-9]+)*$'),
+  constraint client_demos_slug_format check (slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'),
   constraint client_demos_slug_length check (char_length(slug) between 1 and 80),
   constraint client_demos_business_name_length check (char_length(business_name) between 1 and 160),
   constraint client_demos_passcode_hash_not_plain check (passcode_hash like '$2%'),
