@@ -2,12 +2,13 @@ import assert from 'node:assert/strict';
 import { readFile, stat } from 'node:fs/promises';
 import test from 'node:test';
 
-const [gate, edge, schema, contentMigration, lifecycleMigration, vercel] = await Promise.all([
+const [gate, edge, schema, contentMigration, lifecycleMigration, rotationMigration, vercel] = await Promise.all([
   readFile(new URL('../api/demo-gate.js', import.meta.url), 'utf8'),
   readFile(new URL('../supabase/functions/client-demo-access/index.ts', import.meta.url), 'utf8'),
   readFile(new URL('../supabase/client-demo-schema.sql', import.meta.url), 'utf8'),
   readFile(new URL('../supabase/migrations/20260911213954_create_client_demo_content.sql', import.meta.url), 'utf8'),
   readFile(new URL('../supabase/migrations/20260911213929_add_client_demo_lifecycle_labels.sql', import.meta.url), 'utf8'),
+  readFile(new URL('../supabase/migrations/20260911215243_revoke_sessions_on_passcode_change.sql', import.meta.url), 'utf8'),
   readFile(new URL('../vercel.json', import.meta.url), 'utf8'),
 ]);
 
@@ -52,6 +53,14 @@ test('protected content is requested only with an opaque session token', () => {
   assert.match(edge, /\.eq\('path', path\)/);
 });
 
+test('authenticated HTML always exposes a server-side logout control', () => {
+  assert.match(gate, /name="action" value="logout"/);
+  assert.match(gate, /action === 'logout'/);
+  assert.match(gate, /accessRequest\(\{ action: 'logout', slug, token \}\)/);
+  assert.match(gate, /clearSessionCookie\(res, slug\)/);
+  assert.match(gate, /injectDemoExit\(body, slug\)/);
+});
+
 test('database credential, session and protected-content tables are default-deny to browser roles', () => {
   assert.match(schema, /enable row level security/i);
   assert.match(schema, /revoke all on table public\.client_demos from public, anon, authenticated/i);
@@ -70,6 +79,13 @@ test('lifecycle labels support reusable prospect and client management', () => {
   assert.match(lifecycleMigration, /internal_label text/i);
 });
 
+test('rotating a demo passcode revokes every live session for that client', () => {
+  assert.match(rotationMigration, /after update of passcode_hash on public\.client_demos/i);
+  assert.match(rotationMigration, /update public\.client_demo_sessions/i);
+  assert.match(rotationMigration, /where client_demo_id = new\.id/i);
+  assert.match(rotationMigration, /revoked_at is null/i);
+});
+
 test('edge service stores only token hashes and binds validation to slug, expiry and revocation', () => {
   assert.match(edge, /crypto\.subtle\.digest\('SHA-256'/);
   assert.match(edge, /token_hash: tokenHash/);
@@ -78,6 +94,15 @@ test('edge service stores only token hashes and binds validation to slug, expiry
   assert.match(edge, /demo\.slug !== slug/);
   assert.match(edge, /SUPABASE_SERVICE_ROLE_KEY/);
   assert.doesNotMatch(edge, /NEXT_PUBLIC_/);
+});
+
+test('logout propagates database lookup and revocation failures instead of reporting false success', () => {
+  assert.match(edge, /sessionError/);
+  assert.match(edge, /if \(sessionError\) throw sessionError/);
+  assert.match(edge, /demoError/);
+  assert.match(edge, /if \(demoError\) throw demoError/);
+  assert.match(edge, /updateError/);
+  assert.match(edge, /if \(updateError\) throw updateError/);
 });
 
 test('unknown, inactive and incorrect credentials share the same public denial', () => {
