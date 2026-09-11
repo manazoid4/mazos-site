@@ -28,7 +28,7 @@ test('demo cookie is opaque, secure, HttpOnly and scoped to the client slug', ()
 
 test('protected content is served only after session validation', () => {
   const validateAt = gate.indexOf("action: 'validate'");
-  const serveAt = gate.indexOf('serveProtectedContent(req, res, slug)');
+  const serveAt = gate.lastIndexOf('serveProtectedContent(req, res, slug)');
   assert.ok(validateAt >= 0 && serveAt > validateAt);
   assert.match(gate, /getDemoContent\(slug, req\.query\?\.path\)/);
   assert.match(gate, /if \(!token\) return sendHtml\(res, gateHtml\(slug\)/);
@@ -38,9 +38,10 @@ test('protected content is served only after session validation', () => {
 test('registry makes each client bundle explicit and slug-addressable', () => {
   assert.match(registry, /new Map\(\[\[dessertLane\.slug, dessertLane\]\]\)/);
   assert.match(registry, /getDemoContent/);
+  assert.match(dessertLane, /const BASE = '\/demos\/dessert-lane'/);
   assert.match(dessertLane, /slug: 'dessert-lane'/);
   assert.match(dessertLane, /relationshipStatus: 'potential'/);
-  assert.match(dessertLane, /\/demos\/dessert-lane\/kit/);
+  assert.match(dessertLane, /\$\{BASE\}\/kit/);
   assert.match(dessertLane, /assets\/review-tap\.svg/);
 });
 
