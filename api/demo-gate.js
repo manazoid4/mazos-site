@@ -1,14 +1,21 @@
 import crypto from 'node:crypto';
-import { getDemoContent, getDemoDefinition } from './demo-content/index.js';
 
 const DEFAULT_ACCESS_URL = 'https://hkzlsyxcpxcambakdaws.supabase.co/functions/v1/client-demo-access';
 const ACCESS_URL = process.env.SUPABASE_DEMO_ACCESS_URL || DEFAULT_ACCESS_URL;
 const MAX_BODY_BYTES = 4096;
 const COOKIE_PREFIX = 'mw_demo_';
+const REMOTE_IMAGE_HOSTS = new Set(['tb-static.uber.com']);
 
 function cleanSlug(value) {
   const slug = Array.isArray(value) ? value[0] : value;
   return typeof slug === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) && slug.length <= 80 ? slug : null;
+}
+
+function cleanPath(value) {
+  const raw = Array.isArray(value) ? value[0] : value;
+  if (typeof raw !== 'string' || raw === '') return '';
+  const path = raw.replace(/^\/+|\/+$/g, '');
+  return /^[a-z0-9][a-z0-9/_-]*$/.test(path) && path.length <= 160 ? path : null;
 }
 
 function cookieName(slug) {
@@ -28,10 +35,8 @@ function escapeHtml(value) {
 
 function gateHtml(slug, error = '') {
   const safeSlug = escapeHtml(slug);
-  const demo = getDemoDefinition(slug);
-  const businessName = demo?.businessName ? escapeHtml(demo.businessName) : 'your business';
   const errorHtml = error ? `<p class="error" role="alert">${escapeHtml(error)}</p>` : '';
-  return `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>${businessName} — private Maz Works demo</title><style>*{box-sizing:border-box}body{margin:0;min-height:100svh;background:#f5f5ef;color:#111;font-family:Arial,Helvetica,sans-serif;display:grid;place-items:center;padding:24px}.gate{width:min(100%,520px);border-top:4px solid #111;padding:28px 0}.mark{font-weight:900;letter-spacing:-.04em;font-size:28px}.eyebrow{margin-top:54px;font:700 11px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:#666}h1{font-size:clamp(42px,9vw,72px);line-height:.92;letter-spacing:-.065em;margin:15px 0 20px}.copy{max-width:410px;color:#565656;line-height:1.55}form{margin-top:36px;display:grid;gap:12px}label{font-size:12px;font-weight:800}input{min-height:54px;border:2px solid #111;background:#fff;padding:0 15px;font:inherit;border-radius:0}button{min-height:54px;border:2px solid #111;background:#111;color:#fff;font-weight:800;padding:0 18px;cursor:pointer}button:hover{background:#cbff00;color:#111}.error{margin:8px 0 0;color:#9d1c1c;font-weight:700;font-size:13px}.small{font-size:11px;color:#777;margin-top:22px}</style></head><body><main class="gate"><div class="mark">MAZ WORKS</div><p class="eyebrow">Private client demo · ${businessName}</p><h1>Built for the<br>conversation.</h1><p class="copy">Enter the unique passcode Maz Works sent you to open this private concept and proposal.</p>${errorHtml}<form method="post" action="/demos/${safeSlug}"><label for="passcode">Demo passcode</label><input id="passcode" name="passcode" type="password" autocomplete="current-password" required maxlength="72"><button type="submit">Open private demo →</button></form><p class="small">Private concept · Noindex · Client-specific access · Access can be revoked</p></main></body></html>`;
+  return `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Private client demo — Maz Works</title><style>*{box-sizing:border-box}body{margin:0;min-height:100svh;background:#f4f3ed;color:#111;font-family:Arial,Helvetica,sans-serif;display:grid;place-items:center;padding:24px}.gate{width:min(100%,540px);border-top:4px solid #111;padding:28px 0}.mark{font-weight:950;letter-spacing:-.05em;font-size:30px}.eyebrow{margin-top:56px;font:700 11px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:#686868}h1{font-size:clamp(44px,9vw,76px);line-height:.9;letter-spacing:-.07em;margin:15px 0 22px}.copy{max-width:420px;color:#555;line-height:1.6}form{margin-top:38px;display:grid;gap:12px}label{font-size:12px;font-weight:800}input{min-height:56px;border:2px solid #111;background:#fff;padding:0 15px;font:inherit;border-radius:0}button{min-height:56px;border:2px solid #111;background:#111;color:#fff;font-weight:850;padding:0 18px;cursor:pointer}button:hover{background:#d8ff36;color:#111}.error{margin:8px 0 0;color:#9d1c1c;font-weight:700;font-size:13px}.small{font-size:11px;color:#777;margin-top:22px}</style></head><body><main class="gate"><div class="mark">MAZ WORKS</div><p class="eyebrow">Private client demo</p><h1>Built for the<br>conversation.</h1><p class="copy">Enter the unique passcode Maz Works sent you to open this private concept.</p>${errorHtml}<form method="post" action="/demos/${safeSlug}"><label for="passcode">Demo passcode</label><input id="passcode" name="passcode" type="password" autocomplete="current-password" required maxlength="72"><button type="submit">Open private demo →</button></form><p class="small">Client-specific access · Noindex · Revocable sessions</p></main></body></html>`;
 }
 
 function setSecurityHeaders(res, cacheControl = 'private, no-store, max-age=0') {
@@ -80,36 +85,24 @@ function clearSessionCookie(res, slug) {
   res.setHeader('set-cookie', `${name}=; Path=/demos/${slug}; Max-Age=0; HttpOnly; Secure; SameSite=Lax`);
 }
 
-async function serveProtectedContent(req, res, slug) {
-  const content = getDemoContent(slug, req.query?.path);
-  if (!content) {
-    res.statusCode = 404;
-    res.setHeader('content-type', 'text/plain; charset=utf-8');
-    setSecurityHeaders(res);
-    return res.end(req.method === 'HEAD' ? undefined : 'Private demo page not found.');
-  }
-
-  if (content.remote) {
-    const upstream = await fetch(content.remote, { redirect: 'error' });
-    if (!upstream.ok) throw new Error(`Protected asset upstream returned ${upstream.status}`);
-    const type = upstream.headers.get('content-type') || content.type || 'application/octet-stream';
-    if (!type.startsWith('image/')) throw new Error('Protected remote asset was not an image');
-    res.statusCode = 200;
-    res.setHeader('content-type', type);
-    setSecurityHeaders(res, 'private, max-age=300');
-    if (req.method === 'HEAD') return res.end();
-    return res.end(Buffer.from(await upstream.arrayBuffer()));
-  }
-
+async function serveRemoteImage(req, res, source) {
+  let url;
+  try { url = new URL(source); } catch { throw new Error('Invalid protected image URL'); }
+  if (url.protocol !== 'https:' || !REMOTE_IMAGE_HOSTS.has(url.hostname)) throw new Error('Protected image host is not allowed');
+  const upstream = await fetch(url, { redirect: 'error' });
+  if (!upstream.ok) throw new Error(`Protected image returned ${upstream.status}`);
+  const type = upstream.headers.get('content-type') || '';
+  if (!type.startsWith('image/')) throw new Error('Protected image response was not an image');
   res.statusCode = 200;
-  res.setHeader('content-type', content.type || 'text/plain; charset=utf-8');
-  setSecurityHeaders(res);
-  return req.method === 'HEAD' ? res.end() : res.end(content.body);
+  res.setHeader('content-type', type);
+  setSecurityHeaders(res, 'private, max-age=300');
+  return req.method === 'HEAD' ? res.end() : res.end(Buffer.from(await upstream.arrayBuffer()));
 }
 
 export default async function handler(req, res) {
   const slug = cleanSlug(req.query?.slug);
-  if (!slug) return sendHtml(res, gateHtml('invalid', 'This demo link is not valid.'), 404, req.method === 'HEAD');
+  const path = cleanPath(req.query?.path);
+  if (!slug || path === null) return sendHtml(res, gateHtml('invalid', 'This demo link is not valid.'), 404, req.method === 'HEAD');
 
   try {
     if (req.method === 'POST') {
@@ -118,9 +111,7 @@ export default async function handler(req, res) {
       const params = new URLSearchParams(raw);
       const passcode = params.get('passcode') || '';
       const result = await accessRequest({ action: 'login', slug, passcode });
-      if (!result.data?.ok || typeof result.data.token !== 'string') {
-        return sendHtml(res, gateHtml(slug, 'That passcode was not accepted.'), result.status === 401 ? 401 : 503);
-      }
+      if (!result.data?.ok || typeof result.data.token !== 'string') return sendHtml(res, gateHtml(slug, 'That passcode was not accepted.'), result.status === 401 ? 401 : 503);
       setSessionCookie(res, slug, result.data.token, result.data.maxAgeSeconds);
       res.statusCode = 303;
       res.setHeader('location', `/demos/${slug}`);
@@ -134,17 +125,27 @@ export default async function handler(req, res) {
       return res.end('Method not allowed');
     }
 
-    const cookies = parseCookies(req.headers.cookie || '');
-    const token = cookies[cookieName(slug)] || '';
+    const token = parseCookies(req.headers.cookie || '')[cookieName(slug)] || '';
     if (!token) return sendHtml(res, gateHtml(slug), 200, req.method === 'HEAD');
 
-    const result = await accessRequest({ action: 'validate', slug, token });
-    if (!result.data?.ok) {
+    const result = await accessRequest({ action: 'content', slug, token, path });
+    if (result.status === 401 || !result.data?.ok && result.status !== 404) {
       clearSessionCookie(res, slug);
       return sendHtml(res, gateHtml(slug, 'Your demo session has expired. Enter the passcode again.'), 401, req.method === 'HEAD');
     }
+    if (result.status === 404 || !result.data?.ok) {
+      res.statusCode = 404;
+      res.setHeader('content-type', 'text/plain; charset=utf-8');
+      setSecurityHeaders(res);
+      return res.end(req.method === 'HEAD' ? undefined : 'Private demo page not found.');
+    }
 
-    return await serveProtectedContent(req, res, slug);
+    if (result.data.contentType === 'application/x-mazworks-remote-image') return await serveRemoteImage(req, res, result.data.body);
+
+    res.statusCode = 200;
+    res.setHeader('content-type', result.data.contentType || 'text/plain; charset=utf-8');
+    setSecurityHeaders(res);
+    return req.method === 'HEAD' ? res.end() : res.end(result.data.body);
   } catch (error) {
     console.error('demo-gate failed', error instanceof Error ? error.message : 'unknown error');
     return sendHtml(res, gateHtml(slug, 'The private demo service is temporarily unavailable.'), 503, req.method === 'HEAD');
