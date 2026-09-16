@@ -247,6 +247,22 @@
   font-weight: 600;
 }
 
+/* Named builds carry more weight in the first viewport than another claim pill. */
+.mw-hero-proof {
+  max-width: 650px;
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.mw-hero-proof a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--signal);
+  text-decoration-thickness: 3px;
+}
+
 /* Keyboard clarity for the new progressive-disclosure architecture. */
 .mw-disclosure > summary:focus-visible,
 .objects-disclosure > summary:focus-visible,

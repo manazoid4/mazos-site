@@ -99,6 +99,16 @@ export default function ObjectsPage() {
           </div>
         </details>
 
+        <section className="objects-section objects-faq" id="faq" aria-labelledby="faq-title">
+          <header className="objects-section-heading objects-heading-row">
+            <div><p className="objects-kicker">Questions</p><h2 id="faq-title">Open only what you need.</h2></div>
+            <p>If something affects price, appearance or how customers use it, I confirm it before you approve the order.</p>
+          </header>
+          <div className="objects-faq-list">
+            {FAQS.map(([question, answer], index) => <details key={question}><summary><span>{String(index + 1).padStart(2, '0')}</span>{question}</summary><p>{answer}</p></details>)}
+          </div>
+        </section>
+
         <TouchEnquiryForm />
 
         <section className="objects-section objects-usecases" id="business-gifts" aria-labelledby="usecases-title">
@@ -135,16 +145,6 @@ export default function ObjectsPage() {
                 <a className="objects-text-link" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Objects%20custom%20enquiry`}>Ask about a custom object →</a>
               </div>
             </details>
-          </div>
-        </section>
-
-        <section className="objects-section objects-faq" id="faq" aria-labelledby="faq-title">
-          <header className="objects-section-heading objects-heading-row">
-            <div><p className="objects-kicker">Questions</p><h2 id="faq-title">Open only what you need.</h2></div>
-            <p>If something affects price, appearance or how customers use it, I confirm it before you approve the order.</p>
-          </header>
-          <div className="objects-faq-list">
-            {FAQS.map(([question, answer], index) => <details key={question}><summary><span>{String(index + 1).padStart(2, '0')}</span>{question}</summary><p>{answer}</p></details>)}
           </div>
         </section>
 
