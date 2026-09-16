@@ -161,6 +161,23 @@ const CLIENT_PROOF_STEPS = [
   ['04', 'Website Rescue Sprint', 'One agreed improvement, delivered with a clear handoff for £150.'],
 ];
 
+function WorkRow({ project, index }: { project: (typeof WORK)[number]; index: number }) {
+  return (
+    <article className="mw-work-row" id={project.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}>
+      <div className="mw-work-index">0{index + 1}</div>
+      <div className="mw-work-main">
+        <p className="relationship">{project.type}</p>
+        <h3>{project.name}</h3>
+        <p className="mw-work-summary">{project.summary}</p>
+        <p className="mw-work-role">{project.role}</p>
+      </div>
+      <nav className="mw-work-links" aria-label={`${project.name} links`}>
+        {project.links.map((link) => <a href={link.href} key={link.href}>{link.label} <span aria-hidden="true">→</span></a>)}
+      </nav>
+    </article>
+  );
+}
+
 export default function Page() {
   return (
     <main>
@@ -170,205 +187,120 @@ export default function Page() {
         <div className="mw-hero-copy">
           <p className="eyebrow">Maz Works / Manazir Hussain</p>
           <h1 id="intro-title">Websites, automation and AI tools built around real business problems.</h1>
-          <p className="mw-lede">
-            I help small businesses turn awkward manual processes and ideas into simple working systems — from design and development to automation, AI integrations, marketing implementation and deployment.
-          </p>
+          <p className="mw-lede">I help small businesses turn awkward manual processes and ideas into simple working systems — from design and development to automation, AI integrations, marketing implementation and deployment.</p>
           <div className="mw-actions">
             <a className="button button-signal" href="#contact">Request a free live demo</a>
-            <a className="text-link" href="#work">See my work <span aria-hidden="true">↓</span></a>
+            <a className="text-link" href="#work">See selected work <span aria-hidden="true">↓</span></a>
           </div>
           <p className="mw-hero-note">For suitable projects, I can build a near-working demo first and walk you through it live on Microsoft Teams with screen sharing.</p>
         </div>
         <div className="mw-capabilities" aria-label="Core capabilities">
-          <span>Direct with the builder</span>
-          <span>Live demo first</span>
-          <span>Web development</span>
-          <span>Automation</span>
-          <span>AI with guardrails</span>
-          <span>Deployment</span>
+          <span>Direct with the builder</span><span>Live demo first</span><span>Web development</span><span>Automation</span><span>AI with guardrails</span><span>Deployment</span>
         </div>
+        <nav className="mw-jumpbar" aria-label="Jump to page section">
+          <a href="#services">Services</a><a href="/3d-printing">Objects</a><a href="#work">Work</a><a href="#client">Pricing</a><a href="#contact">Contact</a>
+        </nav>
       </section>
 
-      <section className="mw-section" id="services" aria-labelledby="services-title">
-        <header className="mw-section-heading">
-          <p className="eyebrow">What I can help with</p>
-          <h2 id="services-title">Build the useful thing. Remove the busywork.</h2>
+      <section className="mw-section mw-services-compact" id="services" aria-labelledby="services-title">
+        <header className="mw-section-heading mw-heading-inline">
+          <div><p className="eyebrow">What I can help with</p><h2 id="services-title">Start with the problem.</h2></div>
+          <p>Choose the useful outcome first. The technology comes second.</p>
         </header>
         <div className="mw-service-grid">
           {SERVICES.map((service) => (
             <article className="mw-service-card" key={service.title}>
-              <h3>{service.title}</h3>
-              <p>{service.body}</p>
+              <h3>{service.title}</h3><p>{service.body}</p>
               {'href' in service && service.href && <a className="mw-service-link" href={service.href}>Explore Maz Works Objects <span aria-hidden="true">→</span></a>}
             </article>
           ))}
         </div>
 
-        <div className="mw-outcomes" aria-labelledby="outcomes-title">
-          <div>
-            <p className="eyebrow">Useful starting points</p>
-            <h3 id="outcomes-title">Start with the outcome, not the technology.</h3>
+        <details className="mw-disclosure" id="impact">
+          <summary><span>What this can improve</span><small>Outcomes, measurable targets and examples</small></summary>
+          <div className="mw-disclosure-body">
+            <div className="mw-impact-intro"><h3>Less waiting. Less admin. More useful work.</h3><p>For business owners, team leaders and sales teams, automation is most useful when it changes something you can actually measure.</p></div>
+            <div className="mw-outcome-list">
+              {OUTCOMES.map(([title, body]) => <div key={title}><strong>{title}</strong><span>{body}</span></div>)}
+            </div>
+            <div className="mw-impact-grid">
+              {IMPACT.map((item) => <article key={item.title}><h3>{item.title}</h3><p>{item.body}</p><small>{item.measure}</small></article>)}
+            </div>
           </div>
-          <div className="mw-outcome-list">
-            {OUTCOMES.map(([title, body]) => (
-              <div key={title}><strong>{title}</strong><span>{body}</span></div>
-            ))}
-          </div>
-        </div>
-      </section>
+        </details>
 
-      <section className="mw-objects-showcase" aria-labelledby="objects-showcase-title">
-        <figure>
-          <Image src="/objects/touch-three-hero.webp" alt="Concept visual of the black-and-white Touch Three NFC stand" width={1536} height={1024} sizes="(max-width: 760px) 100vw, 48vw" unoptimized />
-          <figcaption>Concept visual / Touch Three</figcaption>
-        </figure>
-        <div>
-          <p className="eyebrow">Maz Works Objects / New service</p>
-          <h2 id="objects-showcase-title">Small objects. Useful connections.</h2>
-          <p>Meet Touch: custom 3D-printed NFC stands for menus, reviews, bookings and the next useful action.</p>
-          <a className="button button-dark" href="/3d-printing">Explore the Touch collection</a>
-        </div>
-      </section>
-
-      <section className="mw-section mw-impact" id="impact" aria-labelledby="impact-title">
-        <header className="mw-section-heading">
-          <p className="eyebrow">What to improve</p>
-          <h2 id="impact-title">Less waiting. Less admin. More useful work.</h2>
-          <p>For business owners, team leaders and sales teams, automation is most useful when it changes something you can actually measure. I scope work around practical operational targets instead of vague transformation claims.</p>
-        </header>
-        <div className="mw-impact-grid">
-          {IMPACT.map((item) => (
-            <article key={item.title}>
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-              <small>{item.measure}</small>
-            </article>
-          ))}
-        </div>
+        <aside className="mw-objects-strip" aria-labelledby="objects-showcase-title">
+          <Image src="/objects/touch-three-hero.webp" alt="Concept visual of the black-and-white Touch Three NFC stand" width={1536} height={1024} sizes="(max-width: 760px) 32vw, 240px" unoptimized />
+          <div><p className="eyebrow">Maz Works Objects</p><h3 id="objects-showcase-title">Physical products that lead somewhere useful.</h3><p>NFC stands, business gifting and custom objects that can connect to reviews, bookings, referrals, campaigns and workflows.</p></div>
+          <a className="button button-dark" href="/3d-printing">Explore Objects</a>
+        </aside>
       </section>
 
       <section className="mw-section mw-work" id="work" aria-labelledby="work-title">
-        <header className="mw-section-heading">
-          <p className="eyebrow">Selected work</p>
-          <h2 id="work-title">A few things I have built.</h2>
-          <p>Short descriptions first. Deeper technical detail is available only when you want it.</p>
-        </header>
+        <header className="mw-section-heading mw-heading-inline"><div><p className="eyebrow">Selected work</p><h2 id="work-title">Built, not just proposed.</h2></div><p>Two representative builds first. More work is available without forcing it into the main scroll.</p></header>
         <div className="mw-work-list">
-          {WORK.map((project, index) => (
-            <article className="mw-work-row" id={project.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')} key={project.name}>
-              <div className="mw-work-index">0{index + 1}</div>
-              <div className="mw-work-main">
-                <p className="relationship">{project.type}</p>
-                <h3>{project.name}</h3>
-                <p className="mw-work-summary">{project.summary}</p>
-                <p className="mw-work-role">{project.role}</p>
-              </div>
-              <nav className="mw-work-links" aria-label={`${project.name} links`}>
-                {project.links.map((link) => (
-                  <a href={link.href} key={link.href}>{link.label} <span aria-hidden="true">→</span></a>
-                ))}
-              </nav>
-            </article>
-          ))}
+          {WORK.slice(0, 2).map((project, index) => <WorkRow project={project} index={index} key={project.name} />)}
         </div>
+        <details className="mw-disclosure mw-more-work">
+          <summary><span>More work</span><small>Agent Nudge + MAZ Pocket</small></summary>
+          <div className="mw-work-list mw-work-list-secondary">
+            {WORK.slice(2).map((project, index) => <WorkRow project={project} index={index + 2} key={project.name} />)}
+          </div>
+        </details>
       </section>
 
-      <section className="mw-process" id="process" aria-labelledby="process-title">
-        <header>
-          <p className="eyebrow">How it works</p>
-          <h2 id="process-title">From problem to something you can actually see.</h2>
-        </header>
-        <ol>
-          {PROCESS.map(([number, title, body]) => (
-            <li key={number}>
-              <span>{number}</span>
-              <div><h3>{title}</h3><p>{body}</p></div>
-            </li>
-          ))}
-        </ol>
-      </section>
+      <section className="mw-section mw-client-flow" aria-label="Process and pricing">
+        <div className="mw-compact-block" id="process">
+          <header className="mw-section-heading mw-heading-inline"><div><p className="eyebrow">How it works</p><h2>Five steps, no maze.</h2></div><p>From first problem to tested handover, with the direction visible before the full commitment.</p></header>
+          <ol className="mw-process-strip">
+            {PROCESS.map(([number, title, body]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}
+          </ol>
+        </div>
 
-      <section className="mw-section mw-pricing" id="client" aria-labelledby="client-title">
-        <header className="mw-section-heading">
-          <p className="eyebrow">Founding offers</p>
-          <h2 id="client-title">Competitive pricing. See the direction first.</h2>
-          <p>Start with a free live demo for a suitable problem. I can send you the demo or walk through it with you on Microsoft Teams before we agree the paid build.</p>
-        </header>
-        <div className="mw-price-grid">
-          {OFFERS.map((offer) => (
-            <article className="mw-price-option" key={offer.name}>
-              <p>{offer.name}</p>
-              <strong>{offer.price}</strong>
-              <span>{offer.body}</span>
-              <small>{offer.note}</small>
-            </article>
-          ))}
+        <div className="mw-compact-block mw-pricing" id="client">
+          <header className="mw-section-heading mw-heading-inline"><div><p className="eyebrow">Founding offers</p><h2>Clear starting prices.</h2></div><p>Competitive pricing. See the direction first.</p></header>
+          <div className="mw-price-grid">
+            {OFFERS.map((offer) => <article className="mw-price-option" key={offer.name}><p>{offer.name}</p><strong>{offer.price}</strong><span>{offer.body}</span><small>{offer.note}</small></article>)}
+          </div>
+          <div className="mw-pricing-foot">
+            <div><strong>£0 first step</strong><span>For suitable projects, I turn the idea into a near-working demo before the full build.</span></div>
+            <div><strong>Optional support from £49/month</strong><span>No long contract. Third-party usage costs are separate.</span></div>
+            <a className="button button-signal" href="#contact">Request a free live demo</a>
+          </div>
+          <details className="mw-disclosure mw-proof-disclosure">
+            <summary><span>What happens before paid work?</span><small>Four-step client proof sequence</small></summary>
+            <ol className="client-proof-steps">
+              {CLIENT_PROOF_STEPS.map(([number, title, body]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}
+            </ol>
+          </details>
         </div>
-        <div className="mw-pricing-foot">
-          <div><strong>£0 first step</strong><span>Send me the problem. For suitable projects, I will turn the idea into a near-working live demo so you can see the direction before paying for the full build.</span></div>
-          <div><strong>Optional support from £49/month</strong><span>For agreed maintenance or small ongoing improvements. No long contract; third-party usage costs are separate.</span></div>
-          <a className="button button-signal" href="#contact">Request a free live demo</a>
-        </div>
-        <ol className="client-proof-steps" aria-label="Client first-step sequence">
-          {CLIENT_PROOF_STEPS.map(([number, title, body]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}
-        </ol>
       </section>
 
       <section className="mw-section mw-about" id="about" aria-labelledby="about-title">
         <header className="mw-section-heading">
           <p className="eyebrow">About Maz Works</p>
-          <h2 id="about-title">Operations experience behind the build.</h2>
+          <h2 id="about-title">Operations thinking behind the build.</h2>
+          <p>I&apos;m Manazir Hussain. My background is in complaints, investigations and operations: understand the actual failure point, communicate clearly, then build the simplest useful fix.</p>
         </header>
-        <div className="mw-about-copy">
-          <p>I&apos;m Manazir Hussain, founder of Maz Works. My background is in complaints, investigations and operations, where I spent years working through complicated problems and coordinating solutions across teams.</p>
-          <p>Today I apply the same approach to websites, automation and software: understand the real problem first, then build the simplest useful system around it.</p>
+        <div className="mw-about-panels">
+          <details className="mw-disclosure">
+            <summary><span>Professional background</span><small>Why operations experience matters</small></summary>
+            <div className="mw-background-grid">
+              {BACKGROUND.map((item) => <article key={item.company}><p>{item.company}</p><h3>{item.role}</h3><span>{item.body}</span></article>)}
+            </div>
+            <div className="mw-skill-strip"><span>Problem investigation</span><span>Process improvement</span><span>Client communication</span><span>Operational ownership</span><span>Regulated environments</span></div>
+          </details>
+          <details className="mw-disclosure mw-guardrails">
+            <summary><span>Practical AI</span><small>Controls before autonomy</small></summary>
+            <div className="mw-disclosure-copy"><h3>AI where it helps. Human control where it matters.</h3><p>Useful automation does not mean handing every decision to a model. Depending on the workflow, I can use validation, limits, approval steps, suppression rules and manual fallback routes so important actions remain controlled.</p></div>
+          </details>
         </div>
-      </section>
-
-      <section className="mw-section mw-background" aria-labelledby="background-title">
-        <header className="mw-section-heading">
-          <p className="eyebrow">Professional background</p>
-          <h2 id="background-title">Experience finding the failure point.</h2>
-          <p>Before Maz Works, I worked in complaints and escalations. That experience taught me to investigate properly, communicate clearly, coordinate across teams and improve processes rather than treating symptoms.</p>
-        </header>
-        <div className="mw-background-grid">
-          {BACKGROUND.map((item) => (
-            <article key={item.company}>
-              <p>{item.company}</p>
-              <h3>{item.role}</h3>
-              <span>{item.body}</span>
-            </article>
-          ))}
-        </div>
-        <div className="mw-skill-strip" aria-label="Transferable professional strengths">
-          <span>Problem investigation</span>
-          <span>Process improvement</span>
-          <span>Client communication</span>
-          <span>Operational ownership</span>
-          <span>Regulated environments</span>
-        </div>
-      </section>
-
-      <section className="mw-section mw-guardrails" aria-labelledby="guardrails-title">
-        <header className="mw-section-heading">
-          <p className="eyebrow">Practical AI</p>
-          <h2 id="guardrails-title">AI where it helps. Human control where it matters.</h2>
-          <p>Useful automation does not mean handing every decision to a model. Depending on the workflow, I can use validation, limits, approval steps, suppression rules and manual fallback routes so important actions remain controlled.</p>
-        </header>
       </section>
 
       <section className="mw-section mw-faq" aria-labelledby="faq-title">
-        <header className="mw-section-heading">
-          <p className="eyebrow">Questions</p>
-          <h2 id="faq-title">Before you contact me.</h2>
-        </header>
+        <header className="mw-section-heading mw-heading-inline"><div><p className="eyebrow">Questions</p><h2 id="faq-title">Useful answers, when you need them.</h2></div><p>Only open the questions relevant to you.</p></header>
         <div className="mw-faq-list">
-          {FAQS.map(([question, answer]) => (
-            <details key={question}>
-              <summary>{question}</summary>
-              <p>{answer}</p>
-            </details>
-          ))}
+          {FAQS.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}
         </div>
       </section>
 
@@ -376,12 +308,8 @@ export default function Page() {
         <div className="mw-contact-intro">
           <p className="eyebrow">Free live demo</p>
           <h2 id="contact-title">Show me the problem. I&apos;ll show you the direction.</h2>
-          <p className="mw-contact-copy">Send a short description. For suitable projects, I will build a near-working live demo around your use case. I can send the demo link or walk you through it over Microsoft Teams with screen sharing.</p>
-          <div className="mw-demo-points" aria-label="Live demo options">
-            <span>No sales call required first</span>
-            <span>Teams walkthrough available</span>
-            <span>Scope and price agreed before paid work</span>
-          </div>
+          <p className="mw-contact-copy">Send a short description. For suitable projects, I can send a near-working demo link or walk you through it over Microsoft Teams.</p>
+          <div className="mw-demo-points"><span>No sales call required first</span><span>Teams walkthrough available</span><span>Scope and price agreed before paid work</span></div>
           <p className="mw-contact-fallback">Prefer email? <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
         </div>
         <DemoRequestForm />

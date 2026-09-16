@@ -1,0 +1,335 @@
+/* Final friction pass: fewer default choices, shorter legacy pages, calmer density. */
+
+/* The hero only needs the three differentiators; service names already sit below. */
+.mw-capabilities span:nth-child(3),
+.mw-capabilities span:nth-child(4),
+.mw-capabilities span:nth-child(6) {
+  display: none;
+}
+
+/* Desktop already has primary navigation. Keep the local jump bar as a mobile shortcut only. */
+.mw-jumpbar {
+  display: none;
+}
+
+/* Demos still used the older full-bleed process treatment. Bring it into the compact system. */
+.mw-process {
+  margin-inline: 0;
+  padding: clamp(48px, 6.5vw, 76px) 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+}
+
+.mw-process > header {
+  max-width: none;
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(260px, .55fr);
+  align-items: end;
+  gap: clamp(28px, 6vw, 72px);
+}
+
+.mw-process > header h2 {
+  margin-top: 10px;
+  font-size: clamp(2.1rem, 4vw, 3.65rem);
+  line-height: .96;
+}
+
+.mw-process > ol {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  list-style: none;
+}
+
+.mw-process > ol > li {
+  min-height: 160px;
+  padding: 18px;
+  display: block;
+  border-right: 1px solid var(--soft-line);
+  border-bottom: 0;
+  background: transparent;
+  color: var(--ink);
+}
+
+.mw-process > ol > li:first-child {
+  padding-left: 0;
+}
+
+.mw-process > ol > li:last-child {
+  border-right: 0;
+}
+
+.mw-process > ol > li > span {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: .6rem;
+  font-weight: 600;
+}
+
+.mw-process > ol h3 {
+  margin-top: 24px;
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: -.015em;
+}
+
+.mw-process > ol p {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: .75rem;
+}
+
+/* Case studies should read as evidence, not long-form editorial pages. */
+.case-study {
+  max-width: none;
+}
+
+.case-hero {
+  padding: clamp(42px, 6vw, 70px) 0 clamp(44px, 6vw, 72px);
+  border-bottom: 1px solid var(--line);
+}
+
+.case-back {
+  margin-bottom: 22px;
+  font-size: .7rem;
+  font-weight: 600;
+}
+
+.case-hero h1 {
+  max-width: 900px;
+  margin-top: 10px;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: .9;
+  font-weight: 600;
+}
+
+.case-lede {
+  max-width: 780px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: clamp(.98rem, 1.35vw, 1.12rem);
+}
+
+.case-meta {
+  margin-top: 28px;
+  padding-top: 18px;
+  display: grid;
+  grid-template-columns: .85fr 1.15fr;
+  gap: 28px;
+  border-top: 1px solid var(--soft-line);
+}
+
+.case-meta h2 {
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.case-meta p,
+.case-meta li {
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.case-section {
+  padding: clamp(42px, 5.5vw, 66px) 0;
+  display: grid;
+  grid-template-columns: minmax(190px, .42fr) minmax(0, 1.58fr);
+  align-items: start;
+  gap: clamp(28px, 6vw, 76px);
+  border-bottom: 1px solid var(--line);
+}
+
+.case-section > header {
+  margin: 0;
+}
+
+.case-section > header h2 {
+  margin-top: 8px;
+  font-size: clamp(1.75rem, 3.1vw, 2.75rem);
+  line-height: .98;
+}
+
+.case-pair,
+.case-proof {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--soft-line);
+}
+
+.case-pair > div,
+.case-proof > div {
+  min-height: 0;
+  padding: 18px 22px 18px 0;
+  border-right: 1px solid var(--soft-line);
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.case-pair > div:nth-child(even),
+.case-proof > div:nth-child(even) {
+  padding-left: 22px;
+  border-right: 0;
+}
+
+.case-pair h3,
+.case-proof h3 {
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.case-pair p,
+.case-proof p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+.case-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  border-top: 1px solid var(--soft-line);
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.case-steps li {
+  min-height: 155px;
+  padding: 18px;
+  border-right: 1px solid var(--soft-line);
+}
+
+.case-steps li:first-child {
+  padding-left: 0;
+}
+
+.case-steps li:last-child {
+  border-right: 0;
+}
+
+.case-steps span {
+  font-size: .6rem;
+  font-weight: 600;
+}
+
+.case-steps strong {
+  margin-top: 22px;
+  display: block;
+  font-size: .88rem;
+  font-weight: 600;
+}
+
+.case-steps p {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: .74rem;
+}
+
+.limitation-panel {
+  background: transparent;
+}
+
+.case-cta {
+  min-height: auto;
+  padding: clamp(34px, 5vw, 54px) 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.case-cta h2 {
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  font-weight: 600;
+}
+
+/* Keyboard clarity for the new progressive-disclosure architecture. */
+.mw-disclosure > summary:focus-visible,
+.objects-disclosure > summary:focus-visible,
+.objects-usecase > summary:focus-visible,
+.mw-faq-list summary:focus-visible,
+.objects-faq-list summary:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  .mw-jumpbar {
+    display: flex;
+  }
+
+  .mw-process > header,
+  .case-section {
+    grid-template-columns: 1fr;
+  }
+
+  .mw-process > ol {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mw-process > ol > li:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .case-section {
+    gap: 22px;
+  }
+}
+
+@media (max-width: 620px) {
+  .mw-capabilities {
+    gap: 6px;
+  }
+
+  .mw-capabilities span {
+    font-size: .56rem;
+  }
+
+  .mw-process > ol,
+  .case-meta,
+  .case-pair,
+  .case-proof {
+    grid-template-columns: 1fr;
+  }
+
+  .mw-process > ol > li,
+  .mw-process > ol > li:first-child,
+  .case-pair > div,
+  .case-pair > div:nth-child(even),
+  .case-proof > div,
+  .case-proof > div:nth-child(even) {
+    min-height: auto;
+    padding: 16px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--soft-line);
+  }
+
+  .case-hero h1 {
+    font-size: clamp(2.7rem, 14vw, 4.2rem);
+  }
+
+  .case-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .case-steps li,
+  .case-steps li:first-child {
+    min-height: auto;
+    padding: 16px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--soft-line);
+  }
+
+  .case-cta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .case-cta .button {
+    width: 100%;
+  }
+}

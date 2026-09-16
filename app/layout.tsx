@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import './simplified.css';
 import './credibility.css';
+import './final-friction.css';
 import { GITHUB_URL, PERSON_NAME, SITE_NAME, SITE_URL } from './site';
 
 const structuredData = {
