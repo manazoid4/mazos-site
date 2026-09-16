@@ -232,7 +232,7 @@ export default function Page() {
 
         <aside className="mw-objects-strip" aria-labelledby="objects-showcase-title">
           <Image src="/objects/touch-three-hero.webp" alt="Concept visual of the black-and-white Touch Three NFC stand" width={1536} height={1024} sizes="(max-width: 760px) 32vw, 240px" unoptimized />
-          <div><p className="eyebrow">Maz Works Objects</p><h3 id="objects-showcase-title">Physical products that lead somewhere useful.</h3><p>NFC stands, business gifting and custom objects that can connect to reviews, bookings, referrals, campaigns and workflows.</p></div>
+          <div><p className="eyebrow">Maz Works Objects</p><h3 id="objects-showcase-title">Physical products that lead somewhere useful.</h3><p>Tap stands, business gifts and custom objects that send a customer straight to the page you choose. I can build that page and the follow-up behind it too.</p></div>
           <a className="button button-dark" href="/3d-printing">Explore Objects</a>
         </aside>
       </section>
