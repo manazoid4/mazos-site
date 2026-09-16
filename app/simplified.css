@@ -667,7 +667,7 @@ h1, h2, h3 {
   }
 
   .mw-hero h1 {
-    font-size: clamp(2.55rem, 12.5vw, 3.8rem);
+    font-size: clamp(2.3rem, 10.5vw, 3.4rem);
   }
 
   .mw-lede {
