@@ -9,11 +9,11 @@ import { TouchSelectionProvider } from './touch-selection';
 
 export const metadata: Metadata = {
   title: 'Maz Works Objects — NFC stands, business gifts and useful custom objects',
-  description: 'Custom countertop tap stands, small-batch business gifts, signs and useful 3D-printed objects for clients, teams and real workplaces.',
+  description: 'Custom countertop tap stands, small-batch business gifts, recruitment agency gifting, signs and useful 3D-printed objects for clients, candidates, teams and workplaces.',
   alternates: { canonical: '/3d-printing' },
   openGraph: {
     title: 'Maz Works Objects — Touch + Business Gifting',
-    description: 'One tap. One useful next step. Plus useful physical objects for client gifting and real workplaces.',
+    description: 'One tap. One useful next step. Plus useful physical objects for client gifting, recruitment and real workplaces.',
     url: '/3d-printing',
     images: [{
       url: '/objects/touch-three-hero.webp',
@@ -54,6 +54,7 @@ const FAQS = [
   ['What colours and material do you use?', 'The launch look is black and white. The first production direction is an indoor 3D-printed plastic finish. If you want another colour or finish, ask first and I will confirm what is realistic before quoting.'],
   ['Can I see the design before you make it?', 'Yes. You approve the direction and final price before production starts.'],
   ['Do you make recurring business gifts?', 'Yes. I can keep an approved product direction on file and personalise small batches for new clients, renewals, referrals, milestones, staff or events. Quantity, turnaround and postage are agreed before production.'],
+  ['Can this work for a recruitment agency?', 'Yes. Recruitment uses can include placement gifts, hiring-manager desk objects, candidate referral pieces, job-fair tap points, internal awards and client-branded onboarding pieces. The physical object can also link to a vacancy page, referral form, candidate guide, review request or booking page.'],
   ['Are there subscriptions?', 'Not for a stand that opens pages you already own. Websites, hosted campaign pages, ongoing link management or a recurring business-gifting arrangement are separate only if you actually need them.'],
   ['Can you build the page it opens?', 'Yes. Maz Works can also build or improve the website, menu, booking journey or campaign page. That is quoted separately rather than hidden inside the object price.'],
 ];
@@ -72,6 +73,7 @@ export default function ObjectsPage() {
             <div className="objects-actions">
               <a className="objects-button objects-button-dark" href="#collection">Choose a Touch</a>
               <a className="objects-text-link" href="#business-gifts">Business gifting <span aria-hidden="true">↓</span></a>
+              <a className="objects-text-link" href="#recruitment">Recruitment agencies <span aria-hidden="true">↓</span></a>
               <a className="objects-text-link" href="#how-it-works">See how Touch works <span aria-hidden="true">↓</span></a>
             </div>
           </div>
@@ -155,6 +157,41 @@ export default function ObjectsPage() {
               <p>Maz Works can design a reusable gift format for your business — for example a desk object, magnetic piece, NFC object, branded stand or custom miniature. Once approved, future pieces can be personalised with a client name, company, date, message or destination without restarting the project every time.</p>
               <p>Small quantities are welcome. Recurring arrangements, direct-to-recipient postage, packaging and larger runs are quoted around the actual brief rather than hidden behind a generic subscription.</p>
               <a className="objects-button objects-button-dark" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Business%20Gifting%20Enquiry`}>Ask about business gifting</a>
+            </div>
+          </div>
+        </section>
+
+        <section className="objects-section objects-details" id="recruitment" aria-labelledby="recruitment-title">
+          <header className="objects-section-heading objects-heading-row">
+            <div>
+              <p className="objects-kicker">Industry use case / Recruitment agencies</p>
+              <h2 id="recruitment-title">Stay on the desk after the placement is made.</h2>
+            </div>
+            <p>Recruitment is built on repeat relationships. Maz Works can combine small-run physical products with NFC, QR and simple web workflows so candidate, client and referral touchpoints feel considered instead of generic.</p>
+          </header>
+
+          <aside className="objects-portfolio-edition">
+            <div>
+              <p className="objects-kicker">Candidate + client moments</p>
+              <h3>Useful objects that can lead somewhere useful too.</h3>
+            </div>
+            <nav aria-label="Recruitment agency Maz Works ideas">
+              <a href="#recruitment-partner"><span>01</span><strong>Placement gift</strong><small>Personalised desk piece / start date / tap to onboarding</small></a>
+              <a href="#recruitment-partner"><span>02</span><strong>Hiring-manager desk object</strong><small>Tap to brief a vacancy / book a recruiter / contact the team</small></a>
+              <a href="#recruitment-partner"><span>03</span><strong>Referral + review piece</strong><small>Unique NFC or QR route to refer, review or recommend</small></a>
+              <a href="#recruitment-partner"><span>04</span><strong>Job-fair tap point</strong><small>Live jobs / registration / candidate guide / event campaign</small></a>
+              <a href="#recruitment-partner"><span>05</span><strong>Recruiter awards</strong><small>Top biller / placement milestones / team recognition</small></a>
+              <a href="#recruitment-partner"><span>06</span><strong>Client-branded onboarding objects</strong><small>Small-run pieces the agency can provide to placed candidates</small></a>
+            </nav>
+          </aside>
+
+          <div className="objects-artwork-note" id="recruitment-partner">
+            <span>Physical + digital</span>
+            <div>
+              <h3>A repeatable placement system, not just merchandise.</h3>
+              <p>The agency can approve a core object once. Each new placement can then change the name, employer, date, message or NFC destination. The same physical system can connect to an interview-prep page, candidate portal, referral form, review request, live vacancies or a hiring-manager booking page.</p>
+              <p>Maz Works can also scope the digital layer behind it — landing pages, forms, referral tracking, follow-up automation or a workflow that prepares a gifting request from an existing recruitment process. Any CRM integration would be confirmed against the agency’s current system before it is promised.</p>
+              <a className="objects-button objects-button-dark" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Recruitment%20Agency%20Enquiry`}>Build a recruitment agency pack</a>
             </div>
           </div>
         </section>
