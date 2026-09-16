@@ -12,8 +12,7 @@ export function SiteHeader() {
         <a href="/demos">Demos</a>
         <a href="/#services">Services</a>
         <a className="mw-nav-objects" href="/3d-printing">Objects</a>
-        <a href="/#process">How it works</a>
-        <a className="mw-nav-cta" href="/#contact">Get a private demo</a>
+        <a className="mw-nav-cta" href="/#contact">Get a demo</a>
       </nav>
     </header>
   );
