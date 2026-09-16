@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ProjectLinks } from '../../project-elements';
 import { CASE_STUDY_PROJECTS, getCaseStudyProject } from '../../projects';
-import { CONTACT_LINKS } from '../../site';
 import { SiteFooter, SiteHeader } from '../../site-chrome';
 
 export const dynamicParams = false;
@@ -79,7 +78,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
         <footer className="case-cta">
           <h2>Have a similar problem?</h2>
-          <a className="button button-signal" href={CONTACT_LINKS.client}>Get a free demo</a>
+          <a className="button button-signal" href="/#contact">Get a free demo</a>
         </footer>
       </article>
       <SiteFooter />

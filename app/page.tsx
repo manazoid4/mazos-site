@@ -17,7 +17,7 @@ const SERVICES = [
     body: 'Useful AI features, internal tools and custom software built around a specific business problem.',
   },
   {
-    title: '3D Printing & Objects',
+    title: 'Objects',
     body: 'Tactile custom objects that connect customers to useful digital destinations.',
     href: '/3d-printing',
   },
