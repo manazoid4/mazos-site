@@ -38,13 +38,6 @@ const DEMO_TYPES = [
   },
 ];
 
-const STEPS = [
-  ['01', 'I look at the business', 'I review the public website, customer journey and the problem you want to improve.'],
-  ['02', 'I build the useful part first', 'You get a focused private demo built around your business rather than a generic sales presentation.'],
-  ['03', 'You open one private link', 'Your demo has its own access code. You can explore it in your own time or we can walk through it together.'],
-  ['04', 'Only build what earns its place', 'If the direction makes sense, we agree the useful parts, the price and what should happen next.'],
-];
-
 export default function DemosPage() {
   return (
     <main>
@@ -75,42 +68,20 @@ export default function DemosPage() {
         <header className="mw-section-heading">
           <p className="eyebrow">What I can demonstrate</p>
           <h2 id="examples-title">A working direction, not a promise on a page.</h2>
-          <p>The point is to make the decision easier. You should be able to see what changes for the customer or the team before discussing a larger project.</p>
+          <p>The point is to make the decision easier: see what changes for the customer or the team before discussing a larger project.</p>
         </header>
-        <div className="mw-service-grid">
-          {DEMO_TYPES.map((item) => (
-            <article className="mw-service-card" key={item.title}>
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </article>
-          ))}
+        <div className="mw-outcome-list">
+          {DEMO_TYPES.map((item) => <div key={item.title}><strong>{item.title}</strong><span>{item.body}</span></div>)}
         </div>
-      </section>
-
-      <section className="mw-process" aria-labelledby="demo-process-title">
-        <header>
-          <p className="eyebrow">How private demos work</p>
-          <h2 id="demo-process-title">Small first step. Clear decision afterwards.</h2>
-        </header>
-        <ol>
-          {STEPS.map(([number, title, body]) => (
-            <li key={number}>
-              <span>{number}</span>
-              <div><h3>{title}</h3><p>{body}</p></div>
-            </li>
-          ))}
-        </ol>
       </section>
 
       <section className="mw-section mw-pricing" aria-labelledby="privacy-title">
         <header className="mw-section-heading">
           <p className="eyebrow">Built for real conversations</p>
           <h2 id="privacy-title">Your business stays the focus.</h2>
-          <p>Private demos can include a website direction, customer journey, physical product idea, campaign or workflow. I keep client-specific demos behind private access instead of turning every conversation into a public case study.</p>
+          <p>I keep client-specific demos behind a private link and access code instead of turning every conversation into a public case study. Each one has its own address, opened when it suits you and shared only with the people who need to see it.</p>
         </header>
-        <div className="mw-pricing-foot">
-          <div><strong>One link</strong><span>Your demo has a simple private address made for your business.</span></div>
-          <div><strong>One access code</strong><span>You can open it when it suits you and share it with the people who need to see it.</span></div>
+        <div className="mw-actions">
           <a className="button button-signal" href="/#contact">Request yours</a>
         </div>
       </section>
