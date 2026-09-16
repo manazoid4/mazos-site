@@ -16,9 +16,7 @@ export const metadata: Metadata = {
     description: 'One tap. One useful next step. Plus useful physical objects for client gifting, recruitment and real workplaces.',
     url: '/3d-printing',
     images: [{
-      url: '/objects/touch-three-hero.webp',
-      width: 1536,
-      height: 1024,
+      url: '/objects/touch-three-hero.webp', width: 1536, height: 1024,
       alt: 'Concept visual of the black-and-white Touch Three stand',
     }],
   },
@@ -67,153 +65,93 @@ export default function ObjectsPage() {
 
         <section className="objects-hero" id="main-content" tabIndex={-1} aria-labelledby="objects-title">
           <div className="objects-hero-copy">
-            <p className="objects-kicker">Maz Works Objects / Touch collection</p>
+            <p className="objects-kicker">Maz Works Objects / Touch</p>
             <h1 id="objects-title">One tap.<br />One useful next step.</h1>
-            <p>Small custom stands that help customers reach your reviews, menu, bookings, social page or website without hunting for the right link.</p>
+            <p>Small custom objects that help customers, clients and teams reach the right next action without hunting for it.</p>
             <div className="objects-actions">
               <a className="objects-button objects-button-dark" href="#collection">Choose a Touch</a>
-              <a className="objects-text-link" href="#business-gifts">Business gifting <span aria-hidden="true">↓</span></a>
-              <a className="objects-text-link" href="#recruitment">Recruitment agencies <span aria-hidden="true">↓</span></a>
-              <a className="objects-text-link" href="#how-it-works">See how Touch works <span aria-hidden="true">↓</span></a>
+              <a className="objects-text-link" href="#business-gifts">Use cases <span aria-hidden="true">↓</span></a>
+              <a className="objects-text-link" href="#personalise">Get a quote <span aria-hidden="true">↓</span></a>
             </div>
           </div>
           <figure className="objects-hero-visual">
-            <Image src="/objects/touch-three-hero.webp" alt="Concept render of a low rounded black stand holding three white tap discs for menu, reviews and bookings" width={1536} height={1024} sizes="(max-width: 800px) 100vw, 58vw" priority unoptimized />
-            <figcaption><span>Concept visual</span><span>Touch Three / 1 stand + 3 tap points</span></figcaption>
+            <Image src="/objects/touch-three-hero.webp" alt="Concept render of a low rounded black stand holding three white tap discs for menu, reviews and bookings" width={1536} height={1024} sizes="(max-width: 800px) 100vw, 52vw" priority unoptimized />
+            <figcaption><span>Concept visual</span><span>Touch Three / 3 tap points</span></figcaption>
           </figure>
-          <p className="objects-hero-side-note">Made for<br />real counters.</p>
         </section>
 
         <TouchCollection />
-        <TouchDemo />
 
-        <section className="objects-section objects-details" id="details" aria-labelledby="details-title">
-          <header className="objects-section-heading objects-heading-row">
-            <div><p className="objects-kicker">Designed to belong in the shop</p><h2 id="details-title">Useful enough to keep out. Simple enough to understand.</h2></div>
-            <p>The launch style is deliberately clean: rounded black bases, white tap areas and clear raised wording. You approve the final look before production.</p>
-          </header>
+        <details className="objects-disclosure objects-demo-disclosure">
+          <summary><span>Try the idea</span><small>Interactive Touch example</small></summary>
+          <TouchDemo />
+        </details>
 
-          <div className="objects-gallery">
-            <figure className="objects-gallery-wide">
-              <Image src="/objects/touch-three-hero.webp" alt="Concept close view of the raised lettering and three-tap black stand" width={1536} height={1024} sizes="(max-width: 760px) 100vw, 66vw" loading="eager" unoptimized />
-              <figcaption><span>Concept visual</span><strong>Raised wording / clean countertop finish</strong></figcaption>
-            </figure>
-            <figure>
-              <Image src="/objects/touch-disc-detail.webp" alt="Concept close-up showing one white tap disc lifted above its place in the stand" width={1200} height={1200} sizes="(max-width: 760px) 100vw, 34vw" loading="eager" unoptimized />
-              <figcaption><span>Concept visual</span><strong>Replaceable tap piece</strong></figcaption>
-            </figure>
-            <figure className="objects-gallery-full">
-              <Image src="/objects/touch-carry-bundle.webp" alt="Concept flat-lay showing one three-tap stand and exactly five matching keyrings" width={1536} height={1024} sizes="100vw" loading="eager" unoptimized />
-              <figcaption><span>Concept visual</span><strong>Touch + Carry / 1 stand + 5 matching keyrings</strong></figcaption>
-            </figure>
+        <details className="objects-disclosure" id="how-it-works">
+          <summary><span>How Touch works</span><small>Ordering + customer journey</small></summary>
+          <div className="objects-disclosure-body">
+            <section className="objects-how" aria-labelledby="how-title">
+              <header><p className="objects-kicker">Simple by default</p><h2 id="how-title">Easy for you. Obvious for the customer.</h2></header>
+              <div className="objects-journeys">
+                <div><h3>Getting yours</h3><ol>{ORDERING_STEPS.map(([number, title, body]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}</ol></div>
+                <div><h3>What the customer does</h3><ol>{CUSTOMER_STEPS.map(([number, title, body]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}</ol></div>
+              </div>
+            </section>
           </div>
-
-          <aside className="objects-portfolio-edition">
-            <div><p className="objects-kicker">Example setup / Three different actions</p><h3>One stand can guide three different next steps.</h3></div>
-            <nav aria-label="Example tap destinations">
-              <a href="https://jobfilter.uk/find-jobs"><span>01</span><strong>Open a product</strong><small>Example live page</small></a>
-              <a href="https://github.com/manazoid4/maz-pocket"><span>02</span><strong>Open project info</strong><small>Example information page</small></a>
-              <a href="/3d-printing"><span>03</span><strong>Open this collection</strong><small>Example website page</small></a>
-            </nav>
-          </aside>
-        </section>
-
-        <section className="objects-how" id="how-it-works" aria-labelledby="how-title">
-          <header><p className="objects-kicker">How it works</p><h2 id="how-title">Easy for you. Obvious for the customer.</h2></header>
-          <div className="objects-journeys">
-            <div><h3>Getting yours</h3><ol>{ORDERING_STEPS.map(([number, title, body]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}</ol></div>
-            <div><h3>What the customer does</h3><ol>{CUSTOMER_STEPS.map(([number, title, body]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}</ol></div>
-          </div>
-        </section>
+        </details>
 
         <TouchEnquiryForm />
 
-        <section className="objects-section objects-details" id="business-gifts" aria-labelledby="business-gifts-title">
+        <section className="objects-section objects-usecases" id="business-gifts" aria-labelledby="usecases-title">
           <header className="objects-section-heading objects-heading-row">
-            <div>
-              <p className="objects-kicker">Business gifting / Small batches / Personalised</p>
-              <h2 id="business-gifts-title">Made for the people your business wants to remember.</h2>
-            </div>
-            <p>Custom physical gifts for B2B companies that want something more personal than generic promotional merchandise. Start with a small run, approve the design once, then personalise future pieces as clients, staff or milestones come up.</p>
+            <div><p className="objects-kicker">Beyond the counter</p><h2 id="usecases-title">One object system. Different business moments.</h2></div>
+            <p>Maz Works can reuse an approved product direction across client gifts, campaigns, recruitment, staff moments and custom business workflows.</p>
           </header>
 
-          <aside className="objects-portfolio-edition">
-            <div>
-              <p className="objects-kicker">Useful occasions</p>
-              <h3>One product direction. Different names, dates and moments.</h3>
-            </div>
-            <nav aria-label="Business gifting options">
-              <a href="#gift-enquiry"><span>01</span><strong>New client gifts</strong><small>Onboarding / deal close / welcome</small></a>
-              <a href="#gift-enquiry"><span>02</span><strong>Renewal + milestone gifts</strong><small>Anniversaries / referrals / achievements</small></a>
-              <a href="#gift-enquiry"><span>03</span><strong>Events + small runs</strong><small>Meetings / exhibitions / partner days</small></a>
-              <a href="#gift-enquiry"><span>04</span><strong>Ongoing gift partner</strong><small>Approved design kept ready for repeat orders</small></a>
-            </nav>
-          </aside>
+          <div className="objects-usecase-grid">
+            <details className="objects-usecase" open>
+              <summary><span>01</span><div><strong>Business gifting</strong><small>Small batches / personalised / repeatable</small></div></summary>
+              <div className="objects-usecase-body">
+                <p>Custom physical gifts for B2B companies that want something more personal than generic promotional merchandise. Start with a small run, approve the design once, then personalise future pieces as clients, staff or milestones come up.</p>
+                <ul><li>New client gifts</li><li>Renewal + milestone gifts</li><li>Events + small runs</li><li>Ongoing gift partner</li></ul>
+                <p><strong>Keep the design. Change the recipient.</strong> A reusable desk object, magnetic piece, NFC object, branded stand or custom miniature can change name, company, date, message or destination without restarting the project every time.</p>
+                <a className="objects-text-link" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Business%20Gifting%20Enquiry`}>Ask about business gifting →</a>
+              </div>
+            </details>
 
-          <div className="objects-artwork-note" id="gift-enquiry">
-            <span>How the partnership can work</span>
-            <div>
-              <h3>Keep the design. Change the recipient.</h3>
-              <p>Maz Works can design a reusable gift format for your business — for example a desk object, magnetic piece, NFC object, branded stand or custom miniature. Once approved, future pieces can be personalised with a client name, company, date, message or destination without restarting the project every time.</p>
-              <p>Small quantities are welcome. Recurring arrangements, direct-to-recipient postage, packaging and larger runs are quoted around the actual brief rather than hidden behind a generic subscription.</p>
-              <a className="objects-button objects-button-dark" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Business%20Gifting%20Enquiry`}>Ask about business gifting</a>
-            </div>
-          </div>
-        </section>
+            <details className="objects-usecase" id="recruitment">
+              <summary><span>02</span><div><strong>Recruitment agencies</strong><small>Candidate + client relationship tools</small></div></summary>
+              <div className="objects-usecase-body">
+                <p>Recruitment is built on repeat relationships. Small-run physical products can connect to NFC, QR and simple web workflows instead of becoming generic merchandise.</p>
+                <ul><li>Placement gift</li><li>Hiring-manager desk object</li><li>Referral + review piece</li><li>Job-fair tap point</li><li>Recruiter awards</li><li>Client-branded onboarding objects</li></ul>
+                <p><strong>A repeatable placement system, not just merchandise.</strong> The same object can link to interview prep, a candidate portal, referral form, review request, live vacancies or a hiring-manager booking page. Any CRM integration is confirmed against the agency&apos;s current system before it is promised.</p>
+                <a className="objects-text-link" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Recruitment%20Agency%20Enquiry`}>Build a recruitment agency pack →</a>
+              </div>
+            </details>
 
-        <section className="objects-section objects-details" id="recruitment" aria-labelledby="recruitment-title">
-          <header className="objects-section-heading objects-heading-row">
-            <div>
-              <p className="objects-kicker">Industry use case / Recruitment agencies</p>
-              <h2 id="recruitment-title">Stay on the desk after the placement is made.</h2>
-            </div>
-            <p>Recruitment is built on repeat relationships. Maz Works can combine small-run physical products with NFC, QR and simple web workflows so candidate, client and referral touchpoints feel considered instead of generic.</p>
-          </header>
-
-          <aside className="objects-portfolio-edition">
-            <div>
-              <p className="objects-kicker">Candidate + client moments</p>
-              <h3>Useful objects that can lead somewhere useful too.</h3>
-            </div>
-            <nav aria-label="Recruitment agency Maz Works ideas">
-              <a href="#recruitment-partner"><span>01</span><strong>Placement gift</strong><small>Personalised desk piece / start date / tap to onboarding</small></a>
-              <a href="#recruitment-partner"><span>02</span><strong>Hiring-manager desk object</strong><small>Tap to brief a vacancy / book a recruiter / contact the team</small></a>
-              <a href="#recruitment-partner"><span>03</span><strong>Referral + review piece</strong><small>Unique NFC or QR route to refer, review or recommend</small></a>
-              <a href="#recruitment-partner"><span>04</span><strong>Job-fair tap point</strong><small>Live jobs / registration / candidate guide / event campaign</small></a>
-              <a href="#recruitment-partner"><span>05</span><strong>Recruiter awards</strong><small>Top biller / placement milestones / team recognition</small></a>
-              <a href="#recruitment-partner"><span>06</span><strong>Client-branded onboarding objects</strong><small>Small-run pieces the agency can provide to placed candidates</small></a>
-            </nav>
-          </aside>
-
-          <div className="objects-artwork-note" id="recruitment-partner">
-            <span>Physical + digital</span>
-            <div>
-              <h3>A repeatable placement system, not just merchandise.</h3>
-              <p>The agency can approve a core object once. Each new placement can then change the name, employer, date, message or NFC destination. The same physical system can connect to an interview-prep page, candidate portal, referral form, review request, live vacancies or a hiring-manager booking page.</p>
-              <p>Maz Works can also scope the digital layer behind it — landing pages, forms, referral tracking, follow-up automation or a workflow that prepares a gifting request from an existing recruitment process. Any CRM integration would be confirmed against the agency’s current system before it is promised.</p>
-              <a className="objects-button objects-button-dark" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Recruitment%20Agency%20Enquiry`}>Build a recruitment agency pack</a>
-            </div>
+            <details className="objects-usecase">
+              <summary><span>03</span><div><strong>Custom business objects</strong><small>Signs / holders / docks / connected pieces</small></div></summary>
+              <div className="objects-usecase-body">
+                <p>Tell me what needs holding, displaying, organising, gifting or connecting to a customer action. I&apos;ll tell you what is realistic before quoting.</p>
+                <a className="objects-text-link" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Objects%20custom%20enquiry`}>Ask about a custom object →</a>
+              </div>
+            </details>
           </div>
         </section>
 
         <section className="objects-section objects-faq" id="faq" aria-labelledby="faq-title">
           <header className="objects-section-heading objects-heading-row">
-            <div><p className="objects-kicker">Questions</p><h2 id="faq-title">The useful answers.</h2></div>
+            <div><p className="objects-kicker">Questions</p><h2 id="faq-title">Open only what you need.</h2></div>
             <p>If something affects price, appearance or how customers use it, I confirm it before you approve the order.</p>
           </header>
           <div className="objects-faq-list">
-            {FAQS.map(([question, answer], index) => (
-              <details key={question}>
-                <summary><span>{String(index + 1).padStart(2, '0')}</span>{question}</summary>
-                <p>{answer}</p>
-              </details>
-            ))}
+            {FAQS.map(([question, answer], index) => <details key={question}><summary><span>{String(index + 1).padStart(2, '0')}</span>{question}</summary><p>{answer}</p></details>)}
           </div>
         </section>
 
         <section className="objects-other" aria-labelledby="other-title">
           <p className="objects-kicker">Need something different?</p>
-          <div><h2 id="other-title">Signs, gifts, holders, stands and useful business objects.</h2><p>Tell me what needs holding, displaying, organising, gifting or connecting to a customer action. I’ll tell you what is realistic before quoting.</p></div>
+          <div><h2 id="other-title">Useful physical products, without the catalogue maze.</h2><p>Send the problem, rough quantity and where the object will be used. I&apos;ll suggest the simplest realistic route.</p></div>
           <a className="objects-button objects-button-signal" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Objects%20custom%20enquiry`}>Ask about an object</a>
         </section>
 
