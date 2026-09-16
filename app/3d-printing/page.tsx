@@ -54,7 +54,6 @@ const FAQS = [
   ['Do you make recurring business gifts?', 'Yes. I can keep an approved product direction on file and personalise small batches for new clients, renewals, referrals, milestones, staff or events. Quantity, turnaround and postage are agreed before production.'],
   ['Can this work for a recruitment agency?', 'Yes. Recruitment uses can include placement gifts, hiring-manager desk objects, candidate referral pieces, job-fair tap points, internal awards and client-branded onboarding pieces. The physical object can also link to a vacancy page, referral form, candidate guide, review request or booking page.'],
   ['Are there subscriptions?', 'Not for a stand that opens pages you already own. Websites, hosted campaign pages, ongoing link management or a recurring business-gifting arrangement are separate only if you actually need them.'],
-  ['Can you build the page it opens?', 'Yes. Maz Works can also build or improve the website, menu, booking journey or campaign page. That is quoted separately rather than hidden inside the object price.'],
 ];
 
 export default function ObjectsPage() {
@@ -81,6 +80,21 @@ export default function ObjectsPage() {
 
         <TouchCollection />
 
+        <section className="objects-section objects-frontdoor" aria-labelledby="frontdoor-title">
+          <header className="objects-section-heading objects-heading-row">
+            <div><p className="objects-kicker">The useful part</p><h2 id="frontdoor-title">The object is the front door. The page behind it does the work.</h2></div>
+            <p>A stand is only worth buying if what opens is worth opening.</p>
+          </header>
+          <ol className="objects-chain">
+            <li><span>01</span><strong>Tap or scan</strong></li>
+            <li><span>02</span><strong>Your chosen page opens</strong></li>
+            <li><span>03</span><strong>They review, book or order</strong></li>
+            <li><span>04</span><strong>You get the review, lead or booking</strong></li>
+          </ol>
+          <p className="objects-frontdoor-note">Maz Works can build or improve that page and what happens after it — the booking journey, the campaign page, or a form that routes an enquiry to the right person instead of a shared inbox. That is quoted separately and never hidden inside the object price.</p>
+          <a className="objects-text-link" href="/#contact">Talk about the page behind the tap <span aria-hidden="true">→</span></a>
+        </section>
+
         <details className="objects-disclosure objects-demo-disclosure">
           <summary><span>Try the idea</span><small>Interactive Touch example</small></summary>
           <TouchDemo />
@@ -98,6 +112,16 @@ export default function ObjectsPage() {
             </section>
           </div>
         </details>
+
+        <section className="objects-section objects-faq" id="faq" aria-labelledby="faq-title">
+          <header className="objects-section-heading objects-heading-row">
+            <div><p className="objects-kicker">Questions</p><h2 id="faq-title">Open only what you need.</h2></div>
+            <p>If something affects price, appearance or how customers use it, I confirm it before you approve the order.</p>
+          </header>
+          <div className="objects-faq-list">
+            {FAQS.map(([question, answer], index) => <details key={question}><summary><span>{String(index + 1).padStart(2, '0')}</span>{question}</summary><p>{answer}</p></details>)}
+          </div>
+        </section>
 
         <TouchEnquiryForm />
 
@@ -135,16 +159,6 @@ export default function ObjectsPage() {
                 <a className="objects-text-link" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Objects%20custom%20enquiry`}>Ask about a custom object →</a>
               </div>
             </details>
-          </div>
-        </section>
-
-        <section className="objects-section objects-faq" id="faq" aria-labelledby="faq-title">
-          <header className="objects-section-heading objects-heading-row">
-            <div><p className="objects-kicker">Questions</p><h2 id="faq-title">Open only what you need.</h2></div>
-            <p>If something affects price, appearance or how customers use it, I confirm it before you approve the order.</p>
-          </header>
-          <div className="objects-faq-list">
-            {FAQS.map(([question, answer], index) => <details key={question}><summary><span>{String(index + 1).padStart(2, '0')}</span>{question}</summary><p>{answer}</p></details>)}
           </div>
         </section>
 

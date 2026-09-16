@@ -193,6 +193,7 @@ export default function Page() {
             <a className="text-link" href="#work">See selected work <span aria-hidden="true">↓</span></a>
           </div>
           <p className="mw-hero-note">For suitable projects, I can build a near-working demo first and walk you through it live on Microsoft Teams with screen sharing.</p>
+          <p className="mw-hero-proof">Recently built: <a href="#jobfilter">JobFilter</a>, a live product for construction firms, and <a href="#scrap-finance-partners">Scrap Finance Partners</a>, a contract client build.</p>
         </div>
         <div className="mw-capabilities" aria-label="Core capabilities">
           <span>Direct with the builder</span><span>Live demo first</span><span>Web development</span><span>Automation</span><span>AI with guardrails</span><span>Deployment</span>
@@ -231,7 +232,7 @@ export default function Page() {
 
         <aside className="mw-objects-strip" aria-labelledby="objects-showcase-title">
           <Image src="/objects/touch-three-hero.webp" alt="Concept visual of the black-and-white Touch Three NFC stand" width={1536} height={1024} sizes="(max-width: 760px) 32vw, 240px" unoptimized />
-          <div><p className="eyebrow">Maz Works Objects</p><h3 id="objects-showcase-title">Physical products that lead somewhere useful.</h3><p>NFC stands, business gifting and custom objects that can connect to reviews, bookings, referrals, campaigns and workflows.</p></div>
+          <div><p className="eyebrow">Maz Works Objects</p><h3 id="objects-showcase-title">Physical products that lead somewhere useful.</h3><p>Tap stands, business gifts and custom objects that send a customer straight to the page you choose. I can build that page and the follow-up behind it too.</p></div>
           <a className="button button-dark" href="/3d-printing">Explore Objects</a>
         </aside>
       </section>
@@ -252,13 +253,16 @@ export default function Page() {
       <section className="mw-section mw-client-flow" aria-label="Process and pricing">
         <div className="mw-compact-block" id="process">
           <header className="mw-section-heading mw-heading-inline"><div><p className="eyebrow">How it works</p><h2>Five steps, no maze.</h2></div><p>From first problem to tested handover, with the direction visible before the full commitment.</p></header>
-          <ol className="mw-process-strip">
-            {PROCESS.map(([number, title, body]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}
-          </ol>
+          <details className="mw-disclosure">
+            <summary><span>See the five steps</span><small>Problem to tested handover</small></summary>
+            <ol className="mw-process-strip">
+              {PROCESS.map(([number, title, body]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}
+            </ol>
+          </details>
         </div>
 
         <div className="mw-compact-block mw-pricing" id="client">
-          <header className="mw-section-heading mw-heading-inline"><div><p className="eyebrow">Founding offers</p><h2>Clear starting prices.</h2></div><p>Competitive pricing. See the direction first.</p></header>
+          <header className="mw-section-heading mw-heading-inline"><div><p className="eyebrow">Pricing</p><h2>Clear starting prices.</h2></div><p>Competitive pricing. See the direction first.</p></header>
           <div className="mw-price-grid">
             {OFFERS.map((offer) => <article className="mw-price-option" key={offer.name}><p>{offer.name}</p><strong>{offer.price}</strong><span>{offer.body}</span><small>{offer.note}</small></article>)}
           </div>
