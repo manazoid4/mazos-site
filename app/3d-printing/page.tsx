@@ -70,7 +70,6 @@ export default function ObjectsPage() {
             <p>Small custom objects that help customers, clients and teams reach the right next action without hunting for it.</p>
             <div className="objects-actions">
               <a className="objects-button objects-button-dark" href="#collection">Choose a Touch</a>
-              <a className="objects-text-link" href="#business-gifts">Use cases <span aria-hidden="true">↓</span></a>
               <a className="objects-text-link" href="#personalise">Get a quote <span aria-hidden="true">↓</span></a>
             </div>
           </div>
@@ -109,7 +108,7 @@ export default function ObjectsPage() {
           </header>
 
           <div className="objects-usecase-grid">
-            <details className="objects-usecase" open>
+            <details className="objects-usecase">
               <summary><span>01</span><div><strong>Business gifting</strong><small>Small batches / personalised / repeatable</small></div></summary>
               <div className="objects-usecase-body">
                 <p>Custom physical gifts for B2B companies that want something more personal than generic promotional merchandise. Start with a small run, approve the design once, then personalise future pieces as clients, staff or milestones come up.</p>
