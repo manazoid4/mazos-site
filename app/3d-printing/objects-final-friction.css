@@ -1,0 +1,18 @@
+/* Route-specific final fixes loaded after the main Objects responsive layer. */
+
+@media (min-width: 681px) and (max-width: 980px) {
+  .objects-bundle:last-child .objects-bundle-number {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .objects-bundle:last-child .objects-bundle-visual {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .objects-bundle:last-child .objects-bundle-copy {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
