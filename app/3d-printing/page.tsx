@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/3d-printing' },
   openGraph: {
     title: 'Maz Works Objects — Touch + Business Gifting',
-    description: 'Useful physical objects for customer actions, client gifting and real workplaces.',
+    description: 'One tap. One useful next step. Plus useful physical objects for client gifting and real workplaces.',
     url: '/3d-printing',
     images: [{
       url: '/objects/touch-three-hero.webp',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Maz Works Objects — Touch + Business Gifting',
-    description: 'Useful physical objects for customer actions, client gifting and real workplaces.',
+    description: 'One tap. One useful next step.',
     images: ['/objects/touch-three-hero.webp'],
   },
 };
