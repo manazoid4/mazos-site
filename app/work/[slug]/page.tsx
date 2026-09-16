@@ -31,6 +31,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const { slug } = await params;
   const project = getCaseStudyProject(slug);
   if (!project) notFound();
+  const otherStudy = CASE_STUDY_PROJECTS.find((candidate) => candidate.id !== project.id);
 
   return (
     <main>
@@ -77,8 +78,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </section>
 
         <footer className="case-cta">
-          <h2>Have a similar problem?</h2>
-          <a className="button button-signal" href="/#contact">Get a free demo</a>
+          <div>
+            <h2>Have a similar problem?</h2>
+            <p>Describe what is slow, manual or not working. For suitable projects I build a near-working demo first, and the scope and price are agreed before any paid work starts.</p>
+          </div>
+          <div className="case-cta-actions">
+            <a className="button button-signal" href="/#contact">Get a free demo</a>
+            {otherStudy && <a className="text-link" href={`/work/${otherStudy.id}`}>Read {otherStudy.name} <span aria-hidden="true">→</span></a>}
+          </div>
         </footer>
       </article>
       <SiteFooter />
