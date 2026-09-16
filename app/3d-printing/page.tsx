@@ -8,12 +8,12 @@ import { TouchEnquiryForm } from './touch-enquiry-form';
 import { TouchSelectionProvider } from './touch-selection';
 
 export const metadata: Metadata = {
-  title: 'Maz Works Objects — tap stands for reviews, menus and bookings',
-  description: 'Custom countertop tap stands that help customers open a review page, menu, booking page, social profile or website in seconds.',
+  title: 'Maz Works Objects — NFC stands, business gifts and useful custom objects',
+  description: 'Custom countertop tap stands, small-batch business gifts, signs and useful 3D-printed objects for clients, teams and real workplaces.',
   alternates: { canonical: '/3d-printing' },
   openGraph: {
-    title: 'Maz Works Objects — Touch',
-    description: 'Useful countertop objects that turn one tap into the next customer action.',
+    title: 'Maz Works Objects — Touch + Business Gifting',
+    description: 'Useful physical objects for customer actions, client gifting and real workplaces.',
     url: '/3d-printing',
     images: [{
       url: '/objects/touch-three-hero.webp',
@@ -24,8 +24,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Maz Works Objects — Touch',
-    description: 'One tap. One useful next step.',
+    title: 'Maz Works Objects — Touch + Business Gifting',
+    description: 'Useful physical objects for customer actions, client gifting and real workplaces.',
     images: ['/objects/touch-three-hero.webp'],
   },
 };
@@ -53,7 +53,8 @@ const FAQS = [
   ['Can I add my logo or artwork?', 'Yes. The £10 artwork option covers one supplied design used across the bundle, basic placement and one proof revision. More detailed artwork or redrawing is quoted separately.'],
   ['What colours and material do you use?', 'The launch look is black and white. The first production direction is an indoor 3D-printed plastic finish. If you want another colour or finish, ask first and I will confirm what is realistic before quoting.'],
   ['Can I see the design before you make it?', 'Yes. You approve the direction and final price before production starts.'],
-  ['Are there subscriptions?', 'Not for a stand that opens pages you already own. Websites, hosted campaign pages or ongoing link management are separate only if you actually need them.'],
+  ['Do you make recurring business gifts?', 'Yes. I can keep an approved product direction on file and personalise small batches for new clients, renewals, referrals, milestones, staff or events. Quantity, turnaround and postage are agreed before production.'],
+  ['Are there subscriptions?', 'Not for a stand that opens pages you already own. Websites, hosted campaign pages, ongoing link management or a recurring business-gifting arrangement are separate only if you actually need them.'],
   ['Can you build the page it opens?', 'Yes. Maz Works can also build or improve the website, menu, booking journey or campaign page. That is quoted separately rather than hidden inside the object price.'],
 ];
 
@@ -70,7 +71,8 @@ export default function ObjectsPage() {
             <p>Small custom stands that help customers reach your reviews, menu, bookings, social page or website without hunting for the right link.</p>
             <div className="objects-actions">
               <a className="objects-button objects-button-dark" href="#collection">Choose a Touch</a>
-              <a className="objects-text-link" href="#how-it-works">See how it works <span aria-hidden="true">↓</span></a>
+              <a className="objects-text-link" href="#business-gifts">Business gifting <span aria-hidden="true">↓</span></a>
+              <a className="objects-text-link" href="#how-it-works">See how Touch works <span aria-hidden="true">↓</span></a>
             </div>
           </div>
           <figure className="objects-hero-visual">
@@ -124,6 +126,39 @@ export default function ObjectsPage() {
 
         <TouchEnquiryForm />
 
+        <section className="objects-section objects-details" id="business-gifts" aria-labelledby="business-gifts-title">
+          <header className="objects-section-heading objects-heading-row">
+            <div>
+              <p className="objects-kicker">Business gifting / Small batches / Personalised</p>
+              <h2 id="business-gifts-title">Made for the people your business wants to remember.</h2>
+            </div>
+            <p>Custom physical gifts for B2B companies that want something more personal than generic promotional merchandise. Start with a small run, approve the design once, then personalise future pieces as clients, staff or milestones come up.</p>
+          </header>
+
+          <aside className="objects-portfolio-edition">
+            <div>
+              <p className="objects-kicker">Useful occasions</p>
+              <h3>One product direction. Different names, dates and moments.</h3>
+            </div>
+            <nav aria-label="Business gifting options">
+              <a href="#gift-enquiry"><span>01</span><strong>New client gifts</strong><small>Onboarding / deal close / welcome</small></a>
+              <a href="#gift-enquiry"><span>02</span><strong>Renewal + milestone gifts</strong><small>Anniversaries / referrals / achievements</small></a>
+              <a href="#gift-enquiry"><span>03</span><strong>Events + small runs</strong><small>Meetings / exhibitions / partner days</small></a>
+              <a href="#gift-enquiry"><span>04</span><strong>Ongoing gift partner</strong><small>Approved design kept ready for repeat orders</small></a>
+            </nav>
+          </aside>
+
+          <div className="objects-artwork-note" id="gift-enquiry">
+            <span>How the partnership can work</span>
+            <div>
+              <h3>Keep the design. Change the recipient.</h3>
+              <p>Maz Works can design a reusable gift format for your business — for example a desk object, magnetic piece, NFC object, branded stand or custom miniature. Once approved, future pieces can be personalised with a client name, company, date, message or destination without restarting the project every time.</p>
+              <p>Small quantities are welcome. Recurring arrangements, direct-to-recipient postage, packaging and larger runs are quoted around the actual brief rather than hidden behind a generic subscription.</p>
+              <a className="objects-button objects-button-dark" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Business%20Gifting%20Enquiry`}>Ask about business gifting</a>
+            </div>
+          </div>
+        </section>
+
         <section className="objects-section objects-faq" id="faq" aria-labelledby="faq-title">
           <header className="objects-section-heading objects-heading-row">
             <div><p className="objects-kicker">Questions</p><h2 id="faq-title">The useful answers.</h2></div>
@@ -141,7 +176,7 @@ export default function ObjectsPage() {
 
         <section className="objects-other" aria-labelledby="other-title">
           <p className="objects-kicker">Need something different?</p>
-          <div><h2 id="other-title">Signs, holders, stands and useful shop objects.</h2><p>Tell me what needs holding, displaying, organising or connecting to a customer action. I’ll tell you what is realistic before quoting.</p></div>
+          <div><h2 id="other-title">Signs, gifts, holders, stands and useful business objects.</h2><p>Tell me what needs holding, displaying, organising, gifting or connecting to a customer action. I’ll tell you what is realistic before quoting.</p></div>
           <a className="objects-button objects-button-signal" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Objects%20custom%20enquiry`}>Ask about an object</a>
         </section>
 
