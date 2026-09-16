@@ -1,6 +1,7 @@
 import { Fredoka } from 'next/font/google';
 import './objects.css';
 import './objects-responsive.css';
+import './objects-final-friction.css';
 
 const objectsDisplay = Fredoka({
   subsets: ['latin'],
