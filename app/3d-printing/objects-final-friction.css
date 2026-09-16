@@ -1,5 +1,14 @@
 /* Route-specific final fixes loaded after the main Objects responsive layer. */
 
+/* Renders carry our own name in the slot the copy sells as the buyer's. */
+.objects-name-note {
+  max-width: 640px;
+  margin-top: 20px;
+  padding-left: 14px;
+  border-left: 3px solid var(--objects-green);
+  font-size: .84rem;
+}
+
 /* The cross-sell into the page behind the tap was buried as the last FAQ. */
 .objects-chain {
   display: grid;

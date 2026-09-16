@@ -48,6 +48,8 @@ export function TouchCollection() {
         ))}
       </div>
 
+      <p className="objects-name-note">Every example above is shown with our own name. Yours goes in that spot — the stand carries your business, not mine.</p>
+
       <aside className="objects-artwork-note">
         <span>Optional +£10</span>
         <div><h3>Add your logo or supplied artwork.</h3><p>Send one design you want used across the bundle. Basic placement and one proof revision are included. If the artwork needs redrawing or something more involved, I will tell you before quoting it.</p></div>
