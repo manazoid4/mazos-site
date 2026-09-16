@@ -483,11 +483,6 @@
     margin-top: 12px;
   }
 
-  /* 4:3 renders pushed the three prices too far apart to compare on a phone. */
-  .objects-bundle-visual {
-    aspect-ratio: 16 / 9;
-  }
-
   .objects-bundle-copy {
     margin-top: 16px;
   }
