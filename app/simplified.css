@@ -386,7 +386,8 @@ h1, h2, h3 {
 
 .mw-process-strip {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  /* Keep in step with PROCESS in app/page.tsx. */
+  grid-template-columns: repeat(4, 1fr);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   list-style: none;

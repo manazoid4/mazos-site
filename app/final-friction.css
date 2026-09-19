@@ -1,12 +1,5 @@
 /* Final friction pass: fewer default choices, shorter legacy pages, calmer density. */
 
-/* The hero only needs the three differentiators; service names already sit below. */
-.mw-capabilities span:nth-child(3),
-.mw-capabilities span:nth-child(4),
-.mw-capabilities span:nth-child(6) {
-  display: none;
-}
-
 /* Desktop already has primary navigation. Keep the local jump bar as a mobile shortcut only. */
 .mw-jumpbar {
   display: none;
