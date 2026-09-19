@@ -140,20 +140,21 @@ test('process, AI guardrails and FAQ stay easy to understand', async () => {
 test('contact request submits in-page instead of depending on the visitor email app', async () => {
   const html = await readPage('/');
   const formSource = await readFile(path.join(root, 'app', 'demo-request-form.tsx'), 'utf8');
+  const enquirySource = await readFile(path.join(root, 'app', 'enquiry.ts'), 'utf8');
   const vercelConfig = JSON.parse(await readFile(path.join(root, 'vercel.json'), 'utf8'));
   const csp = vercelConfig.headers[0].headers.find((header) => header.key === 'Content-Security-Policy')?.value || '';
 
-  assert.match(html, /Send demo request/);
+  assert.match(html, /Send enquiry/);
   assert.match(html, /name="name"/);
   assert.match(html, /name="email"/);
   assert.match(html, /name="business"/);
   assert.match(html, /name="problem"/);
-  assert.match(html, /name="demoPreference"/);
-  assert.match(html, /Send me a live demo link/);
+  assert.match(html, /name="service"/);
+  assert.match(html, /name="nextStep"/);
   assert.match(html, /Microsoft Teams walkthrough/);
   assert.match(html, /sent directly from this form/i);
-  assert.match(formSource, /https:\/\/formsubmit\.co\/ajax\//);
-  assert.match(formSource, /fetch\(FORM_ENDPOINT/);
+  assert.match(enquirySource, /https:\/\/formsubmit\.co\/ajax\//);
+  assert.match(enquirySource, /fetch\(FORM_ENDPOINT/);
   assert.match(formSource, /role="status"/);
   assert.match(formSource, /_honey/);
   assert.doesNotMatch(formSource, /window\.location\.href\s*=\s*`mailto:/);

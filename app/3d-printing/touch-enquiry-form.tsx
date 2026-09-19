@@ -1,13 +1,18 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
 import { CONTACT_EMAIL } from '../site';
+import { buildRecoveryMailto, sendEnquiry } from '../enquiry';
 import { INTENDED_USES, TOUCH_PRICING } from './touch-config';
 import { useSelectedTouchBundle } from './touch-selection';
 
 type SubmitState = 'idle' | 'sending' | 'sent' | 'error';
 
-const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+const FAILURE_COPY: Record<'rejected' | 'timeout' | 'network', string> = {
+  rejected: 'That did not send.',
+  timeout: 'That took too long to send.',
+  network: 'That could not reach me — your connection may have dropped.',
+};
 
 export function TouchEnquiryForm() {
   const {
@@ -22,9 +27,12 @@ export function TouchEnquiryForm() {
     setBusinessName,
     toggleIntendedUse,
   } = useSelectedTouchBundle();
+  const formRef = useRef<HTMLFormElement>(null);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [selectionError, setSelectionError] = useState('');
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
+  const [failureReason, setFailureReason] = useState<'rejected' | 'timeout' | 'network'>('rejected');
+  const [recoveryHref, setRecoveryHref] = useState(`mailto:${CONTACT_EMAIL}`);
 
   function continueToDetails() {
     if (intendedUses.length === 0 || !businessName.trim()) {
@@ -54,46 +62,70 @@ export function TouchEnquiryForm() {
       window.setTimeout(() => document.querySelector<HTMLInputElement>('input[name="intendedUses"]')?.focus(), 0);
       return;
     }
-    if (!name || !email || !businessName.trim()) return;
+
+    // Native `required` accepts whitespace, so re-check here and name the missing field
+    // instead of silently doing nothing.
+    const missing = !businessName.trim() ? 'businessName' : !name ? 'name' : !email ? 'email' : '';
+    if (missing) {
+      setSelectionError(
+        missing === 'businessName'
+          ? 'Add the business name or wording you want on the stand.'
+          : `Add your ${missing} so I can reply.`,
+      );
+      formRef.current?.querySelector<HTMLElement>(`[name="${missing}"]`)?.focus();
+      return;
+    }
+
     setSelectionError('');
+
+    const useLabels = intendedUses.map((id) => INTENDED_USES.find((item) => item.id === id)?.label ?? id).join(', ');
+    const artworkLabel = artwork
+      ? `Yes — £${TOUCH_PRICING.artworkAddOnPrice}; one supplied design, basic placement and one proof revision`
+      : 'No';
+    const subject = `Maz Works Objects enquiry — ${bundle.name} — £${estimate} estimate`;
+
+    setRecoveryHref(buildRecoveryMailto(subject, [
+      ['Name', name],
+      ['Business name / wording', businessName.trim()],
+      ['Bundle', `${bundle.name} (£${bundle.basePrice})`],
+      ['Artwork add-on', artworkLabel],
+      ['Customer actions', useLabels],
+      ['Links supplied', destinationLinks],
+      ['Wants help finding links', helpFindingLinks ? 'Yes' : 'No'],
+      ['Notes', notes],
+      ['Estimated product price', `£${estimate} before delivery or unusual requests`],
+    ]));
+
     setSubmitState('sending');
 
-    try {
-      const response = await fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          name,
-          email,
-          bundle: bundle.name,
-          bundle_id: bundleId,
-          physical_contents: bundle.contents.join(' | '),
-          intended_uses: intendedUses.map((id) => INTENDED_USES.find((item) => item.id === id)?.label ?? id).join(', '),
-          artwork: artwork
-            ? `Yes — £${TOUCH_PRICING.artworkAddOnPrice}; one supplied design, basic placement and one proof revision`
-            : 'No',
-          business_name: businessName.trim(),
-          destination_links: destinationLinks || 'Not supplied yet',
-          help_finding_links: helpFindingLinks ? 'Yes' : 'No',
-          notes: notes || 'None supplied',
-          estimated_product_price: `£${estimate} before delivery or unusual requests`,
-          _replyto: email,
-          _subject: `Maz Works Objects enquiry — ${bundle.name} — £${estimate} estimate`,
-          _template: 'table',
-          _honey: honey,
-          _url: window.location.href,
-        }),
-      });
+    const result = await sendEnquiry({
+      name,
+      email,
+      bundle: bundle.name,
+      bundle_id: bundleId,
+      physical_contents: bundle.contents.join(' | '),
+      intended_uses: useLabels,
+      artwork: artworkLabel,
+      business_name: businessName.trim(),
+      destination_links: destinationLinks || 'Not supplied yet',
+      help_finding_links: helpFindingLinks ? 'Yes' : 'No',
+      notes: notes || 'None supplied',
+      estimated_product_price: `£${estimate} before delivery or unusual requests`,
+      _replyto: email,
+      _subject: subject,
+      _template: 'table',
+      _honey: honey,
+      _url: window.location.href,
+    });
 
-      const payload = await response.json().catch(() => null) as { success?: boolean | string; message?: string } | null;
-      const rejected = payload?.success === false || payload?.success === 'false';
-      if (!response.ok || rejected) throw new Error(payload?.message || 'Unable to send enquiry');
-
+    if (result.ok) {
       form.reset();
       setSubmitState('sent');
-    } catch {
-      setSubmitState('error');
+      return;
     }
+
+    setFailureReason(result.reason);
+    setSubmitState('error');
   }
 
   return (
@@ -105,7 +137,7 @@ export function TouchEnquiryForm() {
       </header>
 
       <div className="objects-enquiry-layout">
-        <form className="objects-form" onSubmit={submitEnquiry}>
+        <form className="objects-form" ref={formRef} onSubmit={submitEnquiry}>
           <fieldset>
             <legend><span>01</span> Choose your stand</legend>
             <div className="objects-choice-grid">
@@ -146,7 +178,7 @@ export function TouchEnquiryForm() {
             {!detailsOpen && (
               <button className="objects-button objects-button-signal" type="button" onClick={continueToDetails}>Add contact details</button>
             )}
-            <p role="alert">{selectionError}</p>
+            {!detailsOpen && <p className="objects-form-error" role="alert">{selectionError}</p>}
           </div>
 
           {detailsOpen && (
@@ -170,12 +202,19 @@ export function TouchEnquiryForm() {
               </label>
               <label className="objects-honeypot" aria-hidden="true"><span>Website</span><input name="_honey" tabIndex={-1} autoComplete="off" /></label>
               <div className="objects-submit-row">
-                <button className="objects-button objects-button-signal" type="submit" disabled={submitState === 'sending'}>{submitState === 'sending' ? 'Sending…' : 'Send my enquiry'}</button>
+                <button className="objects-button objects-button-signal" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>{submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Send my enquiry'}</button>
                 <p>No payment now. You see the design and final price first.</p>
               </div>
+              <p className="objects-form-error" role="alert">{selectionError}</p>
               <p className="objects-form-status" role="status" aria-live="polite">
                 {submitState === 'sent' && 'Sent. I’ll reply by email with any questions, the design direction and the next step.'}
-                {submitState === 'error' && <>That did not send. Your entries are still here—try again or email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</>}
+                {submitState === 'error' && (
+                  <>
+                    {FAILURE_COPY[failureReason]} Your entries are still here — try again,{' '}
+                    <a href={recoveryHref}>send it by email instead</a> (everything is filled in for you), or email{' '}
+                    <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+                  </>
+                )}
               </p>
             </fieldset>
           )}
