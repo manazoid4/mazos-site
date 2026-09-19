@@ -110,9 +110,10 @@ test('Objects is discoverable from shared chrome, homepage and sitemap while dig
   ]);
 
   assert.match(home, /Maz Works Objects/);
-  assert.match(home, /Tactile custom objects that connect customers/);
+  assert.match(home, /Physical products that lead somewhere/);
+  assert.match(home, /reviews, booking page or menu/i);
   assert.match(home, /href="\/3d-printing"/);
-  assert.match(home, /Request a free live demo/);
+  assert.match(home, /Tell me the problem/);
   assert.match(home, /£150 fixed/);
   assert.match(objects, /href="\/#services"/);
   assert.match(objects, /href="\/#work"/);

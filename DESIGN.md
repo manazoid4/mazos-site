@@ -19,16 +19,33 @@ All object imagery is original generated concept work and must remain visibly la
 
 ## Chosen direction — Quiet Framework
 
-Maz Works should feel like a calm architectural portfolio for a hands-on software builder. The page is an evidence surface, not an agency funnel and not a product dashboard.
+Maz Works should feel like a calm, evidence-led studio page for a hands-on software builder. The page is an evidence surface, not an agency funnel and not a product dashboard.
 
 The current FRAMEWORK build is the foundation. The refinement is subtraction and hierarchy: fewer repeated explanations, fewer framed boxes, much less yellow, larger real project imagery, and a clearer human presence.
 
 ## Audience contract
 
-- Employers should quickly see Manazir Hussain, shipped software, technical judgment, code, and honest limitations.
-- Clients should see a real commissioned project, a low-risk bounded first step, and a clear contact route.
-- Collaborators should see personality, current interests, and evidence of thoughtful execution.
-- LinkedIn visitors should be able to move from a claim to a stable case study, live product or repository, and contact.
+> **Corrected 2026-09-19.** This section previously led with *Employers* and
+> *Collaborators*, carrying over a job-hunting portfolio model that the site itself was
+> deliberately reverted away from (see the 2026-08-26 entry in the unified-memory
+> ledger: the site had drifted into a personal portfolio for junior applied-AI roles
+> across three commits and was rebuilt as the client pitch). The code was fixed then;
+> this document was not, and was still pointing later agents at the reverted model.
+> The audiences below now match the positioning brief in
+> `docs/maz-works/AGENT-HANDOFF-POSITIONING.md`.
+
+- **Owner-managers and operations or sales leads** (1–50 people) should see, quickly:
+  what problem this fixes, that it is one person and not an agency, real delivered
+  work, a starting price, and one obvious way to enquire.
+- **Local customer-facing businesses** should see that a physical product can lead to
+  a review, booking or menu, and what that costs.
+- **A sceptical buyer** should find honest limitations, no invented figures or
+  testimonials, and scope agreed before any paid work.
+- **LinkedIn visitors** should be able to move from a claim to a stable case study,
+  live product or repository, and contact.
+
+Employers and collaborators are not target audiences for this site. Do not reintroduce
+a CV, a skills matrix, or role-seeking language.
 
 ## Reference translation
 
@@ -36,7 +53,7 @@ The current FRAMEWORK build is the foundation. The refinement is subtraction and
 - [Pentagram Work](https://www.pentagram.com/work/): let strong work and project imagery lead; keep browsing structure legible.
 - [Build, Memory](https://www.pentagram.com/work/build-memory-1): use a flexible editorial grid so dense information can breathe.
 - [Pienso](https://www.pentagram.com/work/pienso/story): make technical work understandable with real use cases and product visuals.
-- [Lee Robinson on programming portfolios](https://archive.leerob.io/blog/beginners-guide-to-the-programming-portfolio): show code, live work, decisions, and clear writing rather than asserting skill.
+- [Lee Robinson on programming portfolios](https://archive.leerob.io/blog/beginners-guide-to-the-programming-portfolio): borrow only the evidence principle — show live work, decisions and clear writing rather than asserting skill. This is a client site, not a job-seeking portfolio.
 
 These are principles, not templates. Do not imitate another studio's identity, scale, claims, or visual assets.
 
