@@ -1,0 +1,38 @@
+/*
+ * Enquiry feedback states. Owned by the enquiry/integration workstream so that
+ * validation and delivery feedback stay legible without editing the shared
+ * layout stylesheets.
+ */
+
+.mw-form-error:empty,
+.objects-form-error:empty {
+  display: none;
+}
+
+.mw-form-error,
+.objects-form-error {
+  padding-left: 11px;
+  border-left: 3px solid #a3241d;
+  color: #a3241d;
+  font-weight: 650;
+}
+
+/* `.mw-form-submit p` sets the muted small type; the error has to override it. */
+.mw-form-submit p.mw-form-error {
+  color: #a3241d;
+  font-size: .74rem;
+}
+
+/* A text button must read and align exactly like the inline links beside it. */
+button.text-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}

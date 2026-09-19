@@ -53,9 +53,10 @@ test('Touch presents exactly three clear bundles with every base and artwork est
 });
 
 test('Objects enquiry keeps links optional and builds its estimate from shared pricing', async () => {
-  const [html, formSource, configSource, selectionSource] = await Promise.all([
+  const [html, formSource, enquirySource, configSource, selectionSource] = await Promise.all([
     readPage('/3d-printing'),
     readFile(path.join(root, 'app', '3d-printing', 'touch-enquiry-form.tsx'), 'utf8'),
+    readFile(path.join(root, 'app', 'enquiry.ts'), 'utf8'),
     readFile(path.join(root, 'app', '3d-printing', 'touch-config.ts'), 'utf8'),
     readFile(path.join(root, 'app', '3d-printing', 'touch-selection.tsx'), 'utf8'),
   ]);
@@ -66,10 +67,11 @@ test('Objects enquiry keeps links optional and builds its estimate from shared p
   assert.match(formSource, /I want help finding the right links/);
   assert.match(formSource, /Links you already have[\s\S]{0,80}optional/i);
   assert.match(formSource, /Send my enquiry/);
-  assert.match(formSource, /fetch\(FORM_ENDPOINT/);
+  assert.match(formSource, /sendEnquiry\(/);
+  assert.match(enquirySource, /fetch\(FORM_ENDPOINT/);
   assert.match(selectionSource, /getTouchEstimate\(bundleId, artwork\)/);
   assert.match(formSource, /estimated_product_price: `£\$\{estimate\}/);
-  assert.match(formSource, /response\.ok/);
+  assert.match(enquirySource, /response\.ok/);
   assert.match(formSource, /setSubmitState\('error'\)/);
   assert.match(formSource, /submitEnquiry[\s\S]+intendedUses\.length === 0/);
   assert.doesNotMatch(formSource, /required[^>]+destinationLinks|destinationLinks[^>]+required/);
