@@ -207,7 +207,12 @@ export function TouchEnquiryForm() {
               </div>
               <p className="objects-form-error" role="alert">{selectionError}</p>
               <p className="objects-form-status" role="status" aria-live="polite">
-                {submitState === 'sent' && 'Sent. I’ll reply by email with any questions, the design direction and the next step.'}
+                {submitState === 'sent' && (
+                  <>
+                    Sent. I’ll reply by email with any questions, the design direction and the next step.{' '}
+                    <button type="button" className="text-link" onClick={() => setSubmitState('idle')}>Send another enquiry</button>
+                  </>
+                )}
                 {submitState === 'error' && (
                   <>
                     {FAILURE_COPY[failureReason]} Your entries are still here — try again,{' '}

@@ -67,10 +67,29 @@ test('both enquiry forms fail safely with a recoverable email fallback', async (
   // for the requesting origin, so a 200 alone must never be treated as delivered.
   assert.match(enquirySource, /success === 'false'/);
 
+  // An abort raised while the body is still being read is swallowed by the parse
+  // catch, so the signal must be checked before any success is reported.
+  assert.match(enquirySource, /controller\.signal\.aborted/);
+  assert.match(
+    enquirySource,
+    /signal\.aborted\) return \{ ok: false[\s\S]{0,400}?return \{ ok: true \}/,
+    'the aborted check must come before the success return',
+  );
+
   for (const source of [demoForm, touchForm]) {
     assert.match(source, /buildRecoveryMailto/);
     assert.match(source, /recoveryHref/);
     assert.match(source, /role="alert"/);
+  }
+});
+
+test('both forms can send a second enquiry without a page reload', async () => {
+  const demoForm = await readSource('app', 'demo-request-form.tsx');
+  const touchForm = await readSource('app', '3d-printing', 'touch-enquiry-form.tsx');
+
+  // Both submit buttons stay disabled in the `sent` state, so each form needs a way back.
+  for (const source of [demoForm, touchForm]) {
+    assert.match(source, /setSubmitState\('idle'\)/);
   }
 });
 

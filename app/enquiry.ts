@@ -62,6 +62,12 @@ export async function sendEnquiry(payload: Record<string, string>, timeoutMs = S
     });
 
     const body = await response.json().catch(() => null) as { success?: boolean | string } | null;
+
+    // The timer can fire after a successful status but while the body is still being
+    // read. That rejection is swallowed above, so check the signal rather than treat an
+    // unread body as delivered — FormSubmit reports rejections in the body, not the status.
+    if (controller.signal.aborted) return { ok: false, reason: 'timeout' };
+
     const rejected = body?.success === false || body?.success === 'false';
 
     if (!response.ok || rejected) return { ok: false, reason: 'rejected' };
