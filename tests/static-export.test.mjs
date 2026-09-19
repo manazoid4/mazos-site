@@ -279,3 +279,58 @@ test('project memory keeps the Maz Works Knowledge Vault identity canonical', as
   assert.match(handoff, /Maz Works Knowledge Vault/);
   assert.match(handoff, /JobFilter is one project inside it/);
 });
+
+/** Reads the canonical site origin from source so the tests cannot drift from it. */
+async function siteUrl() {
+  const source = await readFile(path.join(root, 'app', 'site.ts'), 'utf8');
+  const match = source.match(/SITE_URL\s*=\s*'([^']+)'/);
+  assert.ok(match, 'could not read SITE_URL from app/site.ts');
+  return match[1];
+}
+
+test('every indexable exported page is listed in the sitemap', async () => {
+  const SITE_URL = await siteUrl();
+  const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
+  const listed = new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]));
+
+  // Next's own error pages are not routes anyone should be pointed at.
+  const notRoutes = new Set(['/404', '/_not-found']);
+
+  const pages = await readdir(exportRoot, { recursive: true, withFileTypes: true });
+  const routes = pages
+    .filter((entry) => entry.isFile() && entry.name.endsWith('.html'))
+    .map((entry) => {
+      const relative = path.relative(exportRoot, path.join(entry.parentPath ?? entry.path, entry.name));
+      const route = `/${relative.replace(/\.html$/, '').replace(/\/index$/, '')}`;
+      return route === '/index' ? '/' : route;
+    })
+    .filter((route) => !notRoutes.has(route));
+
+  assert.ok(routes.length > 0, 'found no exported pages to check');
+
+  const missing = [];
+  for (const route of routes) {
+    const html = await readPage(route);
+    // A page carrying its own noindex is deliberately out of the sitemap.
+    if (/<meta name="robots" content="[^"]*noindex/.test(html)) continue;
+    const url = route === '/' ? SITE_URL : `${SITE_URL}${route}`;
+    if (!listed.has(url)) missing.push(route);
+  }
+
+  assert.deepEqual(missing, [], `indexable pages missing from the sitemap: ${missing.join(', ')}`);
+});
+
+test('every sitemap entry points at a page that was actually exported', async () => {
+  const SITE_URL = await siteUrl();
+  const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
+  const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+
+  const broken = [];
+  for (const url of urls) {
+    assert.ok(url.startsWith(SITE_URL), `sitemap entry is off-site: ${url}`);
+    const route = url.slice(SITE_URL.length) || '/';
+    if (!(await internalTargetExists(route))) broken.push(route);
+  }
+
+  assert.deepEqual(broken, [], `sitemap points at missing pages: ${broken.join(', ')}`);
+});

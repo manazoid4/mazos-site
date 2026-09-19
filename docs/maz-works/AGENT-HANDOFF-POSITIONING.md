@@ -125,6 +125,8 @@ before work starts. Growth System includes one workflow, not a department.
 - `app/3d-printing/touch-enquiry-form.tsx`, `touch-config.ts`, `touch-selection.tsx`
 - `app/layout.tsx` — metadata, structured data, stylesheet imports
 - `app/site.ts`, `app/sitemap.ts`, `app/robots.ts`
+- `app/rotareason/**`, `app/maz-core/**`, `app/maz-pocket-ai/**` — tool and demo routes,
+  not marketing pages
 - `vercel.json`, `next.config.js`, `api/demo-gate.js`
 - `tests/**`
 - `docs/maz-works/AGENT-HANDOFF-POSITIONING.md` (this file)
@@ -199,6 +201,14 @@ Search engines follow it, but the canonical should name the URL actually served.
 domain in Vercel (no code change), or keep `www` primary and A changes `SITE_URL` to
 `https://www.mazworks.uk`. Not changed unilaterally because it moves structured-data ids.
 
+### P3 — `/rotareason` was indexable but missing from the sitemap (fixed)
+
+`/rotareason` ships a canonical and no `noindex`, so it is a public, indexable page —
+but `app/sitemap.ts` never listed it. Added, at priority 0.7. Two tests now guard the
+whole class: every exported page without its own `noindex` must appear in the sitemap,
+and every sitemap entry must point at a page that was actually exported. Verified the
+first test fails on the original sitemap.
+
 ### Verified healthy
 
 - All public routes return 200: `/`, `/demos`, `/3d-printing`, `/work/jobfilter`,
@@ -206,6 +216,18 @@ domain in Vercel (no code change), or keep `www` primary and A changes `SITE_URL
   `/maz-pocket-ai`, `/sitemap.xml`, `/robots.txt`.
 - Security headers present and intact on the live domain, including the CSP that
   permits `https://formsubmit.co` in `connect-src`.
+- Indexing control per route is correct: `/maz-core` and `/maz-pocket-ai` carry
+  `noindex, nofollow, nocache`; `/mazos` carries `noindex, follow` and canonicalises to
+  `/`; the public marketing routes are indexable with their own canonicals.
+- Private client demos are properly excluded from search. `api/demo-gate.js` sets both
+  an `x-robots-tag: noindex, nofollow` header and a `noindex,nofollow` meta tag on the
+  gate page, so no `robots.txt` disallow is needed and none was added.
+
+### Accepted, not changed
+
+`/maz-core` and `/maz-pocket-ai` inherit the root canonical (`https://mazworks.uk`)
+rather than declaring their own. Both are `noindex`, so the canonical is inert. Left
+alone rather than churning two files for no behavioural change.
 
 ---
 

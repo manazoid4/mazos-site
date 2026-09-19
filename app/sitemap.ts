@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: SITE_URL, lastModified: updated, changeFrequency: 'monthly', priority: 1 },
     { url: `${SITE_URL}/demos`, lastModified: updated, changeFrequency: 'monthly', priority: 0.95 },
     { url: `${SITE_URL}/3d-printing`, lastModified: updated, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE_URL}/rotareason`, lastModified: updated, changeFrequency: 'monthly', priority: 0.7 },
     ...CASE_STUDY_PROJECTS.map((project) => ({
       url: `${SITE_URL}/work/${project.id}`,
       lastModified: updated,
