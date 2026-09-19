@@ -95,6 +95,22 @@ than the post earns.**
 | **Background** | Verifiable employment | ManyPets, Complaints Specialist — complex investigations in a regulated FCA/DISP environment. Glide, Complaints & Escalations Coordinator — telecoms escalations, operational ownership. |
 | **Pricing** | Public on the site | Quick Win £150 fixed (£75 start / £75 completion). Website Launch from £299. Growth System from £499. Support from £49/month, optional, no long contract. |
 
+### First-person facts from this session — also claimable, also sourced
+
+These are Maz's own work, so no client confidentiality applies and no permission is
+needed. They are recorded here, in the inventory, so the claims register in §7 can cite
+them like anything else. Dates and figures below are the verified ones — use these, do
+not round them up.
+
+| Fact | Verified detail | Caveat |
+| --- | --- | --- |
+| **The contact form failed silently for roughly three days** | FormSubmit approves per submitting domain. The site moved to `mazworks.uk` on 16 Sep; from then until 19 Sep 11:29 UTC every submission from `www.mazworks.uk` was rejected with an activation notice, while the old `mazos-site.vercel.app` origin still returned success. Found by submitting real test data to both origins, not by reading code. Fixed the same day and confirmed at both ends — endpoint returns success, and Maz confirmed receiving every test submission. | Say "roughly three days" or "16–19 September". Do not claim a number of lost enquiries — **that number is unknown and must not be invented or estimated.** |
+| **The site's smallest text was 9px** | Measured in Chromium at 390px and 1440px: smallest rendered text 9.0–9.3px across pages; headings set below a 1.0 line-height so letters collided when a heading wrapped; section headings clamped up to 85px. | The fix (an 11.5px floor) is on **PR #35, which is not merged**. Until it merges, do not write as though the live site is already fixed. Either wait for the merge, or write it as a finding rather than a completed repair. |
+| **The enquiry form now asks what you actually want** | Free demo, a walkthrough, a quote, or just an answer — so a £29 order or a £150 fixed job does not have to route through an unpaid custom build. | Merged in PR #34 and live. Safe to describe in the present tense. |
+
+If you use either of the first two, check the merge state of the relevant PR before
+writing in the past tense. Ask Maz if unsure.
+
 ### Must NOT be claimed
 
 - **No numbers that were never measured.** No percentages, no "saved X hours", no
@@ -113,8 +129,9 @@ than the post earns.**
 - **No urgency or scarcity.** No "3 slots left", no fake deadlines.
 - **No competitor disparagement.**
 
-If you want to say something and cannot source it from this table, **do not say it** —
-flag it to Maz as a gap instead.
+If you want to say something and cannot source it from the tables in this section,
+**do not say it** — flag it to Maz as a gap instead. Everything the pack recommends as
+material is sourced above; nothing recommended requires you to go outside §3.
 
 ---
 
@@ -152,12 +169,14 @@ Not every post does all five. The *set* does.
 
 Use these if they earn their place; you are not obliged to:
 
-- **"My own contact form was broken for three days and I didn't know."** True, specific,
-  recent, and it demonstrates the exact skill being sold: finding the thing that is
-  quietly costing you money. Ends naturally on "when did you last actually test yours?"
-  This is probably the strongest single post available and it costs nothing to verify.
-- **"The text on my site was 9 pixels."** Also true, also mine-not-a-client's, and it
-  makes the point that the problems worth fixing are usually invisible until measured.
+- **"My own contact form was broken for three days and I didn't know."** Sourced in §3.
+  True, specific, recent, and it demonstrates the exact skill being sold: finding the
+  thing that is quietly costing you money. Ends naturally on "when did you last
+  actually test yours?" This is probably the strongest single post available. Note the
+  caveat: the count of enquiries lost is unknown, and must stay unknown.
+- **"The text on my site was 9 pixels."** Sourced in §3. Also Maz's own, and it makes
+  the point that the problems worth fixing are usually invisible until measured. Note
+  the caveat: the fix is on an unmerged PR.
 - **The operations background.** Complaints and escalations work is genuinely unusual
   for someone who builds software, and it is the honest reason the approach is
   "investigate the real failure point first". Do not turn it into a CV.
@@ -220,7 +239,9 @@ If your next stage touches the site:
 - A stated order and spacing.
 - Per post: the one action, and where any link goes.
 - A list of any assets (photo, screenshot) that would strengthen a post and do not exist.
-- A short "claims register": for each factual statement across the five posts, where it
-  is sourced from in §3. Anything unsourceable is cut or flagged, not softened.
+- A short "claims register": for each factual statement across the five posts, which
+  row of §3 it comes from. Anything unsourceable is cut or flagged to Maz, not softened
+  into something sayable. Where a row carries a caveat, the register states how the
+  draft respects it.
 - Saved to unified memory with the state markers above.
 - Nothing published. Maz posts.
