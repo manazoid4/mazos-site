@@ -65,7 +65,7 @@
 .mw-process > ol > li > span {
   color: var(--muted);
   font-family: var(--mono);
-  font-size: .6rem;
+  font-size: .72rem;
   font-weight: 600;
 }
 
@@ -94,7 +94,7 @@
 
 .case-back {
   margin-bottom: 22px;
-  font-size: .7rem;
+  font-size: .72rem;
   font-weight: 600;
 }
 
@@ -123,7 +123,7 @@
 }
 
 .case-meta h2 {
-  font-size: .68rem;
+  font-size: .72rem;
   font-weight: 600;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -211,7 +211,7 @@
 }
 
 .case-steps span {
-  font-size: .6rem;
+  font-size: .72rem;
   font-weight: 600;
 }
 
@@ -317,7 +317,7 @@
   }
 
   .mw-capabilities span {
-    font-size: .56rem;
+    font-size: .72rem;
   }
 
   .mw-process > ol,
