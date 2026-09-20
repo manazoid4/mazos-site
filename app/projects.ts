@@ -146,7 +146,7 @@ export const FEATURED_PROJECTS: Project[] = [
     ],
     proof: 'Public firmware source with a clean build, a pin map cross-checked against vendor code, and a verification document that separates what is tested from what is not.',
     limitation: 'It compiles and the hardware facts came from vendor source, but no device was attached during the build, so no behaviour has been observed running. Network handoff to OpenFlowKit is designed for, not shipped.',
-    links: [{ label: 'View code', href: 'https://github.com/manazoid4/maz-pocket' }],
+    links: [{ label: 'Ask about this build', href: '/#contact' }],
   },
 ];
 

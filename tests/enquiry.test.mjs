@@ -65,7 +65,7 @@ test('both enquiry forms fail safely with a recoverable email fallback', async (
 
   // FormSubmit answers HTTP 200 with `success: "false"` when a form is not activated
   // for the requesting origin, so a 200 alone must never be treated as delivered.
-  assert.match(enquirySource, /success === 'false'/);
+  assert.match(enquirySource, /success === 'true'/);
 
   // An abort raised while the body is still being read is swallowed by the parse
   // catch, so the signal must be checked before any success is reported.

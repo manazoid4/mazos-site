@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { CONTACT_EMAIL } from './site';
+import { EnquiryRecovery } from './enquiry-recovery';
 import {
   DEFAULT_NEXT_STEP,
   DEFAULT_SERVICE_ID,
@@ -16,10 +17,22 @@ import {
 type SubmitState = 'idle' | 'sending' | 'sent' | 'error';
 
 const FAILURE_COPY: Record<'rejected' | 'timeout' | 'network', string> = {
-  rejected: 'That did not send.',
+  rejected: 'Delivery was not confirmed.',
   timeout: 'That took too long to send.',
   network: 'That could not reach me — your connection may have dropped.',
 };
+
+/** Keep a typed enquiry intact when the visitor chooses a service on this page. */
+export function ServiceEnquiryLink({ service, children }: { service: string; children: ReactNode }) {
+  return <a className="mw-service-link" href={`/?service=${service}#contact`} onClick={(event) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    window.history.pushState(null, '', event.currentTarget.href);
+    window.dispatchEvent(new Event('maz-enquiry-service'));
+    document.getElementById('contact')?.scrollIntoView();
+    document.querySelector<HTMLElement>('.mw-demo-form [name="service"]')?.focus({ preventScroll: true });
+  }}>{children}</a>;
+}
 
 export function DemoRequestForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -30,8 +43,14 @@ export function DemoRequestForm() {
   const [recoveryHref, setRecoveryHref] = useState(`mailto:${CONTACT_EMAIL}`);
 
   useEffect(() => {
-    const requested = readServiceFromLocation();
-    if (requested) setService(requested);
+    const syncService = () => setService(readServiceFromLocation() ?? DEFAULT_SERVICE_ID);
+    syncService();
+    window.addEventListener('maz-enquiry-service', syncService);
+    window.addEventListener('popstate', syncService);
+    return () => {
+      window.removeEventListener('maz-enquiry-service', syncService);
+      window.removeEventListener('popstate', syncService);
+    };
   }, []);
 
   function focusField(name: string) {
@@ -71,6 +90,7 @@ export function DemoRequestForm() {
 
     setRecoveryHref(buildRecoveryMailto(subject, [
       ['Name', name],
+      ['Email', email],
       ['Business', business],
       ['Service', serviceLabel],
       ['What to improve', problem],
@@ -167,7 +187,7 @@ export function DemoRequestForm() {
           {submitState === 'sent' && (
             <>
               Enquiry sent. I’ll reply by email.{' '}
-              <button type="button" className="text-link" onClick={() => setSubmitState('idle')}>Send another</button>
+              <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); focusField('name'); }}>Send another</button>
             </>
           )}
           {submitState === 'error' && (
@@ -178,6 +198,7 @@ export function DemoRequestForm() {
             </>
           )}
         </p>
+        {submitState === 'error' && <EnquiryRecovery href={recoveryHref} />}
       </div>
     </form>
   );

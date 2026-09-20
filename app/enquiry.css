@@ -36,3 +36,41 @@ button.text-link {
   text-underline-offset: 3px;
   cursor: pointer;
 }
+
+.enquiry-recovery {
+  width: 100%;
+  color: var(--ink);
+  font-size: .875rem;
+}
+
+.enquiry-recovery summary {
+  min-height: 44px;
+  padding-block: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.enquiry-recovery label {
+  display: grid;
+  gap: 8px;
+}
+
+.enquiry-recovery textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: var(--paper, #fff);
+  color: var(--ink);
+  font: inherit;
+  resize: vertical;
+}
+
+@media (max-width: 760px) {
+  .mw-demo-form input,
+  .mw-demo-form select,
+  .mw-demo-form textarea {
+    font-size: 16px;
+  }
+}
