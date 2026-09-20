@@ -1,3 +1,5 @@
+> Current recovery and release gates: [RECOVERY-CONTEXT-2026-09-20.md](RECOVERY-CONTEXT-2026-09-20.md). The dated status below is historical, not current release acceptance.
+
 # Maz Works Progress
 
 ## Current state

@@ -1,0 +1,89 @@
+[
+  {
+    "label": "live",
+    "route": "/",
+    "width": 390,
+    "height": 7504,
+    "overflow": false,
+    "title": "Maz Works | Web Development, Automation & AI",
+    "hero": "Websites, automation and AI tools built around real business problems.",
+    "contactY": 5856.96240234375
+  },
+  {
+    "label": "live",
+    "route": "/3d-printing",
+    "width": 390,
+    "height": 8771,
+    "overflow": false,
+    "title": "Maz Works Objects — NFC stands, business gifts and useful custom objects — Maz Works",
+    "hero": "One tap.\nOne useful next step.",
+    "contactY": 5465.25
+  },
+  {
+    "label": "live",
+    "route": "/",
+    "width": 1440,
+    "height": 5283,
+    "overflow": false,
+    "title": "Maz Works | Web Development, Automation & AI",
+    "hero": "Websites, automation and AI tools built around real business problems.",
+    "contactY": 4207.22509765625
+  },
+  {
+    "label": "live",
+    "route": "/3d-printing",
+    "width": 1440,
+    "height": 5800,
+    "overflow": false,
+    "title": "Maz Works Objects — NFC stands, business gifts and useful custom objects — Maz Works",
+    "hero": "One tap.\nOne useful next step.",
+    "contactY": 3423.362548828125
+  },
+  {
+    "label": "agent-b",
+    "route": "/",
+    "width": 390,
+    "height": 8257,
+    "overflow": false,
+    "title": "Maz Works | Web Development, Automation & AI",
+    "hero": "Stop losing time and enquiries to jobs done by hand.",
+    "contactY": 6658.28759765625
+  },
+  {
+    "label": "agent-b",
+    "route": "/3d-printing",
+    "width": 390,
+    "height": 8816,
+    "overflow": false,
+    "title": "Maz Works Objects — NFC stands, business gifts and useful custom objects — Maz Works",
+    "hero": "One tap.\nOne useful next step.",
+    "contactY": 5486.86279296875
+  },
+  {
+    "label": "agent-b",
+    "route": "/",
+    "width": 1440,
+    "height": 5247,
+    "overflow": false,
+    "title": "Maz Works | Web Development, Automation & AI",
+    "hero": "Stop losing time and enquiries to jobs done by hand.",
+    "contactY": 4155.36279296875
+  },
+  {
+    "label": "agent-b",
+    "route": "/3d-printing",
+    "width": 1440,
+    "height": 5818,
+    "overflow": false,
+    "title": "Maz Works Objects — NFC stands, business gifts and useful custom objects — Maz Works",
+    "hero": "One tap.\nOne useful next step.",
+    "contactY": 3435.337646484375
+  },
+  {
+    "serviceLink": {
+      "service": "automation",
+      "name": "",
+      "problem": ""
+    }
+  }
+]
