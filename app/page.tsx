@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { CONTACT_EMAIL } from './site';
-import { DemoRequestForm } from './demo-request-form';
+import { DemoRequestForm, ServiceEnquiryLink } from './demo-request-form';
 import { SiteFooter, SiteHeader } from './site-chrome';
 
 /**
@@ -105,7 +105,7 @@ const WORK = [
     problem: 'Capturing a thought or reminder usually means unlocking a phone and opening an app first.',
     summary: 'A pocket AI assistant built around quick voice capture, reminders and remote interaction with AI tools.',
     role: 'Building the firmware, interface and hardware/software integration.',
-    links: [{ label: 'View project', href: 'https://github.com/manazoid4/maz-pocket' }],
+    links: [{ label: 'Ask about this build', href: '#contact' }],
   },
 ];
 
@@ -194,7 +194,7 @@ export default function Page() {
         <div className="mw-hero-copy">
           <p className="eyebrow">Maz Works / Manazir Hussain</p>
           <h1 id="intro-title">Stop losing time and enquiries to jobs done by hand.</h1>
-          <p className="mw-lede">I&apos;m Manazir Hussain — one person, not an agency. I find the part of your business that leaks time or enquiries, then build the smallest thing that fixes it.</p>
+          <p className="mw-lede">I&apos;m Manazir Hussain. I build websites, software, automations and useful physical products for small businesses — from a tap-to-book stand to the booking page and follow-up behind it.</p>
           <div className="mw-actions">
             <a className="button button-signal" href="#contact">Tell me the problem</a>
             <a className="text-link" href="#work">See real work <span aria-hidden="true">↓</span></a>
@@ -219,9 +219,8 @@ export default function Page() {
           {SERVICES.map((service) => (
             <article className="mw-service-card" key={service.title}>
               <h3>{service.title}</h3><p>{service.body}</p>
-              <a className="mw-service-link" href={service.href ?? `/?service=${service.service}#contact`}>
-                {service.action} <span aria-hidden="true">→</span>
-              </a>
+              {service.href ? <a className="mw-service-link" href={service.href}>{service.action} <span aria-hidden="true">→</span></a>
+                : <ServiceEnquiryLink service={service.service ?? 'unsure'}>{service.action} <span aria-hidden="true">→</span></ServiceEnquiryLink>}
             </article>
           ))}
         </div>
@@ -278,10 +277,12 @@ export default function Page() {
         </div>
 
         <div className="mw-compact-block" id="process">
-          <header className="mw-section-heading mw-heading-inline"><div><p className="eyebrow">How it works</p><h2>Four steps.</h2></div><p>From first message to tested handover.</p></header>
-          <ol className="mw-process-strip">
-            {PROCESS.map(([number, title, body]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}
-          </ol>
+          <details className="mw-disclosure">
+            <summary><span>How we go from enquiry to handover</span><small>Four steps, with scope and price agreed first</small></summary>
+            <ol className="mw-process-strip">
+              {PROCESS.map(([number, title, body]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}
+            </ol>
+          </details>
         </div>
       </section>
 
@@ -313,7 +314,7 @@ export default function Page() {
         <div className="mw-contact-intro">
           <p className="eyebrow">Get in touch</p>
           <h2 id="contact-title">Tell me what&apos;s not working. I&apos;ll tell you what I&apos;d do.</h2>
-          <p className="mw-contact-copy">A short description is enough — no technical detail needed. Say whether you want a quote, a walkthrough, a free demo, or just an answer, and that&apos;s what you&apos;ll get.</p>
+          <p className="mw-contact-copy">A short description is enough — no technical detail needed. Ask for a quote, a walkthrough, a free demo, or an answer. I&apos;ll confirm what suits the job.</p>
           <p className="mw-contact-fallback">Prefer email? <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
         </div>
         <DemoRequestForm />

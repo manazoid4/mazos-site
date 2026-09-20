@@ -2,6 +2,7 @@
 
 import { useRef, useState, type FormEvent } from 'react';
 import { CONTACT_EMAIL } from '../site';
+import { EnquiryRecovery } from '../enquiry-recovery';
 import { buildRecoveryMailto, sendEnquiry } from '../enquiry';
 import { INTENDED_USES, TOUCH_PRICING } from './touch-config';
 import { useSelectedTouchBundle } from './touch-selection';
@@ -9,7 +10,7 @@ import { useSelectedTouchBundle } from './touch-selection';
 type SubmitState = 'idle' | 'sending' | 'sent' | 'error';
 
 const FAILURE_COPY: Record<'rejected' | 'timeout' | 'network', string> = {
-  rejected: 'That did not send.',
+  rejected: 'Delivery was not confirmed.',
   timeout: 'That took too long to send.',
   network: 'That could not reach me — your connection may have dropped.',
 };
@@ -86,6 +87,7 @@ export function TouchEnquiryForm() {
 
     setRecoveryHref(buildRecoveryMailto(subject, [
       ['Name', name],
+      ['Email', email],
       ['Business name / wording', businessName.trim()],
       ['Bundle', `${bundle.name} (£${bundle.basePrice})`],
       ['Artwork add-on', artworkLabel],
@@ -138,7 +140,7 @@ export function TouchEnquiryForm() {
 
       <div className="objects-enquiry-layout">
         <form className="objects-form" ref={formRef} onSubmit={submitEnquiry}>
-          <fieldset>
+          <fieldset disabled={submitState === 'sending'}>
             <legend><span>01</span> Choose your stand</legend>
             <div className="objects-choice-grid">
               {TOUCH_PRICING.bundles.map((option) => (
@@ -150,7 +152,7 @@ export function TouchEnquiryForm() {
             </div>
           </fieldset>
 
-          <fieldset>
+          <fieldset disabled={submitState === 'sending'}>
             <legend><span>02</span> What should customers be able to do?</legend>
             <div className="objects-use-grid">
               {INTENDED_USES.map((use) => (
@@ -162,7 +164,7 @@ export function TouchEnquiryForm() {
             </div>
           </fieldset>
 
-          <fieldset>
+          <fieldset disabled={submitState === 'sending'}>
             <legend><span>03</span> What should it say?</legend>
             <label className="objects-field">
               <span>Business name or wording</span>
@@ -210,7 +212,7 @@ export function TouchEnquiryForm() {
                 {submitState === 'sent' && (
                   <>
                     Sent. I’ll reply by email with any questions, the design direction and the next step.{' '}
-                    <button type="button" className="text-link" onClick={() => setSubmitState('idle')}>Send another enquiry</button>
+                    <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); formRef.current?.querySelector<HTMLInputElement>('[name="name"]')?.focus(); }}>Send another enquiry</button>
                   </>
                 )}
                 {submitState === 'error' && (
@@ -221,6 +223,7 @@ export function TouchEnquiryForm() {
                   </>
                 )}
               </p>
+              {submitState === 'error' && <EnquiryRecovery href={recoveryHref} />}
             </fieldset>
           )}
         </form>

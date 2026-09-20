@@ -45,8 +45,8 @@ test('homepage makes the Maz Works offer obvious in plain language', async () =>
   const html = await readPage('/');
   // The headline leads with the outcome, not a list of technologies.
   assert.match(html, /Stop losing time and enquiries to jobs done by hand/);
-  assert.match(html, /one person, not an agency/);
-  assert.match(html, /smallest thing that fixes it/);
+  assert.match(html, /websites, software, automations and useful physical products for small businesses/);
+  assert.match(html, /tap-to-book stand to the booking page and follow-up behind it/);
   assert.match(html, /Direct with the builder/);
   assert.match(html, /Fixed scope and price/);
   assert.match(html, /See the direction first/);
@@ -65,6 +65,8 @@ test('homepage keeps selected work concise and positions the flagships accuratel
   assert.match(html, /Contract client build/);
   // Unfinished work must stay labelled as unfinished.
   assert.match(html, /In progress/);
+  assert.match(html, /Ask about this build/);
+  assert.doesNotMatch(html, /href="https:\/\/github.com\/manazoid4\/maz-pocket"/);
   assert.match(html, /secure client workspace/i);
   assert.match(html, /approval and suppression controls/i);
   assert.doesNotMatch(html, /jobfilter-scan-result\.webp/);
@@ -250,7 +252,7 @@ test('structured data reflects Maz Works founder and service positioning', async
   assert.equal(person.name, 'Manazir Hussain');
   assert.equal(person.jobTitle, 'Founder and Software Builder');
   assert.ok(person.sameAs.includes('https://github.com/manazoid4'));
-  assert.match(org.description, /Web development, business automation and practical AI tools/);
+  assert.match(org.description, /Websites, software, automation and useful physical products/);
 });
 
 test('Vercel Analytics remains bundled into the static export', async () => {
@@ -318,7 +320,7 @@ test('every indexable exported page is listed in the sitemap', async () => {
   const routes = pages
     .filter((entry) => entry.isFile() && entry.name.endsWith('.html'))
     .map((entry) => {
-      const relative = path.relative(exportRoot, path.join(entry.parentPath ?? entry.path, entry.name));
+      const relative = path.relative(exportRoot, path.join(entry.parentPath ?? entry.path, entry.name)).split(path.sep).join('/');
       const route = `/${relative.replace(/\.html$/, '').replace(/\/index$/, '')}`;
       return route === '/index' ? '/' : route;
     })
