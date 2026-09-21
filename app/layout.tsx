@@ -5,6 +5,7 @@ import './simplified.css';
 import './credibility.css';
 import './final-friction.css';
 import './enquiry.css';
+import './resource-pages.css';
 import { GITHUB_URL, PERSON_NAME, SITE_NAME, SITE_URL } from './site';
 
 const structuredData = {
