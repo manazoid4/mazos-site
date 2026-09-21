@@ -19,18 +19,20 @@ const SERVICES = [
     action: 'Talk about admin',
   },
   {
-    title: 'Build a useful tool',
-    body: 'Internal tools, customer software and AI features built for one job, with human control where judgment matters.',
+    title: 'Build a tool your team will use',
+    body: 'Internal tools, customer software and AI features built for one job. AI where it helps. Human control where it matters.',
     service: 'software',
     action: 'Talk about a tool',
   },
 ];
 
 const MEASURES = [
-  ['Respond faster', 'lead and customer response time'],
-  ['Give hours back', 'admin hours per week'],
-  ['Keep follow-up moving', 'coverage and time to next action'],
-  ['Reduce dropped work', 'overdue tasks and missed handoffs'],
+  ['Respond faster', 'lead & customer response time'],
+  ['Give hours back to the team', 'admin hours per week'],
+  ['Make sales follow-up consistent', 'follow-up coverage & time to next action'],
+  ['Increase team capacity', 'work handled per person'],
+  ['Reduce dropped work', 'overdue tasks & missed handoffs'],
+  ['See where time and sales are leaking', 'response, time-to-quote, pipeline & workload signals'],
 ];
 
 const WORK = [
@@ -50,7 +52,7 @@ const WORK = [
     type: 'Contract client build',
     problem: 'A specialist finance practice serving UK scrap and recycling firms needed a credible digital presence and a working route from interest to enquiry.',
     summary: 'A contract build covering the practice’s positioning, website, lead journey and the automation behind it.',
-    role: 'Handled positioning, marketing implementation, web development, launch, lead capture, a secure client workspace and guarded acquisition automation.',
+    role: 'Handled positioning, marketing implementation, web development, launch, lead capture, a secure client workspace and guarded acquisition automation with approval and suppression controls.',
     links: [
       { label: 'View case study', href: '/work/scrap-finance-partners' },
       { label: 'View live site', href: 'https://scrap-finance-partners.vercel.app' },
@@ -76,9 +78,9 @@ const WORK = [
 
 const PROCESS = [
   ['01', 'Tell me the problem', 'Describe what is taking too much time. No technical detail needed.'],
-  ['02', 'See the direction', 'A demo, screen-share walkthrough, or written scope and quote — whichever suits the job.'],
-  ['03', 'Agree the work', 'What is delivered, the price and the requirements — agreed before any paid work.'],
-  ['04', 'Build and handover', 'I handle the build, testing and deployment, then hand it over clearly.'],
+  ['02', 'I show you the direction', 'A demo, screen-share walkthrough, or written scope and quote — whichever suits the job.'],
+  ['03', 'We agree the work', 'What is delivered, the price and the requirements — agreed before any paid work.'],
+  ['04', 'I build, test and hand it over', 'I handle the build, testing and deployment, then hand it over clearly.'],
 ];
 
 const OFFERS = [
@@ -151,12 +153,12 @@ export default function Page() {
         <div className="mw-hero-copy">
           <p className="eyebrow">Maz Works / Manazir Hussain</p>
           <h1 id="intro-title">Stop losing time and enquiries to jobs done by hand.</h1>
-          <p className="mw-lede">I build websites, software and automations for small businesses — including the physical touchpoints that can lead customers into them.</p>
+          <p className="mw-lede">I build websites, software, automations and useful physical products for small businesses — from a tap-to-book stand to the booking page and follow-up behind it.</p>
           <div className="mw-actions">
             <a className="button button-signal" href="#contact">Tell me the problem</a>
             <a className="text-link" href="#work">See real work <span aria-hidden="true">↓</span></a>
           </div>
-          <p className="mw-hero-note">Ask for a quote, a walkthrough, or a small demo first. I’ll tell you which is useful for the job.</p>
+          <p className="mw-hero-note">Ask for a quote, a walkthrough, or a near-working version first. I’ll tell you which is useful for the job.</p>
           <p className="mw-hero-proof">Recent work: <a href="#jobfilter">JobFilter</a> and <a href="#scrap-finance-partners">Scrap Finance Partners</a>.</p>
           <p className="mw-hero-update">
             <span>{LATEST_MAZ_WORKS_UPDATE.label}</span>
@@ -165,7 +167,7 @@ export default function Page() {
           </p>
         </div>
         <div className="mw-capabilities" aria-label="How working with Maz Works works">
-          <span>Direct with the builder</span><span>Fixed scope first</span><span>See the direction first</span>
+          <span>Direct with the builder</span><span>Fixed scope and price</span><span>See the direction first</span>
         </div>
         <nav className="mw-jumpbar" aria-label="Jump to page section">
           <a href="#work">Work</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a>
@@ -202,11 +204,11 @@ export default function Page() {
           ))}
         </div>
         <details className="mw-disclosure" id="impact">
-          <summary><span>What I would measure</span><small>Only where it matters</small></summary>
+          <summary><span>What gets measured</span><small>Only where it matters</small></summary>
           <div className="mw-disclosure-body">
             <div className="mw-impact-intro">
-              <h3>Measure the change, not the pitch.</h3>
-              <p>I’d rather agree a useful signal than promise a percentage before seeing the problem.</p>
+              <h3>Less waiting. Less admin. More useful work.</h3>
+              <p>I’d rather agree something you can actually measure than promise a percentage before seeing the problem.</p>
             </div>
             <div className="mw-measure-grid">
               {MEASURES.map(([title, measure]) => <div key={title}><strong>{title}</strong><span>{measure}</span></div>)}
@@ -242,7 +244,7 @@ export default function Page() {
 
         <aside className="mw-objects-strip" aria-labelledby="objects-showcase-title">
           <Image src="/objects/touch-three-hero.webp" alt="Concept visual of the black-and-white Touch Three NFC stand" width={1536} height={1024} sizes="(max-width: 760px) 32vw, 240px" unoptimized />
-          <div><p className="eyebrow">Maz Works Objects</p><h3 id="objects-showcase-title">A physical tap into a useful digital action.</h3><p>Review, booking, menu and lead-flow objects from £29.</p></div>
+          <div><p className="eyebrow">Maz Works Objects</p><h3 id="objects-showcase-title">Physical products that lead somewhere useful.</h3><p>Review, booking, menu and lead-flow objects from £29.</p></div>
           <a className="text-link" href="/3d-printing">Explore Objects <span aria-hidden="true">→</span></a>
         </aside>
 
@@ -266,6 +268,7 @@ export default function Page() {
           <div className="mw-background-grid">
             {BACKGROUND.map((item) => <article key={item.company}><p>{item.company}</p><h3>{item.role}</h3><span>{item.body}</span></article>)}
           </div>
+          <div className="mw-skill-strip"><span>Problem investigation</span><span>Process improvement</span><span>Client communication</span><span>Operational ownership</span><span>Regulated environments</span></div>
         </details>
       </section>
 
