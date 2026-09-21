@@ -22,7 +22,7 @@ export function SiteFooter() {
     <footer className="site-footer mw-site-footer mw-footer-clean">
       <div className="mw-footer-brand">
         <strong>Maz Works</strong>
-        <span>Websites, automation, tools and physical touchpoints built around real business problems.</span>
+        <span>Websites, automation and tools that fix real business problems. Physical products can point customers to reviews, booking page or menu.</span>
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
       </div>
 
