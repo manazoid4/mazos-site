@@ -3,11 +3,6 @@ import { CONTACT_EMAIL } from './site';
 import { DemoRequestForm, ServiceEnquiryLink } from './demo-request-form';
 import { SiteFooter, SiteHeader } from './site-chrome';
 
-/**
- * Services are the four outcomes from the positioning brief, in the order businesses
- * ask for them. Websites sit inside enquiry capture rather than being their own
- * category. `service` matches the ids the enquiry form reads from `?service=`.
- */
 const SERVICES = [
   {
     title: 'Capture and follow up enquiries',
@@ -32,39 +27,6 @@ const SERVICES = [
     body: 'Tap stands, keyrings and gifts that send a customer straight to your reviews, booking page or menu.',
     href: '/3d-printing',
     action: 'Explore Maz Works Objects',
-  },
-];
-
-const IMPACT = [
-  {
-    title: 'Respond faster',
-    measure: 'Measure: lead & customer response time',
-    body: 'Route enquiries quickly, alert the right person and prepare the next action so customers and prospects spend less time waiting.',
-  },
-  {
-    title: 'Give hours back to the team',
-    measure: 'Measure: admin hours per week',
-    body: 'Automate repeat data entry, copying, reporting, reminders and handoffs so employees can spend more time on useful work.',
-  },
-  {
-    title: 'Make sales follow-up consistent',
-    measure: 'Measure: follow-up coverage & time to next action',
-    body: 'Capture, qualify, remind and update pipeline stages so fewer warm opportunities go quiet and sales teams know what to do next.',
-  },
-  {
-    title: 'Increase team capacity',
-    measure: 'Measure: work handled per person',
-    body: 'Remove repetitive steps and surface the information people need so an existing team can handle more without simply working longer.',
-  },
-  {
-    title: 'Reduce dropped work',
-    measure: 'Measure: overdue tasks & missed handoffs',
-    body: 'Use clear ownership, reminders and escalation rules so next steps are visible before a forgotten task becomes a customer problem.',
-  },
-  {
-    title: 'See where time and sales are leaking',
-    measure: 'Measure: response, pipeline & workload signals',
-    body: 'Track useful signals such as response time, time-to-quote, follow-up coverage, pipeline movement and recurring bottlenecks.',
   },
 ];
 
@@ -109,11 +71,6 @@ const WORK = [
   },
 ];
 
-/**
- * One journey, four steps. This replaces the previous pair of overlapping
- * explanations (a five-step process and a separate four-step proof sequence) that
- * described the same path in different words.
- */
 const PROCESS = [
   ['01', 'Tell me the problem', 'Describe what is taking too much time. No technical detail needed.'],
   ['02', 'I show you the direction', 'A demo, a screen-share walkthrough, or a written scope and quote — whichever suits the job.'],
@@ -128,6 +85,8 @@ const OFFERS = [
     body: 'One tightly scoped improvement to a website, workflow or automation.',
     scope: 'One agreed change — not a rebuild',
     note: '£75 to start · £75 on completion',
+    service: 'unsure',
+    action: 'Ask about a Quick Win',
   },
   {
     name: 'Website Launch',
@@ -135,6 +94,8 @@ const OFFERS = [
     body: 'A focused small-business website or landing experience with a clear enquiry route and deployment.',
     scope: 'Scope and fixed price agreed before work starts',
     note: 'Best for a first site or a replacement',
+    service: 'website',
+    action: 'Ask about a website',
   },
   {
     name: 'Growth System',
@@ -142,6 +103,8 @@ const OFFERS = [
     body: 'A website or customer journey plus one useful automation or AI-assisted workflow, built with sensible controls.',
     scope: 'One workflow automated, not a whole department',
     note: 'Best for lead flow, follow-up or admin reduction',
+    service: 'automation',
+    action: 'Ask about a growth system',
   },
 ];
 
@@ -161,7 +124,6 @@ const BACKGROUND = [
 const FAQS = [
   ['Do I need to know what technology I need?', 'No. Start with the business problem. I choose the simplest approach that solves it rather than forcing a particular tool.'],
   ['What does the free demo include?', 'For a suitable problem, a small near-working version of the intended workflow so you can see the experience before paying for the full build. It is not the finished production system.'],
-  ['Can this help sales and team productivity?', 'Where the workflow suits it. Common targets are faster lead response, more consistent follow-up, fewer admin hours and fewer missed handoffs. I prefer measuring the starting point and the change rather than promising an invented percentage.'],
   ['Do you use AI in client systems?', 'Where it helps. Important workflows should not be blindly autonomous, so I use limits, validation, approval steps, suppression rules or manual fallback routes when the risk calls for it. AI where it helps. Human control where it matters.'],
   ['Can you work with systems we already use?', 'Often, yes. Existing software, APIs and workflows are checked during scoping so we reuse what already works instead of rebuilding it.'],
   ['What happens after launch?', 'I hand over the agreed work clearly. Ongoing support, extra features or further automation can be quoted separately, from £49/month with no long contract.'],
@@ -206,8 +168,24 @@ export default function Page() {
           <span>Direct with the builder</span><span>Fixed scope and price</span><span>See the direction first</span>
         </div>
         <nav className="mw-jumpbar" aria-label="Jump to page section">
-          <a href="#services">Services</a><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="/3d-printing">Objects</a><a href="#contact">Contact</a>
+          <a href="#work">Work</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="/3d-printing">Objects</a><a href="#contact">Contact</a>
         </nav>
+      </section>
+
+      <section className="mw-section mw-work" id="work" aria-labelledby="work-title">
+        <header className="mw-section-heading mw-heading-inline">
+          <div><p className="eyebrow">Selected work</p><h2 id="work-title">Built, not just proposed.</h2></div>
+          <p>Start with inspectable work, not promises. Unfinished projects are labelled as such.</p>
+        </header>
+        <div className="mw-work-list">
+          {WORK.slice(0, 2).map((project, index) => <WorkRow project={project} index={index} key={project.name} />)}
+        </div>
+        <details className="mw-disclosure mw-more-work">
+          <summary><span>Work in progress</span><small>Agent Nudge + MAZ Pocket</small></summary>
+          <div className="mw-work-list mw-work-list-secondary">
+            {WORK.slice(2).map((project, index) => <WorkRow project={project} index={index + 2} key={project.name} />)}
+          </div>
+        </details>
       </section>
 
       <section className="mw-section mw-services-compact" id="services" aria-labelledby="services-title">
@@ -224,40 +202,14 @@ export default function Page() {
             </article>
           ))}
         </div>
-
-        <details className="mw-disclosure" id="impact">
-          <summary><span>What this can improve</span><small>Outcomes and how they get measured</small></summary>
-          <div className="mw-disclosure-body">
-            <div className="mw-impact-intro"><h3>Less waiting. Less admin. More useful work.</h3><p>Automation is most useful when it changes something you can actually measure.</p></div>
-            <div className="mw-impact-grid">
-              {IMPACT.map((item) => <article key={item.title}><h3>{item.title}</h3><p>{item.body}</p><small>{item.measure}</small></article>)}
-            </div>
-          </div>
-        </details>
-
-        <aside className="mw-objects-strip" aria-labelledby="objects-showcase-title">
-          <Image src="/objects/touch-three-hero.webp" alt="Concept visual of the black-and-white Touch Three NFC stand" width={1536} height={1024} sizes="(max-width: 760px) 32vw, 240px" unoptimized />
-          <div><p className="eyebrow">Maz Works Objects</p><h3 id="objects-showcase-title">A tap that leads somewhere useful.</h3><p>Stands, keyrings and business gifts that send a customer straight to your reviews, booking page or menu. From £29.</p></div>
-          <a className="button button-dark" href="/3d-printing">Explore Objects</a>
-        </aside>
-      </section>
-
-      <section className="mw-section mw-work" id="work" aria-labelledby="work-title">
-        <header className="mw-section-heading mw-heading-inline"><div><p className="eyebrow">Selected work</p><h2 id="work-title">Built, not just proposed.</h2></div><p>Two client-facing builds first. Work still in progress is labelled as such.</p></header>
-        <div className="mw-work-list">
-          {WORK.slice(0, 2).map((project, index) => <WorkRow project={project} index={index} key={project.name} />)}
-        </div>
-        <details className="mw-disclosure mw-more-work">
-          <summary><span>Work in progress</span><small>Agent Nudge + MAZ Pocket</small></summary>
-          <div className="mw-work-list mw-work-list-secondary">
-            {WORK.slice(2).map((project, index) => <WorkRow project={project} index={index + 2} key={project.name} />)}
-          </div>
-        </details>
       </section>
 
       <section className="mw-section mw-client-flow" id="pricing" aria-labelledby="pricing-title">
         <div className="mw-compact-block mw-pricing" id="client">
-          <header className="mw-section-heading mw-heading-inline"><div><p className="eyebrow">Pricing</p><h2 id="pricing-title">Clear starting prices.</h2></div><p>Fixed scope agreed before anything is charged.</p></header>
+          <header className="mw-section-heading mw-heading-inline">
+            <div><p className="eyebrow">Pricing</p><h2 id="pricing-title">Clear starting prices.</h2></div>
+            <p>Fixed scope agreed before anything is charged.</p>
+          </header>
           <div className="mw-price-grid">
             {OFFERS.map((offer) => (
               <article className="mw-price-option" key={offer.name}>
@@ -266,6 +218,7 @@ export default function Page() {
                 <span>{offer.body}</span>
                 <em className="mw-price-scope">{offer.scope}</em>
                 <small>{offer.note}</small>
+                <ServiceEnquiryLink service={offer.service}>{offer.action} <span aria-hidden="true">→</span></ServiceEnquiryLink>
               </article>
             ))}
           </div>
@@ -275,6 +228,12 @@ export default function Page() {
             <a className="button button-signal" href="#contact">Tell me the problem</a>
           </div>
         </div>
+
+        <aside className="mw-objects-strip" aria-labelledby="objects-showcase-title">
+          <Image src="/objects/touch-three-hero.webp" alt="Concept visual of the black-and-white Touch Three NFC stand" width={1536} height={1024} sizes="(max-width: 760px) 32vw, 240px" unoptimized />
+          <div><p className="eyebrow">Maz Works Objects</p><h3 id="objects-showcase-title">A tap that leads somewhere useful.</h3><p>Stands, keyrings and business gifts that send a customer straight to your reviews, booking page or menu. From £29.</p></div>
+          <a className="button button-dark" href="/3d-printing">Explore Objects</a>
+        </aside>
 
         <div className="mw-compact-block" id="process">
           <details className="mw-disclosure">
@@ -304,7 +263,10 @@ export default function Page() {
       </section>
 
       <section className="mw-section mw-faq" aria-labelledby="faq-title">
-        <header className="mw-section-heading mw-heading-inline"><div><p className="eyebrow">Questions</p><h2 id="faq-title">Useful answers, when you need them.</h2></div><p>Only open the ones relevant to you.</p></header>
+        <header className="mw-section-heading mw-heading-inline">
+          <div><p className="eyebrow">Questions</p><h2 id="faq-title">Useful answers, when you need them.</h2></div>
+          <p>Only open the ones relevant to you.</p>
+        </header>
         <div className="mw-faq-list">
           {FAQS.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}
         </div>
