@@ -70,8 +70,6 @@ export function DemoRequestForm() {
     const nextStep = String(data.get('nextStep') || DEFAULT_NEXT_STEP).trim();
     const honey = String(data.get('_honey') || '').trim();
 
-    // Native `required` accepts whitespace, so re-check here and say what is missing
-    // instead of silently doing nothing.
     const missing = !name ? 'name' : !email ? 'email' : !problem ? 'problem' : '';
     if (missing) {
       setValidationError(
@@ -193,7 +191,7 @@ export function DemoRequestForm() {
         <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
           {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Send enquiry'}
         </button>
-        <p>Goes straight to my inbox. No account or booking step.</p>
+        <p>Sent directly from this form to my inbox. No account or booking step.</p>
         <p className="mw-form-status mw-form-error" role="alert">{validationError}</p>
         <p className="mw-form-status" role="status" aria-live="polite">
           {submitState === 'sent' && (
