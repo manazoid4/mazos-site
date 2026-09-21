@@ -25,12 +25,16 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
     answer: 'For a suitable problem, it is a small near-working version of the intended workflow so you can understand the direction before paying for a full build. It is not the finished production system.',
   },
   {
-    question: 'Can you work with systems we already use?',
-    answer: 'Often, yes. Existing software, APIs and workflows are checked during scoping so useful parts can be reused instead of rebuilt for the sake of it.',
+    question: 'Can this help sales and team productivity?',
+    answer: 'Where the workflow suits it. The useful question is what changes after launch, so I agree the signals worth measuring instead of promising an invented percentage.',
   },
   {
     question: 'Do you use AI in client systems?',
     answer: 'Where it genuinely helps. Important workflows should not be blindly autonomous, so I use limits, validation, approval steps, suppression rules or manual fallback routes when the risk calls for it.',
+  },
+  {
+    question: 'Can you work with systems we already use?',
+    answer: 'Often, yes. Existing software, APIs and workflows are checked during scoping so useful parts can be reused instead of rebuilt for the sake of it.',
   },
   {
     question: 'How do you measure whether a change helped?',
@@ -46,4 +50,10 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
 ];
 
-export const HOMEPAGE_FAQS = MAZ_WORKS_FAQS.slice(1, 6);
+export const HOMEPAGE_FAQS = [
+  MAZ_WORKS_FAQS[1],
+  MAZ_WORKS_FAQS[4],
+  MAZ_WORKS_FAQS[5],
+  MAZ_WORKS_FAQS[6],
+  MAZ_WORKS_FAQS[7],
+];
