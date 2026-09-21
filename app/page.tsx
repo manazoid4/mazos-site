@@ -30,6 +30,15 @@ const SERVICES = [
   },
 ];
 
+const MEASURES = [
+  ['Respond faster', 'lead & customer response time'],
+  ['Give hours back to the team', 'admin hours per week'],
+  ['Make sales follow-up consistent', 'follow-up coverage & time to next action'],
+  ['Increase team capacity', 'work handled per person'],
+  ['Reduce dropped work', 'overdue tasks & missed handoffs'],
+  ['See where time and sales are leaking', 'response, time-to-quote, pipeline & workload signals'],
+];
+
 const WORK = [
   {
     name: 'JobFilter',
@@ -124,6 +133,7 @@ const BACKGROUND = [
 const FAQS = [
   ['Do I need to know what technology I need?', 'No. Start with the business problem. I choose the simplest approach that solves it rather than forcing a particular tool.'],
   ['What does the free demo include?', 'For a suitable problem, a small near-working version of the intended workflow so you can see the experience before paying for the full build. It is not the finished production system.'],
+  ['Can this help sales and team productivity?', 'Where the workflow suits it. The useful question is what changes after launch, so I agree the signals worth measuring instead of promising an invented percentage.'],
   ['Do you use AI in client systems?', 'Where it helps. Important workflows should not be blindly autonomous, so I use limits, validation, approval steps, suppression rules or manual fallback routes when the risk calls for it. AI where it helps. Human control where it matters.'],
   ['Can you work with systems we already use?', 'Often, yes. Existing software, APIs and workflows are checked during scoping so we reuse what already works instead of rebuilding it.'],
   ['What happens after launch?', 'I hand over the agreed work clearly. Ongoing support, extra features or further automation can be quoted separately, from £49/month with no long contract.'],
@@ -202,6 +212,18 @@ export default function Page() {
             </article>
           ))}
         </div>
+        <details className="mw-disclosure" id="impact">
+          <summary><span>What gets measured</span><small>Only if it matters to the job</small></summary>
+          <div className="mw-disclosure-body">
+            <div className="mw-impact-intro">
+              <h3>Less waiting. Less admin. More useful work.</h3>
+              <p>I&apos;d rather agree something you can actually measure than promise a percentage before seeing the problem.</p>
+            </div>
+            <div className="mw-measure-grid">
+              {MEASURES.map(([title, measure]) => <div key={title}><strong>{title}</strong><span>{measure}</span></div>)}
+            </div>
+          </div>
+        </details>
       </section>
 
       <section className="mw-section mw-client-flow" id="pricing" aria-labelledby="pricing-title">
