@@ -9,10 +9,9 @@ export function SiteHeader() {
       </a>
       <nav aria-label="Primary navigation">
         <a href="/#work">Work</a>
-        <a href="/demos">Demos</a>
         <a href="/#services">Services</a>
-        <a className="mw-nav-objects" href="/3d-printing">Objects</a>
-        <a className="mw-nav-cta" href="/#contact">Get a demo</a>
+        <a href="/#pricing">Pricing</a>
+        <a className="mw-nav-cta" href="/#contact">Contact</a>
       </nav>
     </header>
   );
@@ -20,15 +19,29 @@ export function SiteHeader() {
 
 export function SiteFooter() {
   return (
-    <footer className="site-footer mw-site-footer">
-      <div><strong>Maz Works</strong><span>Websites, useful systems and physical customer touchpoints built around real business problems.</span></div>
-      <div><span>Manazir Hussain / UK</span><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></div>
-      <div>
-        <a href="/demos">Private demos <span aria-hidden="true">→</span></a>
-        <a href="/3d-printing">Maz Works Objects <span aria-hidden="true">→</span></a>
-        <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
-        <a href={GITHUB_URL} target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-        <span>© 2026</span>
+    <footer className="site-footer mw-site-footer mw-footer-clean">
+      <div className="mw-footer-brand">
+        <strong>Maz Works</strong>
+        <span>Websites, automation and tools that fix real business problems. Physical products can point customers to reviews, booking page or menu.</span>
+        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+      </div>
+
+      <nav className="mw-footer-links" aria-label="Maz Works links">
+        <a href="/#work">Work</a>
+        <a href="/#services">Services</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/3d-printing">Objects</a>
+        <a href="/demos">Private demos</a>
+        <a href="/faq">FAQ</a>
+        <a href="/whats-new">What&apos;s New</a>
+        <a href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20feedback`}>Feedback</a>
+        <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        <a href={GITHUB_URL} target="_blank" rel="noreferrer">GitHub ↗</a>
+      </nav>
+
+      <div className="mw-footer-bottom">
+        <span>© 2026 Maz Works</span>
+        <span>Direct with the builder · fixed scope first</span>
       </div>
     </footer>
   );
