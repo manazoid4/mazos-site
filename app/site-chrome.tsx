@@ -8,9 +8,9 @@ export function SiteHeader() {
         <span><strong>Maz Works</strong><small>Manazir Hussain</small></span>
       </a>
       <nav aria-label="Primary navigation">
-        <a href="/#services">Services</a>
         <a href="/#work">Work</a>
-        <a className="mw-nav-objects" href="/3d-printing">Objects</a>
+        <a href="/#services">Services</a>
+        <a href="/#pricing">Pricing</a>
         <a className="mw-nav-cta" href="/#contact">Contact</a>
       </nav>
     </header>
