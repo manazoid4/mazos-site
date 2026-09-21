@@ -41,6 +41,38 @@
   gap: 16px;
 }
 
+/* Keep measurement language useful without turning it into six full claim cards. */
+.mw-measure-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--soft-line);
+}
+
+.mw-measure-grid > div {
+  padding: 15px 18px 15px 0;
+  display: grid;
+  gap: 5px;
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.mw-measure-grid strong {
+  font-size: .82rem;
+  font-weight: 650;
+}
+
+.mw-measure-grid span {
+  color: var(--muted);
+  font-size: .72rem;
+}
+
+/* Price cards should end with an action, not information only. */
+.mw-price-option > .mw-service-link {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--soft-line);
+}
+
 .mw-form-error:empty,
 .objects-form-error:empty {
   display: none;
@@ -119,5 +151,13 @@ button.text-link {
 
   .mw-form-options > summary small {
     text-align: left;
+  }
+
+  .mw-measure-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mw-measure-grid > div {
+    padding-right: 0;
   }
 }
