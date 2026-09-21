@@ -1,0 +1,475 @@
+/*
+ * Maz Works clean pass.
+ * Loaded last so it can calm the accumulated component styles without
+ * rewriting the behaviour or the resource pages.
+ */
+
+main {
+  width: min(1160px, calc(100% - 40px));
+}
+
+.mw-site-header {
+  min-height: 66px;
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-site-header nav {
+  gap: 20px;
+}
+
+.mw-nav-cta {
+  min-height: 40px !important;
+  padding-inline: 12px;
+  border-color: var(--soft-line);
+  background: transparent;
+  color: var(--ink);
+}
+
+.mw-nav-cta:hover {
+  border-color: var(--line);
+  background: var(--signal);
+}
+
+.mw-hero {
+  padding-top: clamp(58px, 7vw, 84px);
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-hero-copy {
+  max-width: 850px;
+}
+
+.mw-hero h1 {
+  max-width: 850px;
+  font-size: clamp(2.5rem, 5vw, 4.35rem);
+  line-height: 1;
+}
+
+.mw-lede {
+  max-width: 680px;
+  margin-top: 18px;
+  font-size: clamp(.98rem, 1.3vw, 1.08rem);
+}
+
+.mw-actions {
+  margin-top: 22px;
+}
+
+.button {
+  min-height: 46px;
+  padding: 10px 16px;
+}
+
+.mw-hero-note,
+.mw-hero-proof {
+  max-width: 620px;
+}
+
+.mw-capabilities {
+  margin-top: 28px;
+  padding: 15px 0 17px;
+  gap: 0;
+  border-top: 1px solid var(--soft-line);
+}
+
+.mw-capabilities span {
+  padding: 0;
+  border: 0;
+  color: var(--muted);
+  letter-spacing: .025em;
+}
+
+.mw-capabilities span + span::before {
+  content: '·';
+  margin-inline: 10px;
+  color: var(--soft-line);
+}
+
+.mw-hero-update {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 9px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: .72rem;
+}
+
+.mw-hero-update > span {
+  width: 7px;
+  height: 7px;
+  overflow: hidden;
+  display: inline-block;
+  border-radius: 50%;
+  background: var(--signal);
+  color: transparent;
+}
+
+.mw-hero-update a {
+  color: var(--ink);
+  font-weight: 650;
+  text-decoration-color: var(--signal);
+}
+
+.mw-hero-update small {
+  color: var(--muted);
+}
+
+.mw-section {
+  padding: clamp(56px, 7vw, 78px) 0;
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-section-heading {
+  margin-bottom: clamp(24px, 3.5vw, 34px);
+}
+
+.mw-heading-inline {
+  grid-template-columns: minmax(0, 1fr) minmax(220px, .48fr);
+  gap: clamp(24px, 5vw, 56px);
+}
+
+.mw-section-heading h2,
+.mw-contact h2 {
+  font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+}
+
+/* Services should read like three capabilities, not three boxed products. */
+.mw-service-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(22px, 4vw, 42px);
+  border: 0;
+}
+
+.mw-service-card,
+.mw-service-card:first-child,
+.mw-service-card:nth-child(2),
+.mw-service-card:last-child {
+  min-height: 0;
+  padding: 18px 0 0;
+  border: 0 !important;
+  border-top: 1px solid var(--soft-line) !important;
+}
+
+.mw-service-card h3 {
+  font-size: clamp(1.25rem, 1.8vw, 1.65rem);
+}
+
+.mw-service-card p {
+  max-width: 340px;
+  margin-top: 9px;
+}
+
+.mw-service-link {
+  margin-top: 10px;
+}
+
+.mw-disclosure {
+  margin-top: 18px;
+  border-top-color: var(--soft-line);
+  border-bottom: 0;
+}
+
+.mw-disclosure > summary {
+  min-height: 52px;
+  padding-block: 11px;
+}
+
+.mw-disclosure-body,
+.mw-disclosure-copy {
+  padding-top: 10px;
+}
+
+.mw-measure-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top-color: var(--soft-line);
+}
+
+.mw-measure-grid > div {
+  padding-block: 13px;
+}
+
+/* Proof remains prominent, but the rows are quieter and easier to scan. */
+.mw-work-list {
+  border-top-color: var(--soft-line);
+}
+
+.mw-work-row {
+  min-height: 0;
+  padding: 22px 0;
+  grid-template-columns: 34px minmax(0, 1fr) 155px;
+  gap: 18px;
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-work-main h3 {
+  font-size: clamp(1.55rem, 2.6vw, 2.25rem);
+}
+
+.mw-work-problem {
+  margin-top: 8px;
+  font-size: .9rem;
+}
+
+.mw-work-summary {
+  margin-top: 6px;
+  font-size: .84rem;
+}
+
+.mw-work-role {
+  font-size: .74rem;
+}
+
+/* Pricing stays transparent without presenting three heavy boxes. */
+.mw-price-grid {
+  gap: clamp(22px, 4vw, 42px);
+  border: 0;
+}
+
+.mw-price-option,
+.mw-price-option:first-child,
+.mw-price-option:last-child {
+  min-height: 0;
+  padding: 18px 0 0 !important;
+  border: 0 !important;
+  border-top: 1px solid var(--soft-line) !important;
+}
+
+.mw-price-option > strong {
+  font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+}
+
+.mw-price-option > span {
+  margin-top: 10px;
+}
+
+.mw-price-option > small {
+  margin-top: 12px;
+  padding-top: 0;
+}
+
+.mw-price-option > .mw-service-link {
+  margin-top: 12px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.mw-pricing-foot {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--soft-line);
+}
+
+.mw-objects-strip {
+  margin-top: 0;
+  min-height: 0;
+  padding: 24px 0;
+  grid-template-columns: 160px minmax(0, 1fr) auto;
+  gap: 24px;
+  border-top: 1px solid var(--soft-line);
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.mw-objects-strip img {
+  width: 160px;
+  height: 108px;
+}
+
+.mw-objects-strip h3 {
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+}
+
+.mw-about {
+  display: block;
+}
+
+.mw-about > .mw-section-heading {
+  margin-bottom: 18px;
+}
+
+.mw-faq-list details {
+  border-color: var(--soft-line);
+}
+
+.mw-faq-more {
+  margin-top: 10px;
+  justify-content: flex-start;
+}
+
+.mw-contact {
+  padding: clamp(58px, 7vw, 82px) 0;
+  border-top: 0;
+}
+
+/* The JobFilter-derived resource pages stay useful but lose the boxed-release feel. */
+.mw-resource-hero {
+  padding: clamp(52px, 7vw, 78px) 0 clamp(38px, 5vw, 56px);
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-resource-row {
+  padding: 22px 0;
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-resource-row h2 {
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+}
+
+.mw-resource-cta {
+  padding: clamp(36px, 5vw, 54px) 0;
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-updates-layout {
+  gap: clamp(26px, 5vw, 54px);
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-update-card {
+  border-top-color: var(--soft-line);
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-update-meta span {
+  padding: 0;
+  border: 0;
+  background: transparent !important;
+}
+
+.mw-update-meta span:first-child {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--signal);
+  text-decoration-thickness: 3px;
+}
+
+/* One compact footer: secondary routes stay discoverable without three visual columns. */
+.mw-site-footer.mw-footer-clean {
+  padding: 30px 0 22px;
+  display: grid;
+  grid-template-columns: minmax(230px, .8fr) minmax(0, 1.2fr);
+  align-items: start;
+  gap: 28px 48px;
+  border-top: 1px solid var(--soft-line);
+}
+
+.mw-footer-brand {
+  gap: 6px;
+}
+
+.mw-footer-brand > span,
+.mw-footer-brand > a {
+  max-width: 370px;
+}
+
+.mw-footer-links {
+  display: flex;
+  justify-content: flex-end;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+}
+
+.mw-footer-links a {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--muted);
+  font-size: .74rem;
+}
+
+.mw-footer-links a:hover {
+  color: var(--ink);
+}
+
+.mw-footer-bottom {
+  grid-column: 1 / -1;
+  padding-top: 14px;
+  border-top-color: var(--soft-line);
+}
+
+@media (max-width: 900px) {
+  .mw-service-grid,
+  .mw-price-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .mw-work-row {
+    grid-template-columns: 30px 1fr;
+  }
+
+  .mw-work-links {
+    grid-column: 2;
+  }
+
+  .mw-objects-strip {
+    grid-template-columns: 120px 1fr;
+  }
+
+  .mw-objects-strip img {
+    width: 120px;
+    height: 90px;
+  }
+
+  .mw-objects-strip .text-link {
+    grid-column: 2;
+  }
+
+  .mw-site-footer.mw-footer-clean {
+    grid-template-columns: 1fr;
+  }
+
+  .mw-footer-links {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 620px) {
+  main {
+    width: min(100% - 28px, 1160px);
+  }
+
+  .mw-hero {
+    padding-top: 40px;
+  }
+
+  .mw-hero h1 {
+    font-size: clamp(2.25rem, 11vw, 3.3rem);
+  }
+
+  .mw-capabilities span + span::before {
+    margin-inline: 7px;
+  }
+
+  .mw-section {
+    padding-block: 44px;
+  }
+
+  .mw-measure-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mw-objects-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .mw-objects-strip img {
+    width: 136px;
+    height: 92px;
+  }
+
+  .mw-objects-strip .text-link {
+    grid-column: 1;
+  }
+
+  .mw-footer-links {
+    gap-inline: 14px;
+  }
+
+  .mw-footer-bottom {
+    gap: 6px;
+  }
+}

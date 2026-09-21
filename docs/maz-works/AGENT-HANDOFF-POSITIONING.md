@@ -1,3 +1,5 @@
+> Current recovery and release gates: [RECOVERY-CONTEXT-2026-09-20.md](RECOVERY-CONTEXT-2026-09-20.md). The dated status below is historical, not current release acceptance.
+
 # Maz Works — positioning brief and agent handoff
 
 **Owner of this file:** Agent A (positioning, conversion, technical).
@@ -99,7 +101,11 @@ Current ladder, unchanged:
 | Support | From £49/month, optional | No long contract; third-party usage costs separate |
 | Objects — Touch One / Touch Three / Touch + Carry | £29 / £49 / £79 | Artwork add-on +£10 per bundle; delivery and nonstandard requests confirmed separately |
 
-### Duplicate found: Quick Win vs Website Rescue Sprint
+### Duplicate found: Quick Win vs Website Rescue Sprint — RESOLVED 2026-09-19
+
+Resolved in the content pass: "Website Rescue Sprint" is gone and Quick Win is the only
+£150 fixed-scope package. A test now asserts the name cannot come back.
+
 
 `app/page.tsx` defines both `OFFERS[0]` — *Quick Win, £150 fixed, "One tightly scoped
 improvement to a website, workflow or automation"* — and `CLIENT_PROOF_STEPS[3]` —
@@ -115,6 +121,14 @@ Quick Win. No price changes, no new commitments.
 before work starts. Growth System includes one workflow, not a department.
 
 ---
+
+## 3b. Agent B's scope was absorbed by Agent A (2026-09-19)
+
+Agent B ran out of usage budget ~13 minutes in, during reconnaissance. It pushed no
+branch and changed no files, so there was nothing to merge or reconcile. With B out of
+the session, the one-editor-per-file split below had no second editor to protect
+against, so A took the content/typography/composition pass as well. The ownership table
+still describes the intended split if a second agent rejoins.
 
 ## 4. File ownership — one editor per file
 

@@ -21,7 +21,8 @@ test('private demos have a prominent plain-English public page', async () => {
     readFile(path.join(out, 'sitemap.xml'), 'utf8'),
   ]);
 
-  assert.match(home, /href="\/demos"[^>]*>Demos</);
+  // The header nav was trimmed to four items; /demos stays reachable from the footer.
+  assert.match(home, /href="\/demos"[^>]*>Private demos/);
   assert.match(demos, /See the idea working before you pay for the full build/i);
   assert.match(demos, /Built around your business/i);
   assert.match(demos, /Private link \+ access code/i);
