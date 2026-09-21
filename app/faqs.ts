@@ -30,7 +30,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'Do you use AI in client systems?',
-    answer: 'Where it genuinely helps. Important workflows should not be blindly autonomous, so I use limits, validation, approval steps, suppression rules or manual fallback routes when the risk calls for it.',
+    answer: 'Where it genuinely helps. Important workflows should not be blindly autonomous, so I use limits, validation, approval steps, suppression rules or manual fallback routes when the risk calls for it. AI where it helps. Human control where it matters.',
   },
   {
     question: 'Can you work with systems we already use?',
