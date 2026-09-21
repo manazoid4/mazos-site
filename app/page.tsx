@@ -2,6 +2,8 @@ import Image from 'next/image';
 import { CONTACT_EMAIL } from './site';
 import { DemoRequestForm, ServiceEnquiryLink } from './demo-request-form';
 import { SiteFooter, SiteHeader } from './site-chrome';
+import { HOMEPAGE_FAQS } from './faqs';
+import { formatUpdateDate, LATEST_MAZ_WORKS_UPDATE } from './updates';
 
 const SERVICES = [
   {
@@ -130,15 +132,6 @@ const BACKGROUND = [
   },
 ];
 
-const FAQS = [
-  ['Do I need to know what technology I need?', 'No. Start with the business problem. I choose the simplest approach that solves it rather than forcing a particular tool.'],
-  ['What does the free demo include?', 'For a suitable problem, a small near-working version of the intended workflow so you can see the experience before paying for the full build. It is not the finished production system.'],
-  ['Can this help sales and team productivity?', 'Where the workflow suits it. The useful question is what changes after launch, so I agree the signals worth measuring instead of promising an invented percentage.'],
-  ['Do you use AI in client systems?', 'Where it helps. Important workflows should not be blindly autonomous, so I use limits, validation, approval steps, suppression rules or manual fallback routes when the risk calls for it. AI where it helps. Human control where it matters.'],
-  ['Can you work with systems we already use?', 'Often, yes. Existing software, APIs and workflows are checked during scoping so we reuse what already works instead of rebuilding it.'],
-  ['What happens after launch?', 'I hand over the agreed work clearly. Ongoing support, extra features or further automation can be quoted separately, from £49/month with no long contract.'],
-];
-
 function WorkRow({ project, index }: { project: (typeof WORK)[number]; index: number }) {
   return (
     <article className="mw-work-row" id={project.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}>
@@ -181,6 +174,15 @@ export default function Page() {
           <a href="#work">Work</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="/3d-printing">Objects</a><a href="#contact">Contact</a>
         </nav>
       </section>
+
+      <aside className="mw-latest-update" aria-label="Latest Maz Works update">
+        <span>{LATEST_MAZ_WORKS_UPDATE.label}</span>
+        <div>
+          <strong>{LATEST_MAZ_WORKS_UPDATE.title}</strong>
+          <small>{formatUpdateDate(LATEST_MAZ_WORKS_UPDATE.publishedAt)} · {LATEST_MAZ_WORKS_UPDATE.summary}</small>
+        </div>
+        <a href={`/whats-new#${LATEST_MAZ_WORKS_UPDATE.id}`}>What&apos;s new <span aria-hidden="true">→</span></a>
+      </aside>
 
       <section className="mw-section mw-work" id="work" aria-labelledby="work-title">
         <header className="mw-section-heading mw-heading-inline">
@@ -285,13 +287,20 @@ export default function Page() {
       </section>
 
       <section className="mw-section mw-faq" aria-labelledby="faq-title">
-        <header className="mw-section-heading mw-heading-inline">
-          <div><p className="eyebrow">Questions</p><h2 id="faq-title">Useful answers, when you need them.</h2></div>
-          <p>Only open the ones relevant to you.</p>
-        </header>
+        <header className="mw-section-heading mw-heading-inline"><div><p className="eyebrow">Questions</p><h2 id="faq-title">Useful answers, when you need them.</h2></div><p>Five common questions here. The full FAQ has the rest.</p></header>
         <div className="mw-faq-list">
-          {FAQS.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}
+          {HOMEPAGE_FAQS.map((faq) => <details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}
         </div>
+        <div className="mw-faq-more"><a className="text-link" href="/faq">Read all FAQ answers <span aria-hidden="true">→</span></a></div>
+      </section>
+
+      <section className="mw-feedback-strip" aria-labelledby="feedback-title">
+        <div>
+          <p className="eyebrow">Tell me straight</p>
+          <h2 id="feedback-title">Something confusing, missing or not useful?</h2>
+          <p>This site is part of the product. If a service is unclear, a page wastes your time, or there is something you would genuinely pay to have fixed, tell me directly.</p>
+        </div>
+        <a className="button button-dark" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20feedback`}>Send feedback</a>
       </section>
 
       <section className="mw-contact" id="contact" aria-labelledby="contact-title">
