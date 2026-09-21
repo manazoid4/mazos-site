@@ -21,7 +21,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
     answer: 'Tell me the problem. Depending on the job, the useful next step might be a short answer, a walkthrough, a written scope and quote, or a small demo. You do not need to book a call just to explain what is wrong.',
   },
   {
-    question: 'What does a free demo include?',
+    question: 'What does the free demo include?',
     answer: 'For a suitable problem, it is a small near-working version of the intended workflow so you can understand the direction before paying for a full build. It is not the finished production system.',
   },
   {
@@ -30,7 +30,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'Do you use AI in client systems?',
-    answer: 'Where it genuinely helps. Important workflows should not be blindly autonomous, so I use limits, validation, approval steps, suppression rules or manual fallback routes when the risk calls for it.',
+    answer: 'Where it genuinely helps. Important workflows should not be blindly autonomous, so I use limits, validation, approval steps, suppression rules or manual fallback routes when the risk calls for it. AI where it helps. Human control where it matters.',
   },
   {
     question: 'Can you work with systems we already use?',
