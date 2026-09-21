@@ -1,0 +1,88 @@
+[
+  {
+    "mode": "javascript-disabled",
+    "route": "/",
+    "result": "Native POST carries current choices; no enquiry data in URL; CSP allows only intended form destination",
+    "sent": {
+      "method": "POST",
+      "url": "https://formsubmit.co/manazoid4@gmail.com",
+      "fields": {
+        "_subject": "Maz Works — business enquiry",
+        "_template": "table",
+        "name": "Example Customer",
+        "email": "customer@example.com",
+        "problem": "Example admin workflow enquiry",
+        "business": "",
+        "service": "automation",
+        "nextStep": "A quote and scope for a specific job",
+        "_honey": ""
+      }
+    }
+  },
+  {
+    "mode": "javascript-disabled",
+    "route": "/3d-printing",
+    "result": "Native POST carries current choices; no enquiry data in URL; CSP allows only intended form destination",
+    "sent": {
+      "method": "POST",
+      "url": "https://formsubmit.co/manazoid4@gmail.com",
+      "fields": {
+        "_subject": "Maz Works Objects — quote enquiry",
+        "_template": "table",
+        "bundle": "touch-carry",
+        "customer_action_reviews": "Google reviews",
+        "customer_action_bookings": "Bookings",
+        "businessName": "Example Shop",
+        "artwork": "yes",
+        "name": "Example Customer",
+        "email": "customer@example.com",
+        "destinationLinks": "",
+        "notes": "Three bundles please; confirm delivery separately.",
+        "_honey": ""
+      }
+    }
+  },
+  {
+    "mode": "javascript-blocked",
+    "route": "/",
+    "result": "Native POST carries current choices; no enquiry data in URL; CSP allows only intended form destination",
+    "sent": {
+      "method": "POST",
+      "url": "https://formsubmit.co/manazoid4@gmail.com",
+      "fields": {
+        "_subject": "Maz Works — business enquiry",
+        "_template": "table",
+        "name": "Example Customer",
+        "email": "customer@example.com",
+        "problem": "Example admin workflow enquiry",
+        "business": "",
+        "service": "automation",
+        "nextStep": "A quote and scope for a specific job",
+        "_honey": ""
+      }
+    }
+  },
+  {
+    "mode": "javascript-blocked",
+    "route": "/3d-printing",
+    "result": "Native POST carries current choices; no enquiry data in URL; CSP allows only intended form destination",
+    "sent": {
+      "method": "POST",
+      "url": "https://formsubmit.co/manazoid4@gmail.com",
+      "fields": {
+        "_subject": "Maz Works Objects — quote enquiry",
+        "_template": "table",
+        "bundle": "touch-carry",
+        "customer_action_reviews": "Google reviews",
+        "customer_action_bookings": "Bookings",
+        "businessName": "Example Shop",
+        "artwork": "yes",
+        "name": "Example Customer",
+        "email": "customer@example.com",
+        "destinationLinks": "",
+        "notes": "Three bundles please; confirm delivery separately.",
+        "_honey": ""
+      }
+    }
+  }
+]
