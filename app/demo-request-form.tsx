@@ -30,7 +30,7 @@ export function ServiceEnquiryLink({ service, children }: { service: string; chi
     window.history.pushState(null, '', event.currentTarget.href);
     window.dispatchEvent(new Event('maz-enquiry-service'));
     document.getElementById('contact')?.scrollIntoView();
-    document.querySelector<HTMLElement>('.mw-demo-form [name="service"]')?.focus({ preventScroll: true });
+    document.querySelector<HTMLElement>('.mw-demo-form [name="problem"]')?.focus({ preventScroll: true });
   }}>{children}</a>;
 }
 
@@ -70,8 +70,6 @@ export function DemoRequestForm() {
     const nextStep = String(data.get('nextStep') || DEFAULT_NEXT_STEP).trim();
     const honey = String(data.get('_honey') || '').trim();
 
-    // Native `required` accepts whitespace, so re-check here and say what is missing
-    // instead of silently doing nothing.
     const missing = !name ? 'name' : !email ? 'email' : !problem ? 'problem' : '';
     if (missing) {
       setValidationError(
@@ -124,8 +122,12 @@ export function DemoRequestForm() {
     setSubmitState('error');
   }
 
+  const selectedServiceLabel = ENQUIRY_SERVICES.find((option) => option.id === service)?.label ?? 'Not sure yet';
+
   return (
     <form className="mw-demo-form" ref={formRef} onSubmit={submitRequest}>
+      <p className="mw-form-kicker">Name, email and the problem are enough. Add the rest only if it helps.</p>
+
       <div className="mw-form-row">
         <label>
           <span>Name</span>
@@ -138,23 +140,6 @@ export function DemoRequestForm() {
       </div>
 
       <label>
-        <span>Business <small>optional</small></span>
-        <input name="business" autoComplete="organization" disabled={submitState === 'sending'} />
-      </label>
-
-      <label>
-        <span>What do you need help with?</span>
-        <select
-          name="service"
-          value={service}
-          onChange={(event) => setService(event.target.value as EnquiryServiceId)}
-          disabled={submitState === 'sending'}
-        >
-          {ENQUIRY_SERVICES.map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}
-        </select>
-      </label>
-
-      <label>
         <span>What do you want to improve?</span>
         <textarea
           name="problem"
@@ -165,12 +150,37 @@ export function DemoRequestForm() {
         />
       </label>
 
-      <label>
-        <span>What would be most useful next?</span>
-        <select name="nextStep" defaultValue={DEFAULT_NEXT_STEP} disabled={submitState === 'sending'}>
-          {ENQUIRY_NEXT_STEPS.map((option) => <option key={option}>{option}</option>)}
-        </select>
-      </label>
+      <details className="mw-form-options">
+        <summary>
+          <span>Optional details</span>
+          <small>{service === DEFAULT_SERVICE_ID ? 'Business, service and preferred next step' : `Selected: ${selectedServiceLabel}`}</small>
+        </summary>
+        <div className="mw-form-options-body">
+          <label>
+            <span>Business <small>optional</small></span>
+            <input name="business" autoComplete="organization" disabled={submitState === 'sending'} />
+          </label>
+
+          <label>
+            <span>What do you need help with?</span>
+            <select
+              name="service"
+              value={service}
+              onChange={(event) => setService(event.target.value as EnquiryServiceId)}
+              disabled={submitState === 'sending'}
+            >
+              {ENQUIRY_SERVICES.map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}
+            </select>
+          </label>
+
+          <label>
+            <span>What would be most useful next?</span>
+            <select name="nextStep" defaultValue={DEFAULT_NEXT_STEP} disabled={submitState === 'sending'}>
+              {ENQUIRY_NEXT_STEPS.map((option) => <option key={option}>{option}</option>)}
+            </select>
+          </label>
+        </div>
+      </details>
 
       <label className="mw-honeypot" aria-hidden="true">
         <span>Website</span>
@@ -181,7 +191,7 @@ export function DemoRequestForm() {
         <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
           {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Send enquiry'}
         </button>
-        <p>Your enquiry is sent directly from this form. No account or booking system required.</p>
+        <p>Sent directly from this form to my inbox. No account or booking step.</p>
         <p className="mw-form-status mw-form-error" role="alert">{validationError}</p>
         <p className="mw-form-status" role="status" aria-live="polite">
           {submitState === 'sent' && (

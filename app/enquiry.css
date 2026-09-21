@@ -4,6 +4,75 @@
  * layout stylesheets.
  */
 
+.mw-form-kicker {
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: .78rem;
+  line-height: 1.45;
+}
+
+.mw-form-options {
+  border-top: 1px solid var(--soft-line);
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.mw-form-options > summary {
+  min-height: 48px;
+  padding-block: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.mw-form-options > summary small {
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 500;
+  text-align: right;
+}
+
+.mw-form-options-body {
+  padding: 4px 0 16px;
+  display: grid;
+  gap: 16px;
+}
+
+/* Keep measurement language useful without turning it into six full claim cards. */
+.mw-measure-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--soft-line);
+}
+
+.mw-measure-grid > div {
+  padding: 15px 18px 15px 0;
+  display: grid;
+  gap: 5px;
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.mw-measure-grid strong {
+  font-size: .82rem;
+  font-weight: 650;
+}
+
+.mw-measure-grid span {
+  color: var(--muted);
+  font-size: .72rem;
+}
+
+/* Price cards should end with an action, not information only. */
+.mw-price-option > .mw-service-link {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--soft-line);
+}
+
 .mw-form-error:empty,
 .objects-form-error:empty {
   display: none;
@@ -72,5 +141,23 @@ button.text-link {
   .mw-demo-form select,
   .mw-demo-form textarea {
     font-size: 16px;
+  }
+
+  .mw-form-options > summary {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mw-form-options > summary small {
+    text-align: left;
+  }
+
+  .mw-measure-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mw-measure-grid > div {
+    padding-right: 0;
   }
 }
