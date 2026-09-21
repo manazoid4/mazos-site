@@ -153,7 +153,7 @@ test('process, AI guardrails and FAQ stay easy to understand', async () => {
   assert.doesNotMatch(html, /client-proof-steps/);
   assert.match(html, /AI where it helps\. Human control where it matters/);
   assert.match(html, /Do I need to know what technology I need/);
-  assert.match(html, /What does the free demo include/);
+  assert.match(html, /What does a free demo include/);
   assert.match(html, /Can this help sales and team productivity/);
 });
 
