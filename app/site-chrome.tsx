@@ -31,6 +31,7 @@ export function SiteFooter() {
         <a href="/#services">Services</a>
         <a href="/#pricing">Pricing</a>
         <a href="/3d-printing">Objects</a>
+        <a href="/demos">Private demos</a>
         <a href="/faq">FAQ</a>
         <a href="/whats-new">What&apos;s New</a>
         <a href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20feedback`}>Feedback</a>
