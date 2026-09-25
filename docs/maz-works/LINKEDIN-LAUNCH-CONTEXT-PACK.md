@@ -3,7 +3,7 @@
 **For:** Agent B (content, design, information structure), resuming after a
 usage-budget stop.
 **Written by:** Agent A (positioning, conversion, technical).
-**Aligned with `main` at:** `6c40269` (PR #47), 25 Sep 2026. This file has been wrong
+**Aligned with `main` at:** `eaf66f4` (PR #50), 25 Sep 2026. This file has been wrong
 about merge state once already — it merged carrying a caveat that had expired three days
 earlier. **Anything it asserts about what is merged has a shelf life of days, because
 several agents land changes in parallel. Recheck before writing in the past tense.**
@@ -47,6 +47,7 @@ Everything in this table is **merged and live** unless marked otherwise.
 | mazos-site #45 | merged `19a69cd` | `/quick-win` page — the £150 fix, on its own page |
 | mazos-site #46 | merged `f0a03b6` | Canonical URLs moved to `www.mazworks.uk`; JobFilter presented as a full build |
 | mazos-site #47 | merged `6c40269` | Site copy cut to short, plain sentences |
+| mazos-site #50 | merged `eaf66f4` | Objects page and case studies shortened. Touch prices unchanged (£29/£49/£79, +£10 artwork), JobFilter's no-guarantee line kept, Scrap Finance Partners still labelled "contract client build". |
 | mazos-site #35 | **closed unmerged** | Its content reached `main` via #40 on 21 Sep. Merging it would have reverted newer work. Do not cite #35 as pending. |
 | mazos-site #48 | **open** | RotaReason demo text raised to the readable floor (see §3) |
 | unified-memory #4, #5 | merged | Positioning, enquiry P0, content pass, corrections |
