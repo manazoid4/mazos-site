@@ -6,6 +6,9 @@ import test from 'node:test';
 const root = process.cwd();
 const exportRoot = path.join(root, 'out');
 
+// Homepage word budget (visible words in <main>, form labels included). Raise it only on purpose.
+const WORD_BUDGET = 620;
+
 async function readPage(route) {
   const name = route === '/' ? 'index' : route.replace(/^\//, '');
   const candidates = [
@@ -41,120 +44,61 @@ async function internalTargetExists(urlPath) {
   return false;
 }
 
-test('homepage makes the Maz Works offer obvious in plain language', async () => {
+test('homepage leads with a plain offer and none of the old filler', async () => {
   const html = await readPage('/');
-  // The headline leads with the outcome, not a list of technologies.
-  assert.match(html, /Stop losing time and enquiries to jobs done by hand/);
-  assert.match(html, /websites, software, automations and useful physical products for small businesses/);
-  assert.match(html, /tap-to-book stand to the booking page and follow-up behind it/);
-  assert.match(html, /Direct with the builder/);
-  assert.match(html, /Fixed scope and price/);
-  assert.match(html, /See the direction first/);
-  // A technology list in the hero is what this rewrite removed; keep it gone.
-  assert.doesNotMatch(html, /Websites, automation and AI tools built around real business problems/);
+  assert.match(html, /I fix what’s costing you customers/);
+  assert.match(html, /From £150, fixed price/);
+  assert.match(html, /Tell me the problem/);
+  for (const filler of [/Inspect the work before reading more claims/, /Operations thinking/, /What gets measured/, /href="\/whats-new/]) {
+    assert.doesNotMatch(html, filler);
+  }
 });
 
-test('homepage keeps selected work concise and positions the flagships accurately', async () => {
+test('homepage work stays short and labelled accurately', async () => {
   const html = await readPage('/');
   for (const name of ['JobFilter', 'Scrap Finance Partners', 'Agent Nudge', 'MAZ Pocket']) {
     assert.match(html, new RegExp(name));
   }
-  // Each entry states the customer's problem before the work delivered.
-  assert.match(html, /lose hours hunting for contract opportunities/i);
-  assert.match(html, /needed a credible digital presence/i);
+  assert.match(html, /Full build and setup/);
   assert.match(html, /Contract client build/);
   // Unfinished work must stay labelled as unfinished.
   assert.match(html, /In progress/);
   assert.match(html, /Ask about this build/);
   assert.doesNotMatch(html, /href="https:\/\/github.com\/manazoid4\/maz-pocket"/);
-  assert.match(html, /secure client workspace/i);
-  assert.match(html, /approval and suppression controls/i);
   assert.doesNotMatch(html, /jobfilter-scan-result\.webp/);
-  assert.doesNotMatch(html, /scrap-finance-partners\.webp/);
-  assert.doesNotMatch(html, /agent-nudge-demo\.webp/);
-  assert.doesNotMatch(html, /deterministic qualification/i);
 });
 
-test('homepage leads with a free live demo and transparent competitive pricing', async () => {
+test('homepage pricing is fixed, bounded and links straight to an enquiry', async () => {
   const html = await readPage('/');
-  assert.match(html, /Tell me the problem/);
-  assert.match(html, /near-working version/i);
   assert.match(html, /£150 fixed/);
   assert.match(html, /From £299/);
   assert.match(html, /From £499/);
   assert.match(html, /£75 to start/);
   assert.match(html, /£75 on completion/);
-  assert.match(html, /support from £49\/month/i);
-  assert.match(html, /No long contract/i);
-  // Every package states its boundary so "from" cannot read as open-ended.
-  assert.match(html, /One agreed change . not a rebuild/);
-  assert.match(html, /Scope and fixed price agreed before work starts/);
-  assert.match(html, /One workflow automated, not a whole department/);
-  assert.doesNotMatch(html, /problem map/i);
-  // Quick Win and Website Rescue Sprint were the same £150 product under two names.
+  assert.match(html, /Support from £49\/month/);
+  assert.match(html, /no long contract/i);
+  assert.match(html, /One workflow, not a whole department/);
+  assert.match(html, /href="\/quick-win"/);
+  for (const id of ['quick-win', 'website', 'automation']) {
+    assert.match(html, new RegExp(`\\?service=${id}#contact`));
+  }
   assert.doesNotMatch(html, /Rescue Sprint/i);
 });
 
-test('services and starting points are framed around business outcomes', async () => {
+test('homepage is five short blocks with four visible steps', async () => {
   const html = await readPage('/');
-  // Four outcomes, in the order businesses ask for them. Websites sit inside
-  // enquiry capture rather than being their own category.
-  assert.match(html, /Capture and follow up enquiries/);
-  assert.match(html, /Cut repetitive admin/);
-  assert.match(html, /Build a tool your team will use/);
-  assert.match(html, /Physical products that lead somewhere/);
-  // Each service card deep-links to the enquiry form with its context preselected.
-  for (const id of ['website', 'automation', 'software']) {
-    assert.match(html, new RegExp(`\\?service=${id}#contact`));
-  }
-});
-
-test('business impact section gives owners, team leaders and sales teams measurable targets', async () => {
-  const html = await readPage('/');
-  assert.match(html, /Less waiting\. Less admin\. More useful work/);
-  assert.match(html, /something you can actually measure/i);
-  assert.match(html, /Respond faster/);
-  assert.match(html, /Give hours back to the team/);
-  assert.match(html, /Make sales follow-up consistent/);
-  assert.match(html, /Increase team capacity/);
-  assert.match(html, /Reduce dropped work/);
-  assert.match(html, /See where time and sales are leaking/);
-  assert.match(html, /admin hours per week/i);
-  assert.match(html, /follow-up coverage/i);
-  assert.match(html, /work handled per person/i);
-  assert.match(html, /time-to-quote/i);
-});
-
-test('professional background connects operations experience to Maz Works', async () => {
-  const html = await readPage('/');
-  assert.match(html, /Professional background/);
-  assert.match(html, /ManyPets/);
-  assert.match(html, /Complaints Specialist/);
-  assert.match(html, /FCA\/DISP/);
-  assert.match(html, /Glide/);
-  assert.match(html, /Complaints &amp; Escalations Coordinator/);
-  assert.match(html, /Problem investigation/);
-  assert.match(html, /Process improvement/);
-  assert.match(html, /Regulated environments/);
-});
-
-test('process, AI guardrails and FAQ stay easy to understand', async () => {
-  const html = await readPage('/');
-  for (const id of ['services', 'impact', 'work', 'process', 'pricing', 'client', 'about', 'contact']) {
+  for (const id of ['work', 'pricing', 'services', 'process', 'contact']) {
     assert.match(html, new RegExp(`id="${id}"`));
   }
-  // One journey, four steps. The previous five-step process and four-step proof
-  // sequence described the same path twice in different words.
   assert.match(html, /Tell me the problem/);
-  assert.match(html, /I show you the direction/);
-  assert.match(html, /We agree the work/);
-  assert.match(html, /I build, test and hand it over/);
-  assert.doesNotMatch(html, /Walk through it together/);
-  assert.doesNotMatch(html, /client-proof-steps/);
-  assert.match(html, /AI where it helps\. Human control where it matters/);
-  assert.match(html, /Do I need to know what technology I need/);
-  assert.match(html, /What does the free demo include/);
-  assert.match(html, /Can this help sales and team productivity/);
+  assert.match(html, /I suggest the fix/);
+  assert.match(html, /We agree the price/);
+  assert.match(html, /I build and hand over/);
+  assert.match(html, /href="\/faq"/);
+  // Keep the page short: visible words inside <main>, form labels included.
+  const main = html.slice(html.indexOf('<main'), html.indexOf('</main>'));
+  const words = main.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+  assert.ok(words <= WORD_BUDGET, `homepage has ${words} words; budget is ${WORD_BUDGET}`);
 });
 
 test('contact request submits in-page instead of depending on the visitor email app', async () => {
