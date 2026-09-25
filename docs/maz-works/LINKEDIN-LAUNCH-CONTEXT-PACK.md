@@ -130,8 +130,8 @@ than the post earns.**
 
 | Asset | Status | Safe to say |
 | --- | --- | --- |
-| **Scrap Finance Partners** | Paid contract client, delivered | Positioning, marketing implementation, web development, launch, lead capture, a secure client workspace, guarded acquisition automation with approval and suppression controls. Live at `scrap-finance-partners.vercel.app`. |
-| **JobFilter** | Own product, live, **paid plans exist** | Construction-focused; finds public contracts that fit a trades firm, then scores and qualifies them so that stops being manual admin. Live at `jobfilter.uk`. The site presents it as a full build with paid plans — that is the honest limit of the claim. **Do not state or imply a customer count, subscriber number or revenue. None is known.** |
+| **Scrap Finance Partners** | Contract client build, delivered — **the client did not pay** | Positioning, marketing implementation, web development, launch, lead capture, a secure client workspace, guarded acquisition automation with approval and suppression controls. Live at `scrap-finance-partners.vercel.app`. Say "contract client build" or "a client build". **Never "paid client", "paying client", "my first paid project" or anything implying money changed hands.** The work is real and shippable as proof; the payment is not. Corrected 25 Sep — an earlier version of this pack said "paid contract client", which was wrong. |
+| **JobFilter** | Own product, live, **priced but no paying customers** | Construction-focused; finds public contracts that fit a trades firm, then scores and qualifies them so that stops being manual admin. Live at `jobfilter.uk`, with £39/month plans published. Present it as "built and launched, with paid plans" — never as a client contract, it is Maz's own product. **There are no paying customers. Do not state or imply a customer count, subscriber number, revenue or traction of any kind.** |
 | **Maz Works Objects (Touch)** | Product, priced, **not physically validated** | Touch One £29, Touch Three £49, Touch + Carry £79, artwork add-on +£10. Tap stands/keyrings that send a customer to a review, booking or menu page. |
 | **Agent Nudge** | Own product, **released** | Stops AI coding tools clashing over the same files. Public demo and source. Released, not "being built" — that changed in #41. |
 | **OpenFlowKit** | Own product, open source | Voice-to-text in the browser, cleaned up. Live demo. |
@@ -165,7 +165,11 @@ date.
 - **No numbers that were never measured.** No percentages, no "saved X hours", no
   revenue, conversion, lead-volume or ROI figures for any client or product. None exist.
 - **No testimonials or quotes.** Nobody has given one.
-- **No client list or logos.** Scrap Finance Partners is the one nameable client build.
+- **No client list or logos.** Scrap Finance Partners is the one nameable client build,
+  and it is unpaid — see its row above before writing a word about it.
+- **No revenue, no customers, no traction.** Nothing Maz Works sells has a paying
+  customer yet. JobFilter has published prices; that is not the same thing, and a post
+  must not blur the two. This is the single easiest place to fabricate by accident.
 - **Dessert Lane is a PROSPECT, not a client.** There is a private demo built for them
   behind an access gate. **Do not name them publicly.** You may describe the *approach*
   generically ("one business, one action, one tap, one review button") without the name.
