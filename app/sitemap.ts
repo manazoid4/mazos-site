@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: SITE_URL, lastModified: updated, changeFrequency: 'monthly', priority: 1 },
     { url: `${SITE_URL}/demos`, lastModified: updated, changeFrequency: 'monthly', priority: 0.95 },
     { url: `${SITE_URL}/3d-printing`, lastModified: updated, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE_URL}/quick-win`, lastModified: new Date('2026-09-25'), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/faq`, lastModified: updated, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE_URL}/whats-new`, lastModified: new Date(LATEST_MAZ_WORKS_UPDATE.publishedAt), changeFrequency: 'weekly', priority: 0.7 },
     { url: `${SITE_URL}/rotareason`, lastModified: updated, changeFrequency: 'monthly', priority: 0.7 },
