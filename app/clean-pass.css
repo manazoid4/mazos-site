@@ -625,3 +625,85 @@ main {
     padding: 14px 0;
   }
 }
+
+/* Mailing list: a quiet second route for visitors not ready to enquire. */
+.mw-newsletter {
+  margin: 0 0 56px;
+  padding: 28px 0 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px 48px;
+  align-items: end;
+  border-top: 1px solid var(--soft-line);
+}
+
+.mw-newsletter h2 {
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+}
+
+.mw-newsletter-copy p {
+  margin-top: 8px;
+  max-width: 460px;
+  color: var(--muted);
+}
+
+.mw-newsletter-row {
+  display: flex;
+  gap: 8px;
+}
+
+.mw-newsletter-row input {
+  flex: 1;
+  min-width: 0;
+  min-height: 46px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font: inherit;
+  color: var(--ink);
+}
+
+.mw-newsletter-row .button {
+  padding-inline: 22px;
+  border: 1px solid var(--line);
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 650;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.mw-newsletter-row .button:hover {
+  background: var(--signal);
+  color: var(--ink);
+}
+
+.mw-newsletter-trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.mw-newsletter-error {
+  margin-top: 8px;
+  color: #9d1c1c;
+  font-size: .85rem;
+}
+
+.mw-newsletter-done {
+  font-weight: 650;
+}
+
+@media (max-width: 760px) {
+  .mw-newsletter {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .mw-newsletter-row {
+    flex-direction: column;
+  }
+}
