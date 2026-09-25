@@ -37,7 +37,7 @@ export type CaseStudyProject = Project & { caseStudy: ProjectCaseStudy };
 
 export const FLAGSHIP_PROJECTS: Project[] = [
   {
-    id: 'jobfilter', name: 'JobFilter', eyebrow: 'Flagship 01 / Product', status: 'Live product',
+    id: 'jobfilter', name: 'JobFilter', eyebrow: 'Flagship 01 / Full build and setup', status: 'Live product / Built end to end',
     relationship: 'Product',
     summary: 'A construction growth and automation product that helps small trades and maintenance firms find, qualify, track and act on relevant public-sector opportunities with less manual research.',
     problem: 'Small construction firms can lose hours checking opportunity sources, deciding whether work fits their trade, tracking deadlines, and keeping follow-up organised.',
@@ -47,6 +47,7 @@ export const FLAGSHIP_PROJECTS: Project[] = [
       'Trade-specific fit signals and qualification using trade, CPV, location, deadline, and notice evidence.',
       'Free opportunity scanning plus alert capture so firms can keep watching their area when nothing suitable is live.',
       'Calendar export, response templates, scan tracking, and outcome signals that reduce admin around pursuing relevant work.',
+      'The full production setup a client build needs: own domain, hosting and deployment, a £39/month subscription with checkout, and the sign-up route from free scan to paid plan.',
     ],
     proof: 'The live product, public code, recent trade-fit work, alerts, calendar export, response templates, and qualification flow are inspectable now.',
     limitation: 'JobFilter helps firms find and pursue relevant opportunities; it does not guarantee that a contract will be awarded.',
@@ -57,8 +58,8 @@ export const FLAGSHIP_PROJECTS: Project[] = [
     ],
     caseStudy: {
       lede: 'A construction-focused opportunity and workflow product built to help small firms spend less time searching and more time acting on work that genuinely fits.',
-      role: 'Product direction, public-data pipeline, trade-fit qualification, workflow automation, interface, testing, and deployment.',
-      scope: ['Opportunity discovery', 'Trade-fit qualification', 'Alerts and follow-up tools', 'Product interface and deployment'],
+      role: 'Everything, end to end: product direction, public-data pipeline, trade-fit qualification, workflow automation, interface, payments, domain, hosting, testing and launch. The same full setup a client build gets.',
+      scope: ['Opportunity discovery', 'Trade-fit qualification', 'Alerts and follow-up tools', 'Payments and subscriptions', 'Domain, hosting and launch'],
       howItWorks: [
         { number: '01', title: 'Find the work', body: 'Check official public opportunities and normalise the source data into a usable scan.' },
         { number: '02', title: 'Filter for the firm', body: 'Use trade, CPV, location, deadline, and notice evidence so weak or uncertain matches can be excluded.' },

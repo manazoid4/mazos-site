@@ -1,4 +1,4 @@
-export const SITE_URL = 'https://mazworks.uk';
+export const SITE_URL = 'https://www.mazworks.uk';
 export const SITE_NAME = 'Maz Works';
 export const PERSON_NAME = 'Manazir Hussain';
 export const CONTACT_EMAIL = 'manazoid4@gmail.com';
