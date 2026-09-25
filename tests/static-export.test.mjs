@@ -8,6 +8,13 @@ const exportRoot = path.join(root, 'out');
 
 // Homepage word budget (visible words in <main>, form labels included). Raise it only on purpose.
 const WORD_BUDGET = 620;
+// Same count as the homepage: all text inside <main>, including header, footer and closed answers.
+const CASE_STUDY_WORD_BUDGET = 320;
+
+function mainWordCount(html) {
+  const main = html.slice(html.indexOf('<main'), html.indexOf('</main>'));
+  return main.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+}
 
 async function readPage(route) {
   const name = route === '/' ? 'index' : route.replace(/^\//, '');
@@ -96,8 +103,7 @@ test('homepage is five short blocks with four visible steps', async () => {
   assert.match(html, /I build and hand over/);
   assert.match(html, /href="\/faq"/);
   // Keep the page short: visible words inside <main>, form labels included.
-  const main = html.slice(html.indexOf('<main'), html.indexOf('</main>'));
-  const words = main.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+  const words = mainWordCount(html);
   assert.ok(words <= WORD_BUDGET, `homepage has ${words} words; budget is ${WORD_BUDGET}`);
 });
 
@@ -160,19 +166,27 @@ test('internal links and assets resolve inside the static export', async () => {
 test('flagship case studies remain available and use the expanded positioning', async () => {
   const jobfilter = await readPage('/work/jobfilter');
   assert.match(jobfilter, /JobFilter case study/);
-  assert.match(jobfilter, /construction-focused opportunity and workflow product/i);
-  assert.match(jobfilter, /Trade-fit qualification/);
+  assert.match(jobfilter, /help(s)? small building firms find public contracts/i);
+  assert.match(jobfilter, /Trade-fit checks/);
   assert.match(jobfilter, /does not guarantee/i);
 
   const scrap = await readPage('/work/scrap-finance-partners');
   assert.match(scrap, /Scrap Finance Partners case study/);
-  assert.match(scrap, /contract client engagement/i);
-  assert.match(scrap, /Guarded acquisition automation/);
+  assert.match(scrap, /contract client build/i);
+  assert.match(scrap, /Outreach with approval steps/);
+  assert.doesNotMatch(scrap, /paid (client|contract|engagement)|client paid/i);
   assert.match(scrap, /approval/i);
 
   const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
   assert.match(sitemap, /\/work\/jobfilter/);
   assert.match(sitemap, /\/work\/scrap-finance-partners/);
+});
+
+test('case studies stay short', async () => {
+  for (const route of ['/work/jobfilter', '/work/scrap-finance-partners']) {
+    const words = mainWordCount(await readPage(route));
+    assert.ok(words <= CASE_STUDY_WORD_BUDGET, `${route} has ${words} words; budget is ${CASE_STUDY_WORD_BUDGET}`);
+  }
 });
 
 test('legacy MazOS route stays out of homepage discovery and sitemap', async () => {

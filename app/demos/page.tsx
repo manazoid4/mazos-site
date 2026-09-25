@@ -22,19 +22,19 @@ export const metadata: Metadata = {
 const DEMO_TYPES = [
   {
     title: 'Website direction',
-    body: 'See how your business could look, read and guide customers before committing to a full rebuild.',
+    body: 'See how your site could look and guide customers first.',
   },
   {
     title: 'Customer journey',
-    body: 'Make ordering, booking, contacting, reviewing or visiting easier with a clearer path from interest to action.',
+    body: 'Make ordering, booking or contacting you easier for customers.',
   },
   {
     title: 'Follow-up & admin',
-    body: 'Show how repeated chasing, copying or missed follow-up could be simplified before changing your day-to-day process.',
+    body: 'Show how chasing, copying or missed follow-ups could be simpler.',
   },
   {
     title: 'Physical + digital',
-    body: 'Connect the website to useful things in the real world such as review taps, menu stands, signs or campaign pieces.',
+    body: 'Link your website to review taps, menu stands or signs.',
   },
 ];
 
@@ -47,12 +47,12 @@ export default function DemosPage() {
         <div className="mw-hero-copy">
           <p className="eyebrow">Maz Works / Private demos</p>
           <h1 id="demos-title">See the idea working before you pay for the full build.</h1>
-          <p className="mw-lede">For suitable projects, I prepare a private demo around the real business — not a template, not a slide deck, and not a long technical explanation.</p>
+          <p className="mw-lede">For suitable projects, I build a private demo around your business. No templates and no slide decks.</p>
           <div className="mw-actions">
             <a className="button button-signal" href="/#contact">Ask for a private demo</a>
             <a className="text-link" href="#examples">What a demo can show <span aria-hidden="true">↓</span></a>
           </div>
-          <p className="mw-hero-note">Each demo is shared privately with the business it was made for. Public examples stay selective by design.</p>
+          <p className="mw-hero-note">Each demo is shared only with its business. Public examples stay selective by design.</p>
         </div>
         <div className="mw-capabilities" aria-label="Private demo benefits">
           <span>Built around your business</span>
@@ -68,7 +68,7 @@ export default function DemosPage() {
         <header className="mw-section-heading">
           <p className="eyebrow">What I can demonstrate</p>
           <h2 id="examples-title">A working direction, not a promise on a page.</h2>
-          <p>The point is to make the decision easier: see what changes for the customer or the team before discussing a larger project.</p>
+          <p>See what changes for customers or staff before a bigger project.</p>
         </header>
         <div className="mw-outcome-list">
           {DEMO_TYPES.map((item) => <div key={item.title}><strong>{item.title}</strong><span>{item.body}</span></div>)}
@@ -79,7 +79,7 @@ export default function DemosPage() {
         <header className="mw-section-heading">
           <p className="eyebrow">Built for real conversations</p>
           <h2 id="privacy-title">Your business stays the focus.</h2>
-          <p>I keep client-specific demos behind a private link and access code instead of turning every conversation into a public case study. Each one has its own address, opened when it suits you and shared only with the people who need to see it.</p>
+          <p>Client demos sit behind a private link and access code. Only the people you choose see them.</p>
         </header>
         <div className="mw-actions">
           <a className="button button-signal" href="/#contact">Request yours</a>
