@@ -48,11 +48,11 @@ const WORK: {
 }[] = [
   {
     name: 'JobFilter',
-    type: 'Product / Construction',
+    type: 'Full build and setup / Construction',
     stage: 'flagship',
     problem: 'Trades and maintenance teams lose hours hunting for contract opportunities and working out by hand which ones are worth bidding for.',
     summary: 'A construction-focused product that finds, scores and organises relevant contract opportunities so qualification stops being manual admin.',
-    role: 'Built the opportunity scanning, trade-fit scoring, qualification, alerts, calendar export, response templates and outcome-tracking workflows.',
+    role: 'Built and set up everything end to end: opportunity scanning, trade-fit scoring, alerts, calendar export and response templates, plus the domain, hosting, £39/month subscription checkout and launch.',
     links: [
       { label: 'View case study', href: '/work/jobfilter' },
       { label: 'Try it', href: 'https://jobfilter.uk/find-jobs' },
