@@ -1,75 +1,57 @@
 import Image from 'next/image';
 import { CONTACT_EMAIL } from './site';
-import { DemoRequestForm } from './demo-request-form';
+import { DemoRequestForm, ServiceEnquiryLink } from './demo-request-form';
 import { SiteFooter, SiteHeader } from './site-chrome';
+import { HOMEPAGE_FAQS } from './faqs';
+import { formatUpdateDate, LATEST_MAZ_WORKS_UPDATE } from './updates';
 
 const SERVICES = [
   {
-    title: 'Websites',
-    body: 'Clear, fast websites, landing pages and online tools designed around what your customer actually needs to do.',
+    title: 'Capture and follow up enquiries',
+    body: 'A website, landing page or enquiry form that reaches you, with follow-up that does not rely on memory.',
+    service: 'website',
+    action: 'Talk about enquiries',
   },
   {
-    title: 'Automation',
-    body: 'Simple systems that remove repetitive admin, copying, chasing and manual handoffs.',
+    title: 'Cut repetitive admin',
+    body: 'The weekly copying, chasing and re-typing, handled by connecting the systems you already use.',
+    service: 'automation',
+    action: 'Talk about admin',
   },
   {
-    title: 'AI & software',
-    body: 'Useful AI features, internal tools and custom software built around a specific business problem.',
-  },
-  {
-    title: 'Objects',
-    body: 'Tactile custom objects that connect customers to useful digital destinations.',
-    href: '/3d-printing',
+    title: 'Build a tool your team will use',
+    body: 'Internal tools, customer software and AI features built for one job. AI where it helps. Human control where it matters.',
+    service: 'software',
+    action: 'Talk about a tool',
   },
 ];
 
-const OUTCOMES = [
-  ['Get more enquiries', 'Improve a website, enquiry path, follow-up process or lead flow.'],
-  ['Reduce repetitive admin', 'Connect systems and remove repeated copying, chasing and updating.'],
-  ['Improve sales follow-up', 'Capture leads, prompt the next action and keep opportunities moving instead of relying on memory.'],
-  ['Improve customer operations', 'Build clearer workflows around enquiries, support, complaints and internal handoffs.'],
-  ['Find and manage opportunities', 'Research, qualify and organise business-development opportunities with less manual work.'],
-  ['Add AI safely', 'Use AI where it helps, with validation, approval steps and manual fallbacks where judgment matters.'],
+const MEASURES = [
+  ['Respond faster', 'lead & customer response time'],
+  ['Give hours back to the team', 'admin hours per week'],
+  ['Make sales follow-up consistent', 'follow-up coverage & time to next action'],
+  ['Increase team capacity', 'work handled per person'],
+  ['Reduce dropped work', 'overdue tasks & missed handoffs'],
+  ['See where time and sales are leaking', 'response, time-to-quote, pipeline & workload signals'],
 ];
 
-const IMPACT = [
-  {
-    title: 'Respond faster',
-    measure: 'Measure: lead & customer response time',
-    body: 'Route enquiries quickly, alert the right person and prepare the next action so customers and prospects spend less time waiting.',
-  },
-  {
-    title: 'Give hours back to the team',
-    measure: 'Measure: admin hours per week',
-    body: 'Automate repeat data entry, copying, reporting, reminders and handoffs so employees can spend more time on useful work.',
-  },
-  {
-    title: 'Make sales follow-up consistent',
-    measure: 'Measure: follow-up coverage & time to next action',
-    body: 'Capture, qualify, remind and update pipeline stages so fewer warm opportunities go quiet and sales teams know what to do next.',
-  },
-  {
-    title: 'Increase team capacity',
-    measure: 'Measure: work handled per person',
-    body: 'Remove repetitive steps and surface the information people need so an existing team can handle more without simply working longer.',
-  },
-  {
-    title: 'Reduce dropped work',
-    measure: 'Measure: overdue tasks & missed handoffs',
-    body: 'Use clear ownership, reminders and escalation rules so next steps are visible before a forgotten task becomes a customer problem.',
-  },
-  {
-    title: 'See where time and sales are leaking',
-    measure: 'Measure: response, pipeline & workload signals',
-    body: 'Track useful signals such as response time, time-to-quote, follow-up coverage, pipeline movement and recurring bottlenecks.',
-  },
-];
+type WorkStage = 'flagship' | 'live' | 'building';
 
-const WORK = [
+const WORK: {
+  name: string;
+  type: string;
+  stage: WorkStage;
+  problem: string;
+  summary: string;
+  role: string;
+  links: { label: string; href: string }[];
+}[] = [
   {
     name: 'JobFilter',
     type: 'Product / Construction',
-    summary: 'A construction-focused growth and automation product that helps trades and maintenance teams find, qualify and follow relevant contract opportunities with less admin.',
+    stage: 'flagship',
+    problem: 'Trades and maintenance teams lose hours hunting for contract opportunities and working out by hand which ones are worth bidding for.',
+    summary: 'A construction-focused product that finds, scores and organises relevant contract opportunities so qualification stops being manual admin.',
     role: 'Built the opportunity scanning, trade-fit scoring, qualification, alerts, calendar export, response templates and outcome-tracking workflows.',
     links: [
       { label: 'View case study', href: '/work/jobfilter' },
@@ -79,7 +61,9 @@ const WORK = [
   {
     name: 'Scrap Finance Partners',
     type: 'Contract client build',
-    summary: 'A contract build for a specialist finance practice serving UK scrap and recycling firms, covering its digital presence, lead journey and business automation.',
+    stage: 'flagship',
+    problem: 'A specialist finance practice serving UK scrap and recycling firms needed a credible digital presence and a working route from interest to enquiry.',
+    summary: 'A contract build covering the practice\u2019s positioning, website, lead journey and the automation behind it.',
     role: 'Handled positioning, marketing implementation, web development, launch, lead capture, a secure client workspace and guarded acquisition automation with approval and suppression controls.',
     links: [
       { label: 'View case study', href: '/work/scrap-finance-partners' },
@@ -88,26 +72,61 @@ const WORK = [
   },
   {
     name: 'Agent Nudge',
-    type: 'Product',
-    summary: 'A desktop tool that helps multiple AI coding agents avoid stale information and overlapping work.',
-    role: 'Designed and built the desktop workflow, coordination checks and release system.',
-    links: [{ label: 'View project', href: 'https://github.com/manazoid4/agent-nudge' }],
+    type: 'Product / Released',
+    stage: 'live',
+    problem: 'Running several AI coding agents on one repository at once means they can claim the same files, duplicate work and act on information that has already changed.',
+    summary: 'A local-first Windows tool that checks an agent\u2019s context before it acts and returns one of three explicit outcomes, with a downloadable release and a browser demo you can try without installing anything.',
+    role: 'Built the desktop app, background service, provider hooks, coordination checks, the public documentation site and the signed release pipeline.',
+    links: [
+      { label: 'Try the demo', href: 'https://agent-nudge-bay.vercel.app/demo/overview' },
+      { label: 'Download for Windows', href: 'https://github.com/manazoid4/agent-nudge/releases' },
+      { label: 'View code', href: 'https://github.com/manazoid4/agent-nudge' },
+    ],
+  },
+  {
+    name: 'OpenFlowKit',
+    type: 'Open source / Live MVP',
+    stage: 'live',
+    problem: 'Typing is slow for drafting, prompting and other writing-heavy work, and most dictation tools leave you cleaning up filler words by hand.',
+    summary: 'An open-source voice-to-text workbench that captures speech in the browser, cleans it with explicit rules rather than a vague AI layer, and bridges the result into a terminal.',
+    role: 'Built the speech capture, the typed transcription contracts, the deterministic refinement rules with latency tracking, and the tested WebSocket terminal bridge.',
+    links: [
+      { label: 'Try the MVP', href: 'https://openflowkit-dusky.vercel.app' },
+      { label: 'View code', href: 'https://github.com/manazoid4/openflowkit' },
+    ],
+  },
+  {
+    name: 'Khutba.io',
+    type: 'Product / Live prototype',
+    stage: 'live',
+    problem: 'Mosques with a mixed-language congregation have no calm way to put live translation on the screen they already own.',
+    summary: 'A screen-first live captioning platform built around the Friday workflow: pair the existing screen, check it is ready, start explicitly, then present multilingual captions readable at worship-hall distance.',
+    role: 'Built the product direction, the pairing and readiness flow, the presentation layer and an account-free demo anyone can open.',
+    links: [
+      { label: 'Try the demo', href: 'https://khutba-io.vercel.app/demo' },
+      { label: 'View code', href: 'https://github.com/manazoid4/khutba-io' },
+    ],
   },
   {
     name: 'MAZ Pocket',
-    type: 'Hardware + software',
-    summary: 'A pocket AI assistant built around quick voice capture, reminders and remote interaction with AI tools.',
-    role: 'Building the firmware, interface and hardware/software integration.',
-    links: [{ label: 'View project', href: 'https://github.com/manazoid4/maz-pocket' }],
+    type: 'Hardware + software / In progress',
+    stage: 'building',
+    problem: 'Capturing a thought, checking on a long-running job or approving something on the PC usually means unlocking a phone and opening an app first.',
+    summary: 'A card-sized handheld and paired PC service: hold a key to talk and hear an answer back, record a PC workflow by demonstrating it, and approve short-lived PC access from a phone rather than letting the model approve itself.',
+    role: 'Building the firmware, the six-tile interface, the paired PC service, the phone approval broker and the packaged installer and release pipeline.',
+    links: [{ label: 'Ask about this build', href: '#contact' }],
   },
 ];
 
+const FLAGSHIP_WORK = WORK.filter((project) => project.stage === 'flagship');
+const FURTHER_WORK = WORK.filter((project) => project.stage !== 'flagship');
+const FURTHER_WORK_SUMMARY = FURTHER_WORK.map((project) => project.name).join(' \u00b7 ');
+
 const PROCESS = [
-  ['01', 'Tell me the problem', 'Explain what is taking too much time, what you want built or what currently does not work.'],
-  ['02', 'See a live demo', 'For suitable projects, I build a near-working demo around your real use case before you commit to the full build.'],
-  ['03', 'Walk through it together', 'I can send the demo link or run a Microsoft Teams screen-share walkthrough so you can see exactly how it works.'],
-  ['04', 'Agree the build', 'We agree exactly what is being delivered, the price and the important requirements.'],
-  ['05', 'I finish, test and hand it over', 'I handle the agreed implementation, testing, deployment and a clear handover.'],
+  ['01', 'Tell me the problem', 'Describe what is taking too much time. No technical detail needed.'],
+  ['02', 'I show you the direction', 'A demo, screen-share walkthrough, or written scope and quote — whichever suits the job.'],
+  ['03', 'We agree the work', 'What is delivered, the price and the requirements — agreed before any paid work.'],
+  ['04', 'I build, test and hand it over', 'I handle the build, testing and deployment, then hand it over clearly.'],
 ];
 
 const OFFERS = [
@@ -115,19 +134,28 @@ const OFFERS = [
     name: 'Quick Win',
     price: '£150 fixed',
     body: 'One tightly scoped improvement to a website, workflow or automation.',
+    scope: 'One agreed change — not a rebuild',
     note: '£75 to start · £75 on completion',
+    service: 'unsure',
+    action: 'Ask about a Quick Win',
   },
   {
     name: 'Website Launch',
     price: 'From £299',
     body: 'A focused small-business website or landing experience with a clear enquiry route and deployment.',
-    note: 'Scope and fixed price agreed first',
+    scope: 'Scope and fixed price agreed before work starts',
+    note: 'Best for a first site or replacement',
+    service: 'website',
+    action: 'Ask about a website',
   },
   {
     name: 'Growth System',
     price: 'From £499',
-    body: 'A website or customer journey plus one useful automation or AI-assisted workflow, built with sensible controls.',
+    body: 'A website or customer journey plus one useful automation or AI-assisted workflow.',
+    scope: 'One workflow automated, not a whole department',
     note: 'Best for lead flow, follow-up or admin reduction',
+    service: 'automation',
+    action: 'Ask about a growth system',
   },
 ];
 
@@ -144,23 +172,6 @@ const BACKGROUND = [
   },
 ];
 
-const FAQS = [
-  ['Do I need to know what technology I need?', 'No. Start with the business problem. I choose the simplest appropriate approach rather than forcing a particular tool.'],
-  ['What does the free live demo include?', 'For a suitable problem, I build a small near-working demo around the intended workflow so you can understand the experience before paying for the full implementation. It is not the finished production build.'],
-  ['Can you show me the demo live?', 'Yes. I am available for a Microsoft Teams screen-share walkthrough where I can show the demo, explain the workflow and answer questions. Choose Teams in the demo request form.'],
-  ['Can this help sales and team productivity?', 'Yes when the workflow is suitable. Common targets include faster lead response, more consistent follow-up, fewer admin hours, fewer missed handoffs and more capacity from the existing team. I prefer measuring the starting point and the change rather than promising an invented percentage.'],
-  ['Do you use AI in client systems?', 'Where it is useful. Important workflows should not be blindly autonomous, so I use limits, validation, approval steps or manual fallbacks when the risk calls for them.'],
-  ['Can you work with systems we already use?', 'Often, yes. Existing software, APIs and workflows are checked during scoping so we can reuse what already works instead of rebuilding unnecessarily.'],
-  ['What happens after launch?', 'I hand over the agreed work clearly. Ongoing support, extra features or further automation can be quoted separately.'],
-];
-
-const CLIENT_PROOF_STEPS = [
-  ['01', 'Evidence note', 'One reviewed website or workflow gap, written in plain English.'],
-  ['02', 'Free live demo', 'For a suitable problem, see a near-working direction before any paid build.'],
-  ['03', '15-minute screen-share', 'Walk through the demo and confirm whether the problem is worth fixing.'],
-  ['04', 'Website Rescue Sprint', 'One agreed improvement, delivered with a clear handoff for £150.'],
-];
-
 function WorkRow({ project, index }: { project: (typeof WORK)[number]; index: number }) {
   return (
     <article className="mw-work-row" id={project.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}>
@@ -168,6 +179,7 @@ function WorkRow({ project, index }: { project: (typeof WORK)[number]; index: nu
       <div className="mw-work-main">
         <p className="relationship">{project.type}</p>
         <h3>{project.name}</h3>
+        <p className="mw-work-problem">{project.problem}</p>
         <p className="mw-work-summary">{project.summary}</p>
         <p className="mw-work-role">{project.role}</p>
       </div>
@@ -186,134 +198,144 @@ export default function Page() {
       <section className="mw-hero" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
         <div className="mw-hero-copy">
           <p className="eyebrow">Maz Works / Manazir Hussain</p>
-          <h1 id="intro-title">Websites, automation and AI tools built around real business problems.</h1>
-          <p className="mw-lede">I help small businesses turn awkward manual processes and ideas into simple working systems — from design and development to automation, AI integrations, marketing implementation and deployment.</p>
+          <h1 id="intro-title">Stop losing time and enquiries to jobs done by hand.</h1>
+          <p className="mw-lede">I build websites, software, automations and useful physical products for small businesses — from a tap-to-book stand to the booking page and follow-up behind it.</p>
           <div className="mw-actions">
-            <a className="button button-signal" href="#contact">Request a free live demo</a>
-            <a className="text-link" href="#work">See selected work <span aria-hidden="true">↓</span></a>
+            <a className="button button-signal" href="#contact">Tell me the problem</a>
+            <a className="text-link" href="#work">See real work <span aria-hidden="true">↓</span></a>
           </div>
-          <p className="mw-hero-note">For suitable projects, I can build a near-working demo first and walk you through it live on Microsoft Teams with screen sharing.</p>
-          <p className="mw-hero-proof">Recently built: <a href="#jobfilter">JobFilter</a>, a live product for construction firms, and <a href="#scrap-finance-partners">Scrap Finance Partners</a>, a contract client build.</p>
+          <p className="mw-hero-note">Ask for a quote, a walkthrough, or a near-working version first. I’ll tell you which is useful for the job.</p>
+          <p className="mw-hero-proof">Recent work: <a href="#jobfilter">JobFilter</a> and <a href="#scrap-finance-partners">Scrap Finance Partners</a>.</p>
+          <p className="mw-hero-update">
+            <span>{LATEST_MAZ_WORKS_UPDATE.label}</span>
+            <a href={`/whats-new#${LATEST_MAZ_WORKS_UPDATE.id}`}>{LATEST_MAZ_WORKS_UPDATE.title}</a>
+            <small>{formatUpdateDate(LATEST_MAZ_WORKS_UPDATE.publishedAt)}</small>
+          </p>
         </div>
-        <div className="mw-capabilities" aria-label="Core capabilities">
-          <span>Direct with the builder</span><span>Live demo first</span><span>Web development</span><span>Automation</span><span>AI with guardrails</span><span>Deployment</span>
+        <div className="mw-capabilities" aria-label="How working with Maz Works works">
+          <span>Direct with the builder</span><span>Fixed scope and price</span><span>See the direction first</span>
         </div>
         <nav className="mw-jumpbar" aria-label="Jump to page section">
-          <a href="#services">Services</a><a href="/3d-printing">Objects</a><a href="#work">Work</a><a href="#client">Pricing</a><a href="#contact">Contact</a>
+          <a href="#work">Work</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a>
         </nav>
+      </section>
+
+      <section className="mw-section mw-work" id="work" aria-labelledby="work-title">
+        <header className="mw-section-heading mw-heading-inline">
+          <div><p className="eyebrow">Selected work</p><h2 id="work-title">Built, not just proposed.</h2></div>
+          <p>Inspect the work before reading more claims.</p>
+        </header>
+        <div className="mw-work-list">
+          {FLAGSHIP_WORK.map((project, index) => <WorkRow project={project} index={index} key={project.name} />)}
+        </div>
+        <details className="mw-disclosure mw-more-work">
+          <summary><span>Products and tools</span><small>{FURTHER_WORK_SUMMARY}</small></summary>
+          <div className="mw-work-list mw-work-list-secondary">
+            {FURTHER_WORK.map((project, index) => (
+              <WorkRow project={project} index={index + FLAGSHIP_WORK.length} key={project.name} />
+            ))}
+          </div>
+        </details>
       </section>
 
       <section className="mw-section mw-services-compact" id="services" aria-labelledby="services-title">
         <header className="mw-section-heading mw-heading-inline">
-          <div><p className="eyebrow">What I can help with</p><h2 id="services-title">Start with the problem.</h2></div>
-          <p>Choose the useful outcome first. The technology comes second.</p>
+          <div><p className="eyebrow">What I help with</p><h2 id="services-title">Start with the problem.</h2></div>
+          <p>The technology comes second.</p>
         </header>
         <div className="mw-service-grid">
           {SERVICES.map((service) => (
             <article className="mw-service-card" key={service.title}>
               <h3>{service.title}</h3><p>{service.body}</p>
-              {'href' in service && service.href && <a className="mw-service-link" href={service.href}>Explore Maz Works Objects <span aria-hidden="true">→</span></a>}
+              <ServiceEnquiryLink service={service.service}>{service.action} <span aria-hidden="true">→</span></ServiceEnquiryLink>
             </article>
           ))}
         </div>
-
         <details className="mw-disclosure" id="impact">
-          <summary><span>What this can improve</span><small>Outcomes, measurable targets and examples</small></summary>
+          <summary><span>What gets measured</span><small>Only where it matters</small></summary>
           <div className="mw-disclosure-body">
-            <div className="mw-impact-intro"><h3>Less waiting. Less admin. More useful work.</h3><p>For business owners, team leaders and sales teams, automation is most useful when it changes something you can actually measure.</p></div>
-            <div className="mw-outcome-list">
-              {OUTCOMES.map(([title, body]) => <div key={title}><strong>{title}</strong><span>{body}</span></div>)}
+            <div className="mw-impact-intro">
+              <h3>Less waiting. Less admin. More useful work.</h3>
+              <p>I’d rather agree something you can actually measure than promise a percentage before seeing the problem.</p>
             </div>
-            <div className="mw-impact-grid">
-              {IMPACT.map((item) => <article key={item.title}><h3>{item.title}</h3><p>{item.body}</p><small>{item.measure}</small></article>)}
+            <div className="mw-measure-grid">
+              {MEASURES.map(([title, measure]) => <div key={title}><strong>{title}</strong><span>{measure}</span></div>)}
             </div>
           </div>
         </details>
+      </section>
+
+      <section className="mw-section mw-client-flow" id="pricing" aria-labelledby="pricing-title">
+        <div className="mw-compact-block mw-pricing" id="client">
+          <header className="mw-section-heading mw-heading-inline">
+            <div><p className="eyebrow">Pricing</p><h2 id="pricing-title">Clear starting points.</h2></div>
+            <p>Scope and price agreed before paid work.</p>
+          </header>
+          <div className="mw-price-grid">
+            {OFFERS.map((offer) => (
+              <article className="mw-price-option" key={offer.name}>
+                <p>{offer.name}</p>
+                <strong>{offer.price}</strong>
+                <span>{offer.body}</span>
+                <em className="mw-price-scope">{offer.scope}</em>
+                <small>{offer.note}</small>
+                <ServiceEnquiryLink service={offer.service}>{offer.action} <span aria-hidden="true">→</span></ServiceEnquiryLink>
+              </article>
+            ))}
+          </div>
+          <div className="mw-pricing-foot">
+            <div><strong>£0 first step</strong><span>Tell me the problem. I’ll show you the direction before you commit.</span></div>
+            <div><strong>Support from £49/month</strong><span>Optional. No long contract.</span></div>
+            <a className="button button-signal" href="#contact">Tell me the problem</a>
+          </div>
+        </div>
 
         <aside className="mw-objects-strip" aria-labelledby="objects-showcase-title">
           <Image src="/objects/touch-three-hero.webp" alt="Concept visual of the black-and-white Touch Three NFC stand" width={1536} height={1024} sizes="(max-width: 760px) 32vw, 240px" unoptimized />
-          <div><p className="eyebrow">Maz Works Objects</p><h3 id="objects-showcase-title">Physical products that lead somewhere useful.</h3><p>Tap stands, business gifts and custom objects that send a customer straight to the page you choose. I can build that page and the follow-up behind it too.</p></div>
-          <a className="button button-dark" href="/3d-printing">Explore Objects</a>
+          <div><p className="eyebrow">Maz Works Objects</p><h3 id="objects-showcase-title">Physical products that lead somewhere useful.</h3><p>Review, booking, menu and lead-flow objects from £29.</p></div>
+          <a className="text-link" href="/3d-printing">Explore Objects <span aria-hidden="true">→</span></a>
         </aside>
-      </section>
 
-      <section className="mw-section mw-work" id="work" aria-labelledby="work-title">
-        <header className="mw-section-heading mw-heading-inline"><div><p className="eyebrow">Selected work</p><h2 id="work-title">Built, not just proposed.</h2></div><p>Two representative builds first. More work is available without forcing it into the main scroll.</p></header>
-        <div className="mw-work-list">
-          {WORK.slice(0, 2).map((project, index) => <WorkRow project={project} index={index} key={project.name} />)}
-        </div>
-        <details className="mw-disclosure mw-more-work">
-          <summary><span>More work</span><small>Agent Nudge + MAZ Pocket</small></summary>
-          <div className="mw-work-list mw-work-list-secondary">
-            {WORK.slice(2).map((project, index) => <WorkRow project={project} index={index + 2} key={project.name} />)}
-          </div>
-        </details>
-      </section>
-
-      <section className="mw-section mw-client-flow" aria-label="Process and pricing">
         <div className="mw-compact-block" id="process">
-          <header className="mw-section-heading mw-heading-inline"><div><p className="eyebrow">How it works</p><h2>Five steps, no maze.</h2></div><p>From first problem to tested handover, with the direction visible before the full commitment.</p></header>
           <details className="mw-disclosure">
-            <summary><span>See the five steps</span><small>Problem to tested handover</small></summary>
+            <summary><span>How a project works</span><small>Four steps</small></summary>
             <ol className="mw-process-strip">
               {PROCESS.map(([number, title, body]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}
-            </ol>
-          </details>
-        </div>
-
-        <div className="mw-compact-block mw-pricing" id="client">
-          <header className="mw-section-heading mw-heading-inline"><div><p className="eyebrow">Pricing</p><h2>Clear starting prices.</h2></div><p>Competitive pricing. See the direction first.</p></header>
-          <div className="mw-price-grid">
-            {OFFERS.map((offer) => <article className="mw-price-option" key={offer.name}><p>{offer.name}</p><strong>{offer.price}</strong><span>{offer.body}</span><small>{offer.note}</small></article>)}
-          </div>
-          <div className="mw-pricing-foot">
-            <div><strong>£0 first step</strong><span>For suitable projects, I turn the idea into a near-working demo before the full build.</span></div>
-            <div><strong>Optional support from £49/month</strong><span>No long contract. Third-party usage costs are separate.</span></div>
-            <a className="button button-signal" href="#contact">Request a free live demo</a>
-          </div>
-          <details className="mw-disclosure mw-proof-disclosure">
-            <summary><span>What happens before paid work?</span><small>Four-step client proof sequence</small></summary>
-            <ol className="client-proof-steps">
-              {CLIENT_PROOF_STEPS.map(([number, title, body]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}
             </ol>
           </details>
         </div>
       </section>
 
       <section className="mw-section mw-about" id="about" aria-labelledby="about-title">
-        <header className="mw-section-heading">
-          <p className="eyebrow">About Maz Works</p>
-          <h2 id="about-title">Operations thinking behind the build.</h2>
-          <p>I&apos;m Manazir Hussain. My background is in complaints, investigations and operations: understand the actual failure point, communicate clearly, then build the simplest useful fix.</p>
+        <header className="mw-section-heading mw-heading-inline">
+          <div><p className="eyebrow">About</p><h2 id="about-title">Operations thinking behind the build.</h2></div>
+          <p>Find the actual failure point, explain it clearly, then build the simplest thing that fixes it.</p>
         </header>
-        <div className="mw-about-panels">
-          <details className="mw-disclosure">
-            <summary><span>Professional background</span><small>Why operations experience matters</small></summary>
-            <div className="mw-background-grid">
-              {BACKGROUND.map((item) => <article key={item.company}><p>{item.company}</p><h3>{item.role}</h3><span>{item.body}</span></article>)}
-            </div>
-            <div className="mw-skill-strip"><span>Problem investigation</span><span>Process improvement</span><span>Client communication</span><span>Operational ownership</span><span>Regulated environments</span></div>
-          </details>
-          <details className="mw-disclosure mw-guardrails">
-            <summary><span>Practical AI</span><small>Controls before autonomy</small></summary>
-            <div className="mw-disclosure-copy"><h3>AI where it helps. Human control where it matters.</h3><p>Useful automation does not mean handing every decision to a model. Depending on the workflow, I can use validation, limits, approval steps, suppression rules and manual fallback routes so important actions remain controlled.</p></div>
-          </details>
-        </div>
+        <details className="mw-disclosure">
+          <summary><span>Professional background</span><small>ManyPets + Glide</small></summary>
+          <div className="mw-background-grid">
+            {BACKGROUND.map((item) => <article key={item.company}><p>{item.company}</p><h3>{item.role}</h3><span>{item.body}</span></article>)}
+          </div>
+          <div className="mw-skill-strip"><span>Problem investigation</span><span>Process improvement</span><span>Client communication</span><span>Operational ownership</span><span>Regulated environments</span></div>
+        </details>
       </section>
 
       <section className="mw-section mw-faq" aria-labelledby="faq-title">
-        <header className="mw-section-heading mw-heading-inline"><div><p className="eyebrow">Questions</p><h2 id="faq-title">Useful answers, when you need them.</h2></div><p>Only open the questions relevant to you.</p></header>
+        <header className="mw-section-heading mw-heading-inline">
+          <div><p className="eyebrow">Questions</p><h2 id="faq-title">Straight answers.</h2></div>
+          <p>Three common objections here. The rest live on one page.</p>
+        </header>
         <div className="mw-faq-list">
-          {FAQS.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}
+          {HOMEPAGE_FAQS.slice(0, 3).map((faq) => <details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}
         </div>
+        <div className="mw-faq-more"><a className="text-link" href="/faq">Read the full FAQ <span aria-hidden="true">→</span></a></div>
       </section>
 
       <section className="mw-contact" id="contact" aria-labelledby="contact-title">
         <div className="mw-contact-intro">
-          <p className="eyebrow">Free live demo</p>
-          <h2 id="contact-title">Show me the problem. I&apos;ll show you the direction.</h2>
-          <p className="mw-contact-copy">Send a short description. For suitable projects, I can send a near-working demo link or walk you through it over Microsoft Teams.</p>
-          <div className="mw-demo-points"><span>No sales call required first</span><span>Teams walkthrough available</span><span>Scope and price agreed before paid work</span></div>
+          <p className="eyebrow">Get in touch</p>
+          <h2 id="contact-title">Tell me what&apos;s not working.</h2>
+          <p className="mw-contact-copy">A short description is enough. I’ll tell you what I’d do next.</p>
           <p className="mw-contact-fallback">Prefer email? <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
         </div>
         <DemoRequestForm />

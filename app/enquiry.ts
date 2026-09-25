@@ -1,6 +1,7 @@
 import { CONTACT_EMAIL } from './site';
 
 export const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+export const NATIVE_FORM_ENDPOINT = `https://formsubmit.co/${CONTACT_EMAIL}`;
 
 /** Default time before a hung submission is abandoned so the button never sticks on "Sending…". */
 export const SUBMIT_TIMEOUT_MS = 15000;
@@ -68,9 +69,8 @@ export async function sendEnquiry(payload: Record<string, string>, timeoutMs = S
     // unread body as delivered — FormSubmit reports rejections in the body, not the status.
     if (controller.signal.aborted) return { ok: false, reason: 'timeout' };
 
-    const rejected = body?.success === false || body?.success === 'false';
-
-    if (!response.ok || rejected) return { ok: false, reason: 'rejected' };
+    const confirmed = body?.success === true || body?.success === 'true';
+    if (!response.ok || !confirmed) return { ok: false, reason: 'rejected' };
     return { ok: true };
   } catch (error) {
     if (error instanceof DOMException && error.name === 'AbortError') return { ok: false, reason: 'timeout' };
