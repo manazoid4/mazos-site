@@ -43,12 +43,15 @@ async function internalTargetExists(urlPath) {
 
 test('homepage makes the Maz Works offer obvious in plain language', async () => {
   const html = await readPage('/');
-  assert.match(html, /Websites, automation and AI tools built around real business problems/);
-  assert.match(html, /small businesses/);
-  assert.match(html, /marketing implementation/);
+  // The headline leads with the outcome, not a list of technologies.
+  assert.match(html, /Stop losing time and enquiries to jobs done by hand/);
+  assert.match(html, /websites, software, automations and useful physical products for small businesses/);
+  assert.match(html, /tap-to-book stand to the booking page and follow-up behind it/);
   assert.match(html, /Direct with the builder/);
-  assert.match(html, /Live demo first/);
-  assert.match(html, /AI with guardrails/);
+  assert.match(html, /Fixed scope and price/);
+  assert.match(html, /See the direction first/);
+  // A technology list in the hero is what this rewrite removed; keep it gone.
+  assert.doesNotMatch(html, /Websites, automation and AI tools built around real business problems/);
 });
 
 test('homepage keeps selected work concise and positions the flagships accurately', async () => {
@@ -56,8 +59,14 @@ test('homepage keeps selected work concise and positions the flagships accuratel
   for (const name of ['JobFilter', 'Scrap Finance Partners', 'Agent Nudge', 'MAZ Pocket']) {
     assert.match(html, new RegExp(name));
   }
-  assert.match(html, /construction-focused growth and automation product/i);
+  // Each entry states the customer's problem before the work delivered.
+  assert.match(html, /lose hours hunting for contract opportunities/i);
+  assert.match(html, /needed a credible digital presence/i);
   assert.match(html, /Contract client build/);
+  // Unfinished work must stay labelled as unfinished.
+  assert.match(html, /In progress/);
+  assert.match(html, /Ask about this build/);
+  assert.doesNotMatch(html, /href="https:\/\/github.com\/manazoid4\/maz-pocket"/);
   assert.match(html, /secure client workspace/i);
   assert.match(html, /approval and suppression controls/i);
   assert.doesNotMatch(html, /jobfilter-scan-result\.webp/);
@@ -68,9 +77,8 @@ test('homepage keeps selected work concise and positions the flagships accuratel
 
 test('homepage leads with a free live demo and transparent competitive pricing', async () => {
   const html = await readPage('/');
-  assert.match(html, /Request a free live demo/);
-  assert.match(html, /near-working demo/i);
-  assert.match(html, /Microsoft Teams/);
+  assert.match(html, /Tell me the problem/);
+  assert.match(html, /near-working version/i);
   assert.match(html, /£150 fixed/);
   assert.match(html, /From £299/);
   assert.match(html, /From £499/);
@@ -78,23 +86,33 @@ test('homepage leads with a free live demo and transparent competitive pricing',
   assert.match(html, /£75 on completion/);
   assert.match(html, /support from £49\/month/i);
   assert.match(html, /No long contract/i);
+  // Every package states its boundary so "from" cannot read as open-ended.
+  assert.match(html, /One agreed change . not a rebuild/);
+  assert.match(html, /Scope and fixed price agreed before work starts/);
+  assert.match(html, /One workflow automated, not a whole department/);
   assert.doesNotMatch(html, /problem map/i);
+  // Quick Win and Website Rescue Sprint were the same £150 product under two names.
+  assert.doesNotMatch(html, /Rescue Sprint/i);
 });
 
 test('services and starting points are framed around business outcomes', async () => {
   const html = await readPage('/');
-  assert.match(html, /Get more enquiries/);
-  assert.match(html, /Reduce repetitive admin/);
-  assert.match(html, /Improve sales follow-up/);
-  assert.match(html, /Improve customer operations/);
-  assert.match(html, /Find and manage opportunities/);
-  assert.match(html, /Add AI safely/);
+  // Four outcomes, in the order businesses ask for them. Websites sit inside
+  // enquiry capture rather than being their own category.
+  assert.match(html, /Capture and follow up enquiries/);
+  assert.match(html, /Cut repetitive admin/);
+  assert.match(html, /Build a tool your team will use/);
+  assert.match(html, /Physical products that lead somewhere/);
+  // Each service card deep-links to the enquiry form with its context preselected.
+  for (const id of ['website', 'automation', 'software']) {
+    assert.match(html, new RegExp(`\\?service=${id}#contact`));
+  }
 });
 
 test('business impact section gives owners, team leaders and sales teams measurable targets', async () => {
   const html = await readPage('/');
   assert.match(html, /Less waiting\. Less admin\. More useful work/);
-  assert.match(html, /business owners, team leaders and sales teams/i);
+  assert.match(html, /something you can actually measure/i);
   assert.match(html, /Respond faster/);
   assert.match(html, /Give hours back to the team/);
   assert.match(html, /Make sales follow-up consistent/);
@@ -122,38 +140,41 @@ test('professional background connects operations experience to Maz Works', asyn
 
 test('process, AI guardrails and FAQ stay easy to understand', async () => {
   const html = await readPage('/');
-  for (const id of ['services', 'impact', 'work', 'process', 'client', 'about', 'contact']) {
+  for (const id of ['services', 'impact', 'work', 'process', 'pricing', 'client', 'about', 'contact']) {
     assert.match(html, new RegExp(`id="${id}"`));
   }
+  // One journey, four steps. The previous five-step process and four-step proof
+  // sequence described the same path twice in different words.
   assert.match(html, /Tell me the problem/);
-  assert.match(html, /See a live demo/);
-  assert.match(html, /Walk through it together/);
-  assert.match(html, /Agree the build/);
-  assert.match(html, /finish, test and hand it over/i);
+  assert.match(html, /I show you the direction/);
+  assert.match(html, /We agree the work/);
+  assert.match(html, /I build, test and hand it over/);
+  assert.doesNotMatch(html, /Walk through it together/);
+  assert.doesNotMatch(html, /client-proof-steps/);
   assert.match(html, /AI where it helps\. Human control where it matters/);
   assert.match(html, /Do I need to know what technology I need/);
-  assert.match(html, /What does the free live demo include/);
-  assert.match(html, /Can you show me the demo live/);
+  assert.match(html, /What does the free demo include/);
   assert.match(html, /Can this help sales and team productivity/);
 });
 
 test('contact request submits in-page instead of depending on the visitor email app', async () => {
   const html = await readPage('/');
   const formSource = await readFile(path.join(root, 'app', 'demo-request-form.tsx'), 'utf8');
+  const enquirySource = await readFile(path.join(root, 'app', 'enquiry.ts'), 'utf8');
   const vercelConfig = JSON.parse(await readFile(path.join(root, 'vercel.json'), 'utf8'));
   const csp = vercelConfig.headers[0].headers.find((header) => header.key === 'Content-Security-Policy')?.value || '';
 
-  assert.match(html, /Send demo request/);
+  assert.match(html, /Send enquiry/);
   assert.match(html, /name="name"/);
   assert.match(html, /name="email"/);
   assert.match(html, /name="business"/);
   assert.match(html, /name="problem"/);
-  assert.match(html, /name="demoPreference"/);
-  assert.match(html, /Send me a live demo link/);
+  assert.match(html, /name="service"/);
+  assert.match(html, /name="nextStep"/);
   assert.match(html, /Microsoft Teams walkthrough/);
   assert.match(html, /sent directly from this form/i);
-  assert.match(formSource, /https:\/\/formsubmit\.co\/ajax\//);
-  assert.match(formSource, /fetch\(FORM_ENDPOINT/);
+  assert.match(enquirySource, /https:\/\/formsubmit\.co\/ajax\//);
+  assert.match(enquirySource, /fetch\(FORM_ENDPOINT/);
   assert.match(formSource, /role="status"/);
   assert.match(formSource, /_honey/);
   assert.doesNotMatch(formSource, /window\.location\.href\s*=\s*`mailto:/);
@@ -231,7 +252,7 @@ test('structured data reflects Maz Works founder and service positioning', async
   assert.equal(person.name, 'Manazir Hussain');
   assert.equal(person.jobTitle, 'Founder and Software Builder');
   assert.ok(person.sameAs.includes('https://github.com/manazoid4'));
-  assert.match(org.description, /Web development, business automation and practical AI tools/);
+  assert.match(org.description, /Websites, software, automation and useful physical products/);
 });
 
 test('Vercel Analytics remains bundled into the static export', async () => {
@@ -277,4 +298,59 @@ test('project memory keeps the Maz Works Knowledge Vault identity canonical', as
   assert.match(readme, /Maz Works Knowledge Vault/);
   assert.match(handoff, /Maz Works Knowledge Vault/);
   assert.match(handoff, /JobFilter is one project inside it/);
+});
+
+/** Reads the canonical site origin from source so the tests cannot drift from it. */
+async function siteUrl() {
+  const source = await readFile(path.join(root, 'app', 'site.ts'), 'utf8');
+  const match = source.match(/SITE_URL\s*=\s*'([^']+)'/);
+  assert.ok(match, 'could not read SITE_URL from app/site.ts');
+  return match[1];
+}
+
+test('every indexable exported page is listed in the sitemap', async () => {
+  const SITE_URL = await siteUrl();
+  const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
+  const listed = new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]));
+
+  // Next's own error pages are not routes anyone should be pointed at.
+  const notRoutes = new Set(['/404', '/_not-found']);
+
+  const pages = await readdir(exportRoot, { recursive: true, withFileTypes: true });
+  const routes = pages
+    .filter((entry) => entry.isFile() && entry.name.endsWith('.html'))
+    .map((entry) => {
+      const relative = path.relative(exportRoot, path.join(entry.parentPath ?? entry.path, entry.name)).split(path.sep).join('/');
+      const route = `/${relative.replace(/\.html$/, '').replace(/\/index$/, '')}`;
+      return route === '/index' ? '/' : route;
+    })
+    .filter((route) => !notRoutes.has(route));
+
+  assert.ok(routes.length > 0, 'found no exported pages to check');
+
+  const missing = [];
+  for (const route of routes) {
+    const html = await readPage(route);
+    // A page carrying its own noindex is deliberately out of the sitemap.
+    if (/<meta name="robots" content="[^"]*noindex/.test(html)) continue;
+    const url = route === '/' ? SITE_URL : `${SITE_URL}${route}`;
+    if (!listed.has(url)) missing.push(route);
+  }
+
+  assert.deepEqual(missing, [], `indexable pages missing from the sitemap: ${missing.join(', ')}`);
+});
+
+test('every sitemap entry points at a page that was actually exported', async () => {
+  const SITE_URL = await siteUrl();
+  const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
+  const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+
+  const broken = [];
+  for (const url of urls) {
+    assert.ok(url.startsWith(SITE_URL), `sitemap entry is off-site: ${url}`);
+    const route = url.slice(SITE_URL.length) || '/';
+    if (!(await internalTargetExists(route))) broken.push(route);
+  }
+
+  assert.deepEqual(broken, [], `sitemap points at missing pages: ${broken.join(', ')}`);
 });

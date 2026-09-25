@@ -2,12 +2,12 @@ import type { Project } from './projects';
 
 export function ProjectLinks({ project, includeCaseStudy = false }: { project: Project; includeCaseStudy?: boolean }) {
   return (
-    <nav className="project-links" aria-label={`${project.name} evidence links`}>
+    <div className="project-links" role="group" aria-label={`${project.name} evidence links`}>
       {includeCaseStudy && project.caseStudy ? <a className="case-link" href={`/work/${project.id}`}>Read case study <span aria-hidden="true">→</span></a> : null}
       {project.links.map((link) => (
         <a href={link.href} key={link.href}>{link.label}<span aria-hidden="true"> ↗</span></a>
       ))}
-    </nav>
+    </div>
   );
 }
 

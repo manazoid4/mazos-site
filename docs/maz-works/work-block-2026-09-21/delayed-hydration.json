@@ -1,0 +1,44 @@
+[
+  {
+    "route": "/",
+    "result": "Pre-hydration inputs and choices survive in both UI and submitted payload",
+    "sent": {
+      "name": "Example Customer",
+      "email": "customer@example.com",
+      "business": "Not provided",
+      "service": "Automation and repetitive admin",
+      "problem": "Entered before JavaScript finished loading",
+      "next_step": "A free live demo built around my problem",
+      "_replyto": "customer@example.com",
+      "_subject": "Maz Works — enquiry — Automation and repetitive admin",
+      "_template": "table",
+      "_honey": "",
+      "_url": "http://127.0.0.1:3107/"
+    },
+    "errors": []
+  },
+  {
+    "route": "/3d-printing",
+    "result": "Pre-hydration inputs and choices survive in both UI and submitted payload",
+    "sent": {
+      "name": "Example Customer",
+      "email": "customer@example.com",
+      "bundle": "Touch + Carry",
+      "bundle_id": "touch-carry",
+      "physical_contents": "Everything in Touch Three | 5 matching tap keyrings | Keyrings open one chosen link | Setup included",
+      "intended_uses": "Google reviews",
+      "artwork": "Yes — £10; one supplied design, basic placement and one proof revision",
+      "business_name": "Before scripts loaded",
+      "destination_links": "Not supplied yet",
+      "help_finding_links": "No",
+      "notes": "None supplied",
+      "estimated_product_price": "£89 before delivery or unusual requests",
+      "_replyto": "customer@example.com",
+      "_subject": "Maz Works Objects enquiry — Touch + Carry — £89 estimate",
+      "_template": "table",
+      "_honey": "",
+      "_url": "http://127.0.0.1:3107/3d-printing"
+    },
+    "errors": []
+  }
+]

@@ -7,10 +7,11 @@ import { useTouchSelection } from './touch-selection';
 function moveToPersonalisation() {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.getElementById('personalise')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
+  document.getElementById('personalise-title')?.focus({ preventScroll: true });
 }
 
 export function TouchCollection() {
-  const { bundleId, selectBundle } = useTouchSelection();
+  const { interactive, submitState, bundleId, selectBundle } = useTouchSelection();
 
   function personalise(id: TouchBundleId) {
     selectBundle(id);
@@ -20,14 +21,14 @@ export function TouchCollection() {
   return (
     <section className="objects-section objects-collection" id="collection" aria-labelledby="collection-title">
       <header className="objects-section-heading">
-        <p className="objects-kicker">The Touch collection / Three bundles</p>
-        <h2 id="collection-title">Choose the amount of connection you need.</h2>
-        <p>Each bundle is a physical object with link setup included. Prices cover the standard black-and-white designs shown.</p>
+        <p className="objects-kicker">Three simple choices</p>
+        <h2 id="collection-title">Choose how many customer actions you want.</h2>
+        <p>Every option arrives set up for the links we agree. You approve the wording and final price before anything is made.</p>
       </header>
 
       <div className="objects-bundle-list">
         {TOUCH_PRICING.bundles.map((bundle, index) => (
-          <article className={`objects-bundle ${bundleId === bundle.id ? 'is-selected' : ''}`} key={bundle.id} aria-labelledby={`${bundle.id}-title`}>
+          <article className={`objects-bundle ${interactive && bundleId === bundle.id ? 'is-selected' : ''}`} key={bundle.id} aria-labelledby={`${bundle.id}-title`}>
             <div className="objects-bundle-number" aria-hidden="true">0{index + 1}</div>
             <figure className="objects-bundle-visual">
               <Image src={bundle.image} alt={bundle.imageAlt} width={bundle.imageWidth} height={bundle.imageHeight} sizes="(max-width: 760px) 100vw, 48vw" unoptimized />
@@ -36,23 +37,26 @@ export function TouchCollection() {
             <div className="objects-bundle-copy">
               <div className="objects-bundle-title">
                 <div><p>Touch / {index + 1}</p><h3 id={`${bundle.id}-title`}>{bundle.name}</h3></div>
-                <div className="objects-bundle-price"><strong>£{bundle.basePrice}</strong><small>With artwork £{bundle.basePrice + TOUCH_PRICING.artworkAddOnPrice}</small></div>
+                <div className="objects-bundle-price"><strong>£{bundle.basePrice}</strong><small>With your artwork £{bundle.basePrice + TOUCH_PRICING.artworkAddOnPrice}</small></div>
               </div>
               <p className="objects-bundle-short">{bundle.short}</p>
               <ul>{bundle.contents.map((item) => <li key={item}>{item}</li>)}</ul>
-              <button className="objects-button objects-button-dark" type="button" onClick={() => personalise(bundle.id)} aria-pressed={bundleId === bundle.id}>
-                Personalise {bundle.name}
+              <button className="objects-button objects-button-dark" type="button" hidden={!interactive} disabled={submitState === 'sending'} onClick={() => personalise(bundle.id)} aria-pressed={bundleId === bundle.id}>
+                Choose {bundle.name}
               </button>
+              <a className="objects-button objects-button-dark" href="#personalise" hidden={interactive}>Choose in the enquiry form</a>
             </div>
           </article>
         ))}
       </div>
 
+      <p className="objects-name-note">Every example above is shown with our own name. Yours goes in that spot — the stand carries your business, not mine.</p>
+
       <aside className="objects-artwork-note">
-        <span>Optional add-on</span>
-        <div><h3>Your logo or image — +£10 per bundle.</h3><p>One supplied artwork design reused across the bundle, basic placement and one proof revision. Artwork must suit the production method; complex redrawing, extra designs and detailed imagery are quoted separately. This is not full-colour photographic printing.</p></div>
+        <span>Optional +£10</span>
+        <div><h3>Add your logo or supplied artwork.</h3><p>Send one design you want used across the bundle. Basic placement and one proof revision are included. If the artwork needs redrawing or something more involved, I will tell you before quoting it.</p></div>
       </aside>
-      <p className="objects-price-note">Prices cover standard designs. Delivery and nonstandard requests are confirmed separately.</p>
+      <p className="objects-price-note">Delivery and unusual requests are confirmed before you approve the order.</p>
     </section>
   );
 }

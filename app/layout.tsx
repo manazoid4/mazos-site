@@ -3,6 +3,10 @@ import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import './simplified.css';
 import './credibility.css';
+import './final-friction.css';
+import './enquiry.css';
+import './resource-pages.css';
+import './clean-pass.css';
 import { GITHUB_URL, PERSON_NAME, SITE_NAME, SITE_URL } from './site';
 
 const structuredData = {
@@ -30,21 +34,21 @@ const structuredData = {
       name: SITE_NAME,
       url: `${SITE_URL}/`,
       founder: { '@id': `${SITE_URL}/#person` },
-      description: 'Web development, business automation and practical AI tools that reduce admin, improve follow-up and help UK small-business teams work more effectively.',
+      description: 'Websites, software, automation and useful physical products for UK small businesses, built by Manazir Hussain around practical business problems.',
     },
   ],
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: 'Maz Works | Web Development, Automation & AI', template: '%s — Maz Works' },
-  description: 'Maz Works builds websites, business automations and practical AI software that reduce repetitive admin, improve lead follow-up and help small-business teams work more effectively.',
+  title: { default: 'Maz Works | Websites, Software & Useful Business Products', template: '%s — Maz Works' },
+  description: 'Websites, software, automation and useful physical products for small businesses. Connect a tap stand to a booking page, improve enquiries or cut repetitive admin.',
   alternates: { canonical: '/' },
   authors: [{ name: PERSON_NAME }],
   creator: PERSON_NAME,
   openGraph: {
-    title: 'Maz Works | Web Development, Automation & AI',
-    description: 'Websites and automation built to reduce admin, improve follow-up and make everyday business workflows faster.',
+    title: 'Maz Works | Websites, Software & Useful Business Products',
+    description: 'Websites, software, automation and physical products built around real business problems. Work directly with Manazir Hussain.',
     type: 'website',
     url: '/',
     siteName: SITE_NAME,
@@ -55,8 +59,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Maz Works | Web Development, Automation & AI',
-    description: 'Websites and automation built to reduce admin, improve follow-up and make everyday business workflows faster.',
+    title: 'Maz Works | Websites, Software & Useful Business Products',
+    description: 'Websites, software, automation and physical products built around real business problems. Work directly with Manazir Hussain.',
     images: ['/social-card.png'],
   },
 };

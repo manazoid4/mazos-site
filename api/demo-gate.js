@@ -36,7 +36,7 @@ function escapeHtml(value) {
 function gateHtml(slug, error = '') {
   const safeSlug = escapeHtml(slug);
   const errorHtml = error ? `<p class="error" role="alert">${escapeHtml(error)}</p>` : '';
-  return `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Private client demo — Maz Works</title><style>*{box-sizing:border-box}body{margin:0;min-height:100svh;background:#f4f3ed;color:#111;font-family:Arial,Helvetica,sans-serif;display:grid;place-items:center;padding:24px}.gate{width:min(100%,540px);border-top:4px solid #111;padding:28px 0}.mark{font-weight:950;letter-spacing:-.05em;font-size:30px}.eyebrow{margin-top:56px;font:700 11px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:#686868}h1{font-size:clamp(44px,9vw,76px);line-height:.9;letter-spacing:-.07em;margin:15px 0 22px}.copy{max-width:420px;color:#555;line-height:1.6}form{margin-top:38px;display:grid;gap:12px}label{font-size:12px;font-weight:800}input{min-height:56px;border:2px solid #111;background:#fff;padding:0 15px;font:inherit;border-radius:0}button{min-height:56px;border:2px solid #111;background:#111;color:#fff;font-weight:850;padding:0 18px;cursor:pointer}button:hover{background:#d8ff36;color:#111}.error{margin:8px 0 0;color:#9d1c1c;font-weight:700;font-size:13px}.small{font-size:11px;color:#777;margin-top:22px}</style></head><body><main class="gate"><div class="mark">MAZ WORKS</div><p class="eyebrow">Private client demo</p><h1>Built for the<br>conversation.</h1><p class="copy">Enter the unique passcode Maz Works sent you to open this private concept.</p>${errorHtml}<form method="post" action="/demos/${safeSlug}"><label for="passcode">Demo passcode</label><input id="passcode" name="passcode" type="password" autocomplete="current-password" required maxlength="72"><button type="submit">Open private demo →</button></form><p class="small">Client-specific access · Noindex · Revocable sessions</p></main></body></html>`;
+  return `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Private business demo — Maz Works</title><style>*{box-sizing:border-box}body{margin:0;min-height:100svh;background:#f4f3ed;color:#111;font-family:Arial,Helvetica,sans-serif;display:grid;place-items:center;padding:24px}.gate{width:min(100%,540px);border-top:4px solid #111;padding:28px 0}.mark{font-weight:950;letter-spacing:-.05em;font-size:30px}.eyebrow{margin-top:56px;font:700 11px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:#686868}h1{font-size:clamp(44px,9vw,76px);line-height:.9;letter-spacing:-.07em;margin:15px 0 22px}.copy{max-width:420px;color:#555;line-height:1.6}form{margin-top:38px;display:grid;gap:12px}label{font-size:12px;font-weight:800}input{min-height:56px;border:2px solid #111;background:#fff;padding:0 15px;font:inherit;border-radius:0}button{min-height:56px;border:2px solid #111;background:#111;color:#fff;font-weight:850;padding:0 18px;cursor:pointer}button:hover{background:#d8ff36;color:#111}.error{margin:8px 0 0;color:#9d1c1c;font-weight:700;font-size:13px}.small{font-size:11px;color:#777;margin-top:22px}</style></head><body><main class="gate"><div class="mark">MAZ WORKS</div><p class="eyebrow">Private business demo</p><h1>Made for<br>your business.</h1><p class="copy">Enter the access code Maz Works sent you to open your private concept.</p>${errorHtml}<form method="post" action="/demos/${safeSlug}"><label for="passcode">Access code</label><input id="passcode" name="passcode" type="password" autocomplete="current-password" required maxlength="72"><button type="submit">Open my demo →</button></form><p class="small">Private to this business · Easy to reopen · Access can be changed at any time</p></main></body></html>`;
 }
 
 function injectDemoExit(html, slug) {
@@ -133,7 +133,7 @@ export default async function handler(req, res) {
       if (action !== 'login') return sendHtml(res, gateHtml(slug, 'Invalid request.'), 400);
       const passcode = params.get('passcode') || '';
       const result = await accessRequest({ action: 'login', slug, passcode });
-      if (!result.data?.ok || typeof result.data.token !== 'string') return sendHtml(res, gateHtml(slug, 'That passcode was not accepted.'), result.status === 401 ? 401 : 503);
+      if (!result.data?.ok || typeof result.data.token !== 'string') return sendHtml(res, gateHtml(slug, 'That access code was not accepted.'), result.status === 401 ? 401 : 503);
       setSessionCookie(res, slug, result.data.token, result.data.maxAgeSeconds);
       res.statusCode = 303;
       res.setHeader('location', `/demos/${slug}`);
@@ -153,7 +153,7 @@ export default async function handler(req, res) {
     const result = await accessRequest({ action: 'content', slug, token, path });
     if (result.status === 401 || !result.data?.ok && result.status !== 404) {
       clearSessionCookie(res, slug);
-      return sendHtml(res, gateHtml(slug, 'Your demo session has expired. Enter the passcode again.'), 401, req.method === 'HEAD');
+      return sendHtml(res, gateHtml(slug, 'Your demo access has expired. Enter the code again.'), 401, req.method === 'HEAD');
     }
     if (result.status === 404 || !result.data?.ok) {
       res.statusCode = 404;
@@ -172,6 +172,6 @@ export default async function handler(req, res) {
     return res.end((result.data.contentType || '').startsWith('text/html') ? injectDemoExit(body, slug) : body);
   } catch (error) {
     console.error('demo-gate failed', error instanceof Error ? error.message : 'unknown error');
-    return sendHtml(res, gateHtml(slug, 'The private demo service is temporarily unavailable.'), 503, req.method === 'HEAD');
+    return sendHtml(res, gateHtml(slug, 'The private demo is temporarily unavailable. Please try again.'), 503, req.method === 'HEAD');
   }
 }

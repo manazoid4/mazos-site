@@ -1,0 +1,84 @@
+/* Route-specific final fixes loaded after the main Objects responsive layer. */
+
+/* Renders carry our own name in the slot the copy sells as the buyer's. */
+.objects-name-note {
+  max-width: 640px;
+  margin-top: 20px;
+  padding-left: 14px;
+  border-left: 3px solid var(--objects-green);
+  font-size: .84rem;
+}
+
+/* The cross-sell into the page behind the tap was buried as the last FAQ. */
+.objects-chain {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--objects-black);
+  border-bottom: 1px solid var(--objects-black);
+  list-style: none;
+}
+
+.objects-chain li {
+  min-height: 104px;
+  padding: 16px 18px 16px 0;
+}
+
+.objects-chain li + li {
+  padding-left: 18px;
+  border-left: 1px solid var(--objects-black);
+}
+
+.objects-chain span {
+  font-family: var(--mono);
+  font-size: .72rem;
+  font-weight: 600;
+}
+
+.objects-chain strong {
+  margin-top: 18px;
+  display: block;
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.objects-frontdoor-note {
+  max-width: 760px;
+  margin-top: 18px;
+  font-size: .84rem;
+}
+
+.objects-frontdoor .objects-text-link {
+  margin-top: 14px;
+}
+
+@media (max-width: 680px) {
+  .objects-chain {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .objects-chain li {
+    min-height: 88px;
+  }
+
+  .objects-chain li:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+@media (min-width: 681px) and (max-width: 980px) {
+  .objects-bundle:last-child .objects-bundle-number {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .objects-bundle:last-child .objects-bundle-visual {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .objects-bundle:last-child .objects-bundle-copy {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}

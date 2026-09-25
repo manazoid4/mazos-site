@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "Catalogue selection moves focus into enquiry; next Tab reaches selected radio",
+    "Optional details work by keyboard; required contacts stay visible; missing action is focused, described, and clears on correction",
+    "Whitespace business-name error clears on correction; catalogue locks only during submission",
+    "Every mobile section shortcut stays visible and tappable at 320 and 390px",
+    "Homepage validation identifies and describes the field, and clears stale error after input"
+  ],
+  "errors": []
+}

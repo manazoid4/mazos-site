@@ -1,136 +1,505 @@
+/* Compact Objects experience: progressive disclosure, lighter type, shorter paths. */
+
+.objects-page h1,
+.objects-page h2,
+.objects-page h3 {
+  font-weight: 600;
+  letter-spacing: -.035em;
+}
+
+.objects-kicker,
+.objects-button,
+.objects-text-link,
+.objects-bundle-title p,
+.objects-bundle-price small,
+.objects-selection-summary > p,
+.objects-form legend,
+.objects-field > span,
+.objects-faq-list summary span {
+  font-weight: 600;
+}
+
+.objects-hero {
+  min-height: auto;
+  padding: clamp(44px, 6vw, 72px) 0 clamp(42px, 6vw, 70px);
+  grid-template-columns: .82fr 1.18fr;
+  gap: clamp(30px, 5vw, 64px);
+}
+
+.objects-hero h1 {
+  margin-top: 12px;
+  font-size: clamp(3.2rem, 6.5vw, 6.4rem);
+  line-height: .86;
+}
+
+.objects-hero-copy > p:not(.objects-kicker) {
+  margin-top: 20px;
+  font-size: clamp(.98rem, 1.2vw, 1.08rem);
+}
+
+.objects-actions {
+  margin-top: 22px;
+  gap: 10px 18px;
+}
+
+.objects-hero-visual {
+  margin-right: 0;
+  border-radius: 30px;
+}
+
+.objects-hero-side-note {
+  display: none;
+}
+
+.objects-section {
+  padding: clamp(48px, 6.5vw, 78px) 0;
+}
+
+.objects-section-heading {
+  margin-bottom: clamp(26px, 4vw, 42px);
+}
+
+.objects-section-heading h2,
+.objects-how h2,
+.objects-other h2 {
+  font-size: clamp(2.2rem, 4.4vw, 4rem);
+  line-height: .96;
+}
+
+.objects-heading-row {
+  grid-template-columns: minmax(0, .9fr) minmax(260px, .55fr);
+  gap: clamp(28px, 5vw, 64px);
+}
+
+/* Turn the three Touch options into cards rather than three page-length rows. */
+.objects-bundle-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--objects-black);
+  border-bottom: 1px solid var(--objects-black);
+}
+
+.objects-bundle {
+  min-width: 0;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-right: 1px solid var(--soft-line);
+  border-bottom: 0;
+}
+
+.objects-bundle:first-child {
+  padding-left: 0;
+}
+
+.objects-bundle:last-child {
+  border-right: 0;
+}
+
+.objects-bundle-number {
+  padding: 0;
+  font-weight: 600;
+}
+
+.objects-bundle-visual,
+.objects-bundle:nth-child(even) .objects-bundle-visual {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  grid-column: auto;
+  grid-row: auto;
+  border-radius: 18px !important;
+}
+
+.objects-bundle-copy,
+.objects-bundle:nth-child(even) .objects-bundle-copy {
+  padding: 0;
+  grid-column: auto;
+  grid-row: auto;
+}
+
+.objects-bundle-title {
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.objects-bundle-title h3 {
+  margin-top: 4px;
+  font-size: clamp(1.65rem, 2.8vw, 2.45rem);
+}
+
+.objects-bundle-price > strong {
+  font-size: clamp(1.65rem, 2.8vw, 2.35rem);
+  font-weight: 600;
+}
+
+.objects-bundle-short {
+  margin-top: 11px;
+  font-size: .88rem;
+}
+
+.objects-bundle-copy ul {
+  margin-top: 15px;
+}
+
+.objects-bundle-copy li {
+  padding: 7px 0;
+  font-size: .74rem;
+}
+
+.objects-bundle-copy .objects-button {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.objects-artwork-note {
+  margin-top: 24px;
+  padding: 16px 0;
+  grid-template-columns: 130px 1fr;
+  gap: 24px;
+}
+
+.objects-artwork-note h3 {
+  font-size: clamp(1.45rem, 2.5vw, 2.1rem);
+}
+
+.objects-artwork-note p,
+.objects-price-note {
+  margin-top: 9px;
+  font-size: .76rem;
+}
+
+/* Generic compact disclosure used for demo and how-it-works. */
+.objects-disclosure {
+  border-bottom: 1px solid var(--objects-black);
+}
+
+.objects-disclosure > summary {
+  min-height: 62px;
+  padding: 14px 38px 14px 0;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.objects-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+.objects-disclosure > summary::after {
+  content: '+';
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.35rem;
+  font-weight: 400;
+}
+
+.objects-disclosure[open] > summary::after {
+  content: '−';
+}
+
+.objects-disclosure > summary span {
+  font-size: .96rem;
+  font-weight: 600;
+}
+
+.objects-disclosure > summary small {
+  color: var(--muted);
+  font-size: .72rem;
+}
+
+.objects-disclosure-body {
+  padding-bottom: 34px;
+}
+
+.objects-demo-disclosure .objects-demo {
+  padding: 24px 0 42px;
+}
+
+.objects-demo {
+  gap: clamp(34px, 6vw, 72px);
+}
+
+.objects-demo h2 {
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+}
+
+.objects-destination {
+  min-height: 390px;
+}
+
+.objects-how {
+  margin-inline: 0;
+  padding: 26px 0 8px;
+}
+
+.objects-journeys {
+  gap: clamp(36px, 6vw, 70px);
+}
+
+.objects-journeys li {
+  min-height: auto;
+  padding: 14px 0;
+}
+
+/* Keep the enquiry visible, but tighter. */
+.objects-personalise {
+  padding-top: clamp(52px, 6vw, 76px);
+}
+
+.objects-enquiry-layout {
+  gap: clamp(30px, 5vw, 58px);
+}
+
+.objects-form fieldset {
+  padding-block: 20px;
+}
+
+.objects-choice-grid label,
+.objects-use-grid label {
+  min-height: 54px;
+}
+
+.objects-selection-summary {
+  top: 88px;
+  padding: 20px;
+  box-shadow: 7px 7px 0 var(--objects-black);
+}
+
+/* Use cases become short expandable cards. */
+.objects-usecase-grid {
+  border-top: 1px solid var(--objects-black);
+}
+
+.objects-usecase {
+  border-bottom: 1px solid var(--objects-black);
+}
+
+.objects-usecase > summary {
+  min-height: 72px;
+  padding: 14px 38px 14px 0;
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.objects-usecase > summary::-webkit-details-marker {
+  display: none;
+}
+
+.objects-usecase > summary::after {
+  content: '+';
+  position: absolute;
+  right: 2px;
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.objects-usecase[open] > summary::after {
+  content: '−';
+}
+
+.objects-usecase > summary > span {
+  font-family: var(--mono);
+  font-size: .72rem;
+}
+
+.objects-usecase > summary div {
+  display: grid;
+  gap: 3px;
+}
+
+.objects-usecase > summary strong {
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.objects-usecase > summary small {
+  color: var(--muted);
+  font-size: .72rem;
+}
+
+.objects-usecase-body {
+  max-width: 880px;
+  padding: 0 0 24px 56px;
+}
+
+.objects-usecase-body p {
+  color: var(--muted);
+  font-size: .84rem;
+}
+
+.objects-usecase-body p + p,
+.objects-usecase-body ul + p,
+.objects-usecase-body p + ul {
+  margin-top: 14px;
+}
+
+.objects-usecase-body ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 22px;
+  list-style: none;
+}
+
+.objects-usecase-body li {
+  padding: 7px 0;
+  border-bottom: 1px solid var(--soft-line);
+  font-size: .78rem;
+}
+
+.objects-usecase-body .objects-text-link {
+  margin-top: 16px;
+}
+
+.objects-faq-list {
+  columns: 2;
+  column-gap: 40px;
+  border-top-width: 1px;
+}
+
+.objects-faq-list details {
+  break-inside: avoid;
+}
+
+.objects-faq-list summary {
+  min-height: 54px;
+  padding-block: 13px;
+  font-size: .88rem;
+}
+
+.objects-faq-list details p {
+  padding-bottom: 16px;
+  font-size: .8rem;
+}
+
+.objects-other {
+  min-height: auto;
+  padding: clamp(42px, 6vw, 66px) 0;
+  grid-template-columns: .35fr 1fr auto;
+  gap: 28px;
+}
+
+.objects-other h2 {
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+}
+
+.objects-other p:not(.objects-kicker) {
+  margin-top: 8px;
+  font-size: .82rem;
+}
+
 @media (max-width: 980px) {
   .objects-hero,
-  .objects-demo,
   .objects-heading-row,
-  .objects-portfolio-edition,
   .objects-enquiry-layout,
   .objects-other {
     grid-template-columns: 1fr;
   }
 
-  .objects-hero {
-    min-height: auto;
+  .objects-bundle-list {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .objects-hero-visual {
-    margin-right: -8vw;
-    margin-left: 6vw;
+  .objects-bundle:nth-child(2) {
+    border-right: 0;
   }
 
-  .objects-bundle {
-    grid-template-columns: 34px 1fr;
+  .objects-bundle:last-child {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
-  .objects-bundle-visual,
-  .objects-bundle:nth-child(even) .objects-bundle-visual {
-    grid-column: 2;
-    grid-row: auto;
-  }
-
-  .objects-bundle-copy,
-  .objects-bundle:nth-child(even) .objects-bundle-copy {
-    grid-column: 2;
-    grid-row: auto;
-  }
-
-  .objects-bundle-number {
-    grid-row: 1 / span 2;
-  }
-
-  .objects-gallery figure {
-    min-height: 430px;
-  }
-
-  .objects-gallery-full {
-    min-height: 520px !important;
+  .objects-faq-list {
+    columns: 1;
   }
 
   .objects-selection-summary {
     position: static;
     grid-row: 1;
   }
-
-  .objects-other {
-    align-items: start;
-  }
 }
 
 @media (max-width: 680px) {
   .objects-hero {
-    padding-top: 58px;
-    gap: 46px;
+    padding-top: 42px;
+    gap: 28px;
   }
 
   .objects-hero h1 {
-    font-size: clamp(3.75rem, 20vw, 5.4rem);
+    font-size: clamp(3.1rem, 16vw, 4.6rem);
   }
 
   .objects-hero-visual {
-    width: 118%;
-    margin-inline: -9%;
-    border-radius: 50% 50% 12px 12px;
+    width: 100%;
+    margin: 0;
+    border-radius: 20px;
   }
 
-  .objects-hero-visual figcaption {
-    right: 12px;
-    bottom: 12px;
-    left: 12px;
-  }
-
-  .objects-hero-visual figcaption span:last-child,
-  .objects-hero-side-note {
+  .objects-hero-visual figcaption span:last-child {
     display: none;
   }
 
   .objects-section {
-    padding-block: 82px;
+    padding-block: 48px;
   }
 
   .objects-section-heading h2,
   .objects-how h2,
   .objects-other h2 {
-    font-size: clamp(2.8rem, 15vw, 4.3rem);
+    font-size: clamp(2.1rem, 11vw, 3.2rem);
   }
 
-  .objects-bundle {
-    padding-block: 34px 52px;
+  .objects-bundle-list {
     grid-template-columns: 1fr;
-    gap: 18px;
   }
 
-  .objects-bundle-number,
-  .objects-bundle-visual,
-  .objects-bundle-copy,
-  .objects-bundle:nth-child(even) .objects-bundle-visual,
-  .objects-bundle:nth-child(even) .objects-bundle-copy {
-    grid-column: 1;
-    grid-row: auto;
+  .objects-bundle,
+  .objects-bundle:first-child,
+  .objects-bundle:last-child {
+    padding: 20px 0;
+    display: block;
+    grid-column: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--soft-line);
+  }
+
+  .objects-bundle:last-child {
+    border-bottom: 0;
   }
 
   .objects-bundle-visual {
-    aspect-ratio: 1 / 1;
+    margin-top: 12px;
   }
 
-  .objects-bundle:nth-child(2) .objects-bundle-visual {
-    aspect-ratio: 4 / 3;
-  }
-
-  .objects-bundle-title {
-    align-items: end;
-  }
-
-  .objects-bundle-copy .objects-button,
-  .objects-continue .objects-button,
-  .objects-submit-row .objects-button,
-  .objects-other .objects-button {
-    width: 100%;
+  .objects-bundle-copy {
+    margin-top: 16px;
   }
 
   .objects-artwork-note,
   .objects-journeys,
-  .objects-gallery,
   .objects-form-row {
     grid-template-columns: 1fr;
+  }
+
+  .objects-disclosure > summary {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+
+  .objects-disclosure > summary small {
+    text-align: left;
   }
 
   .objects-demo-discs {
@@ -138,50 +507,16 @@
   }
 
   .objects-demo-discs button {
-    min-height: 64px;
-    padding: 8px 14px;
+    min-height: 58px;
+    padding: 8px 12px;
     display: flex;
     justify-content: flex-start;
-    gap: 14px;
-  }
-
-  .objects-demo-discs button span {
-    width: 42px;
-    height: 42px;
+    gap: 12px;
   }
 
   .objects-destination {
-    min-height: 430px;
-    box-shadow: 8px 8px 0 var(--objects-green);
-  }
-
-  .objects-gallery figure,
-  .objects-gallery-full {
-    min-height: 390px !important;
-    grid-column: 1;
-    border-radius: 0;
-  }
-
-  .objects-gallery figcaption {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .objects-portfolio-edition a {
-    grid-template-columns: 34px 1fr;
-  }
-
-  .objects-portfolio-edition a small {
-    grid-column: 2;
-  }
-
-  .objects-how {
-    padding-block: 82px;
-  }
-
-  .objects-journeys {
-    gap: 55px;
+    min-height: 330px;
+    box-shadow: 6px 6px 0 var(--objects-green);
   }
 
   .objects-choice-grid,
@@ -198,18 +533,19 @@
     flex-direction: column;
   }
 
-  .objects-selection-summary {
-    padding: 20px;
-    box-shadow: 6px 6px 0 var(--objects-black);
-  }
-
-  .objects-faq-list summary {
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .objects-faq-list details p {
+  .objects-usecase-body {
     padding-left: 0;
+  }
+
+  .objects-usecase-body ul {
+    grid-template-columns: 1fr;
+  }
+
+  .objects-other .objects-button,
+  .objects-bundle-copy .objects-button,
+  .objects-optional-details > summary,
+  .objects-submit-row .objects-button {
+    width: 100%;
   }
 }
 
