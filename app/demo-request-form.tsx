@@ -8,6 +8,7 @@ import {
   DEFAULT_SERVICE_ID,
   ENQUIRY_NEXT_STEPS,
   ENQUIRY_SERVICES,
+  NATIVE_FORM_ENDPOINT,
   buildRecoveryMailto,
   readServiceFromLocation,
   sendEnquiry,
@@ -39,12 +40,16 @@ export function DemoRequestForm() {
   const [service, setService] = useState<EnquiryServiceId>(DEFAULT_SERVICE_ID);
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
   const [validationError, setValidationError] = useState('');
+  const [invalidField, setInvalidField] = useState('');
   const [failureReason, setFailureReason] = useState<'rejected' | 'timeout' | 'network'>('rejected');
   const [recoveryHref, setRecoveryHref] = useState(`mailto:${CONTACT_EMAIL}`);
 
   useEffect(() => {
     const syncService = () => setService(readServiceFromLocation() ?? DEFAULT_SERVICE_ID);
-    syncService();
+    const selectedValue = formRef.current?.querySelector<HTMLSelectElement>('[name="service"]')?.value;
+    const selectedService = ENQUIRY_SERVICES.find((option) => option.id === selectedValue)?.id;
+    // Preserve a native selection made while the scripts were still loading.
+    setService(selectedService && selectedService !== DEFAULT_SERVICE_ID ? selectedService : readServiceFromLocation() ?? DEFAULT_SERVICE_ID);
     window.addEventListener('maz-enquiry-service', syncService);
     window.addEventListener('popstate', syncService);
     return () => {
@@ -72,6 +77,7 @@ export function DemoRequestForm() {
 
     const missing = !name ? 'name' : !email ? 'email' : !problem ? 'problem' : '';
     if (missing) {
+      setInvalidField(missing);
       setValidationError(
         missing === 'problem'
           ? 'Add a short description of what you want to improve.'
@@ -82,6 +88,7 @@ export function DemoRequestForm() {
     }
 
     setValidationError('');
+    setInvalidField('');
 
     const serviceLabel = ENQUIRY_SERVICES.find((option) => option.id === service)?.label ?? 'Not specified';
     const subject = `Maz Works — enquiry${business ? ` — ${business}` : ''} — ${serviceLabel}`;
@@ -125,17 +132,23 @@ export function DemoRequestForm() {
   const selectedServiceLabel = ENQUIRY_SERVICES.find((option) => option.id === service)?.label ?? 'Not sure yet';
 
   return (
-    <form className="mw-demo-form" ref={formRef} onSubmit={submitRequest}>
+    <form className="mw-demo-form" action={NATIVE_FORM_ENDPOINT} method="post" ref={formRef} onSubmit={submitRequest} onInput={(event) => {
+      if ((event.target as HTMLInputElement).name === invalidField) {
+        setInvalidField('');
+        setValidationError('');
+      }
+    }}>
+      <input type="hidden" name="_subject" value="Maz Works — business enquiry" />
+      <input type="hidden" name="_template" value="table" />
       <p className="mw-form-kicker">Name, email and the problem are enough. Add the rest only if it helps.</p>
-
       <div className="mw-form-row">
         <label>
           <span>Name</span>
-          <input name="name" autoComplete="name" required disabled={submitState === 'sending'} />
+          <input name="name" autoComplete="name" required aria-invalid={invalidField === 'name' || undefined} aria-describedby={invalidField === 'name' ? 'business-enquiry-error' : undefined} disabled={submitState === 'sending'} />
         </label>
         <label>
           <span>Email</span>
-          <input name="email" type="email" autoComplete="email" required disabled={submitState === 'sending'} />
+          <input name="email" type="email" autoComplete="email" required aria-invalid={invalidField === 'email' || undefined} aria-describedby={invalidField === 'email' ? 'business-enquiry-error' : undefined} disabled={submitState === 'sending'} />
         </label>
       </div>
 
@@ -143,6 +156,8 @@ export function DemoRequestForm() {
         <span>What do you want to improve?</span>
         <textarea
           name="problem"
+          aria-invalid={invalidField === 'problem' || undefined}
+          aria-describedby={invalidField === 'problem' ? 'business-enquiry-error' : undefined}
           rows={5}
           required
           disabled={submitState === 'sending'}
@@ -192,7 +207,7 @@ export function DemoRequestForm() {
           {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Send enquiry'}
         </button>
         <p>Sent directly from this form to my inbox. No account or booking step.</p>
-        <p className="mw-form-status mw-form-error" role="alert">{validationError}</p>
+        <p id="business-enquiry-error" className="mw-form-status mw-form-error" role="alert">{validationError}</p>
         <p className="mw-form-status" role="status" aria-live="polite">
           {submitState === 'sent' && (
             <>

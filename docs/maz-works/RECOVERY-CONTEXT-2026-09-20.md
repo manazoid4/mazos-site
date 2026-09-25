@@ -1,5 +1,7 @@
 # Maz Works recovery — 20 September 2026
 
+> Superseded for current integration by [21 September work block](WORK-BLOCK-2026-09-21.md). PR #40 landed the earlier recovery and later cleanup on main. Resume from the new main-based resilience branch, not the old stacked PRs. The account below is historical.
+
 ## Resume here
 
 Implementation is complete and locally verified on `agents/maz-works-recovery-20260920`,

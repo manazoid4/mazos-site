@@ -1,0 +1,556 @@
+[
+  {
+    "route": "/",
+    "width": 390,
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          {
+            "target": [
+              ".mw-capabilities"
+            ],
+            "summary": "Fix all of the following:\n  aria-label attribute is not well supported on a div with no valid role attribute."
+          }
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "target": [
+              ".text-link[href$=\"#work\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".mw-hero-update > span"
+            ],
+            "summary": "Fix any of the following:\n  Element has a 1:1 contrast ratio with the background"
+          },
+          {
+            "target": [
+              "a[href$=\"jobfilter\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              "a[href$=\"find-jobs\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              "a[href$=\"scrap-finance-partners\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              "nav[aria-label=\"Scrap Finance Partners links\"] > a:nth-child(2) > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              "nav[aria-label=\"Agent Nudge links\"] > a > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              "nav[aria-label=\"MAZ Pocket links\"] > a[href$=\"#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".mw-service-card:nth-child(1) > .mw-service-link[href=\"/?service=website#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".mw-service-card:nth-child(2) > .mw-service-link[href=\"/?service=automation#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              "a[href=\"/?service=software#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              "a[href=\"/?service=unsure#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".mw-price-option:nth-child(2) > .mw-service-link[href=\"/?service=website#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".mw-price-option:nth-child(3) > .mw-service-link[href=\"/?service=automation#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".text-link[href$=\"3d-printing\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".text-link[href$=\"faq\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/3d-printing",
+    "width": 390,
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "target": [
+              ".objects-text-link[href$=\"#personalise\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".objects-text-link[href$=\"/#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/demos",
+    "width": 390,
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          {
+            "target": [
+              ".mw-capabilities"
+            ],
+            "summary": "Fix all of the following:\n  aria-label attribute is not well supported on a div with no valid role attribute."
+          }
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "target": [
+              "span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/work/jobfilter",
+    "width": 390,
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "target": [
+              ".case-back > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".text-link > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/work/scrap-finance-partners",
+    "width": 390,
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "target": [
+              ".case-back > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".text-link > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/faq",
+    "width": 390,
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "target": [
+              ".text-link[href$=\"whats-new\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".text-link[href$=\"/#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/whats-new",
+    "width": 390,
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "target": [
+              ".text-link[href$=\"/#work\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              "a[href$=\"#clearer-site-language\"] > span"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+          },
+          {
+            "target": [
+              "a[href$=\"#clearer-site-language\"] > time[datetime=\"2026-09-19\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+          },
+          {
+            "target": [
+              ".text-link[href$=\"/#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          {
+            "target": [
+              ".mw-capabilities"
+            ],
+            "summary": "Fix all of the following:\n  aria-label attribute is not well supported on a div with no valid role attribute."
+          }
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "target": [
+              ".text-link[href$=\"#work\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".mw-hero-update > span"
+            ],
+            "summary": "Fix any of the following:\n  Element has a 1:1 contrast ratio with the background"
+          },
+          {
+            "target": [
+              "a[href$=\"jobfilter\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              "a[href$=\"find-jobs\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              "a[href$=\"scrap-finance-partners\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              "nav[aria-label=\"Scrap Finance Partners links\"] > a:nth-child(2) > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              "nav[aria-label=\"Agent Nudge links\"] > a > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              "nav[aria-label=\"MAZ Pocket links\"] > a[href$=\"#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".mw-service-card:nth-child(1) > .mw-service-link[href=\"/?service=website#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".mw-service-card:nth-child(2) > .mw-service-link[href=\"/?service=automation#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              "a[href=\"/?service=software#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              "a[href=\"/?service=unsure#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".mw-price-option:nth-child(2) > .mw-service-link[href=\"/?service=website#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".mw-price-option:nth-child(3) > .mw-service-link[href=\"/?service=automation#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".text-link[href$=\"3d-printing\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".text-link[href$=\"faq\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/3d-printing",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "target": [
+              ".objects-text-link[href$=\"#personalise\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              "figcaption > span:nth-child(2)"
+            ],
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+          },
+          {
+            "target": [
+              ".objects-text-link[href$=\"/#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/demos",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "aria-prohibited-attr",
+        "nodes": [
+          {
+            "target": [
+              ".mw-capabilities"
+            ],
+            "summary": "Fix all of the following:\n  aria-label attribute is not well supported on a div with no valid role attribute."
+          }
+        ]
+      },
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "target": [
+              "span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/work/jobfilter",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "target": [
+              ".case-back > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".text-link > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/work/scrap-finance-partners",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "target": [
+              ".case-back > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".text-link > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/faq",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "target": [
+              ".text-link[href$=\"whats-new\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".text-link[href$=\"/#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/whats-new",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "target": [
+              ".text-link[href$=\"/#work\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "target": [
+              ".text-link[href$=\"/#contact\"] > span[aria-hidden=\"true\"]"
+            ],
+            "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ]
+  }
+]

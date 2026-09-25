@@ -21,7 +21,7 @@ fs.mkdirSync(ARTIFACTS, {recursive:true});
  });
  for(const width of [320,390,768,1440]){
   await page.setViewportSize({width,height:900});
-  for(const route of ['/','/3d-printing','/demos','/work/jobfilter','/work/scrap-finance-partners']){
+  for(const route of ['/','/3d-printing','/demos','/work/jobfilter','/work/scrap-finance-partners','/faq','/whats-new']){
    await page.goto(TARGET_URL+route,{waitUntil:'networkidle'});
    await page.locator('img').evaluateAll(async images => { await Promise.all(images.map(img => { img.loading='eager'; return img.decode().catch(()=>{}); })); });
    const metrics=await page.evaluate(()=>({height:document.documentElement.scrollHeight,overflow:document.documentElement.scrollWidth>innerWidth,contactY:document.querySelector('#contact,#personalise')?.getBoundingClientRect().top+scrollY,inputs:[...document.querySelectorAll('input:not([type=hidden]),textarea,select')].filter(e=>e.getBoundingClientRect().height&&e.tabIndex>=0).map(e=>({name:e.name,size:getComputedStyle(e).fontSize})),brokenImages:[...document.images].filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src)}));
@@ -42,9 +42,10 @@ fs.mkdirSync(ARTIFACTS, {recursive:true});
  assert.equal(await page.locator('[name=service]').inputValue(),'automation');
  assert.equal(await page.locator('[name=name]').inputValue(),'Example Customer');
  assert.match(await page.locator('[name=problem]').inputValue(),/Bookings/);
- assert.equal(await page.evaluate(()=>document.activeElement.name),'service');
+ assert.equal(await page.evaluate(()=>document.activeElement.name),'problem');
  await page.goBack(); assert.equal(await page.locator('[name=service]').inputValue(),'unsure');
  await page.goForward(); assert.equal(await page.locator('[name=service]').inputValue(),'automation');
+ await page.locator('.mw-form-options > summary').click();
  await page.locator('[name=nextStep]').selectOption({label:'Just answer my question first'});
  for(const failMode of ['rejected','malformed']){
   mode=failMode; await page.getByRole('button',{name:'Send enquiry',exact:true}).click();
@@ -75,7 +76,7 @@ fs.mkdirSync(ARTIFACTS, {recursive:true});
    assert.equal(await page.locator('.objects-estimate dd').innerText(),`£${price+(artwork?10:0)}`);
   }
  }
- await page.locator('[name=businessName]').fill('Example Shop'); await page.getByRole('button',{name:'Add contact details'}).click();
+ await page.locator('[name=businessName]').fill('Example Shop'); await page.locator('.objects-optional-details > summary').click();
  await page.locator('[name=name]').fill('Example Customer'); await page.locator('[name=email]').fill('customer@example.com');
  await page.locator('[name=helpFindingLinks]').check(); mode='malformed'; await page.getByRole('button',{name:'Send my enquiry'}).click();
  await page.getByRole('status').filter({hasText:'Delivery was not confirmed'}).waitFor();
@@ -83,7 +84,7 @@ fs.mkdirSync(ARTIFACTS, {recursive:true});
  assert.equal(await page.locator('[name=businessName]').inputValue(),'Example Shop');
  await page.getByText('No email app? Copy your enquiry',{exact:true}).click(); assert.match(await page.locator('.enquiry-recovery textarea').inputValue(),/Email: customer@example.com/);
  mode='success'; await page.getByRole('button',{name:'Send my enquiry'}).click(); await page.getByRole('button',{name:'Send another enquiry'}).click(); assert.equal(await page.getByRole('button',{name:'Send my enquiry'}).isEnabled(),true);
- results.push({checks:'Service links preserve drafts and browser history; blank validation and focus; both forms reject malformed/provider failures; pending locks inputs; confirmed success/reset/retry; mailto and webmail recovery; six prices; keyboard skip; 20 responsive route checks',errors,responses});
+ results.push({checks:'Service links preserve drafts and browser history; blank validation and focus; both forms reject malformed/provider failures; pending locks inputs; confirmed success/reset/retry; mailto and webmail recovery; six prices; keyboard skip; 28 responsive route checks',errors,responses});
  assert.deepEqual(errors,[]); assert.deepEqual(responses,[]);
  fs.writeFileSync(`${ARTIFACTS}/maz-after.json`,JSON.stringify(results,null,2)); console.log(JSON.stringify(results,null,2)); await browser.close();
 })().catch(e=>{console.error(e);process.exit(1)});

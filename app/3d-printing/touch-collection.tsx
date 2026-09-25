@@ -7,10 +7,11 @@ import { useTouchSelection } from './touch-selection';
 function moveToPersonalisation() {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.getElementById('personalise')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
+  document.getElementById('personalise-title')?.focus({ preventScroll: true });
 }
 
 export function TouchCollection() {
-  const { bundleId, selectBundle } = useTouchSelection();
+  const { interactive, submitState, bundleId, selectBundle } = useTouchSelection();
 
   function personalise(id: TouchBundleId) {
     selectBundle(id);
@@ -27,7 +28,7 @@ export function TouchCollection() {
 
       <div className="objects-bundle-list">
         {TOUCH_PRICING.bundles.map((bundle, index) => (
-          <article className={`objects-bundle ${bundleId === bundle.id ? 'is-selected' : ''}`} key={bundle.id} aria-labelledby={`${bundle.id}-title`}>
+          <article className={`objects-bundle ${interactive && bundleId === bundle.id ? 'is-selected' : ''}`} key={bundle.id} aria-labelledby={`${bundle.id}-title`}>
             <div className="objects-bundle-number" aria-hidden="true">0{index + 1}</div>
             <figure className="objects-bundle-visual">
               <Image src={bundle.image} alt={bundle.imageAlt} width={bundle.imageWidth} height={bundle.imageHeight} sizes="(max-width: 760px) 100vw, 48vw" unoptimized />
@@ -40,9 +41,10 @@ export function TouchCollection() {
               </div>
               <p className="objects-bundle-short">{bundle.short}</p>
               <ul>{bundle.contents.map((item) => <li key={item}>{item}</li>)}</ul>
-              <button className="objects-button objects-button-dark" type="button" onClick={() => personalise(bundle.id)} aria-pressed={bundleId === bundle.id}>
+              <button className="objects-button objects-button-dark" type="button" hidden={!interactive} disabled={submitState === 'sending'} onClick={() => personalise(bundle.id)} aria-pressed={bundleId === bundle.id}>
                 Choose {bundle.name}
               </button>
+              <a className="objects-button objects-button-dark" href="#personalise" hidden={interactive}>Choose in the enquiry form</a>
             </div>
           </article>
         ))}
