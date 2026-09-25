@@ -68,7 +68,7 @@
 .tagline {
   margin-top: 0.08rem;
   color: #71837d;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
 }
 
 .demoBadge,
@@ -82,7 +82,7 @@
   padding: 0.45rem 0.65rem;
   background: #e7f0ed;
   color: #47625a;
-  font-size: 0.71rem;
+  font-size: 0.72rem;
 }
 
 .ghostButton,
@@ -131,7 +131,7 @@
 .cardTitle span {
   display: block;
   color: #748680;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -188,7 +188,7 @@
 .eyebrow {
   margin: 0 0 0.28rem;
   color: #31806d;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -240,7 +240,7 @@
   border-radius: 0.55rem;
   background: white;
   color: #395b52;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-align: left;
 }
@@ -282,7 +282,7 @@
 .messageMeta {
   margin-bottom: 0.28rem;
   color: #71837d;
-  font-size: 0.64rem;
+  font-size: 0.72rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -291,7 +291,7 @@
 .userMessage .messageMeta { color: rgba(255, 255, 255, 0.68); }
 .message p { margin: 0; font-size: 0.79rem; line-height: 1.55; }
 .message ul { margin: 0.55rem 0 0; padding-left: 1.05rem; }
-.message li { margin-top: 0.22rem; color: #587169; font-size: 0.7rem; line-height: 1.45; }
+.message li { margin-top: 0.22rem; color: #587169; font-size: 0.72rem; line-height: 1.45; }
 .userMessage li { color: white; }
 
 .pendingCard {
@@ -306,7 +306,7 @@
   background: #eef9f5;
 }
 
-.pendingCard span { color: #2b765f; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; }
+.pendingCard span { color: #2b765f; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; }
 .pendingCard strong { display: block; margin-top: 0.18rem; font-size: 0.87rem; }
 .pendingCard p { margin: 0.26rem 0 0; color: #5b746c; font-size: 0.72rem; line-height: 1.45; }
 .pendingActions { gap: 0.45rem; flex-shrink: 0; }
@@ -317,7 +317,7 @@
   background: #fff;
 }
 
-.commandForm label { display: block; margin-bottom: 0.45rem; color: #274e44; font-size: 0.7rem; font-weight: 800; }
+.commandForm label { display: block; margin-bottom: 0.45rem; color: #274e44; font-size: 0.72rem; font-weight: 800; }
 .inputRow { gap: 0.45rem; }
 .inputRow input {
   min-width: 0;
@@ -332,11 +332,11 @@
   font-size: 0.78rem;
 }
 .inputRow input:focus { border-color: #5fa995; box-shadow: 0 0 0 3px rgba(95, 169, 149, 0.12); }
-.commandForm > p { margin: 0.45rem 0 0; color: #879690; font-size: 0.65rem; }
+.commandForm > p { margin: 0.45rem 0 0; color: #879690; font-size: 0.72rem; }
 
 .rotaPanel { overflow: hidden; }
 .rotaHeader { align-items: flex-start; }
-.shiftBadge { padding: 0.42rem 0.58rem; background: #edf4f2; color: #45635a; font-size: 0.68rem; }
+.shiftBadge { padding: 0.42rem 0.58rem; background: #edf4f2; color: #45635a; font-size: 0.72rem; }
 
 .calendar {
   display: grid;
@@ -357,8 +357,8 @@
 
 .dayHeader { justify-content: space-between; gap: 0.4rem; padding-bottom: 0.6rem; border-bottom: 1px solid #e7eeeb; }
 .dayHeader strong { display: block; font-size: 0.76rem; }
-.dayHeader div > span { display: block; margin-top: 0.12rem; color: #82928d; font-size: 0.65rem; }
-.risk { padding: 0.28rem 0.4rem; font-size: 0.59rem; }
+.dayHeader div > span { display: block; margin-top: 0.12rem; color: #82928d; font-size: 0.72rem; }
+.risk { padding: 0.28rem 0.4rem; font-size: 0.72rem; }
 .healthy { background: #e9f7f1; color: #1e7858; }
 .tight { background: #fff5df; color: #8a641a; }
 .conflict { background: #fff0ec; color: #a84432; }
@@ -384,11 +384,11 @@
   border-radius: 0.58rem;
   background: #e7f0ed;
   color: #27584b;
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   font-weight: 800;
 }
-.personCard strong { display: block; overflow: hidden; font-size: 0.69rem; text-overflow: ellipsis; white-space: nowrap; }
-.personCard div > span { display: block; margin-top: 0.12rem; color: #80908b; font-size: 0.58rem; line-height: 1.3; }
+.personCard strong { display: block; overflow: hidden; font-size: 0.72rem; text-overflow: ellipsis; white-space: nowrap; }
+.personCard div > span { display: block; margin-top: 0.12rem; color: #80908b; font-size: 0.72rem; line-height: 1.3; }
 .skillDots { position: absolute; right: 0.35rem; bottom: 0.35rem; display: flex; gap: 0.18rem; }
 .skillDots i {
   display: grid;
@@ -398,7 +398,7 @@
   border-radius: 50%;
   background: #eef5f3;
   color: #37685b;
-  font-size: 0.52rem;
+  font-size: 0.72rem;
   font-style: normal;
   font-weight: 900;
 }
@@ -422,7 +422,7 @@
 .cardTitle { justify-content: space-between; gap: 0.8rem; }
 .cardTitle strong { font-size: 0.79rem; }
 .rulesCard ul { margin: 0.7rem 0 0; padding: 0; list-style: none; }
-.rulesCard li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.48rem 0; border-top: 1px solid #eef2f1; font-size: 0.69rem; }
+.rulesCard li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.48rem 0; border-top: 1px solid #eef2f1; font-size: 0.72rem; }
 .rulesCard li span { color: #6f817b; }
 .rulesCard li strong { color: #294f45; }
 
@@ -435,10 +435,10 @@
 .teamList > div { min-width: 0; padding: 0.46rem 0.5rem; border-radius: 0.56rem; background: #f6f9f8; }
 .teamList span,
 .teamList small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.teamList span { font-size: 0.67rem; font-weight: 800; }
-.teamList small { margin-top: 0.16rem; color: #80908b; font-size: 0.57rem; }
+.teamList span { font-size: 0.72rem; font-weight: 800; }
+.teamList small { margin-top: 0.16rem; color: #80908b; font-size: 0.72rem; }
 .teamList .inactive { opacity: 0.5; text-decoration: line-through; }
-.seedNote { margin: 0.65rem 0 0; color: #7e8f89; font-size: 0.62rem; line-height: 1.45; }
+.seedNote { margin: 0.65rem 0 0; color: #7e8f89; font-size: 0.72rem; line-height: 1.45; }
 
 .footer {
   display: flex;
@@ -448,7 +448,7 @@
   margin: 0 auto;
   padding: 0 2.25rem 2rem;
   color: #71837d;
-  font-size: 0.66rem;
+  font-size: 0.72rem;
   line-height: 1.45;
 }
 .footer strong { color: #355d52; }
