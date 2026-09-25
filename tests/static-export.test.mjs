@@ -354,3 +354,18 @@ test('every sitemap entry points at a page that was actually exported', async ()
 
   assert.deepEqual(broken, [], `sitemap points at missing pages: ${broken.join(', ')}`);
 });
+
+test('Quick Win page sells one fix, reassures on existing systems and routes to the enquiry form', async () => {
+  const html = await readPage('/quick-win');
+  assert.match(html, /£150/);
+  assert.match(html, /Works with what you have/);
+  for (const platform of ['Wix', 'Squarespace', 'WordPress', 'Square', 'Fresha', 'Booksy', 'Google Business Profile']) {
+    assert.ok(html.includes(platform), `Quick Win page should name ${platform}`);
+  }
+  assert.match(html, /No password sharing/);
+  assert.match(html, /\?service=quick-win#contact/);
+
+  const home = await readPage('/');
+  assert.match(home, /href="\/quick-win"/);
+  assert.match(home, /\?service=quick-win#contact/);
+});
