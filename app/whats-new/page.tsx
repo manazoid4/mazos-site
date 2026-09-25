@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     url: PAGE_URL,
     type: 'website',
   },
+  robots: { index: false, follow: true },
 };
 
 export default function WhatsNewPage() {

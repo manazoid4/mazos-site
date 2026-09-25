@@ -39,10 +39,9 @@ export default function FaqPage() {
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="faq-title">
         <p className="eyebrow">FAQ</p>
         <h1 id="faq-title">Questions? Straight answers.</h1>
-        <p>Pricing, demos, AI, handover and what Maz Works actually does — without making you book a call to find out.</p>
+        <p>Quick, plain answers before you book a call.</p>
         <div className="mw-actions">
           <a className="button button-signal" href="/#contact">Tell me the problem</a>
-          <a className="text-link" href="/whats-new">See what changed recently <span aria-hidden="true">→</span></a>
         </div>
       </section>
 
@@ -62,7 +61,7 @@ export default function FaqPage() {
         <div>
           <p className="eyebrow">Still unsure?</p>
           <h2 id="faq-still-title">Ask the actual question.</h2>
-          <p>No ticket system or forced booking flow. Send the question, or use the short enquiry form.</p>
+          <p>Send it by email, or use the form below.</p>
         </div>
         <div className="mw-actions">
           <a className="button button-dark" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20question`}>Email me</a>

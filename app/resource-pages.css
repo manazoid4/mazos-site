@@ -385,60 +385,58 @@
   }
 }
 
-/* Quick Win page: section headings, platform and reassurance cards. */
-.mw-qw-heading {
-  padding-top: clamp(34px, 5vw, 52px);
-  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
-}
-
-.mw-resource-row h3 {
-  font-size: clamp(1.15rem, 1.9vw, 1.55rem);
-}
-
+/* Quick Win page: short lists and a platform table. */
 .mw-qw-section {
-  padding: clamp(40px, 6vw, 64px) 0;
+  padding: clamp(28px, 4vw, 44px) 0;
   border-bottom: 1px solid var(--soft-line);
 }
 
 .mw-qw-section h2 {
-  margin-top: 7px;
-  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  margin-top: 6px;
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
 }
 
 .mw-qw-lead {
-  max-width: 680px;
-  margin-top: 10px;
+  margin-top: 12px;
   color: var(--muted);
-  font-size: .92rem;
+  font-size: .88rem;
 }
 
-.mw-qw-grid {
-  margin-top: 26px;
+.mw-qw-list {
+  margin-top: 14px;
+  padding-left: 1.1em;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-  gap: 14px;
+  gap: 6px;
+  font-size: .95rem;
 }
 
-.mw-qw-card {
-  padding: 20px;
-  border: 1px solid var(--soft-line);
-  border-radius: 10px;
+.mw-qw-platforms {
+  margin-top: 16px;
+  display: grid;
+  gap: 10px;
 }
 
-.mw-qw-card h3 {
-  font-size: 1.05rem;
+.mw-qw-platforms div {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 12px;
 }
 
-.mw-qw-card p {
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: .86rem;
-}
-
-.mw-qw-card .mw-qw-tools {
-  color: inherit;
+.mw-qw-platforms dt {
   font-family: var(--mono);
-  font-size: .72rem;
+  font-size: .75rem;
   font-weight: 700;
-  line-height: 1.6;
+  padding-top: 2px;
+}
+
+.mw-qw-platforms dd {
+  margin: 0;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.mw-pricing-extra {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: .82rem;
 }
