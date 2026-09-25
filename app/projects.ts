@@ -61,7 +61,7 @@ export const FLAGSHIP_PROJECTS: Project[] = [
   {
     id: 'scrap-finance-partners', name: 'Scrap Finance Partners', eyebrow: 'Flagship 02 / Contract client build', status: 'Contract client work / Shipped',
     relationship: 'Client work',
-    summary: 'A contract client build for a specialist finance practice serving UK scrap and recycling firms, covering positioning, web development, lead capture, a secure client workspace, and guarded acquisition automation.',
+    summary: 'A contract client build for a specialist finance practice: website, lead capture, a client area and outreach with approval steps.',
     problem: 'The client needed more than a brochure site. Enquiries had to land somewhere safe and get followed up.',
     insight: 'Treat the site, enquiries and follow-up as one journey. Then nothing gets lost in an inbox.',
     built: [
