@@ -34,7 +34,7 @@ the work was blocking. Landed or in flight:
 | PR | State | What |
 | --- | --- | --- |
 | mazos-site #34 | **merged** (`81742c6`) | Enquiry hardening, service context, sitemap fix, positioning brief |
-| mazos-site #35 | **open** | Homepage rewrite, typography floor, nav trim, DESIGN.md correction |
+| mazos-site #35 | **closed unmerged** | Its content reached `main` via #40 on 21 Sep; verified field by field before closing |
 | unified-memory #4 | merged | Positioning + enquiry P0 record |
 | unified-memory #5 | open | Content pass record + corrections |
 
@@ -106,7 +106,7 @@ not round them up.
 | --- | --- | --- |
 | **The contact form failed silently for roughly three days** | FormSubmit approves per submitting domain. The site moved to `mazworks.uk` on 16 Sep; from then until 19 Sep 11:29 UTC every submission from `www.mazworks.uk` was rejected with an activation notice, while the old `mazos-site.vercel.app` origin still returned success. Found by submitting real test data to both origins, not by reading code. Fixed the same day and confirmed at both ends — endpoint returns success, and Maz confirmed receiving every test submission. | Say "roughly three days" or "16–19 September". Do not claim a number of lost enquiries — **that number is unknown and must not be invented or estimated.** |
 | **The enquiry form is now resilient without JavaScript** | Before scripts load, the homepage form used to default to a GET that put contact details in the URL, and the Objects form needed script-mounted fields. Both now have a native POST fallback and preserve what was typed when the interactive UI starts. | Merged via PR #42, 25 Sep. Describe the behaviour, not a measured improvement. |
-| **The site's smallest text was 9px** | Measured in Chromium at 390px and 1440px: smallest rendered text 9.0–9.3px across pages; headings set below a 1.0 line-height so letters collided when a heading wrapped; section headings clamped up to 85px. | **Fixed and live.** The 11.5px floor reached `main` via PR #40 on 21 Sep and PR #35 was closed unmerged; verified on `main` as 0 genuine sub-`.72rem` declarations across all seven stylesheets. Safe to write in the past tense: found, measured, fixed. Do not claim a before/after business effect — none was measured. |
+| **The site's smallest text was 9px** | Measured in Chromium at 390px and 1440px: smallest rendered text 9.0–9.3px across pages; headings set below a 1.0 line-height so letters collided when a heading wrapped; section headings clamped up to 85px. | **Fixed on the marketing pages, and only those.** The 11.5px floor reached `main` via PR #40 on 21 Sep; verified as 0 sub-floor declarations across the seven marketing stylesheets. **`/rotareason` is still not fixed** — it is public and in the sitemap, and `rotareason.module.css` carries text at `0.57rem` (~9.1px) and several values in the 0.62–0.71rem range. Write it as "the pages I sell from", never "the whole site". Do not claim a before/after business effect — none was measured. |
 | **The enquiry form now asks what you actually want** | Free demo, a walkthrough, a quote, or just an answer — so a £29 order or a £150 fixed job does not have to route through an unpaid custom build. | Merged in PR #34 and live. Safe to describe in the present tense. |
 
 **All of the above are merged and live on `main` as of 25 Sep 2026**, so the past tense
@@ -180,7 +180,7 @@ Use these if they earn their place; you are not obliged to:
   caveat: the count of enquiries lost is unknown, and must stay unknown.
 - **"The text on my site was 9 pixels."** Sourced in §3. Also Maz's own, and it makes
   the point that the problems worth fixing are usually invisible until measured. Note
-  the caveat: the fix is on an unmerged PR.
+  the caveat in §3: the marketing pages are fixed, `/rotareason` is not yet.
 - **The operations background.** Complaints and escalations work is genuinely unusual
   for someone who builds software, and it is the honest reason the approach is
   "investigate the real failure point first". Do not turn it into a CV.
@@ -222,10 +222,18 @@ If your next stage touches the site:
   `app/page.tsx`, grep the stylesheets for `nth-child` against that component.** Two of
   these shipped as real visual faults that typecheck, the build and all 44 tests passed
   clean.
-- **Typography floor is `.72rem`.** Enforcing it requires covering three patterns:
-  `font-size:`, the `font:` shorthand the Objects stylesheet uses, and bare `<small>`
-  (a ~0.83em browser shrink). Use a negative lookbehind `(?<![\d.])` or you will rewrite
-  the decimal inside `2.5rem` into `2.72rem`.
+- **Typography floor is `.72rem`, and auditing it has burned three patterns so far.**
+  Enforcing it requires covering `font-size:`, the `font:` shorthand the Objects
+  stylesheet uses, and bare `<small>` (a ~0.83em browser shrink).
+  The audit regex has been wrong twice in opposite directions:
+  - Without a lookbehind it rewrites the decimal inside `2.5rem` into `2.72rem`.
+  - With `(?<![\d.])\.\d+rem` it silently skips every **leading-zero** value, so a
+    whole stylesheet can read as clean. That is how `/rotareason` was reported fixed
+    when it still had `0.57rem` text.
+
+  Use **`(?<![\d.])0?\.\d+rem`**. Verified both ways: it finds the leading-zero
+  values in `rotareason.module.css` and raises no false sub-floor hit on
+  `globals.css`, which contains `clamp(2.5rem, …)`.
 - **`style.zoom` is not a reflow test.** It does not reflow layout. Use narrow
   viewports (320/360/390px).
 - **Stale docs are the recurring failure here.** Three separate artefacts today asserted
