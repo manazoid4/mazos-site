@@ -11,6 +11,7 @@ export const SUBMIT_TIMEOUT_MS = 15000;
  * `label` is what the visitor sees and what arrives in the email.
  */
 export const ENQUIRY_SERVICES = [
+  { id: 'quick-win', label: 'Quick Win — fix one thing (£150)' },
   { id: 'website', label: 'Website or landing page' },
   { id: 'automation', label: 'Automation and repetitive admin' },
   { id: 'software', label: 'Internal tool, AI feature or custom software' },

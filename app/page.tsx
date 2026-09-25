@@ -136,8 +136,9 @@ const OFFERS = [
     body: 'One tightly scoped improvement to a website, workflow or automation.',
     scope: 'One agreed change — not a rebuild',
     note: '£75 to start · £75 on completion',
-    service: 'unsure',
+    service: 'quick-win',
     action: 'Ask about a Quick Win',
+    details: '/quick-win',
   },
   {
     name: 'Website Launch',
@@ -279,6 +280,7 @@ export default function Page() {
                 <span>{offer.body}</span>
                 <em className="mw-price-scope">{offer.scope}</em>
                 <small>{offer.note}</small>
+                {offer.details ? <a className="text-link" href={offer.details}>See common fixes <span aria-hidden="true">→</span></a> : null}
                 <ServiceEnquiryLink service={offer.service}>{offer.action} <span aria-hidden="true">→</span></ServiceEnquiryLink>
               </article>
             ))}
