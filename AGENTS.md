@@ -19,3 +19,9 @@ This repo is the Maz Works marketing site. Before any sales, lead, offer or copy
 
 Local vault path: `C:\Users\manaz\Desktop\Maz Works Knowledge Vault`.
 Rules: branch + PR, never push to main. Never invent testimonials, clients or results.
+
+## Working with Maz (read every session)
+
+- Reply in **two short, plain paragraphs**: what he must do, and what changed. Details belong in PRs.
+- **Remind him of his open to-dos** at the start and end of each session. He asks for this; he forgets things like posting. The list lives in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/STATUS.md` → "Maz's open to-dos". If a session ends with one still open, schedule a reminder with `send_later`.
+- Prefer free tiers and say plainly when something costs money.
