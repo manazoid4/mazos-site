@@ -543,7 +543,7 @@
 
   .objects-other .objects-button,
   .objects-bundle-copy .objects-button,
-  .objects-continue .objects-button,
+  .objects-optional-details > summary,
   .objects-submit-row .objects-button {
     width: 100%;
   }
