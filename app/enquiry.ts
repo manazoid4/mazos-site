@@ -1,6 +1,7 @@
 import { CONTACT_EMAIL } from './site';
 
 export const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+export const NATIVE_FORM_ENDPOINT = `https://formsubmit.co/${CONTACT_EMAIL}`;
 
 /** Default time before a hung submission is abandoned so the button never sticks on "Sending…". */
 export const SUBMIT_TIMEOUT_MS = 15000;
