@@ -35,10 +35,21 @@ const MEASURES = [
   ['See where time and sales are leaking', 'response, time-to-quote, pipeline & workload signals'],
 ];
 
-const WORK = [
+type WorkStage = 'flagship' | 'live' | 'building';
+
+const WORK: {
+  name: string;
+  type: string;
+  stage: WorkStage;
+  problem: string;
+  summary: string;
+  role: string;
+  links: { label: string; href: string }[];
+}[] = [
   {
     name: 'JobFilter',
     type: 'Product / Construction',
+    stage: 'flagship',
     problem: 'Trades and maintenance teams lose hours hunting for contract opportunities and working out by hand which ones are worth bidding for.',
     summary: 'A construction-focused product that finds, scores and organises relevant contract opportunities so qualification stops being manual admin.',
     role: 'Built the opportunity scanning, trade-fit scoring, qualification, alerts, calendar export, response templates and outcome-tracking workflows.',
@@ -50,8 +61,9 @@ const WORK = [
   {
     name: 'Scrap Finance Partners',
     type: 'Contract client build',
+    stage: 'flagship',
     problem: 'A specialist finance practice serving UK scrap and recycling firms needed a credible digital presence and a working route from interest to enquiry.',
-    summary: 'A contract build covering the practice’s positioning, website, lead journey and the automation behind it.',
+    summary: 'A contract build covering the practice\u2019s positioning, website, lead journey and the automation behind it.',
     role: 'Handled positioning, marketing implementation, web development, launch, lead capture, a secure client workspace and guarded acquisition automation with approval and suppression controls.',
     links: [
       { label: 'View case study', href: '/work/scrap-finance-partners' },
@@ -60,21 +72,55 @@ const WORK = [
   },
   {
     name: 'Agent Nudge',
-    type: 'Product / In progress',
-    problem: 'Running several AI coding agents at once means they can duplicate work and act on stale information.',
-    summary: 'A desktop tool that helps multiple AI coding agents avoid overlapping or working from out-of-date context.',
-    role: 'Designed and built the desktop workflow, coordination checks and release system.',
-    links: [{ label: 'View project', href: 'https://github.com/manazoid4/agent-nudge' }],
+    type: 'Product / Released',
+    stage: 'live',
+    problem: 'Running several AI coding agents on one repository at once means they can claim the same files, duplicate work and act on information that has already changed.',
+    summary: 'A local-first Windows tool that checks an agent\u2019s context before it acts and returns one of three explicit outcomes, with a downloadable release and a browser demo you can try without installing anything.',
+    role: 'Built the desktop app, background service, provider hooks, coordination checks, the public documentation site and the signed release pipeline.',
+    links: [
+      { label: 'Try the demo', href: 'https://agent-nudge-bay.vercel.app/demo/overview' },
+      { label: 'Download for Windows', href: 'https://github.com/manazoid4/agent-nudge/releases' },
+      { label: 'View code', href: 'https://github.com/manazoid4/agent-nudge' },
+    ],
+  },
+  {
+    name: 'OpenFlowKit',
+    type: 'Open source / Live MVP',
+    stage: 'live',
+    problem: 'Typing is slow for drafting, prompting and other writing-heavy work, and most dictation tools leave you cleaning up filler words by hand.',
+    summary: 'An open-source voice-to-text workbench that captures speech in the browser, cleans it with explicit rules rather than a vague AI layer, and bridges the result into a terminal.',
+    role: 'Built the speech capture, the typed transcription contracts, the deterministic refinement rules with latency tracking, and the tested WebSocket terminal bridge.',
+    links: [
+      { label: 'Try the MVP', href: 'https://openflowkit-dusky.vercel.app' },
+      { label: 'View code', href: 'https://github.com/manazoid4/openflowkit' },
+    ],
+  },
+  {
+    name: 'Khutba.io',
+    type: 'Product / Live prototype',
+    stage: 'live',
+    problem: 'Mosques with a mixed-language congregation have no calm way to put live translation on the screen they already own.',
+    summary: 'A screen-first live captioning platform built around the Friday workflow: pair the existing screen, check it is ready, start explicitly, then present multilingual captions readable at worship-hall distance.',
+    role: 'Built the product direction, the pairing and readiness flow, the presentation layer and an account-free demo anyone can open.',
+    links: [
+      { label: 'Try the demo', href: 'https://khutba-io.vercel.app/demo' },
+      { label: 'View code', href: 'https://github.com/manazoid4/khutba-io' },
+    ],
   },
   {
     name: 'MAZ Pocket',
     type: 'Hardware + software / In progress',
-    problem: 'Capturing a thought or reminder usually means unlocking a phone and opening an app first.',
-    summary: 'A pocket AI assistant built around quick voice capture, reminders and remote interaction with AI tools.',
-    role: 'Building the firmware, interface and hardware/software integration.',
+    stage: 'building',
+    problem: 'Capturing a thought, checking on a long-running job or approving something on the PC usually means unlocking a phone and opening an app first.',
+    summary: 'A card-sized handheld and paired PC service: hold a key to talk and hear an answer back, record a PC workflow by demonstrating it, and approve short-lived PC access from a phone rather than letting the model approve itself.',
+    role: 'Building the firmware, the six-tile interface, the paired PC service, the phone approval broker and the packaged installer and release pipeline.',
     links: [{ label: 'Ask about this build', href: '#contact' }],
   },
 ];
+
+const FLAGSHIP_WORK = WORK.filter((project) => project.stage === 'flagship');
+const FURTHER_WORK = WORK.filter((project) => project.stage !== 'flagship');
+const FURTHER_WORK_SUMMARY = FURTHER_WORK.map((project) => project.name).join(' \u00b7 ');
 
 const PROCESS = [
   ['01', 'Tell me the problem', 'Describe what is taking too much time. No technical detail needed.'],
@@ -180,12 +226,14 @@ export default function Page() {
           <p>Inspect the work before reading more claims.</p>
         </header>
         <div className="mw-work-list">
-          {WORK.slice(0, 2).map((project, index) => <WorkRow project={project} index={index} key={project.name} />)}
+          {FLAGSHIP_WORK.map((project, index) => <WorkRow project={project} index={index} key={project.name} />)}
         </div>
         <details className="mw-disclosure mw-more-work">
-          <summary><span>Work in progress</span><small>Agent Nudge + MAZ Pocket</small></summary>
+          <summary><span>Products and tools</span><small>{FURTHER_WORK_SUMMARY}</small></summary>
           <div className="mw-work-list mw-work-list-secondary">
-            {WORK.slice(2).map((project, index) => <WorkRow project={project} index={index + 2} key={project.name} />)}
+            {FURTHER_WORK.map((project, index) => (
+              <WorkRow project={project} index={index + FLAGSHIP_WORK.length} key={project.name} />
+            ))}
           </div>
         </details>
       </section>
