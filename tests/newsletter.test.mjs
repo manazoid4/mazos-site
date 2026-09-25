@@ -3,7 +3,7 @@ import { EventEmitter } from 'node:events';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-process.env.HUBSPOT_NEWSLETTER_FORM_ID ??= 'test-form-id';
+process.env.RESEND_API_KEY ??= 're_test_key';
 const { default: handler } = await import('../api/subscribe.js');
 
 function fakeReq(body, { json = true, method = 'POST' } = {}) {
@@ -28,24 +28,28 @@ function fakeRes() {
   };
 }
 
-function recordingFetch(status = 200) {
+function recordingFetch(status = 200, text = '') {
   const calls = [];
-  const impl = async (url, init) => { calls.push({ url, body: JSON.parse(init.body) }); return { ok: status < 300, status }; };
+  const impl = async (url, init) => {
+    calls.push({ url, headers: init.headers, body: JSON.parse(init.body) });
+    return { ok: status < 300, status, text: async () => text };
+  };
   return { calls, impl };
 }
 
-test('a valid email is forwarded to the HubSpot form and reported as joined', async () => {
+test('a valid email is added to Resend contacts and reported as joined', async () => {
   const f = recordingFetch();
   const res = fakeRes();
   await handler(fakeReq({ email: '  Owner@Shop.co.uk ' }), res, f.impl);
   assert.equal(res.statusCode, 200);
   assert.deepEqual(JSON.parse(res.body), { ok: true });
   assert.equal(f.calls.length, 1);
-  assert.match(f.calls[0].url, /api\.hsforms\.com\/submissions\/v3\/integration\/submit\/149409285\/test-form-id$/);
-  assert.deepEqual(f.calls[0].body.fields, [{ objectTypeId: '0-1', name: 'email', value: 'owner@shop.co.uk' }]);
+  assert.equal(f.calls[0].url, 'https://api.resend.com/contacts');
+  assert.equal(f.calls[0].headers.authorization, 'Bearer re_test_key');
+  assert.deepEqual(f.calls[0].body, { email: 'owner@shop.co.uk', unsubscribed: false });
 });
 
-test('a bad email is refused before anything reaches HubSpot', async () => {
+test('a bad email is refused before anything reaches Resend', async () => {
   const f = recordingFetch();
   const res = fakeRes();
   await handler(fakeReq({ email: 'not-an-email' }), res, f.impl);
@@ -62,7 +66,13 @@ test('a filled honeypot looks like success to the bot but sends nothing', async 
   assert.equal(f.calls.length, 0);
 });
 
-test('a HubSpot rejection is reported as a failure, never as joined', async () => {
+test('signing up twice still reads as joined', async () => {
+  const res = fakeRes();
+  await handler(fakeReq({ email: 'owner@shop.co.uk' }), res, recordingFetch(409, '{"message":"Contact already exists"}').impl);
+  assert.deepEqual(JSON.parse(res.body), { ok: true });
+});
+
+test('a Resend rejection is reported as a failure, never as joined', async () => {
   const res = fakeRes();
   await handler(fakeReq({ email: 'owner@shop.co.uk' }), res, recordingFetch(400).impl);
   assert.equal(res.statusCode, 502);

@@ -6,7 +6,7 @@ type State = 'idle' | 'sending' | 'done' | 'error';
 
 /**
  * One-field mailing-list signup. Posts to `/api/subscribe`, which forwards to
- * HubSpot. Without JavaScript the same form does a normal POST and the server
+ * Resend. Without JavaScript the same form does a normal POST and the server
  * redirects back with `?subscribed=1` or `0`, which is read here on load.
  */
 export function NewsletterSignup() {

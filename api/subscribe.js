@@ -1,13 +1,11 @@
-// Mailing-list signup. Forwards one email address to a HubSpot form so each
-// subscriber lands in the CRM as a contact, next to the leads.
+// Mailing-list signup. Adds one email address to Resend's contacts, which is
+// the list Maz Works broadcasts go to from its own domain.
 //
 // Runs server-side so the page keeps its same-origin CSP, the form still works
-// without JavaScript (a plain POST gets a redirect back), and the honeypot is
-// checked before anything reaches HubSpot. Neither ID below is a secret: HubSpot
-// publishes both in the form's own embed code.
-const HUBSPOT_PORTAL_ID = '149409285';
-const HUBSPOT_FORM_ID = process.env.HUBSPOT_NEWSLETTER_FORM_ID || '';
-const SUBMIT_URL = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/`;
+// without JavaScript (a plain POST gets a redirect back), the honeypot is
+// checked before anything reaches Resend, and the API key never reaches a
+// browser. The key lives only in Vercel as RESEND_API_KEY.
+const CONTACTS_URL = 'https://api.resend.com/contacts';
 const MAX_BODY_BYTES = 2048;
 const TIMEOUT_MS = 10000;
 
@@ -57,21 +55,23 @@ function reply(req, res, status, result) {
   return res.end();
 }
 
-export async function submitToHubSpot(email, pageUri, fetchImpl = fetch) {
-  if (!HUBSPOT_FORM_ID) return { ok: false, reason: 'unconfigured' };
+export async function addContact(email, fetchImpl = fetch) {
+  const apiKey = process.env.RESEND_API_KEY || '';
+  if (!apiKey) return { ok: false, reason: 'unconfigured' };
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
-    const response = await fetchImpl(`${SUBMIT_URL}${HUBSPOT_FORM_ID}`, {
+    const response = await fetchImpl(CONTACTS_URL, {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        fields: [{ objectTypeId: '0-1', name: 'email', value: email }],
-        context: { pageUri, pageName: 'Maz Works mailing list' },
-      }),
+      headers: { authorization: `Bearer ${apiKey}`, 'content-type': 'application/json' },
+      body: JSON.stringify({ email, unsubscribed: false }),
       signal: controller.signal,
     });
-    return response.ok ? { ok: true } : { ok: false, reason: 'rejected' };
+    if (response.ok) return { ok: true };
+    // Signing up twice is not an error from the visitor's side: they are on the list.
+    const detail = await response.text().catch(() => '');
+    if (response.status === 409 || /already exists/i.test(detail)) return { ok: true };
+    return { ok: false, reason: 'rejected' };
   } catch {
     return { ok: false, reason: controller.signal.aborted ? 'timeout' : 'network' };
   } finally {
@@ -102,6 +102,6 @@ export default async function handler(req, res, fetchImpl = fetch) {
   const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
   if (!EMAIL.test(email)) return reply(req, res, 400, { ok: false, reason: 'invalid-email' });
 
-  const result = await submitToHubSpot(email, 'https://www.mazworks.uk/', fetchImpl);
+  const result = await addContact(email, fetchImpl);
   return reply(req, res, result.ok ? 200 : 502, result);
 }
