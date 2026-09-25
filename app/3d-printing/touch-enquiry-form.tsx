@@ -128,7 +128,7 @@ export function TouchEnquiryForm() {
       <header className="objects-section-heading">
         <p className="objects-kicker">Get yours</p>
         <h2 id="personalise-title" tabIndex={-1}>Tell me what you want customers to do.</h2>
-        <p>You do not need every link or technical detail ready. Pick the stand, tell me the job, and I can help with the rest.</p>
+        <p>You do not need every link or technical detail ready. I can help.</p>
       </header>
 
       <p className="objects-native-note" hidden={interactive}>Choose your bundle and customer actions below. I’ll confirm the total, including delivery, before you commit. You can also <a href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Objects%20enquiry`}>enquire by email</a>.</p>
