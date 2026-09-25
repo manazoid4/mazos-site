@@ -93,31 +93,13 @@ customer-facing businesses (hospitality, retail, trades, salons).
 
 Full brief: `docs/maz-works/AGENT-HANDOFF-POSITIONING.md`.
 
-### One open tension you need to know about
+### Resolved 25 Sep: the homepage now matches the positioning
 
-The positioning above is settled. **The live homepage is currently narrower than it.**
-After #47 the hero reads:
-
-> I fix what's costing you customers.
-> Websites, booking and admin fixes for small businesses. From £150, fixed price.
-
-Software, internal tools and the physical products are not in the hero. Objects appear
-once, as a trailing link under the prices. Read cold, the homepage now sounds close to
-"a cheap website and booking guy" — which is a clear, sellable position, and also the
-narrower one Maz explicitly said the business is not.
-
-Both readings are defensible: a £150 entry offer needs a blunt hero, and a one-person
-business cannot lead with four categories at once. **This is Maz's call, not yours and
-not mine.** What matters for your work:
-
-- **Write the posts to the positioning in §2**, not to the current hero. The set is
-  supposed to establish what Maz Works actually does, and a cold LinkedIn reader has no
-  homepage context yet.
-- **Do not describe the homepage as saying something it does not say.** If a post sends
-  someone to `/#contact`, what they land on is the narrow version.
-- **Flag the mismatch to Maz explicitly in your recap**, with a recommendation: either
-  widen the hero, or accept websites-and-booking as the front door and let the rest be
-  discovered after contact. Do not fix the homepage yourself as part of this task.
+After #47 the hero named only websites, booking and admin fixes. Maz chose the broad
+version: the hero now keeps the headline and £150 entry price, and lists four routes in —
+**Websites, Automation, Software, Physical products** — each linking straight to the
+enquiry form with that service preselected (Objects links to `/3d-printing`). A test keeps
+the narrow wording from coming back. Posts can now describe the homepage as it stands.
 
 ---
 
@@ -131,7 +113,7 @@ than the post earns.**
 
 | Asset | Status | Safe to say |
 | --- | --- | --- |
-| **Scrap Finance Partners** | Contract client build, delivered — **the client did not pay** | Positioning, marketing implementation, web development, launch, lead capture, a secure client workspace, guarded acquisition automation with approval and suppression controls. Live at `scrap-finance-partners.vercel.app`. Say "contract client build" or "a client build". **Never "paid client", "paying client", "my first paid project" or anything implying money changed hands.** The work is real and shippable as proof; the payment is not. Corrected 25 Sep — an earlier version of this pack said "paid contract client", which was wrong. |
+| **Scrap Finance Partners** | Contract client build, delivered — **the client did not pay** | Positioning, marketing implementation, web development, launch, lead capture, a secure client workspace, guarded acquisition automation with approval and suppression controls. Live at `scrap-finance-partners.vercel.app`. Say "contract client build" or "a client build". **Never "paid client", "paying client", "my first paid project" or anything implying money changed hands.** **On LinkedIn it may also be used unnamed, as "a specialist finance firm"** — Maz prefers it kept vague there (25 Sep). The work is real and shippable as proof; the payment is not. Corrected 25 Sep — an earlier version of this pack said "paid contract client", which was wrong. |
 | **JobFilter** | Own product, live, **priced but no paying customers** | Construction-focused; finds public contracts that fit a trades firm, then scores and qualifies them so that stops being manual admin. Live at `jobfilter.uk`, with £39/month plans published. Present it as "built and launched, with paid plans" — never as a client contract, it is Maz's own product. **There are no paying customers. Do not state or imply a customer count, subscriber number, revenue or traction of any kind.** |
 | **Maz Works Objects (Touch)** | Product, priced, **not physically validated** | Touch One £29, Touch Three £49, Touch + Carry £79, artwork add-on +£10. Tap stands/keyrings that send a customer to a review, booking or menu page. |
 | **Agent Nudge** | Own product, **released** | Stops AI coding tools clashing over the same files. Public demo and source. Released, not "being built" — that changed in #41. |
