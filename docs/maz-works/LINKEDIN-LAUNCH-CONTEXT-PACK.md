@@ -1,8 +1,13 @@
 # Maz Works — LinkedIn launch context pack
 
-**For:** Agent B (content, design, information structure), resuming 19 Sep 2026 after a
+**For:** Agent B (content, design, information structure), resuming after a
 usage-budget stop.
 **Written by:** Agent A (positioning, conversion, technical).
+**Aligned with `main` at:** `6c40269` (PR #47), 25 Sep 2026. This file has been wrong
+about merge state once already — it merged carrying a caveat that had expired three days
+earlier. **Anything it asserts about what is merged has a shelf life of days, because
+several agents land changes in parallel. Recheck before writing in the past tense.**
+Facts about what was *measured* age well; facts about what is *merged* do not.
 **Your deliverable:** five complete, ready-to-post LinkedIn drafts, then orchestration
 of the next stage.
 
@@ -31,12 +36,23 @@ prior intent; the canonical state is
 Agent A took the content/typography/structure pass because you were unavailable and
 the work was blocking. Landed or in flight:
 
+Everything in this table is **merged and live** unless marked otherwise.
+
 | PR | State | What |
 | --- | --- | --- |
-| mazos-site #34 | **merged** (`81742c6`) | Enquiry hardening, service context, sitemap fix, positioning brief |
-| mazos-site #35 | **open** | Homepage rewrite, typography floor, nav trim, DESIGN.md correction |
-| unified-memory #4 | merged | Positioning + enquiry P0 record |
-| unified-memory #5 | open | Content pass record + corrections |
+| mazos-site #34 | merged `81742c6` | Enquiry hardening, service context, sitemap fix, positioning brief |
+| mazos-site #40 | merged `9e0ebc9` | Homepage rewrite, 11.5px typography floor, nav trim, DESIGN.md correction |
+| mazos-site #41 | merged `dfde002` | Shipped products shown on the homepage |
+| mazos-site #42 | merged `49784ca` | Enquiry forms work before scripts load; keyboard flow |
+| mazos-site #45 | merged `19a69cd` | `/quick-win` page — the £150 fix, on its own page |
+| mazos-site #46 | merged `f0a03b6` | Canonical URLs moved to `www.mazworks.uk`; JobFilter presented as a full build |
+| mazos-site #47 | merged `6c40269` | Site copy cut to short, plain sentences |
+| mazos-site #35 | **closed unmerged** | Its content reached `main` via #40 on 21 Sep. Merging it would have reverted newer work. Do not cite #35 as pending. |
+| mazos-site #48 | **open** | RotaReason demo text raised to the readable floor (see §3) |
+| unified-memory #4, #5 | merged | Positioning, enquiry P0, content pass, corrections |
+
+The homepage you are writing posts about is therefore **not** the one described in
+earlier notes. #47 cut it to five short blocks with a word budget enforced by a test.
 
 **The single most important fact for your content work:** the Maz Works contact form
 was **silently failing for three days**. FormSubmit approves per-domain; the switch to
@@ -49,7 +65,7 @@ line-height below 1.0 so letters collided when a heading wrapped. Both measured 
 real browser.
 
 Both of these are *true, first-person, verifiable stories about the exact service Maz
-sells*. See §5.
+sells*. They are sourced in §3 and recommended as material in §4.
 
 ---
 
@@ -76,6 +92,32 @@ customer-facing businesses (hospitality, retail, trades, salons).
 
 Full brief: `docs/maz-works/AGENT-HANDOFF-POSITIONING.md`.
 
+### One open tension you need to know about
+
+The positioning above is settled. **The live homepage is currently narrower than it.**
+After #47 the hero reads:
+
+> I fix what's costing you customers.
+> Websites, booking and admin fixes for small businesses. From £150, fixed price.
+
+Software, internal tools and the physical products are not in the hero. Objects appear
+once, as a trailing link under the prices. Read cold, the homepage now sounds close to
+"a cheap website and booking guy" — which is a clear, sellable position, and also the
+narrower one Maz explicitly said the business is not.
+
+Both readings are defensible: a £150 entry offer needs a blunt hero, and a one-person
+business cannot lead with four categories at once. **This is Maz's call, not yours and
+not mine.** What matters for your work:
+
+- **Write the posts to the positioning in §2**, not to the current hero. The set is
+  supposed to establish what Maz Works actually does, and a cold LinkedIn reader has no
+  homepage context yet.
+- **Do not describe the homepage as saying something it does not say.** If a post sends
+  someone to `/#contact`, what they land on is the narrow version.
+- **Flag the mismatch to Maz explicitly in your recap**, with a recommendation: either
+  widen the hero, or accept websites-and-booking as the front door and let the rest be
+  discovered after contact. Do not fix the homepage yourself as part of this task.
+
 ---
 
 ## 3. Truth inventory — what may and may not be claimed
@@ -89,11 +131,15 @@ than the post earns.**
 | Asset | Status | Safe to say |
 | --- | --- | --- |
 | **Scrap Finance Partners** | Paid contract client, delivered | Positioning, marketing implementation, web development, launch, lead capture, a secure client workspace, guarded acquisition automation with approval and suppression controls. Live at `scrap-finance-partners.vercel.app`. |
-| **JobFilter** | Own product, live | Construction-focused; finds, scores, qualifies and organises contract opportunities so qualifying stops being manual admin. Live at `jobfilter.uk`. |
+| **JobFilter** | Own product, live, **paid plans exist** | Construction-focused; finds public contracts that fit a trades firm, then scores and qualifies them so that stops being manual admin. Live at `jobfilter.uk`. The site presents it as a full build with paid plans — that is the honest limit of the claim. **Do not state or imply a customer count, subscriber number or revenue. None is known.** |
 | **Maz Works Objects (Touch)** | Product, priced, **not physically validated** | Touch One £29, Touch Three £49, Touch + Carry £79, artwork add-on +£10. Tap stands/keyrings that send a customer to a review, booking or menu page. |
-| **Agent Nudge / MAZ Pocket / RotaReason** | Own products, in progress | Describe as being built. RotaReason has a public demo at `/rotareason`. |
-| **Background** | Verifiable employment | ManyPets, Complaints Specialist — complex investigations in a regulated FCA/DISP environment. Glide, Complaints & Escalations Coordinator — telecoms escalations, operational ownership. |
-| **Pricing** | Public on the site | Quick Win £150 fixed (£75 start / £75 completion). Website Launch from £299. Growth System from £499. Support from £49/month, optional, no long contract. |
+| **Agent Nudge** | Own product, **released** | Stops AI coding tools clashing over the same files. Public demo and source. Released, not "being built" — that changed in #41. |
+| **OpenFlowKit** | Own product, open source | Voice-to-text in the browser, cleaned up. Live demo. |
+| **Khutba.io** | Live prototype | Live translated captions for mosque screens. Say "prototype" — it is labelled that way on the site. |
+| **MAZ Pocket** | Own product, in progress | A pocket device to talk to your PC and approve its actions. Must stay labelled unfinished. |
+| **RotaReason** | Own product, in progress | Explainable shift scheduling. Public demo at `/rotareason`. Describe as being built. |
+| **Background** | Verifiable employment | ManyPets, Complaints Specialist — complex investigations in a regulated FCA/DISP environment. Glide, Complaints & Escalations Coordinator — telecoms escalations, operational ownership. **Note:** #47 removed this from the site entirely, so a post citing it is no longer corroborated by anything on `mazworks.uk`. It is still true and still on Maz's own profile — just don't say "as my site says". |
+| **Pricing** | Public on the site | **Quick Win £150 fixed** (£75 to start / £75 on completion) — one broken or missing thing, fixed; it has its own page at `/quick-win`, which names the platforms it works with (Wix, Squarespace, WordPress, Square, Fresha, Booksy, Google Business Profile) and promises no password sharing. **Website Launch from £299.** **Growth System from £499** — website plus one job automated. **Support from £49/month**, optional, no long contract. Objects from £29. |
 
 ### First-person facts from this session — also claimable, also sourced
 
@@ -105,11 +151,14 @@ not round them up.
 | Fact | Verified detail | Caveat |
 | --- | --- | --- |
 | **The contact form failed silently for roughly three days** | FormSubmit approves per submitting domain. The site moved to `mazworks.uk` on 16 Sep; from then until 19 Sep 11:29 UTC every submission from `www.mazworks.uk` was rejected with an activation notice, while the old `mazos-site.vercel.app` origin still returned success. Found by submitting real test data to both origins, not by reading code. Fixed the same day and confirmed at both ends — endpoint returns success, and Maz confirmed receiving every test submission. | Say "roughly three days" or "16–19 September". Do not claim a number of lost enquiries — **that number is unknown and must not be invented or estimated.** |
-| **The site's smallest text was 9px** | Measured in Chromium at 390px and 1440px: smallest rendered text 9.0–9.3px across pages; headings set below a 1.0 line-height so letters collided when a heading wrapped; section headings clamped up to 85px. | The fix (an 11.5px floor) is on **PR #35, which is not merged**. Until it merges, do not write as though the live site is already fixed. Either wait for the merge, or write it as a finding rather than a completed repair. |
+| **The site's smallest text was 9px** | Measured in Chromium at 390px and 1440px: smallest rendered text 9.0–9.3px across pages; headings set below a 1.0 line-height so letters collided when a heading wrapped; section headings clamped up to 85px. | **Fixed and live on the pages Maz sells from.** The 11.5px floor reached `main` via #40 on 21 Sep; 0 sub-floor declarations remain across those stylesheets. One page was missed and is **not yet live**: the `/rotareason` demo, whose smallest text measured 8.3px — the fix is on open **PR #48**. So write it as "the pages I sell from", never "the whole site". **Do not claim a before/after business effect — none was measured.** |
 | **The enquiry form now asks what you actually want** | Free demo, a walkthrough, a quote, or just an answer — so a £29 order or a £150 fixed job does not have to route through an unpaid custom build. | Merged in PR #34 and live. Safe to describe in the present tense. |
+| **The enquiry form worked before its own JavaScript did** | Before scripts loaded, the homepage form fell back to a plain GET — which would have put the visitor's contact details into the URL. Found in Agent A's own code and fixed in #42, along with the keyboard path through the form. | Merged and live. This is a defect Maz found in his own work, which is why it is safe and strong material. |
 
-If you use either of the first two, check the merge state of the relevant PR before
-writing in the past tense. Ask Maz if unsure.
+All three facts above are live as of 25 Sep 2026. The `/rotareason` exception in the
+second row is the only part not yet on the live site. Past tense is fine for the rest —
+but see the shelf-life warning at the top of this file before assuming that on a later
+date.
 
 ### Must NOT be claimed
 
@@ -145,7 +194,10 @@ Maz has no posts. A cold reader has no context. The set should, between them:
    before paid work.
 3. Show **real delivered work**, honestly bounded.
 4. Make the **physical products** legible as a business tool, not a 3D-printing hobby.
-5. Give **one obvious next step** — the enquiry form at `https://mazworks.uk/#contact`.
+5. Give **one obvious next step** — the enquiry form at `https://www.mazworks.uk/#contact`.
+   **Use the `www.` host.** #46 made it canonical; the bare apex 308-redirects to it, and
+   a redirect in a LinkedIn post is a needless hop. For the £150 offer specifically,
+   `https://www.mazworks.uk/quick-win` is the better landing page.
 
 Not every post does all five. The *set* does.
 
@@ -175,8 +227,13 @@ Use these if they earn their place; you are not obliged to:
   actually test yours?" This is probably the strongest single post available. Note the
   caveat: the count of enquiries lost is unknown, and must stay unknown.
 - **"The text on my site was 9 pixels."** Sourced in §3. Also Maz's own, and it makes
-  the point that the problems worth fixing are usually invisible until measured. Note
-  the caveat: the fix is on an unmerged PR.
+  the point that the problems worth fixing are usually invisible until measured. The fix
+  is live on the pages Maz sells from — write it in the past tense, but scope it to those
+  pages and claim no business effect.
+- **"My own form would have put a customer's details in the URL."** Sourced in §3 (#42).
+  A second self-caught defect, and a sharper one: it only happened in the seconds before
+  the page's own JavaScript loaded, which is exactly the kind of failure nobody tests
+  for. Pairs with the contact-form story; **don't use both in the same post.**
 - **The operations background.** Complaints and escalations work is genuinely unusual
   for someone who builds software, and it is the honest reason the approach is
   "investigate the real failure point first". Do not turn it into a CV.
@@ -222,6 +279,15 @@ If your next stage touches the site:
   `font-size:`, the `font:` shorthand the Objects stylesheet uses, and bare `<small>`
   (a ~0.83em browser shrink). Use a negative lookbehind `(?<![\d.])` or you will rewrite
   the decimal inside `2.5rem` into `2.72rem`.
+- **That lookbehind has a blind spot, and it cost a page.** `(?<![\d.])\.\d+rem` skips
+  every **leading-zero** value, so a stylesheet written as `0.57rem` is invisible to it —
+  and `rotareason.module.css` is written that way throughout. The floor pass never
+  touched it *and* the "0 sub-floor declarations" check silently walked past it, leaving
+  8.3px text on a public, sitemap-listed demo for four days. Correct pattern:
+  `(?<![\d.])0?\.\d+rem`, validated in both directions. **The lesson is broader than the
+  regex: a verification that shares a bug with the thing it verifies reports success.**
+  `tests/typography.test.mjs` (PR #48) now parses values as numbers instead, so no
+  pattern is in the loop.
 - **`style.zoom` is not a reflow test.** It does not reflow layout. Use narrow
   viewports (320/360/390px).
 - **Stale docs are the recurring failure here.** Three separate artefacts today asserted
