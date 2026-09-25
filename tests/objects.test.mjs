@@ -121,3 +121,13 @@ test('Objects is discoverable from shared chrome, homepage and sitemap while dig
   assert.match(readme, /Touch One/);
   assert.match(readme, /manufacturing checks/i);
 });
+
+test('Objects page stays short', async () => {
+  // Same count as the homepage budget: all text inside <main>, including form labels,
+  // header, footer and closed answers. Was about 1,630 before the September cut.
+  const WORD_BUDGET = 900;
+  const html = await readPage('/3d-printing');
+  const main = html.slice(html.indexOf('<main'), html.indexOf('</main>'));
+  const words = main.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+  assert.ok(words <= WORD_BUDGET, `/3d-printing has ${words} words; budget is ${WORD_BUDGET}`);
+});

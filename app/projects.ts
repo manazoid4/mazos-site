@@ -7,13 +7,10 @@ export type ProjectImage = {
   width: number;
   height: number;
 };
-export type CaseStudyStep = { number: string; title: string; body: string };
 export type ProjectCaseStudy = {
   lede: string;
   role: string;
   scope: string[];
-  howItWorks: CaseStudyStep[];
-  decisions: { title: string; body: string }[];
 };
 
 export type Project = {
@@ -40,72 +37,50 @@ export const FLAGSHIP_PROJECTS: Project[] = [
     id: 'jobfilter', name: 'JobFilter', eyebrow: 'Flagship 01 / Full build and setup', status: 'Live product / Built end to end',
     relationship: 'Product',
     summary: 'A construction growth and automation product that helps small trades and maintenance firms find, qualify, track and act on relevant public-sector opportunities with less manual research.',
-    problem: 'Small construction firms can lose hours checking opportunity sources, deciding whether work fits their trade, tracking deadlines, and keeping follow-up organised.',
-    insight: 'The useful product is the workflow around an opportunity, not just a list of tenders: reject weak matches, explain why a job fits, surface the next action, and make follow-up easier.',
+    problem: 'Small building firms lose hours checking tender sites. Deciding what fits and tracking deadlines takes even longer.',
+    insight: 'A list of tenders is not enough. Firms need weak matches removed and a clear next step.',
     built: [
-      'Official public-tender retrieval with pagination, retries, notice reconciliation, and deduplication.',
-      'Trade-specific fit signals and qualification using trade, CPV, location, deadline, and notice evidence.',
-      'Free opportunity scanning plus alert capture so firms can keep watching their area when nothing suitable is live.',
-      'Calendar export, response templates, scan tracking, and outcome signals that reduce admin around pursuing relevant work.',
-      'The full production setup a client build needs: own domain, hosting and deployment, a £39/month subscription with checkout, and the sign-up route from free scan to paid plan.',
+      'Pulls official public tenders and removes duplicates.',
+      'Checks each job against the firm’s trade, area and deadline.',
+      'Free scans, email alerts, calendar export and reply templates.',
+      'Own domain, hosting, a £39/month plan and checkout.',
     ],
-    proof: 'The live product, public code, recent trade-fit work, alerts, calendar export, response templates, and qualification flow are inspectable now.',
-    limitation: 'JobFilter helps firms find and pursue relevant opportunities; it does not guarantee that a contract will be awarded.',
+    proof: 'The live product and its code are public. You can run a free scan now.',
+    limitation: 'It helps firms find and chase work. It does not guarantee a contract.',
     image: { src: '/jobfilter-scan-result.webp', mobileSrc: '/jobfilter-scan-result-mobile.webp', alt: 'JobFilter showing an honest zero-result scan after checking configured public tender sources', caption: 'Live scan result / verified matching can return zero', width: 1440, height: 900 },
     links: [
       { label: 'Try a free scan', href: 'https://jobfilter.uk/find-jobs' },
       { label: 'View code', href: 'https://github.com/manazoid4/JobFilterV1' },
     ],
     caseStudy: {
-      lede: 'A construction-focused opportunity and workflow product built to help small firms spend less time searching and more time acting on work that genuinely fits.',
-      role: 'Everything, end to end: product direction, public-data pipeline, trade-fit qualification, workflow automation, interface, payments, domain, hosting, testing and launch. The same full setup a client build gets.',
-      scope: ['Opportunity discovery', 'Trade-fit qualification', 'Alerts and follow-up tools', 'Payments and subscriptions', 'Domain, hosting and launch'],
-      howItWorks: [
-        { number: '01', title: 'Find the work', body: 'Check official public opportunities and normalise the source data into a usable scan.' },
-        { number: '02', title: 'Filter for the firm', body: 'Use trade, CPV, location, deadline, and notice evidence so weak or uncertain matches can be excluded.' },
-        { number: '03', title: 'Make the next action obvious', body: 'Surface fit signals, buyer and deadline context where available, plus the official response route.' },
-        { number: '04', title: 'Reduce follow-up admin', body: 'Support alerts, calendar export, response templates, and outcome tracking around the opportunity workflow.' },
-      ],
-      decisions: [
-        { title: 'Do more than aggregate tenders', body: 'Construction teams need help deciding what is worth their time and what to do next, not another long list of notices.' },
-        { title: 'Keep the promise realistic', body: 'JobFilter can improve discovery, qualification, and follow-up, but contract awards still depend on the buyer and the firm’s bid.' },
-      ],
+      lede: 'Maz Works’ own product. It helps small building firms find public contracts that fit.',
+      role: 'Everything, end to end. The same full setup a client build gets.',
+      scope: ['Finding public contracts', 'Trade-fit checks', 'Alerts and reminders', 'Paid plans and checkout', 'Domain, hosting and launch'],
     },
   },
   {
     id: 'scrap-finance-partners', name: 'Scrap Finance Partners', eyebrow: 'Flagship 02 / Contract client build', status: 'Contract client work / Shipped',
     relationship: 'Client work',
-    summary: 'A contract client build for a specialist finance practice serving UK scrap and recycling firms, covering positioning, web development, lead capture, a secure client workspace, and guarded acquisition automation.',
-    problem: 'The client needed more than a brochure site: the specialist offer had to be positioned clearly, launched professionally, turn interest into enquiries, and give the business a controlled way to manage leads and follow-up.',
-    insight: 'The strongest build connected marketing, website, enquiry capture, lead operations, and safety controls into one maintainable client journey instead of treating them as separate projects.',
+    summary: 'A contract client build for a specialist finance practice: website, lead capture, a client area and outreach with approval steps.',
+    problem: 'The client needed more than a brochure site. Enquiries had to land somewhere safe and get followed up.',
+    insight: 'Treat the site, enquiries and follow-up as one journey. Then nothing gets lost in an inbox.',
     built: [
-      'Specialist positioning, service and pricing architecture, responsive web development, and production launch.',
-      'A lower-friction enquiry journey that saves valid website enquiries into an authenticated lead workspace with source and qualification context.',
-      'Secure client login, organisation-scoped leads, reusable email templates, message history, and onboarding guidance.',
-      'A guarded acquisition workflow with dry-run, approval, batching, suppression, recipient-safety controls, and follow-up handling.',
+      'Clear positioning, service pages and pricing, launched live.',
+      'A short enquiry form that saves each lead to a private workspace.',
+      'Secure login, shared email templates and message history.',
+      'Outreach that needs approval before sending, with test runs and opt-out lists.',
     ],
-    proof: 'The deployed client site, public repository, secure lead workspace, enquiry-to-pipeline workflow, and guarded acquisition controls are inspectable now.',
-    limitation: 'This case study describes delivered systems and launch work; it does not invent revenue, conversion, lead-volume, or financial-outcome claims.',
+    proof: 'The live site and its code are public. The lead workspace and approval steps shipped with it.',
+    limitation: 'This shows what was built and launched. It makes no claims about revenue or leads.',
     image: { src: '/scrap-finance-partners.webp', mobileSrc: '/scrap-finance-partners-mobile.webp', alt: 'Scrap Finance Partners homepage explaining its Finance Health Check for UK scrap and recycling firms', caption: 'Live client site / specialist positioning and enquiry path', width: 1440, height: 1000 },
     links: [
       { label: 'View the live site', href: 'https://scrap-finance-partners.vercel.app' },
       { label: 'View code', href: 'https://github.com/manazoid4/scrap-finance-partners' },
     ],
     caseStudy: {
-      lede: 'A contract client engagement spanning positioning, marketing implementation, web development, launch, lead capture, client operations, and controlled acquisition automation.',
-      role: 'Positioning, marketing implementation, information architecture, web development, lead capture, secure workspace, acquisition automation, testing, deployment, and handoff.',
-      scope: ['Positioning and web development', 'Lead capture and pipeline', 'Client workspace', 'Guarded acquisition automation', 'Production launch'],
-      howItWorks: [
-        { number: '01', title: 'Position the specialist offer', body: 'Structure the site around the real finance and operational pressures faced by scrap and recycling businesses rather than generic consultancy language.' },
-        { number: '02', title: 'Turn interest into a usable lead', body: 'Keep first contact low-friction, then save valid enquiries into the lead workspace with source, qualification, and follow-up context.' },
-        { number: '03', title: 'Give the client an operating workspace', body: 'Provide secure organisation-scoped leads, templates, message history, onboarding guidance, and follow-up actions.' },
-        { number: '04', title: 'Automate with controls', body: 'Use dry runs, approval gates, suppression, batching, and recipient-safety rules so acquisition workflows do not blindly send or duplicate outreach.' },
-        { number: '05', title: 'Launch and hand over', body: 'Test the web and account flows, deploy to production, and leave a maintainable system the client can continue using.' },
-      ],
-      decisions: [
-        { title: 'Treat marketing and operations as one journey', body: 'A polished site is more useful when enquiries continue into a real lead workflow instead of disappearing into an inbox.' },
-        { title: 'Automate without removing judgment', body: 'Approval, suppression, and dry-run controls keep the efficiency benefits of automation while preserving human responsibility for important outreach.' },
-      ],
+      lede: 'A contract client build for a finance firm serving UK scrap and recycling businesses.',
+      role: 'Positioning, website, enquiry capture, client login, outreach tools, testing and launch.',
+      scope: ['Positioning and website', 'Enquiry capture', 'Secure client workspace', 'Outreach with approval steps', 'Production launch'],
     },
   },
 ];
