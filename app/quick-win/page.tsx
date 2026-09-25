@@ -62,7 +62,7 @@ export default function QuickWinPage() {
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="quick-win-title">
         <p className="eyebrow">Quick Win · £150 fixed</p>
         <h1 id="quick-win-title">One fix. £150. Done.</h1>
-        <p>I fix the one thing losing you customers, inside the system you already use.</p>
+        <p>I fix the one thing losing you customers. No new system needed.</p>
         <div className="mw-actions">
           <a className="button button-signal" href={ENQUIRY_HREF}>Tell me what’s broken</a>
         </div>

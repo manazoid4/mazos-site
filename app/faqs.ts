@@ -14,7 +14,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How much does it cost?',
-    answer: 'Quick Win is £150 fixed: £75 to start, £75 on completion. Website Launch starts at £299, Growth System from £499, support from £49/month.',
+    answer: 'Quick Win £150 fixed. Website from £299. Growth System from £499. Support from £49/month.',
   },
   {
     question: 'What is the free first step?',

@@ -16,7 +16,7 @@ const WORK: {
     name: 'JobFilter',
     type: 'Full build and setup',
     stage: 'flagship',
-    summary: 'Finds public contracts that fit a trades firm. Built, launched and taking subscriptions.',
+    summary: 'Finds public contracts that fit a trades firm. Built and launched, with paid plans.',
     links: [
       { label: 'Case study', href: '/work/jobfilter' },
       { label: 'Try it', href: 'https://jobfilter.uk/find-jobs' },
@@ -36,7 +36,7 @@ const WORK: {
     name: 'Agent Nudge',
     type: 'Released',
     stage: 'live',
-    summary: 'A Windows tool that stops AI coding agents clashing on the same files.',
+    summary: 'Stops AI tools clashing over the same files.',
     links: [
       { label: 'Try the demo', href: 'https://agent-nudge-bay.vercel.app/demo/overview' },
       { label: 'View code', href: 'https://github.com/manazoid4/agent-nudge' },
@@ -46,7 +46,7 @@ const WORK: {
     name: 'OpenFlowKit',
     type: 'Open source',
     stage: 'live',
-    summary: 'Voice-to-text in the browser, cleaned up and sent to a terminal.',
+    summary: 'Voice-to-text in the browser, cleaned up for you.',
     links: [{ label: 'Try it', href: 'https://openflowkit-dusky.vercel.app' }],
   },
   {
