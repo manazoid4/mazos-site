@@ -46,16 +46,23 @@ inside the first outcome, not a category of their own.
 
 Keep these tiers distinct in copy. Never merge them into one "work" list without labels.
 
+Last checked against the live site and against
+`spine/projects/mazworks-site/STATUS.md` in `unified-memory-database` on 25 Sep 2026.
+
 | Tier | Item | What may be claimed |
 | --- | --- | --- |
-| Paid client work, delivered | Scrap Finance Partners | Positioning, marketing implementation, web build, launch, lead capture, secure client workspace, guarded acquisition automation. No revenue, conversion or lead-volume figures. |
-| Live private client demo | Dessert Lane (`/demos`) | A real prospect demo exists behind an access gate. Not a paying client. |
-| Own product, live | JobFilter (`jobfilter.uk`) | Shipped and usable. Never implies guaranteed contract awards. |
-| Own product, in progress | Agent Nudge, MAZ Pocket, RotaReason | Building. Do not imply finished or in production use. |
-| Product, not physically validated | Maz Works Objects Touch | Images stay labelled concept visuals. No claims about magnets, dimensions, waterproofing, outdoor durability, food contact or production-tested fits until a real print is photographed and NFC-tested. |
-| Background | ManyPets, Glide | Operations credibility only — complaints, investigations, regulated environments. Not a CV section. |
+| Contract client build, delivered — **the client did not pay** | Scrap Finance Partners | Positioning, marketing implementation, web build, launch, lead capture, secure client workspace, guarded acquisition automation. Say "contract client build". **Never "paid client", "paying client" or "my first paid project"** — corrected 25 Sep, this row previously said "paid client work" and it was wrong. No revenue, conversion or lead-volume figures. |
+| Live private client demo | Dessert Lane (`/demos`) | A real prospect demo exists behind an access gate. **A prospect, not a client. Do not name publicly** — describe the approach generically. |
+| Own product, live, priced | JobFilter (`jobfilter.uk`) | Built and launched, with £39/month plans published. Never implies guaranteed contract awards. **No paying customers — never imply a customer count, subscriber number or revenue.** |
+| Own product, released | Agent Nudge | Released, with a public demo and source. Not "being built" — that changed in #41. |
+| Own product, open source | OpenFlowKit | Live demo. Voice-to-text in the browser. |
+| Live prototype | Khutba.io | Say "prototype" — that is how the site labels it. |
+| Own product, in progress | MAZ Pocket, RotaReason | Building. Do not imply finished or in production use. RotaReason has a public demo at `/rotareason`. |
+| Product, priced, not physically validated | Maz Works Objects Touch (£29 / £49 / £79, +£10 artwork) | Images stay labelled concept visuals. No claims about magnets, dimensions, waterproofing, outdoor durability, food contact or production-tested fits until a real print is photographed and NFC-tested. Never imply units have shipped. |
+| Background | ManyPets, Glide | Operations credibility only — complaints, investigations, regulated environments. Not a CV section. **No longer anywhere on the site** (removed by #47), so do not write "as my site says". |
 
-No invented percentages, testimonials, urgency or guarantees.
+No invented percentages, testimonials, urgency or guarantees. **Nothing Maz Works sells
+has a paying customer yet**; published prices are not traction.
 
 ### Main action
 
