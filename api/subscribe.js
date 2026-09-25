@@ -6,6 +6,10 @@
 // checked before anything reaches Resend, and the API key never reaches a
 // browser. The key lives only in Vercel as RESEND_API_KEY.
 const CONTACTS_URL = 'https://api.resend.com/contacts';
+const EMAILS_URL = 'https://api.resend.com/emails';
+// Resend stores contacts silently, so each signup is also emailed to Maz.
+const NOTIFY_TO = process.env.SIGNUP_NOTIFY_EMAIL || 'manazoid4@gmail.com';
+const NOTIFY_FROM = 'Maz Works <signups@mazworks.uk>';
 const MAX_BODY_BYTES = 2048;
 const TIMEOUT_MS = 10000;
 
@@ -79,6 +83,36 @@ export async function addContact(email, fetchImpl = fetch) {
   }
 }
 
+/**
+ * Best effort: a failed notification must never turn a real signup into an
+ * error for the visitor, because the contact is already saved in Resend.
+ */
+export async function notifyOwner(email, fetchImpl = fetch) {
+  const apiKey = process.env.RESEND_API_KEY || '';
+  if (!apiKey) return false;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  try {
+    const response = await fetchImpl(EMAILS_URL, {
+      method: 'POST',
+      headers: { authorization: `Bearer ${apiKey}`, 'content-type': 'application/json' },
+      body: JSON.stringify({
+        from: NOTIFY_FROM,
+        to: [NOTIFY_TO],
+        reply_to: email,
+        subject: `New mailing-list signup: ${email}`,
+        text: `${email} just joined the Maz Works mailing list from www.mazworks.uk.\n\nThey are saved in Resend contacts. Reply to this email to write to them directly.`,
+      }),
+      signal: controller.signal,
+    });
+    return response.ok;
+  } catch {
+    return false;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export default async function handler(req, res, fetchImpl = fetch) {
   if (req.method !== 'POST') {
     res.statusCode = 405;
@@ -103,5 +137,7 @@ export default async function handler(req, res, fetchImpl = fetch) {
   if (!EMAIL.test(email)) return reply(req, res, 400, { ok: false, reason: 'invalid-email' });
 
   const result = await addContact(email, fetchImpl);
+  // Awaited, not fired-and-forgotten: the function can be frozen once it replies.
+  if (result.ok) await notifyOwner(email, fetchImpl);
   return reply(req, res, result.ok ? 200 : 502, result);
 }
