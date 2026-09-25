@@ -28,11 +28,12 @@ function fakeRes() {
   };
 }
 
-function recordingFetch(status = 200, text = '') {
+function recordingFetch(status = 200, text = '', emailStatus = 200) {
   const calls = [];
   const impl = async (url, init) => {
     calls.push({ url, headers: init.headers, body: JSON.parse(init.body) });
-    return { ok: status < 300, status, text: async () => text };
+    const s = url.endsWith('/emails') ? emailStatus : status;
+    return { ok: s < 300, status: s, text: async () => text };
   };
   return { calls, impl };
 }
@@ -43,7 +44,7 @@ test('a valid email is added to Resend contacts and reported as joined', async (
   await handler(fakeReq({ email: '  Owner@Shop.co.uk ' }), res, f.impl);
   assert.equal(res.statusCode, 200);
   assert.deepEqual(JSON.parse(res.body), { ok: true });
-  assert.equal(f.calls.length, 1);
+  assert.equal(f.calls.length, 2);
   assert.equal(f.calls[0].url, 'https://api.resend.com/contacts');
   assert.equal(f.calls[0].headers.authorization, 'Bearer re_test_key');
   assert.deepEqual(f.calls[0].body, { email: 'owner@shop.co.uk', unsubscribed: false });
@@ -108,4 +109,28 @@ test('the homepage signup posts to the API, has a hidden honeypot and says how t
   assert.match(input('website'), /tabindex="-1"/i);
   assert.match(input('website'), /aria-hidden="true"/);
   assert.match(section, /unsubscribe any time/i);
+});
+
+test('each signup emails Maz, from the verified domain, with the subscriber as reply-to', async () => {
+  const f = recordingFetch();
+  await handler(fakeReq({ email: 'owner@shop.co.uk' }), fakeRes(), f.impl);
+  const mail = f.calls.find((call) => call.url === 'https://api.resend.com/emails');
+  assert.ok(mail, 'a notification email should be sent');
+  assert.deepEqual(mail.body.to, ['manazoid4@gmail.com']);
+  assert.match(mail.body.from, /@mazworks\.uk>$/);
+  assert.equal(mail.body.reply_to, 'owner@shop.co.uk');
+  assert.match(mail.body.subject, /owner@shop\.co\.uk/);
+});
+
+test('a failed notification never turns a saved signup into an error', async () => {
+  const res = fakeRes();
+  await handler(fakeReq({ email: 'owner@shop.co.uk' }), res, recordingFetch(200, '', 500).impl);
+  assert.equal(res.statusCode, 200);
+  assert.deepEqual(JSON.parse(res.body), { ok: true });
+});
+
+test('no notification is sent when the signup itself failed', async () => {
+  const f = recordingFetch(400);
+  await handler(fakeReq({ email: 'owner@shop.co.uk' }), fakeRes(), f.impl);
+  assert.equal(f.calls.some((call) => call.url.endsWith('/emails')), false);
 });
