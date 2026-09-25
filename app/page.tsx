@@ -2,6 +2,7 @@ import { CONTACT_EMAIL } from './site';
 import { DemoRequestForm, ServiceEnquiryLink } from './demo-request-form';
 import { SiteFooter, SiteHeader } from './site-chrome';
 import { HOMEPAGE_FAQS } from './faqs';
+import { NewsletterSignup } from './newsletter-signup';
 
 type WorkStage = 'flagship' | 'live' | 'building';
 
@@ -221,6 +222,8 @@ export default function Page() {
         </div>
         <DemoRequestForm />
       </section>
+
+      <NewsletterSignup />
 
       <SiteFooter />
     </main>
