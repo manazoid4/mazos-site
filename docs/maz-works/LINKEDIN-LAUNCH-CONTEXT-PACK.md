@@ -3,7 +3,7 @@
 **For:** Agent B (content, design, information structure), resuming after a
 usage-budget stop.
 **Written by:** Agent A (positioning, conversion, technical).
-**Aligned with `main` at:** `eaf66f4` (PR #50), 25 Sep 2026. This file has been wrong
+**Aligned with `main` at:** `13effae` (PR #48), 25 Sep 2026. This file has been wrong
 about merge state once already — it merged carrying a caveat that had expired three days
 earlier. **Anything it asserts about what is merged has a shelf life of days, because
 several agents land changes in parallel. Recheck before writing in the past tense.**
@@ -49,7 +49,7 @@ Everything in this table is **merged and live** unless marked otherwise.
 | mazos-site #47 | merged `6c40269` | Site copy cut to short, plain sentences |
 | mazos-site #50 | merged `eaf66f4` | Objects page and case studies shortened. Touch prices unchanged (£29/£49/£79, +£10 artwork), JobFilter's no-guarantee line kept, Scrap Finance Partners still labelled "contract client build". |
 | mazos-site #35 | **closed unmerged** | Its content reached `main` via #40 on 21 Sep. Merging it would have reverted newer work. Do not cite #35 as pending. |
-| mazos-site #48 | **open** | RotaReason demo text raised to the readable floor (see §3) |
+| mazos-site #48 | merged `13effae` | Every page now meets the 11.5px floor — the RotaReason demo, the Objects bundle captions and the maz-core chips. A test guards it across every stylesheet under `app/`. |
 | unified-memory #4, #5 | merged | Positioning, enquiry P0, content pass, corrections |
 
 The homepage you are writing posts about is therefore **not** the one described in
@@ -152,7 +152,7 @@ not round them up.
 | Fact | Verified detail | Caveat |
 | --- | --- | --- |
 | **The contact form failed silently for roughly three days** | FormSubmit approves per submitting domain. The site moved to `mazworks.uk` on 16 Sep; from then until 19 Sep 11:29 UTC every submission from `www.mazworks.uk` was rejected with an activation notice, while the old `mazos-site.vercel.app` origin still returned success. Found by submitting real test data to both origins, not by reading code. Fixed the same day and confirmed at both ends — endpoint returns success, and Maz confirmed receiving every test submission. | Say "roughly three days" or "16–19 September". Do not claim a number of lost enquiries — **that number is unknown and must not be invented or estimated.** |
-| **The site's smallest text was 9px** | Measured in Chromium at 390px and 1440px: smallest rendered text 9.0–9.3px across pages; headings set below a 1.0 line-height so letters collided when a heading wrapped; section headings clamped up to 85px. | **Fixed and live on the pages Maz sells from.** The 11.5px floor reached `main` via #40 on 21 Sep; 0 sub-floor declarations remain across those stylesheets. One page was missed and is **not yet live**: the `/rotareason` demo, whose smallest text measured 8.3px — the fix is on open **PR #48**. So write it as "the pages I sell from", never "the whole site". **Do not claim a before/after business effect — none was measured.** |
+| **The site's smallest text was 9px** | Measured in Chromium at 390px and 1440px: smallest rendered text 9.0–9.3px across pages; headings set below a 1.0 line-height so letters collided when a heading wrapped; section headings clamped up to 85px. | **Fixed and live, across the whole site as of 25 Sep.** The marketing pages reached the floor via #40 on 21 Sep. #48 then closed the gaps it had left: the `/rotareason` demo at 8.3px, the Objects bundle captions at 8.96px on phones, and the maz-core chips at 11px. A test now fails any stylesheet that drops below 11.52px. **Do not claim a before/after business effect — none was measured.** |
 | **The enquiry form now asks what you actually want** | Free demo, a walkthrough, a quote, or just an answer — so a £29 order or a £150 fixed job does not have to route through an unpaid custom build. | Merged in PR #34 and live. Safe to describe in the present tense. |
 | **The enquiry form worked before — and without — its own JavaScript** | The homepage form fell back to a plain GET, which would have put the visitor's contact details into the URL. That applied in the seconds before scripts loaded **and for the whole visit of anyone whose JavaScript was disabled, blocked or simply failed to load.** Found in Agent A's own code and fixed in #42, along with the keyboard path through the form. | Merged and live. Say "before or without JavaScript" — **not** "only for a second", which understates it. A defect Maz found in his own work, which is why it is safe material. |
 
