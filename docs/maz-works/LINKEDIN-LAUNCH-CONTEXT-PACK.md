@@ -105,11 +105,15 @@ not round them up.
 | Fact | Verified detail | Caveat |
 | --- | --- | --- |
 | **The contact form failed silently for roughly three days** | FormSubmit approves per submitting domain. The site moved to `mazworks.uk` on 16 Sep; from then until 19 Sep 11:29 UTC every submission from `www.mazworks.uk` was rejected with an activation notice, while the old `mazos-site.vercel.app` origin still returned success. Found by submitting real test data to both origins, not by reading code. Fixed the same day and confirmed at both ends — endpoint returns success, and Maz confirmed receiving every test submission. | Say "roughly three days" or "16–19 September". Do not claim a number of lost enquiries — **that number is unknown and must not be invented or estimated.** |
-| **The site's smallest text was 9px** | Measured in Chromium at 390px and 1440px: smallest rendered text 9.0–9.3px across pages; headings set below a 1.0 line-height so letters collided when a heading wrapped; section headings clamped up to 85px. | The fix (an 11.5px floor) is on **PR #35, which is not merged**. Until it merges, do not write as though the live site is already fixed. Either wait for the merge, or write it as a finding rather than a completed repair. |
+| **The enquiry form is now resilient without JavaScript** | Before scripts load, the homepage form used to default to a GET that put contact details in the URL, and the Objects form needed script-mounted fields. Both now have a native POST fallback and preserve what was typed when the interactive UI starts. | Merged via PR #42, 25 Sep. Describe the behaviour, not a measured improvement. |
+| **The site's smallest text was 9px** | Measured in Chromium at 390px and 1440px: smallest rendered text 9.0–9.3px across pages; headings set below a 1.0 line-height so letters collided when a heading wrapped; section headings clamped up to 85px. | **Fixed and live.** The 11.5px floor reached `main` via PR #40 on 21 Sep and PR #35 was closed unmerged; verified on `main` as 0 genuine sub-`.72rem` declarations across all seven stylesheets. Safe to write in the past tense: found, measured, fixed. Do not claim a before/after business effect — none was measured. |
 | **The enquiry form now asks what you actually want** | Free demo, a walkthrough, a quote, or just an answer — so a £29 order or a £150 fixed job does not have to route through an unpaid custom build. | Merged in PR #34 and live. Safe to describe in the present tense. |
 
-If you use either of the first two, check the merge state of the relevant PR before
-writing in the past tense. Ask Maz if unsure.
+**All of the above are merged and live on `main` as of 25 Sep 2026**, so the past tense
+is safe for each. That was not true when this pack was written — it said the 9px fix was
+unmerged, which by 25 Sep was wrong and would have had you write a weaker, inaccurate
+post. If you are reading this later than 25 Sep, check merge state again rather than
+trusting this paragraph: this file has now been wrong about it once.
 
 ### Must NOT be claimed
 
