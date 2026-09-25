@@ -61,6 +61,21 @@ test('homepage leads with a plain offer and none of the old filler', async () =>
   }
 });
 
+test('homepage hero names all four kinds of build, each one a route into the enquiry', async () => {
+  const html = await readPage('/');
+  const band = html.match(/<ul class="mw-builds"[\s\S]*?<\/ul>/)?.[0];
+  assert.ok(band, 'the hero must list what gets built, not just websites');
+  for (const name of ['Websites', 'Automation', 'Software', 'Physical products']) {
+    assert.match(band, new RegExp(`<strong>${name}</strong>`));
+  }
+  for (const id of ['website', 'automation', 'software']) {
+    assert.match(band, new RegExp(`\\?service=${id}#contact`));
+  }
+  assert.match(band, /href="\/3d-printing"/);
+  // The old hero named websites, booking and admin only. Keep that narrowing gone.
+  assert.doesNotMatch(html, /Websites, booking and admin fixes/);
+});
+
 test('homepage work stays short and labelled accurately', async () => {
   const html = await readPage('/');
   for (const name of ['JobFilter', 'Scrap Finance Partners', 'Agent Nudge', 'MAZ Pocket']) {

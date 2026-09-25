@@ -65,6 +65,13 @@ const WORK: {
   },
 ];
 
+const BUILDS = [
+  { name: 'Websites', body: 'Pages that bring enquiries in.', service: 'website' },
+  { name: 'Automation', body: 'The admin you repeat, done for you.', service: 'automation' },
+  { name: 'Software', body: 'Tools built around how you work.', service: 'software' },
+  { name: 'Physical products', body: 'Tap stands that send customers to your reviews.', href: '/3d-printing' },
+] as const;
+
 const FLAGSHIP_WORK = WORK.filter((project) => project.stage === 'flagship');
 const FURTHER_WORK = WORK.filter((project) => project.stage !== 'flagship');
 
@@ -127,13 +134,25 @@ export default function Page() {
         <div className="mw-hero-copy">
           <p className="eyebrow">Maz Works / Manazir Hussain</p>
           <h1 id="intro-title">I fix what’s costing you customers.</h1>
-          <p className="mw-lede">Websites, booking and admin fixes for small businesses. From £150, fixed price.</p>
+          <p className="mw-lede">Whatever form the fix takes, I build it. From £150, fixed price.</p>
           <div className="mw-actions">
             <a className="button button-signal" href="#contact">Tell me the problem</a>
             <a className="text-link" href="#pricing">See prices <span aria-hidden="true">↓</span></a>
           </div>
           <p className="mw-hero-note">You deal with me directly. The price is agreed before any work.</p>
         </div>
+        <ul className="mw-builds" aria-label="What I build">
+          {BUILDS.map((build) => {
+            const content = <><strong>{build.name}</strong><span>{build.body}</span></>;
+            return (
+              <li key={build.name}>
+                {'href' in build
+                  ? <a className="mw-service-link" href={build.href}>{content}</a>
+                  : <ServiceEnquiryLink service={build.service}>{content}</ServiceEnquiryLink>}
+              </li>
+            );
+          })}
+        </ul>
       </section>
 
       <section className="mw-section mw-work" id="work" aria-labelledby="work-title">
