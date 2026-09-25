@@ -413,7 +413,7 @@ export default function RotaReasonClient() {
               <input id="rota-command" value={input} onChange={(event) => setInput(event.target.value)} placeholder="e.g. Julie wants 17th and 18th off" autoComplete="off" />
               <button type="submit" className={styles.primaryButton}>Check</button>
             </div>
-            <p>v1 uses a deterministic local rule engine. No personal data is sent anywhere.</p>
+            <p>v1 checks fixed rules in your browser. No personal data is sent anywhere.</p>
           </form>
         </section>
 

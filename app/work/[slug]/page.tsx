@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!project) return {};
   return {
     title: `${project.name} case study`,
-    description: `${project.summary} See what I built, how it works and the current status.`,
+    description: `${project.caseStudy.lede} See what I built and where it stands.`,
     alternates: { canonical: `/work/${project.id}` },
     openGraph: {
       title: `${project.name} case study — Maz Works`,
@@ -59,20 +59,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
         <section className="case-section" aria-labelledby="built-title">
           <header><p className="eyebrow">02 / What I built</p><h2 id="built-title">The work delivered.</h2></header>
-          <div className="case-pair">{project.built.map((item, index) => <div key={item}><h3>0{index + 1}</h3><p>{item}</p></div>)}</div>
-        </section>
-
-        <section className="case-section" aria-labelledby="working-title">
-          <header><p className="eyebrow">03 / How it works</p><h2 id="working-title">A simple view of the flow.</h2></header>
-          <ol className="case-steps">
-            {project.caseStudy.howItWorks.map((step) => <li key={step.number}><span>{step.number}</span><strong>{step.title}</strong><p>{step.body}</p></li>)}
-          </ol>
+          <ol className="case-built">{project.built.map((item) => <li key={item}>{item}</li>)}</ol>
         </section>
 
         <section className="case-section" aria-labelledby="status-title">
-          <header><p className="eyebrow">04 / Current status</p><h2 id="status-title">What is live and what is still being proved.</h2></header>
+          <header><p className="eyebrow">03 / Current status</p><h2 id="status-title">Where it stands.</h2></header>
           <div className="case-proof">
-            <div><h3>Working now</h3><p>{project.proof}</p><ProjectLinks project={project} /></div>
+            <div><h3>Working now</h3><p>{project.proof}</p></div>
             <div className="limitation-panel"><h3>Still to prove</h3><p>{project.limitation}</p></div>
           </div>
         </section>
@@ -80,7 +73,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         <footer className="case-cta">
           <div>
             <h2>Have a similar problem?</h2>
-            <p>Describe what is slow, manual or not working. For suitable projects I build a near-working demo first, and the scope and price are agreed before any paid work starts.</p>
+            <p>Tell me what is slow or not working. For suitable projects I build a demo first. The price is agreed before any paid work.</p>
           </div>
           <div className="case-cta-actions">
             <a className="button button-signal" href="/#contact">Get a free demo</a>
