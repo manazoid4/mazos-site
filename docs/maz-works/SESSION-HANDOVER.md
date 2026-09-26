@@ -12,7 +12,7 @@ Over a week the previous session tightened mazworks.uk into a short, plain site 
 ### Open goals (agent's judgement on how)
 - **Finish the lead research pass** and handle replies. Details and rules in the private memory repo; lead data never goes in this repo.
 - **Goal A: first paying client.** Find the shortest path from a booked call to one paid £150 Quick Win (proposal, payment link or invoice, delivery checklist) and build only what's missing.
-- **Goal B: email that works in 2027.** Compare the options in the private `EMAIL-STACK.md` on cost and effort, recommend one to Maz, and prepare the DNS steps.
+- **Goal B: calls first, but at least 10 cold emails a day.** Keep a ready queue of drafted emails so Maz only presses send. No Google Workspace (decided 26 Sep); before Jan 2027 find a free way to keep info@ sending.
 - **Open decision for Maz:** the homepage hero is narrower than the standing positioning. Put it to him, don't change it alone.
 
 ### Guardrails
