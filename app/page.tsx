@@ -153,7 +153,7 @@ const STEPS = [
   ['01', 'Tell me what’s wrong', 'A free check, or send it straight to me.'],
   ['02', 'I confirm the fix and price', 'Before you pay anything.'],
   ['03', 'You pay half to start', 'The rest when it’s working.'],
-  ['04', 'Working within 7 days', 'Or you don’t pay the rest.'],
+  ['04', 'Working within 7 working days', 'Or you don’t pay the rest.'],
 ];
 
 function WorkRow({ project }: { project: (typeof WORK)[number] }) {
@@ -280,7 +280,7 @@ export default function Page() {
                 </tr>
               </tbody>
             </table>
-            <p className="mw-hero-note">Example from a real, anonymised repair. Yours comes dated, with your own before and after.</p>
+            <p className="mw-hero-note">Illustrative example, based on a real problem found during a check. Yours comes dated, with your own verified before and after.</p>
           </div>
 
           <div className="mw-secondary-offers">
@@ -331,7 +331,7 @@ export default function Page() {
           <p className="eyebrow">Get in touch</p>
           <h2 id="contact-title">Tell me what&apos;s not working.</h2>
           <p className="mw-contact-copy">One line is enough. I’ll reply with what I’d do.</p>
-          <p className="mw-contact-book"><a className="button" href={BOOKING_URL} target="_blank" rel="noreferrer">Book a 20-min call</a></p>
+          <p className="mw-contact-book"><a className="button" href={BOOKING_URL} target="_blank" rel="noreferrer">Book the 15-minute walkthrough</a></p>
           <p className="mw-contact-fallback">Prefer email? <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
         </div>
         <DemoRequestForm />
