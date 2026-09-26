@@ -42,8 +42,6 @@ export default function LeakCheckPage() {
     url: PAGE_URL,
     provider: { '@type': 'Organization', name: 'Maz Works', url: SITE_URL },
     areaServed: [
-      { '@type': 'City', name: 'Nottingham' },
-      { '@type': 'AdministrativeArea', name: 'East Midlands' },
       { '@type': 'Country', name: 'United Kingdom' },
     ],
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
@@ -70,7 +68,7 @@ export default function LeakCheckPage() {
       <section className="mw-qw-section" aria-labelledby="leak-check-send-title">
         <p className="eyebrow">Send your link</p>
         <h2 id="leak-check-send-title">Three fields. Then I check it myself.</h2>
-        <p className="mw-qw-lead">I’ll reply by email within 2 working days. Independent businesses in Nottingham and the East Midlands are the current focus; UK businesses are welcome.</p>
+        <p className="mw-qw-lead">I’ll reply by email within 5 working days. Free for any UK business.</p>
         <LeakCheckForm />
       </section>
 
@@ -84,7 +82,7 @@ export default function LeakCheckPage() {
 
       <section className="mw-qw-section" aria-labelledby="leak-check-examples-title">
         <p className="eyebrow">Real examples</p>
-        <h2 id="leak-check-examples-title">What I found on local websites this month.</h2>
+        <h2 id="leak-check-examples-title">What I found on UK business websites this month.</h2>
         <ul className="mw-qw-list">
           <li>A salon homepage showing casino adverts. It looked hacked.</li>
           <li>A bakery contact page listing Email@example.com and placeholder reviews.</li>

@@ -26,9 +26,9 @@ test('the free Leak Check has a dedicated shareable acquisition page', async () 
 
   assert.match(html, /Free Leak Check/);
   assert.match(html, /Three fields\. No call required\./);
-  assert.match(html, /within 2 working days/i);
-  assert.match(html, /Nottingham/);
-  assert.match(html, /East Midlands/);
+  assert.match(html, /within 5 working days/i);
+  assert.match(html, /any UK business/);
+  assert.doesNotMatch(html, /Nottingham/);
   assert.match(html, /no automated score/i);
   assert.match(html, /If nothing important is wrong, I’ll say that too\./);
   assert.match(html, /rel="canonical" href="https:\/\/www\.mazworks\.uk\/leak-check"/);
