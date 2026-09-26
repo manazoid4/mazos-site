@@ -10,3 +10,9 @@ Everything lands in one Gmail inbox; Maz sends from Gmail.
 - **Booking calls:** `cal.com/mazworks/quick-chat` (`BOOKING_URL` in `app/site.ts`).
 
 DNS lives at Fasthosts, not Vercel. Don't edit the `send` or `resend._domainkey` records.
+
+## Looking professional, staying out of spam
+- **Signature logo:** `https://www.mazworks.uk/email/mw-logo.png` (96px PNG of the site's MW mark, shown at 48px). PNG, not SVG: Gmail and Outlook don't render SVG.
+- **DMARC:** root `_dmarc` TXT `v=DMARC1; p=none;` (monitor only, never blocks mail).
+- **Per email:** plain text plus one small logo, at most two links, no tracking pixels, no attachments on a first email, personalised, under ~20 cold emails a day.
+- Limit: sent through Gmail SMTP, some inboxes show "via gmail.com". Removing that needs a mailbox provider that signs DKIM for mazworks.uk (e.g. Google Workspace, paid). Not needed at this volume.
