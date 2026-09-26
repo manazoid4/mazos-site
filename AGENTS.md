@@ -22,6 +22,7 @@ Rules: branch + PR, never push to main. Never invent testimonials, clients or re
 
 ## Working with Maz (read every session)
 
+- **Start and end with the handover.** Read `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/HANDOVER.md` first (public summary: `docs/maz-works/SESSION-HANDOVER.md`). Before a session ends with work open, overwrite the private `HANDOVER.md` (4 sentence summary, Maz's open to-dos, next work), then update the public copy with no lead names or contact details.
 - Reply in **two short, plain paragraphs**: what he must do, and what changed. Details belong in PRs.
 - **Remind him of his open to-dos** at the start and end of each session. He asks for this; he forgets things like posting. The list lives in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/STATUS.md` → "Maz's open to-dos". If a session ends with one still open, schedule a reminder with `send_later`.
 - Prefer free tiers and say plainly when something costs money.
