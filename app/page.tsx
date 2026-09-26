@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL } from './site';
+import { BOOKING_URL, CONTACT_EMAIL } from './site';
 import { DemoRequestForm, ServiceEnquiryLink } from './demo-request-form';
 import { SiteFooter, SiteHeader } from './site-chrome';
 import { HOMEPAGE_FAQS } from './faqs';
@@ -25,9 +25,9 @@ const WORK: {
   },
   {
     name: 'Scrap Finance Partners',
-    type: 'Contract client build',
+    type: 'Client website',
     stage: 'flagship',
-    summary: 'Website, lead capture and client area for a specialist finance practice.',
+    summary: 'A website for a specialist finance practice.',
     links: [
       { label: 'Case study', href: '/work/scrap-finance-partners' },
       { label: 'View site', href: 'https://scrap-finance-partners.vercel.app' },
@@ -138,9 +138,10 @@ export default function Page() {
           <p className="mw-lede">Whatever form the fix takes, I build it. From £150, fixed price.</p>
           <div className="mw-actions">
             <a className="button button-signal" href="#contact">Tell me the problem</a>
+            <a className="button" href={BOOKING_URL} target="_blank" rel="noreferrer">Book a call</a>
             <a className="text-link" href="#pricing">See prices <span aria-hidden="true">↓</span></a>
           </div>
-          <p className="mw-hero-note">You deal with me directly. The price is agreed before any work.</p>
+          <p className="mw-hero-note">You deal with me directly. Price agreed before any work.</p>
         </div>
         <ul className="mw-builds" aria-label="What I build">
           {BUILDS.map((build) => {
@@ -218,6 +219,7 @@ export default function Page() {
           <p className="eyebrow">Get in touch</p>
           <h2 id="contact-title">Tell me what&apos;s not working.</h2>
           <p className="mw-contact-copy">One line is enough. I’ll reply with what I’d do.</p>
+          <p className="mw-contact-book"><a className="button" href={BOOKING_URL} target="_blank" rel="noreferrer">Book a 20-min call</a></p>
           <p className="mw-contact-fallback">Prefer email? <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
         </div>
         <DemoRequestForm />
