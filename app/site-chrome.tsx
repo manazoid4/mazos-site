@@ -11,7 +11,7 @@ export function SiteHeader() {
         <a href="/#work">Work</a>
         <a href="/#services">Services</a>
         <a href="/#pricing">Pricing</a>
-        <a className="mw-nav-cta" href="/#contact">Contact</a>
+        <a className="mw-nav-cta" href="/leak-check">Free check</a>
       </nav>
     </header>
   );
@@ -27,6 +27,7 @@ export function SiteFooter() {
       </div>
 
       <nav className="mw-footer-links" aria-label="Maz Works links">
+        <a href="/leak-check">Free Leak Check</a>
         <a href="/#work">Work</a>
         <a href="/#services">Services</a>
         <a href="/#pricing">Pricing</a>
