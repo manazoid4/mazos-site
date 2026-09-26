@@ -35,6 +35,9 @@ test('the free Booking & Enquiry Check has a dedicated shareable acquisition pag
   assert.match(html, /FIX NOW/);
   assert.match(html, /FIX SOON/);
   assert.match(html, /WORKING WHEN CHECKED/);
+  assert.match(html, /Up to two smaller findings/);
+  assert.match(html, /Dated evidence/);
+  assert.match(html, /We.ll check the journey together in 15 minutes/);
   assert.doesNotMatch(html, /hacked/i);
   assert.match(html, /cal\.com\/mazworks\/quick-chat/);
   assert.match(html, /rel="canonical" href="https:\/\/www\.mazworks\.uk\/leak-check"/);

@@ -30,9 +30,9 @@ test('the enquiry captures which service the visitor actually wants', async () =
   assert.match(html, /What do you need help with\?/);
   for (const label of [
     'Website or landing page',
-    'Automation and repetitive admin',
-    'Internal tool, AI feature or custom software',
-    'Physical product linked to a digital action',
+    'Automating repetitive admin',
+    'Custom software or an internal tool',
+    'Tap-to-review stands and signs',
     'Not sure yet',
   ]) {
     assert.ok(html.includes(label), `Missing service option: ${label}`);
@@ -49,8 +49,9 @@ test('an enquiry can ask for a quote or an answer instead of an unpaid build', a
   const html = await readPage('/');
 
   assert.match(html, /What would be most useful next\?/);
-  assert.match(html, /A free live demo built around my problem/);
-  assert.match(html, /A quote and scope for a specific job/);
+  assert.match(html, /A free check of my website/);
+  assert.doesNotMatch(html, /free live demo|free demo/i);
+  assert.match(html, /A fixed quote for a specific job/);
   assert.match(html, /Just answer my question first/);
 });
 
