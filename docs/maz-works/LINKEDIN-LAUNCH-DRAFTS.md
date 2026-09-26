@@ -43,7 +43,7 @@ And I build the whole thing, not just the part you see.
 
 JobFilter finds public contracts for trades firms. I built it end to end: the data, the matching, the payments, the hosting and the launch. It's live, with paid plans.
 
-For a specialist finance firm, I built the website, the lead capture behind it and a private client area.
+For a specialist finance firm, I designed and built their website.
 
 Want to see how I work before you commit? Book a 20-minute call, bring your team if you like, and I'll walk you through real projects and the code behind them. The link is in the comments.
 
@@ -171,7 +171,7 @@ I'd rather say that than show you a render and let you assume.
 | --- | --- | --- |
 | Intro | Computer Science, Swansea; finance and complaints background, SLAs | Maz, first-hand, 25 Sep |
 | Intro | JobFilter built end to end; live, with paid plans | §3 JobFilter row. No customer count implied |
-| Intro | Specialist finance firm: website, lead capture, private client area | Live site `/work` summary. Unnamed; nothing said about payment |
+| Intro | Specialist finance firm: designed and built their website | Live site `/work` summary (kept vague by choice, 26 Sep). Unnamed; nothing said about payment |
 | Intro | Stands being designed, to print on his own 3D printer | Maz owns an Ender 5 (EnderForge). Planned, not produced: context pack says no unit printed or NFC-tested yet |
 | Intro | Free demo "for the right project"; small jobs live within five working days; from £150 | Free-demo policy (#34): suitable projects only, not Quick Win or Objects. Five days is Maz's commitment, not a track record |
 | 1 | Form broken ~3 days after the domain move; found by test submissions to both origins | §3 first-person facts, 16→19 Sep |
