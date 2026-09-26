@@ -172,3 +172,20 @@ Viewport status:
 3. **Test one complete Leak Check submission on the PR preview and verify the email arrives through the existing delivery path.** Do not merge a lead form that only passes static tests.
 4. **Make the smallest possible conversion-measurement addition if Vercel custom events are available on Maz's current plan at no extra cost.** Track Leak Check submit and Book a call clicks; otherwise leave analytics as-is and count enquiries manually.
 5. **Do not build niche SEO pages yet.** Use real outreach and Leak Check requests to learn which niche/problem repeats first, then build one genuinely useful landing page around evidence from that pattern.
+
+---
+
+## Claude's final review (26 Sep 2026)
+
+**Verdict:** pass 4 is sound. The dedicated `/leak-check` page, three-field form and header/hero CTA are the right move and are merged with the additions below.
+
+**Checked:** viewport screenshots at 390px and 1440px for `/leak-check` and the new guides (no horizontal scroll, form fully visible on mobile). Typecheck, build and 73 tests pass. The form reuses the proven FormSubmit path (same endpoint, timeout and recovery as the homepage form).
+
+**Added (the items pass 4 rejected, done so they are not thin):**
+- `/for/[niche]` guides for salons and beauty, dog groomers, garages, cafes and food, clinics and therapists (`app/for/niches.ts`). Each page carries real problems found on live local sites in September 2026, anonymised, plus a 60-second self-check, the matching fixed prices and a `?src=for-<niche>` Leak Check link. A test fails if any lead's business name appears.
+- A "Real examples" section on `/leak-check` linking every guide (the "common leaks" idea, kept on one page).
+- Sitemap entries for all five guides.
+
+**Still rejected:** paid analytics events (Vercel custom events need a paid plan; count enquiries by `src` instead), a payment button (Maz can create a free Stripe Payment Link for the £75 deposit; Stripe takes a per-card fee), CSS consolidation (later).
+
+**Open for Maz:** confirm the "reply within 2 working days" promise.
