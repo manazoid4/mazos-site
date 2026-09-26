@@ -8,7 +8,8 @@ const exportRoot = path.join(root, 'out');
 
 // Homepage word budget (visible words in <main>, form labels and closed disclosure copy included).
 // Raised 650 -> 820 on 26 Sep for the confirmed care options, clearer FAQs and Business Leak Check.
-const WORD_BUDGET = 780;
+// 780 -> 820 on 26 Sep: new pricing adds a free Leak Check and a Full Rebuild card.
+const WORD_BUDGET = 820;
 // Same count as the homepage: all text inside <main>, including header, footer and closed answers.
 const CASE_STUDY_WORD_BUDGET = 320;
 
@@ -116,15 +117,17 @@ test('homepage work stays short, truthful and now shows real flagship evidence',
 test('homepage pricing is transparent, bounded and links straight to an enquiry', async () => {
   const html = await readPage('/');
   assert.match(html, /£150 fixed/);
-  assert.match(html, /From £299/);
-  assert.match(html, /From £499/);
-  assert.match(html, /£75 to start/);
-  assert.match(html, /£75 on completion/);
+  // Maz, 26 Sep: confident pricing with a free first step.
+  assert.match(html, /free Leak Check/i);
+  assert.match(html, /From £495/);
+  assert.match(html, /From £795/);
+  assert.match(html, /From £1,000/);
+  assert.doesNotMatch(html, /£299|£360/);
   assert.match(html, /Up to 4 pages/);
   assert.match(html, /you own it/i);
   assert.match(html, /£39\/month/);
   assert.match(html, /£210 \/ 6 months/);
-  assert.match(html, /£360 \/ year/);
+  assert.match(html, /£390 \/ year/);
   assert.match(html, /Small edits, checks and quick fixes/);
   assert.doesNotMatch(html, /founding/i);
   assert.match(html, /href="\/quick-win"/);
