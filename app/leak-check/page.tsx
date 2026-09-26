@@ -29,8 +29,10 @@ const CHECKS = [
 
 const RETURN = [
   'One main finding, labelled FIX NOW, FIX SOON or WORKING WHEN CHECKED',
-  'What was actually tested, and what it is likely costing you',
-  'One scoped recommendation and price, only if one is worth it',
+  'Up to two smaller findings',
+  'Dated evidence of exactly what I tested',
+  'What it stops or slows down for your customers',
+  'One fix and a fixed price, only if one is worth paying for',
 ];
 
 export default function LeakCheckPage() {
@@ -76,7 +78,7 @@ export default function LeakCheckPage() {
       <section className="mw-qw-section" aria-labelledby="leak-check-walkthrough-title">
         <p className="eyebrow">Prefer to talk it through?</p>
         <h2 id="leak-check-walkthrough-title">Show me how a new customer reaches you.</h2>
-        <p className="mw-qw-lead">Book a free 15-minute call. We check the journey together, on screen, and you tell me what matters.</p>
+        <p className="mw-qw-lead">Show me how a new customer reaches you. We&apos;ll check the journey together in 15 minutes. Free, and optional.</p>
         <div className="mw-actions">
           <a className="button" href={BOOKING_URL} target="_blank" rel="noreferrer">Book the 15-minute walkthrough</a>
         </div>
