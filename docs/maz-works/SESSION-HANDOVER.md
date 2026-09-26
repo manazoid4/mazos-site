@@ -4,16 +4,16 @@ This repo is public, so this copy carries no lead names, contact details or lead
 
 Standard practice: before a session ends with work open, overwrite the private `HANDOVER.md` (4 sentence summary, Maz's open to-dos, next work), then update this public copy with only what is safe to publish.
 
-## 26 Sep 2026 (session "Mazworks positioning and enquiry audit", 19 to 26 Sep)
+## 26 Sep 2026 — pass 4 acquisition handover
 
 ### Summary
-Over a week the previous session tightened mazworks.uk into a short, plain site with a £150 Quick Win offer, Book a call buttons, a site wide readable text floor guarded by tests, and removed every false claim (nothing sold has a paying customer yet). It set up the email stack: all @mazworks.uk mail forwards to Gmail, Gmail sends as info@mazworks.uk, Resend handles only the site mailing list, and a deliverability check found a DKIM gap plus a January 2027 deadline when Gmail "Send mail as" ends. It built a tiered lead pipeline in the private leads repo and HubSpot, with cold email drafts waiting for Maz to send. The LinkedIn intro was posted, all earlier PRs are merged, and the session ended part way through a lead research pass.
+Pass 4 focused the next site change on first-client acquisition rather than another general redesign. PR #63 adds a dedicated `/leak-check` page with a three-field form, makes the free Leak Check the primary homepage/header route, preserves the broad Maz Works offer and confirmed pricing, and reuses the existing resilient enquiry delivery rather than adding another service. Research covered mobile owners, trust, CRO, local SEO, design, accessibility, pricing, current Nottingham/East Midlands competitors and CSS maintainability; the full findings and Claude review brief are in `docs/maz-works/HANDBACK-TO-CLAUDE.md`. Automated typecheck/build/tests/smoke passed on the code change; the remaining pre-merge checks are a real-browser 390px/1440px visual pass and one end-to-end Leak Check delivery test.
 
-### Open goals (agent's judgement on how)
-- **Finish the lead research pass** and handle replies. Details and rules in the private memory repo; lead data never goes in this repo.
-- **Goal A: first paying client.** Find the shortest path from a booked call to one paid £150 Quick Win (proposal, payment link or invoice, delivery checklist) and build only what's missing.
-- **Goal B: calls first, but at least 10 cold emails a day.** Keep a ready queue of drafted emails so Maz only presses send. No Google Workspace (decided 26 Sep); before Jan 2027 find a free way to keep info@ sending.
-- **Open decision for Maz:** the homepage hero is narrower than the standing positioning. Put it to him, don't change it alone.
+### Open goals
+- **PR #63 remains open.** Claude should complete the real-browser visual check, verify one Leak Check submission reaches the inbox, review the two-working-day promise with Maz, then fix or merge as appropriate.
+- **Goal A remains the first paying client.** The new `/leak-check` route is designed to be a simple URL for calls, cold email, DMs and LinkedIn without copying private lead data into this repo.
+- **Do not build thin niche pages yet.** Let real outreach show which niche/problem repeats, then make one useful page backed by evidence.
+- **Measure before redesigning again.** Existing Vercel Analytics can show page visits; add conversion events only if they are supported on the current plan without an unwanted cost.
 
 ### Guardrails
-Reorder, drop or add work if something earns money sooner; say why in the PR. Never invent clients, results or testimonials. Never put lead data here. Branch + PR, never push to main. Outreach only from Gmail as info@, never Resend. Reply to Maz in two short plain paragraphs and say plainly when something costs money. Read `AGENTS.md` and the private `spine/projects/mazworks-site/STATUS.md` before starting.
+Never invent clients, results or testimonials. Scrap Finance Partners remains an unpaid client website and JobFilter has no paying customers. Physical Objects remain unvalidated concepts. Never put lead data here. Keep Maz Works broader than a website agency. Branch + PR, never push to main. Outreach only from Gmail as info@mazworks.uk, never Resend. Read `AGENTS.md`, the private `spine/projects/mazworks-site/STATUS.md` and `docs/maz-works/HANDBACK-TO-CLAUDE.md` before the next pass.
