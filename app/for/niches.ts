@@ -2,6 +2,9 @@
  * Niche guides. Every example is a real problem found on a live UK small-business
  * website during manual checks in September 2026, described without naming the
  * business. Keep it that way: no invented findings, no names.
+ *
+ * These are examples of businesses this applies to, not a limit: the same
+ * check and repairs work for any UK business customers book, call or enquire with.
  */
 export type NicheGuide = {
   id: string;
@@ -20,7 +23,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
     title: 'Website leaks on salon and beauty websites',
     lede: 'Clients book on their phone, often late at night. If the booking route breaks, they book somewhere else and you never hear about it.',
     examples: [
-      { found: 'A salon homepage showing casino adverts, a New York address and info@example.com. It looked hacked.', cost: 'Anyone searching for the salon saw gambling content under its name.' },
+      { found: 'A salon homepage showing unrelated casino content, a New York address and info@example.com instead of the salon’s own details.', cost: 'Anyone searching for the salon saw gambling content under its name.' },
       { found: 'A skin clinic where every Book a Treatment button opened an old booking page saying the business was no longer available.', cost: 'Clients ready to book were told the clinic had closed.' },
       { found: 'A salon with thousands of five-star reviews whose phone number could not be tapped on a phone.', cost: 'Clients had to copy the number out by hand to call.' },
       { found: 'A beauty parlour homepage still full of template filler text, including a line reading "Longer intro text about" the salon.', cost: 'The first thing new clients read looked unfinished.' },
@@ -31,8 +34,8 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Google your salon name. Is the title and description yours, spelled right?',
     ],
     fixes: [
-      { name: 'Quick Win', price: '£150 fixed', body: 'Book buttons pointed at your real booking page, tap-to-call and your Google details fixed.' },
-      { name: 'Growth System', price: 'From £795', body: 'Online booking plus rebooking reminders and review requests after each visit.' },
+      { name: 'Booking & Enquiry Repair', price: '£395', body: 'Book buttons pointed at your real booking page, tap-to-call and a test booking followed through to a reply.' },
+      { name: 'Google Profile & Contact Setup', price: '£249', body: 'Your Google listing corrected, plus a review-request message ready to send.' },
     ],
   },
   {
@@ -51,8 +54,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Does your Book button do what it says?',
     ],
     fixes: [
-      { name: 'Quick Win', price: '£150 fixed', body: 'A working Book button linked to a free booking tool, plus tap-to-call.' },
-      { name: 'Growth System', price: 'From £795', body: 'Online booking plus "time for the next groom" reminders so regulars rebook themselves.' },
+      { name: 'Booking & Enquiry Repair', price: '£395', body: 'A working Book button linked to a free booking tool, tap-to-call, and a test booking followed through to a reply.' },
     ],
   },
   {
@@ -71,7 +73,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Can a driver request an MOT without phoning?',
     ],
     fixes: [
-      { name: 'Quick Win', price: '£150 fixed', body: 'Tap-to-call everywhere, leftover template text replaced and a simple MOT request form.' },
+      { name: 'Google Profile & Contact Setup', price: '£249', body: 'Tap-to-call everywhere, leftover template text replaced and your Google listing corrected.' },
       { name: 'Full Rebuild', price: 'From £1,000', body: 'An old site rebuilt properly, with online booking requests and your content moved across.' },
     ],
   },
@@ -92,7 +94,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Tap your call button. Does it ring you?',
     ],
     fixes: [
-      { name: 'Quick Win', price: '£150 fixed', body: 'Security, contact details, call button or Google title fixed, whichever is costing you most.' },
+      { name: 'Google Profile & Contact Setup', price: '£249', body: 'Contact details, call button or Google title fixed, whichever is costing you most, plus a review-request message.' },
       { name: 'Website Launch', price: 'From £495', body: 'A clean phone-first site with menu, hours, tap-to-call and a reviews link.' },
     ],
   },
@@ -113,8 +115,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Can a new patient see how to book in under 10 seconds?',
     ],
     fixes: [
-      { name: 'Quick Win', price: '£150 fixed', body: 'Broken links and pages fixed, tap-to-call and a clear booking route.' },
-      { name: 'Growth System', price: 'From £795', body: 'Booking plus appointment reminders and review requests after treatment.' },
+      { name: 'Booking & Enquiry Repair', price: '£395', body: 'Broken links and pages fixed, tap-to-call, and a test enquiry followed through to a reply.' },
     ],
   },
 ];
