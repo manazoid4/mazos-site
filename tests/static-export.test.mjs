@@ -10,7 +10,8 @@ const exportRoot = path.join(root, 'out');
 // Raised 650 -> 820 on 26 Sep for the confirmed care options, clearer FAQs and Business Leak Check.
 // 780 -> 820 on 26 Sep: new pricing adds a free Leak Check and a Full Rebuild card.
 // 820 -> 1100 on 26 Sep (Offer v5): Journey Receipt example, Tell Maz section and referral line added.
-const WORD_BUDGET = 1100;
+// 1100 -> 1050 on 26 Sep: audit pass removed the duplicate problem chooser.
+const WORD_BUDGET = 1050;
 // Same count as the homepage: all text inside <main>, including header, footer and closed answers.
 const CASE_STUDY_WORD_BUDGET = 320;
 
@@ -69,7 +70,7 @@ test('homepage hero keeps the offer broad instead of reducing Maz Works to three
   const html = await readPage('/');
   const band = html.match(/<ul class="mw-builds"[\s\S]*?<\/ul>/)?.[0];
   assert.ok(band, 'the hero must list what gets built, not just websites');
-  for (const name of ['Websites', 'Full rebuilds', 'More customers', 'Automation', 'Software', 'Physical products']) {
+  for (const name of ['Websites', 'Full rebuilds', 'Repairs', 'Automation', 'Software', 'Physical products']) {
     assert.match(band, new RegExp(`<strong>${name}</strong>`));
   }
   for (const id of ['website', 'rebuild', 'repair', 'automation', 'software']) {
@@ -80,22 +81,9 @@ test('homepage hero keeps the offer broad instead of reducing Maz Works to three
   assert.match(html, /I find and fix broken booking links, confusing enquiry routes/);
 });
 
-test('Business Leak Check routes common problems without adding another form or AI call', async () => {
+test('homepage has one set of service routes, not a duplicate problem chooser', async () => {
   const html = await readPage('/');
-  const check = html.match(/<details class="mw-leak-check"[\s\S]*?<\/details>/)?.[0];
-  assert.ok(check, 'homepage should include the compact Business Leak Check');
-  for (const text of [
-    'Something is broken',
-    'I need a website',
-    'My site needs replacing',
-    'I want more customers',
-    'Admin takes too long',
-    'I need a custom tool',
-    'I want tap stands or signs',
-    'Not sure, help me',
-  ]) {
-    assert.ok(check.includes(text), `Business Leak Check missing: ${text}`);
-  }
+  assert.doesNotMatch(html, /class="mw-leak-check"/);
 });
 
 test('homepage work stays short, truthful and now shows real flagship evidence', async () => {
@@ -128,6 +116,8 @@ test('homepage pricing is transparent, bounded and links straight to an enquiry'
   assert.match(html, /From £1,000/);
   assert.match(html, /£200 to start · £195 on completion/);
   assert.match(html, /£125 to start · £124 on completion/);
+  assert.match(html, /£300 to start, £295 on completion/);
+  assert.match(html, /verification times/);
   assert.match(html, /No VAT added/);
   assert.match(html, /you own everything i build/i);
   assert.match(html, /working within 7 working days/i);
@@ -180,7 +170,7 @@ test('contact request submits in-page instead of depending on the visitor email 
   assert.match(html, /name="problem"/);
   assert.match(html, /name="service"/);
   assert.match(html, /name="nextStep"/);
-  assert.match(html, /Microsoft Teams walkthrough/);
+  assert.match(html, /A 15-minute call/);
   assert.match(html, /sent directly from this form/i);
   assert.match(enquirySource, /https:\/\/formsubmit\.co\/ajax\//);
   assert.match(enquirySource, /fetch\(FORM_ENDPOINT/);
@@ -409,4 +399,12 @@ test('the guarantee, no-VAT and referral lines appear where Maz\'s decisions req
   assert.match(faq, /No VAT added/);
   assert.match(faq, /£40 by bank transfer/);
   assert.match(faq, /Your agreed repair works within 7 working days/);
+});
+
+test('case studies route to a plan and fixed price, not a blanket free demo', async () => {
+  for (const route of ['/work/jobfilter', '/work/scrap-finance-partners']) {
+    const html = await readPage(route);
+    assert.doesNotMatch(html, /free demo/i, `${route} still offers a free demo`);
+    assert.match(html, /Ask about a build like this/);
+  }
 });

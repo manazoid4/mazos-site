@@ -1,5 +1,7 @@
 # Maz Works Client Acquisition
 
+> **Superseded by Offer v5 (26 Sep 2026).** Quick Win £150, Growth System and Website Care are retired. Current prices: Booking & Enquiry Repair £395, Google Profile & Contact Setup £249, both £595, Website Launch from £495, Full Rebuild from £1,000, no VAT added. See `SESSION-HANDOVER.md`. Kept for history only.
+
 A lightweight operating playbook for finding and converting early Maz Works clients without turning the business into a generic AI agency.
 
 ## Positioning

@@ -18,7 +18,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'What do I get for £249?',
-    answer: 'Correct Google Business Profile information, working contact routes, a usable review-request process and a print-ready QR file. No ranking promises.',
+    answer: 'Correct Google Business Profile information, working contact routes, a usable review-request process and a print-ready QR file. No ranking promises, and Google sets its own verification times.',
   },
   {
     question: "What's the guarantee?",

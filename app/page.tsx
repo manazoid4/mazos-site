@@ -98,7 +98,7 @@ const WORK: {
 const BUILDS = [
   { name: 'Websites', body: 'New sites and quick fixes.', service: 'website' },
   { name: 'Full rebuilds', body: 'Old sites and systems, rebuilt.', service: 'rebuild' },
-  { name: 'More customers', body: 'Booking, enquiries and reviews.', service: 'repair' },
+  { name: 'Repairs', body: 'Broken booking and enquiry routes.', service: 'repair' },
   { name: 'Automation', body: 'Repeat admin, done for you.', service: 'automation' },
   { name: 'Software', body: 'Tools built around your work.', service: 'software' },
   { name: 'Physical products', body: 'Tap stands and useful objects.', href: '/3d-printing' },
@@ -126,7 +126,7 @@ const PRIMARY_OFFERS = [
     name: 'Google Profile & Contact Setup',
     price: '£249',
     highlight: false,
-    body: 'An accurate Google listing and contact routes that actually reach you.',
+    body: 'An accurate Google listing and contact routes that reach you. Google sets its own verification times.',
     bullets: [
       'Google Business Profile checked and corrected',
       'A review-request message ready to send',
@@ -209,19 +209,6 @@ export default function Page() {
             );
           })}
         </ul>
-        <details className="mw-leak-check">
-          <summary><span>What&apos;s the problem?</span><small>Not sure what you need? Pick your problem.</small></summary>
-          <div className="mw-leak-options">
-            <ServiceEnquiryLink service="repair">Something is broken</ServiceEnquiryLink>
-            <ServiceEnquiryLink service="website">I need a website</ServiceEnquiryLink>
-            <ServiceEnquiryLink service="rebuild">My site needs replacing</ServiceEnquiryLink>
-            <ServiceEnquiryLink service="growth">I want more customers</ServiceEnquiryLink>
-            <ServiceEnquiryLink service="automation">Admin takes too long</ServiceEnquiryLink>
-            <ServiceEnquiryLink service="software">I need a custom tool</ServiceEnquiryLink>
-            <a className="mw-service-link" href="/3d-printing">I want tap stands or signs</a>
-            <ServiceEnquiryLink service="unsure">Not sure, help me</ServiceEnquiryLink>
-          </div>
-        </details>
       </section>
 
       <section className="mw-section mw-work" id="work" aria-labelledby="work-title">
@@ -263,7 +250,7 @@ export default function Page() {
             ))}
           </div>
           <p className="mw-pricing-extra">
-            Need both? <ServiceEnquiryLink service="bundle">£595 together <span aria-hidden="true">→</span></ServiceEnquiryLink>. Guarantee: working within 7 working days of getting access, or you don&apos;t pay the rest. If I can&apos;t deliver it, your deposit is refunded.
+            Need both? <ServiceEnquiryLink service="bundle">£595 together <span aria-hidden="true">→</span></ServiceEnquiryLink> (£300 to start, £295 on completion). Guarantee: working within 7 working days of getting access, or you don&apos;t pay the rest. If I can&apos;t deliver it, your deposit is refunded.
           </p>
 
           <div className="mw-journey-receipt">
@@ -294,9 +281,9 @@ export default function Page() {
             </ul>
           </div>
 
-          <p className="mw-pricing-extra">
-            No VAT added. Every price is fixed before work starts. You own everything I build. Know a business with this problem? Introduce them and I&apos;ll thank you with £40 when they become a paying client — <a href="/faq#do-you-pay-for-referrals">how it works <span aria-hidden="true">→</span></a>. · <a href="/3d-printing">Maz Works Objects: tap-to-review stands from £29 <span aria-hidden="true">→</span></a>
-          </p>
+          <p className="mw-pricing-extra">No VAT added. Every price is fixed before work starts. You own everything I build.</p>
+          <p className="mw-pricing-extra">Know a business with this problem? Introduce them and I&apos;ll thank you with £40 when they become a paying client. <a href="/faq#do-you-pay-for-referrals">How it works <span aria-hidden="true">→</span></a></p>
+          <p className="mw-pricing-extra"><a href="/3d-printing">Maz Works Objects: tap-to-review stands, fixed price from £29 <span aria-hidden="true">→</span></a></p>
         </div>
       </section>
 
@@ -328,9 +315,9 @@ export default function Page() {
 
       <section className="mw-contact" id="contact" aria-labelledby="contact-title">
         <div className="mw-contact-intro">
-          <p className="eyebrow">Get in touch</p>
-          <h2 id="contact-title">Tell me what&apos;s not working.</h2>
-          <p className="mw-contact-copy">One line is enough. I’ll reply with what I’d do.</p>
+          <p className="eyebrow">Bigger job?</p>
+          <h2 id="contact-title">Websites, software and automation.</h2>
+          <p className="mw-contact-copy">Tell me what you want built or fixed. One line is enough. I’ll reply with a plan and a fixed price.</p>
           <p className="mw-contact-book"><a className="button" href={BOOKING_URL} target="_blank" rel="noreferrer">Book the 15-minute walkthrough</a></p>
           <p className="mw-contact-fallback">Prefer email? <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
         </div>
