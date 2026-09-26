@@ -1,5 +1,6 @@
 import { BOOKING_URL, CONTACT_EMAIL } from './site';
 import { DemoRequestForm, ServiceEnquiryLink } from './demo-request-form';
+import { TellMazForm } from './tell-maz-form';
 import { SiteFooter, SiteHeader } from './site-chrome';
 import { HOMEPAGE_FAQS } from './faqs';
 import { NewsletterSignup } from './newsletter-signup';
@@ -97,7 +98,7 @@ const WORK: {
 const BUILDS = [
   { name: 'Websites', body: 'New sites and quick fixes.', service: 'website' },
   { name: 'Full rebuilds', body: 'Old sites and systems, rebuilt.', service: 'rebuild' },
-  { name: 'More customers', body: 'Mailing lists, email and reviews.', service: 'growth' },
+  { name: 'More customers', body: 'Booking, enquiries and reviews.', service: 'repair' },
   { name: 'Automation', body: 'Repeat admin, done for you.', service: 'automation' },
   { name: 'Software', body: 'Tools built around your work.', service: 'software' },
   { name: 'Physical products', body: 'Tap stands and useful objects.', href: '/3d-printing' },
@@ -106,47 +107,53 @@ const BUILDS = [
 const FLAGSHIP_WORK = WORK.filter((project) => project.stage === 'flagship');
 const FURTHER_WORK = WORK.filter((project) => project.stage !== 'flagship');
 
-const OFFERS = [
+const PRIMARY_OFFERS = [
   {
-    name: 'Quick Win',
-    price: '£150 fixed',
-    body: 'One thing costing you customers, fixed.',
-    note: 'Live within 5 working days',
-    service: 'quick-win',
-    action: 'Ask about a Quick Win',
-    details: '/quick-win',
+    name: 'Booking & Enquiry Repair',
+    price: '£395',
+    highlight: true,
+    body: 'One booking or enquiry journey, repaired and tested on what you already use.',
+    bullets: [
+      'Booking links, forms and routing checked and fixed',
+      'A real test enquiry followed through to a reply',
+      'A dated Journey Receipt showing what changed',
+    ],
+    deposit: '£200 to start · £195 on completion',
+    service: 'repair',
+    action: 'Ask about a repair',
   },
   {
-    name: 'Website Launch',
-    price: 'From £495',
-    body: 'Up to 4 pages, phone-ready, with a contact form.',
-    note: 'Google set up · you own it',
-    service: 'website',
-    action: 'Ask about a website',
+    name: 'Google Profile & Contact Setup',
+    price: '£249',
+    highlight: false,
+    body: 'An accurate Google listing and contact routes that actually reach you.',
+    bullets: [
+      'Google Business Profile checked and corrected',
+      'A review-request message ready to send',
+      'A print-ready QR card for the counter',
+    ],
+    deposit: '£125 to start · £124 on completion',
+    service: 'google-profile',
+    action: 'Ask about Google setup',
   },
-  {
-    name: 'Growth System',
-    price: 'From £795',
-    body: 'Your website plus one system that brings customers back.',
-    note: 'Mailing list, review requests or booking reminders',
-    service: 'growth',
-    action: 'Ask about a Growth System',
-  },
-  {
-    name: 'Full Rebuild',
-    price: 'From £1,000',
-    body: 'Your old site or system, rebuilt properly.',
-    note: 'Content moved across · fixed quote first',
-    service: 'rebuild',
-    action: 'Ask about a rebuild',
-  },
-];
+] as const;
+
+const SECONDARY_OFFERS = [
+  { name: 'Website Launch', price: 'From £495', body: 'A new site, when repairing the old one is not practical.', service: 'website', action: 'Ask about a website' },
+  { name: 'Full Rebuild', price: 'From £1,000', body: 'Your old site or system, rebuilt properly.', service: 'rebuild', action: 'Ask about a rebuild' },
+] as const;
+
+const JOURNEY_RECEIPT_EXAMPLE = {
+  action: 'Tap "Book a Treatment"',
+  before: 'Opens an old booking page saying the business is no longer available',
+  after: 'Opens the real booking page and confirms the slot',
+};
 
 const STEPS = [
-  ['01', 'Tell me the problem', 'One line is enough.'],
-  ['02', 'I suggest the fix', 'A quote, a call or a quick demo.'],
-  ['03', 'We agree the price', 'Before any paid work.'],
-  ['04', 'I build and hand over', 'Tested, and yours to keep.'],
+  ['01', 'Tell me what’s wrong', 'A free check, or send it straight to me.'],
+  ['02', 'I confirm the fix and price', 'Before you pay anything.'],
+  ['03', 'You pay half to start', 'The rest when it’s working.'],
+  ['04', 'Working within 7 days', 'Or you don’t pay the rest.'],
 ];
 
 function WorkRow({ project }: { project: (typeof WORK)[number] }) {
@@ -182,10 +189,10 @@ export default function Page() {
         <div className="mw-hero-copy">
           <p className="eyebrow">Maz Works / Manazir Hussain</p>
           <h1 id="intro-title">I fix what’s costing your business time, customers, or money.</h1>
-          <p className="mw-lede">Small fixes to full rebuilds. I build around the problem, not a fixed menu. From £150, fixed price.</p>
+          <p className="mw-lede">I find and fix broken booking links, confusing enquiry routes and incorrect business information, so customers can reach you. Fixed price agreed before work starts.</p>
           <div className="mw-actions">
-            <a className="button button-signal" href="/leak-check">Get a free Leak Check</a>
-            <a className="button" href={BOOKING_URL} target="_blank" rel="noreferrer">Book a call</a>
+            <a className="button button-signal" href="/leak-check">Get a free Booking &amp; Enquiry Check</a>
+            <a className="button" href={BOOKING_URL} target="_blank" rel="noreferrer">15-minute walkthrough</a>
             <a className="text-link" href="#pricing">See prices <span aria-hidden="true">↓</span></a>
           </div>
           <p className="mw-hero-note">You deal with me directly. Price agreed before any work.</p>
@@ -203,9 +210,9 @@ export default function Page() {
           })}
         </ul>
         <details className="mw-leak-check">
-          <summary><span>Business Leak Check</span><small>Not sure what you need? Pick your problem.</small></summary>
+          <summary><span>What&apos;s the problem?</span><small>Not sure what you need? Pick your problem.</small></summary>
           <div className="mw-leak-options">
-            <ServiceEnquiryLink service="quick-win">Something is broken</ServiceEnquiryLink>
+            <ServiceEnquiryLink service="repair">Something is broken</ServiceEnquiryLink>
             <ServiceEnquiryLink service="website">I need a website</ServiceEnquiryLink>
             <ServiceEnquiryLink service="rebuild">My site needs replacing</ServiceEnquiryLink>
             <ServiceEnquiryLink service="growth">I want more customers</ServiceEnquiryLink>
@@ -238,34 +245,66 @@ export default function Page() {
             <div><p className="eyebrow">Prices</p><h2 id="pricing-title">Fixed prices. No surprises.</h2></div>
           </header>
           <div className="mw-free-check">
-            <p><strong>Start free.</strong> Send your link. Get a plain list of what&apos;s costing you customers.</p>
-            <a className="mw-service-link" href="/leak-check">Get a free Leak Check <span aria-hidden="true">→</span></a>
+            <p><strong>Start free.</strong> Send your link. Get a plain check of what&apos;s stopping customers reaching you.</p>
+            <a className="mw-service-link" href="/leak-check">Get a free Booking &amp; Enquiry Check <span aria-hidden="true">→</span></a>
           </div>
-          <div className="mw-price-grid mw-price-grid-4">
-            {OFFERS.map((offer) => (
-              <article className="mw-price-option" key={offer.name}>
+          <div className="mw-price-grid mw-price-grid-2">
+            {PRIMARY_OFFERS.map((offer) => (
+              <article className={`mw-price-option${offer.highlight ? ' mw-price-option-highlight' : ''}`} key={offer.name}>
                 <p>{offer.name}</p>
                 <strong>{offer.price}</strong>
                 <span>{offer.body}</span>
-                <small>{offer.note}</small>
-                {offer.details ? <a className="text-link" href={offer.details}>See common fixes <span aria-hidden="true">→</span></a> : null}
+                <ul className="mw-price-bullets">
+                  {offer.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+                </ul>
+                <small>{offer.deposit}</small>
                 <ServiceEnquiryLink service={offer.service}>{offer.action} <span aria-hidden="true">→</span></ServiceEnquiryLink>
               </article>
             ))}
           </div>
-          <div className="mw-care-plan">
-            <div>
-              <p className="eyebrow">Website Care</p>
-              <h3>Keep it looked after.</h3>
-              <p>Small edits, checks and quick fixes.</p>
-            </div>
-            <p className="mw-care-prices"><strong>£39/month</strong><span>£210 / 6 months</span><span>£390 / year (2 months free)</span></p>
-            <ServiceEnquiryLink service="care">Ask about Website Care <span aria-hidden="true">→</span></ServiceEnquiryLink>
-          </div>
           <p className="mw-pricing-extra">
-            Every price is fixed before work starts. You own everything I build. · <a href="/3d-printing">Maz Works Objects: tap-to-review stands from £29 <span aria-hidden="true">→</span></a>
+            Need both? <ServiceEnquiryLink service="bundle">£595 together <span aria-hidden="true">→</span></ServiceEnquiryLink>. Guarantee: working within 7 working days of getting access, or you don&apos;t pay the rest. If I can&apos;t deliver it, your deposit is refunded.
+          </p>
+
+          <div className="mw-journey-receipt">
+            <p className="eyebrow">Example Journey Receipt</p>
+            <table>
+              <thead>
+                <tr><th>Customer action</th><th>Before</th><th>After</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{JOURNEY_RECEIPT_EXAMPLE.action}</td>
+                  <td>{JOURNEY_RECEIPT_EXAMPLE.before}</td>
+                  <td>{JOURNEY_RECEIPT_EXAMPLE.after}</td>
+                </tr>
+              </tbody>
+            </table>
+            <p className="mw-hero-note">Example from a real, anonymised repair. Yours comes dated, with your own before and after.</p>
+          </div>
+
+          <div className="mw-secondary-offers">
+            <p className="eyebrow">When repairing what you have isn&apos;t practical</p>
+            <ul className="mw-qw-list">
+              {SECONDARY_OFFERS.map((offer) => (
+                <li key={offer.name}>
+                  <strong>{offer.name}, {offer.price}.</strong> {offer.body} <ServiceEnquiryLink service={offer.service}>{offer.action} <span aria-hidden="true">→</span></ServiceEnquiryLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <p className="mw-pricing-extra">
+            No VAT added. Every price is fixed before work starts. You own everything I build. Know a business with this problem? Introduce them and I&apos;ll thank you with £40 when they become a paying client — <a href="/faq#do-you-pay-for-referrals">how it works <span aria-hidden="true">→</span></a>. · <a href="/3d-printing">Maz Works Objects: tap-to-review stands from £29 <span aria-hidden="true">→</span></a>
           </p>
         </div>
+      </section>
+
+      <section className="mw-section mw-tell-maz" id="tell-maz" aria-labelledby="tell-maz-title">
+        <header className="mw-section-heading mw-heading-inline">
+          <div><p className="eyebrow">Already know what&apos;s wrong?</p><h2 id="tell-maz-title">Something&apos;s broken? Tell Maz.</h2></div>
+        </header>
+        <TellMazForm />
       </section>
 
       <section className="mw-section" id="process" aria-labelledby="process-title">
@@ -282,7 +321,7 @@ export default function Page() {
           <div><p className="eyebrow">Questions</p><h2 id="faq-title">Quick answers.</h2></div>
         </header>
         <div className="mw-faq-list">
-          {HOMEPAGE_FAQS.slice(0, 4).map((faq) => <details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}
+          {HOMEPAGE_FAQS.map((faq) => <details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}
         </div>
         <div className="mw-faq-more"><a className="text-link" href="/faq">All questions <span aria-hidden="true">→</span></a></div>
       </section>

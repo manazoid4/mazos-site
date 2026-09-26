@@ -39,7 +39,7 @@ test('the enquiry captures which service the visitor actually wants', async () =
   }
 
   // CTAs deep-link with ?service=<id>; the ids must stay stable for those links to work.
-  for (const id of ['quick-win', 'website', 'automation', 'software', 'objects', 'unsure']) {
+  for (const id of ['repair', 'google-profile', 'bundle', 'website', 'automation', 'software', 'objects', 'unsure']) {
     assert.match(enquirySource, new RegExp(`id: '${id}'`));
   }
   assert.match(enquirySource, /readServiceFromLocation/);
