@@ -4,6 +4,21 @@ This repo is public, so this copy carries no lead names, contact details or lead
 
 Standard practice: before a session ends with work open, overwrite the private `HANDOVER.md` (4 sentence summary, Maz's open to-dos, next work), then update this public copy with only what is safe to publish.
 
+## 26 Sep 2026 — Offer v5
+
+### Summary
+The old £150 Quick Win was judged not worth paying for, so the whole commercial offer was rebuilt as "Offer v5": Booking & Enquiry Repair (£395, primary) and Google Profile & Contact Setup (£249), with both together at £595, replacing Quick Win, the Growth System and Website Care entirely. Every priced offer now carries a written guarantee, "No VAT added", and a £40 referral thank-you for any introduction that becomes a paying client. Positioning widened to all UK small businesses customers book, call or enquire with, not a niche-first or region-limited launch. PR #65 covers the site changes: typecheck, build and the full test suite (75/75) pass, and 390px/1440px screenshots show no horizontal overflow.
+
+### Open goals
+- **Get the PR merged once CI is green**, then watch for the first real quote sent under the new pricing.
+- **Goal A remains the first paying client.** The Repair and Setup offers, the free check and the Live Customer Walkthrough are the funnel; track it in the private pipeline tracker.
+- **Do not build thin niche pages yet.** The `/for/*` guides got a one-line "not your trade?" note instead of new pages — let real outreach show what repeats before adding more.
+
+### Guardrails
+Never invent clients, results or testimonials. Scrap Finance Partners remains an unpaid client website and JobFilter has no paying customers. Physical Objects remain unvalidated concepts; no tap stand has been printed or sold. Never put lead data here. Branch + PR, never push to main. Outreach only from Gmail as info@mazworks.uk, never Resend. Read `AGENTS.md` and the private `spine/projects/mazworks-site/HANDOVER.md` before the next pass.
+
+---
+
 ## 26 Sep 2026 — pass 4 acquisition handover
 
 ### Summary
