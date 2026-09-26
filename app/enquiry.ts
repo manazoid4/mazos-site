@@ -1,7 +1,7 @@
-import { CONTACT_EMAIL } from './site';
+import { CONTACT_EMAIL, FORM_DELIVERY_EMAIL } from './site';
 
-export const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
-export const NATIVE_FORM_ENDPOINT = `https://formsubmit.co/${CONTACT_EMAIL}`;
+export const FORM_ENDPOINT = `https://formsubmit.co/ajax/${FORM_DELIVERY_EMAIL}`;
+export const NATIVE_FORM_ENDPOINT = `https://formsubmit.co/${FORM_DELIVERY_EMAIL}`;
 
 /** Default time before a hung submission is abandoned so the button never sticks on "Sending…". */
 export const SUBMIT_TIMEOUT_MS = 15000;
@@ -18,6 +18,7 @@ export const ENQUIRY_SERVICES = [
   { id: 'automation', label: 'Automation and repetitive admin' },
   { id: 'software', label: 'Internal tool, AI feature or custom software' },
   { id: 'objects', label: 'Physical product linked to a digital action' },
+  { id: 'care', label: 'Website Care — ongoing small fixes and checks' },
   { id: 'unsure', label: 'Not sure yet — help me work it out' },
 ] as const;
 
