@@ -1,0 +1,190 @@
+/* 26 Sep conversion/friction pass. Kept separate so a later design agent can replace it cleanly. */
+
+.mw-work-row-with-proof {
+  align-items: start;
+}
+
+.mw-work-proof {
+  grid-column: 1 / -1;
+  margin: 6px 0 8px;
+}
+
+.mw-work-proof picture,
+.mw-work-proof img {
+  display: block;
+  width: 100%;
+}
+
+.mw-work-proof img {
+  height: auto;
+  border: 1px solid var(--soft-line);
+  background: var(--surface);
+  object-fit: cover;
+  object-position: top;
+}
+
+.mw-work-proof-primary img {
+  max-height: 430px;
+}
+
+.mw-work-proof-secondary {
+  max-width: 620px;
+}
+
+.mw-work-proof-secondary img {
+  max-height: 235px;
+}
+
+.mw-work-proof figcaption {
+  margin-top: 7px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: .7rem;
+}
+
+.mw-leak-check {
+  margin-top: 18px;
+  border-top: 1px solid var(--soft-line);
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.mw-leak-check > summary {
+  min-height: 52px;
+  padding: 11px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 650;
+}
+
+.mw-leak-check > summary::-webkit-details-marker {
+  display: none;
+}
+
+.mw-leak-check > summary::after {
+  content: '+';
+  color: var(--muted);
+  font-family: var(--mono);
+}
+
+.mw-leak-check[open] > summary::after {
+  content: '−';
+}
+
+.mw-leak-check > summary small {
+  margin-left: auto;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.mw-leak-options {
+  padding: 4px 0 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 28px;
+}
+
+.mw-leak-options .mw-service-link {
+  min-height: 44px;
+  margin: 0;
+  padding: 11px 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--soft-line);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: .9rem;
+  font-weight: 550;
+  text-decoration: none;
+}
+
+.mw-leak-options .mw-service-link::after {
+  content: ' →';
+  margin-left: auto;
+  color: var(--muted);
+}
+
+.mw-care-plan {
+  margin-top: 30px;
+  padding: 20px 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 18px 32px;
+  border-top: 1px solid var(--soft-line);
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.mw-care-plan h3 {
+  margin-top: 3px;
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+}
+
+.mw-care-plan > div > p:last-child {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+.mw-care-prices {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 7px 16px;
+  white-space: nowrap;
+}
+
+.mw-care-prices strong {
+  font-size: 1.15rem;
+}
+
+.mw-care-prices span {
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+.mw-care-plan > .mw-service-link {
+  margin: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .mw-work-proof-primary img {
+    max-height: none;
+  }
+
+  .mw-work-proof-secondary {
+    max-width: 100%;
+  }
+
+  .mw-work-proof-secondary img {
+    max-height: 210px;
+  }
+
+  .mw-leak-check > summary {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .mw-leak-check > summary small {
+    width: calc(100% - 26px);
+    margin-left: 0;
+  }
+
+  .mw-leak-options {
+    grid-template-columns: 1fr;
+  }
+
+  .mw-care-plan {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .mw-care-plan > .mw-service-link {
+    white-space: normal;
+  }
+}
