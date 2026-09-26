@@ -36,9 +36,10 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <h1 id="niche-title">{guide.title}.</h1>
         <p>{guide.lede}</p>
         <div className="mw-actions">
-          <a className="button button-signal" href={checkHref}>Get a free Leak Check</a>
+          <a className="button button-signal" href={checkHref}>Get a free check</a>
         </div>
         <p className="mw-hero-note">Free · no call required · I check it myself</p>
+        <p className="mw-hero-note">Not your trade? The same check works for any business customers book, call or enquire with.</p>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="niche-examples-title">

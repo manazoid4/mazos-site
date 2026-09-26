@@ -1,9 +1,9 @@
 'use client';
 
 import { useRef, useState, type FormEvent } from 'react';
-import { CONTACT_EMAIL } from '../site';
-import { EnquiryRecovery } from '../enquiry-recovery';
-import { NATIVE_FORM_ENDPOINT, buildRecoveryMailto, sendEnquiry } from '../enquiry';
+import { CONTACT_EMAIL } from './site';
+import { EnquiryRecovery } from './enquiry-recovery';
+import { NATIVE_FORM_ENDPOINT, buildRecoveryMailto, sendEnquiry } from './enquiry';
 
 type SubmitState = 'idle' | 'sending' | 'sent' | 'error';
 type FailureReason = 'rejected' | 'timeout' | 'network';
@@ -14,9 +14,13 @@ const FAILURE_COPY: Record<FailureReason, string> = {
   network: 'That could not reach me — your connection may have dropped.',
 };
 
-const SERVICE_LABEL = 'Free Booking & Enquiry Check: review my website';
+const SERVICE_LABEL = 'Booking & Enquiry Repair (£395)';
 
-export function LeakCheckForm() {
+/**
+ * A direct route for owners who already know something is wrong, rather than
+ * making them describe the problem from scratch in the general enquiry form.
+ */
+export function TellMazForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
   const [validationError, setValidationError] = useState('');
@@ -34,18 +38,21 @@ export function LeakCheckForm() {
 
     const form = event.currentTarget;
     const data = new FormData(form);
+    const website = String(data.get('website') || '').trim();
+    const action = String(data.get('action') || '').trim();
+    const instead = String(data.get('instead') || '').trim();
     const name = String(data.get('name') || '').trim();
     const email = String(data.get('email') || '').trim();
-    const website = String(data.get('website') || '').trim();
+    const screenshot = String(data.get('screenshot') || '').trim();
     const honey = String(data.get('_honey') || '').trim();
-    const source = new URLSearchParams(window.location.search).get('src')?.trim() || 'direct';
 
-    const missing = !name ? 'name' : !email ? 'email' : !website ? 'website' : '';
+    const missing = !website ? 'website' : !action ? 'action' : !instead ? 'instead' : !name ? 'name' : !email ? 'email' : '';
     if (missing) {
       setInvalidField(missing);
       setValidationError(
-        missing === 'website'
-          ? 'Add the website you want me to check.'
+        missing === 'website' ? 'Add the website you want checked.'
+          : missing === 'action' ? 'Say what a customer is trying to do.'
+          : missing === 'instead' ? 'Say what happens instead.'
           : `Add your ${missing} so I can reply.`,
       );
       focusField(missing);
@@ -55,12 +62,14 @@ export function LeakCheckForm() {
     setValidationError('');
     setInvalidField('');
 
-    const subject = `Maz Works — free Booking & Enquiry Check — ${website}`;
+    const subject = `Maz Works — something's broken — ${website}`;
     setRecoveryHref(buildRecoveryMailto(subject, [
       ['Name', name],
       ['Email', email],
       ['Website', website],
-      ['Source', source],
+      ['Customer tries to', action],
+      ['What happens instead', instead],
+      ['Screenshot', screenshot || 'Not provided'],
     ]));
 
     setSubmitState('sending');
@@ -70,9 +79,9 @@ export function LeakCheckForm() {
       email,
       website,
       service: SERVICE_LABEL,
-      problem: `Please review ${website} for customer-facing leaks and friction.`,
-      next_step: 'Email me the free check',
-      source,
+      problem: `Customer tries to: ${action}. What happens instead: ${instead}.`,
+      screenshot: screenshot || 'Not provided',
+      next_step: 'Confirm the repair and price before any work',
       _replyto: email,
       _subject: subject,
       _template: 'table',
@@ -93,7 +102,7 @@ export function LeakCheckForm() {
   return (
     <form
       className="mw-demo-form"
-      id="leak-check-form"
+      id="tell-maz-form"
       action={NATIVE_FORM_ENDPOINT}
       method="post"
       ref={formRef}
@@ -105,10 +114,48 @@ export function LeakCheckForm() {
         }
       }}
     >
-      <input type="hidden" name="_subject" value="Maz Works — free Booking & Enquiry Check" />
+      <input type="hidden" name="_subject" value="Maz Works — something's broken" />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="service" value={SERVICE_LABEL} />
-      <p className="mw-form-kicker">Three fields. No call required.</p>
+      <p className="mw-form-kicker">Four short fields. No call required.</p>
+
+      <label>
+        <span>Website link</span>
+        <input
+          name="website"
+          inputMode="url"
+          autoComplete="url"
+          required
+          placeholder="yourbusiness.co.uk"
+          aria-invalid={invalidField === 'website' || undefined}
+          aria-describedby={invalidField === 'website' ? 'tell-maz-error' : undefined}
+          disabled={submitState === 'sending'}
+        />
+      </label>
+
+      <label>
+        <span>What is a customer trying to do?</span>
+        <input
+          name="action"
+          required
+          placeholder="Book an appointment, ask a question, get a quote…"
+          aria-invalid={invalidField === 'action' || undefined}
+          aria-describedby={invalidField === 'action' ? 'tell-maz-error' : undefined}
+          disabled={submitState === 'sending'}
+        />
+      </label>
+
+      <label>
+        <span>What happens instead?</span>
+        <input
+          name="instead"
+          required
+          placeholder="The button opens the wrong page, nobody replies…"
+          aria-invalid={invalidField === 'instead' || undefined}
+          aria-describedby={invalidField === 'instead' ? 'tell-maz-error' : undefined}
+          disabled={submitState === 'sending'}
+        />
+      </label>
 
       <div className="mw-form-row">
         <label>
@@ -118,7 +165,7 @@ export function LeakCheckForm() {
             autoComplete="name"
             required
             aria-invalid={invalidField === 'name' || undefined}
-            aria-describedby={invalidField === 'name' ? 'leak-check-error' : undefined}
+            aria-describedby={invalidField === 'name' ? 'tell-maz-error' : undefined}
             disabled={submitState === 'sending'}
           />
         </label>
@@ -130,24 +177,15 @@ export function LeakCheckForm() {
             autoComplete="email"
             required
             aria-invalid={invalidField === 'email' || undefined}
-            aria-describedby={invalidField === 'email' ? 'leak-check-error' : undefined}
+            aria-describedby={invalidField === 'email' ? 'tell-maz-error' : undefined}
             disabled={submitState === 'sending'}
           />
         </label>
       </div>
 
       <label>
-        <span>Website link</span>
-        <input
-          name="website"
-          inputMode="url"
-          autoComplete="url"
-          required
-          placeholder="yourbusiness.co.uk"
-          aria-invalid={invalidField === 'website' || undefined}
-          aria-describedby={invalidField === 'website' ? 'leak-check-error' : undefined}
-          disabled={submitState === 'sending'}
-        />
+        <span>Screenshot link <small>optional</small></span>
+        <input name="screenshot" inputMode="url" placeholder="A link to an image, if you have one" disabled={submitState === 'sending'} />
       </label>
 
       <label className="mw-honeypot" aria-hidden="true">
@@ -157,15 +195,15 @@ export function LeakCheckForm() {
 
       <div className="mw-form-submit">
         <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
-          {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Get my free check'}
+          {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Tell Maz'}
         </button>
-        <p>I’ll check it myself and reply by email within 5 working days.</p>
-        <p id="leak-check-error" className="mw-form-status mw-form-error" role="alert">{validationError}</p>
+        <p>I&apos;ll check it myself and reply with what I&apos;d fix and the price.</p>
+        <p id="tell-maz-error" className="mw-form-status mw-form-error" role="alert">{validationError}</p>
         <p className="mw-form-status" role="status" aria-live="polite">
           {submitState === 'sent' && (
             <>
-              Request sent. I’ll reply within 5 working days.{' '}
-              <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); focusField('name'); }}>Send another</button>
+              Sent. I&apos;ll reply by email.{' '}
+              <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); focusField('website'); }}>Send another</button>
             </>
           )}
           {submitState === 'error' && (
