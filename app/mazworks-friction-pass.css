@@ -226,3 +226,101 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Offer v5: two primary packages, the repair highlighted. */
+.mw-price-grid.mw-price-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 640px) {
+  .mw-price-grid.mw-price-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mw-price-option-highlight {
+  position: relative;
+}
+
+.mw-price-option-highlight::before {
+  content: 'Most requested';
+  position: absolute;
+  top: -14px;
+  left: 0;
+  padding: 3px 10px;
+  background: var(--accent, #e6ff38);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: .72rem;
+  font-weight: 650;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+
+.mw-price-bullets {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+}
+
+.mw-price-bullets li {
+  padding-left: 14px;
+  position: relative;
+  font-size: .84rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.mw-price-bullets li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+}
+
+.mw-secondary-offers {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--soft-line);
+}
+
+.mw-secondary-offers .eyebrow {
+  margin: 0 0 10px;
+}
+
+/* A dated before/after example so a visitor knows what a Journey Receipt looks like. */
+.mw-journey-receipt {
+  margin: 24px 0;
+  padding: 16px 18px;
+  border: 1px solid var(--soft-line);
+  background: var(--surface);
+  overflow-x: auto;
+}
+
+.mw-journey-receipt table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: .82rem;
+}
+
+.mw-journey-receipt th,
+.mw-journey-receipt td {
+  text-align: left;
+  padding: 8px 10px 8px 0;
+  vertical-align: top;
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.mw-journey-receipt th {
+  color: var(--muted);
+  font-weight: 650;
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+}
+
+.mw-tell-maz .mw-demo-form {
+  max-width: 640px;
+}
