@@ -67,10 +67,12 @@ const WORK: {
 ];
 
 const BUILDS = [
-  { name: 'Websites', body: 'Pages that bring enquiries in.', service: 'website' },
-  { name: 'Automation', body: 'The admin you repeat, done for you.', service: 'automation' },
-  { name: 'Software', body: 'Tools built around how you work.', service: 'software' },
-  { name: 'Physical products', body: 'Tap stands that send customers to your reviews.', href: '/3d-printing' },
+  { name: 'Websites', body: 'New sites and quick fixes.', service: 'website' },
+  { name: 'Full rebuilds', body: 'Old sites and systems, rebuilt.', service: 'rebuild' },
+  { name: 'More customers', body: 'Mailing lists, email and reviews.', service: 'growth' },
+  { name: 'Automation', body: 'Repeat admin, done for you.', service: 'automation' },
+  { name: 'Software', body: 'Tools built around your work.', service: 'software' },
+  { name: 'Physical products', body: 'Tap stands for more reviews.', href: '/3d-printing' },
 ] as const;
 
 const FLAGSHIP_WORK = WORK.filter((project) => project.stage === 'flagship');
@@ -97,7 +99,7 @@ const OFFERS = [
   {
     name: 'Growth System',
     price: 'From £499',
-    body: 'Your website plus one job automated, like booking reminders.',
+    body: 'Your website plus a mailing list or booking reminders.',
     note: 'One workflow, not a whole department',
     service: 'automation',
     action: 'Ask about automation',
@@ -135,7 +137,7 @@ export default function Page() {
         <div className="mw-hero-copy">
           <p className="eyebrow">Maz Works / Manazir Hussain</p>
           <h1 id="intro-title">I fix what’s costing you customers.</h1>
-          <p className="mw-lede">Whatever form the fix takes, I build it. From £150, fixed price.</p>
+          <p className="mw-lede">Small fixes to full rebuilds. Anything that brings customers in. From £150, fixed price.</p>
           <div className="mw-actions">
             <a className="button button-signal" href="#contact">Tell me the problem</a>
             <a className="button" href={BOOKING_URL} target="_blank" rel="noreferrer">Book a call</a>
@@ -190,7 +192,7 @@ export default function Page() {
             ))}
           </div>
           <p className="mw-pricing-extra">
-            Support from £49/month. Optional, no long contract. · <a href="/3d-printing">Maz Works Objects: tap-to-review stands from £29 <span aria-hidden="true">→</span></a>
+            Rebuilds quoted after a free call. Support from £49/month, no long contract. · <a href="/3d-printing">Maz Works Objects: tap-to-review stands from £29 <span aria-hidden="true">→</span></a>
           </p>
         </div>
       </section>
