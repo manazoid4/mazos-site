@@ -14,7 +14,7 @@ work, not the deal.
 
 ## Intro post — post before Post 1 (final, audited 26 Sep 2026)
 
-Photo: the black-and-white headshot. First comment: `www.mazworks.uk` (no GitHub link until the GitHub is cleaned up).
+Photo: the black-and-white headshot. First comment: `Book a 20-minute call: cal.com/mazworks/quick-chat` then `Website: www.mazworks.uk` (no GitHub link until the GitHub is cleaned up).
 
 ```
 Somewhere in your business, customers are slipping away.
@@ -45,7 +45,7 @@ JobFilter finds public contracts for trades firms. I built it end to end: the da
 
 For a specialist finance firm, I built the website, the lead capture behind it and a private client area.
 
-Want to see how I work before you commit? Jump on a call with me, bring your team if you like, and I'll walk you through real projects and the code behind them.
+Want to see how I work before you commit? Book a 20-minute call, bring your team if you like, and I'll walk you through real projects and the code behind them. The link is in the comments.
 
 It's just me. No account managers. No handoffs. No surprises. You deal with me directly, and the price is agreed before any work starts. From £150 for one fixed job.
 
