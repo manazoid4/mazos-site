@@ -243,7 +243,7 @@
 }
 
 .mw-price-option-highlight::before {
-  content: 'Most requested';
+  content: 'Start here';
   position: absolute;
   top: -14px;
   left: 0;
