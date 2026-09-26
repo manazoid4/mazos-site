@@ -7,7 +7,7 @@ import './final-friction.css';
 import './enquiry.css';
 import './resource-pages.css';
 import './clean-pass.css';
-import { GITHUB_URL, PERSON_NAME, SITE_NAME, SITE_URL } from './site';
+import { GITHUB_URL, LINKEDIN_URL, PERSON_NAME, SITE_NAME, SITE_URL } from './site';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -19,7 +19,7 @@ const structuredData = {
       jobTitle: 'Founder and Software Builder',
       url: `${SITE_URL}/`,
       address: { '@type': 'PostalAddress', addressCountry: 'GB' },
-      sameAs: [GITHUB_URL],
+      sameAs: [GITHUB_URL, LINKEDIN_URL],
     },
     {
       '@type': 'ProfilePage',
@@ -34,33 +34,33 @@ const structuredData = {
       name: SITE_NAME,
       url: `${SITE_URL}/`,
       founder: { '@id': `${SITE_URL}/#person` },
-      description: 'Websites, software, automation and useful physical products for UK small businesses, built by Manazir Hussain around practical business problems.',
+      description: 'Websites, rebuilds, customer-growth systems, automation, software and useful physical products for UK small businesses.',
     },
   ],
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: 'Maz Works | Websites, Software & Useful Business Products', template: '%s — Maz Works' },
-  description: 'Websites, software, automation and useful physical products for small businesses. Connect a tap stand to a booking page, improve enquiries or cut repetitive admin.',
+  title: { default: 'Maz Works | Websites, Automation & Practical Business Fixes', template: '%s — Maz Works' },
+  description: 'Websites, rebuilds, automation, software, customer-growth systems and useful physical products for small businesses. Fix what is costing your business time, customers or money.',
   alternates: { canonical: '/' },
   authors: [{ name: PERSON_NAME }],
   creator: PERSON_NAME,
   openGraph: {
-    title: 'Maz Works | Websites, Software & Useful Business Products',
-    description: 'Websites, software, automation and physical products built around real business problems. Work directly with Manazir Hussain.',
+    title: 'Maz Works | Websites, Automation & Practical Business Fixes',
+    description: 'Websites, rebuilds, automation, software and physical products built around real business problems. Work directly with Manazir Hussain.',
     type: 'website',
     url: '/',
     siteName: SITE_NAME,
     images: [{
       url: '/social-card.png', width: 1200, height: 630,
-      alt: 'Maz Works by Manazir Hussain — websites, automation and AI tools',
+      alt: 'Maz Works by Manazir Hussain — websites, automation and practical business fixes',
     }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Maz Works | Websites, Software & Useful Business Products',
-    description: 'Websites, software, automation and physical products built around real business problems. Work directly with Manazir Hussain.',
+    title: 'Maz Works | Websites, Automation & Practical Business Fixes',
+    description: 'Websites, rebuilds, automation, software and physical products built around real business problems. Work directly with Manazir Hussain.',
     images: ['/social-card.png'],
   },
 };
