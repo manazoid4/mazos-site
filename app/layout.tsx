@@ -7,6 +7,7 @@ import './final-friction.css';
 import './enquiry.css';
 import './resource-pages.css';
 import './clean-pass.css';
+import './mazworks-friction-pass.css';
 import { GITHUB_URL, LINKEDIN_URL, PERSON_NAME, SITE_NAME, SITE_URL } from './site';
 
 const structuredData = {
