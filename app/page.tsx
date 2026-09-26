@@ -33,10 +33,10 @@ const WORK: {
       { label: 'Try it', href: 'https://jobfilter.uk/find-jobs' },
     ],
     proof: {
-      src: '/jobfilter-scan-result.webp',
-      mobileSrc: '/jobfilter-scan-result-mobile.webp',
-      alt: 'JobFilter showing a public-contract scan result and trade-fit checking interface',
-      caption: 'JobFilter / live product',
+      src: '/jobfilter-home.webp',
+      mobileSrc: '/jobfilter-home-mobile.webp',
+      alt: 'JobFilter homepage: know which public works opportunities fit your firm, and which to skip',
+      caption: 'JobFilter / live at jobfilter.uk',
       width: 1440,
       height: 900,
       emphasis: 'primary',
@@ -119,8 +119,8 @@ const OFFERS = [
   {
     name: 'Website Launch',
     price: 'From £299',
-    body: 'Up to 4 pages, mobile-ready, contact form, basic SEO, analytics and launch.',
-    note: '1 revision · domain connected · you own the finished site',
+    body: 'Up to 4 pages, phone-ready, contact form and Google basics.',
+    note: 'Domain connected · you own it',
     service: 'website',
     action: 'Ask about a website',
   },
@@ -195,16 +195,16 @@ export default function Page() {
           })}
         </ul>
         <details className="mw-leak-check">
-          <summary><span>Business Leak Check</span><small>Not sure what to ask for? Pick the closest problem.</small></summary>
+          <summary><span>Business Leak Check</span><small>Not sure what you need? Pick your problem.</small></summary>
           <div className="mw-leak-options">
-            <ServiceEnquiryLink service="quick-win">Something is broken or missing</ServiceEnquiryLink>
-            <ServiceEnquiryLink service="website">I need a new website or landing page</ServiceEnquiryLink>
-            <ServiceEnquiryLink service="rebuild">My current site or system needs replacing</ServiceEnquiryLink>
-            <ServiceEnquiryLink service="growth">I need more enquiries, reviews or follow-up</ServiceEnquiryLink>
-            <ServiceEnquiryLink service="automation">Admin is taking too much time</ServiceEnquiryLink>
-            <ServiceEnquiryLink service="software">I need a custom tool or software feature</ServiceEnquiryLink>
-            <a className="mw-service-link" href="/3d-printing">I want a physical customer touchpoint</a>
-            <ServiceEnquiryLink service="unsure">None of these — help me work it out</ServiceEnquiryLink>
+            <ServiceEnquiryLink service="quick-win">Something is broken</ServiceEnquiryLink>
+            <ServiceEnquiryLink service="website">I need a website</ServiceEnquiryLink>
+            <ServiceEnquiryLink service="rebuild">My site needs replacing</ServiceEnquiryLink>
+            <ServiceEnquiryLink service="growth">I want more customers</ServiceEnquiryLink>
+            <ServiceEnquiryLink service="automation">Admin takes too long</ServiceEnquiryLink>
+            <ServiceEnquiryLink service="software">I need a custom tool</ServiceEnquiryLink>
+            <a className="mw-service-link" href="/3d-printing">I want tap stands or signs</a>
+            <ServiceEnquiryLink service="unsure">Not sure, help me</ServiceEnquiryLink>
           </div>
         </details>
       </section>
@@ -245,7 +245,7 @@ export default function Page() {
             <div>
               <p className="eyebrow">Website Care</p>
               <h3>Keep it looked after.</h3>
-              <p>Small edits, basic site/form/link checks and priority fixes.</p>
+              <p>Small edits, checks and quick fixes.</p>
             </div>
             <p className="mw-care-prices"><strong>£39/month</strong><span>£210 / 6 months</span><span>£360 / year</span></p>
             <ServiceEnquiryLink service="care">Ask about Website Care <span aria-hidden="true">→</span></ServiceEnquiryLink>

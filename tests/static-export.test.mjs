@@ -8,7 +8,7 @@ const exportRoot = path.join(root, 'out');
 
 // Homepage word budget (visible words in <main>, form labels and closed disclosure copy included).
 // Raised 650 -> 820 on 26 Sep for the confirmed care options, clearer FAQs and Business Leak Check.
-const WORD_BUDGET = 820;
+const WORD_BUDGET = 780;
 // Same count as the homepage: all text inside <main>, including header, footer and closed answers.
 const CASE_STUDY_WORD_BUDGET = 320;
 
@@ -82,14 +82,14 @@ test('Business Leak Check routes common problems without adding another form or 
   const check = html.match(/<details class="mw-leak-check"[\s\S]*?<\/details>/)?.[0];
   assert.ok(check, 'homepage should include the compact Business Leak Check');
   for (const text of [
-    'Something is broken or missing',
-    'I need a new website or landing page',
-    'My current site or system needs replacing',
-    'I need more enquiries, reviews or follow-up',
-    'Admin is taking too much time',
-    'I need a custom tool or software feature',
-    'I want a physical customer touchpoint',
-    'None of these — help me work it out',
+    'Something is broken',
+    'I need a website',
+    'My site needs replacing',
+    'I want more customers',
+    'Admin takes too long',
+    'I need a custom tool',
+    'I want tap stands or signs',
+    'Not sure, help me',
   ]) {
     assert.ok(check.includes(text), `Business Leak Check missing: ${text}`);
   }
@@ -103,7 +103,8 @@ test('homepage work stays short, truthful and now shows real flagship evidence',
   assert.match(html, /Full build and setup/);
   assert.match(html, /Client website/);
   assert.match(html, /href="https:\/\/cal\.com\/mazworks\/quick-chat"/);
-  assert.match(html, /jobfilter-scan-result\.webp/);
+  assert.match(html, /jobfilter-home\.webp/);
+  assert.ok(html.indexOf('jobfilter-home.webp') < html.indexOf('scrap-finance-partners.webp'), 'JobFilter proof comes first');
   assert.match(html, /scrap-finance-partners\.webp/);
   assert.match(html, /mw-work-proof-primary/);
   assert.match(html, /mw-work-proof-secondary/);
@@ -120,11 +121,12 @@ test('homepage pricing is transparent, bounded and links straight to an enquiry'
   assert.match(html, /£75 to start/);
   assert.match(html, /£75 on completion/);
   assert.match(html, /Up to 4 pages/);
-  assert.match(html, /you own the finished site/i);
+  assert.match(html, /you own it/i);
   assert.match(html, /£39\/month/);
   assert.match(html, /£210 \/ 6 months/);
   assert.match(html, /£360 \/ year/);
-  assert.match(html, /Small edits, basic site\/form\/link checks and priority fixes/);
+  assert.match(html, /Small edits, checks and quick fixes/);
+  assert.doesNotMatch(html, /founding/i);
   assert.match(html, /href="\/quick-win"/);
   for (const id of ['quick-win', 'website', 'growth', 'care']) {
     assert.match(html, new RegExp(`\\?service=${id}#contact`));
