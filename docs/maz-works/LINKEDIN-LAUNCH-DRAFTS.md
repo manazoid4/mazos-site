@@ -31,7 +31,7 @@ But somewhere, there's a leak:
 
 That's what I fix.
 
-Sometimes it's a website. Sometimes it's an automation that does the dull bit for you, or a small piece of software built around how you actually work. And sometimes it's a stand on your counter that sends customers straight to your reviews. I design those myself and print them on my own 3D printer.
+Sometimes it's a website. Sometimes it's an automation that does the dull bit for you, or a small piece of software built around how you actually work. And sometimes it's a stand on your counter that sends customers straight to your reviews. I'm designing those now, to print on my own 3D printer.
 
 Why trust me with it?
 
@@ -50,7 +50,7 @@ Want to see how I work before you commit? Jump on a call with me, bring your tea
 It's just me. No account managers. No handoffs. No surprises. You deal with me directly, and the price is agreed before any work starts. From £150 for one fixed job.
 
 Here's the offer.
-Tell me the problem. For anything bigger than a quick fix, I'll build you a free demo before you spend a penny. Small jobs go live within five working days.
+Tell me the problem. For the right project, I'll build you a free demo before you spend a penny. Small jobs go live within five working days.
 
 So, what's the one thing in your business that's slower than it should be?
 
@@ -172,8 +172,8 @@ I'd rather say that than show you a render and let you assume.
 | Intro | Computer Science, Swansea; finance and complaints background, SLAs | Maz, first-hand, 25 Sep |
 | Intro | JobFilter built end to end; live, with paid plans | §3 JobFilter row. No customer count implied |
 | Intro | Specialist finance firm: website, lead capture, private client area | Live site `/work` summary. Unnamed; nothing said about payment |
-| Intro | Designs and prints stands on own 3D printer | Maz owns an Ender 5 (EnderForge). No claim any stand has shipped |
-| Intro | Free demo for anything bigger than a quick fix; small jobs live within five working days; from £150 | Free-demo policy (#34); five days is Maz's commitment, not a track record |
+| Intro | Stands being designed, to print on his own 3D printer | Maz owns an Ender 5 (EnderForge). Planned, not produced: context pack says no unit printed or NFC-tested yet |
+| Intro | Free demo "for the right project"; small jobs live within five working days; from £150 | Free-demo policy (#34): suitable projects only, not Quick Win or Objects. Five days is Maz's commitment, not a track record |
 | 1 | Form broken ~3 days after the domain move; found by test submissions to both origins | §3 first-person facts, 16→19 Sep |
 | 1 | Lost-enquiry count unknown | §3 caveat — stated as unknown in the post |
 | 1, 2 | Websites, automation, software and physical products | §2 positioning; homepage hero from #51 |
