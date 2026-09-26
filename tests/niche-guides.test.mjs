@@ -11,8 +11,12 @@ test('each niche guide exports with real examples, a self-check, prices and a ta
     const html = await readFile(path.join(exportRoot, 'for', `${id}.html`), 'utf8').catch(() => readFile(path.join(exportRoot, 'for', id, 'index.html'), 'utf8'));
     assert.match(html, /Real examples/, `${id}: examples section`);
     assert.match(html, /Check yours in 60 seconds/, `${id}: self-check section`);
-    assert.match(html, /£150 fixed/, `${id}: Quick Win price`);
-    assert.match(html, new RegExp(`/leak-check\\?src=for-${id}`), `${id}: tagged Leak Check link`);
+    assert.match(html, /£(395|249|495|1,000)/, `${id}: Offer v5 price`);
+    assert.doesNotMatch(html, /£150 fixed/, `${id}: retired Quick Win price`);
+    assert.doesNotMatch(html, /Quick Win/, `${id}: retired Quick Win name`);
+    assert.doesNotMatch(html, /hacked/i, `${id}: must not say hacked`);
+    assert.match(html, /Not your trade\? The same check works for any business customers book, call or enquire with\./, `${id}: broad-audience line`);
+    assert.match(html, new RegExp(`/leak-check\\?src=for-${id}`), `${id}: tagged free check link`);
     assert.match(html, new RegExp(`<link rel="canonical" href="[^"]*/for/${id}"`), `${id}: canonical`);
     // Anonymised on purpose: never name the businesses the examples came from.
     for (const name of ['Vines', 'Yumi', 'Casa Bake', 'Sandiacre', 'Hurley', 'Revive', 'Aeternum', 'Old Smithy', 'Lana', 'Dorsi', 'Elm Tree', 'Pawfect']) {

@@ -3,15 +3,16 @@ import { CONTACT_EMAIL, SITE_URL } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 
 const PAGE_URL = `${SITE_URL}/quick-win`;
-const ENQUIRY_HREF = '/?service=quick-win#contact';
+const ENQUIRY_HREF = '/?service=repair#contact';
 
 export const metadata: Metadata = {
-  title: 'Quick Win — £150 fixed',
-  description: 'One broken or missing thing on your website, booking or Google listing, fixed for £150. Works with the website and booking system you already use.',
-  alternates: { canonical: PAGE_URL },
+  title: 'Quick Win has moved',
+  description: 'Quick Win has been replaced by the Booking & Enquiry Repair. Same idea, properly scoped and tested.',
+  alternates: { canonical: '/' },
+  robots: { index: false, follow: true },
   openGraph: {
-    title: 'Quick Win — one fix, £150 fixed',
-    description: 'Fix the thing that is quietly losing you customers. No rebuild, no new system.',
+    title: 'Quick Win has moved — Maz Works',
+    description: 'This offer has been replaced by the Booking & Enquiry Repair.',
     url: PAGE_URL,
     type: 'website',
   },
@@ -40,31 +41,16 @@ const REASSURANCE = [
 ];
 
 export default function QuickWinPage() {
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'Quick Win',
-    description: 'One tightly scoped fix to a small business website, booking link, Google listing or enquiry form.',
-    url: PAGE_URL,
-    provider: { '@type': 'Organization', name: 'Maz Works', url: SITE_URL },
-    areaServed: 'GB',
-    offers: { '@type': 'Offer', price: '150', priceCurrency: 'GBP' },
-  };
-
   return (
     <main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }}
-      />
       <SiteHeader />
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="quick-win-title">
-        <p className="eyebrow">Quick Win · £150 fixed</p>
-        <h1 id="quick-win-title">One fix. £150. Done.</h1>
-        <p>I fix the one thing losing you customers. No new system needed.</p>
+        <p className="eyebrow">This offer has moved</p>
+        <h1 id="quick-win-title">Quick Win is now the Booking &amp; Enquiry Repair.</h1>
+        <p>Same idea — one thing fixed — but properly scoped, tested and backed by a guarantee. £395, fixed price agreed first.</p>
         <div className="mw-actions">
-          <a className="button button-signal" href={ENQUIRY_HREF}>Tell me what’s broken</a>
+          <a className="button button-signal" href={ENQUIRY_HREF}>Ask about a repair</a>
         </div>
       </section>
 
@@ -93,13 +79,13 @@ export default function QuickWinPage() {
 
       <section className="mw-resource-cta" aria-labelledby="quick-win-cta-title">
         <div>
-          <p className="eyebrow">£75 to start · £75 on completion</p>
+          <p className="eyebrow">£200 to start · £195 on completion</p>
           <h2 id="quick-win-cta-title">Tell me what’s broken.</h2>
-          <p>Send your website link. I’ll confirm the fix before you pay.</p>
+          <p>Send your website link. I’ll confirm the fix and price before you pay.</p>
         </div>
         <div className="mw-actions">
           <a className="button button-signal" href={ENQUIRY_HREF}>Use the enquiry form</a>
-          <a className="text-link" href={`mailto:${CONTACT_EMAIL}?subject=Quick%20Win%20enquiry`}>Or email me <span aria-hidden="true">→</span></a>
+          <a className="text-link" href={`mailto:${CONTACT_EMAIL}?subject=Booking%20%26%20Enquiry%20Repair%20enquiry`}>Or email me <span aria-hidden="true">→</span></a>
         </div>
       </section>
 
