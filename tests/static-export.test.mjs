@@ -151,7 +151,7 @@ test('homepage stays compact with four visible process steps', async () => {
   assert.match(html, /Tell me what’s wrong/);
   assert.match(html, /I confirm the fix and price/);
   assert.match(html, /You pay half to start/);
-  assert.match(html, /Working within 7 days/);
+  assert.match(html, /Working within 7 working days/);
   assert.match(html, /href="\/faq"/);
   const words = mainWordCount(html);
   assert.ok(words <= WORD_BUDGET, `homepage has ${words} words; budget is ${WORD_BUDGET}`);
