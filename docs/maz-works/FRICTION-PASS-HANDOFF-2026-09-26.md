@@ -1,5 +1,7 @@
 # Maz Works — friction pass handoff (26 Sep 2026)
 
+> **Superseded by Offer v5 (26 Sep 2026).** Quick Win £150, Growth System and Website Care are retired. Current prices: Booking & Enquiry Repair £395, Google Profile & Contact Setup £249, both £595, Website Launch from £495, Full Rebuild from £1,000, no VAT added. See `SESSION-HANDOVER.md`. Kept for history only.
+
 ## Purpose
 
 This pass implements Maz's confirmed commercial and homepage decisions with minimal extra complexity. The next agent should review the finished result critically, improve it where evidence supports a change, and avoid undoing settled commercial decisions without a clear reason.

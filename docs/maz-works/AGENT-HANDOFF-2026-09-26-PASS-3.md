@@ -1,5 +1,7 @@
 # Maz Works: handoff for the next agent (pass 3, 26 Sep 2026)
 
+> **Superseded by Offer v5 (26 Sep 2026).** Quick Win £150, Growth System and Website Care are retired. Current prices: Booking & Enquiry Repair £395, Google Profile & Contact Setup £249, both £595, Website Launch from £495, Full Rebuild from £1,000, no VAT added. See `SESSION-HANDOVER.md`. Kept for history only.
+
 Repo: `manazoid4/mazos-site` · Live: https://www.mazworks.uk · Read `AGENTS.md` first, then the private handover `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/HANDOVER.md`.
 
 ## Your job

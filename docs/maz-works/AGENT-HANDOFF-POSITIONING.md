@@ -1,5 +1,7 @@
 > Current recovery and release gates: [RECOVERY-CONTEXT-2026-09-20.md](RECOVERY-CONTEXT-2026-09-20.md). The dated status below is historical, not current release acceptance.
 
+> **Superseded by Offer v5 (26 Sep 2026).** Quick Win £150, Growth System and Website Care are retired. Current prices: Booking & Enquiry Repair £395, Google Profile & Contact Setup £249, both £595, Website Launch from £495, Full Rebuild from £1,000, no VAT added. See `SESSION-HANDOVER.md`. Kept for history only.
+
 # Maz Works — positioning brief and agent handoff
 
 **Owner of this file:** Agent A (positioning, conversion, technical).

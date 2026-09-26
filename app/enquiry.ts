@@ -11,31 +11,26 @@ export const SUBMIT_TIMEOUT_MS = 15000;
  * `label` is what the visitor sees and what arrives in the email.
  */
 export const ENQUIRY_SERVICES = [
-  { id: 'leak-check', label: 'Free Booking & Enquiry Check: review my website' },
   { id: 'repair', label: 'Booking & Enquiry Repair (£395)' },
   { id: 'google-profile', label: 'Google Profile & Contact Setup (£249)' },
-  { id: 'bundle', label: 'Both — Repair and Setup (£595)' },
+  { id: 'bundle', label: 'Both, Repair and Google Setup (£595)' },
   { id: 'website', label: 'Website or landing page' },
   { id: 'rebuild', label: 'Full rebuild' },
-  { id: 'growth', label: 'More customers: reviews, bookings, enquiries' },
-  { id: 'automation', label: 'Automation and repetitive admin' },
-  { id: 'software', label: 'Internal tool, AI feature or custom software' },
-  { id: 'objects', label: 'Physical product linked to a digital action' },
-  { id: 'unsure', label: 'Not sure yet — help me work it out' },
+  { id: 'automation', label: 'Automating repetitive admin' },
+  { id: 'software', label: 'Custom software or an internal tool' },
+  { id: 'objects', label: 'Tap-to-review stands and signs' },
+  { id: 'unsure', label: 'Not sure yet, help me work it out' },
 ] as const;
 
 export type EnquiryServiceId = (typeof ENQUIRY_SERVICES)[number]['id'];
 
 export const DEFAULT_SERVICE_ID: EnquiryServiceId = 'unsure';
 
-/**
- * Next step the visitor actually wants. A free demo stays the headline route, but an
- * enquiry must be able to ask for a quote or a plain answer without requesting unpaid work.
- */
+/** Next step the visitor actually wants. */
 export const ENQUIRY_NEXT_STEPS = [
-  'A free live demo built around my problem',
-  'A Microsoft Teams walkthrough',
-  'A quote and scope for a specific job',
+  'A fixed quote for a specific job',
+  'A free check of my website',
+  'A 15-minute call',
   'Just answer my question first',
 ] as const;
 
