@@ -82,7 +82,8 @@ test('homepage work stays short and labelled accurately', async () => {
     assert.match(html, new RegExp(name));
   }
   assert.match(html, /Full build and setup/);
-  assert.match(html, /Contract client build/);
+  assert.match(html, /Client website/);
+  assert.match(html, /href="https:\/\/cal\.com\/mazworks\/quick-chat"/);
   // Unfinished work must stay labelled as unfinished.
   assert.match(html, /In progress/);
   assert.match(html, /Ask about this build/);
@@ -187,10 +188,10 @@ test('flagship case studies remain available and use the expanded positioning', 
 
   const scrap = await readPage('/work/scrap-finance-partners');
   assert.match(scrap, /Scrap Finance Partners case study/);
-  assert.match(scrap, /contract client build/i);
-  assert.match(scrap, /Outreach with approval steps/);
+  assert.match(scrap, /client website/i);
   assert.doesNotMatch(scrap, /paid (client|contract|engagement)|client paid/i);
-  assert.match(scrap, /approval/i);
+  // Kept deliberately vague: website only, no lead workspace, outreach or code link.
+  assert.doesNotMatch(scrap, /outreach|client area|lead workspace|github\.com\/manazoid4\/scrap-finance-partners/i);
 
   const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
   assert.match(sitemap, /\/work\/jobfilter/);
