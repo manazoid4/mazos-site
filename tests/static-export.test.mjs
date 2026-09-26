@@ -6,9 +6,9 @@ import test from 'node:test';
 const root = process.cwd();
 const exportRoot = path.join(root, 'out');
 
-// Homepage word budget (visible words in <main>, form labels included). Raise it only on purpose.
-// Raised 620 -> 650 on 26 Sep: Maz asked for full rebuilds and customer growth on the homepage.
-const WORD_BUDGET = 650;
+// Homepage word budget (visible words in <main>, form labels and closed disclosure copy included).
+// Raised 650 -> 820 on 26 Sep for the confirmed care options, clearer FAQs and Business Leak Check.
+const WORD_BUDGET = 820;
 // Same count as the homepage: all text inside <main>, including header, footer and closed answers.
 const CASE_STUDY_WORD_BUDGET = 320;
 
@@ -54,7 +54,7 @@ async function internalTargetExists(urlPath) {
 
 test('homepage leads with a plain offer and none of the old filler', async () => {
   const html = await readPage('/');
-  assert.match(html, /I fix what’s costing you customers/);
+  assert.match(html, /I fix what’s costing your business time, customers, or money/);
   assert.match(html, /From £150, fixed price/);
   assert.match(html, /Tell me the problem/);
   for (const filler of [/Inspect the work before reading more claims/, /Operations thinking/, /What gets measured/, /href="\/whats-new/]) {
@@ -62,7 +62,7 @@ test('homepage leads with a plain offer and none of the old filler', async () =>
   }
 });
 
-test('homepage hero names all four kinds of build, each one a route into the enquiry', async () => {
+test('homepage hero keeps the offer broad instead of reducing Maz Works to three outcomes', async () => {
   const html = await readPage('/');
   const band = html.match(/<ul class="mw-builds"[\s\S]*?<\/ul>/)?.[0];
   assert.ok(band, 'the hero must list what gets built, not just websites');
@@ -73,13 +73,29 @@ test('homepage hero names all four kinds of build, each one a route into the enq
     assert.match(band, new RegExp(`\\?service=${id}#contact`));
   }
   assert.match(band, /href="\/3d-printing"/);
-  // The old hero named websites, booking and admin only. Keep that narrowing gone.
   assert.doesNotMatch(html, /Websites, booking and admin fixes/);
-  // Maz, 26 Sep: small fixes and heavy rebuilds both, plus getting customers.
   assert.match(html, /Small fixes to full rebuilds/);
 });
 
-test('homepage work stays short and labelled accurately', async () => {
+test('Business Leak Check routes common problems without adding another form or AI call', async () => {
+  const html = await readPage('/');
+  const check = html.match(/<details class="mw-leak-check"[\s\S]*?<\/details>/)?.[0];
+  assert.ok(check, 'homepage should include the compact Business Leak Check');
+  for (const text of [
+    'Something is broken or missing',
+    'I need a new website or landing page',
+    'My current site or system needs replacing',
+    'I need more enquiries, reviews or follow-up',
+    'Admin is taking too much time',
+    'I need a custom tool or software feature',
+    'I want a physical customer touchpoint',
+    'None of these — help me work it out',
+  ]) {
+    assert.ok(check.includes(text), `Business Leak Check missing: ${text}`);
+  }
+});
+
+test('homepage work stays short, truthful and now shows real flagship evidence', async () => {
   const html = await readPage('/');
   for (const name of ['JobFilter', 'Scrap Finance Partners', 'Agent Nudge', 'MAZ Pocket']) {
     assert.match(html, new RegExp(name));
@@ -87,31 +103,36 @@ test('homepage work stays short and labelled accurately', async () => {
   assert.match(html, /Full build and setup/);
   assert.match(html, /Client website/);
   assert.match(html, /href="https:\/\/cal\.com\/mazworks\/quick-chat"/);
-  // Unfinished work must stay labelled as unfinished.
+  assert.match(html, /jobfilter-scan-result\.webp/);
+  assert.match(html, /scrap-finance-partners\.webp/);
+  assert.match(html, /mw-work-proof-primary/);
+  assert.match(html, /mw-work-proof-secondary/);
   assert.match(html, /In progress/);
   assert.match(html, /Ask about this build/);
   assert.doesNotMatch(html, /href="https:\/\/github.com\/manazoid4\/maz-pocket"/);
-  assert.doesNotMatch(html, /jobfilter-scan-result\.webp/);
 });
 
-test('homepage pricing is fixed, bounded and links straight to an enquiry', async () => {
+test('homepage pricing is transparent, bounded and links straight to an enquiry', async () => {
   const html = await readPage('/');
   assert.match(html, /£150 fixed/);
   assert.match(html, /From £299/);
   assert.match(html, /From £499/);
   assert.match(html, /£75 to start/);
   assert.match(html, /£75 on completion/);
-  assert.match(html, /Support from £49\/month/);
-  assert.match(html, /no long contract/i);
-  assert.match(html, /One workflow, not a whole department/);
+  assert.match(html, /Up to 4 pages/);
+  assert.match(html, /you own the finished site/i);
+  assert.match(html, /£39\/month/);
+  assert.match(html, /£210 \/ 6 months/);
+  assert.match(html, /£360 \/ year/);
+  assert.match(html, /Small edits, basic site\/form\/link checks and priority fixes/);
   assert.match(html, /href="\/quick-win"/);
-  for (const id of ['quick-win', 'website', 'automation']) {
+  for (const id of ['quick-win', 'website', 'growth', 'care']) {
     assert.match(html, new RegExp(`\\?service=${id}#contact`));
   }
   assert.doesNotMatch(html, /Rescue Sprint/i);
 });
 
-test('homepage is five short blocks with four visible steps', async () => {
+test('homepage stays compact with four visible process steps', async () => {
   const html = await readPage('/');
   for (const id of ['work', 'pricing', 'services', 'process', 'contact']) {
     assert.match(html, new RegExp(`id="${id}"`));
@@ -121,9 +142,17 @@ test('homepage is five short blocks with four visible steps', async () => {
   assert.match(html, /We agree the price/);
   assert.match(html, /I build and hand over/);
   assert.match(html, /href="\/faq"/);
-  // Keep the page short: visible words inside <main>, form labels included.
   const words = mainWordCount(html);
   assert.ok(words <= WORD_BUDGET, `homepage has ${words} words; budget is ${WORD_BUDGET}`);
+});
+
+test('public contact uses the branded address while form delivery stays stable', async () => {
+  const html = await readPage('/');
+  const siteSource = await readFile(path.join(root, 'app', 'site.ts'), 'utf8');
+  const enquirySource = await readFile(path.join(root, 'app', 'enquiry.ts'), 'utf8');
+  assert.match(html, /info@mazworks\.uk/);
+  assert.match(siteSource, /CONTACT_EMAIL = 'info@mazworks\.uk'/);
+  assert.match(enquirySource, /FORM_DELIVERY_EMAIL/);
 });
 
 test('contact request submits in-page instead of depending on the visitor email app', async () => {
@@ -193,7 +222,6 @@ test('flagship case studies remain available and use the expanded positioning', 
   assert.match(scrap, /Scrap Finance Partners case study/);
   assert.match(scrap, /client website/i);
   assert.doesNotMatch(scrap, /paid (client|contract|engagement)|client paid/i);
-  // Kept deliberately vague: website only, no lead workspace, outreach or code link.
   assert.doesNotMatch(scrap, /outreach|client area|lead workspace|github\.com\/manazoid4\/scrap-finance-partners/i);
 
   const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
@@ -218,7 +246,7 @@ test('legacy MazOS route stays out of homepage discovery and sitemap', async () 
   assert.match(moved, /noindex/);
 });
 
-test('structured data reflects Maz Works founder and service positioning', async () => {
+test('structured data reflects Maz Works founder and broad service positioning', async () => {
   const html = await readPage('/');
   const ldMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
   assert.ok(ldMatch, 'Homepage is missing JSON-LD');
@@ -229,7 +257,10 @@ test('structured data reflects Maz Works founder and service positioning', async
   assert.equal(person.name, 'Manazir Hussain');
   assert.equal(person.jobTitle, 'Founder and Software Builder');
   assert.ok(person.sameAs.includes('https://github.com/manazoid4'));
-  assert.match(org.description, /Websites, software, automation and useful physical products/);
+  assert.ok(person.sameAs.includes('https://www.linkedin.com/company/maz-works'));
+  for (const term of ['Websites', 'rebuilds', 'customer-growth', 'automation', 'software', 'physical products']) {
+    assert.ok(org.description.toLowerCase().includes(term.toLowerCase()), `structured data missing ${term}`);
+  }
 });
 
 test('Vercel Analytics remains bundled into the static export', async () => {
@@ -290,7 +321,6 @@ test('every indexable exported page is listed in the sitemap', async () => {
   const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
   const listed = new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]));
 
-  // Next's own error pages are not routes anyone should be pointed at.
   const notRoutes = new Set(['/404', '/_not-found']);
 
   const pages = await readdir(exportRoot, { recursive: true, withFileTypes: true });
@@ -308,7 +338,6 @@ test('every indexable exported page is listed in the sitemap', async () => {
   const missing = [];
   for (const route of routes) {
     const html = await readPage(route);
-    // A page carrying its own noindex is deliberately out of the sitemap.
     if (/<meta name="robots" content="[^"]*noindex/.test(html)) continue;
     const url = route === '/' ? SITE_URL : `${SITE_URL}${route}`;
     if (!listed.has(url)) missing.push(route);
