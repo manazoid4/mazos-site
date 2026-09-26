@@ -110,27 +110,35 @@ const OFFERS = [
   {
     name: 'Quick Win',
     price: '£150 fixed',
-    body: 'One broken or missing thing, fixed.',
-    note: '£75 to start · £75 on completion',
+    body: 'One thing costing you customers, fixed.',
+    note: 'Live within 5 working days',
     service: 'quick-win',
     action: 'Ask about a Quick Win',
     details: '/quick-win',
   },
   {
     name: 'Website Launch',
-    price: 'From £299',
-    body: 'Up to 4 pages, phone-ready, contact form and Google basics.',
-    note: 'Domain connected · you own it',
+    price: 'From £495',
+    body: 'Up to 4 pages, phone-ready, with a contact form.',
+    note: 'Google set up · you own it',
     service: 'website',
     action: 'Ask about a website',
   },
   {
     name: 'Growth System',
-    price: 'From £499',
-    body: 'Your website plus one customer-growth or automation workflow.',
-    note: 'Mailing list, reviews, booking reminders or similar',
+    price: 'From £795',
+    body: 'Your website plus one system that brings customers back.',
+    note: 'Mailing list, review requests or booking reminders',
     service: 'growth',
     action: 'Ask about a Growth System',
+  },
+  {
+    name: 'Full Rebuild',
+    price: 'From £1,000',
+    body: 'Your old site or system, rebuilt properly.',
+    note: 'Content moved across · fixed quote first',
+    service: 'rebuild',
+    action: 'Ask about a rebuild',
   },
 ];
 
@@ -229,7 +237,11 @@ export default function Page() {
           <header className="mw-section-heading mw-heading-inline">
             <div><p className="eyebrow">Prices</p><h2 id="pricing-title">Fixed prices. No surprises.</h2></div>
           </header>
-          <div className="mw-price-grid">
+          <div className="mw-free-check">
+            <p><strong>Start free.</strong> Send your link. Get a plain list of what&apos;s costing you customers.</p>
+            <ServiceEnquiryLink service="leak-check">Get a free Leak Check <span aria-hidden="true">→</span></ServiceEnquiryLink>
+          </div>
+          <div className="mw-price-grid mw-price-grid-4">
             {OFFERS.map((offer) => (
               <article className="mw-price-option" key={offer.name}>
                 <p>{offer.name}</p>
@@ -247,11 +259,11 @@ export default function Page() {
               <h3>Keep it looked after.</h3>
               <p>Small edits, checks and quick fixes.</p>
             </div>
-            <p className="mw-care-prices"><strong>£39/month</strong><span>£210 / 6 months</span><span>£360 / year</span></p>
+            <p className="mw-care-prices"><strong>£39/month</strong><span>£210 / 6 months</span><span>£390 / year (2 months free)</span></p>
             <ServiceEnquiryLink service="care">Ask about Website Care <span aria-hidden="true">→</span></ServiceEnquiryLink>
           </div>
           <p className="mw-pricing-extra">
-            Rebuilds quoted after a free call. · <a href="/3d-printing">Maz Works Objects: tap-to-review stands from £29 <span aria-hidden="true">→</span></a>
+            Every price is fixed before work starts. You own everything I build. · <a href="/3d-printing">Maz Works Objects: tap-to-review stands from £29 <span aria-hidden="true">→</span></a>
           </p>
         </div>
       </section>

@@ -10,10 +10,10 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How much does it cost?',
-    answer: 'Quick fixes are £150. Websites start at £299. Bigger jobs get a fixed quote before any work starts.',
+    answer: 'The Leak Check is free. Quick fixes are £150, websites from £495, rebuilds from £1,000. Always fixed before work starts.',
   },
   {
-    question: 'What do I get for £299?',
+    question: 'What do I get for £495?',
     answer: 'Up to 4 pages that work on phones, a contact form, Google basics, one round of changes and your domain connected. You own it.',
   },
   {
@@ -25,8 +25,12 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
     answer: 'No. Send one line with the form. Book a call only if you would rather talk.',
   },
   {
+    question: 'How do I pay?',
+    answer: 'Quick Wins: half to start, half when it is live. Bigger jobs: payment terms are agreed with the fixed quote.',
+  },
+  {
     question: 'How long does it take?',
-    answer: 'Small fixes are quick. You get a firm date before you pay anything.',
+    answer: 'Quick Wins go live within 5 working days. Bigger jobs get a firm date before you pay anything.',
   },
   {
     question: 'Can you work with what I already use?',
@@ -38,7 +42,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'What is Website Care?',
-    answer: 'Small edits, checks and quick fixes after launch. £39 a month, or pay £210 for 6 months or £360 for a year.',
+    answer: 'Small edits, checks and quick fixes after launch. £39 a month, or £210 for 6 months, or £390 for a year (2 months free).',
   },
 ];
 
