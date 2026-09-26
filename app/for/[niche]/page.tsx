@@ -44,7 +44,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
       <section className="mw-qw-section" aria-labelledby="niche-examples-title">
         <p className="eyebrow">Real examples</p>
         <h2 id="niche-examples-title">What I found this month.</h2>
-        <p className="mw-qw-lead">All real, all on live local business websites. Names left out on purpose.</p>
+        <p className="mw-qw-lead">All real, all on live UK small business websites. Names left out on purpose.</p>
         <ul className="mw-qw-list">
           {guide.examples.map((example) => (
             <li key={example.found}><strong>{example.found}</strong> {example.cost}</li>

@@ -188,4 +188,4 @@ Viewport status:
 
 **Still rejected:** paid analytics events (Vercel custom events need a paid plan; count enquiries by `src` instead), a payment button (Maz can create a free Stripe Payment Link for the £75 deposit; Stripe takes a per-card fee), CSS consolidation (later).
 
-**Open for Maz:** confirm the "reply within 2 working days" promise.
+**Maz confirmed (26 Sep):** reply within 5 working days, free, for any UK business. Nottingham-only wording removed; the site serves the whole UK.

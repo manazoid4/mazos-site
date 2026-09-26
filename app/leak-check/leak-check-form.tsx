@@ -159,12 +159,12 @@ export function LeakCheckForm() {
         <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
           {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Get my free Leak Check'}
         </button>
-        <p>I’ll check it myself and reply by email within 2 working days.</p>
+        <p>I’ll check it myself and reply by email within 5 working days.</p>
         <p id="leak-check-error" className="mw-form-status mw-form-error" role="alert">{validationError}</p>
         <p className="mw-form-status" role="status" aria-live="polite">
           {submitState === 'sent' && (
             <>
-              Request sent. I’ll reply within 2 working days.{' '}
+              Request sent. I’ll reply within 5 working days.{' '}
               <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); focusField('name'); }}>Send another</button>
             </>
           )}

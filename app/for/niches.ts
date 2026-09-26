@@ -1,5 +1,5 @@
 /**
- * Niche guides. Every example is a real problem found on a live small-business
+ * Niche guides. Every example is a real problem found on a live UK small-business
  * website during manual checks in September 2026, described without naming the
  * business. Keep it that way: no invented findings, no names.
  */
