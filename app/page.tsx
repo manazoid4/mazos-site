@@ -184,7 +184,7 @@ export default function Page() {
           <h1 id="intro-title">I fix what’s costing your business time, customers, or money.</h1>
           <p className="mw-lede">Small fixes to full rebuilds. I build around the problem, not a fixed menu. From £150, fixed price.</p>
           <div className="mw-actions">
-            <a className="button button-signal" href="#contact">Tell me the problem</a>
+            <a className="button button-signal" href="/leak-check">Get a free Leak Check</a>
             <a className="button" href={BOOKING_URL} target="_blank" rel="noreferrer">Book a call</a>
             <a className="text-link" href="#pricing">See prices <span aria-hidden="true">↓</span></a>
           </div>
@@ -239,7 +239,7 @@ export default function Page() {
           </header>
           <div className="mw-free-check">
             <p><strong>Start free.</strong> Send your link. Get a plain list of what&apos;s costing you customers.</p>
-            <ServiceEnquiryLink service="leak-check">Get a free Leak Check <span aria-hidden="true">→</span></ServiceEnquiryLink>
+            <a className="mw-service-link" href="/leak-check">Get a free Leak Check <span aria-hidden="true">→</span></a>
           </div>
           <div className="mw-price-grid mw-price-grid-4">
             {OFFERS.map((offer) => (
