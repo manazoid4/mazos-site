@@ -54,7 +54,8 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Does your Book button do what it says?',
     ],
     fixes: [
-      { name: 'Booking & Enquiry Repair', price: '£395', body: 'A working Book button linked to a free booking tool, tap-to-call, and a test booking followed through to a reply.' },
+      { name: 'Booking & Enquiry Repair', price: '£395', body: 'A Book button that does what it says, tap-to-call, and a test booking or enquiry followed through to a reply.' },
+      { name: 'New online booking', price: 'quoted after a free check', body: 'If you have no booking tool yet. Most booking tools charge a monthly fee, and I tell you the cost before you commit.' },
     ],
   },
   {

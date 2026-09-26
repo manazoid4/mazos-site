@@ -98,7 +98,7 @@ const WORK: {
 const BUILDS = [
   { name: 'Websites', body: 'New sites and quick fixes.', service: 'website' },
   { name: 'Full rebuilds', body: 'Old sites and systems, rebuilt.', service: 'rebuild' },
-  { name: 'Repairs', body: 'Broken booking, enquiries, Google.', service: 'repair' },
+  { name: 'Repairs', body: 'Broken booking and enquiry routes.', service: 'repair' },
   { name: 'Automation', body: 'Repeat admin, done for you.', service: 'automation' },
   { name: 'Software', body: 'Tools built around your work.', service: 'software' },
   { name: 'Physical products', body: 'Tap stands and useful objects.', href: '/3d-printing' },
