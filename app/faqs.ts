@@ -45,7 +45,5 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
 export const HOMEPAGE_FAQS = [
   MAZ_WORKS_FAQS[1],
   MAZ_WORKS_FAQS[2],
-  MAZ_WORKS_FAQS[3],
   MAZ_WORKS_FAQS[4],
-  MAZ_WORKS_FAQS[7],
 ];
