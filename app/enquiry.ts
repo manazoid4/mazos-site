@@ -13,6 +13,8 @@ export const SUBMIT_TIMEOUT_MS = 15000;
 export const ENQUIRY_SERVICES = [
   { id: 'quick-win', label: 'Quick Win — fix one thing (£150)' },
   { id: 'website', label: 'Website or landing page' },
+  { id: 'rebuild', label: 'Full rebuild' },
+  { id: 'growth', label: 'More customers: email, mailing list, reviews' },
   { id: 'automation', label: 'Automation and repetitive admin' },
   { id: 'software', label: 'Internal tool, AI feature or custom software' },
   { id: 'objects', label: 'Physical product linked to a digital action' },

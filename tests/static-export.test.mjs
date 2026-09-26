@@ -7,7 +7,8 @@ const root = process.cwd();
 const exportRoot = path.join(root, 'out');
 
 // Homepage word budget (visible words in <main>, form labels included). Raise it only on purpose.
-const WORD_BUDGET = 620;
+// Raised 620 -> 650 on 26 Sep: Maz asked for full rebuilds and customer growth on the homepage.
+const WORD_BUDGET = 650;
 // Same count as the homepage: all text inside <main>, including header, footer and closed answers.
 const CASE_STUDY_WORD_BUDGET = 320;
 
@@ -65,15 +66,17 @@ test('homepage hero names all four kinds of build, each one a route into the enq
   const html = await readPage('/');
   const band = html.match(/<ul class="mw-builds"[\s\S]*?<\/ul>/)?.[0];
   assert.ok(band, 'the hero must list what gets built, not just websites');
-  for (const name of ['Websites', 'Automation', 'Software', 'Physical products']) {
+  for (const name of ['Websites', 'Full rebuilds', 'More customers', 'Automation', 'Software', 'Physical products']) {
     assert.match(band, new RegExp(`<strong>${name}</strong>`));
   }
-  for (const id of ['website', 'automation', 'software']) {
+  for (const id of ['website', 'rebuild', 'growth', 'automation', 'software']) {
     assert.match(band, new RegExp(`\\?service=${id}#contact`));
   }
   assert.match(band, /href="\/3d-printing"/);
   // The old hero named websites, booking and admin only. Keep that narrowing gone.
   assert.doesNotMatch(html, /Websites, booking and admin fixes/);
+  // Maz, 26 Sep: small fixes and heavy rebuilds both, plus getting customers.
+  assert.match(html, /Small fixes to full rebuilds/);
 });
 
 test('homepage work stays short and labelled accurately', async () => {
