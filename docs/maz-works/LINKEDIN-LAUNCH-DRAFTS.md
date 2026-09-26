@@ -3,12 +3,61 @@
 Ready to paste. Written 25 Sep 2026 against `LINKEDIN-LAUNCH-CONTEXT-PACK.md`; every
 factual claim is traced in the register at the bottom.
 
-**Order:** 1 → 2 → 3 → 4 → 5, three to four days apart. Keep 1 and 3 at least four days
+**Order:** Intro → 1 → 2 → 3 → 4 → 5, three to four days apart. Posting rules (format, voice, truth limits) live in the private memory repo: `spine/projects/mazworks-site/POSTING-RULES.md`. Keep 1 and 3 at least four days
 apart — both are "invisible problem" stories and back to back they read badly.
 
 **Scrap Finance Partners** is used as evidence in post 2 **without its name**, as "a
 specialist finance firm". Never say paid, unpaid, or "my client paid me". Describe the
 work, not the deal.
+
+---
+
+## Intro post — post before Post 1 (final, audited 26 Sep 2026)
+
+Photo: the black-and-white headshot. First comment: `www.mazworks.uk` (no GitHub link until the GitHub is cleaned up).
+
+```
+Somewhere in your business, customers are slipping away.
+And nobody's noticed yet.
+
+I'm Manazir, and this is Maz Works.
+
+Most small businesses aren't broken. They work.
+But somewhere, there's a leak:
+
+• Enquiries that never get a reply.
+• The same admin typed out every morning.
+• A booking process that loses people halfway through.
+
+That's what I fix.
+
+Sometimes it's a website. Sometimes it's an automation that does the dull bit for you, or a small piece of software built around how you actually work. And sometimes it's a stand on your counter that sends customers straight to your reviews. I design those myself and print them on my own 3D printer.
+
+Why trust me with it?
+
+I studied Computer Science at Swansea University. Then I worked in finance and complaints: regulated work, tight SLAs, and a lot of finding out why things went wrong for customers.
+
+That's how I approach every build. Find the real cause first. Then fix it with the smallest thing that works.
+
+And I build the whole thing, not just the part you see.
+
+JobFilter finds public contracts for trades firms. I built it end to end: the data, the matching, the payments, the hosting and the launch. It's live, with paid plans.
+
+For a specialist finance firm, I built the website, the lead capture behind it and a private client area.
+
+Want to see how I work before you commit? Jump on a call with me, bring your team if you like, and I'll walk you through real projects and the code behind them.
+
+It's just me. No account managers. No handoffs. No surprises. You deal with me directly, and the price is agreed before any work starts. From £150 for one fixed job.
+
+Here's the offer.
+Tell me the problem. For anything bigger than a quick fix, I'll build you a free demo before you spend a penny. Small jobs go live within five working days.
+
+So, what's the one thing in your business that's slower than it should be?
+
+Send me one line. I'll tell you exactly how I'd fix it.
+
+#SmallBusiness #Automation #WebDesign
+```
 
 ---
 
@@ -120,6 +169,11 @@ I'd rather say that than show you a render and let you assume.
 
 | Post | Claim | Source in the context pack |
 | --- | --- | --- |
+| Intro | Computer Science, Swansea; finance and complaints background, SLAs | Maz, first-hand, 25 Sep |
+| Intro | JobFilter built end to end; live, with paid plans | §3 JobFilter row. No customer count implied |
+| Intro | Specialist finance firm: website, lead capture, private client area | Live site `/work` summary. Unnamed; nothing said about payment |
+| Intro | Designs and prints stands on own 3D printer | Maz owns an Ender 5 (EnderForge). No claim any stand has shipped |
+| Intro | Free demo for anything bigger than a quick fix; small jobs live within five working days; from £150 | Free-demo policy (#34); five days is Maz's commitment, not a track record |
 | 1 | Form broken ~3 days after the domain move; found by test submissions to both origins | §3 first-person facts, 16→19 Sep |
 | 1 | Lost-enquiry count unknown | §3 caveat — stated as unknown in the post |
 | 1, 2 | Websites, automation, software and physical products | §2 positioning; homepage hero from #51 |
