@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { SITE_URL } from '../site';
 import { LeakCheckForm } from './leak-check-form';
+import { NICHE_GUIDES } from '../for/niches';
 
 const PAGE_URL = `${SITE_URL}/leak-check`;
 
@@ -79,6 +80,20 @@ export default function LeakCheckPage() {
         <ul className="mw-qw-list">
           {CHECKS.map((item) => <li key={item}>{item}</li>)}
         </ul>
+      </section>
+
+      <section className="mw-qw-section" aria-labelledby="leak-check-examples-title">
+        <p className="eyebrow">Real examples</p>
+        <h2 id="leak-check-examples-title">What I found on local websites this month.</h2>
+        <ul className="mw-qw-list">
+          <li>A salon homepage showing casino adverts. It looked hacked.</li>
+          <li>A bakery contact page listing Email@example.com and placeholder reviews.</li>
+          <li>A venue whose mobile call button dialled the wrong number.</li>
+          <li>A clinic whose Book Consultation link opened an error page.</li>
+        </ul>
+        <p className="mw-qw-lead">By business type: {NICHE_GUIDES.map((guide, index) => (
+          <span key={guide.id}>{index ? ' · ' : ''}<a href={`/for/${guide.id}`}>{guide.name}</a></span>
+        ))}</p>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="leak-check-return-title">
