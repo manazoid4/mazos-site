@@ -25,4 +25,5 @@ Rules: branch + PR, never push to main. Never invent testimonials, clients or re
 - Reply in **two short, plain paragraphs**: what he must do, and what changed. Details belong in PRs.
 - **Remind him of his open to-dos** at the start and end of each session. He asks for this; he forgets things like posting. The list lives in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/STATUS.md` → "Maz's open to-dos". If a session ends with one still open, schedule a reminder with `send_later`.
 - Prefer free tiers and say plainly when something costs money.
+- **Email:** see `docs/maz-works/EMAIL-SETUP.md` (ImprovMX → Gmail in, Gmail out, Resend for opt-in only).
 - **Posts:** every LinkedIn/public post follows his posting rules in `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/POSTING-RULES.md`. Hand over final text in a plain code block, no dashes, link in the first comment, and audit claims before handing over.
