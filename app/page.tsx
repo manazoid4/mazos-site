@@ -5,6 +5,15 @@ import { HOMEPAGE_FAQS } from './faqs';
 import { NewsletterSignup } from './newsletter-signup';
 
 type WorkStage = 'flagship' | 'live' | 'building';
+type WorkProof = {
+  src: string;
+  mobileSrc: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
+  emphasis: 'primary' | 'secondary';
+};
 
 const WORK: {
   name: string;
@@ -12,6 +21,7 @@ const WORK: {
   stage: WorkStage;
   summary: string;
   links: { label: string; href: string }[];
+  proof?: WorkProof;
 }[] = [
   {
     name: 'JobFilter',
@@ -22,6 +32,15 @@ const WORK: {
       { label: 'Case study', href: '/work/jobfilter' },
       { label: 'Try it', href: 'https://jobfilter.uk/find-jobs' },
     ],
+    proof: {
+      src: '/jobfilter-scan-result.webp',
+      mobileSrc: '/jobfilter-scan-result-mobile.webp',
+      alt: 'JobFilter showing a public-contract scan result and trade-fit checking interface',
+      caption: 'JobFilter / live product',
+      width: 1440,
+      height: 900,
+      emphasis: 'primary',
+    },
   },
   {
     name: 'Scrap Finance Partners',
@@ -32,6 +51,15 @@ const WORK: {
       { label: 'Case study', href: '/work/scrap-finance-partners' },
       { label: 'View site', href: 'https://scrap-finance-partners.vercel.app' },
     ],
+    proof: {
+      src: '/scrap-finance-partners.webp',
+      mobileSrc: '/scrap-finance-partners-mobile.webp',
+      alt: 'Scrap Finance Partners website homepage for a specialist finance practice',
+      caption: 'Scrap Finance Partners / client website',
+      width: 1440,
+      height: 1000,
+      emphasis: 'secondary',
+    },
   },
   {
     name: 'Agent Nudge',
@@ -72,7 +100,7 @@ const BUILDS = [
   { name: 'More customers', body: 'Mailing lists, email and reviews.', service: 'growth' },
   { name: 'Automation', body: 'Repeat admin, done for you.', service: 'automation' },
   { name: 'Software', body: 'Tools built around your work.', service: 'software' },
-  { name: 'Physical products', body: 'Tap stands for more reviews.', href: '/3d-printing' },
+  { name: 'Physical products', body: 'Tap stands and useful objects.', href: '/3d-printing' },
 ] as const;
 
 const FLAGSHIP_WORK = WORK.filter((project) => project.stage === 'flagship');
@@ -91,18 +119,18 @@ const OFFERS = [
   {
     name: 'Website Launch',
     price: 'From £299',
-    body: 'A simple website that brings you enquiries.',
-    note: 'Fixed price agreed before work starts',
+    body: 'Up to 4 pages, mobile-ready, contact form, basic SEO, analytics and launch.',
+    note: '1 revision · domain connected · you own the finished site',
     service: 'website',
     action: 'Ask about a website',
   },
   {
     name: 'Growth System',
     price: 'From £499',
-    body: 'Your website plus a mailing list or booking reminders.',
-    note: 'One workflow, not a whole department',
-    service: 'automation',
-    action: 'Ask about automation',
+    body: 'Your website plus one customer-growth or automation workflow.',
+    note: 'Mailing list, reviews, booking reminders or similar',
+    service: 'growth',
+    action: 'Ask about a Growth System',
   },
 ];
 
@@ -115,7 +143,7 @@ const STEPS = [
 
 function WorkRow({ project }: { project: (typeof WORK)[number] }) {
   return (
-    <article className="mw-work-row" id={project.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}>
+    <article className={`mw-work-row${project.proof ? ' mw-work-row-with-proof' : ''}`} id={project.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}>
       <div className="mw-work-main">
         <p className="relationship">{project.type}</p>
         <h3>{project.name}</h3>
@@ -124,6 +152,15 @@ function WorkRow({ project }: { project: (typeof WORK)[number] }) {
       <nav className="mw-work-links" aria-label={`${project.name} links`}>
         {project.links.map((link) => <a href={link.href} key={link.href}>{link.label} <span aria-hidden="true">→</span></a>)}
       </nav>
+      {project.proof ? (
+        <figure className={`mw-work-proof mw-work-proof-${project.proof.emphasis}`}>
+          <picture>
+            <source media="(max-width: 640px)" srcSet={project.proof.mobileSrc} />
+            <img src={project.proof.src} alt={project.proof.alt} width={project.proof.width} height={project.proof.height} loading="lazy" />
+          </picture>
+          <figcaption>{project.proof.caption}</figcaption>
+        </figure>
+      ) : null}
     </article>
   );
 }
@@ -136,8 +173,8 @@ export default function Page() {
       <section className="mw-hero" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
         <div className="mw-hero-copy">
           <p className="eyebrow">Maz Works / Manazir Hussain</p>
-          <h1 id="intro-title">I fix what’s costing you customers.</h1>
-          <p className="mw-lede">Small fixes to full rebuilds. Anything that brings customers in. From £150, fixed price.</p>
+          <h1 id="intro-title">I fix what’s costing your business time, customers, or money.</h1>
+          <p className="mw-lede">Small fixes to full rebuilds. I build around the problem, not a fixed menu. From £150, fixed price.</p>
           <div className="mw-actions">
             <a className="button button-signal" href="#contact">Tell me the problem</a>
             <a className="button" href={BOOKING_URL} target="_blank" rel="noreferrer">Book a call</a>
@@ -157,6 +194,19 @@ export default function Page() {
             );
           })}
         </ul>
+        <details className="mw-leak-check">
+          <summary><span>Business Leak Check</span><small>Not sure what to ask for? Pick the closest problem.</small></summary>
+          <div className="mw-leak-options">
+            <ServiceEnquiryLink service="quick-win">Something is broken or missing</ServiceEnquiryLink>
+            <ServiceEnquiryLink service="website">I need a new website or landing page</ServiceEnquiryLink>
+            <ServiceEnquiryLink service="rebuild">My current site or system needs replacing</ServiceEnquiryLink>
+            <ServiceEnquiryLink service="growth">I need more enquiries, reviews or follow-up</ServiceEnquiryLink>
+            <ServiceEnquiryLink service="automation">Admin is taking too much time</ServiceEnquiryLink>
+            <ServiceEnquiryLink service="software">I need a custom tool or software feature</ServiceEnquiryLink>
+            <a className="mw-service-link" href="/3d-printing">I want a physical customer touchpoint</a>
+            <ServiceEnquiryLink service="unsure">None of these — help me work it out</ServiceEnquiryLink>
+          </div>
+        </details>
       </section>
 
       <section className="mw-section mw-work" id="work" aria-labelledby="work-title">
@@ -191,8 +241,17 @@ export default function Page() {
               </article>
             ))}
           </div>
+          <div className="mw-care-plan">
+            <div>
+              <p className="eyebrow">Website Care</p>
+              <h3>Keep it looked after.</h3>
+              <p>Small edits, basic site/form/link checks and priority fixes.</p>
+            </div>
+            <p className="mw-care-prices"><strong>£39/month</strong><span>£210 / 6 months</span><span>£360 / year</span></p>
+            <ServiceEnquiryLink service="care">Ask about Website Care <span aria-hidden="true">→</span></ServiceEnquiryLink>
+          </div>
           <p className="mw-pricing-extra">
-            Rebuilds quoted after a free call. Support from £49/month, no long contract. · <a href="/3d-printing">Maz Works Objects: tap-to-review stands from £29 <span aria-hidden="true">→</span></a>
+            Rebuilds quoted after a free call. · <a href="/3d-printing">Maz Works Objects: tap-to-review stands from £29 <span aria-hidden="true">→</span></a>
           </p>
         </div>
       </section>
@@ -211,7 +270,7 @@ export default function Page() {
           <div><p className="eyebrow">Questions</p><h2 id="faq-title">Quick answers.</h2></div>
         </header>
         <div className="mw-faq-list">
-          {HOMEPAGE_FAQS.slice(0, 3).map((faq) => <details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}
+          {HOMEPAGE_FAQS.slice(0, 4).map((faq) => <details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}
         </div>
         <div className="mw-faq-more"><a className="text-link" href="/faq">All questions <span aria-hidden="true">→</span></a></div>
       </section>
