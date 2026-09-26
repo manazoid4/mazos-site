@@ -27,7 +27,7 @@ export function SiteFooter() {
       </div>
 
       <nav className="mw-footer-links" aria-label="Maz Works links">
-        <a href="/leak-check">Free Leak Check</a>
+        <a href="/leak-check">Free Booking &amp; Enquiry Check</a>
         <a href="/#work">Work</a>
         <a href="/#services">Services</a>
         <a href="/#pricing">Pricing</a>

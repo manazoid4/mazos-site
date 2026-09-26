@@ -9,7 +9,8 @@ const exportRoot = path.join(root, 'out');
 // Homepage word budget (visible words in <main>, form labels and closed disclosure copy included).
 // Raised 650 -> 820 on 26 Sep for the confirmed care options, clearer FAQs and Business Leak Check.
 // 780 -> 820 on 26 Sep: new pricing adds a free Leak Check and a Full Rebuild card.
-const WORD_BUDGET = 820;
+// 820 -> 1100 on 26 Sep (Offer v5): Journey Receipt example, Tell Maz section and referral line added.
+const WORD_BUDGET = 1100;
 // Same count as the homepage: all text inside <main>, including header, footer and closed answers.
 const CASE_STUDY_WORD_BUDGET = 320;
 
@@ -56,9 +57,10 @@ async function internalTargetExists(urlPath) {
 test('homepage leads with a plain offer and none of the old filler', async () => {
   const html = await readPage('/');
   assert.match(html, /I fix what’s costing your business time, customers, or money/);
-  assert.match(html, /From £150, fixed price/);
-  assert.match(html, /Tell me the problem/);
-  for (const filler of [/Inspect the work before reading more claims/, /Operations thinking/, /What gets measured/, /href="\/whats-new/]) {
+  assert.match(html, /I find and fix broken booking links, confusing enquiry routes and incorrect business information/);
+  assert.match(html, /Fixed price agreed before work starts/);
+  assert.match(html, /Tell me what’s wrong/);
+  for (const filler of [/Inspect the work before reading more claims/, /Operations thinking/, /What gets measured/, /href="\/whats-new/, /£150/, /Quick Win/, /£39\/month/, /£795/, /founding/i, /hacked/i]) {
     assert.doesNotMatch(html, filler);
   }
 });
@@ -70,12 +72,12 @@ test('homepage hero keeps the offer broad instead of reducing Maz Works to three
   for (const name of ['Websites', 'Full rebuilds', 'More customers', 'Automation', 'Software', 'Physical products']) {
     assert.match(band, new RegExp(`<strong>${name}</strong>`));
   }
-  for (const id of ['website', 'rebuild', 'growth', 'automation', 'software']) {
+  for (const id of ['website', 'rebuild', 'repair', 'automation', 'software']) {
     assert.match(band, new RegExp(`\\?service=${id}#contact`));
   }
   assert.match(band, /href="\/3d-printing"/);
   assert.doesNotMatch(html, /Websites, booking and admin fixes/);
-  assert.match(html, /Small fixes to full rebuilds/);
+  assert.match(html, /I find and fix broken booking links, confusing enquiry routes/);
 });
 
 test('Business Leak Check routes common problems without adding another form or AI call', async () => {
@@ -116,25 +118,29 @@ test('homepage work stays short, truthful and now shows real flagship evidence',
 
 test('homepage pricing is transparent, bounded and links straight to an enquiry', async () => {
   const html = await readPage('/');
-  assert.match(html, /£150 fixed/);
-  // Maz, 26 Sep: confident pricing with a free first step.
-  assert.match(html, /free Leak Check/i);
+  assert.match(html, /£395/);
+  assert.match(html, /£249/);
+  assert.match(html, /£595/);
+  assert.match(html, /Booking &amp; Enquiry Repair/);
+  assert.match(html, /Google Profile &amp; Contact Setup/);
+  assert.match(html, /free Booking &amp; Enquiry Check/i);
   assert.match(html, /From £495/);
-  assert.match(html, /From £795/);
   assert.match(html, /From £1,000/);
-  assert.doesNotMatch(html, /£299|£360/);
-  assert.match(html, /Up to 4 pages/);
-  assert.match(html, /you own it/i);
-  assert.match(html, /£39\/month/);
-  assert.match(html, /£210 \/ 6 months/);
-  assert.match(html, /£390 \/ year/);
-  assert.match(html, /Small edits, checks and quick fixes/);
+  assert.match(html, /£200 to start · £195 on completion/);
+  assert.match(html, /£125 to start · £124 on completion/);
+  assert.match(html, /No VAT added/);
+  assert.match(html, /you own everything i build/i);
+  assert.match(html, /working within 7 working days/i);
+  assert.match(html, /£40 when they become a paying client/);
+  assert.doesNotMatch(html, /£150/);
+  assert.doesNotMatch(html, /Quick Win/);
+  assert.doesNotMatch(html, /£795/);
+  assert.doesNotMatch(html, /£39\/month/);
   assert.doesNotMatch(html, /founding/i);
-  assert.match(html, /href="\/quick-win"/);
-  for (const id of ['quick-win', 'website', 'growth', 'care']) {
+  assert.doesNotMatch(html, /href="\/quick-win"/);
+  for (const id of ['website', 'rebuild', 'repair', 'google-profile', 'bundle']) {
     assert.match(html, new RegExp(`\\?service=${id}#contact`));
   }
-  assert.doesNotMatch(html, /Rescue Sprint/i);
 });
 
 test('homepage stays compact with four visible process steps', async () => {
@@ -142,10 +148,10 @@ test('homepage stays compact with four visible process steps', async () => {
   for (const id of ['work', 'pricing', 'services', 'process', 'contact']) {
     assert.match(html, new RegExp(`id="${id}"`));
   }
-  assert.match(html, /Tell me the problem/);
-  assert.match(html, /I suggest the fix/);
-  assert.match(html, /We agree the price/);
-  assert.match(html, /I build and hand over/);
+  assert.match(html, /Tell me what’s wrong/);
+  assert.match(html, /I confirm the fix and price/);
+  assert.match(html, /You pay half to start/);
+  assert.match(html, /Working within 7 days/);
   assert.match(html, /href="\/faq"/);
   const words = mainWordCount(html);
   assert.ok(words <= WORD_BUDGET, `homepage has ${words} words; budget is ${WORD_BUDGET}`);
@@ -366,17 +372,41 @@ test('every sitemap entry points at a page that was actually exported', async ()
   assert.deepEqual(broken, [], `sitemap points at missing pages: ${broken.join(', ')}`);
 });
 
-test('Quick Win page sells one fix, reassures on existing systems and routes to the enquiry form', async () => {
+test('retired Quick Win page stays reachable but noindexed and points to the Repair', async () => {
   const html = await readPage('/quick-win');
-  assert.match(html, /£150/);
-  assert.match(html, /Works with what you have/);
-  for (const platform of ['Wix', 'Squarespace', 'WordPress', 'Square', 'Fresha', 'Booksy', 'Google Business Profile']) {
-    assert.ok(html.includes(platform), `Quick Win page should name ${platform}`);
-  }
-  assert.match(html, /No password sharing/);
-  assert.match(html, /\?service=quick-win#contact/);
+  assert.match(html, /noindex/);
+  assert.match(html, /Booking &amp; Enquiry Repair/);
+  assert.match(html, /£395/);
+  assert.match(html, /\?service=repair#contact/);
+  assert.doesNotMatch(html, /£150/);
 
   const home = await readPage('/');
-  assert.match(home, /href="\/quick-win"/);
-  assert.match(home, /\?service=quick-win#contact/);
+  assert.doesNotMatch(home, /href="\/quick-win"/);
+
+  const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
+  assert.doesNotMatch(sitemap, /<loc>[^<]+\/quick-win(?:\/)?<\/loc>/);
+});
+
+test('retired offer terms are gone from every public page', async () => {
+  const routes = [
+    '/', '/leak-check', '/faq',
+    '/for/salons-and-beauty', '/for/dog-groomers', '/for/garages', '/for/cafes-and-food', '/for/clinics-and-therapists',
+  ];
+  const retired = [/£150/, /Quick Win/, /£39\/month/, /£795/, /founding/i, /hacked/i];
+  for (const route of routes) {
+    const html = await readPage(route);
+    for (const pattern of retired) {
+      assert.doesNotMatch(html, pattern, `${route} still mentions a retired term matching ${pattern}`);
+    }
+  }
+});
+
+test('the guarantee, no-VAT and referral lines appear where Maz\'s decisions require them', async () => {
+  const home = await readPage('/');
+  const faq = await readPage('/faq');
+  assert.match(home, /No VAT added/);
+  assert.match(home, /£40 when they become a paying client/);
+  assert.match(faq, /No VAT added/);
+  assert.match(faq, /£40 by bank transfer/);
+  assert.match(faq, /Your agreed repair works within 7 working days/);
 });

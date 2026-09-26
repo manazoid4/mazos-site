@@ -11,15 +11,16 @@ export const SUBMIT_TIMEOUT_MS = 15000;
  * `label` is what the visitor sees and what arrives in the email.
  */
 export const ENQUIRY_SERVICES = [
-  { id: 'leak-check', label: 'Free Leak Check: review my website' },
-  { id: 'quick-win', label: 'Quick Win — fix one thing (£150)' },
+  { id: 'leak-check', label: 'Free Booking & Enquiry Check: review my website' },
+  { id: 'repair', label: 'Booking & Enquiry Repair (£395)' },
+  { id: 'google-profile', label: 'Google Profile & Contact Setup (£249)' },
+  { id: 'bundle', label: 'Both — Repair and Setup (£595)' },
   { id: 'website', label: 'Website or landing page' },
   { id: 'rebuild', label: 'Full rebuild' },
-  { id: 'growth', label: 'More customers: email, mailing list, reviews' },
+  { id: 'growth', label: 'More customers: reviews, bookings, enquiries' },
   { id: 'automation', label: 'Automation and repetitive admin' },
   { id: 'software', label: 'Internal tool, AI feature or custom software' },
   { id: 'objects', label: 'Physical product linked to a digital action' },
-  { id: 'care', label: 'Website Care — ongoing small fixes and checks' },
   { id: 'unsure', label: 'Not sure yet — help me work it out' },
 ] as const;
 

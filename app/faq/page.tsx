@@ -46,15 +46,18 @@ export default function FaqPage() {
       </section>
 
       <section className="mw-resource-list" aria-label="Frequently asked questions">
-        {MAZ_WORKS_FAQS.map((faq, index) => (
-          <article className="mw-resource-row" key={faq.question}>
-            <span className="mw-resource-index">{String(index + 1).padStart(2, '0')}</span>
-            <div>
-              <h2>{faq.question}</h2>
-              <p>{faq.answer}</p>
-            </div>
-          </article>
-        ))}
+        {MAZ_WORKS_FAQS.map((faq, index) => {
+          const slug = faq.question.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+          return (
+            <article className="mw-resource-row" id={slug} key={faq.question}>
+              <span className="mw-resource-index">{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <h2>{faq.question}</h2>
+                <p>{faq.answer}</p>
+              </div>
+            </article>
+          );
+        })}
       </section>
 
       <section className="mw-resource-cta" aria-labelledby="faq-still-title">
