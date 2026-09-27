@@ -14,7 +14,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How much does it cost?',
-    answer: 'Starter Automation is £295 for one job set up to run itself. A Business System, where several jobs are joined up, starts from £1,250. Custom Software & Websites start from £2,950. Optional extras, like reminders or an AI enquiry assistant, are priced up front and added to the same invoice. Keep It Running is £49 a month. No VAT added.',
+    answer: 'Starter Automation is £295 for one job set up to run itself. A Business System, where several jobs are joined up, starts from £1,250. Custom Software & Websites start from £2,950. Optional extras, like text reminders, missed-call text-back or a review system, are priced up front and added to the same invoice. Keep It Running is £49 a month. No VAT added.',
   },
   {
     question: 'What can the £295 Starter do?',
@@ -22,7 +22,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How do the optional extras work?',
-    answer: 'They are small add-ons with a fixed price, like text reminders (£145), review requests (£145) or an extra automation (£195). Add them when you order, or later. They go on the same invoice, so there are no surprise costs.',
+    answer: 'They are add-ons with a fixed price, like appointment reminders (£145), missed-call text-back (£195) or a review system (£195). Add them when you order, or later. They go on the same invoice, so there are no surprise costs.',
   },
   {
     question: "What's the guarantee?",
