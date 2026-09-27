@@ -31,3 +31,12 @@ test('Leak Check page links every niche guide and shows real examples', async ()
   assert.match(html, /Built for any business that runs on customers/);
   for (const id of NICHES) assert.match(html, new RegExp(`href="/for/${id}"`));
 });
+
+test('niche guides sell systems and outcomes, not website fixes (Maz, 27 Sep positioning)', async () => {
+  for (const id of NICHES) {
+    const html = await readFile(path.join(exportRoot, 'for', `${id}.html`), 'utf8').catch(() => readFile(path.join(exportRoot, 'for', id, 'index.html'), 'utf8'));
+    const title = /<h1[^>]*>([\s\S]*?)<\/h1>/.exec(html)?.[1] || '';
+    assert.doesNotMatch(title, /website|leak|fix/i, `${id}: headline reads as a website-fix service`);
+    assert.doesNotMatch(html, /Website leaks|put right|leftover template text replaced|pointed at your real booking page/i, `${id}: website-fix wording`);
+  }
+});

@@ -20,7 +20,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
   {
     id: 'salons-and-beauty',
     name: 'Salons and beauty',
-    title: 'Website leaks on salon and beauty websites',
+    title: 'Keep salon and beauty clients booking without chasing them',
     lede: 'Clients book on their phone, often late at night. If the booking route breaks, they book somewhere else and you never hear about it.',
     examples: [
       { found: 'A salon homepage showing unrelated casino content, a New York address and info@example.com instead of the salon’s own details.', cost: 'Anyone searching for the salon saw gambling content under its name.' },
@@ -34,14 +34,14 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Google your salon name. Is the title and description yours, spelled right?',
     ],
     fixes: [
-      { name: 'Starter Automation', price: '£195', body: 'Book buttons pointed at your real booking page, confirmations and reminders switched on, your Google listing matched, and a test booking followed through.' },
+      { name: 'Starter Automation', price: '£195', body: 'One job set up to run itself: every booking or enquiry lands in one place, gets an instant confirmation, and reminders go out the day before.' },
       { name: 'Business System', price: 'From £795', body: 'Rebooking prompts, review requests and no-show follow-ups that send themselves, so repeat visits do not depend on your memory.' },
     ],
   },
   {
     id: 'dog-groomers',
     name: 'Dog groomers',
-    title: 'Website leaks on dog grooming websites',
+    title: 'Take dog grooming bookings while your hands are full',
     lede: 'You cannot answer the phone mid-groom. If your website cannot take the booking instead, the call goes to the next groomer on Google.',
     examples: [
       { found: 'A groomer with over a thousand clients and no way to book online, only a form or a phone call. A review mentioned calls going unanswered.', cost: 'Owners who could not get through booked elsewhere.' },
@@ -54,14 +54,14 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Does your Book button do what it says?',
     ],
     fixes: [
-      { name: 'Starter Automation', price: '£195', body: 'A Book button that does what it says, confirmations and reminders, and a test booking or enquiry followed through to a reply.' },
+      { name: 'Starter Automation', price: '£195', body: 'Missed calls answered with a text and your booking link, and every booking confirmed and reminded automatically, so you can keep grooming.' },
       { name: 'New online booking', price: 'quoted in your free plan', body: 'If you have no booking tool yet. Most booking tools charge a monthly fee, and I tell you the cost before you commit.' },
     ],
   },
   {
     id: 'garages',
     name: 'Garages and MOT centres',
-    title: 'Website leaks on garage and MOT websites',
+    title: 'Turn garage and MOT enquiries into booked jobs',
     lede: 'Most drivers search when something is already wrong. They want a number to tap or an MOT slot to book, fast.',
     examples: [
       { found: 'A garage homepage with template filler text ("Lorem ipsum") sitting right under the words "trusted repairs".', cost: 'It undercut the trust line directly above it.' },
@@ -74,14 +74,14 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Can a driver request an MOT without phoning?',
     ],
     fixes: [
-      { name: 'Starter Automation', price: '£195', body: 'Tap-to-call and quote requests that reach you, leftover template text replaced, and your Google listing corrected.' },
-      { name: 'Custom Software & Websites', price: 'From £1,950', body: 'An old site rebuilt properly, with online booking requests and your content moved across.' },
+      { name: 'Starter Automation', price: '£195', body: 'Every quote or MOT request logged in one list with an instant reply, and a friendly follow-up if the customer goes quiet.' },
+      { name: 'Custom Software & Websites', price: 'From £1,950', body: 'A new site with online booking and job updates built in, when your current one can’t do it.' },
     ],
   },
   {
     id: 'cafes-and-food',
     name: 'Cafes, bakeries and food',
-    title: 'Website leaks on cafe, bakery and food websites',
+    title: 'Get cafe, bakery and food customers through the door',
     lede: 'People check your hours, menu and number on their phone before they visit. Small errors quietly send them elsewhere.',
     examples: [
       { found: 'A bakery contact page listing "Email@example.com", a US-style phone number and placeholder Latin reviews signed with a made-up name.', cost: 'Customers could not reach the business from its own contact page.' },
@@ -95,14 +95,14 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Tap your call button. Does it ring you?',
     ],
     fixes: [
-      { name: 'Starter Automation', price: '£195', body: 'Contact details, call button and Google listing put right, plus a review-request message ready to send.' },
-      { name: 'Custom Software & Websites', price: 'From £1,950', body: 'A clean phone-first site with menu, hours, tap-to-call and a reviews link.' },
+      { name: 'Starter Automation', price: '£195', body: 'Orders, bookings and messages gathered in one place with an automatic reply, plus review requests after each visit.' },
+      { name: 'Custom Software & Websites', price: 'From £1,950', body: 'A phone-first site with menu, hours, ordering or table booking built in, when your current one can’t do it.' },
     ],
   },
   {
     id: 'clinics-and-therapists',
     name: 'Clinics and therapists',
-    title: 'Website leaks on clinic and therapist websites',
+    title: 'Help clinic and therapy clients book with confidence',
     lede: 'Patients are often nervous before they book. A dead link or a missing number at the wrong moment is enough to stop them.',
     examples: [
       { found: 'An aesthetics clinic whose "Skin Consultation" menu link opened a page-not-found error.', cost: 'Patients ready to book hit a dead end.' },
@@ -116,13 +116,13 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Can a new patient see how to book in under 10 seconds?',
     ],
     fixes: [
-      { name: 'Starter Automation', price: '£195', body: 'Booking and enquiry routes that work, confirmations and reminders, and a test enquiry followed through to a reply.' },
+      { name: 'Starter Automation', price: '£195', body: 'New enquiries acknowledged straight away with the next step, plus confirmations and reminders so fewer appointments are missed.' },
     ],
   },
   {
     id: 'architects',
     name: 'Architects and architecture practices',
-    title: 'Enquiry gaps on architecture practice websites',
+    title: 'Turn portfolio interest into qualified architecture projects',
     lede: 'A strong portfolio gets attention, but the next step still matters. If a potential client has to hunt for contact details or start from a blank email, every enquiry begins with extra back-and-forth.',
     examples: [
       { found: 'A small architecture practice had a dedicated contact page that showed only an address, phone number and email, with no project enquiry form.', cost: 'A prospective client could not send project type, location, budget or timescale in the first step.' },
