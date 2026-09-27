@@ -132,10 +132,11 @@ test('homepage shows a low-cost Starter, two bigger tiers, priced extras and a c
     assert.match(html, new RegExp(price));
   }
   assert.match(html, /id="extras"/);
-  for (const extra of ['Extra automation', 'Appointment reminders', 'Review requests', 'Google Business Profile setup', 'AI assistant that answers enquiries']) {
+  for (const extra of ['Extra automation', 'Appointment confirmations and reminders', 'Missed-call text-back', 'Review system', 'Google Business Profile setup']) {
     assert.match(html, new RegExp(extra));
   }
   assert.match(html, /Keep It Running[\s\S]{0,30}£49\/month/);
+  assert.doesNotMatch(html, /\bAI\b/, 'AI is used behind the scenes, never advertised (Maz, 27 Sep)');
   assert.match(html, /Free Plan &amp; Fixed Quote/);
   assert.match(html, /Half to start, the rest when it is live/);
   assert.match(html, /No VAT added/);

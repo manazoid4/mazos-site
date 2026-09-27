@@ -32,7 +32,7 @@ test('the enquiry captures which service the visitor actually wants', async () =
     'Starter Automation (£295)',
     'Business System (from £1,250)',
     'Website with the system built in (from £2,950)',
-    'AI assistant that answers enquiries (from £495)',
+    'Review system and customer reminders (from £145)',
     'Keep It Running (£49/month)',
     'Custom software or internal tool (from £2,950)',
     'Tap-to-review stands and signs',
