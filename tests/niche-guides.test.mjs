@@ -27,6 +27,6 @@ test('each niche guide exports with real examples, a self-check, prices and a ta
 
 test('Leak Check page links every niche guide and shows real examples', async () => {
   const html = await readFile(path.join(exportRoot, 'leak-check.html'), 'utf8').catch(() => readFile(path.join(exportRoot, 'leak-check', 'index.html'), 'utf8'));
-  assert.match(html, /What I found on UK business websites this month/);
+  assert.match(html, /What I found on UK business websites in September 2026/);
   for (const id of NICHES) assert.match(html, new RegExp(`href="/for/${id}"`));
 });

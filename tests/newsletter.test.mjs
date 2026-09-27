@@ -84,11 +84,11 @@ test('without JavaScript the form posts normally and is redirected back with the
   const ok = fakeRes();
   await handler(fakeReq({ email: 'owner@shop.co.uk' }, { json: false }), ok, recordingFetch().impl);
   assert.equal(ok.statusCode, 303);
-  assert.equal(ok.headers.location, '/?subscribed=1#newsletter');
+  assert.equal(ok.headers.location, '/lab?subscribed=1#newsletter');
 
   const bad = fakeRes();
   await handler(fakeReq({ email: 'nope' }, { json: false }), bad, recordingFetch().impl);
-  assert.equal(bad.headers.location, '/?subscribed=0#newsletter');
+  assert.equal(bad.headers.location, '/lab?subscribed=0#newsletter');
 });
 
 test('only POST is accepted', async () => {
@@ -97,10 +97,10 @@ test('only POST is accepted', async () => {
   assert.equal(res.statusCode, 405);
 });
 
-test('the homepage signup posts to the API, has a hidden honeypot and says how to unsubscribe', async () => {
-  const html = await readFile(new URL('../out/index.html', import.meta.url), 'utf8');
+test('the /lab signup posts to the API, has a hidden honeypot and says how to unsubscribe', async () => {
+  const html = await readFile(new URL('../out/lab.html', import.meta.url), 'utf8');
   const section = html.match(/<section class="mw-newsletter"[\s\S]*?<\/section>/)?.[0];
-  assert.ok(section, 'homepage should include the mailing-list signup');
+  assert.ok(section, '/lab should include the mailing-list signup');
   const form = section.match(/<form[^>]*>/)?.[0] ?? '';
   assert.match(form, /method="post"/);
   assert.match(form, /action="\/api\/subscribe"/);

@@ -25,11 +25,14 @@ test('the free Booking & Enquiry Check has a dedicated shareable acquisition pag
   const html = await readPage('/leak-check');
 
   assert.match(html, /Free Booking &amp; Enquiry Check/);
-  assert.match(html, /Three fields\. No call required\./);
-  assert.match(html, /within 5 working days/i);
+  assert.match(html, /Three fields\. No call needed\./);
+  assert.match(html, /within 3 working days/i);
+  assert.doesNotMatch(html, /5 working days/i);
   assert.match(html, /any UK business/);
   assert.doesNotMatch(html, /Nottingham/);
-  assert.match(html, /no automated score/i);
+  assert.match(html, /Checked by hand/i);
+  assert.match(html, /EXAMPLE|>Example</);
+  assert.match(html, /A fictional business/);
   assert.match(html, /Your current provider should be able to fix this/);
   assert.match(html, /I couldn.t find anything I.d honestly charge you to fix/);
   assert.match(html, /FIX NOW/);
@@ -69,7 +72,10 @@ test('the Leak Check reuses the resilient enquiry delivery path', async () => {
 test('homepage and shared navigation send the free first step to the dedicated page', async () => {
   const home = await readPage('/');
 
-  assert.match(home, /href="\/leak-check">Get a free Booking &amp; Enquiry Check/);
+  // The homepage carries the check form itself; shared navigation points at the dedicated page.
+  assert.match(home, /id="check"/);
+  assert.match(home, /id="leak-check-form"/);
+  assert.match(home, /href="#check">Get my free check/);
   assert.match(home, /href="\/leak-check">Free check/);
   assert.doesNotMatch(home, /\?service=leak-check#contact/);
 });

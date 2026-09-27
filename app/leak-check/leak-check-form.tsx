@@ -1,7 +1,8 @@
 'use client';
 
 import { useRef, useState, type FormEvent } from 'react';
-import { CONTACT_EMAIL } from '../site';
+import { CHECK_REPLY_TIME, CONTACT_EMAIL } from '../site';
+import { trackConversion } from '../analytics';
 import { EnquiryRecovery } from '../enquiry-recovery';
 import { NATIVE_FORM_ENDPOINT, buildRecoveryMailto, sendEnquiry } from '../enquiry';
 
@@ -38,14 +39,15 @@ export function LeakCheckForm() {
     const email = String(data.get('email') || '').trim();
     const website = String(data.get('website') || '').trim();
     const honey = String(data.get('_honey') || '').trim();
-    const source = new URLSearchParams(window.location.search).get('src')?.trim() || 'direct';
+    const page = window.location.pathname === '/' ? 'homepage' : window.location.pathname.replace(/^\//, '');
+    const source = new URLSearchParams(window.location.search).get('src')?.trim() || `direct (${page})`;
 
     const missing = !name ? 'name' : !email ? 'email' : !website ? 'website' : '';
     if (missing) {
       setInvalidField(missing);
       setValidationError(
         missing === 'website'
-          ? 'Add the website you want me to check.'
+          ? 'Add your website or booking link. No website? Your Google or Facebook page works.'
           : `Add your ${missing} so I can reply.`,
       );
       focusField(missing);
@@ -83,6 +85,7 @@ export function LeakCheckForm() {
     if (result.ok) {
       form.reset();
       setSubmitState('sent');
+      trackConversion('Check submitted', { source });
       return;
     }
 
@@ -108,7 +111,7 @@ export function LeakCheckForm() {
       <input type="hidden" name="_subject" value="Maz Works — free Booking & Enquiry Check" />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="service" value={SERVICE_LABEL} />
-      <p className="mw-form-kicker">Three fields. No call required.</p>
+      <p className="mw-form-kicker">Three fields. No call needed.</p>
 
       <div className="mw-form-row">
         <label>
@@ -137,13 +140,13 @@ export function LeakCheckForm() {
       </div>
 
       <label>
-        <span>Website link</span>
+        <span>Your website or booking link</span>
         <input
           name="website"
           inputMode="url"
           autoComplete="url"
           required
-          placeholder="yourbusiness.co.uk"
+          placeholder="yourbusiness.co.uk or a booking link"
           aria-invalid={invalidField === 'website' || undefined}
           aria-describedby={invalidField === 'website' ? 'leak-check-error' : undefined}
           disabled={submitState === 'sending'}
@@ -159,12 +162,12 @@ export function LeakCheckForm() {
         <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
           {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Get my free check'}
         </button>
-        <p>I’ll check it myself and reply by email within 5 working days.</p>
+        <p>I check it myself and email you within {CHECK_REPLY_TIME}. Free, no obligation.</p>
         <p id="leak-check-error" className="mw-form-status mw-form-error" role="alert">{validationError}</p>
         <p className="mw-form-status" role="status" aria-live="polite">
           {submitState === 'sent' && (
             <>
-              Request sent. I’ll reply within 5 working days.{' '}
+              Got it. I’ll email your check within {CHECK_REPLY_TIME}.{' '}
               <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); focusField('name'); }}>Send another</button>
             </>
           )}

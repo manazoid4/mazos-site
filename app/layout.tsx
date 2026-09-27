@@ -8,7 +8,9 @@ import './enquiry.css';
 import './resource-pages.css';
 import './clean-pass.css';
 import './mazworks-friction-pass.css';
-import { GITHUB_URL, LINKEDIN_URL, PERSON_NAME, SITE_NAME, SITE_URL } from './site';
+import './sales.css';
+import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, PERSON_NAME, SITE_NAME, SITE_URL } from './site';
+import { OG_IMAGE, SITE_DESCRIPTION, SITE_TITLE } from './seo';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -30,39 +32,49 @@ const structuredData = {
       about: { '@id': `${SITE_URL}/#person` },
     },
     {
-      '@type': 'Organization',
+      '@type': ['Organization', 'ProfessionalService'],
       '@id': `${SITE_URL}/#maz-works`,
       name: SITE_NAME,
       url: `${SITE_URL}/`,
+      email: CONTACT_EMAIL,
+      image: `${SITE_URL}${OG_IMAGE.url}`,
+      logo: `${SITE_URL}/email/mw-logo.png`,
       founder: { '@id': `${SITE_URL}/#person` },
-      description: 'Websites, rebuilds, customer-growth systems, automation, software and useful physical products for UK small businesses.',
+      address: { '@type': 'PostalAddress', addressLocality: 'Heanor', addressRegion: 'Derbyshire', addressCountry: 'GB' },
+      areaServed: { '@type': 'Country', name: 'United Kingdom' },
+      priceRange: '£249–£595',
+      description: 'Booking, enquiry and Google Business Profile repairs for UK small businesses, at fixed prices. Also websites, rebuilds, customer-growth systems, automation, software and physical products.',
+      makesOffer: [
+        { '@type': 'Offer', name: 'Free Booking & Enquiry Check', price: '0', priceCurrency: 'GBP', url: `${SITE_URL}/leak-check` },
+        { '@type': 'Offer', name: 'Booking & Enquiry Repair', price: '395', priceCurrency: 'GBP', url: `${SITE_URL}/#pricing` },
+        { '@type': 'Offer', name: 'Google Profile & Contact Setup', price: '249', priceCurrency: 'GBP', url: `${SITE_URL}/#pricing` },
+        { '@type': 'Offer', name: 'Booking & Enquiry Repair and Google Setup', price: '595', priceCurrency: 'GBP', url: `${SITE_URL}/#pricing` },
+      ],
     },
   ],
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: 'Maz Works | Websites, Automation & Practical Business Fixes', template: '%s — Maz Works' },
-  description: 'Websites, rebuilds, automation, software, customer-growth systems and useful physical products for small businesses. Fix what is costing your business time, customers or money.',
+  title: { default: SITE_TITLE, template: '%s — Maz Works' },
+  description: SITE_DESCRIPTION,
   alternates: { canonical: '/' },
   authors: [{ name: PERSON_NAME }],
   creator: PERSON_NAME,
   openGraph: {
-    title: 'Maz Works | Websites, Automation & Practical Business Fixes',
-    description: 'Websites, rebuilds, automation, software and physical products built around real business problems. Work directly with Manazir Hussain.',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     type: 'website',
     url: '/',
     siteName: SITE_NAME,
-    images: [{
-      url: '/social-card.png', width: 1200, height: 630,
-      alt: 'Maz Works by Manazir Hussain — websites, automation and practical business fixes',
-    }],
+    locale: 'en_GB',
+    images: [OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Maz Works | Websites, Automation & Practical Business Fixes',
-    description: 'Websites, rebuilds, automation, software and physical products built around real business problems. Work directly with Manazir Hussain.',
-    images: ['/social-card.png'],
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [OG_IMAGE.url],
   },
 };
 

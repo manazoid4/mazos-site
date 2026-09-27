@@ -1,3 +1,4 @@
+import { OG_IMAGE } from '../../seo';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SiteFooter, SiteHeader } from '../../site-chrome';
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ niche: st
     title: guide.title,
     description: `${guide.lede} Real examples, a 60-second self-check and fixed prices.`,
     alternates: { canonical: `/for/${guide.id}` },
-    openGraph: { title: `${guide.title} — Maz Works`, description: guide.lede, url: `/for/${guide.id}` },
+    openGraph: { title: `${guide.title} — Maz Works`, description: guide.lede, url: `/for/${guide.id}`, images: [OG_IMAGE] },
   };
 }
 
@@ -44,7 +45,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
 
       <section className="mw-qw-section" aria-labelledby="niche-examples-title">
         <p className="eyebrow">Real examples</p>
-        <h2 id="niche-examples-title">What I found this month.</h2>
+        <h2 id="niche-examples-title">What I found in September 2026.</h2>
         <p className="mw-qw-lead">All real, all on live UK small business websites. Names left out on purpose.</p>
         <ul className="mw-qw-list">
           {guide.examples.map((example) => (
