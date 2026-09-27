@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { CONTACT_EMAIL } from './site';
 import { EnquiryRecovery } from './enquiry-recovery';
+import { trackConversion } from './analytics';
 import {
   DEFAULT_NEXT_STEP,
   DEFAULT_SERVICE_ID,
@@ -23,12 +24,13 @@ const FAILURE_COPY: Record<'rejected' | 'timeout' | 'network', string> = {
   network: 'That could not reach me — your connection may have dropped.',
 };
 
-/** Keep a typed enquiry intact when the visitor chooses a service on this page. */
+/** Links to the enquiry form with the service pre-selected, keeping typed text when the form is on this page. */
 export function ServiceEnquiryLink({ service, children }: { service: string; children: ReactNode }) {
-  return <a className="mw-service-link" href={`/?service=${service}#contact`} onClick={(event) => {
+  return <a className="mw-service-link" href={`/contact?service=${service}#contact`} onClick={(event) => {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (!document.getElementById('contact')) return;
     event.preventDefault();
-    window.history.pushState(null, '', event.currentTarget.href);
+    window.history.pushState(null, '', `?service=${service}#contact`);
     window.dispatchEvent(new Event('maz-enquiry-service'));
     document.getElementById('contact')?.scrollIntoView();
     document.querySelector<HTMLElement>('.mw-demo-form [name="problem"]')?.focus({ preventScroll: true });
@@ -122,6 +124,7 @@ export function DemoRequestForm() {
       form.reset();
       setService(DEFAULT_SERVICE_ID);
       setSubmitState('sent');
+      trackConversion('Enquiry sent', { service });
       return;
     }
 
@@ -153,7 +156,7 @@ export function DemoRequestForm() {
       </div>
 
       <label>
-        <span>What do you want to improve?</span>
+        <span>What’s broken, or what do you need?</span>
         <textarea
           name="problem"
           aria-invalid={invalidField === 'problem' || undefined}
@@ -161,7 +164,7 @@ export function DemoRequestForm() {
           rows={5}
           required
           disabled={submitState === 'sending'}
-          placeholder="For example: reduce admin hours, respond to leads faster, improve follow-up, or make the team more productive."
+          placeholder="For example: our Book now button opens an old page, or we need a new website."
         />
       </label>
 

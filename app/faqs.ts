@@ -5,6 +5,10 @@ export type MazWorksFaq = {
 
 export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   {
+    question: 'Is the check really free? What’s the catch?',
+    answer: 'It’s free. I test your site by hand and email you what I find within 2 working days. If nothing is worth paying for, I say so. No call, no automated sales emails, no obligation.',
+  },
+  {
     question: 'What can you help with?',
     answer: 'Broken booking links, confusing enquiry routes and wrong business information, so customers can actually reach you. Also websites, rebuilds, automation and physical products.',
   },
@@ -55,8 +59,8 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
 ];
 
 export const HOMEPAGE_FAQS = [
-  MAZ_WORKS_FAQS[1],
-  MAZ_WORKS_FAQS[4],
+  MAZ_WORKS_FAQS[0],
+  MAZ_WORKS_FAQS[5],
   MAZ_WORKS_FAQS[7],
-  MAZ_WORKS_FAQS[8],
+  MAZ_WORKS_FAQS[9],
 ];

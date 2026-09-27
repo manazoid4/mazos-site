@@ -1,20 +1,26 @@
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
-import { SITE_URL, BOOKING_URL } from '../site';
+import { SITE_URL, BOOKING_URL, CHECK_REPLY_TIME } from '../site';
+import { OG_IMAGE } from '../seo';
+import { CallLink } from '../analytics';
+import { StickyCheckCta } from '../sticky-cta';
+import { SampleReport } from '../sample-report';
+import { REAL_FINDINGS } from '../real-findings';
 import { LeakCheckForm } from './leak-check-form';
 import { NICHE_GUIDES } from '../for/niches';
 
 const PAGE_URL = `${SITE_URL}/leak-check`;
 
 export const metadata: Metadata = {
-  title: 'Free Booking & Enquiry Check for Small Businesses',
-  description: 'Send your website and get a short, plain-English check of your booking and enquiry routes: what is broken, what it is stopping, and the one fix worth paying for, if any. Free, no call required.',
+  title: { absolute: 'Free Website Booking & Enquiry Check for UK Small Businesses | Maz Works' },
+  description: 'Not getting enquiries or bookings? Send your website or booking link. I test it by hand like a customer and email you what is broken, with dated proof, within 2 working days. Free.',
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: 'Free Booking & Enquiry Check — Maz Works',
-    description: 'Send your website. Get a short, honest check of your booking and enquiry routes.',
+    description: 'Send your website or booking link. I test it by hand and email you what is broken, within 2 working days.',
     url: PAGE_URL,
     type: 'website',
+    images: [OG_IMAGE],
   },
 };
 
@@ -59,28 +65,28 @@ export default function LeakCheckPage() {
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="leak-check-title">
         <p className="eyebrow">Free Booking &amp; Enquiry Check · £0</p>
-        <h1 id="leak-check-title">Send your website. I’ll show you what’s getting in the way.</h1>
-        <p>I check the customer journey, booking and contact routes, mobile basics, Google details and obvious trust problems. You get a short list in plain English.</p>
+        <h1 id="leak-check-title">Send your link. I’ll test it like a customer would.</h1>
+        <p>I tap your booking and call buttons, send a real test enquiry and check your Google details. You get what’s broken, in plain English, with dated proof.</p>
         <div className="mw-actions">
           <a className="button button-signal" href="#leak-check-form">Get my free check</a>
-          <a className="button" href={BOOKING_URL} target="_blank" rel="noreferrer">Or a 15-minute walkthrough</a>
+          <CallLink className="button" href={BOOKING_URL} placement="leak-check-hero">Or book a 15-minute call</CallLink>
         </div>
-        <p className="mw-hero-note">No call required · no automated score · no obligation</p>
+        <p className="mw-hero-note">Checked by hand · emailed within {CHECK_REPLY_TIME} · no call, no obligation</p>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="leak-check-send-title">
         <p className="eyebrow">Send your link</p>
         <h2 id="leak-check-send-title">Three fields. Then I check it myself.</h2>
-        <p className="mw-qw-lead">I’ll reply by email within 5 working days. Free for any UK business.</p>
+        <p className="mw-qw-lead">I’ll reply by email within {CHECK_REPLY_TIME}. Free for any UK business. No website? Send your booking, Google or Facebook link.</p>
         <LeakCheckForm />
       </section>
 
       <section className="mw-qw-section" aria-labelledby="leak-check-walkthrough-title">
         <p className="eyebrow">Prefer to talk it through?</p>
         <h2 id="leak-check-walkthrough-title">Show me how a new customer reaches you.</h2>
-        <p className="mw-qw-lead">Show me how a new customer reaches you. We&apos;ll check the journey together in 15 minutes. Free, and optional.</p>
+        <p className="mw-qw-lead">We&apos;ll check the journey together in 15 minutes. Free, and optional.</p>
         <div className="mw-actions">
-          <a className="button" href={BOOKING_URL} target="_blank" rel="noreferrer">Book the 15-minute walkthrough</a>
+          <CallLink className="button" href={BOOKING_URL} placement="leak-check-walkthrough">Book the 15-minute call</CallLink>
         </div>
       </section>
 
@@ -96,10 +102,7 @@ export default function LeakCheckPage() {
         <p className="eyebrow">Real examples</p>
         <h2 id="leak-check-examples-title">What I found on UK business websites this month.</h2>
         <ul className="mw-qw-list">
-          <li>A salon homepage showing unrelated casino content and template contact details.</li>
-          <li>A bakery contact page listing Email@example.com and placeholder reviews.</li>
-          <li>A venue whose mobile call button dialled the wrong number.</li>
-          <li>A clinic whose Book Consultation link opened an error page.</li>
+          {REAL_FINDINGS.map((item) => <li key={item}>{item}</li>)}
         </ul>
         <p className="mw-qw-lead">Not your trade? The same check works for any business customers book, call or enquire with. By business type: {NICHE_GUIDES.map((guide, index) => (
           <span key={guide.id}>{index ? ' · ' : ''}<a href={`/for/${guide.id}`}>{guide.name}</a></span>
@@ -113,6 +116,7 @@ export default function LeakCheckPage() {
           {RETURN.map((item) => <li key={item}>{item}</li>)}
         </ul>
         <p className="mw-qw-lead">Honest outcomes, always allowed: &quot;Your current provider should be able to fix this.&quot; Or: &quot;I couldn&apos;t find anything I&apos;d honestly charge you to fix.&quot;</p>
+        <div className="s-report-wrap"><SampleReport /></div>
       </section>
 
       <section className="mw-resource-cta" aria-labelledby="leak-check-cta-title">
@@ -127,6 +131,7 @@ export default function LeakCheckPage() {
       </section>
 
       <SiteFooter />
+      <StickyCheckCta href="#leak-check-form" hideWhenVisible="leak-check-form" />
     </main>
   );
 }

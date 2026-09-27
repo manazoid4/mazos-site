@@ -1,3 +1,4 @@
+import { OG_IMAGE } from '../../seo';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SiteFooter, SiteHeader } from '../../site-chrome';
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ niche: st
     title: guide.title,
     description: `${guide.lede} Real examples, a 60-second self-check and fixed prices.`,
     alternates: { canonical: `/for/${guide.id}` },
-    openGraph: { title: `${guide.title} — Maz Works`, description: guide.lede, url: `/for/${guide.id}` },
+    openGraph: { title: `${guide.title} — Maz Works`, description: guide.lede, url: `/for/${guide.id}`, images: [OG_IMAGE] },
   };
 }
 

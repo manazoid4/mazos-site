@@ -38,7 +38,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <SiteHeader />
       <article className="case-study" id="main-content" tabIndex={-1}>
         <header className="case-hero">
-          <a className="case-back" href="/#work"><span aria-hidden="true">←</span>&nbsp; Selected work</a>
+          <a className="case-back" href="/lab"><span aria-hidden="true">←</span>&nbsp; Selected work</a>
           <p className="eyebrow">{project.relationship} / {project.status}</p>
           <h1>{project.name}</h1>
           <p className="case-lede">{project.caseStudy.lede}</p>
@@ -76,7 +76,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <p>Tell me what you want built or fixed. You get a plan and a fixed price before any paid work.</p>
           </div>
           <div className="case-cta-actions">
-            <a className="button button-signal" href={`/?service=${project.id === 'scrap-finance-partners' ? 'website' : 'software'}#contact`}>Ask about a build like this</a>
+            <a className="button button-signal" href={`/contact?service=${project.id === 'scrap-finance-partners' ? 'website' : 'software'}#contact`}>Ask about a build like this</a>
             {otherStudy && <a className="text-link" href={`/work/${otherStudy.id}`}>Read {otherStudy.name} <span aria-hidden="true">→</span></a>}
           </div>
         </footer>

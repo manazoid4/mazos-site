@@ -137,7 +137,7 @@ export const FEATURED_PROJECTS: Project[] = [
     ],
     proof: 'A tagged v0.8.0 release with installers, checksums and release notes, a host test suite, and CI that compiles the firmware on every change.',
     limitation: 'CI proves the host tests, packaging and firmware compilation; it cannot prove physical device behaviour. Full field validation on the hardware is still outstanding, so this is a release candidate rather than a finished product.',
-    links: [{ label: 'Ask about this build', href: '/#contact' }],
+    links: [{ label: 'Ask about this build', href: '/contact#contact' }],
   },
 ];
 
