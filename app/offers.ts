@@ -10,6 +10,9 @@
  * Pricing model (Offer v7): a low-cost Starter so anyone can begin, optional
  * extras priced up front and added to the invoice, and a small monthly care
  * plan. Audience is every UK small business and team, not one niche.
+ *
+ * AI (Maz, 27 Sep): may be used behind the scenes to build or run things, but
+ * is never advertised or sold as an offer. No 'AI assistant' or 'AI agent' copy.
  */
 
 export const POSITIONING = 'Automation, connected tools and custom software for UK small businesses.';
@@ -80,16 +83,18 @@ export const OFFERS: Offer[] = [
 /** Optional extras: priced up front, added to any job and invoiced with it. */
 export const EXTRAS: { name: string; price: string }[] = [
   { name: 'Extra automation', price: '£195 each' },
-  { name: 'Appointment reminders by text or email', price: '£145' },
-  { name: 'Review requests after every job', price: '£145' },
-  { name: 'Google Business Profile setup', price: '£149' },
+  { name: 'Appointment confirmations and reminders', price: '£145' },
+  { name: 'Customers confirm or rebook by text', price: '£195' },
+  { name: 'Missed-call text-back with your booking link', price: '£195' },
+  { name: 'Review system: requests after every job, replies in one place', price: '£195' },
+  { name: 'Rebooking and win-back reminders', price: '£145' },
+  { name: 'Online booking setup', price: '£195' },
   { name: 'Quote follow-up sequence', price: '£195' },
+  { name: 'Google Business Profile setup', price: '£149' },
   { name: 'Dashboard or weekly report', price: '£245' },
   { name: 'New landing page or website page', price: 'from £295' },
-  { name: 'AI assistant that answers enquiries', price: 'from £495' },
   { name: 'Team training session (1 hour)', price: '£95' },
 ];
-
 export const CARE_PLAN = {
   name: 'Keep It Running',
   price: '£49/month',
