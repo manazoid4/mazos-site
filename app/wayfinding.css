@@ -78,3 +78,27 @@ body[data-menu-open] .s-sticky { display: none; }
 .mw-footer-groups a { min-height: 32px; display: inline-flex; align-items: center; color: var(--muted); font-size: .8rem; }
 .mw-footer-groups a:hover { color: var(--ink); }
 @media (min-width: 901px) { .mw-footer-groups { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* Where am I: current section in the header */
+.mw-site-header nav a.mw-nav-link[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 3px; text-decoration-color: var(--signal); text-underline-offset: 6px; }
+
+/* Homepage "On this page" jump bar (GOV.UK contents / Apple sub-nav pattern) */
+.mw-onpage { margin-top: 18px; display: flex; gap: 8px; align-items: center; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+.mw-onpage span { flex: 0 0 auto; font-family: var(--mono); font-size: .72rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
+.mw-onpage a { flex: 0 0 auto; min-height: 40px; padding: 0 14px; display: inline-flex; align-items: center; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: .88rem; font-weight: 650; text-decoration: none; }
+.mw-onpage a:hover { background: var(--signal); }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.s-section[id], .s-compare[id], .s-extras[id] { scroll-margin-top: 16px; }
+
+/* Site map */
+.mw-sitemap { padding: 28px 0 40px; display: grid; gap: 28px; }
+.mw-sitemap h2 { font-size: 1.15rem; margin-bottom: 8px; }
+.mw-sitemap ul { list-style: none; display: grid; }
+.mw-sitemap a { min-height: 40px; display: flex; align-items: center; border-bottom: 1px solid var(--soft-line); color: var(--ink); font-weight: 600; }
+@media (min-width: 721px) { .mw-sitemap { grid-template-columns: repeat(3, 1fr); } }
+
+/* Footer bottom: back to top */
+.mw-footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; }
+.mw-footer-bottom a { color: var(--ink); }
+.mw-back-top { font-weight: 700; }
