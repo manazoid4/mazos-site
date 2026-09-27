@@ -1,50 +1,50 @@
 /**
- * A clearly labelled example of the free check report. The business is
- * fictional; the kinds of problem match what real checks find.
+ * A clearly labelled example of the free plan and fixed quote. The business is
+ * fictional; the kind of plan matches what a real reply looks like.
  */
 const FINDINGS = [
   {
     level: 'Fix now',
-    title: '“Book now” on a phone opens a dead page',
-    evidence: 'Tapped “Book now” on the homepage, 22 Sep, 10:14, on a phone-sized screen. It opened an old booking page saying “This business is no longer taking online bookings”. Screenshot attached.',
-    impact: 'Anyone booking from their phone hits a dead end, and has to ring or go elsewhere.',
+    title: 'Enquiries arrive in four places and some are missed',
+    evidence: 'Phone, email, the website form and Instagram messages each go to a different place. Nobody sees them all in one list.',
+    impact: 'A new client who messages on a busy Saturday may not hear back until Tuesday.',
   },
   {
     level: 'Fix soon',
-    title: 'The contact form sends, but nothing arrives',
-    evidence: 'Sent a test message through the contact form, 22 Sep, 10:20. The page said “Thanks”, but it had not reached the listed inbox 24 hours later.',
-    impact: 'Enquiries from the form are likely being lost without anyone knowing.',
+    title: 'Reminders are sent by hand, when someone remembers',
+    evidence: 'The booking tool can send reminders, but they are switched off. Staff text clients the night before instead.',
+    impact: 'Missed reminders mean more no-shows, and the texting takes time every evening.',
   },
   {
-    level: 'Working when checked',
-    title: 'Phone number and opening hours',
-    evidence: 'The number on Google matches the website, and the call button dialled it correctly.',
-    impact: 'Nothing to fix here.',
+    level: 'Working well',
+    title: 'Online booking itself',
+    evidence: 'The booking page is quick and clear on a phone.',
+    impact: 'No change needed. The plan builds on it.',
   },
 ];
 
 export function SampleReport() {
   return (
-    <article className="s-report" aria-label="Example check report for a fictional business">
+    <article className="s-report" aria-label="Example plan and quote for a fictional business">
       <header>
         <span className="s-report-badge">Example</span>
-        <p><strong>Customer Journey Review: Hollybank Hair</strong></p>
-        <p className="s-small">A fictional business, made up to show the format. Checked 22 Sep 2026.</p>
+        <p><strong>Plan and fixed quote: Hollybank Hair</strong></p>
+        <p className="s-small">A fictional business, made up to show the format.</p>
       </header>
       <ol>
         {FINDINGS.map((finding) => (
           <li key={finding.title}>
             <span className={`s-level s-level-${finding.level.split(' ')[0].toLowerCase()}`}>{finding.level}</span>
             <strong>{finding.title}</strong>
-            <p><em>What I tested:</em> {finding.evidence}</p>
+            <p><em>What I found:</em> {finding.evidence}</p>
             <p><em>What it means:</em> {finding.impact}</p>
           </li>
         ))}
       </ol>
-      <p className="s-report-untested"><em>Couldn’t test:</em> whether booking reminders go out. That needs access to your booking system.</p>
+      <p className="s-report-untested"><em>Not included:</em> a new website. The current one works, so there’s no reason to pay for one.</p>
       <footer>
-        <p><strong>Worth fixing?</strong> Yes. A Booking &amp; Enquiry System, fixed quote from <strong>£495</strong>, No VAT added: point “Book now” at your live booking page, make the form reach you, switch on confirmations and reminders, and test it all end to end. Live within 7 working days of access, or you don’t pay the rest.</p>
-        <p className="s-small">If nothing is worth paying for, the review says so. If your current web person can fix it, it says that instead.</p>
+        <p><strong>The quote.</strong> Starter Automation, <strong>£295</strong>: every enquiry lands in one list and gets an instant reply. Optional extra, <strong>£145</strong>: reminders switched on and set up by text. Total £440, No VAT added. Live within 7 working days of access, or you don’t pay the rest.</p>
+        <p className="s-small">If nothing is worth automating, the plan says so.</p>
       </footer>
     </article>
   );

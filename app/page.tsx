@@ -6,10 +6,9 @@ import { LeakCheckForm } from './leak-check/leak-check-form';
 import { CallLink, PricingViewTracker } from './analytics';
 import { StickyCheckCta } from './sticky-cta';
 import { SampleReport } from './sample-report';
-import { REAL_FINDINGS } from './real-findings';
-import { FREE_STEP, GUARANTEE, OFFERS, PAYMENT_TERMS } from './offers';
+import { CARE_PLAN, EXTRAS, FREE_STEP, GUARANTEE, OFFERS, PAYMENT_TERMS, THIRD_PARTY_NOTE } from './offers';
 
-const POSITIONING_EYEBROW = 'For UK small businesses that run on bookings and enquiries';
+const POSITIONING_EYEBROW = 'For UK small businesses and teams, in any trade';
 
 const TRUST = [
   ['You deal with Manazir', 'The person who plans it builds it.'],
@@ -19,15 +18,22 @@ const TRUST = [
 ] as const;
 
 const SYMPTOMS = [
-  'People say they tried to book or get in touch, and gave up.',
+  'Enquiries arrive by phone, email, form and DM, and some get missed.',
   'Quotes go out and nobody follows them up.',
   'Customers explain the same thing three times to three people.',
   'Your evenings go on admin that a system could do.',
 ];
 
+const EXAMPLES = [
+  ['Trades', 'Quote requests logged, priced from a template and followed up after three days.'],
+  ['Salons and clinics', 'Confirmations, reminders and rebooking prompts that send themselves.'],
+  ['Professional services', 'New client details collected once and passed to everyone who needs them.'],
+  ['Shops and cafés', 'Orders, stock notes and reviews gathered in one place instead of five.'],
+];
+
 const STEPS = [
-  ['01', 'Tell me what’s wrong', `Send your link. I review it myself and email you within ${CHECK_REPLY_TIME}.`],
-  ['02', 'I confirm the fix and price', 'A fixed quote, only if it’s worth doing. If it isn’t, I say so.'],
+  ['01', 'Tell me the job', `What eats your week or loses you customers. I reply within ${CHECK_REPLY_TIME}.`],
+  ['02', 'I send a plan and fixed price', 'Start small or go bigger. Extras are priced up front.'],
   ['03', 'You pay half to start', 'Once access is sorted. The rest when it’s live.'],
   ['04', 'Live on the agreed date', 'Or you don’t pay the rest.'],
 ];
@@ -59,12 +65,12 @@ export default function Page() {
       <section className="s-hero" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
         <p className="eyebrow">{POSITIONING_EYEBROW}</p>
         <h1 id="intro-title">I build the systems that turn enquiries into paying customers.</h1>
-        <p className="s-lede">Booking and enquiry systems, automated follow-up and custom tools for UK small businesses. Fewer customers lost, less chasing, evenings back.</p>
+        <p className="s-lede">Automation, connected tools and custom software that take the chasing and admin off you. Start from £295, add only what you need.</p>
         <div className="s-actions">
-          <a className="button button-signal s-button-lg" href="#check">Get my free review</a>
+          <a className="button button-signal s-button-lg" href="#check">Get a free plan and price</a>
           <CallLink className="button" href={BOOKING_URL} placement="hero">Or book a 15-minute call</CallLink>
         </div>
-        <p className="s-note">Start with a {FREE_STEP.name}. Done by hand, emailed within {CHECK_REPLY_TIME}. No call needed.</p>
+        <p className="s-note">{FREE_STEP.name}, emailed within {CHECK_REPLY_TIME}. No call needed, no obligation.</p>
       </section>
 
       <ul className="s-trust" aria-label="Why owners trust Maz Works">
@@ -78,39 +84,39 @@ export default function Page() {
           {SYMPTOMS.map((item) => <li key={item}>{item}</li>)}
         </ul>
         <div className="s-found">
-          <p><strong>Real problems I found reviewing UK businesses in September 2026:</strong></p>
+          <p><strong>The kind of thing I build:</strong></p>
           <ul>
-            {REAL_FINDINGS.map((item) => <li key={item}>{item}</li>)}
+            {EXAMPLES.map(([who, what]) => <li key={who}><strong>{who}:</strong> {what}</li>)}
           </ul>
-          <p>Any one of these can send a customer elsewhere, and the owner would never hear about it.</p>
+          <p>Examples of the work, not client results.</p>
         </div>
       </section>
 
       <section className="s-section s-check" id="check" aria-labelledby="check-title">
         <div className="s-check-copy">
           <p className="eyebrow">{FREE_STEP.name} · {FREE_STEP.price}</p>
-          <h2 id="check-title">Send your link. I’ll go through it like a customer would.</h2>
+          <h2 id="check-title">Tell me the job. I’ll send a plan and a price.</h2>
           <ul className="s-ticks">
-            <li>I try to book, call and enquire, on a phone</li>
-            <li>I follow a real test enquiry through to you</li>
-            <li>I check your Google listing, reminders and follow-up</li>
-            <li>You get the change worth making first, with dated proof</li>
+            <li>One line is enough: what takes too long, or where customers slip away</li>
+            <li>I look at how you work now and what you already use</li>
+            <li>You get a short plan and a fixed price, with any extras listed</li>
+            <li>If it isn’t worth automating, I say so</li>
           </ul>
-          <p className="s-small"><a href="#example">See an example report ↓</a></p>
+          <p className="s-small"><a href="#example">See an example plan ↓</a></p>
         </div>
         <LeakCheckForm />
       </section>
 
       <section className="s-section" id="example" aria-labelledby="example-title">
         <p className="eyebrow">What you get back</p>
-        <h2 id="example-title">An example review.</h2>
+        <h2 id="example-title">An example plan.</h2>
         <SampleReport />
       </section>
 
       <section className="s-section" id="pricing" aria-labelledby="pricing-title">
         <PricingViewTracker targetId="pricing" />
         <p className="eyebrow">What I build</p>
-        <h2 id="pricing-title">Three ways I can help.</h2>
+        <h2 id="pricing-title">Start small. Add what you need.</h2>
         <p className="s-small">Every job starts with the {FREE_STEP.short}. {PAYMENT_TERMS}</p>
         <div className="s-prices">
           {OFFERS.map((offer) => (
@@ -124,11 +130,20 @@ export default function Page() {
             </article>
           ))}
         </div>
+        <div className="s-extras" id="extras">
+          <h3>Optional extras</h3>
+          <p className="s-small">Add any of these to a job. Priced up front and on the same invoice.</p>
+          <ul>
+            {EXTRAS.map((extra) => <li key={extra.name}><span>{extra.name}</span><strong>{extra.price}</strong></li>)}
+          </ul>
+          <p className="s-extras-care"><strong>{CARE_PLAN.name}, {CARE_PLAN.price}.</strong> {CARE_PLAN.body}</p>
+          <p className="s-small">{THIRD_PARTY_NOTE}</p>
+        </div>
         <div className="s-guarantee">
           <strong>The guarantee.</strong> {GUARANTEE} You own everything I build.
         </div>
         <div className="s-actions">
-          <a className="button button-signal" href="#check">Start with the free review</a>
+          <a className="button button-signal" href="#check">Get a free plan and price</a>
         </div>
         <p className="s-small">Introduce a business and I&apos;ll thank you with £40 when they become a paying client. <a href="/faq#do-you-pay-for-referrals">How →</a></p>
       </section>
@@ -172,9 +187,9 @@ export default function Page() {
 
       <section className="s-final" aria-labelledby="final-title">
         <h2 id="final-title">Find out where customers and hours are slipping away.</h2>
-        <p>Free, by hand, within {CHECK_REPLY_TIME}. No call, no obligation.</p>
+        <p>A free plan and fixed price within {CHECK_REPLY_TIME}. No call, no obligation.</p>
         <div className="s-actions">
-          <a className="button button-signal s-button-lg" href="#check">Get my free review</a>
+          <a className="button button-signal s-button-lg" href="#check">Get a free plan and price</a>
           <CallLink className="button" href={BOOKING_URL} placement="footer-cta">Book a 15-minute call</CallLink>
         </div>
       </section>

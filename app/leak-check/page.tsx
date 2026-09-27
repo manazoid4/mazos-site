@@ -5,19 +5,18 @@ import { OG_IMAGE } from '../seo';
 import { CallLink } from '../analytics';
 import { StickyCheckCta } from '../sticky-cta';
 import { SampleReport } from '../sample-report';
-import { REAL_FINDINGS } from '../real-findings';
 import { LeakCheckForm } from './leak-check-form';
 import { NICHE_GUIDES } from '../for/niches';
 
 const PAGE_URL = `${SITE_URL}/leak-check`;
 
 export const metadata: Metadata = {
-  title: { absolute: 'Free Customer Journey Review for UK Small Businesses | Maz Works' },
-  description: 'Losing enquiries, bookings or hours to admin? Send your website or booking link. I review how customers reach you and what happens after, by hand, and email you what to fix first within 3 working days. Free.',
+  title: { absolute: 'Free Plan & Fixed Quote: automate the job that eats your week | Maz Works' },
+  description: 'Tell me the job that eats your week or loses you customers. I reply within 3 working days with a plan and a fixed price, from £295. Free, no obligation, no call needed.',
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: 'Free Customer Journey Review — Maz Works',
-    description: 'Send your website or booking link. I review how customers reach you and what happens after, and email you what to fix first within 3 working days.',
+    title: 'Free Plan & Fixed Quote — Maz Works',
+    description: 'Tell me the job you want off your plate. A plan and fixed price within 3 working days.',
     url: PAGE_URL,
     type: 'website',
     images: [OG_IMAGE],
@@ -25,28 +24,28 @@ export const metadata: Metadata = {
 };
 
 const CHECKS = [
-  'Booking, call and enquiry routes, tested on a phone',
-  'A real test enquiry followed through to see if, and how fast, it reaches you',
-  'Confirmations, reminders and what customers hear after they get in touch',
-  'Quote and enquiry follow-up: what happens when nobody replies',
-  'Google Business Profile, business details and trust signals',
-  'Repeat admin that a simple system could take off your hands',
+  'Enquiries from phone, email, forms and DMs gathered into one list, with an instant reply',
+  'Booking confirmations, reminders and rebooking prompts',
+  'Quotes that follow themselves up',
+  'Invoices and payment reminders sent on time',
+  'Customer details collected once and shared with the team',
+  'Review requests after every job',
 ];
 
 const RETURN = [
-  'One main finding, labelled FIX NOW, FIX SOON or WORKING WHEN CHECKED',
-  'Up to two smaller findings',
-  'Dated evidence of exactly what I tested',
-  'What it stops or slows down for your customers',
-  'The change worth making first, with a fixed quote, only if it is worth paying for',
+  'What to automate first, and why',
+  'What I would leave alone, and why',
+  'A fixed price, starting from £295, with any optional extras listed separately',
+  'Any software or text-message costs you would pay directly',
+  'A date it would be live by',
 ];
 
 export default function LeakCheckPage() {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: 'Maz Works Free Customer Journey Review',
-    description: 'A free manual review of how customers find, contact and book a small business, and what happens after.',
+    name: 'Maz Works Free Plan & Fixed Quote',
+    description: 'A free plan and fixed price for automating a job a small business does by hand.',
     url: PAGE_URL,
     provider: { '@type': 'Organization', name: 'Maz Works', url: SITE_URL },
     areaServed: [
@@ -64,69 +63,66 @@ export default function LeakCheckPage() {
       <SiteHeader />
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="leak-check-title">
-        <p className="eyebrow">Free Customer Journey Review · £0</p>
-        <h1 id="leak-check-title">Send your link. I’ll go through it like a customer would.</h1>
-        <p>I try to book, call and enquire, follow a real test enquiry, and look at what happens after: confirmations, follow-up and the admin behind it. You get the change worth making first, in plain English, with dated proof.</p>
+        <p className="eyebrow">Free Plan &amp; Fixed Quote · £0</p>
+        <h1 id="leak-check-title">Tell me the job. I’ll send a plan and a price.</h1>
+        <p>The chasing, copying, reminding or admin that eats your week, or the point where customers slip away. I look at how you work now and reply with a short plan and a fixed price, from £295.</p>
         <div className="mw-actions">
-          <a className="button button-signal" href="#leak-check-form">Get my free review</a>
+          <a className="button button-signal" href="#leak-check-form">Get my free plan and price</a>
           <CallLink className="button" href={BOOKING_URL} placement="leak-check-hero">Or book a 15-minute call</CallLink>
         </div>
-        <p className="mw-hero-note">Reviewed by hand · emailed within {CHECK_REPLY_TIME} · no call, no obligation</p>
+        <p className="mw-hero-note">Written by me · emailed within {CHECK_REPLY_TIME} · no call, no obligation</p>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="leak-check-send-title">
         <p className="eyebrow">Send your link</p>
-        <h2 id="leak-check-send-title">Three fields. Then I review it myself.</h2>
-        <p className="mw-qw-lead">I’ll reply by email within {CHECK_REPLY_TIME}. Free for any UK business. No website? Send your booking, Google or Facebook link.</p>
+        <h2 id="leak-check-send-title">Three quick answers. Then I plan it myself.</h2>
+        <p className="mw-qw-lead">I’ll reply by email within {CHECK_REPLY_TIME}. Free for any UK business, in any trade.</p>
         <LeakCheckForm />
       </section>
 
       <section className="mw-qw-section" aria-labelledby="leak-check-walkthrough-title">
         <p className="eyebrow">Prefer to talk it through?</p>
-        <h2 id="leak-check-walkthrough-title">Show me how a new customer reaches you.</h2>
-        <p className="mw-qw-lead">We&apos;ll check the journey together in 15 minutes. Free, and optional.</p>
+        <h2 id="leak-check-walkthrough-title">Show me the job on a call.</h2>
+        <p className="mw-qw-lead">Walk me through how it works now. 15 minutes, free and optional.</p>
         <div className="mw-actions">
           <CallLink className="button" href={BOOKING_URL} placement="leak-check-walkthrough">Book the 15-minute call</CallLink>
         </div>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="leak-check-checks-title">
-        <p className="eyebrow">What I check</p>
-        <h2 id="leak-check-checks-title">The things I look for first.</h2>
+        <p className="eyebrow">Jobs I automate most</p>
+        <h2 id="leak-check-checks-title">If you do it by hand every week, it probably doesn’t need you.</h2>
         <ul className="mw-qw-list">
           {CHECKS.map((item) => <li key={item}>{item}</li>)}
         </ul>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="leak-check-examples-title">
-        <p className="eyebrow">Real examples</p>
-        <h2 id="leak-check-examples-title">What I found reviewing UK businesses in September 2026.</h2>
-        <ul className="mw-qw-list">
-          {REAL_FINDINGS.map((item) => <li key={item}>{item}</li>)}
-        </ul>
-        <p className="mw-qw-lead">Not your trade? The same review works for any business customers book, call or enquire with. By business type: {NICHE_GUIDES.map((guide, index) => (
+        <p className="eyebrow">Any trade</p>
+        <h2 id="leak-check-examples-title">Built for any business that runs on customers.</h2>
+        <p className="mw-qw-lead">Trades, salons, clinics, cafés, shops, agencies and professional services. Guides by business type: {NICHE_GUIDES.map((guide, index) => (
           <span key={guide.id}>{index ? ' · ' : ''}<a href={`/for/${guide.id}`}>{guide.name}</a></span>
         ))}</p>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="leak-check-return-title">
         <p className="eyebrow">What you get back</p>
-        <h2 id="leak-check-return-title">A useful answer, not a sales report.</h2>
+        <h2 id="leak-check-return-title">A short plan and a fixed price.</h2>
         <ul className="mw-qw-list">
           {RETURN.map((item) => <li key={item}>{item}</li>)}
         </ul>
-        <p className="mw-qw-lead">Honest outcomes, always allowed: &quot;Your current provider should be able to fix this.&quot; Or: &quot;I couldn&apos;t find anything I&apos;d honestly charge you to fix.&quot;</p>
+        <p className="mw-qw-lead">Honest outcomes, always allowed: &quot;This isn&apos;t worth automating yet.&quot; Or: &quot;The tool you already pay for can do this. Here&apos;s the setting.&quot;</p>
         <div className="s-report-wrap"><SampleReport /></div>
       </section>
 
       <section className="mw-resource-cta" aria-labelledby="leak-check-cta-title">
         <div>
           <p className="eyebrow">Free first step</p>
-          <h2 id="leak-check-cta-title">Want me to check yours?</h2>
-          <p>Send the link. No discovery call before you get something useful.</p>
+          <h2 id="leak-check-cta-title">What would you take off your plate first?</h2>
+          <p>One line is enough. No discovery call before you get something useful.</p>
         </div>
         <div className="mw-actions">
-          <a className="button button-signal" href="#leak-check-form">Get the free review</a>
+          <a className="button button-signal" href="#leak-check-form">Get the free plan and price</a>
         </div>
       </section>
 

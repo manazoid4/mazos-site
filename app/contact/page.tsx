@@ -8,7 +8,7 @@ import { FREE_STEP, OFFERS, PAYMENT_TERMS } from '../offers';
 
 export const metadata: Metadata = {
   title: { absolute: 'Contact Maz Works | Booking systems, automation and custom tools' },
-  description: 'Tell Manazir what you need: a booking and enquiry system, automated follow-up, a custom tool or a new website. One line is enough. Fixed quote, No VAT added.',
+  description: 'Tell Manazir what you need: automation from £295, a joined-up business system, an AI assistant, custom software or a website. One line is enough. Fixed quote, No VAT added.',
   alternates: { canonical: `${SITE_URL}/contact` },
   openGraph: { images: [OG_IMAGE], title: 'Contact Maz Works', description: 'Tell me what you need built. Fixed quote, No VAT added.', url: `${SITE_URL}/contact`, type: 'website' },
 };
@@ -34,7 +34,7 @@ export default function ContactPage() {
           <ul className="s-ticks">
             {BIGGER_JOBS.map((job) => <li key={job.name}><strong>{job.name}, {job.price}.</strong> {job.body}</li>)}
           </ul>
-          <p className="s-small">{PAYMENT_TERMS} You own everything I build.</p>
+          <p className="s-small">Optional extras from £95, priced up front. {PAYMENT_TERMS} You own everything I build.</p>
         </div>
         <DemoRequestForm />
       </section>
