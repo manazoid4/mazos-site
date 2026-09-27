@@ -12,7 +12,7 @@ const PAGE_URL = `${SITE_URL}/leak-check`;
 
 export const metadata: Metadata = {
   title: { absolute: 'Free Plan & Fixed Quote: automate the job that eats your week | Maz Works' },
-  description: 'Tell me the job that eats your week or loses you customers. I reply within 3 working days with a plan and a fixed price, from £295. Free, no obligation, no call needed.',
+  description: 'Tell me the job that eats your week or loses you customers. I reply within 3 working days with a plan and a fixed price, from £195. Free, no obligation, no call needed.',
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: 'Free Plan & Fixed Quote — Maz Works',
@@ -35,7 +35,7 @@ const CHECKS = [
 const RETURN = [
   'What to automate first, and why',
   'What I would leave alone, and why',
-  'A fixed price, starting from £295, with any optional extras listed separately',
+  'A fixed price, starting from £195, with any optional extras listed separately',
   'Any software or text-message costs you would pay directly',
   'A date it would be live by',
 ];
@@ -65,7 +65,7 @@ export default function LeakCheckPage() {
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="leak-check-title">
         <p className="eyebrow">Free Plan &amp; Fixed Quote · £0</p>
         <h1 id="leak-check-title">Tell me the job. I’ll send a plan and a price.</h1>
-        <p>The chasing, copying, reminding or admin that eats your week, or the point where customers slip away. I look at how you work now and reply with a short plan and a fixed price, from £295.</p>
+        <p>The chasing, copying, reminding or admin that eats your week, or the point where customers slip away. I look at how you work now and reply with a short plan and a fixed price, from £195.</p>
         <div className="mw-actions">
           <a className="button button-signal" href="#leak-check-form">Get my free plan and price</a>
           <CallLink className="button" href={BOOKING_URL} placement="leak-check-hero">Or book a 15-minute call</CallLink>

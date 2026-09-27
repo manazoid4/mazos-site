@@ -115,7 +115,7 @@ test('Objects is discoverable from shared chrome, homepage and sitemap while dig
   assert.match(lab, /Maz Works Objects/);
   assert.match(lab, /Tap-to-review stands and signs, fixed price from £29/);
   assert.match(home, /Tell me the job/);
-  assert.match(home, /£295/);
+  assert.match(home, /£195/);
   assert.match(objects, /href="\/#pricing"/);
   assert.match(objects, /href="\/lab"/);
   assert.match(objects, /href="\/demos"/);
