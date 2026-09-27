@@ -18,6 +18,7 @@ This repo is the Maz Works marketing site. Before any sales, lead, offer or copy
 - Leads, call list, pitches: PRIVATE repo https://github.com/manazoid4/maz-works-leads. Never copy lead data into this public repo.
 
 Local vault path: see the private memory repo.
+**Positioning (Maz, 27 Sep 2026, non-negotiable):** Maz Works builds the systems that turn enquiries into paying customers and take admin off the owner: booking and enquiry systems, automated follow-up, admin automation, custom tools and websites. It is **not** a website-fix shop or a small-time web agency. Never describe the work as "website repairs", "small fixes", "quick fixes" or "fix your broken link" in site copy, posts, outreach or quotes. Lead with outcomes (more enquiries become customers, less chasing, hours back), not with tiny tasks. Offers and prices live only in `app/offers.ts` (Offer v6: Booking & Enquiry System from £495, Follow-up & Admin Automation from £950, Custom Systems & Websites from £1,500, free first step = Free Customer Journey Review); change them there, never hard-code prices elsewhere.
 Rules: branch + PR, never push to main. Never invent testimonials, clients or results. **Never publish Maz's location (town, county, address), personal email or phone number** in this public repo or on the site; the public contact is info@mazworks.uk only.
 
 ## Working with Maz (read every session)

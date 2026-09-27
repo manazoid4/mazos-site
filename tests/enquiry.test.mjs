@@ -29,13 +29,14 @@ test('the enquiry captures which service the visitor actually wants', async () =
 
   assert.match(html, /What do you need help with\?/);
   for (const label of [
-    'Website or landing page',
-    'Automating repetitive admin',
-    'Custom software or an internal tool',
+    'Booking & Enquiry System (from £495)',
+    'Follow-up & Admin Automation (from £950)',
+    'New website (from £1,500)',
+    'Custom system, portal or internal tool (from £1,500)',
     'Tap-to-review stands and signs',
     'Not sure yet',
   ]) {
-    assert.ok(html.includes(label), `Missing service option: ${label}`);
+    assert.ok(html.includes(label.replace(/&/g, '&amp;')), `Missing service option: ${label}`);
   }
 
   // CTAs deep-link with ?service=<id>; the ids must stay stable for those links to work.
@@ -49,7 +50,7 @@ test('an enquiry can ask for a quote or an answer instead of an unpaid build', a
   const html = await readPage('/contact');
 
   assert.match(html, /What would be most useful next\?/);
-  assert.match(html, /A free check of my website/);
+  assert.match(html, /A free review of how customers reach me/);
   assert.doesNotMatch(html, /free live demo|free demo/i);
   assert.match(html, /A fixed quote for a specific job/);
   assert.match(html, /Just answer my question first/);

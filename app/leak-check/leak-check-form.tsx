@@ -15,7 +15,7 @@ const FAILURE_COPY: Record<FailureReason, string> = {
   network: 'That could not reach me — your connection may have dropped.',
 };
 
-const SERVICE_LABEL = 'Free Booking & Enquiry Check: review my website';
+const SERVICE_LABEL = 'Free Customer Journey Review';
 
 export function LeakCheckForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -57,7 +57,7 @@ export function LeakCheckForm() {
     setValidationError('');
     setInvalidField('');
 
-    const subject = `Maz Works — free Booking & Enquiry Check — ${website}`;
+    const subject = `Maz Works — free Customer Journey Review — ${website}`;
     setRecoveryHref(buildRecoveryMailto(subject, [
       ['Name', name],
       ['Email', email],
@@ -73,7 +73,7 @@ export function LeakCheckForm() {
       website,
       service: SERVICE_LABEL,
       problem: `Please review ${website} for customer-facing leaks and friction.`,
-      next_step: 'Email me the free check',
+      next_step: 'Email me the free review',
       source,
       _replyto: email,
       _subject: subject,
@@ -108,7 +108,7 @@ export function LeakCheckForm() {
         }
       }}
     >
-      <input type="hidden" name="_subject" value="Maz Works — free Booking & Enquiry Check" />
+      <input type="hidden" name="_subject" value="Maz Works — free Customer Journey Review" />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="service" value={SERVICE_LABEL} />
       <p className="mw-form-kicker">Three fields. No call needed.</p>
@@ -160,14 +160,14 @@ export function LeakCheckForm() {
 
       <div className="mw-form-submit">
         <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
-          {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Get my free check'}
+          {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Get my free review'}
         </button>
-        <p>I check it myself and email you within {CHECK_REPLY_TIME}. Free, no obligation.</p>
+        <p>I review it myself and email you within {CHECK_REPLY_TIME}. Free, no obligation.</p>
         <p id="leak-check-error" className="mw-form-status mw-form-error" role="alert">{validationError}</p>
         <p className="mw-form-status" role="status" aria-live="polite">
           {submitState === 'sent' && (
             <>
-              Got it. I’ll email your check within {CHECK_REPLY_TIME}.{' '}
+              Got it. I’ll email your review within {CHECK_REPLY_TIME}.{' '}
               <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); focusField('name'); }}>Send another</button>
             </>
           )}
