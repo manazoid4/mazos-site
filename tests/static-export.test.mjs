@@ -14,7 +14,8 @@ const exportRoot = path.join(root, 'out');
 // 1100 -> 1050 on 26 Sep: audit pass removed the duplicate problem chooser.
 // 1050 -> 1250 on 27 Sep (sales overhaul): the free-check form and a labelled example report now
 // live on the homepage; the second enquiry form, project list and newsletter moved off it.
-const WORD_BUDGET = 1250;
+// 1250 -> 1400 on 27 Sep (Offer v7): priced optional extras and the care plan added to the homepage.
+const WORD_BUDGET = 1400;
 // Same count as the homepage: all text inside <main>, including header, footer and closed answers.
 const CASE_STUDY_WORD_BUDGET = 320;
 
@@ -61,11 +62,12 @@ async function internalTargetExists(urlPath) {
 test('homepage positions Maz Works as a systems builder, not a website-fix shop (Maz, 27 Sep)', async () => {
   const html = await readPage('/');
   assert.match(html, /I build the systems that turn enquiries into paying customers/);
-  assert.match(html, /automated follow-up and custom tools/);
+  assert.match(html, /Automation, connected tools and custom software/);
+  assert.match(html, /For UK small businesses and teams, in any trade/);
   for (const smallTime of [/website fix/i, /small fixes/i, /quick fix/i, /Enquiry Repair/, /fix what’s broken/i, /Maz Works is new/i]) {
     assert.doesNotMatch(html, smallTime, `homepage reads as small-time: ${smallTime}`);
   }
-  assert.match(html, /Tell me what’s wrong/);
+  assert.match(html, /Tell me the job/);
   for (const filler of [/Inspect the work before reading more claims/, /Operations thinking/, /What gets measured/, /href="\/whats-new/, /£150/, /Quick Win/, /£39\/month/, /£795/, /founding/i, /hacked/i, /class="mw-builds"/]) {
     assert.doesNotMatch(html, filler);
   }
@@ -94,8 +96,8 @@ test('homepage shows a clearly labelled example report, not a real client', asyn
   const html = await readPage('/');
   assert.match(html, /id="example"/);
   assert.match(html, /A fictional business, made up to show the format/);
-  for (const level of ['Fix now', 'Fix soon', 'Working when checked']) assert.match(html, new RegExp(level));
-  assert.match(html, /Couldn’t test/);
+  for (const level of ['Fix now', 'Fix soon', 'Working well']) assert.match(html, new RegExp(level));
+  assert.match(html, /Total £440/);
 });
 
 test('homepage has one set of service routes, not a duplicate problem chooser', async () => {
@@ -123,19 +125,24 @@ test('homepage proof is limited to real, honestly labelled work', async () => {
   assert.doesNotMatch(lab, /href="https:\/\/github.com\/manazoid4\/maz-pocket"/);
 });
 
-test('homepage shows three tiers from app/offers.ts, with from-prices and no retired offers', async () => {
+test('homepage shows a low-cost Starter, two bigger tiers, priced extras and a care plan (Offer v7)', async () => {
   const html = await readPage('/');
-  for (const [name, price] of [['Booking &amp; Enquiry System', 'From £495'], ['Follow-up &amp; Admin Automation', 'From £950'], ['Custom Systems &amp; Websites', 'From £1,500']]) {
+  for (const [name, price] of [['Starter Automation', '£295'], ['Business System', 'From £1,250'], ['Custom Software &amp; Websites', 'From £2,950']]) {
     assert.match(html, new RegExp(name));
     assert.match(html, new RegExp(price));
   }
-  assert.match(html, /Free Customer Journey Review/);
+  assert.match(html, /id="extras"/);
+  for (const extra of ['Extra automation', 'Appointment reminders', 'Review requests', 'Google Business Profile setup', 'AI assistant that answers enquiries']) {
+    assert.match(html, new RegExp(extra));
+  }
+  assert.match(html, /Keep It Running[\s\S]{0,30}£49\/month/);
+  assert.match(html, /Free Plan &amp; Fixed Quote/);
   assert.match(html, /Half to start, the rest when it is live/);
   assert.match(html, /No VAT added/);
   assert.match(html, /you own everything i build/i);
   assert.match(html, /live within 7 working days of me getting access/i);
   assert.match(html, /£40 when they become a paying client/);
-  for (const retired of [/£150/, /£395/, /£249/, /£595/, /Quick Win/, /£795/, /£39\/month/, /founding/i, /Contact Setup/, /Enquiry Check/]) {
+  for (const retired of [/£150/, /£395/, /£249/, /£595/, /Quick Win/, /£795/, /£39\/month/, /founding/i, /Contact Setup/, /Enquiry Check/, /Customer Journey Review/, /From £495/, /From £950/, /From £1,500/]) {
     assert.doesNotMatch(html, retired, `retired offer still on homepage: ${retired}`);
   }
   assert.doesNotMatch(html, /href="\/quick-win"/);
@@ -144,7 +151,7 @@ test('homepage shows three tiers from app/offers.ts, with from-prices and no ret
   }
 
   const contact = await readPage('/contact');
-  for (const price of ['From £495', 'From £950', 'From £1,500']) assert.match(contact, new RegExp(price));
+  for (const price of ['£295', 'From £1,250', 'From £2,950']) assert.match(contact, new RegExp(price));
   assert.match(contact, /No VAT added/);
 });
 
@@ -162,8 +169,8 @@ test('homepage stays compact with four visible process steps', async () => {
   for (const id of ['check', 'example', 'pricing', 'process', 'about', 'faq']) {
     assert.match(html, new RegExp(`id="${id}"`));
   }
-  assert.match(html, /Tell me what’s wrong/);
-  assert.match(html, /I confirm the fix and price/);
+  assert.match(html, /Tell me the job/);
+  assert.match(html, /I send a plan and fixed price/);
   assert.match(html, /You pay half to start/);
   assert.match(html, /Live on the agreed date/);
   assert.match(html, /href="\/faq"/);
@@ -287,7 +294,7 @@ test('structured data reflects Maz Works founder and broad service positioning',
   assert.equal(business.address.addressLocality, undefined, 'never publish Maz\'s town');
   assert.equal(business.areaServed.name, 'United Kingdom');
   assert.equal(business.makesOffer[0].price, '0');
-  assert.deepEqual(business.makesOffer.slice(1).map((offer) => offer.priceSpecification.minPrice), [495, 950, 1500]);
+  assert.deepEqual(business.makesOffer.slice(1).map((offer) => offer.priceSpecification.minPrice), [295, 1250, 2950]);
   for (const term of ['booking', 'enquiry', 'Google Business Profile', 'Websites', 'rebuilds', 'automation', 'software']) {
     assert.ok(business.description.toLowerCase().includes(term.toLowerCase()), `structured data missing ${term}`);
   }
@@ -391,11 +398,11 @@ test('every sitemap entry points at a page that was actually exported', async ()
   assert.deepEqual(broken, [], `sitemap points at missing pages: ${broken.join(', ')}`);
 });
 
-test('retired Quick Win page stays reachable but noindexed and points to the booking system', async () => {
+test('retired Quick Win page stays reachable but noindexed and points to Starter Automation', async () => {
   const html = await readPage('/quick-win');
   assert.match(html, /noindex/);
-  assert.match(html, /Booking &amp; Enquiry System/);
-  assert.match(html, /From £495/);
+  assert.match(html, /Starter Automation/);
+  assert.match(html, /£295/);
   assert.match(html, /\?service=repair#contact/);
   assert.doesNotMatch(html, /£150/);
 

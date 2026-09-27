@@ -11,12 +11,12 @@ test('each niche guide exports with real examples, a self-check, prices and a ta
     const html = await readFile(path.join(exportRoot, 'for', `${id}.html`), 'utf8').catch(() => readFile(path.join(exportRoot, 'for', id, 'index.html'), 'utf8'));
     assert.match(html, /Real examples/, `${id}: examples section`);
     assert.match(html, /Check yours in 60 seconds/, `${id}: self-check section`);
-    assert.match(html, /From £(495|950|1,500)/, `${id}: Offer v6 price`);
-    assert.doesNotMatch(html, /£(395|249|595)\b/, `${id}: retired Offer v5 price`);
+    assert.match(html, /£295|From £(1,250|2,950)/, `${id}: Offer v7 price`);
+    assert.doesNotMatch(html, /£(395|249|595)\b|From £(495|950|1,500)\b/, `${id}: retired Offer v5/v6 price`);
     assert.doesNotMatch(html, /£150 fixed/, `${id}: retired Quick Win price`);
     assert.doesNotMatch(html, /Quick Win/, `${id}: retired Quick Win name`);
     assert.doesNotMatch(html, /hacked/i, `${id}: must not say hacked`);
-    assert.match(html, /Not your trade\? The same review works for any business customers book, call or enquire with\./, `${id}: broad-audience line`);
+    assert.match(html, /Not your trade\? The same approach works for any business customers book, call or enquire with\./, `${id}: broad-audience line`);
     assert.match(html, new RegExp(`/leak-check\\?src=for-${id}`), `${id}: tagged free check link`);
     assert.match(html, new RegExp(`<link rel="canonical" href="[^"]*/for/${id}"`), `${id}: canonical`);
     // Anonymised on purpose: never name the businesses the examples came from.
@@ -28,6 +28,6 @@ test('each niche guide exports with real examples, a self-check, prices and a ta
 
 test('Leak Check page links every niche guide and shows real examples', async () => {
   const html = await readFile(path.join(exportRoot, 'leak-check.html'), 'utf8').catch(() => readFile(path.join(exportRoot, 'leak-check', 'index.html'), 'utf8'));
-  assert.match(html, /What I found reviewing UK businesses in September 2026/);
+  assert.match(html, /Built for any business that runs on customers/);
   for (const id of NICHES) assert.match(html, new RegExp(`href="/for/${id}"`));
 });

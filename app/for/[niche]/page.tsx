@@ -37,10 +37,10 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <h1 id="niche-title">{guide.title}.</h1>
         <p>{guide.lede}</p>
         <div className="mw-actions">
-          <a className="button button-signal" href={checkHref}>Get a free review</a>
+          <a className="button button-signal" href={checkHref}>Get a free plan and price</a>
         </div>
-        <p className="mw-hero-note">Free · no call required · I review it myself</p>
-        <p className="mw-hero-note">Not your trade? The same review works for any business customers book, call or enquire with.</p>
+        <p className="mw-hero-note">Free · no call required · I plan it myself</p>
+        <p className="mw-hero-note">Not your trade? The same approach works for any business customers book, call or enquire with.</p>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="niche-examples-title">
@@ -77,10 +77,10 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <div>
           <p className="eyebrow">Free first step</p>
           <h2 id="niche-cta-title">Not sure what yours is leaking?</h2>
-          <p>Send your link. I&apos;ll review it myself and tell you what to fix first.</p>
+          <p>Tell me the job. I&apos;ll send a plan and a fixed price.</p>
         </div>
         <div className="mw-actions">
-          <a className="button button-signal" href={checkHref}>Get the free review</a>
+          <a className="button button-signal" href={checkHref}>Get the free plan and price</a>
         </div>
       </section>
 

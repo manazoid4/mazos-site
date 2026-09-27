@@ -21,42 +21,36 @@ async function readPage(route) {
   throw new Error(`Missing static page for ${route}`);
 }
 
-test('the free Customer Journey Review has a dedicated shareable acquisition page', async () => {
+test('the Free Plan & Fixed Quote has a dedicated shareable acquisition page', async () => {
   const html = await readPage('/leak-check');
 
-  assert.match(html, /Free Customer Journey Review/);
-  assert.doesNotMatch(html, /Booking &amp; Enquiry Check/);
+  assert.match(html, /Free Plan &amp; Fixed Quote/);
+  assert.doesNotMatch(html, /Customer Journey Review|Booking &amp; Enquiry Check/);
   assert.match(html, /Three fields\. No call needed\./);
   assert.match(html, /within 3 working days/i);
   assert.doesNotMatch(html, /5 working days/i);
   assert.match(html, /any UK business/);
   assert.doesNotMatch(html, /Nottingham/);
-  assert.match(html, /Reviewed by hand/i);
   assert.match(html, /EXAMPLE|>Example</);
   assert.match(html, /A fictional business/);
-  assert.match(html, /Your current provider should be able to fix this/);
-  assert.match(html, /I couldn.t find anything I.d honestly charge you to fix/);
-  assert.match(html, /FIX NOW/);
-  assert.match(html, /FIX SOON/);
-  assert.match(html, /WORKING WHEN CHECKED/);
-  assert.match(html, /Up to two smaller findings/);
-  assert.match(html, /Dated evidence/);
-  assert.match(html, /We.ll check the journey together in 15 minutes/);
+  assert.match(html, /This isn&#x27;t worth automating yet|This isn.t worth automating yet/);
+  assert.match(html, /A fixed price, starting from £295/);
   assert.doesNotMatch(html, /hacked/i);
   assert.match(html, /cal\.com\/mazworks\/quick-chat/);
   assert.match(html, /rel="canonical" href="https:\/\/www\.mazworks\.uk\/leak-check"/);
 });
 
-test('the free check asks only for name, email and website before submission', async () => {
+test('the free plan form asks for name, email and the job, with the website optional', async () => {
   const html = await readPage('/leak-check');
   const form = /<form[^>]*id="leak-check-form"[\s\S]*?<\/form>/.exec(html)?.[0] || '';
 
   assert.ok(form, 'free check form should be present');
-  for (const name of ['name', 'email', 'website']) {
+  for (const name of ['name', 'email', 'problem', 'website']) {
     assert.match(form, new RegExp(`name="${name}"`));
   }
-  assert.doesNotMatch(form, /name="business"|name="problem"|name="nextStep"/);
-  assert.match(form, /Get my free review/);
+  assert.match(form, /<input[^>]*name="website"(?![^>]*required)[^>]*>/, 'website is optional');
+  assert.doesNotMatch(form, /name="business"|name="nextStep"/);
+  assert.match(form, /Get my free plan and price/);
 });
 
 test('the Leak Check reuses the resilient enquiry delivery path', async () => {
@@ -76,7 +70,7 @@ test('homepage and shared navigation send the free first step to the dedicated p
   // The homepage carries the check form itself; shared navigation points at the dedicated page.
   assert.match(home, /id="check"/);
   assert.match(home, /id="leak-check-form"/);
-  assert.match(home, /href="#check">Get my free review/);
-  assert.match(home, /href="\/leak-check">Free review/);
+  assert.match(home, /href="#check">Get a free plan and price/);
+  assert.match(home, /href="\/leak-check">Free quote/);
   assert.doesNotMatch(home, /\?service=leak-check#contact/);
 });

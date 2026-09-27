@@ -5,52 +5,52 @@ export type MazWorksFaq = {
 
 export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   {
-    question: 'Is the review really free? What’s the catch?',
-    answer: 'It’s free. I go through how customers reach you by hand and email you what to fix first within 3 working days. If nothing is worth paying for, I say so. No call, no automated sales emails, no obligation.',
+    question: 'Is the plan really free? What’s the catch?',
+    answer: 'It’s free. Tell me the job you want off your plate and I reply within 3 working days with a plan and a fixed price. If it isn’t worth automating, I say so. No call, no automated sales emails, no obligation.',
   },
   {
     question: 'What do you actually build?',
-    answer: 'Systems that turn enquiries into paying customers and take admin off your hands: booking and enquiry systems, confirmations and reminders, automated follow-up, internal tools, customer portals and websites. Built around the tools you already use where that makes sense.',
+    answer: 'Automation, connected tools and custom software for small businesses: enquiries gathered and answered, quotes and invoices that follow themselves up, reminders, shared customer records, internal tools, customer portals and websites with the system built in.',
   },
   {
     question: 'How much does it cost?',
-    answer: 'The review is free. A Booking & Enquiry System starts from £495. Follow-up & Admin Automation starts from £950. Custom Systems & Websites start from £1,500. You get a fixed quote before any work starts. No VAT added.',
+    answer: 'Starter Automation is £295 for one job set up to run itself. A Business System, where several jobs are joined up, starts from £1,250. Custom Software & Websites start from £2,950. Optional extras, like reminders or an AI enquiry assistant, are priced up front and added to the same invoice. Keep It Running is £49 a month. No VAT added.',
   },
   {
-    question: 'What do I get in a Booking & Enquiry System?',
-    answer: 'The route from someone finding you to being booked in, built and tested: booking, enquiry and call routes that reach you, automatic confirmations and reminders, and your Google Business Profile matched to your site. You get a dated before-and-after record of what changed.',
+    question: 'What can the £295 Starter do?',
+    answer: 'One job you currently do by hand, set up to run itself on the tools you already use. For example: every enquiry logged in one list with an instant reply, or booking confirmations and reminders sent automatically. Live within 7 working days of access.',
   },
   {
-    question: 'What does automation look like for a small business?',
-    answer: 'Things like quotes that follow themselves up, enquiries that land in one place with the right details, reminders that go out without you remembering, and repeat admin handled by a simple system instead of your evenings.',
+    question: 'How do the optional extras work?',
+    answer: 'They are small add-ons with a fixed price, like text reminders (£145), review requests (£145) or an extra automation (£195). Add them when you order, or later. They go on the same invoice, so there are no surprise costs.',
   },
   {
     question: "What's the guarantee?",
-    answer: 'A Booking & Enquiry System is live within 7 working days of me getting access, or I waive the final payment and still finish. Larger jobs get a dated plan in the quote. If I cannot deliver what we agreed, I refund your deposit.',
+    answer: 'Starter Automation is live within 7 working days of me getting access, or I waive the final payment and still finish. Larger jobs get a dated plan in the quote. If I cannot deliver what we agreed, I refund your deposit.',
   },
   {
     question: 'How does payment work?',
-    answer: 'A fixed quote first. Then half to start and the rest when it is live. I confirm access before taking any payment. No VAT added.',
+    answer: 'A fixed quote first. Then half to start and the rest when it is live, all on one invoice. Software subscriptions or text-message costs, if any, are paid by you directly at cost. No VAT added.',
   },
   {
     question: 'Do I own what you build?',
     answer: 'Yes. Every account stays yours. I never need your passwords; add me as a user, then remove me after.',
   },
   {
-    question: 'Do I need a new website?',
-    answer: "Often not. Many booking and enquiry problems are solved with the tools you already have. I'll say plainly if a new site or a custom system would genuinely help instead.",
+    question: 'Is this only for certain trades?',
+    answer: 'No. If your business has customers, enquiries and admin, it fits: trades, salons, clinics, cafés, shops, agencies, charities and professional services, anywhere in the UK.',
   },
   {
-    question: 'What if my current web person can fix it?',
-    answer: "Then I'll tell you that, for free, and you pay nothing. I'd rather you know than pay me for something someone else already handles.",
+    question: 'Do I need a new website?',
+    answer: "Often not. Most of this works with the website and tools you already have. I'll say plainly if a new site or a custom system would genuinely help.",
   },
   {
     question: 'Do I need to book a call?',
-    answer: "No. Send your website for the free review, or send one line with the enquiry form. Book the 15-minute call only if you'd rather talk it through.",
+    answer: "No. Send one line about the job with the form and I reply by email. Book the 15-minute call only if you'd rather talk it through.",
   },
   {
     question: 'Can you work with what I already use?',
-    answer: 'Yes. Wix, Squarespace, WordPress, Square, Fresha, Booksy, Google Workspace, spreadsheets and most others. I build on what you have wherever practical.',
+    answer: 'Yes. Google Workspace, Microsoft 365, spreadsheets, Wix, Squarespace, WordPress, Square, Fresha, Booksy, Xero, QuickBooks and most others. I build on what you have wherever practical.',
   },
   {
     question: 'Do you pay for referrals?',
@@ -60,7 +60,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
 
 export const HOMEPAGE_FAQS = [
   MAZ_WORKS_FAQS[0],
-  MAZ_WORKS_FAQS[1],
-  MAZ_WORKS_FAQS[2],
-  MAZ_WORKS_FAQS[7],
+  MAZ_WORKS_FAQS[3],
+  MAZ_WORKS_FAQS[4],
+  MAZ_WORKS_FAQS[8],
 ];

@@ -15,7 +15,7 @@ const FAILURE_COPY: Record<FailureReason, string> = {
   network: 'That could not reach me — your connection may have dropped.',
 };
 
-const SERVICE_LABEL = 'Free Customer Journey Review';
+const SERVICE_LABEL = 'Free Plan & Fixed Quote';
 
 export function LeakCheckForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -37,17 +37,18 @@ export function LeakCheckForm() {
     const data = new FormData(form);
     const name = String(data.get('name') || '').trim();
     const email = String(data.get('email') || '').trim();
+    const task = String(data.get('problem') || '').trim();
     const website = String(data.get('website') || '').trim();
     const honey = String(data.get('_honey') || '').trim();
     const page = window.location.pathname === '/' ? 'homepage' : window.location.pathname.replace(/^\//, '');
     const source = new URLSearchParams(window.location.search).get('src')?.trim() || `direct (${page})`;
 
-    const missing = !name ? 'name' : !email ? 'email' : !website ? 'website' : '';
+    const missing = !name ? 'name' : !email ? 'email' : !task ? 'problem' : '';
     if (missing) {
       setInvalidField(missing);
       setValidationError(
-        missing === 'website'
-          ? 'Add your website or booking link. No website? Your Google or Facebook page works.'
+        missing === 'problem'
+          ? 'Add one line about the job you want off your plate.'
           : `Add your ${missing} so I can reply.`,
       );
       focusField(missing);
@@ -57,10 +58,11 @@ export function LeakCheckForm() {
     setValidationError('');
     setInvalidField('');
 
-    const subject = `Maz Works — free Customer Journey Review — ${website}`;
+    const subject = `Maz Works — free plan and quote — ${website || name}`;
     setRecoveryHref(buildRecoveryMailto(subject, [
       ['Name', name],
       ['Email', email],
+      ['The job', task],
       ['Website', website],
       ['Source', source],
     ]));
@@ -72,8 +74,8 @@ export function LeakCheckForm() {
       email,
       website,
       service: SERVICE_LABEL,
-      problem: `Please review ${website} for customer-facing leaks and friction.`,
-      next_step: 'Email me the free review',
+      problem: task,
+      next_step: 'Email me a plan and fixed price',
       source,
       _replyto: email,
       _subject: subject,
@@ -108,7 +110,7 @@ export function LeakCheckForm() {
         }
       }}
     >
-      <input type="hidden" name="_subject" value="Maz Works — free Customer Journey Review" />
+      <input type="hidden" name="_subject" value="Maz Works — free plan and quote" />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="service" value={SERVICE_LABEL} />
       <p className="mw-form-kicker">Three fields. No call needed.</p>
@@ -140,15 +142,25 @@ export function LeakCheckForm() {
       </div>
 
       <label>
-        <span>Your website or booking link</span>
+        <span>What job do you want off your plate?</span>
+        <textarea
+          name="problem"
+          rows={3}
+          required
+          placeholder="For example: chasing quotes, typing enquiries into a spreadsheet, reminding customers"
+          aria-invalid={invalidField === 'problem' || undefined}
+          aria-describedby={invalidField === 'problem' ? 'leak-check-error' : undefined}
+          disabled={submitState === 'sending'}
+        />
+      </label>
+
+      <label>
+        <span>Your website <small>(optional)</small></span>
         <input
           name="website"
           inputMode="url"
           autoComplete="url"
-          required
-          placeholder="yourbusiness.co.uk or a booking link"
-          aria-invalid={invalidField === 'website' || undefined}
-          aria-describedby={invalidField === 'website' ? 'leak-check-error' : undefined}
+          placeholder="yourbusiness.co.uk"
           disabled={submitState === 'sending'}
         />
       </label>
@@ -160,14 +172,14 @@ export function LeakCheckForm() {
 
       <div className="mw-form-submit">
         <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
-          {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Get my free review'}
+          {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Get my free plan and price'}
         </button>
-        <p>I review it myself and email you within {CHECK_REPLY_TIME}. Free, no obligation.</p>
+        <p>I reply myself within {CHECK_REPLY_TIME} with a plan and fixed price. Free, no obligation.</p>
         <p id="leak-check-error" className="mw-form-status mw-form-error" role="alert">{validationError}</p>
         <p className="mw-form-status" role="status" aria-live="polite">
           {submitState === 'sent' && (
             <>
-              Got it. I’ll email your review within {CHECK_REPLY_TIME}.{' '}
+              Got it. I’ll email your plan and price within {CHECK_REPLY_TIME}.{' '}
               <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); focusField('name'); }}>Send another</button>
             </>
           )}

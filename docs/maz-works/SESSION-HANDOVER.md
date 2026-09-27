@@ -4,7 +4,10 @@ This repo is public, so this copy carries no lead names, contact details or lead
 
 Standard practice: before a session ends with work open, overwrite the private `HANDOVER.md` (4 sentence summary, Maz's open to-dos, next work), then update this public copy with only what is safe to publish.
 
-## 27 Sep 2026 — Offer v6: systems, not website fixes
+## 27 Sep 2026 — Offer v7: low-cost Starter plus priced extras
+Maz wanted a cheaper way in so prices don't scare anyone off, more money from optional extras, and no narrowing of the audience. `app/offers.ts` now holds: Starter Automation £295 (one job set up to run itself, live within 7 working days), Business System from £1,250, Custom Software & Websites from £2,950, nine optional extras from £95 to from £495 (reminders, review requests, Google profile, quote follow-up, dashboard, landing page, AI enquiry assistant, training), and Keep It Running at £49/month. The free first step is the Free Plan & Fixed Quote: the /leak-check form now asks for the job to automate (website optional) instead of offering a website review, and the example is a plan and quote (£295 + £145 extra = £440). The homepage speaks to any trade. Offer v6 below is superseded.
+
+## 27 Sep 2026 — Offer v6: systems, not website fixes (superseded by Offer v7)
 Maz does not want Maz Works to read as a small-time website-fix shop, and asked for slightly higher prices. The site now leads with "I build the systems that turn enquiries into paying customers" and sells three tiers from `app/offers.ts` (the only place prices live): Booking & Enquiry System from £495 (replaces the £395 Repair, £249 Google setup and £595 bundle), Follow-up & Admin Automation from £950, and Custom Systems & Websites from £1,500 (replaces Website Launch and Full Rebuild). The free first step is now the Free Customer Journey Review (same form, same /leak-check link). Terms: fixed quote first, half to start, rest when live, No VAT added; the 7-working-day guarantee applies to the Booking & Enquiry System, larger jobs get a dated plan. Tests fail if any public page shows the retired £395/£249/£595 offers or "website fix" wording. The positioning rule is in AGENTS.md.
 
 ## 27 Sep 2026 — privacy fix
