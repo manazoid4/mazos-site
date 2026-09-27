@@ -21,7 +21,15 @@ const WORD_BUDGET = 1900;
 // Same count as the homepage: all text inside <main>, including header, footer and closed answers.
 const CASE_STUDY_WORD_BUDGET = 320;
 
+/** Shared nav chrome (phone menu panel, grouped footer) is the same on every page, so page word budgets skip it. */
+function stripNavChrome(html) {
+  return html
+    .replace(/<div class="mw-menu-panel"[\s\S]*?<\/ul><\/div><\/div>/, ' ')
+    .replace(/<div class="mw-footer-groups">[\s\S]*?<\/nav><\/div>/, ' ');
+}
+
 function mainWordCount(html) {
+  html = stripNavChrome(html);
   const main = html.slice(html.indexOf('<main'), html.indexOf('</main>'));
   return main.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
 }
@@ -481,4 +489,32 @@ test('no public page or shipped script leaks Maz\'s personal details', async () 
     }
   }
   assert.deepEqual(leaks, [], `personal details found in: ${leaks.join(', ')}`);
+});
+
+test('every main page is one tap from the key routes, and the trade guides have a hub', async () => {
+  // Navigation audit, 27 Sep: guides were only linked from inside the quote form
+  // and phones only saw "Free quote". Now every page carries the same map.
+  for (const route of ['/', '/leak-check', '/contact', '/faq', '/lab', '/3d-printing', '/for', '/for/architects']) {
+    const html = await readPage(route);
+    for (const href of ['/#pricing', '/for', '/3d-printing', '/faq', '/leak-check', '/for/architects', '/3d-printing#architecture-property']) {
+      assert.ok(html.includes(`href="${href}"`), `${route} is missing a link to ${href}`);
+    }
+    assert.match(html, /class="mw-menu-button"[^>]*aria-expanded="false"/, `${route} has no phone menu button`);
+  }
+  const hub = await readPage('/for');
+  for (const guide of ['salons-and-beauty', 'dog-groomers', 'garages', 'cafes-and-food', 'clinics-and-therapists', 'architects']) {
+    assert.match(hub, new RegExp(`href="/for/${guide}"`));
+  }
+  const guide = await readPage('/for/architects');
+  assert.match(guide, /"@type":"BreadcrumbList"/);
+  assert.match(guide, /Illustrations made for this page, not client work/);
+  const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
+  assert.match(sitemap, /mazworks\.uk\/for</);
+});
+
+test('architecture drawings exist and are labelled illustrative', async () => {
+  for (const name of ['scaffold-elevation', 'floor-plan', 'massing-model', 'site-plan']) {
+    const svg = await readFile(path.join(root, 'public', 'architecture', `${name}.svg`), 'utf8');
+    assert.match(svg, /ILLUSTRATIVE ONLY/, `${name}.svg is not labelled illustrative`);
+  }
 });

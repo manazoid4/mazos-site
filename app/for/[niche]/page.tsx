@@ -1,6 +1,7 @@
 import { OG_IMAGE } from '../../seo';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { Breadcrumbs } from '../../breadcrumbs';
 import { SiteFooter, SiteHeader } from '../../site-chrome';
 import { NICHE_GUIDES, getNicheGuide } from '../niches';
 
@@ -33,6 +34,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
       <SiteHeader />
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="niche-title">
+        <Breadcrumbs items={[{ href: '/for', label: 'Who it’s for' }, { label: guide.shortName }]} />
         <p className="eyebrow">{guide.name}</p>
         <h1 id="niche-title">{guide.title}.</h1>
         <p>{guide.lede}</p>
@@ -73,10 +75,33 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <p className="mw-qw-lead">You own everything I build. <a href="/#pricing">See all prices</a>.</p>
       </section>
 
+      {guide.visuals ? (
+        <section className="mw-qw-section" aria-labelledby="niche-visuals-title">
+          <p className="eyebrow">What it can look like</p>
+          <h2 id="niche-visuals-title">Drawings and models, linked to the project.</h2>
+          <div className="mw-figures">
+            {guide.visuals.map((visual) => (
+              <figure key={visual.src}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={visual.src} alt={visual.alt} width={800} height={560} loading="lazy" />
+                <figcaption>{visual.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+          <p className="mw-qw-lead">Illustrations made for this page, not client work.</p>
+        </section>
+      ) : null}
+
+      {guide.related ? (
+        <p className="mw-related"><a href={guide.related.href}><strong>{guide.related.label} →</strong> <span>{guide.related.body}</span></a></p>
+      ) : null}
+
+      <p className="mw-related mw-related-quiet"><a href="/for"><strong>Other trades →</strong> <span>Salons, groomers, garages, cafés, clinics and architects.</span></a></p>
+
       <section className="mw-resource-cta" aria-labelledby="niche-cta-title">
         <div>
           <p className="eyebrow">Free first step</p>
-          <h2 id="niche-cta-title">Not sure what yours is leaking?</h2>
+          <h2 id="niche-cta-title">Not sure where to start?</h2>
           <p>Tell me the job. I&apos;ll send a plan and a fixed price.</p>
         </div>
         <div className="mw-actions">

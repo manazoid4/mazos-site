@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { Breadcrumbs } from '../breadcrumbs';
 import { CONTACT_EMAIL } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { TouchCollection } from './touch-collection';
@@ -8,7 +9,7 @@ import { TouchEnquiryForm } from './touch-enquiry-form';
 import { TouchSelectionProvider } from './touch-selection';
 
 export const metadata: Metadata = {
-  title: 'Maz Works Objects — NFC stands, simple architectural models and custom objects',
+  title: 'Maz Works Objects — tap stands, architecture models and drawings',
   description: 'Custom countertop tap stands, small-batch business gifts, simple architectural presentation models, signs and useful 3D-printed objects for real workplaces.',
   alternates: { canonical: '/3d-printing' },
   openGraph: {
@@ -40,11 +41,19 @@ const FAQS = [
   ['Architectural models?', 'Simple concept or massing models, possibly. Send the file and scale; I’ll confirm feasibility first, before any price.'],
 ];
 
+const ARCH_VISUALS = [
+  { src: '/architecture/massing-model.svg', title: 'Massing model.', body: 'A simple 1:500 printed block model on a site base, with a QR plaque.', alt: 'Illustrative axonometric of a simple 1:500 massing model on a site base, with a QR and tap plaque that opens the project page' },
+  { src: '/architecture/site-plan.svg', title: 'Site plan.', body: 'Boundary, footprint, access and north point, clean enough for a client pack.', alt: 'Illustrative site plan with a proposed dwelling, garage, trees, access road, north arrow and scale bar' },
+  { src: '/architecture/floor-plan.svg', title: 'Floor plan.', body: 'Rooms, doors and key dimensions, laid out so a client can follow it.', alt: 'Illustrative ground floor plan with living room, hall, dining room, kitchen, study and stair' },
+  { src: '/architecture/scaffold-elevation.svg', title: 'Scaffold elevation.', body: 'Shows a client or neighbour where access scaffold goes and how high.', alt: 'Illustrative front elevation of a two-storey house with access scaffold, labelled standards, boarded lifts, guard rails, bracing and base plates' },
+];
+
 export default function ObjectsPage() {
   return (
     <TouchSelectionProvider>
       <main className="objects-page">
         <SiteHeader />
+        <Breadcrumbs items={[{ label: 'Objects' }]} />
 
         <section className="objects-hero" id="main-content" tabIndex={-1} aria-labelledby="objects-title">
           <div className="objects-hero-copy">
@@ -54,6 +63,7 @@ export default function ObjectsPage() {
             <div className="objects-actions">
               <a className="objects-button objects-button-dark" href="#collection">Choose a Touch</a>
               <a className="objects-text-link" href="#personalise">Get a quote <span aria-hidden="true">↓</span></a>
+              <a className="objects-text-link" href="#architecture-property">Architecture models <span aria-hidden="true">↓</span></a>
             </div>
           </div>
           <figure className="objects-hero-visual">
@@ -110,13 +120,43 @@ export default function ObjectsPage() {
               </div>
             </details>
 
-            <details className="objects-usecase" id="architecture-property">
-              <summary><span>04</span><div><strong>Architecture &amp; property</strong><small>Models</small></div></summary>
-              <div className="objects-usecase-body">
-                <p>Concept, massing, site or presentation models from suitable files, optionally linked by QR/tap.</p>
-                <a className="objects-text-link" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Architecture%20Property%20Objects%20Enquiry`}>Ask about a model →</a>
-              </div>
-            </details>
+            <a className="objects-usecase objects-usecase-link" href="#architecture-property">
+              <span>04</span><div><strong>Architecture &amp; property</strong><small>Models and drawings ↓</small></div>
+            </a>
+          </div>
+        </section>
+
+
+        <section className="objects-section mw-arch" id="architecture-property" aria-labelledby="arch-title">
+          <header className="objects-section-heading">
+            <div>
+              <p className="objects-kicker">Architecture &amp; property</p>
+              <h2 id="arch-title">Simple models and clear drawings that open the project.</h2>
+            </div>
+          </header>
+          <p className="mw-arch-lede">For architects, developers and builders who want a client to see the scheme, not just read about it. Send what you have: a CAD or SketchUp file, a PDF plan or a sketch with dimensions.</p>
+
+          <div className="mw-figures mw-figures-4">
+            {ARCH_VISUALS.map((visual) => (
+              <figure key={visual.src}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={visual.src} alt={visual.alt} width={800} height={560} loading="lazy" />
+                <figcaption><strong>{visual.title}</strong> {visual.body}</figcaption>
+              </figure>
+            ))}
+          </div>
+          <p className="mw-arch-note">Illustrations made for this page, not client work.</p>
+
+          <ol className="mw-arch-steps">
+            <li><strong>Send the file and the scale.</strong> Tell me what the model or drawing is for.</li>
+            <li><strong>I confirm what’s realistic.</strong> Then a fixed price, before anything is printed or drawn.</li>
+            <li><strong>You get it with a QR or tap plaque.</strong> It opens your project page or enquiry form.</li>
+          </ol>
+          <p className="mw-arch-note">Presentation drawings only. Structural, planning or scaffold design drawings stay with your engineer or scaffold contractor.</p>
+
+          <div className="objects-actions">
+            <a className="objects-button objects-button-dark" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20architecture%20model%20or%20drawing`}>Ask about a model or drawing</a>
+            <a className="objects-text-link" href="/for/architects">Guide for architecture practices →</a>
           </div>
         </section>
 
