@@ -6,7 +6,7 @@ export type MazWorksFaq = {
 export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   {
     question: 'Is the check really free? What’s the catch?',
-    answer: 'It’s free. I test your site by hand and email you what I find within 2 working days. If nothing is worth paying for, I say so. No call, no automated sales emails, no obligation.',
+    answer: 'It’s free. I test your site by hand and email you what I find within 3 working days. If nothing is worth paying for, I say so. No call, no automated sales emails, no obligation.',
   },
   {
     question: 'What can you help with?',

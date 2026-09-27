@@ -154,12 +154,13 @@ test('homepage pricing is transparent, bounded and links straight to an enquiry'
   assert.match(contact, /No VAT added/);
 });
 
-test('the free-check reply promise is 2 working days everywhere', async () => {
+test('the free-check reply promise is 3 working days everywhere (Maz confirmed 27 Sep)', async () => {
   for (const route of ['/', '/leak-check', '/contact', '/faq']) {
     const html = await readPage(route);
     assert.doesNotMatch(html, /5 working days/, `${route} still promises 5 working days`);
+    assert.doesNotMatch(html, /2 working days/, `${route} still promises 2 working days`);
   }
-  assert.match(await readPage('/'), /within 2 working days/);
+  assert.match(await readPage('/'), /within 3 working days/);
 });
 
 test('homepage stays compact with four visible process steps', async () => {
