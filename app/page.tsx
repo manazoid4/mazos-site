@@ -1,132 +1,46 @@
-import { BOOKING_URL, CONTACT_EMAIL } from './site';
-import { DemoRequestForm, ServiceEnquiryLink } from './demo-request-form';
-import { TellMazForm } from './tell-maz-form';
+import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, LOCATION } from './site';
+import { ServiceEnquiryLink } from './demo-request-form';
 import { SiteFooter, SiteHeader } from './site-chrome';
 import { HOMEPAGE_FAQS } from './faqs';
-import { NewsletterSignup } from './newsletter-signup';
+import { LeakCheckForm } from './leak-check/leak-check-form';
+import { CallLink, PricingViewTracker } from './analytics';
+import { StickyCheckCta } from './sticky-cta';
+import { SampleReport } from './sample-report';
+import { REAL_FINDINGS } from './real-findings';
 
-type WorkStage = 'flagship' | 'live' | 'building';
-type WorkProof = {
-  src: string;
-  mobileSrc: string;
-  alt: string;
-  caption: string;
-  width: number;
-  height: number;
-  emphasis: 'primary' | 'secondary';
-};
-
-const WORK: {
-  name: string;
-  type: string;
-  stage: WorkStage;
-  summary: string;
-  links: { label: string; href: string }[];
-  proof?: WorkProof;
-}[] = [
-  {
-    name: 'JobFilter',
-    type: 'Full build and setup',
-    stage: 'flagship',
-    summary: 'Finds public contracts that fit a trades firm. Built and launched, with paid plans.',
-    links: [
-      { label: 'Case study', href: '/work/jobfilter' },
-      { label: 'Try it', href: 'https://jobfilter.uk/find-jobs' },
-    ],
-    proof: {
-      src: '/jobfilter-home.webp',
-      mobileSrc: '/jobfilter-home-mobile.webp',
-      alt: 'JobFilter homepage: know which public works opportunities fit your firm, and which to skip',
-      caption: 'JobFilter / live at jobfilter.uk',
-      width: 1440,
-      height: 900,
-      emphasis: 'primary',
-    },
-  },
-  {
-    name: 'Scrap Finance Partners',
-    type: 'Client website',
-    stage: 'flagship',
-    summary: 'A website for a specialist finance practice.',
-    links: [
-      { label: 'Case study', href: '/work/scrap-finance-partners' },
-      { label: 'View site', href: 'https://scrap-finance-partners.vercel.app' },
-    ],
-    proof: {
-      src: '/scrap-finance-partners.webp',
-      mobileSrc: '/scrap-finance-partners-mobile.webp',
-      alt: 'Scrap Finance Partners website homepage for a specialist finance practice',
-      caption: 'Scrap Finance Partners / client website',
-      width: 1440,
-      height: 1000,
-      emphasis: 'secondary',
-    },
-  },
-  {
-    name: 'Agent Nudge',
-    type: 'Released',
-    stage: 'live',
-    summary: 'Stops AI tools clashing over the same files.',
-    links: [
-      { label: 'Try the demo', href: 'https://agent-nudge-bay.vercel.app/demo/overview' },
-      { label: 'View code', href: 'https://github.com/manazoid4/agent-nudge' },
-    ],
-  },
-  {
-    name: 'OpenFlowKit',
-    type: 'Open source',
-    stage: 'live',
-    summary: 'Voice-to-text in the browser, cleaned up for you.',
-    links: [{ label: 'Try it', href: 'https://openflowkit-dusky.vercel.app' }],
-  },
-  {
-    name: 'Khutba.io',
-    type: 'Live prototype',
-    stage: 'live',
-    summary: 'Live translated captions for mosque screens.',
-    links: [{ label: 'Try the demo', href: 'https://khutba-io.vercel.app/demo' }],
-  },
-  {
-    name: 'MAZ Pocket',
-    type: 'In progress',
-    stage: 'building',
-    summary: 'A pocket device to talk to your PC and approve its actions.',
-    links: [{ label: 'Ask about this build', href: '#contact' }],
-  },
-];
-
-const BUILDS = [
-  { name: 'Websites', body: 'New sites and quick fixes.', service: 'website' },
-  { name: 'Full rebuilds', body: 'Old sites and systems, rebuilt.', service: 'rebuild' },
-  { name: 'Repairs', body: 'Broken booking and enquiry routes.', service: 'repair' },
-  { name: 'Automation', body: 'Repeat admin, done for you.', service: 'automation' },
-  { name: 'Software', body: 'Tools built around your work.', service: 'software' },
-  { name: 'Physical products', body: 'Tap stands and useful objects.', href: '/3d-printing' },
+const TRUST = [
+  ['You deal with Manazir', 'The person who checks it fixes it.'],
+  [LOCATION, 'Working with businesses UK-wide.'],
+  ['Fixed price, No VAT added', 'Agreed before any work starts.'],
+  ['7-working-day guarantee', 'Working in time, or you don’t pay the rest.'],
 ] as const;
 
-const FLAGSHIP_WORK = WORK.filter((project) => project.stage === 'flagship');
-const FURTHER_WORK = WORK.filter((project) => project.stage !== 'flagship');
+const SYMPTOMS = [
+  'The phone has gone quiet, but your work is as good as ever.',
+  'Someone said they tried to book online and gave up.',
+  'Your website form hasn’t sent you anything in weeks.',
+  'Google shows old hours, an old number or the wrong link.',
+];
 
-const PRIMARY_OFFERS = [
+const OFFERS = [
   {
     name: 'Booking & Enquiry Repair',
     price: '£395',
-    highlight: true,
-    body: 'One booking or enquiry journey, repaired and tested on what you already use.',
+    tag: 'Most people start here',
+    body: 'How customers book or enquire, fixed and tested on what you already use.',
     bullets: [
-      'Booking links, forms and routing checked and fixed',
-      'A real test enquiry followed through to a reply',
-      'A dated Journey Receipt showing what changed',
+      'Booking links, forms and phone buttons fixed',
+      'A real test booking or enquiry followed to your inbox',
+      'A dated Journey Receipt: before and after',
     ],
     deposit: '£200 to start · £195 on completion',
     service: 'repair',
-    action: 'Ask about a repair',
   },
   {
     name: 'Google Profile & Contact Setup',
     price: '£249',
-    highlight: false,
-    body: 'An accurate Google listing and contact routes that reach you. Google sets its own verification times.',
+    tag: '',
+    body: 'Your Google listing right, and every contact route reaching you.',
     bullets: [
       'Google Business Profile checked and corrected',
       'A review-request message ready to send',
@@ -134,199 +48,180 @@ const PRIMARY_OFFERS = [
     ],
     deposit: '£125 to start · £124 on completion',
     service: 'google-profile',
-    action: 'Ask about Google setup',
+  },
+  {
+    name: 'Both together',
+    price: '£595',
+    tag: '',
+    body: 'The Repair and the Google setup in one job.',
+    bullets: [
+      'Everything in the Repair',
+      'Everything in the Google setup',
+      'One Journey Receipt covering both',
+    ],
+    deposit: '£300 to start, £295 on completion',
+    service: 'bundle',
   },
 ] as const;
 
-const SECONDARY_OFFERS = [
-  { name: 'Website Launch', price: 'From £495', body: 'A new site, when repairing the old one is not practical.', service: 'website', action: 'Ask about a website' },
-  { name: 'Full Rebuild', price: 'From £1,000', body: 'Your old site or system, rebuilt properly.', service: 'rebuild', action: 'Ask about a rebuild' },
-] as const;
-
-const JOURNEY_RECEIPT_EXAMPLE = {
-  action: 'Tap "Book a Treatment"',
-  before: 'Opens an old booking page saying the business is no longer available',
-  after: 'Opens the real booking page and confirms the slot',
-};
-
 const STEPS = [
-  ['01', 'Tell me what’s wrong', 'A free check, or send it straight to me.'],
-  ['02', 'I confirm the fix and price', 'Before you pay anything.'],
-  ['03', 'You pay half to start', 'The rest when it’s working.'],
+  ['01', 'Tell me what’s wrong', `Send your link. I test it myself and email you within ${CHECK_REPLY_TIME}.`],
+  ['02', 'I confirm the fix and price', 'Only if a fix is worth paying for. If it isn’t, I say so.'],
+  ['03', 'You pay half to start', 'Once access is sorted. The rest when it works.'],
   ['04', 'Working within 7 working days', 'Or you don’t pay the rest.'],
 ];
 
-function WorkRow({ project }: { project: (typeof WORK)[number] }) {
-  return (
-    <article className={`mw-work-row${project.proof ? ' mw-work-row-with-proof' : ''}`} id={project.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}>
-      <div className="mw-work-main">
-        <p className="relationship">{project.type}</p>
-        <h3>{project.name}</h3>
-        <p className="mw-work-summary">{project.summary}</p>
-      </div>
-      <nav className="mw-work-links" aria-label={`${project.name} links`}>
-        {project.links.map((link) => <a href={link.href} key={link.href}>{link.label} <span aria-hidden="true">→</span></a>)}
-      </nav>
-      {project.proof ? (
-        <figure className={`mw-work-proof mw-work-proof-${project.proof.emphasis}`}>
-          <picture>
-            <source media="(max-width: 640px)" srcSet={project.proof.mobileSrc} />
-            <img src={project.proof.src} alt={project.proof.alt} width={project.proof.width} height={project.proof.height} loading="lazy" />
-          </picture>
-          <figcaption>{project.proof.caption}</figcaption>
-        </figure>
-      ) : null}
-    </article>
-  );
-}
+const PROOF = [
+  {
+    name: 'JobFilter',
+    label: 'My own product · built and launched',
+    body: 'Finds public contracts that suit small trades firms. Live at jobfilter.uk.',
+    href: '/work/jobfilter',
+    img: '/jobfilter-home-mobile.webp',
+    alt: 'JobFilter homepage on a phone',
+  },
+  {
+    name: 'Scrap Finance Partners',
+    label: 'Client website · built by me',
+    body: 'A website for a specialist finance practice.',
+    href: '/work/scrap-finance-partners',
+    img: '/scrap-finance-partners-mobile.webp',
+    alt: 'Scrap Finance Partners website on a phone',
+  },
+];
 
 export default function Page() {
   return (
-    <main>
+    <main className="s-home">
       <SiteHeader />
 
-      <section className="mw-hero" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
-        <div className="mw-hero-copy">
-          <p className="eyebrow">Maz Works / Manazir Hussain</p>
-          <h1 id="intro-title">I fix what’s costing your business time, customers, or money.</h1>
-          <p className="mw-lede">I find and fix broken booking links, confusing enquiry routes and incorrect business information, so customers can reach you. Fixed price agreed before work starts.</p>
-          <div className="mw-actions">
-            <a className="button button-signal" href="/leak-check">Get a free Booking &amp; Enquiry Check</a>
-            <a className="button" href={BOOKING_URL} target="_blank" rel="noreferrer">15-minute walkthrough</a>
-            <a className="text-link" href="#pricing">See prices <span aria-hidden="true">↓</span></a>
-          </div>
-          <p className="mw-hero-note">You deal with me directly. Price agreed before any work.</p>
+      <section className="s-hero" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
+        <p className="eyebrow">For UK businesses customers book, call or message</p>
+        <h1 id="intro-title">Customers trying to book you might be hitting a dead end.</h1>
+        <p className="s-lede">Broken booking links, forms that never arrive, the wrong number on Google. I check yours for free, then fix what’s broken for a fixed £395.</p>
+        <div className="s-actions">
+          <a className="button button-signal s-button-lg" href="#check">Get my free check</a>
+          <CallLink className="button" href={BOOKING_URL} placement="hero">Or book a 15-minute call</CallLink>
         </div>
-        <ul className="mw-builds" aria-label="What I build">
-          {BUILDS.map((build) => {
-            const content = <><strong>{build.name}</strong><span>{build.body}</span></>;
-            return (
-              <li key={build.name}>
-                {'href' in build
-                  ? <a className="mw-service-link" href={build.href}>{content}</a>
-                  : <ServiceEnquiryLink service={build.service}>{content}</ServiceEnquiryLink>}
-              </li>
-            );
-          })}
+        <p className="s-note">Free. Checked by hand. Emailed within {CHECK_REPLY_TIME}. No call needed.</p>
+      </section>
+
+      <ul className="s-trust" aria-label="Why owners trust Maz Works">
+        {TRUST.map(([title, body]) => <li key={title}><strong>{title}</strong><span>{body}</span></li>)}
+      </ul>
+
+      <section className="s-section" id="problem" aria-labelledby="problem-title">
+        <p className="eyebrow">Sound familiar?</p>
+        <h2 id="problem-title">Quiet week, or a broken link?</h2>
+        <ul className="s-ticks">
+          {SYMPTOMS.map((item) => <li key={item}>{item}</li>)}
         </ul>
-      </section>
-
-      <section className="mw-section mw-work" id="work" aria-labelledby="work-title">
-        <header className="mw-section-heading mw-heading-inline">
-          <div><p className="eyebrow">Work</p><h2 id="work-title">Real builds you can open.</h2></div>
-        </header>
-        <div className="mw-work-list">
-          {FLAGSHIP_WORK.map((project) => <WorkRow project={project} key={project.name} />)}
-        </div>
-        <details className="mw-disclosure mw-more-work">
-          <summary><span>More projects</span><small>{FURTHER_WORK.length} products and tools</small></summary>
-          <div className="mw-work-list mw-work-list-secondary">
-            {FURTHER_WORK.map((project) => <WorkRow project={project} key={project.name} />)}
-          </div>
-        </details>
-      </section>
-
-      <section className="mw-section mw-client-flow" id="pricing" aria-labelledby="pricing-title">
-        <div className="mw-compact-block mw-pricing" id="services">
-          <header className="mw-section-heading mw-heading-inline">
-            <div><p className="eyebrow">Prices</p><h2 id="pricing-title">Fixed prices. No surprises.</h2></div>
-          </header>
-          <div className="mw-free-check">
-            <p><strong>Start free.</strong> Send your link. Get a plain check of what&apos;s stopping customers reaching you.</p>
-            <a className="mw-service-link" href="/leak-check">Get a free Booking &amp; Enquiry Check <span aria-hidden="true">→</span></a>
-          </div>
-          <div className="mw-price-grid mw-price-grid-2">
-            {PRIMARY_OFFERS.map((offer) => (
-              <article className={`mw-price-option${offer.highlight ? ' mw-price-option-highlight' : ''}`} key={offer.name}>
-                <p>{offer.name}</p>
-                <strong>{offer.price}</strong>
-                <span>{offer.body}</span>
-                <ul className="mw-price-bullets">
-                  {offer.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
-                </ul>
-                <small>{offer.deposit}</small>
-                <ServiceEnquiryLink service={offer.service}>{offer.action} <span aria-hidden="true">→</span></ServiceEnquiryLink>
-              </article>
-            ))}
-          </div>
-          <p className="mw-pricing-extra">
-            Need both? <ServiceEnquiryLink service="bundle">£595 together <span aria-hidden="true">→</span></ServiceEnquiryLink> (£300 to start, £295 on completion). Guarantee: working within 7 working days of getting access, or you don&apos;t pay the rest. If I can&apos;t deliver it, your deposit is refunded.
-          </p>
-
-          <div className="mw-journey-receipt">
-            <p className="eyebrow">Example Journey Receipt</p>
-            <table>
-              <thead>
-                <tr><th>Customer action</th><th>Before</th><th>After</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{JOURNEY_RECEIPT_EXAMPLE.action}</td>
-                  <td>{JOURNEY_RECEIPT_EXAMPLE.before}</td>
-                  <td>{JOURNEY_RECEIPT_EXAMPLE.after}</td>
-                </tr>
-              </tbody>
-            </table>
-            <p className="mw-hero-note">Illustrative example, based on a real problem found during a check. Yours comes dated, with your own verified before and after.</p>
-          </div>
-
-          <div className="mw-secondary-offers">
-            <p className="eyebrow">When repairing what you have isn&apos;t practical</p>
-            <ul className="mw-qw-list">
-              {SECONDARY_OFFERS.map((offer) => (
-                <li key={offer.name}>
-                  <strong>{offer.name}, {offer.price}.</strong> {offer.body} <ServiceEnquiryLink service={offer.service}>{offer.action} <span aria-hidden="true">→</span></ServiceEnquiryLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <p className="mw-pricing-extra">No VAT added. Every price is fixed before work starts. You own everything I build.</p>
-          <p className="mw-pricing-extra">Know a business with this problem? Introduce them and I&apos;ll thank you with £40 when they become a paying client. <a href="/faq#do-you-pay-for-referrals">How it works <span aria-hidden="true">→</span></a></p>
-          <p className="mw-pricing-extra"><a href="/3d-printing">Maz Works Objects: tap-to-review stands, fixed price from £29 <span aria-hidden="true">→</span></a></p>
+        <div className="s-found">
+          <p><strong>Real problems I found on UK business websites in September 2026:</strong></p>
+          <ul>
+            {REAL_FINDINGS.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+          <p>Any one of these can send a customer elsewhere, and the owner would never hear about it.</p>
         </div>
       </section>
 
-      <section className="mw-section mw-tell-maz" id="tell-maz" aria-labelledby="tell-maz-title">
-        <header className="mw-section-heading mw-heading-inline">
-          <div><p className="eyebrow">Already know what&apos;s wrong?</p><h2 id="tell-maz-title">Something&apos;s broken? Tell Maz.</h2></div>
-        </header>
-        <TellMazForm />
+      <section className="s-section s-check" id="check" aria-labelledby="check-title">
+        <div className="s-check-copy">
+          <p className="eyebrow">Free Booking &amp; Enquiry Check · £0</p>
+          <h2 id="check-title">Send your link. I’ll test it like a customer would.</h2>
+          <ul className="s-ticks">
+            <li>I tap your booking and call buttons on a phone</li>
+            <li>I send a real test enquiry and see if it reaches you</li>
+            <li>I check your Google listing matches your website</li>
+            <li>You get one clear finding, dated proof, and a fixed price only if a fix is worth paying for</li>
+          </ul>
+          <p className="s-small"><a href="#example">See an example report ↓</a></p>
+        </div>
+        <LeakCheckForm />
       </section>
 
-      <section className="mw-section" id="process" aria-labelledby="process-title">
-        <header className="mw-section-heading mw-heading-inline">
-          <div><p className="eyebrow">How it works</p><h2 id="process-title">Four simple steps.</h2></div>
-        </header>
-        <ol className="mw-process-strip">
-          {STEPS.map(([number, title, body]) => <li key={number}><span>{number}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}
+      <section className="s-section" id="example" aria-labelledby="example-title">
+        <p className="eyebrow">What you get back</p>
+        <h2 id="example-title">An example check report.</h2>
+        <SampleReport />
+      </section>
+
+      <section className="s-section" id="pricing" aria-labelledby="pricing-title">
+        <PricingViewTracker targetId="pricing" />
+        <p className="eyebrow">Prices</p>
+        <h2 id="pricing-title">Fixed prices. No VAT added.</h2>
+        <p className="s-small">Start with the free Booking &amp; Enquiry Check. Any fix will be one of these.</p>
+        <div className="s-prices">
+          {OFFERS.map((offer) => (
+            <article className={`s-price${offer.tag ? ' s-price-main' : ''}`} key={offer.name}>
+              {offer.tag ? <p className="s-price-tag">{offer.tag}</p> : null}
+              <h3>{offer.name}</h3>
+              <p className="s-price-amount">{offer.price}</p>
+              <p>{offer.body}</p>
+              <ul>{offer.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
+              <p className="s-price-deposit">{offer.deposit}</p>
+              <ServiceEnquiryLink service={offer.service}>Know what’s broken? Ask about this <span aria-hidden="true">→</span></ServiceEnquiryLink>
+            </article>
+          ))}
+        </div>
+        <div className="s-guarantee">
+          <strong>The guarantee.</strong> Your repair is working within 7 working days of me getting access, or you don’t pay the rest. I still finish it. If I can’t deliver it, your deposit is refunded. You own everything I build.
+        </div>
+        <div className="s-actions">
+          <a className="button button-signal" href="#check">Start with the free check</a>
+        </div>
+        <p className="s-small">Google sets its own verification times. Bigger job, like a new website? <a href="/contact">Tell me what you need →</a></p>
+        <p className="s-small">Know a business with this problem? Introduce them and I&apos;ll thank you with £40 when they become a paying client. <a href="/faq#do-you-pay-for-referrals">How it works →</a></p>
+      </section>
+
+      <section className="s-section" id="process" aria-labelledby="process-title">
+        <p className="eyebrow">How it works</p>
+        <h2 id="process-title">Four simple steps.</h2>
+        <ol className="s-steps">
+          {STEPS.map(([number, title, body]) => <li key={number}><span>{number}</span><strong>{title}</strong><p>{body}</p></li>)}
         </ol>
       </section>
 
-      <section className="mw-section mw-faq" aria-labelledby="faq-title">
-        <header className="mw-section-heading mw-heading-inline">
-          <div><p className="eyebrow">Questions</p><h2 id="faq-title">Quick answers.</h2></div>
-        </header>
-        <div className="mw-faq-list">
+      <section className="s-section s-about" id="about" aria-labelledby="about-title">
+        <div>
+          <p className="eyebrow">Who you’re dealing with</p>
+          <h2 id="about-title">I’m Manazir. I do the work myself.</h2>
+          <p>I’m based in {LOCATION} and work with businesses across the UK. No account managers, no sales team. Email me directly at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+          <p className="s-small">Maz Works is new, so there are no client reviews here yet. What I can show is work you can open yourself:</p>
+        </div>
+        <div className="s-proof">
+          {PROOF.map((item) => (
+            <a className="s-proof-card" href={item.href} key={item.name}>
+              <img src={item.img} alt={item.alt} width={390} height={600} loading="lazy" />
+              <span className="relationship">{item.label}</span>
+              <strong>{item.name}</strong>
+              <span>{item.body}</span>
+            </a>
+          ))}
+        </div>
+        <p className="s-small"><a href="/lab">Other things I’ve built →</a></p>
+      </section>
+
+      <section className="s-section" id="faq" aria-labelledby="faq-title">
+        <p className="eyebrow">Questions</p>
+        <h2 id="faq-title">Quick answers.</h2>
+        <div className="s-faq">
           {HOMEPAGE_FAQS.map((faq) => <details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}
         </div>
-        <div className="mw-faq-more"><a className="text-link" href="/faq">All questions <span aria-hidden="true">→</span></a></div>
+        <p className="s-small"><a href="/faq">All questions →</a></p>
       </section>
 
-      <section className="mw-contact" id="contact" aria-labelledby="contact-title">
-        <div className="mw-contact-intro">
-          <p className="eyebrow">Bigger job?</p>
-          <h2 id="contact-title">Websites, software and automation.</h2>
-          <p className="mw-contact-copy">Tell me what you want built or fixed. One line is enough. I’ll reply with a plan and a fixed price.</p>
-          <p className="mw-contact-book"><a className="button" href={BOOKING_URL} target="_blank" rel="noreferrer">Book the 15-minute walkthrough</a></p>
-          <p className="mw-contact-fallback">Prefer email? <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
+      <section className="s-final" aria-labelledby="final-title">
+        <h2 id="final-title">Find out what’s stopping customers reaching you.</h2>
+        <p>Free, by hand, within {CHECK_REPLY_TIME}. No call, no obligation.</p>
+        <div className="s-actions">
+          <a className="button button-signal s-button-lg" href="#check">Get my free check</a>
+          <CallLink className="button" href={BOOKING_URL} placement="footer-cta">Book a 15-minute call</CallLink>
         </div>
-        <DemoRequestForm />
       </section>
-
-      <NewsletterSignup />
 
       <SiteFooter />
+      <StickyCheckCta href="#check" hideWhenVisible="check" />
     </main>
   );
 }

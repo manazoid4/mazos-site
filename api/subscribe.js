@@ -55,7 +55,7 @@ function reply(req, res, status, result) {
   }
   // No JavaScript: send the visitor back to the form with the outcome in the URL.
   res.statusCode = 303;
-  res.setHeader('location', `/?subscribed=${result.ok ? '1' : '0'}#newsletter`);
+  res.setHeader('location', `/lab?subscribed=${result.ok ? '1' : '0'}#newsletter`);
   return res.end();
 }
 

@@ -8,9 +8,8 @@ export function SiteHeader() {
         <span><strong>Maz Works</strong><small>Manazir Hussain</small></span>
       </a>
       <nav aria-label="Primary navigation">
-        <a href="/#work">Work</a>
-        <a href="/#services">Services</a>
-        <a href="/#pricing">Pricing</a>
+        <a className="mw-nav-optional" href="/#example">Example</a>
+        <a href="/#pricing">Prices</a>
         <a className="mw-nav-cta" href="/leak-check">Free check</a>
       </nav>
     </header>
@@ -22,15 +21,16 @@ export function SiteFooter() {
     <footer className="site-footer mw-site-footer mw-footer-clean">
       <div className="mw-footer-brand">
         <strong>Maz Works</strong>
-        <span>Websites, automation and tools that fix real business problems. Physical products can point customers to reviews, booking page or menu.</span>
+        <span>Booking, enquiry and Google fixes for UK small businesses. Manazir Hussain, UK.</span>
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
       </div>
 
       <nav className="mw-footer-links" aria-label="Maz Works links">
         <a href="/leak-check">Free Booking &amp; Enquiry Check</a>
-        <a href="/#work">Work</a>
-        <a href="/#services">Services</a>
-        <a href="/#pricing">Pricing</a>
+        <a href="/#pricing">Prices</a>
+        <a href="/#example">Example report</a>
+        <a href="/contact">Bigger jobs</a>
+        <a href="/lab">Other builds</a>
         <a href="/3d-printing">Objects</a>
         <a href="/demos">Private demos</a>
         <a href="/faq">FAQ</a>
@@ -41,7 +41,7 @@ export function SiteFooter() {
 
       <div className="mw-footer-bottom">
         <span>© 2026 Maz Works</span>
-        <span>Direct with the builder · fixed scope first</span>
+        <span>Fixed price · No VAT added · 7-working-day guarantee</span>
       </div>
     </footer>
   );

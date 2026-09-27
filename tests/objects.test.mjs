@@ -109,13 +109,15 @@ test('Objects is discoverable from shared chrome, homepage and sitemap while dig
     readFile(path.join(root, 'README.md'), 'utf8'),
   ]);
 
-  assert.match(home, /Maz Works Objects/);
-  assert.match(home, /tap-to-review stands, fixed price from £29/);
-  assert.match(home, /href="\/3d-printing"/);
+  // Objects left the homepage in the 27 Sep sales overhaul; it stays in the footer and on /lab.
+  const lab = await readPage('/lab');
+  assert.match(home, /href="\/3d-printing"[^>]*>Objects/);
+  assert.match(lab, /Maz Works Objects/);
+  assert.match(lab, /Tap-to-review stands and signs, fixed price from £29/);
   assert.match(home, /Tell me what’s wrong/);
   assert.match(home, /£395/);
-  assert.match(objects, /href="\/#services"/);
-  assert.match(objects, /href="\/#work"/);
+  assert.match(objects, /href="\/#pricing"/);
+  assert.match(objects, /href="\/lab"/);
   assert.match(objects, /href="\/demos"/);
   assert.match(sitemap, /\/3d-printing/);
   assert.match(readme, /Touch One/);

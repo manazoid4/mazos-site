@@ -1,3 +1,4 @@
+import { OG_IMAGE } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Private business demos',
   description: DEMO_DESCRIPTION,
   alternates: { canonical: '/demos' },
-  openGraph: {
+  openGraph: { images: [OG_IMAGE],
     title: 'Private business demos — Maz Works',
     description: 'See the useful part working before committing to the full build.',
     url: '/demos',
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Private business demos — Maz Works',
     description: 'See the useful part working before committing to the full build.',
+    images: [OG_IMAGE.url],
   },
 };
 
@@ -49,7 +51,7 @@ export default function DemosPage() {
           <h1 id="demos-title">See the idea working before you pay for the full build.</h1>
           <p className="mw-lede">For suitable projects, I build a private demo around your business. No templates and no slide decks.</p>
           <div className="mw-actions">
-            <a className="button button-signal" href="/#contact">Ask for a private demo</a>
+            <a className="button button-signal" href="/contact#contact">Ask for a private demo</a>
             <a className="text-link" href="#examples">What a demo can show <span aria-hidden="true">↓</span></a>
           </div>
           <p className="mw-hero-note">Each demo is shared only with its business. Public examples stay selective by design.</p>
@@ -82,7 +84,7 @@ export default function DemosPage() {
           <p>Client demos sit behind a private link and access code. Only the people you choose see them.</p>
         </header>
         <div className="mw-actions">
-          <a className="button button-signal" href="/#contact">Request yours</a>
+          <a className="button button-signal" href="/contact#contact">Request yours</a>
         </div>
       </section>
 

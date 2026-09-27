@@ -1,3 +1,4 @@
+import { OG_IMAGE } from '../seo';
 import type { Metadata } from 'next';
 import { MAZ_WORKS_FAQS } from '../faqs';
 import { CONTACT_EMAIL, SITE_URL } from '../site';
@@ -7,9 +8,9 @@ const PAGE_URL = `${SITE_URL}/faq`;
 
 export const metadata: Metadata = {
   title: 'FAQ',
-  description: 'Straight answers about Maz Works pricing, demos, websites, automation, AI, support and physical Objects.',
+  description: 'Straight answers about the free Booking & Enquiry Check, the £395 repair, the guarantee, payment and ownership. No VAT added.',
   alternates: { canonical: PAGE_URL },
-  openGraph: {
+  openGraph: { images: [OG_IMAGE],
     title: 'Maz Works FAQ',
     description: 'Straight answers about working with Maz Works.',
     url: PAGE_URL,
@@ -41,7 +42,7 @@ export default function FaqPage() {
         <h1 id="faq-title">Questions? Straight answers.</h1>
         <p>Quick, plain answers before you book a call.</p>
         <div className="mw-actions">
-          <a className="button button-signal" href="/#contact">Tell me the problem</a>
+          <a className="button button-signal" href="/leak-check">Get a free check</a>
         </div>
       </section>
 
@@ -68,7 +69,7 @@ export default function FaqPage() {
         </div>
         <div className="mw-actions">
           <a className="button button-dark" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20question`}>Email me</a>
-          <a className="text-link" href="/#contact">Use the enquiry form <span aria-hidden="true">→</span></a>
+          <a className="text-link" href="/contact#contact">Use the enquiry form <span aria-hidden="true">→</span></a>
         </div>
       </section>
 
