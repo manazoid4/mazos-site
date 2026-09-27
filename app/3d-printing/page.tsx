@@ -8,7 +8,7 @@ import { TouchEnquiryForm } from './touch-enquiry-form';
 import { TouchSelectionProvider } from './touch-selection';
 
 export const metadata: Metadata = {
-  title: 'Maz Works Objects — NFC stands, architectural models and custom objects',
+  title: 'Maz Works Objects — NFC stands, simple architectural models and custom objects',
   description: 'Custom countertop tap stands, small-batch business gifts, simple architectural presentation models, signs and useful 3D-printed objects for real workplaces.',
   alternates: { canonical: '/3d-printing' },
   openGraph: {
@@ -37,7 +37,7 @@ const FAQS = [
   ['Can I see the design before you make it?', 'Yes. You approve the direction and final price before production starts.'],
   ['Are there subscriptions?', 'Not for a stand that opens pages you already own. Ongoing page or link work is extra only if you need it.'],
   ['Can you build the page behind the tap?', 'Yes. I can build the booking page, form or campaign page. That is quoted separately, never hidden in the stand price.'],
-  ['Architectural models?', 'Yes. Send the file and scale; I’ll confirm feasibility first.'],
+  ['Architectural models?', 'Simple concept or massing models, possibly. Send the file and scale; I’ll confirm feasibility first, before any price.'],
 ];
 
 export default function ObjectsPage() {
