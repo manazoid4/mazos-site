@@ -104,9 +104,9 @@ test('Touch explains real-world limits without turning owner-visible copy into t
 test('Objects includes an honest architecture and property use case', async () => {
   const text = visibleText(await readPage('/3d-printing'));
   assert.match(text, /Architecture & property/i);
-  assert.match(text, /Concept, massing, site and presentation pieces/i);
-  assert.match(text, /Send the file and scale; I(?:'|’)?ll confirm what is realistic before quoting/i);
-  assert.match(text, /Can you make architectural models\?/i);
+  assert.match(text, /Concept, massing, site or presentation models/i);
+  assert.match(text, /Send the file and scale; I(?:'|’)?ll confirm feasibility first/i);
+  assert.match(text, /Architectural models\?/i);
   assert.doesNotMatch(text, /museum quality|resin quality|precision manufacturing|any scale/i);
 });
 
