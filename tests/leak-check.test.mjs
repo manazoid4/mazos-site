@@ -40,7 +40,7 @@ test('the free Booking & Enquiry Check has a dedicated shareable acquisition pag
   assert.match(html, /We.ll check the journey together in 15 minutes/);
   assert.doesNotMatch(html, /hacked/i);
   assert.match(html, /cal\.com\/mazworks\/quick-chat/);
-  assert.match(html, /rel="canonical" href="https:\/\/www\.mazworks\.uk\/leak-check"/);
+  assert.match(html, /rel="canonical" href="https:\/\/mazworks\.uk\/leak-check"/);
 });
 
 test('the free check asks only for name, email and website before submission', async () => {
