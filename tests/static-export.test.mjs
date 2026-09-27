@@ -78,7 +78,7 @@ test('homepage positions Maz Works as a systems builder, not a website-fix shop 
     assert.doesNotMatch(html, smallTime, `homepage reads as small-time: ${smallTime}`);
   }
   assert.match(html, /Tell me the job/);
-  for (const filler of [/Inspect the work before reading more claims/, /Operations thinking/, /What gets measured/, /href="\/whats-new/, /£150/, /Quick Win/, /£39\/month/, /founding/i, /hacked/i, /class="mw-builds"/]) {
+  for (const filler of [/Inspect the work before reading more claims/, /Operations thinking/, /What gets measured/, /£150/, /Quick Win/, /£39\/month/, /founding/i, /hacked/i, /class="mw-builds"/]) {
     assert.doesNotMatch(html, filler);
   }
 });
@@ -517,4 +517,27 @@ test('architecture drawings exist and are labelled illustrative', async () => {
     const svg = await readFile(path.join(root, 'public', 'architecture', `${name}.svg`), 'utf8');
     assert.match(svg, /ILLUSTRATIVE ONLY/, `${name}.svg is not labelled illustrative`);
   }
+});
+
+test('six wayfinding helps big sites use are in place', async () => {
+  const home = await readPage('/');
+  // 1. On this page jump bar on the long homepage, every target exists.
+  const jumps = [...home.matchAll(/<nav class="mw-onpage"[\s\S]*?<\/nav>/g)][0][0].match(/href="#([a-z-]+)"/g).map((h) => h.slice(7, -1));
+  for (const id of jumps) assert.match(home, new RegExp(`id="${id}"`), `jump target #${id} missing`);
+  // 2. Human site map lists every trade guide and case study.
+  const map = await readPage('/site-map');
+  for (const href of ['/for/architects', '/for/garages', '/work/jobfilter', '/leak-check', '/whats-new']) assert.ok(map.includes(`href="${href}"`), `site map missing ${href}`);
+  // 3. What's new is current and linked from every page footer.
+  const news = await readPage('/whats-new');
+  assert.match(news, /Easier to find your way around/);
+  assert.ok(home.includes('href="/whats-new"') && home.includes('href="/site-map"'));
+  // 4. A helpful not-found page.
+  const nf = await readFile(path.join(exportRoot, '404.html'), 'utf8');
+  assert.match(nf, /That page has moved or never existed/);
+  assert.ok(nf.includes('href="/site-map"') && nf.includes('href="/for"'));
+  // 5. Back to top.
+  assert.match(home, /class="mw-back-top" href="#main-content"/);
+  // 6. The header marks the current section.
+  const guide = await readPage('/for/architects');
+  assert.match(guide, /href="\/for" aria-current="page"/);
 });

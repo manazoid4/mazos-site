@@ -5,6 +5,8 @@ This repo is public. The full handover, open to-dos and research source names li
 
 ## 27 Sep: navigation audit and architecture visuals
 
+- Follow-up, six wayfinding helps: What's new (current, linked in every footer), human site map `/site-map`, helpful 404, header marks the current section (`aria-current`), homepage On this page jump bar, Back to top link.
+
 - Audit: on phones the header showed only "Free quote"; trade guides were linked only from inside the quote page; Objects only from the footer; no breadcrumbs or trade hub.
 - Fix (NN/g "combo" navigation, Xero-style grouped menu): desktop header shows Prices, Who it's for, Objects, FAQ plus Free quote; phones get Prices plus a labelled Menu button with every route in three groups. Footer uses the same groups (`app/nav.ts` is the one map). New `/for` hub, breadcrumbs with BreadcrumbList schema on guides, `/for` and Objects.
 - Architecture: four illustrative CAD-style drawings in `public/architecture/` (massing model with QR plaque, site plan, floor plan, scaffold elevation), each labelled illustrative. Objects has a full Architecture & property section; the architects guide shows two drawings and links to it. Presentation drawings only, never structural or scaffold design.
