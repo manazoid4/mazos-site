@@ -4,6 +4,9 @@ This repo is public, so this copy carries no lead names, contact details or lead
 
 Standard practice: before a session ends with work open, overwrite the private `HANDOVER.md` (4 sentence summary, Maz's open to-dos, next work), then update this public copy with only what is safe to publish.
 
+## 27 Sep 2026 — Offer v6: systems, not website fixes
+Maz does not want Maz Works to read as a small-time website-fix shop, and asked for slightly higher prices. The site now leads with "I build the systems that turn enquiries into paying customers" and sells three tiers from `app/offers.ts` (the only place prices live): Booking & Enquiry System from £495 (replaces the £395 Repair, £249 Google setup and £595 bundle), Follow-up & Admin Automation from £950, and Custom Systems & Websites from £1,500 (replaces Website Launch and Full Rebuild). The free first step is now the Free Customer Journey Review (same form, same /leak-check link). Terms: fixed quote first, half to start, rest when live, No VAT added; the 7-working-day guarantee applies to the Booking & Enquiry System, larger jobs get a dated plan. Tests fail if any public page shows the retired £395/£249/£595 offers or "website fix" wording. The positioning rule is in AGENTS.md.
+
 ## 27 Sep 2026 — privacy fix
 Maz's town was removed from the site, schema, share image and docs, and the form endpoint now uses FormSubmit's private alias instead of a personal email address. Never publish Maz's location, personal email or phone (see AGENTS.md); a test now fails the build if any exported page contains them.
 

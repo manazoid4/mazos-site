@@ -11,6 +11,7 @@ import './mazworks-friction-pass.css';
 import './sales.css';
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, PERSON_NAME, SITE_NAME, SITE_URL } from './site';
 import { OG_IMAGE, SITE_DESCRIPTION, SITE_TITLE } from './seo';
+import { FREE_STEP, OFFERS, PRICE_RANGE } from './offers';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -42,13 +43,16 @@ const structuredData = {
       founder: { '@id': `${SITE_URL}/#person` },
       address: { '@type': 'PostalAddress', addressCountry: 'GB' },
       areaServed: { '@type': 'Country', name: 'United Kingdom' },
-      priceRange: '£249–£595',
-      description: 'Booking, enquiry and Google Business Profile repairs for UK small businesses, at fixed prices. Also websites, rebuilds, customer-growth systems, automation, software and physical products.',
+      priceRange: PRICE_RANGE,
+      description: 'Booking and enquiry systems, Google Business Profile setup, automated follow-up, admin automation, custom software and websites for UK small businesses, with fixed quotes. Also customer-growth systems, rebuilds and physical products.',
       makesOffer: [
-        { '@type': 'Offer', name: 'Free Booking & Enquiry Check', price: '0', priceCurrency: 'GBP', url: `${SITE_URL}/leak-check` },
-        { '@type': 'Offer', name: 'Booking & Enquiry Repair', price: '395', priceCurrency: 'GBP', url: `${SITE_URL}/#pricing` },
-        { '@type': 'Offer', name: 'Google Profile & Contact Setup', price: '249', priceCurrency: 'GBP', url: `${SITE_URL}/#pricing` },
-        { '@type': 'Offer', name: 'Booking & Enquiry Repair and Google Setup', price: '595', priceCurrency: 'GBP', url: `${SITE_URL}/#pricing` },
+        { '@type': 'Offer', name: FREE_STEP.name, price: '0', priceCurrency: 'GBP', url: `${SITE_URL}/leak-check` },
+        ...OFFERS.map((offer) => ({
+          '@type': 'Offer',
+          name: offer.name,
+          url: `${SITE_URL}/#pricing`,
+          priceSpecification: { '@type': 'PriceSpecification', minPrice: offer.from, priceCurrency: 'GBP' },
+        })),
       ],
     },
   ],

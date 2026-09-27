@@ -4,7 +4,7 @@
  * business. Keep it that way: no invented findings, no names.
  *
  * These are examples of businesses this applies to, not a limit: the same
- * check and repairs work for any UK business customers book, call or enquire with.
+ * review and systems work for any UK business customers book, call or enquire with.
  */
 export type NicheGuide = {
   id: string;
@@ -34,8 +34,8 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Google your salon name. Is the title and description yours, spelled right?',
     ],
     fixes: [
-      { name: 'Booking & Enquiry Repair', price: '£395', body: 'Book buttons pointed at your real booking page, tap-to-call and a test booking followed through to a reply.' },
-      { name: 'Google Profile & Contact Setup', price: '£249', body: 'Your Google listing corrected, plus a review-request message ready to send.' },
+      { name: 'Booking & Enquiry System', price: 'From £495', body: 'Book buttons pointed at your real booking page, confirmations and reminders switched on, your Google listing matched, and a test booking followed through.' },
+      { name: 'Follow-up & Admin Automation', price: 'From £950', body: 'Rebooking prompts, review requests and no-show follow-ups that send themselves, so repeat visits do not depend on your memory.' },
     ],
   },
   {
@@ -54,8 +54,8 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Does your Book button do what it says?',
     ],
     fixes: [
-      { name: 'Booking & Enquiry Repair', price: '£395', body: 'A Book button that does what it says, tap-to-call, and a test booking or enquiry followed through to a reply.' },
-      { name: 'New online booking', price: 'quoted after a free check', body: 'If you have no booking tool yet. Most booking tools charge a monthly fee, and I tell you the cost before you commit.' },
+      { name: 'Booking & Enquiry System', price: 'From £495', body: 'A Book button that does what it says, confirmations and reminders, and a test booking or enquiry followed through to a reply.' },
+      { name: 'New online booking', price: 'quoted after a free review', body: 'If you have no booking tool yet. Most booking tools charge a monthly fee, and I tell you the cost before you commit.' },
     ],
   },
   {
@@ -74,8 +74,8 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Can a driver request an MOT without phoning?',
     ],
     fixes: [
-      { name: 'Google Profile & Contact Setup', price: '£249', body: 'Tap-to-call everywhere, leftover template text replaced and your Google listing corrected.' },
-      { name: 'Full Rebuild', price: 'From £1,000', body: 'An old site rebuilt properly, with online booking requests and your content moved across.' },
+      { name: 'Booking & Enquiry System', price: 'From £495', body: 'Tap-to-call and quote requests that reach you, leftover template text replaced, and your Google listing corrected.' },
+      { name: 'Custom Systems & Websites', price: 'From £1,500', body: 'An old site rebuilt properly, with online booking requests and your content moved across.' },
     ],
   },
   {
@@ -95,8 +95,8 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Tap your call button. Does it ring you?',
     ],
     fixes: [
-      { name: 'Google Profile & Contact Setup', price: '£249', body: 'Contact details, call button or Google title fixed, whichever is costing you most, plus a review-request message.' },
-      { name: 'Website Launch', price: 'From £495', body: 'A clean phone-first site with menu, hours, tap-to-call and a reviews link.' },
+      { name: 'Booking & Enquiry System', price: 'From £495', body: 'Contact details, call button and Google listing put right, plus a review-request message ready to send.' },
+      { name: 'Custom Systems & Websites', price: 'From £1,500', body: 'A clean phone-first site with menu, hours, tap-to-call and a reviews link.' },
     ],
   },
   {
@@ -116,7 +116,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Can a new patient see how to book in under 10 seconds?',
     ],
     fixes: [
-      { name: 'Booking & Enquiry Repair', price: '£395', body: 'Broken links and pages fixed, tap-to-call, and a test enquiry followed through to a reply.' },
+      { name: 'Booking & Enquiry System', price: 'From £495', body: 'Booking and enquiry routes that work, confirmations and reminders, and a test enquiry followed through to a reply.' },
     ],
   },
 ];

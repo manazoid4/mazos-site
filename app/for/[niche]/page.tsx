@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ niche: st
   if (!guide) return {};
   return {
     title: guide.title,
-    description: `${guide.lede} Real examples, a 60-second self-check and fixed prices.`,
+    description: `${guide.lede} Real examples, a 60-second self-check and fixed quotes.`,
     alternates: { canonical: `/for/${guide.id}` },
     openGraph: { title: `${guide.title} — Maz Works`, description: guide.lede, url: `/for/${guide.id}`, images: [OG_IMAGE] },
   };
@@ -37,10 +37,10 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <h1 id="niche-title">{guide.title}.</h1>
         <p>{guide.lede}</p>
         <div className="mw-actions">
-          <a className="button button-signal" href={checkHref}>Get a free check</a>
+          <a className="button button-signal" href={checkHref}>Get a free review</a>
         </div>
-        <p className="mw-hero-note">Free · no call required · I check it myself</p>
-        <p className="mw-hero-note">Not your trade? The same check works for any business customers book, call or enquire with.</p>
+        <p className="mw-hero-note">Free · no call required · I review it myself</p>
+        <p className="mw-hero-note">Not your trade? The same review works for any business customers book, call or enquire with.</p>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="niche-examples-title">
@@ -77,10 +77,10 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <div>
           <p className="eyebrow">Free first step</p>
           <h2 id="niche-cta-title">Not sure what yours is leaking?</h2>
-          <p>Send your link. I&apos;ll check it myself and send a short, plain list.</p>
+          <p>Send your link. I&apos;ll review it myself and tell you what to fix first.</p>
         </div>
         <div className="mw-actions">
-          <a className="button button-signal" href={checkHref}>Get the free check</a>
+          <a className="button button-signal" href={checkHref}>Get the free review</a>
         </div>
       </section>
 
