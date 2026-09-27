@@ -16,7 +16,7 @@ export const ENQUIRY_SERVICES = [
   { id: 'automation', label: 'Business System (from £1,250)' },
   { id: 'software', label: 'Custom software or internal tool (from £2,950)' },
   { id: 'website', label: 'Website with the system built in (from £2,950)' },
-  { id: 'ai', label: 'AI assistant that answers enquiries (from £495)' },
+  { id: 'reviews', label: 'Review system and customer reminders (from £145)' },
   { id: 'care', label: 'Keep It Running (£49/month)' },
   { id: 'rebuild', label: 'Rebuild of an existing site or system' },
   { id: 'google-profile', label: 'Google Business Profile setup (£149)' },

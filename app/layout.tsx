@@ -44,7 +44,7 @@ const structuredData = {
       address: { '@type': 'PostalAddress', addressCountry: 'GB' },
       areaServed: { '@type': 'Country', name: 'United Kingdom' },
       priceRange: PRICE_RANGE,
-      description: 'Business automation, booking and enquiry systems, Google Business Profile setup, automated follow-up, AI assistants, custom software and websites for UK small businesses, with fixed quotes. Also customer-growth systems, rebuilds and physical products.',
+      description: 'Business automation, booking and enquiry systems, Google Business Profile setup, automated follow-up, review systems, custom software and websites for UK small businesses, with fixed quotes. Also customer-growth systems, rebuilds and physical products.',
       makesOffer: [
         { '@type': 'Offer', name: FREE_STEP.name, price: '0', priceCurrency: 'GBP', url: `${SITE_URL}/leak-check` },
         ...OFFERS.map((offer) => ({
