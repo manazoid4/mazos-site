@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { access, readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
@@ -443,6 +444,14 @@ test('case studies route to a plan and fixed price, not a blanket free demo', as
   }
 });
 
+// SHA-256 of personal details that must never ship (Maz's town, county and personal email).
+// Stored as hashes so this public test does not publish the details it guards against.
+const PERSONAL_DETAIL_HASHES = new Set([
+  '686728388e144cc2771391a70ec335299917343cfd49fbcecdf2b3a8d08b7420',
+  '71be3b9635b8c45ea65075e9a6e76eefdaab4f1647bc2de8ff74de48697e2cff',
+  '7e6bd5d79d7f62f11b4d090f1b2ccd941018523ab009674c15dc452dc6e3252f',
+]);
+
 test('no public page or shipped script leaks Maz\'s personal details', async () => {
   const files = [];
   async function walk(dir) {
@@ -456,7 +465,10 @@ test('no public page or shipped script leaks Maz\'s personal details', async () 
   const leaks = [];
   for (const file of files) {
     const text = await readFile(file, 'utf8');
-    if (/manazoid4@gmail|heanor|derbyshire/i.test(text)) leaks.push(path.relative(exportRoot, file));
+    const tokens = new Set(text.toLowerCase().match(/[a-z0-9._%+-]+@[a-z0-9.-]+|[a-z]{4,12}/g) || []);
+    if ([...tokens].some((token) => PERSONAL_DETAIL_HASHES.has(createHash('sha256').update(token).digest('hex')))) {
+      leaks.push(path.relative(exportRoot, file));
+    }
   }
   assert.deepEqual(leaks, [], `personal details found in: ${leaks.join(', ')}`);
 });
