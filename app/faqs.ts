@@ -25,6 +25,14 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
     answer: 'They are add-ons with a fixed, one-off price, like appointment reminders (£79), review requests (£95) or missed-call text-back (£95). Add them when you order, or later. They go on the same invoice, so there are no surprise costs.',
   },
   {
+    question: 'Can I buy an add-on on its own?',
+    answer: 'Yes. Standard add-ons, like appointment reminders (£79) or Google Business Profile setup (£49), can be bought on their own or added to any package. The one exception is Extra automation, which adds a second job to a package; a first job of your own is Starter Automation (£195).',
+  },
+  {
+    question: 'What isn’t included?',
+    answer: 'Paid apps or text-message costs, which you pay those companies directly (I tell you the cost up front). Changes after handover, unless you have Keep It Running at £19 a month. And new features beyond the agreed plan, which get their own fixed price first.',
+  },
+  {
     question: "What's the guarantee?",
     answer: 'Starter Automation is working within 7 working days of me getting access, or I waive the final payment and still finish. Larger jobs get a dated plan in the quote. If I cannot deliver what we agreed, I refund your deposit.',
   },
@@ -58,9 +66,15 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
 ];
 
+const pick = (question: string) => {
+  const faq = MAZ_WORKS_FAQS.find((item) => item.question === question);
+  if (!faq) throw new Error(`Missing homepage FAQ: ${question}`);
+  return faq;
+};
+
 export const HOMEPAGE_FAQS = [
-  MAZ_WORKS_FAQS[0],
-  MAZ_WORKS_FAQS[3],
-  MAZ_WORKS_FAQS[4],
-  MAZ_WORKS_FAQS[8],
+  pick('Is the plan really free? What’s the catch?'),
+  pick('Can I buy an add-on on its own?'),
+  pick('What isn’t included?'),
+  pick('Is this only for certain trades?'),
 ];
