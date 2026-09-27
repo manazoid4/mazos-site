@@ -101,6 +101,15 @@ test('Touch explains real-world limits without turning owner-visible copy into t
   assert.doesNotMatch(text, /FDM|passive tag|NDEF|antenna|retention method|cavity lock|maintained redirect service/i);
 });
 
+test('Objects includes an honest architecture and property use case', async () => {
+  const text = visibleText(await readPage('/3d-printing'));
+  assert.match(text, /Architecture & property/i);
+  assert.match(text, /Concept, massing, site or presentation models/i);
+  assert.match(text, /Send the file and scale; I(?:'|’)?ll confirm feasibility first/i);
+  assert.match(text, /Architectural models\?/i);
+  assert.doesNotMatch(text, /museum quality|resin quality|precision manufacturing|any scale/i);
+});
+
 test('Objects is discoverable from shared chrome, homepage and sitemap while digital services remain', async () => {
   const [home, objects, sitemap, readme] = await Promise.all([
     readPage('/'),
