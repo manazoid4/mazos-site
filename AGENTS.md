@@ -17,8 +17,8 @@ This repo is the Maz Works marketing site. Before any sales, lead, offer or copy
 - Prompt library + `/mw-*` commands: https://github.com/manazoid4/maz-works-knowledge-vault/blob/main/prompts/maz-works-prompt-library.md
 - Leads, call list, pitches: PRIVATE repo https://github.com/manazoid4/maz-works-leads. Never copy lead data into this public repo.
 
-Local vault path: `C:\Users\manaz\Desktop\Maz Works Knowledge Vault`.
-Rules: branch + PR, never push to main. Never invent testimonials, clients or results.
+Local vault path: see the private memory repo.
+Rules: branch + PR, never push to main. Never invent testimonials, clients or results. **Never publish Maz's location (town, county, address), personal email or phone number** in this public repo or on the site; the public contact is info@mazworks.uk only.
 
 ## Working with Maz (read every session)
 
@@ -26,7 +26,7 @@ Rules: branch + PR, never push to main. Never invent testimonials, clients or re
 - Reply in **two short, plain paragraphs**: what he must do, and what changed. Details belong in PRs.
 - **Remind him of his open to-dos** at the start and end of each session. He asks for this; he forgets things like posting. The list lives in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/STATUS.md` → "Maz's open to-dos". If a session ends with one still open, schedule a reminder with `send_later`.
 - Prefer free tiers and say plainly when something costs money.
-- **Email (all outreach):** every lead email, cold or warm, is sent by Maz from Gmail using the `info@mazworks.uk` From address (Gmail "Send mail as", live since 26 Sep 2026), and every reply to any `@mazworks.uk` address lands in info@mazworks.uk via ImprovMX. Never send outreach through Resend or any other tool; Resend is only for the site's opt-in mail. Details: `docs/maz-works/EMAIL-SETUP.md`.
+- **Email (all outreach):** every lead email, cold or warm, is sent by Maz from Gmail using the `info@mazworks.uk` From address (Gmail "Send mail as", live since 26 Sep 2026), and every reply to any `@mazworks.uk` address lands in Maz's Gmail via ImprovMX. Never send outreach through Resend or any other tool; Resend is only for the site's opt-in mail. Details: `docs/maz-works/EMAIL-SETUP.md`.
 - **Posts:** every LinkedIn/public post follows his posting rules in `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/POSTING-RULES.md`. Hand over final text in a plain code block, no dashes, link in the first comment, and audit claims before handing over.
 - **HubSpot (standard, always):** company names start with the tier, `🥇 GOLD · `, `🥈 SILVER · ` or `BENCH · ` (Maz reads HubSpot on his phone, where custom properties don't show), and the `Lead tier`, `Contact route` and `Website problem` properties stay in sync. Every call is a HubSpot **Task** (type Call, due time, number + one-line script in the body). Emailed leads get lead status `Attempted to contact`. Inbox-only contacts are named `<Business> (team)`.
 - **Leads (standard):** tier Gold 8–10 / Silver 6–7 / Bench, recorded in the private `maz-works-leads` repo and HubSpot together. Cold email only to confirmed limited companies; everyone else is phone or walk-in.

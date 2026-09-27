@@ -4,10 +4,13 @@ This repo is public, so this copy carries no lead names, contact details or lead
 
 Standard practice: before a session ends with work open, overwrite the private `HANDOVER.md` (4 sentence summary, Maz's open to-dos, next work), then update this public copy with only what is safe to publish.
 
+## 27 Sep 2026 — privacy fix
+Maz's town was removed from the site, schema, share image and docs, and the form endpoint now uses FormSubmit's private alias instead of a personal email address. Never publish Maz's location, personal email or phone (see AGENTS.md); a test now fails the build if any exported page contains them.
+
 ## 27 Sep 2026 — sales overhaul (homepage as a single-purpose sales page)
 
 ### Summary
-The homepage was rebuilt for one buyer, a UK small business losing bookings or enquiries, with one way in (the free Booking & Enquiry Check form, now on the homepage itself) and one main paid offer (the £395 Repair, with the £249 Google setup and £595 bundle beside it). Added a trust strip (Manazir, UK, fixed price, No VAT added, 7-working-day guarantee), real anonymised findings, a clearly labelled fictional example check report, a sticky phone CTA, ProfessionalService schema, a new share image and local-search meta titles; the second enquiry form moved to `/contact` (with Website Launch and Full Rebuild prices), and side projects, Objects and the newsletter moved to `/lab`. The free-check reply promise changed from 5 to 3 working days everywhere via one constant (`CHECK_REPLY_TIME` in `app/site.ts`); Maz chose 3 on 27 Sep. Typecheck, build, 79/79 tests and smoke pass; Lighthouse on the new build is 99/100/100/100 on mobile for `/` and `/leak-check`, with no horizontal overflow at 390px or 1440px.
+The homepage was rebuilt for one buyer, a UK small business losing bookings or enquiries, with one way in (the free Booking & Enquiry Check form, now on the homepage itself) and one main paid offer (the £395 Repair, with the £249 Google setup and £595 bundle beside it). Added a trust strip (Manazir, UK-wide, fixed price, No VAT added, 7-working-day guarantee), real anonymised findings, a clearly labelled fictional example check report, a sticky phone CTA, ProfessionalService schema, a new share image and local-search meta titles; the second enquiry form moved to `/contact` (with Website Launch and Full Rebuild prices), and side projects, Objects and the newsletter moved to `/lab`. The free-check reply promise changed from 5 to 3 working days everywhere via one constant (`CHECK_REPLY_TIME` in `app/site.ts`); Maz chose 3 on 27 Sep. Typecheck, build, 79/79 tests and smoke pass; Lighthouse on the new build is 99/100/100/100 on mobile for `/` and `/leak-check`, with no horizontal overflow at 390px or 1440px.
 
 ### Open goals
 - **Reply to every free check within 3 working days**; that is now a public promise.
