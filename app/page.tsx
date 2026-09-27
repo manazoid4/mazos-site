@@ -1,4 +1,4 @@
-import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, LOCATION } from './site';
+import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL } from './site';
 import { ServiceEnquiryLink } from './demo-request-form';
 import { SiteFooter, SiteHeader } from './site-chrome';
 import { HOMEPAGE_FAQS } from './faqs';
@@ -10,7 +10,7 @@ import { REAL_FINDINGS } from './real-findings';
 
 const TRUST = [
   ['You deal with Manazir', 'The person who checks it fixes it.'],
-  [LOCATION, 'Working with businesses UK-wide.'],
+  ['UK-wide, done remotely', 'No site visit needed.'],
   ['Fixed price, No VAT added', 'Agreed before any work starts.'],
   ['7-working-day guarantee', 'Working in time, or you don’t pay the rest.'],
 ] as const;
@@ -186,7 +186,7 @@ export default function Page() {
         <div>
           <p className="eyebrow">Who you’re dealing with</p>
           <h2 id="about-title">I’m Manazir. I do the work myself.</h2>
-          <p>I’m based in {LOCATION} and work with businesses across the UK. No account managers, no sales team. Email me directly at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+          <p>I work with small businesses across the UK, remotely. No account managers, no sales team. Email me directly at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
           <p className="s-small">Maz Works is new, so there are no client reviews here yet. What I can show is work you can open yourself:</p>
         </div>
         <div className="s-proof">

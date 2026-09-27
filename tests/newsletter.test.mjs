@@ -116,7 +116,7 @@ test('each signup emails Maz, from the verified domain, with the subscriber as r
   await handler(fakeReq({ email: 'owner@shop.co.uk' }), fakeRes(), f.impl);
   const mail = f.calls.find((call) => call.url === 'https://api.resend.com/emails');
   assert.ok(mail, 'a notification email should be sent');
-  assert.deepEqual(mail.body.to, ['manazoid4@gmail.com']);
+  assert.deepEqual(mail.body.to, ['info@mazworks.uk']);
   assert.match(mail.body.from, /@mazworks\.uk>$/);
   assert.equal(mail.body.reply_to, 'owner@shop.co.uk');
   assert.match(mail.body.subject, /owner@shop\.co\.uk/);
