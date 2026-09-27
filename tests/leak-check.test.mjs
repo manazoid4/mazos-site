@@ -21,16 +21,17 @@ async function readPage(route) {
   throw new Error(`Missing static page for ${route}`);
 }
 
-test('the free Booking & Enquiry Check has a dedicated shareable acquisition page', async () => {
+test('the free Customer Journey Review has a dedicated shareable acquisition page', async () => {
   const html = await readPage('/leak-check');
 
-  assert.match(html, /Free Booking &amp; Enquiry Check/);
+  assert.match(html, /Free Customer Journey Review/);
+  assert.doesNotMatch(html, /Booking &amp; Enquiry Check/);
   assert.match(html, /Three fields\. No call needed\./);
   assert.match(html, /within 3 working days/i);
   assert.doesNotMatch(html, /5 working days/i);
   assert.match(html, /any UK business/);
   assert.doesNotMatch(html, /Nottingham/);
-  assert.match(html, /Checked by hand/i);
+  assert.match(html, /Reviewed by hand/i);
   assert.match(html, /EXAMPLE|>Example</);
   assert.match(html, /A fictional business/);
   assert.match(html, /Your current provider should be able to fix this/);
@@ -55,7 +56,7 @@ test('the free check asks only for name, email and website before submission', a
     assert.match(form, new RegExp(`name="${name}"`));
   }
   assert.doesNotMatch(form, /name="business"|name="problem"|name="nextStep"/);
-  assert.match(form, /Get my free check/);
+  assert.match(form, /Get my free review/);
 });
 
 test('the Leak Check reuses the resilient enquiry delivery path', async () => {
@@ -75,7 +76,7 @@ test('homepage and shared navigation send the free first step to the dedicated p
   // The homepage carries the check form itself; shared navigation points at the dedicated page.
   assert.match(home, /id="check"/);
   assert.match(home, /id="leak-check-form"/);
-  assert.match(home, /href="#check">Get my free check/);
-  assert.match(home, /href="\/leak-check">Free check/);
+  assert.match(home, /href="#check">Get my free review/);
+  assert.match(home, /href="\/leak-check">Free review/);
   assert.doesNotMatch(home, /\?service=leak-check#contact/);
 });

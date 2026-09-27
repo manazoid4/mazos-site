@@ -25,7 +25,7 @@ export default function LabPage() {
       <SiteHeader />
       <section className="s-hero s-hero-short" id="main-content" tabIndex={-1} aria-labelledby="lab-title">
         <p className="eyebrow">Other builds</p>
-        <h1 id="lab-title">Things I’ve built beyond repairs.</h1>
+        <h1 id="lab-title">Products and tools I’ve built.</h1>
         <p className="s-lede">Products, prototypes and open-source tools. Each is labelled with what it really is. Want something like this? <a href="/contact">Tell me what you need</a>.</p>
       </section>
       <section className="s-section" aria-label="Projects">

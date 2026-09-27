@@ -10,7 +10,7 @@ export function SiteHeader() {
       <nav aria-label="Primary navigation">
         <a className="mw-nav-optional" href="/#example">Example</a>
         <a href="/#pricing">Prices</a>
-        <a className="mw-nav-cta" href="/leak-check">Free check</a>
+        <a className="mw-nav-cta" href="/leak-check">Free review</a>
       </nav>
     </header>
   );
@@ -21,12 +21,12 @@ export function SiteFooter() {
     <footer className="site-footer mw-site-footer mw-footer-clean">
       <div className="mw-footer-brand">
         <strong>Maz Works</strong>
-        <span>Booking, enquiry and Google fixes for UK small businesses, by Manazir Hussain.</span>
+        <span>Booking systems, automated follow-up and custom tools for UK small businesses, by Manazir Hussain.</span>
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
       </div>
 
       <nav className="mw-footer-links" aria-label="Maz Works links">
-        <a href="/leak-check">Free Booking &amp; Enquiry Check</a>
+        <a href="/leak-check">Free Customer Journey Review</a>
         <a href="/#pricing">Prices</a>
         <a href="/#example">Example report</a>
         <a href="/contact">Bigger jobs</a>
@@ -41,7 +41,7 @@ export function SiteFooter() {
 
       <div className="mw-footer-bottom">
         <span>© 2026 Maz Works</span>
-        <span>Fixed price · No VAT added · 7-working-day guarantee</span>
+        <span>Fixed quotes · No VAT added · Delivery guarantee</span>
       </div>
     </footer>
   );
