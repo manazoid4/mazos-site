@@ -4,7 +4,10 @@ This repo is public, so this copy carries no lead names, contact details or lead
 
 Standard practice: before a session ends with work open, overwrite the private `HANDOVER.md` (4 sentence summary, Maz's open to-dos, next work), then update this public copy with only what is safe to publish.
 
-## 27 Sep 2026 — Offer v8: lower prices, plain descriptions
+## 27 Sep 2026 — Offer v9: ManyPets-style clarity, consistent prices
+Maz asked for the Google profile, website page and training prices to come down and for every service to be explained as clearly as ManyPets explains its insurance. The homepage now has a side-by-side "Compare packages" table (same rows for each package, plain answers), four short promise blocks (fixed price first, half now half when it works, no contracts, no VAT), add-ons grouped under Win and keep customers / Get found and trusted / Less admin / Help for your team, and a "What's not included" list. New prices: Google Business Profile setup £49, single website page £145, team training £39 (one-hour call plus a written guide). Consistency rules in `app/offers.ts`: standard add-ons can be bought alone; Extra automation only adds a second job to a package; the weekly report is included free in a Business System.
+
+## 27 Sep 2026 — Offer v8: lower prices, plain descriptions (superseded by v9)
 Maz felt the prices (especially £49/month) would not sell and that the add-ons were hard to understand. Prices in `app/offers.ts` are now: Starter Automation £195, Business System from £795, Custom Software & Websites from £1,950, Keep It Running £19/month (checks, fixes to what I built, one small change a month). Twelve add-ons, each with a one-line "what you get": missed-call text-back, confirm or rebook by text, review requests, online booking (up to 10 services), quote follow-up and extra automation at £95; appointment reminders, rebooking reminders and Google Business Profile setup at £79; weekly report £145; website page from £195; team training £49. Each add-on was checked to be a quick set-up on the client's existing tools, with limits written in (e.g. missed-call text-back needs a phone line that supports it). The example plan totals £274.
 
 ## 27 Sep 2026 — Offer v7: low-cost Starter plus priced extras (superseded by v8)
