@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ niche: st
   if (!guide) return {};
   return {
     title: guide.title,
-    description: `${guide.lede} Real examples, a 60-second self-check and fixed quotes.`,
+    description: `${guide.lede} Real examples, a 60-second self-check and what I’d set up, with fixed prices.`,
     alternates: { canonical: `/for/${guide.id}` },
     openGraph: { title: `${guide.title} — Maz Works`, description: guide.lede, url: `/for/${guide.id}`, images: [OG_IMAGE] },
   };
@@ -45,8 +45,8 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
 
       <section className="mw-qw-section" aria-labelledby="niche-examples-title">
         <p className="eyebrow">Real examples</p>
-        <h2 id="niche-examples-title">What I found in September 2026.</h2>
-        <p className="mw-qw-lead">All real, all on live UK small business websites. Names left out on purpose.</p>
+        <h2 id="niche-examples-title">Where customers slip away.</h2>
+        <p className="mw-qw-lead">Real things I found looking at UK businesses in September 2026. Names left out on purpose.</p>
         <ul className="mw-qw-list">
           {guide.examples.map((example) => (
             <li key={example.found}><strong>{example.found}</strong> {example.cost}</li>
@@ -63,7 +63,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
       </section>
 
       <section className="mw-qw-section" aria-labelledby="niche-fix-title">
-        <p className="eyebrow">What fixing it costs</p>
+        <p className="eyebrow">What I’d set up, and the price</p>
         <h2 id="niche-fix-title">Fixed prices, agreed first.</h2>
         <ul className="mw-qw-list">
           {guide.fixes.map((fix) => (
