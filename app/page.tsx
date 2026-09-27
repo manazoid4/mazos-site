@@ -117,11 +117,11 @@ export default function Page() {
           {SYMPTOMS.map((item) => <li key={item}>{item}</li>)}
         </ul>
         <div className="s-found">
-          <p><strong>Real problems I found on UK business websites this month:</strong></p>
+          <p><strong>Real problems I found on UK business websites in September 2026:</strong></p>
           <ul>
             {REAL_FINDINGS.map((item) => <li key={item}>{item}</li>)}
           </ul>
-          <p>Each one is a customer who tried, gave up and went elsewhere. The owner never hears about them.</p>
+          <p>Any one of these can send a customer elsewhere, and the owner would never hear about it.</p>
         </div>
       </section>
 

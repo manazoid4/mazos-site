@@ -100,7 +100,7 @@ export default function LeakCheckPage() {
 
       <section className="mw-qw-section" aria-labelledby="leak-check-examples-title">
         <p className="eyebrow">Real examples</p>
-        <h2 id="leak-check-examples-title">What I found on UK business websites this month.</h2>
+        <h2 id="leak-check-examples-title">What I found on UK business websites in September 2026.</h2>
         <ul className="mw-qw-list">
           {REAL_FINDINGS.map((item) => <li key={item}>{item}</li>)}
         </ul>

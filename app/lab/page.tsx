@@ -5,7 +5,7 @@ import { SITE_URL } from '../site';
 
 export const metadata: Metadata = {
   title: 'Other builds',
-  description: 'Products, prototypes and open-source tools Manazir Hussain has built alongside Maz Works client repairs.',
+  description: 'Products, prototypes, open-source tools and a client website built by Manazir Hussain, founder of Maz Works.',
   alternates: { canonical: `${SITE_URL}/lab` },
 };
 

@@ -84,11 +84,11 @@ test('without JavaScript the form posts normally and is redirected back with the
   const ok = fakeRes();
   await handler(fakeReq({ email: 'owner@shop.co.uk' }, { json: false }), ok, recordingFetch().impl);
   assert.equal(ok.statusCode, 303);
-  assert.equal(ok.headers.location, '/?subscribed=1#newsletter');
+  assert.equal(ok.headers.location, '/lab?subscribed=1#newsletter');
 
   const bad = fakeRes();
   await handler(fakeReq({ email: 'nope' }, { json: false }), bad, recordingFetch().impl);
-  assert.equal(bad.headers.location, '/?subscribed=0#newsletter');
+  assert.equal(bad.headers.location, '/lab?subscribed=0#newsletter');
 });
 
 test('only POST is accepted', async () => {
