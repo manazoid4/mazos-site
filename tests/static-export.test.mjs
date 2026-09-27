@@ -16,7 +16,8 @@ const exportRoot = path.join(root, 'out');
 // live on the homepage; the second enquiry form, project list and newsletter moved off it.
 // 1250 -> 1400 on 27 Sep (Offer v7): priced optional extras and the care plan added to the homepage.
 // 1400 -> 1600 on 27 Sep (Offer v8): each add-on now says in plain words what the customer gets (Maz's request).
-const WORD_BUDGET = 1600;
+// 1600 -> 1900 on 27 Sep (Offer v9): ManyPets-style comparison table, promises and "what's not included" list.
+const WORD_BUDGET = 1900;
 // Same count as the homepage: all text inside <main>, including header, footer and closed answers.
 const CASE_STUDY_WORD_BUDGET = 320;
 
@@ -139,7 +140,12 @@ test('homepage shows a low-cost Starter, two bigger tiers, priced extras and a c
   assert.match(html, /Keep It Running[\s\S]{0,30}£19\/month/);
   assert.doesNotMatch(html, /\bAI\b/, 'AI is used behind the scenes, never advertised (Maz, 27 Sep)');
   assert.match(html, /Free Plan &amp; Fixed Quote/);
-  assert.match(html, /Half to start, the rest when it is working/);
+  assert.match(html, /Half now, half when it works/);
+  assert.match(html, /id="compare"/);
+  assert.match(html, /What’s not included/);
+  assert.match(html, /Google Business Profile setup[\s\S]{0,300}£49/);
+  assert.match(html, /Single website page[\s\S]{0,300}£145/);
+  assert.match(html, /Team training[\s\S]{0,300}£39/);
   assert.match(html, /No VAT added/);
   assert.match(html, /you own everything i build/i);
   assert.match(html, /working within 7 working days of me getting access/i);
