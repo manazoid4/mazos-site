@@ -13,11 +13,11 @@ const PAGE_URL = `${SITE_URL}/leak-check`;
 
 export const metadata: Metadata = {
   title: { absolute: 'Free Website Booking & Enquiry Check for UK Small Businesses | Maz Works' },
-  description: 'Not getting enquiries or bookings? Send your website or booking link. I test it by hand like a customer and email you what is broken, with dated proof, within 2 working days. Free.',
+  description: 'Not getting enquiries or bookings? Send your website or booking link. I test it by hand like a customer and email you what is broken, with dated proof, within 3 working days. Free.',
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: 'Free Booking & Enquiry Check — Maz Works',
-    description: 'Send your website or booking link. I test it by hand and email you what is broken, within 2 working days.',
+    description: 'Send your website or booking link. I test it by hand and email you what is broken, within 3 working days.',
     url: PAGE_URL,
     type: 'website',
     images: [OG_IMAGE],

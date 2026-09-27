@@ -26,7 +26,7 @@ test('the free Booking & Enquiry Check has a dedicated shareable acquisition pag
 
   assert.match(html, /Free Booking &amp; Enquiry Check/);
   assert.match(html, /Three fields\. No call needed\./);
-  assert.match(html, /within 2 working days/i);
+  assert.match(html, /within 3 working days/i);
   assert.doesNotMatch(html, /5 working days/i);
   assert.match(html, /any UK business/);
   assert.doesNotMatch(html, /Nottingham/);
