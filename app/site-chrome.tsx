@@ -10,7 +10,7 @@ export function SiteHeader() {
       <nav aria-label="Primary navigation">
         <a className="mw-nav-optional" href="/#example">Example</a>
         <a href="/#pricing">Prices</a>
-        <a className="mw-nav-cta" href="/leak-check">Free review</a>
+        <a className="mw-nav-cta" href="/leak-check">Free quote</a>
       </nav>
     </header>
   );
@@ -21,14 +21,14 @@ export function SiteFooter() {
     <footer className="site-footer mw-site-footer mw-footer-clean">
       <div className="mw-footer-brand">
         <strong>Maz Works</strong>
-        <span>Booking systems, automated follow-up and custom tools for UK small businesses, by Manazir Hussain.</span>
+        <span>Automation, connected tools and custom software for UK small businesses, by Manazir Hussain.</span>
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
       </div>
 
       <nav className="mw-footer-links" aria-label="Maz Works links">
-        <a href="/leak-check">Free Customer Journey Review</a>
+        <a href="/leak-check">Free plan and quote</a>
         <a href="/#pricing">Prices</a>
-        <a href="/#example">Example report</a>
+        <a href="/#example">Example plan</a>
         <a href="/contact">Bigger jobs</a>
         <a href="/lab">Other builds</a>
         <a href="/3d-printing">Objects</a>

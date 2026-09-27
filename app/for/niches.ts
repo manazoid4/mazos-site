@@ -34,8 +34,8 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Google your salon name. Is the title and description yours, spelled right?',
     ],
     fixes: [
-      { name: 'Booking & Enquiry System', price: 'From £495', body: 'Book buttons pointed at your real booking page, confirmations and reminders switched on, your Google listing matched, and a test booking followed through.' },
-      { name: 'Follow-up & Admin Automation', price: 'From £950', body: 'Rebooking prompts, review requests and no-show follow-ups that send themselves, so repeat visits do not depend on your memory.' },
+      { name: 'Starter Automation', price: '£295', body: 'Book buttons pointed at your real booking page, confirmations and reminders switched on, your Google listing matched, and a test booking followed through.' },
+      { name: 'Business System', price: 'From £1,250', body: 'Rebooking prompts, review requests and no-show follow-ups that send themselves, so repeat visits do not depend on your memory.' },
     ],
   },
   {
@@ -54,8 +54,8 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Does your Book button do what it says?',
     ],
     fixes: [
-      { name: 'Booking & Enquiry System', price: 'From £495', body: 'A Book button that does what it says, confirmations and reminders, and a test booking or enquiry followed through to a reply.' },
-      { name: 'New online booking', price: 'quoted after a free review', body: 'If you have no booking tool yet. Most booking tools charge a monthly fee, and I tell you the cost before you commit.' },
+      { name: 'Starter Automation', price: '£295', body: 'A Book button that does what it says, confirmations and reminders, and a test booking or enquiry followed through to a reply.' },
+      { name: 'New online booking', price: 'quoted in your free plan', body: 'If you have no booking tool yet. Most booking tools charge a monthly fee, and I tell you the cost before you commit.' },
     ],
   },
   {
@@ -74,8 +74,8 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Can a driver request an MOT without phoning?',
     ],
     fixes: [
-      { name: 'Booking & Enquiry System', price: 'From £495', body: 'Tap-to-call and quote requests that reach you, leftover template text replaced, and your Google listing corrected.' },
-      { name: 'Custom Systems & Websites', price: 'From £1,500', body: 'An old site rebuilt properly, with online booking requests and your content moved across.' },
+      { name: 'Starter Automation', price: '£295', body: 'Tap-to-call and quote requests that reach you, leftover template text replaced, and your Google listing corrected.' },
+      { name: 'Custom Software & Websites', price: 'From £2,950', body: 'An old site rebuilt properly, with online booking requests and your content moved across.' },
     ],
   },
   {
@@ -95,8 +95,8 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Tap your call button. Does it ring you?',
     ],
     fixes: [
-      { name: 'Booking & Enquiry System', price: 'From £495', body: 'Contact details, call button and Google listing put right, plus a review-request message ready to send.' },
-      { name: 'Custom Systems & Websites', price: 'From £1,500', body: 'A clean phone-first site with menu, hours, tap-to-call and a reviews link.' },
+      { name: 'Starter Automation', price: '£295', body: 'Contact details, call button and Google listing put right, plus a review-request message ready to send.' },
+      { name: 'Custom Software & Websites', price: 'From £2,950', body: 'A clean phone-first site with menu, hours, tap-to-call and a reviews link.' },
     ],
   },
   {
@@ -116,7 +116,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Can a new patient see how to book in under 10 seconds?',
     ],
     fixes: [
-      { name: 'Booking & Enquiry System', price: 'From £495', body: 'Booking and enquiry routes that work, confirmations and reminders, and a test enquiry followed through to a reply.' },
+      { name: 'Starter Automation', price: '£295', body: 'Booking and enquiry routes that work, confirmations and reminders, and a test enquiry followed through to a reply.' },
     ],
   },
 ];
