@@ -37,7 +37,7 @@ const FAQS = [
   ['Can I see the design before you make it?', 'Yes. You approve the direction and final price before production starts.'],
   ['Are there subscriptions?', 'Not for a stand that opens pages you already own. Ongoing page or link work is extra only if you need it.'],
   ['Can you build the page behind the tap?', 'Yes. I can build the booking page, form or campaign page. That is quoted separately, never hidden in the stand price.'],
-  ['Can you make architectural models?', 'Yes, for simple concept, massing, site and presentation models from suitable supplied files. Send the file and scale; I’ll confirm what is realistic before quoting.'],
+  ['Architectural models?', 'Yes. Send the file and scale; I’ll confirm feasibility first.'],
 ];
 
 export default function ObjectsPage() {
@@ -111,10 +111,10 @@ export default function ObjectsPage() {
             </details>
 
             <details className="objects-usecase" id="architecture-property">
-              <summary><span>04</span><div><strong>Architecture &amp; property</strong><small>Project models + linked displays</small></div></summary>
+              <summary><span>04</span><div><strong>Architecture &amp; property</strong><small>Models</small></div></summary>
               <div className="objects-usecase-body">
-                <p>Concept, massing, site and presentation pieces from suitable supplied files. Add a QR or tap point to open the project page, drawings or enquiry. Send the file and scale; I&apos;ll confirm what is realistic before quoting.</p>
-                <a className="objects-text-link" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Architecture%20Property%20Objects%20Enquiry`}>Ask about a project model →</a>
+                <p>Concept, massing, site or presentation models from suitable files, optionally linked by QR/tap.</p>
+                <a className="objects-text-link" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Architecture%20Property%20Objects%20Enquiry`}>Ask about a model →</a>
               </div>
             </details>
           </div>
