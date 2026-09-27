@@ -1,5 +1,6 @@
 import { OG_IMAGE } from '../seo';
 import type { Metadata } from 'next';
+import { Breadcrumbs } from '../breadcrumbs';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { SITE_URL } from '../site';
 import { formatUpdateDate, LATEST_MAZ_WORKS_UPDATE, MAZ_WORKS_UPDATES } from '../updates';
@@ -16,7 +17,6 @@ export const metadata: Metadata = {
     url: PAGE_URL,
     type: 'website',
   },
-  robots: { index: false, follow: true },
 };
 
 export default function WhatsNewPage() {
@@ -44,7 +44,8 @@ export default function WhatsNewPage() {
       <SiteHeader />
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="updates-title">
-        <p className="eyebrow">Product updates</p>
+        <Breadcrumbs items={[{ label: 'What’s new' }]} />
+        <p className="eyebrow">Updates</p>
         <h1 id="updates-title">What&apos;s new at Maz Works.</h1>
         <p>Real changes to the site and customer journey. Short release notes, what changed, and no invented results.</p>
         <div className="mw-actions">
@@ -90,13 +91,13 @@ export default function WhatsNewPage() {
 
       <section className="mw-resource-cta" aria-labelledby="updates-cta-title">
         <div>
-          <p className="eyebrow">See it rather than read about it</p>
-          <h2 id="updates-cta-title">Start with the current work.</h2>
-          <p>JobFilter and Scrap Finance Partners are both linked from the homepage, alongside the services and current starting prices.</p>
+          <p className="eyebrow">Free first step</p>
+          <h2 id="updates-cta-title">Tell me the job that eats your week.</h2>
+          <p>I’ll send a plan and a fixed price. No call needed.</p>
         </div>
         <div className="mw-actions">
-          <a className="button button-dark" href="/lab">See real work</a>
-          <a className="text-link" href="/contact#contact">Tell me the problem <span aria-hidden="true">→</span></a>
+          <a className="button button-signal" href="/leak-check?src=whats-new">Get a free plan and price</a>
+          <a className="text-link" href="/site-map">Site map <span aria-hidden="true">→</span></a>
         </div>
       </section>
 

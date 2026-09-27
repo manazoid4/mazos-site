@@ -1,3 +1,4 @@
+import { HOME_SECTIONS } from './nav';
 import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL } from './site';
 import { ServiceEnquiryLink } from './demo-request-form';
 import { SiteFooter, SiteHeader } from './site-chrome';
@@ -76,6 +77,11 @@ export default function Page() {
       <ul className="s-trust" aria-label="Why owners trust Maz Works">
         {TRUST.map(([title, body]) => <li key={title}><strong>{title}</strong><span>{body}</span></li>)}
       </ul>
+
+      <nav className="mw-onpage" aria-label="On this page">
+        <span>On this page</span>
+        {HOME_SECTIONS.map((section) => <a key={section.href} href={section.href}>{section.label}</a>)}
+      </nav>
 
       <section className="s-section" id="problem" aria-labelledby="problem-title">
         <p className="eyebrow">Sound familiar?</p>
