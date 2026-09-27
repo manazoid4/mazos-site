@@ -24,7 +24,7 @@ async function readPage(route) {
 const readSource = (...parts) => readFile(path.join(root, ...parts), 'utf8');
 
 test('the enquiry captures which service the visitor actually wants', async () => {
-  const html = await readPage('/');
+  const html = await readPage('/contact');
   const enquirySource = await readSource('app', 'enquiry.ts');
 
   assert.match(html, /What do you need help with\?/);
@@ -46,7 +46,7 @@ test('the enquiry captures which service the visitor actually wants', async () =
 });
 
 test('an enquiry can ask for a quote or an answer instead of an unpaid build', async () => {
-  const html = await readPage('/');
+  const html = await readPage('/contact');
 
   assert.match(html, /What would be most useful next\?/);
   assert.match(html, /A free check of my website/);

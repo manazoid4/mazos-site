@@ -11,7 +11,9 @@ const exportRoot = path.join(root, 'out');
 // 780 -> 820 on 26 Sep: new pricing adds a free Leak Check and a Full Rebuild card.
 // 820 -> 1100 on 26 Sep (Offer v5): Journey Receipt example, Tell Maz section and referral line added.
 // 1100 -> 1050 on 26 Sep: audit pass removed the duplicate problem chooser.
-const WORD_BUDGET = 1050;
+// 1050 -> 1250 on 27 Sep (sales overhaul): the free-check form and a labelled example report now
+// live on the homepage; the second enquiry form, project list and newsletter moved off it.
+const WORD_BUDGET = 1250;
 // Same count as the homepage: all text inside <main>, including header, footer and closed answers.
 const CASE_STUDY_WORD_BUDGET = 320;
 
@@ -55,30 +57,41 @@ async function internalTargetExists(urlPath) {
   return false;
 }
 
-test('homepage leads with a plain offer and none of the old filler', async () => {
+test('homepage is a single-purpose sales page for a business losing bookings', async () => {
   const html = await readPage('/');
-  assert.match(html, /I fix what’s costing your business time, customers, or money/);
-  assert.match(html, /I find and fix broken booking links, confusing enquiry routes and incorrect business information/);
-  assert.match(html, /Fixed price agreed before work starts/);
+  assert.match(html, /Customers trying to book you might be hitting a dead end/);
+  assert.match(html, /I check yours for free, then fix what’s broken for a fixed £395/);
   assert.match(html, /Tell me what’s wrong/);
-  for (const filler of [/Inspect the work before reading more claims/, /Operations thinking/, /What gets measured/, /href="\/whats-new/, /£150/, /Quick Win/, /£39\/month/, /£795/, /founding/i, /hacked/i]) {
+  for (const filler of [/Inspect the work before reading more claims/, /Operations thinking/, /What gets measured/, /href="\/whats-new/, /£150/, /Quick Win/, /£39\/month/, /£795/, /founding/i, /hacked/i, /class="mw-builds"/]) {
     assert.doesNotMatch(html, filler);
   }
 });
 
-test('homepage hero keeps the offer broad instead of reducing Maz Works to three outcomes', async () => {
+test('homepage has one way in: the free check form, with the call as the fallback', async () => {
   const html = await readPage('/');
-  const band = html.match(/<ul class="mw-builds"[\s\S]*?<\/ul>/)?.[0];
-  assert.ok(band, 'the hero must list what gets built, not just websites');
-  for (const name of ['Websites', 'Full rebuilds', 'Repairs', 'Automation', 'Software', 'Physical products']) {
-    assert.match(band, new RegExp(`<strong>${name}</strong>`));
+  assert.equal((html.match(/<form/g) || []).length, 1, 'the homepage carries exactly one form, the free check');
+  assert.match(html, /id="leak-check-form"/);
+  assert.doesNotMatch(html, /Send enquiry/);
+  assert.doesNotMatch(html, /class="mw-newsletter"/);
+  assert.match(html, /href="https:\/\/cal\.com\/mazworks\/quick-chat"/);
+  assert.match(html, /class="s-sticky/);
+});
+
+test('homepage trust strip states who, where and the terms', async () => {
+  const html = await readPage('/');
+  const strip = html.match(/<ul class="s-trust"[\s\S]*?<\/ul>/)?.[0];
+  assert.ok(strip, 'trust strip must sit under the hero');
+  for (const item of [/Manazir/, /Heanor, Derbyshire/, /No VAT added/, /7-working-day guarantee/]) {
+    assert.match(strip, item);
   }
-  for (const id of ['website', 'rebuild', 'repair', 'automation', 'software']) {
-    assert.match(band, new RegExp(`\\?service=${id}#contact`));
-  }
-  assert.match(band, /href="\/3d-printing"/);
-  assert.doesNotMatch(html, /Websites, booking and admin fixes/);
-  assert.match(html, /I find and fix broken booking links, confusing enquiry routes/);
+});
+
+test('homepage shows a clearly labelled example report, not a real client', async () => {
+  const html = await readPage('/');
+  assert.match(html, /id="example"/);
+  assert.match(html, /A fictional business, made up to show the format/);
+  for (const level of ['Fix now', 'Fix soon', 'Working when checked']) assert.match(html, new RegExp(level));
+  assert.match(html, /Couldn’t test/);
 });
 
 test('homepage has one set of service routes, not a duplicate problem chooser', async () => {
@@ -86,22 +99,24 @@ test('homepage has one set of service routes, not a duplicate problem chooser', 
   assert.doesNotMatch(html, /class="mw-leak-check"/);
 });
 
-test('homepage work stays short, truthful and now shows real flagship evidence', async () => {
+test('homepage proof is limited to real, honestly labelled work', async () => {
   const html = await readPage('/');
-  for (const name of ['JobFilter', 'Scrap Finance Partners', 'Agent Nudge', 'MAZ Pocket']) {
-    assert.match(html, new RegExp(name));
+  assert.match(html, /JobFilter/);
+  assert.match(html, /My own product · built and launched/);
+  assert.match(html, /Scrap Finance Partners/);
+  assert.match(html, /Client website · built by me/);
+  assert.match(html, /no client reviews here yet/);
+  assert.match(html, /href="\/lab"/);
+  for (const name of ['Agent Nudge', 'OpenFlowKit', 'Khutba', 'MAZ Pocket', 'tap-to-review']) {
+    assert.doesNotMatch(html, new RegExp(name), `${name} belongs on /lab, not the homepage`);
   }
-  assert.match(html, /Full build and setup/);
-  assert.match(html, /Client website/);
-  assert.match(html, /href="https:\/\/cal\.com\/mazworks\/quick-chat"/);
-  assert.match(html, /jobfilter-home\.webp/);
-  assert.ok(html.indexOf('jobfilter-home.webp') < html.indexOf('scrap-finance-partners.webp'), 'JobFilter proof comes first');
-  assert.match(html, /scrap-finance-partners\.webp/);
-  assert.match(html, /mw-work-proof-primary/);
-  assert.match(html, /mw-work-proof-secondary/);
-  assert.match(html, /In progress/);
-  assert.match(html, /Ask about this build/);
-  assert.doesNotMatch(html, /href="https:\/\/github.com\/manazoid4\/maz-pocket"/);
+  assert.doesNotMatch(html, /paid (client|contract|engagement)|client paid|testimonial/i);
+
+  const lab = await readPage('/lab');
+  for (const name of ['JobFilter', 'Scrap Finance Partners', 'Agent Nudge', 'OpenFlowKit', 'Khutba.io', 'MAZ Pocket', 'In progress', 'Ask about this build']) {
+    assert.match(lab, new RegExp(name));
+  }
+  assert.doesNotMatch(lab, /href="https:\/\/github.com\/manazoid4\/maz-pocket"/);
 });
 
 test('homepage pricing is transparent, bounded and links straight to an enquiry', async () => {
@@ -112,8 +127,9 @@ test('homepage pricing is transparent, bounded and links straight to an enquiry'
   assert.match(html, /Booking &amp; Enquiry Repair/);
   assert.match(html, /Google Profile &amp; Contact Setup/);
   assert.match(html, /free Booking &amp; Enquiry Check/i);
-  assert.match(html, /From £495/);
-  assert.match(html, /From £1,000/);
+  assert.doesNotMatch(html, /From £495/);
+  assert.doesNotMatch(html, /From £1,000/);
+  assert.match(html, /Bigger job[\s\S]{0,120}href="\/contact"/);
   assert.match(html, /£200 to start · £195 on completion/);
   assert.match(html, /£125 to start · £124 on completion/);
   assert.match(html, /£300 to start, £295 on completion/);
@@ -128,14 +144,27 @@ test('homepage pricing is transparent, bounded and links straight to an enquiry'
   assert.doesNotMatch(html, /£39\/month/);
   assert.doesNotMatch(html, /founding/i);
   assert.doesNotMatch(html, /href="\/quick-win"/);
-  for (const id of ['website', 'rebuild', 'repair', 'google-profile', 'bundle']) {
-    assert.match(html, new RegExp(`\\?service=${id}#contact`));
+  for (const id of ['repair', 'google-profile', 'bundle']) {
+    assert.match(html, new RegExp(`/contact\\?service=${id}#contact`));
   }
+
+  const contact = await readPage('/contact');
+  assert.match(contact, /From £495/);
+  assert.match(contact, /From £1,000/);
+  assert.match(contact, /No VAT added/);
+});
+
+test('the free-check reply promise is 2 working days everywhere', async () => {
+  for (const route of ['/', '/leak-check', '/contact', '/faq']) {
+    const html = await readPage(route);
+    assert.doesNotMatch(html, /5 working days/, `${route} still promises 5 working days`);
+  }
+  assert.match(await readPage('/'), /within 2 working days/);
 });
 
 test('homepage stays compact with four visible process steps', async () => {
   const html = await readPage('/');
-  for (const id of ['work', 'pricing', 'services', 'process', 'contact']) {
+  for (const id of ['check', 'example', 'pricing', 'process', 'about', 'faq']) {
     assert.match(html, new RegExp(`id="${id}"`));
   }
   assert.match(html, /Tell me what’s wrong/);
@@ -157,7 +186,7 @@ test('public contact uses the branded address while form delivery stays stable',
 });
 
 test('contact request submits in-page instead of depending on the visitor email app', async () => {
-  const html = await readPage('/');
+  const html = await readPage('/contact');
   const formSource = await readFile(path.join(root, 'app', 'demo-request-form.tsx'), 'utf8');
   const enquirySource = await readFile(path.join(root, 'app', 'enquiry.ts'), 'utf8');
   const vercelConfig = JSON.parse(await readFile(path.join(root, 'vercel.json'), 'utf8'));
@@ -254,13 +283,17 @@ test('structured data reflects Maz Works founder and broad service positioning',
   const data = JSON.parse(ldMatch[1]);
   const graph = data['@graph'];
   const person = graph.find((node) => node['@type'] === 'Person');
-  const org = graph.find((node) => node['@type'] === 'Organization');
   assert.equal(person.name, 'Manazir Hussain');
   assert.equal(person.jobTitle, 'Founder and Software Builder');
   assert.ok(person.sameAs.includes('https://github.com/manazoid4'));
   assert.ok(person.sameAs.includes('https://www.linkedin.com/company/maz-works'));
-  for (const term of ['Websites', 'rebuilds', 'customer-growth', 'automation', 'software', 'physical products']) {
-    assert.ok(org.description.toLowerCase().includes(term.toLowerCase()), `structured data missing ${term}`);
+  const business = graph.find((node) => [].concat(node['@type']).includes('ProfessionalService'));
+  assert.ok(business, 'homepage needs ProfessionalService structured data for local search');
+  assert.equal(business.address.addressLocality, 'Heanor');
+  assert.equal(business.areaServed.name, 'United Kingdom');
+  assert.deepEqual(business.makesOffer.map((offer) => offer.price), ['0', '395', '249', '595']);
+  for (const term of ['booking', 'enquiry', 'Google Business Profile', 'Websites', 'rebuilds', 'automation', 'software']) {
+    assert.ok(business.description.toLowerCase().includes(term.toLowerCase()), `structured data missing ${term}`);
   }
 });
 

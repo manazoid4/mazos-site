@@ -1,16 +1,17 @@
+import { OG_IMAGE } from '../seo';
 import type { Metadata } from 'next';
 import { CONTACT_EMAIL, SITE_URL } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 
 const PAGE_URL = `${SITE_URL}/quick-win`;
-const ENQUIRY_HREF = '/?service=repair#contact';
+const ENQUIRY_HREF = '/contact?service=repair#contact';
 
 export const metadata: Metadata = {
   title: 'Quick Win has moved',
   description: 'Quick Win has been replaced by the Booking & Enquiry Repair. Same idea, properly scoped and tested.',
   alternates: { canonical: '/' },
   robots: { index: false, follow: true },
-  openGraph: {
+  openGraph: { images: [OG_IMAGE],
     title: 'Quick Win has moved — Maz Works',
     description: 'This offer has been replaced by the Booking & Enquiry Repair.',
     url: PAGE_URL,

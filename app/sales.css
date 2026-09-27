@@ -1,0 +1,123 @@
+/* Sales pages (homepage, /contact, /lab). Loaded last; every class is `s-` prefixed
+   so it never fights the older layered stylesheets. Mobile first. */
+
+.s-home { --s-gap: clamp(56px, 9vw, 104px); }
+.s-home a:not(.button) { text-underline-offset: .2em; }
+
+.s-hero { padding: clamp(40px, 7vw, 96px) 0 clamp(28px, 4vw, 44px); max-width: 980px; }
+.s-hero .eyebrow { margin-bottom: 18px; }
+.s-hero h1 { font-size: clamp(2.15rem, 6.2vw, 4.4rem); max-width: 17ch; }
+.s-hero-short h1 { font-size: clamp(2rem, 5vw, 3.4rem); }
+.s-lede { margin-top: 20px; max-width: 640px; font-size: clamp(1.08rem, 1.8vw, 1.3rem); color: var(--charcoal); }
+.s-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; }
+.s-actions .button { font-size: .9rem; }
+.s-button-lg { min-height: 56px; padding: 14px 24px; font-size: 1rem !important; }
+.s-note { margin-top: 16px; color: var(--muted); font-size: .9rem; }
+.s-small { margin-top: 14px; color: var(--muted); font-size: .92rem; }
+.s-small a, .s-note a { color: var(--ink); font-weight: 700; }
+
+.s-trust { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.s-trust li { padding: 16px 14px 16px 0; display: grid; gap: 3px; border-bottom: 1px solid var(--soft-line); }
+.s-trust li:nth-child(n+3) { border-bottom: 0; }
+.s-trust strong { font-size: .92rem; line-height: 1.25; }
+.s-trust span { color: var(--muted); font-size: .8rem; line-height: 1.35; }
+
+.s-section { padding-top: var(--s-gap); }
+.s-section > h2, .s-check-copy h2, .s-about h2 { margin: 10px 0 22px; max-width: 22ch; }
+
+.s-ticks { list-style: none; display: grid; gap: 10px; max-width: 700px; }
+.s-ticks li { position: relative; padding-left: 30px; font-size: 1.02rem; }
+.s-ticks li::before { content: ""; position: absolute; left: 0; top: .35em; width: 16px; height: 16px; background: var(--signal); border: 1px solid var(--ink); }
+
+.s-found { margin-top: 28px; padding: 20px; max-width: 760px; background: var(--surface); border: 1px solid var(--line); display: grid; gap: 12px; }
+.s-found ul { padding-left: 20px; display: grid; gap: 6px; }
+
+.s-check { display: grid; gap: 28px; align-items: start; }
+.s-check .mw-demo-form { margin: 0; width: 100%; }
+.s-subhead { margin: 26px 0 12px; font-size: 1.2rem; }
+
+.s-report-wrap { margin-top: 24px; }
+.s-report { max-width: 820px; border: 1px solid var(--line); background: var(--surface); }
+.s-report header { padding: 18px 20px; border-bottom: 1px solid var(--line); display: grid; gap: 4px; position: relative; }
+.s-report-badge { justify-self: start; padding: 3px 9px; background: var(--ink); color: var(--signal); font-family: var(--mono); font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.s-report ol { list-style: none; }
+.s-report li { padding: 18px 20px; border-bottom: 1px solid var(--soft-line); display: grid; gap: 6px; }
+.s-report li strong { font-size: 1.05rem; }
+.s-report li p { font-size: .95rem; }
+.s-report em, .s-report-untested em { font-style: normal; font-weight: 750; }
+.s-level { justify-self: start; padding: 2px 8px; border: 1px solid var(--ink); font-family: var(--mono); font-size: .75rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.s-level-fix { background: #ffd9d2; }
+.s-level-working { background: #d9efdc; }
+.s-report li:nth-child(2) .s-level { background: #fff1c2; }
+.s-report-untested { padding: 14px 20px; font-size: .95rem; border-bottom: 1px solid var(--line); }
+.s-report footer { padding: 18px 20px; background: var(--signal); display: grid; gap: 6px; }
+.s-report footer .s-small { color: var(--charcoal); margin-top: 0; }
+
+.s-prices { margin-top: 24px; display: grid; gap: 14px; }
+.s-price { padding: 22px 20px; border: 1px solid var(--line); background: var(--surface); display: grid; gap: 10px; align-content: start; }
+.s-price-main { border-width: 3px; }
+.s-price-tag { justify-self: start; padding: 3px 9px; background: var(--signal); border: 1px solid var(--ink); font-family: var(--mono); font-size: .75rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.s-price h3 { font-size: 1.15rem; letter-spacing: -.01em; }
+.s-price-amount { font-size: 2.6rem; font-weight: 850; line-height: 1; letter-spacing: -.04em; }
+.s-price ul { padding-left: 20px; display: grid; gap: 4px; font-size: .95rem; }
+.s-price-deposit { color: var(--muted); font-family: var(--mono); font-size: .8rem; }
+.s-price .mw-service-link { font-size: .9rem; font-weight: 750; }
+.s-guarantee { margin-top: 20px; padding: 18px 20px; border: 1px solid var(--line); border-left: 8px solid var(--signal); background: var(--surface); max-width: 820px; }
+
+.s-steps { list-style: none; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.s-steps li { padding: 16px 0; border-bottom: 1px solid var(--soft-line); display: grid; grid-template-columns: 44px 1fr; column-gap: 12px; }
+.s-steps span { grid-row: span 2; font-family: var(--mono); font-weight: 800; }
+.s-steps p { color: var(--muted); font-size: .95rem; }
+
+.s-about > div > p { max-width: 680px; }
+.s-proof { margin-top: 22px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; max-width: 760px; }
+.s-proof-card { display: grid; gap: 4px; align-content: start; text-decoration: none; }
+.s-proof-card img { width: 100%; height: auto; aspect-ratio: 13 / 14; object-fit: cover; object-position: top; border: 1px solid var(--line); margin-bottom: 8px; }
+.s-proof-card strong { font-size: 1rem; text-decoration: underline; }
+.s-proof-card > span:last-child { color: var(--muted); font-size: .85rem; }
+
+.s-faq { display: grid; border-top: 1px solid var(--line); max-width: 860px; }
+.s-faq details { border-bottom: 1px solid var(--soft-line); }
+.s-faq summary { min-height: 56px; padding: 14px 0; cursor: pointer; font-weight: 750; display: flex; align-items: center; }
+.s-faq details p { padding: 0 0 16px; color: var(--charcoal); }
+
+.s-final { margin-top: var(--s-gap); padding: clamp(32px, 6vw, 64px) clamp(20px, 5vw, 56px); background: var(--ink); color: var(--surface); }
+.s-final h2 { max-width: 20ch; }
+.s-final p { margin-top: 12px; color: #cfd0c9; }
+.s-final .button:not(.button-signal) { background: transparent; color: var(--surface); border-color: var(--surface); }
+
+.s-lab { list-style: none; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.s-lab li { padding: 20px 0; border-bottom: 1px solid var(--soft-line); display: grid; gap: 6px; }
+.s-lab h2 { font-size: 1.4rem; }
+.s-lab-links { display: flex; flex-wrap: wrap; gap: 8px 20px; font-weight: 700; font-size: .92rem; }
+
+.s-sticky { display: none; }
+
+@media (max-width: 720px) {
+  .s-home .mw-nav-optional { display: none; }
+  .s-sticky { position: fixed; z-index: 50; left: 0; right: 0; bottom: 0; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); display: flex; align-items: center; gap: 12px; background: var(--ink); color: var(--surface); transition: transform 160ms ease-out; }
+  .s-sticky .button { min-height: 48px; flex: 0 0 auto; font-size: .9rem; }
+  .s-sticky span { font-size: .8rem; line-height: 1.3; }
+  .s-sticky-hidden { transform: translateY(110%); }
+  body:has(.s-sticky) .mw-site-footer { padding-bottom: 84px; }
+}
+
+@media (min-width: 721px) {
+  .s-trust { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .s-trust li { padding: 18px 18px 18px 0; border-bottom: 0; }
+  .s-trust li + li { padding-left: 18px; border-left: 1px solid var(--soft-line); }
+  .s-steps { grid-template-columns: repeat(4, 1fr); border-top: 0; gap: 16px; }
+  .s-steps li { border-top: 1px solid var(--line); border-bottom: 0; grid-template-columns: 1fr; row-gap: 6px; }
+  .s-steps span { grid-row: auto; }
+  .s-lab { grid-template-columns: repeat(2, 1fr); column-gap: 32px; }
+}
+
+@media (min-width: 960px) {
+  .s-check { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 48px; }
+  .s-prices { grid-template-columns: 1.1fr 1fr 1fr; }
+  .s-proof { grid-template-columns: repeat(2, 260px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .s-sticky { transition: none; }
+}

@@ -1,3 +1,4 @@
+import { OG_IMAGE } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { SITE_URL } from '../site';
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   title: "What's New",
   description: 'Recent Maz Works site and product improvements, explained plainly with what changed and why it matters.',
   alternates: { canonical: PAGE_URL },
-  openGraph: {
+  openGraph: { images: [OG_IMAGE],
     title: "What's New at Maz Works",
     description: 'Recent improvements to Maz Works, explained without release-note noise.',
     url: PAGE_URL,
@@ -48,7 +49,7 @@ export default function WhatsNewPage() {
         <p>Real changes to the site and customer journey. Short release notes, what changed, and no invented results.</p>
         <div className="mw-actions">
           <a className="button button-signal" href={`#${LATEST_MAZ_WORKS_UPDATE.id}`}>Latest update</a>
-          <a className="text-link" href="/#work">See the work <span aria-hidden="true">→</span></a>
+          <a className="text-link" href="/lab">See the work <span aria-hidden="true">→</span></a>
         </div>
       </section>
 
@@ -94,8 +95,8 @@ export default function WhatsNewPage() {
           <p>JobFilter and Scrap Finance Partners are both linked from the homepage, alongside the services and current starting prices.</p>
         </div>
         <div className="mw-actions">
-          <a className="button button-dark" href="/#work">See real work</a>
-          <a className="text-link" href="/#contact">Tell me the problem <span aria-hidden="true">→</span></a>
+          <a className="button button-dark" href="/lab">See real work</a>
+          <a className="text-link" href="/contact#contact">Tell me the problem <span aria-hidden="true">→</span></a>
         </div>
       </section>
 
