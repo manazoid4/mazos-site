@@ -8,12 +8,12 @@ const ENQUIRY_HREF = '/contact?service=repair#contact';
 
 export const metadata: Metadata = {
   title: 'Quick Win has moved',
-  description: 'Quick Win has been replaced by the Booking & Enquiry System, properly scoped, tested and guaranteed.',
+  description: 'Quick Win has been replaced by Starter Automation: one job set up to run itself, £295.',
   alternates: { canonical: '/' },
   robots: { index: false, follow: true },
   openGraph: { images: [OG_IMAGE],
     title: 'Quick Win has moved — Maz Works',
-    description: 'This offer has been replaced by the Booking & Enquiry System.',
+    description: 'This offer has been replaced by Starter Automation.',
     url: PAGE_URL,
     type: 'website',
   },
@@ -48,10 +48,10 @@ export default function QuickWinPage() {
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="quick-win-title">
         <p className="eyebrow">This offer has moved</p>
-        <h1 id="quick-win-title">Quick Win is now the Booking &amp; Enquiry System.</h1>
-        <p>Your booking and enquiry route built properly, with confirmations and reminders, tested end to end and backed by a guarantee. From £495, fixed quote agreed first.</p>
+        <h1 id="quick-win-title">Quick Win is now Starter Automation.</h1>
+        <p>One job you do by hand, set up to run itself, tested and backed by a guarantee. £295, fixed price agreed first, with optional extras if you want them.</p>
         <div className="mw-actions">
-          <a className="button button-signal" href={ENQUIRY_HREF}>Ask about a booking system</a>
+          <a className="button button-signal" href={ENQUIRY_HREF}>Ask about Starter Automation</a>
         </div>
       </section>
 
@@ -86,7 +86,7 @@ export default function QuickWinPage() {
         </div>
         <div className="mw-actions">
           <a className="button button-signal" href={ENQUIRY_HREF}>Use the enquiry form</a>
-          <a className="text-link" href={`mailto:${CONTACT_EMAIL}?subject=Booking%20%26%20Enquiry%20System%20enquiry`}>Or email me <span aria-hidden="true">→</span></a>
+          <a className="text-link" href={`mailto:${CONTACT_EMAIL}?subject=Starter%20Automation%20enquiry`}>Or email me <span aria-hidden="true">→</span></a>
         </div>
       </section>
 
