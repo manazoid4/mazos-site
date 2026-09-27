@@ -1,62 +1,20 @@
 # Maz Works: latest session handover (public copy)
 
-This repo is public, so this copy carries no lead names, contact details or lead actions. The full handover, with Maz's open to-dos and the lead work, is in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/HANDOVER.md`. Read that first.
+This repo is public. The full handover, open to-dos and research source names live in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/HANDOVER.md` and `ARCHITECTS-CONTEXT-PACK-2026-09-27.md`.
 
-Standard practice: before a session ends with work open, overwrite the private `HANDOVER.md` (4 sentence summary, Maz's open to-dos, next work), then update this public copy with only what is safe to publish.
+## 27 Sep 2026 — Offer v8 + architects test
 
-## 27 Sep 2026 — Offer v8: lower prices, plain descriptions
-Maz felt the prices (especially £49/month) would not sell and that the add-ons were hard to understand. Prices in `app/offers.ts` are now: Starter Automation £195, Business System from £795, Custom Software & Websites from £1,950, Keep It Running £19/month (checks, fixes to what I built, one small change a month). Twelve add-ons, each with a one-line "what you get": missed-call text-back, confirm or rebook by text, review requests, online booking (up to 10 services), quote follow-up and extra automation at £95; appointment reminders, rebooking reminders and Google Business Profile setup at £79; weekly report £145; website page from £195; team training £49. Each add-on was checked to be a quick set-up on the client's existing tools, with limits written in (e.g. missed-call text-back needs a phone line that supports it). The example plan totals £274.
+Claude session `01KHHDcykQuZunqoEKFvr7a5` completed through PR #74 before its limit was hit. Offer v8 is the current source of truth: Starter Automation £195, Business System from £795, Custom Software & Websites from £1,950, Keep It Running £19/month, with scoped optional add-ons; AI may be used behind the scenes but is never advertised or sold.
 
-## 27 Sep 2026 — Offer v7: low-cost Starter plus priced extras (superseded by v8)
-Maz wanted a cheaper way in so prices don't scare anyone off, more money from optional extras, and no narrowing of the audience. `app/offers.ts` now holds: Starter Automation £295 (one job set up to run itself, live within 7 working days), Business System from £1,250, Custom Software & Websites from £2,950, twelve optional extras from £95 (reminders, confirm-or-rebook by text, missed-call text-back, review system, rebooking reminders, online booking, quote follow-up, Google profile, dashboard, landing page, training); AI is used behind the scenes only and never advertised, and Keep It Running at £49/month. The free first step is the Free Plan & Fixed Quote: the /leak-check form now asks for the job to automate (website optional) instead of offering a website review, and the example is a plan and quote (£295 + £145 extra = £440). The homepage speaks to any trade. Offer v6 below is superseded.
+PR #75 (`chatgpt/architects-objects-vertical`) tests architects as one Maz Works use case without changing the core positioning. It adds `/for/architects` through the existing `NICHE_GUIDES` system using anonymised observations from live UK architecture-practice websites, maps the fixes onto Offer v8, and adds one restrained `Architecture & property` use case to Maz Works Objects for simple concept/massing/site/presentation pieces from suitable supplied files. The Objects copy explicitly says the file and scale are checked before quoting; there is no claim that Maz has already produced an architectural model, no separate architect pricing, no new brand and no homepage architecture section.
 
-## 27 Sep 2026 — Offer v6: systems, not website fixes (superseded by Offer v7)
-Maz does not want Maz Works to read as a small-time website-fix shop, and asked for slightly higher prices. The site now leads with "I build the systems that turn enquiries into paying customers" and sells three tiers from `app/offers.ts` (the only place prices live): Booking & Enquiry System from £495 (replaces the £395 Repair, £249 Google setup and £595 bundle), Follow-up & Admin Automation from £950, and Custom Systems & Websites from £1,500 (replaces Website Launch and Full Rebuild). The free first step is now the Free Customer Journey Review (same form, same /leak-check link). Terms: fixed quote first, half to start, rest when live, No VAT added; the 7-working-day guarantee applies to the Booking & Enquiry System, larger jobs get a dated plan. Tests fail if any public page shows the retired £395/£249/£595 offers or "website fix" wording. The positioning rule is in AGENTS.md.
+Tests were extended so architects must export with the same real-example/self-check/canonical/tagged-link rules as the other niches, current Offer v8 prices are allowed while retired prices remain blocked, the researched practice names stay out of public output, and Objects must keep the architecture wording honest without promising resin/museum-quality/precision manufacturing. The existing data-driven route generation means adding the guide should also feed the sitemap and the Free Plan page automatically.
 
-## 27 Sep 2026 — privacy fix
-Maz's town was removed from the site, schema, share image and docs, and the form endpoint now uses FormSubmit's private alias instead of a personal email address. Never publish Maz's location, personal email or phone (see AGENTS.md); a test now fails the build if any exported page contains them.
+### Next agent
+- Read `AGENTS.md` and current `app/offers.ts` first; do not work from Offer v7 or older handoffs.
+- Check PR #75's protected `Verify portfolio` result before merge.
+- Fix only genuine CI/review issues; do not widen scope into a print bureau, a separate architecture brand, new homepage section or another pricing model.
+- If the idea is validated physically, the next proof should be one clearly labelled fictional/concept architectural demo linked to one project page, not a catalogue.
 
-## 27 Sep 2026 — sales overhaul (homepage as a single-purpose sales page)
-
-### Summary
-The homepage was rebuilt for one buyer, a UK small business losing bookings or enquiries, with one way in (the free Booking & Enquiry Check form, now on the homepage itself) and one main paid offer (the £395 Repair, with the £249 Google setup and £595 bundle beside it). Added a trust strip (Manazir, UK-wide, fixed price, No VAT added, 7-working-day guarantee), real anonymised findings, a clearly labelled fictional example check report, a sticky phone CTA, ProfessionalService schema, a new share image and local-search meta titles; the second enquiry form moved to `/contact` (with Website Launch and Full Rebuild prices), and side projects, Objects and the newsletter moved to `/lab`. The free-check reply promise changed from 5 to 3 working days everywhere via one constant (`CHECK_REPLY_TIME` in `app/site.ts`); Maz chose 3 on 27 Sep. Typecheck, build, 79/79 tests and smoke pass; Lighthouse on the new build is 99/100/100/100 on mobile for `/` and `/leak-check`, with no horizontal overflow at 390px or 1440px.
-
-### Open goals
-- **Reply to every free check within 3 working days**; that is now a public promise.
-- **Vercel custom events** (`Check submitted`, `Enquiry sent`, `Call clicked`, `Pricing viewed`) are wired in `app/analytics.tsx` but only appear in the dashboard on a paid Vercel plan; on Hobby they are silently dropped. Until then, count check emails in Gmail; each carries a `Source` line (`direct (homepage)`, `direct (leak-check)` or the `?src=` tag).
-- **Add a real photo of Maz** to the "I'm Manazir" section when one is available; no photo is in the repo today.
-- The private sales kit that turns a delivered check into a paid repair should match the example report layout on the homepage.
-
-### Guardrails
-Unchanged: never invent clients, results or testimonials; the example report is fictional and labelled so; the "real problems I found" list lives in `app/real-findings.ts` and must only hold observed findings. Scrap Finance Partners stays labelled as a client website, JobFilter as Maz's own product.
-
----
-
-## 26 Sep 2026 — Offer v5
-
-### Summary
-The old £150 Quick Win was judged not worth paying for, so the whole commercial offer was rebuilt as "Offer v5": Booking & Enquiry Repair (£395, primary) and Google Profile & Contact Setup (£249), with both together at £595, replacing Quick Win, the Growth System and Website Care entirely. Every priced offer now carries a written guarantee, "No VAT added", and a £40 referral thank-you for any introduction that becomes a paying client. Positioning widened to all UK small businesses customers book, call or enquire with, not a niche-first or region-limited launch. PR #65 covers the site changes: typecheck, build and the full test suite (75/75) pass, and 390px/1440px screenshots show no horizontal overflow.
-
-### Open goals
-- **Get the PR merged once CI is green**, then watch for the first real quote sent under the new pricing.
-- **Goal A remains the first paying client.** The Repair and Setup offers, the free check and the Live Customer Walkthrough are the funnel; track it in the private pipeline tracker.
-- **Do not build thin niche pages yet.** The `/for/*` guides got a one-line "not your trade?" note instead of new pages — let real outreach show what repeats before adding more.
-
-### Guardrails
-Never invent clients, results or testimonials. Scrap Finance Partners remains an unpaid client website and JobFilter has no paying customers. Physical Objects remain unvalidated concepts; no tap stand has been printed or sold. Never put lead data here. Branch + PR, never push to main. Outreach only from Gmail as info@mazworks.uk, never Resend. Read `AGENTS.md` and the private `spine/projects/mazworks-site/HANDOVER.md` before the next pass.
-
----
-
-## 26 Sep 2026 — pass 4 acquisition handover
-
-### Summary
-Pass 4 focused the next site change on first-client acquisition rather than another general redesign. PR #63 adds a dedicated `/leak-check` page with a three-field form, makes the free Leak Check the primary homepage/header route, preserves the broad Maz Works offer and confirmed pricing, and reuses the existing resilient enquiry delivery rather than adding another service. Research covered mobile owners, trust, CRO, local SEO, design, accessibility, pricing, current Nottingham/East Midlands competitors and CSS maintainability; the full findings and Claude review brief are in `docs/maz-works/HANDBACK-TO-CLAUDE.md`. Automated typecheck/build/tests/smoke passed on the code change; the remaining pre-merge checks are a real-browser 390px/1440px visual pass and one end-to-end Leak Check delivery test.
-
-### Open goals
-- **PR #63 remains open.** Claude should complete the real-browser visual check, verify one Leak Check submission reaches the inbox, review the two-working-day promise with Maz, then fix or merge as appropriate.
-- **Goal A remains the first paying client.** The new `/leak-check` route is designed to be a simple URL for calls, cold email, DMs and LinkedIn without copying private lead data into this repo.
-- **Do not build thin niche pages yet.** Let real outreach show which niche/problem repeats, then make one useful page backed by evidence.
-- **Measure before redesigning again.** Existing Vercel Analytics can show page visits; add conversion events only if they are supported on the current plan without an unwanted cost.
-
-### Guardrails
-Never invent clients, results or testimonials. Scrap Finance Partners remains an unpaid client website and JobFilter has no paying customers. Physical Objects remain unvalidated concepts. Never put lead data here. Keep Maz Works broader than a website agency. Branch + PR, never push to main. Outreach only from Gmail as info@mazworks.uk, never Resend. Read `AGENTS.md`, the private `spine/projects/mazworks-site/STATUS.md` and `docs/maz-works/HANDBACK-TO-CLAUDE.md` before the next pass.
+### Standing guardrails
+Maz Works remains a systems/automation/custom-software business for UK small businesses and teams, with websites and physical objects as routes inside the offer. Never invent clients, results or testimonials; never publish Maz's location, personal email or phone; never advertise AI; and use branch + PR rather than pushing directly to `main`.
