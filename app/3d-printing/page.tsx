@@ -8,12 +8,12 @@ import { TouchEnquiryForm } from './touch-enquiry-form';
 import { TouchSelectionProvider } from './touch-selection';
 
 export const metadata: Metadata = {
-  title: 'Maz Works Objects — NFC stands, business gifts and useful custom objects',
-  description: 'Custom countertop tap stands, small-batch business gifts, recruitment agency gifting, signs and useful 3D-printed objects for clients, candidates, teams and workplaces.',
+  title: 'Maz Works Objects — NFC stands, architectural models and custom objects',
+  description: 'Custom countertop tap stands, small-batch business gifts, simple architectural presentation models, signs and useful 3D-printed objects for real workplaces.',
   alternates: { canonical: '/3d-printing' },
   openGraph: {
     title: 'Maz Works Objects — Touch + Business Gifting',
-    description: 'One tap. One useful next step. Plus useful physical objects for client gifting, recruitment and real workplaces.',
+    description: 'One tap. One useful next step. Plus useful physical objects for client gifting, project presentation and real workplaces.',
     url: '/3d-printing',
     images: [{
       url: '/objects/touch-three-hero.webp', width: 1536, height: 1024,
@@ -37,6 +37,7 @@ const FAQS = [
   ['Can I see the design before you make it?', 'Yes. You approve the direction and final price before production starts.'],
   ['Are there subscriptions?', 'Not for a stand that opens pages you already own. Ongoing page or link work is extra only if you need it.'],
   ['Can you build the page behind the tap?', 'Yes. I can build the booking page, form or campaign page. That is quoted separately, never hidden in the stand price.'],
+  ['Can you make architectural models?', 'Yes, for simple concept, massing, site and presentation models from suitable supplied files. Send the file and scale; I’ll confirm what is realistic before quoting.'],
 ];
 
 export default function ObjectsPage() {
@@ -106,6 +107,14 @@ export default function ObjectsPage() {
               <div className="objects-usecase-body">
                 <p>Tell me what needs holding, showing or connecting. I&apos;ll say what is realistic before quoting.</p>
                 <a className="objects-text-link" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Objects%20custom%20enquiry`}>Ask about a custom object →</a>
+              </div>
+            </details>
+
+            <details className="objects-usecase" id="architecture-property">
+              <summary><span>04</span><div><strong>Architecture &amp; property</strong><small>Project models + linked displays</small></div></summary>
+              <div className="objects-usecase-body">
+                <p>Concept, massing, site and presentation pieces from suitable supplied files. Add a QR or tap point to open the project page, drawings or enquiry. Send the file and scale; I&apos;ll confirm what is realistic before quoting.</p>
+                <a className="objects-text-link" href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20Architecture%20Property%20Objects%20Enquiry`}>Ask about a project model →</a>
               </div>
             </details>
           </div>
