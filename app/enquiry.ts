@@ -12,14 +12,14 @@ export const SUBMIT_TIMEOUT_MS = 15000;
  */
 export const ENQUIRY_SERVICES = [
   // Ids are stable deep-link keys (old outreach links use them); labels follow app/offers.ts.
-  { id: 'repair', label: 'Starter Automation (£295)' },
-  { id: 'automation', label: 'Business System (from £1,250)' },
-  { id: 'software', label: 'Custom software or internal tool (from £2,950)' },
-  { id: 'website', label: 'Website with the system built in (from £2,950)' },
-  { id: 'reviews', label: 'Review system and customer reminders (from £145)' },
-  { id: 'care', label: 'Keep It Running (£49/month)' },
+  { id: 'repair', label: 'Starter Automation (£195)' },
+  { id: 'automation', label: 'Business System (from £795)' },
+  { id: 'software', label: 'Custom software or internal tool (from £1,950)' },
+  { id: 'website', label: 'Website with the system built in (from £1,950)' },
+  { id: 'reviews', label: 'Review requests and customer reminders (from £79)' },
+  { id: 'care', label: 'Keep It Running (£19/month)' },
   { id: 'rebuild', label: 'Rebuild of an existing site or system' },
-  { id: 'google-profile', label: 'Google Business Profile setup (£149)' },
+  { id: 'google-profile', label: 'Google Business Profile setup (£79)' },
   { id: 'bundle', label: 'Starter plus optional extras' },
   { id: 'objects', label: 'Tap-to-review stands and signs' },
   { id: 'unsure', label: 'Not sure yet, help me work it out' },

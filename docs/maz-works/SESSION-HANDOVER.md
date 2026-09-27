@@ -4,7 +4,10 @@ This repo is public, so this copy carries no lead names, contact details or lead
 
 Standard practice: before a session ends with work open, overwrite the private `HANDOVER.md` (4 sentence summary, Maz's open to-dos, next work), then update this public copy with only what is safe to publish.
 
-## 27 Sep 2026 — Offer v7: low-cost Starter plus priced extras
+## 27 Sep 2026 — Offer v8: lower prices, plain descriptions
+Maz felt the prices (especially £49/month) would not sell and that the add-ons were hard to understand. Prices in `app/offers.ts` are now: Starter Automation £195, Business System from £795, Custom Software & Websites from £1,950, Keep It Running £19/month (checks, fixes to what I built, one small change a month). Twelve add-ons, each with a one-line "what you get": missed-call text-back, confirm or rebook by text, review requests, online booking (up to 10 services), quote follow-up and extra automation at £95; appointment reminders, rebooking reminders and Google Business Profile setup at £79; weekly report £145; website page from £195; team training £49. Each add-on was checked to be a quick set-up on the client's existing tools, with limits written in (e.g. missed-call text-back needs a phone line that supports it). The example plan totals £274.
+
+## 27 Sep 2026 — Offer v7: low-cost Starter plus priced extras (superseded by v8)
 Maz wanted a cheaper way in so prices don't scare anyone off, more money from optional extras, and no narrowing of the audience. `app/offers.ts` now holds: Starter Automation £295 (one job set up to run itself, live within 7 working days), Business System from £1,250, Custom Software & Websites from £2,950, twelve optional extras from £95 (reminders, confirm-or-rebook by text, missed-call text-back, review system, rebooking reminders, online booking, quote follow-up, Google profile, dashboard, landing page, training); AI is used behind the scenes only and never advertised, and Keep It Running at £49/month. The free first step is the Free Plan & Fixed Quote: the /leak-check form now asks for the job to automate (website optional) instead of offering a website review, and the example is a plan and quote (£295 + £145 extra = £440). The homepage speaks to any trade. Offer v6 below is superseded.
 
 ## 27 Sep 2026 — Offer v6: systems, not website fixes (superseded by Offer v7)
