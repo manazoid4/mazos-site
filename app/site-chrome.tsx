@@ -1,4 +1,5 @@
-import { NAV_GROUPS, PRIMARY_NAV } from './nav';
+import { NAV_GROUPS } from './nav';
+import { NavLinks } from './nav-links';
 import { SiteMenu } from './site-menu';
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL } from './site';
 
@@ -10,7 +11,7 @@ export function SiteHeader() {
         <span><strong>Maz Works</strong><small>Manazir Hussain</small></span>
       </a>
       <nav aria-label="Primary navigation">
-        {PRIMARY_NAV.map((link) => <a key={link.href} className="mw-nav-link" href={link.href}>{link.label}</a>)}
+        <NavLinks />
         <SiteMenu />
         <a className="mw-nav-cta" href="/leak-check">Free quote</a>
       </nav>
@@ -45,7 +46,8 @@ export function SiteFooter() {
       </div>
 
       <div className="mw-footer-bottom">
-        <span>© 2026 Maz Works</span>
+        <span>© 2026 Maz Works · <a href="/site-map">Site map</a> · <a href="/whats-new">What’s new</a></span>
+        <a className="mw-back-top" href="#main-content">Back to top ↑</a>
         <span>Fixed quotes · No VAT added · Delivery guarantee</span>
       </div>
     </footer>

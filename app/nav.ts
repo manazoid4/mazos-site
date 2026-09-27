@@ -41,6 +41,19 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/3d-printing#architecture-property', label: 'Architecture models' },
       { href: '/faq', label: 'FAQ' },
       { href: '/lab', label: 'Other builds' },
+      { href: '/whats-new', label: 'What’s new' },
+      { href: '/site-map', label: 'Site map' },
     ],
   },
+];
+
+/** Homepage "On this page" jump bar, in page order. */
+export const HOME_SECTIONS: NavLink[] = [
+  { href: '#check', label: 'Free plan' },
+  { href: '#example', label: 'Example' },
+  { href: '#pricing', label: 'Prices' },
+  { href: '#compare', label: 'Compare' },
+  { href: '#extras', label: 'Add-ons' },
+  { href: '#process', label: 'How it works' },
+  { href: '#faq', label: 'Questions' },
 ];

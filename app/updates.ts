@@ -13,6 +13,44 @@ export type MazWorksUpdate = {
  */
 export const MAZ_WORKS_UPDATES: MazWorksUpdate[] = [
   {
+    id: 'easier-navigation',
+    publishedAt: '2026-09-27',
+    label: 'BETTER',
+    title: 'Easier to find your way around',
+    summary: 'Every page now carries the same map of the site, so prices, trade guides and objects are one or two taps away.',
+    items: [
+      'Phones get a labelled Menu button with every page, grouped into What I do, Who it’s for and More.',
+      'A new Who it’s for page lists every trade guide, and each guide shows where you are with a Home / Who it’s for trail.',
+      'The homepage has an On this page bar that jumps straight to prices, add-ons, the example plan and questions.',
+      'A plain site map, this page and a helpful not-found page, so a wrong link never leaves you stuck.',
+    ],
+  },
+  {
+    id: 'architecture-models-drawings',
+    publishedAt: '2026-09-27',
+    label: 'NEW',
+    title: 'Architecture models and drawings',
+    summary: 'Objects now shows simple printed models and clear presentation drawings for architects, developers and builders.',
+    items: [
+      'Four illustrative drawings: a massing model with a QR plaque, a site plan, a floor plan and a scaffold elevation.',
+      'A three-step way to ask: send the file and scale, get a fixed price, receive it with a plaque that opens the project page.',
+      'Presentation drawings only. Structural, planning and scaffold design stay with your engineer or contractor.',
+    ],
+  },
+  {
+    id: 'simpler-packages',
+    publishedAt: '2026-09-27',
+    label: 'BETTER',
+    title: 'Simpler packages you can compare',
+    summary: 'Three packages side by side, add-ons that each say plainly what you get, and a clear list of what is not included.',
+    items: [
+      'A low-cost starting package so any business can try one job first.',
+      'Add-ons grouped by what they help with: winning customers, getting found, less admin and team help.',
+      'Promises spelled out: one fixed price agreed first, half now and half when it works, no contracts, no VAT added.',
+      'Trade guides now lead with outcomes, like turning enquiries into booked jobs.',
+    ],
+  },
+  {
     id: 'proof-first-enquiries',
     publishedAt: '2026-09-21',
     label: 'BETTER',
