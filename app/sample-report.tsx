@@ -43,7 +43,7 @@ export function SampleReport() {
       </ol>
       <p className="s-report-untested"><em>Not included:</em> a new website. The current one works, so there’s no reason to pay for one.</p>
       <footer>
-        <p><strong>The quote.</strong> Starter Automation, <strong>£295</strong>: every enquiry lands in one list and gets an instant reply. Optional extra, <strong>£145</strong>: reminders switched on and set up by text. Total £440, No VAT added. Live within 7 working days of access, or you don’t pay the rest.</p>
+        <p><strong>The quote.</strong> Starter Automation, <strong>£195</strong>: every enquiry lands in one list and gets an instant reply. Add-on, <strong>£79</strong>: appointment reminders switched on. Total £274, No VAT added. Working within 7 working days of access, or you don’t pay the rest.</p>
         <p className="s-small">If nothing is worth automating, the plan says so.</p>
       </footer>
     </article>

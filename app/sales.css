@@ -126,6 +126,8 @@
 .s-extras { margin-top: 20px; padding: 20px; border: 1px solid var(--line); background: var(--surface); max-width: 820px; }
 .s-extras h3 { font-size: 1.15rem; letter-spacing: -.01em; }
 .s-extras ul { list-style: none; margin-top: 12px; display: grid; }
-.s-extras li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--soft-line); font-size: .95rem; }
-.s-extras li strong { white-space: nowrap; }
+.s-extras li { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--soft-line); font-size: .95rem; }
+.s-extras li div { display: grid; gap: 2px; }
+.s-extras li div span { color: var(--muted); font-size: .88rem; line-height: 1.4; }
+.s-extras-price { white-space: nowrap; }
 .s-extras-care { margin-top: 14px; }

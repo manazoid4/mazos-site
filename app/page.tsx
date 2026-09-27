@@ -33,9 +33,9 @@ const EXAMPLES = [
 
 const STEPS = [
   ['01', 'Tell me the job', `What eats your week or loses you customers. I reply within ${CHECK_REPLY_TIME}.`],
-  ['02', 'I send a plan and fixed price', 'Start small or go bigger. Extras are priced up front.'],
-  ['03', 'You pay half to start', 'Once access is sorted. The rest when it’s live.'],
-  ['04', 'Live on the agreed date', 'Or you don’t pay the rest.'],
+  ['02', 'I send a plan and fixed price', 'Start small or go bigger. Add-ons are priced up front.'],
+  ['03', 'You pay half to start', 'Once access is sorted. The rest when it’s working.'],
+  ['04', 'Working by the agreed date', 'Or you don’t pay the rest.'],
 ];
 
 const PROOF = [
@@ -65,7 +65,7 @@ export default function Page() {
       <section className="s-hero" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
         <p className="eyebrow">{POSITIONING_EYEBROW}</p>
         <h1 id="intro-title">I build the systems that turn enquiries into paying customers.</h1>
-        <p className="s-lede">Automation, connected tools and custom software that take the chasing and admin off you. Start from £295, add only what you need.</p>
+        <p className="s-lede">Automation, connected tools and custom software that take the chasing and admin off you. Start from £195, add only what you need.</p>
         <div className="s-actions">
           <a className="button button-signal s-button-lg" href="#check">Get a free plan and price</a>
           <CallLink className="button" href={BOOKING_URL} placement="hero">Or book a 15-minute call</CallLink>
@@ -132,9 +132,9 @@ export default function Page() {
         </div>
         <div className="s-extras" id="extras">
           <h3>Optional extras</h3>
-          <p className="s-small">Add any of these to a job. Priced up front and on the same invoice.</p>
+          <p className="s-small">Add any of these to a package. One-off price, on the same invoice.</p>
           <ul>
-            {EXTRAS.map((extra) => <li key={extra.name}><span>{extra.name}</span><strong>{extra.price}</strong></li>)}
+            {EXTRAS.map((extra) => <li key={extra.name}><div><strong>{extra.name}</strong><span>{extra.what}</span></div><strong className="s-extras-price">{extra.price}</strong></li>)}
           </ul>
           <p className="s-extras-care"><strong>{CARE_PLAN.name}, {CARE_PLAN.price}.</strong> {CARE_PLAN.body}</p>
           <p className="s-small">{THIRD_PARTY_NOTE}</p>
