@@ -1,3 +1,5 @@
+import { NAV_GROUPS, PRIMARY_NAV } from './nav';
+import { SiteMenu } from './site-menu';
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL } from './site';
 
 export function SiteHeader() {
@@ -8,8 +10,8 @@ export function SiteHeader() {
         <span><strong>Maz Works</strong><small>Manazir Hussain</small></span>
       </a>
       <nav aria-label="Primary navigation">
-        <a className="mw-nav-optional" href="/#example">Example</a>
-        <a href="/#pricing">Prices</a>
+        {PRIMARY_NAV.map((link) => <a key={link.href} className="mw-nav-link" href={link.href}>{link.label}</a>)}
+        <SiteMenu />
         <a className="mw-nav-cta" href="/leak-check">Free quote</a>
       </nav>
     </header>
@@ -25,19 +27,22 @@ export function SiteFooter() {
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
       </div>
 
-      <nav className="mw-footer-links" aria-label="Maz Works links">
-        <a href="/leak-check">Free plan and quote</a>
-        <a href="/#pricing">Prices</a>
-        <a href="/#example">Example plan</a>
-        <a href="/contact">Bigger jobs</a>
-        <a href="/lab">Other builds</a>
-        <a href="/3d-printing">Objects</a>
-        <a href="/demos">Private demos</a>
-        <a href="/faq">FAQ</a>
-        <a href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20feedback`}>Feedback</a>
-        <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn ↗</a>
-        <a href={GITHUB_URL} target="_blank" rel="noreferrer">GitHub ↗</a>
-      </nav>
+      <div className="mw-footer-groups">
+        {NAV_GROUPS.map((group) => (
+          <nav key={group.title} aria-label={group.title}>
+            <p>{group.title}</p>
+            {group.links.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
+          </nav>
+        ))}
+        <nav aria-label="Get started">
+          <p>Get started</p>
+          <a href="/leak-check">Free plan and quote</a>
+          <a href="/demos">Private demos</a>
+          <a href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20feedback`}>Feedback</a>
+          <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a href={GITHUB_URL} target="_blank" rel="noreferrer">GitHub ↗</a>
+        </nav>
+      </div>
 
       <div className="mw-footer-bottom">
         <span>© 2026 Maz Works</span>

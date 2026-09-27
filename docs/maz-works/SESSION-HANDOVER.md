@@ -2,6 +2,14 @@
 
 This repo is public. The full handover, open to-dos and research source names live in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/HANDOVER.md` and `ARCHITECTS-CONTEXT-PACK-2026-09-27.md`.
 
+
+## 27 Sep: navigation audit and architecture visuals
+
+- Audit: on phones the header showed only "Free quote"; trade guides were linked only from inside the quote page; Objects only from the footer; no breadcrumbs or trade hub.
+- Fix (NN/g "combo" navigation, Xero-style grouped menu): desktop header shows Prices, Who it's for, Objects, FAQ plus Free quote; phones get Prices plus a labelled Menu button with every route in three groups. Footer uses the same groups (`app/nav.ts` is the one map). New `/for` hub, breadcrumbs with BreadcrumbList schema on guides, `/for` and Objects.
+- Architecture: four illustrative CAD-style drawings in `public/architecture/` (massing model with QR plaque, site plan, floor plan, scaffold elevation), each labelled illustrative. Objects has a full Architecture & property section; the architects guide shows two drawings and links to it. Presentation drawings only, never structural or scaffold design.
+- Tests: every main page links to the key routes and has the menu button; drawings labelled illustrative; shared nav chrome excluded from page word budgets; Objects budget 1,100.
+
 ## 27 Sep 2026 — Audit of the architects work (PR #75/#76)
 Checked by Claude against AGENTS.md and the live site. Sound: no researched practice is named in this repo, architects stay a use case through `NICHE_GUIDES`, no new pricing tier. Improved: every trade guide (including architects) was headlined "Website leaks on…" / "Enquiry gaps on … websites", which contradicts the positioning, so all six now lead with the outcome (e.g. "Turn portfolio interest into qualified architecture projects"); fix lines now describe systems, not website repairs; "What fixing it costs" became "What I'd set up, and the price"; the architectural-models FAQ now says "simple concept or massing models, possibly" because no model has been printed yet. A new test blocks website-fix headlines and wording on the guides.
 
