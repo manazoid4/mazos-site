@@ -57,7 +57,7 @@ fs.mkdirSync(ARTIFACTS, {recursive:true});
  }
  await page.getByText('No email app? Copy your enquiry',{exact:true}).click();
  const recovered=await page.locator('.enquiry-recovery textarea').inputValue();
- assert.match(recovered,/To: manazoid4@gmail.com/); assert.match(recovered,/Bookings & follow-up\nSecond line \+ £49/);
+ assert.match(recovered,/To: info@mazworks.uk/); assert.match(recovered,/Bookings & follow-up\nSecond line \+ £49/);
  await page.screenshot({path:ARTIFACTS+'/enquiry-recovery-mobile.png'});
  mode='pending'; await page.getByRole('button',{name:'Send enquiry',exact:true}).click();
  await page.getByRole('button',{name:'Sending…'}).waitFor(); assert.equal(await page.locator('[name=email]').isDisabled(),true);

@@ -40,7 +40,7 @@ const structuredData = {
       image: `${SITE_URL}${OG_IMAGE.url}`,
       logo: `${SITE_URL}/email/mw-logo.png`,
       founder: { '@id': `${SITE_URL}/#person` },
-      address: { '@type': 'PostalAddress', addressLocality: 'Heanor', addressRegion: 'Derbyshire', addressCountry: 'GB' },
+      address: { '@type': 'PostalAddress', addressCountry: 'GB' },
       areaServed: { '@type': 'Country', name: 'United Kingdom' },
       priceRange: '£249–£595',
       description: 'Booking, enquiry and Google Business Profile repairs for UK small businesses, at fixed prices. Also websites, rebuilds, customer-growth systems, automation, software and physical products.',

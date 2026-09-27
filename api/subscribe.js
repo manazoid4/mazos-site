@@ -8,7 +8,7 @@
 const CONTACTS_URL = 'https://api.resend.com/contacts';
 const EMAILS_URL = 'https://api.resend.com/emails';
 // Resend stores contacts silently, so each signup is also emailed to Maz.
-const NOTIFY_TO = process.env.SIGNUP_NOTIFY_EMAIL || 'manazoid4@gmail.com';
+const NOTIFY_TO = process.env.SIGNUP_NOTIFY_EMAIL || 'info@mazworks.uk';
 const NOTIFY_FROM = 'Maz Works <signups@mazworks.uk>';
 const MAX_BODY_BYTES = 2048;
 const TIMEOUT_MS = 10000;

@@ -81,7 +81,7 @@ test('homepage trust strip states who, where and the terms', async () => {
   const html = await readPage('/');
   const strip = html.match(/<ul class="s-trust"[\s\S]*?<\/ul>/)?.[0];
   assert.ok(strip, 'trust strip must sit under the hero');
-  for (const item of [/Manazir/, /Heanor, Derbyshire/, /No VAT added/, /7-working-day guarantee/]) {
+  for (const item of [/Manazir/, /UK-wide/, /No VAT added/, /7-working-day guarantee/]) {
     assert.match(strip, item);
   }
 });
@@ -290,7 +290,7 @@ test('structured data reflects Maz Works founder and broad service positioning',
   assert.ok(person.sameAs.includes('https://www.linkedin.com/company/maz-works'));
   const business = graph.find((node) => [].concat(node['@type']).includes('ProfessionalService'));
   assert.ok(business, 'homepage needs ProfessionalService structured data for local search');
-  assert.equal(business.address.addressLocality, 'Heanor');
+  assert.equal(business.address.addressLocality, undefined, 'never publish Maz\'s town');
   assert.equal(business.areaServed.name, 'United Kingdom');
   assert.deepEqual(business.makesOffer.map((offer) => offer.price), ['0', '395', '249', '595']);
   for (const term of ['booking', 'enquiry', 'Google Business Profile', 'Websites', 'rebuilds', 'automation', 'software']) {
@@ -441,4 +441,22 @@ test('case studies route to a plan and fixed price, not a blanket free demo', as
     assert.doesNotMatch(html, /free demo/i, `${route} still offers a free demo`);
     assert.match(html, /Ask about a build like this/);
   }
+});
+
+test('no public page or shipped script leaks Maz\'s personal details', async () => {
+  const files = [];
+  async function walk(dir) {
+    for (const entry of await readdir(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) await walk(full);
+      else if (/\.(html|js|txt|xml|json)$/.test(entry.name)) files.push(full);
+    }
+  }
+  await walk(exportRoot);
+  const leaks = [];
+  for (const file of files) {
+    const text = await readFile(file, 'utf8');
+    if (/manazoid4@gmail|heanor|derbyshire/i.test(text)) leaks.push(path.relative(exportRoot, file));
+  }
+  assert.deepEqual(leaks, [], `personal details found in: ${leaks.join(', ')}`);
 });

@@ -208,7 +208,7 @@ state and the email fallback, so nothing is silently swallowed — but the lead 
 unless they email manually.
 
 **Needs Manazir:** open the FormSubmit "Activate Form" email (sent to
-`manazoid4@gmail.com` during this audit, 19 Sep 2026) and click the activation link,
+`[the activated inbox]` during this audit, 19 Sep 2026) and click the activation link,
 then re-test from the live site. No code change can substitute for this.
 
 **Mitigated in code by Agent A:** a failed submission now offers a prefilled `mailto:`

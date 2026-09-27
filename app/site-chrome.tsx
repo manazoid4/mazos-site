@@ -21,7 +21,7 @@ export function SiteFooter() {
     <footer className="site-footer mw-site-footer mw-footer-clean">
       <div className="mw-footer-brand">
         <strong>Maz Works</strong>
-        <span>Booking, enquiry and Google fixes for UK small businesses. Manazir Hussain, Heanor, Derbyshire.</span>
+        <span>Booking, enquiry and Google fixes for UK small businesses, by Manazir Hussain.</span>
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
       </div>
 
