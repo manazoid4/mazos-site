@@ -14,19 +14,19 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How much does it cost?',
-    answer: 'Starter Automation is £295 for one job set up to run itself. A Business System, where several jobs are joined up, starts from £1,250. Custom Software & Websites start from £2,950. Optional extras, like text reminders, missed-call text-back or a review system, are priced up front and added to the same invoice. Keep It Running is £49 a month. No VAT added.',
+    answer: 'Starter Automation is £195 for one job set up to run itself. A Business System, where several jobs are joined up, starts from £795. Custom Software & Websites start from £1,950. Add-ons like appointment reminders (£79) or missed-call text-back (£95) are priced up front and go on the same invoice. Keep It Running is £19 a month. No VAT added.',
   },
   {
-    question: 'What can the £295 Starter do?',
-    answer: 'One job you currently do by hand, set up to run itself on the tools you already use. For example: every enquiry logged in one list with an instant reply, or booking confirmations and reminders sent automatically. Live within 7 working days of access.',
+    question: 'What can the £195 Starter do?',
+    answer: 'One job you currently do by hand, set up to run itself on the tools you already use. For example: every enquiry logged in one list with an instant reply, or booking confirmations and reminders sent automatically. Working within 7 working days of access.',
   },
   {
     question: 'How do the optional extras work?',
-    answer: 'They are add-ons with a fixed price, like appointment reminders (£145), missed-call text-back (£195) or a review system (£195). Add them when you order, or later. They go on the same invoice, so there are no surprise costs.',
+    answer: 'They are add-ons with a fixed, one-off price, like appointment reminders (£79), review requests (£95) or missed-call text-back (£95). Add them when you order, or later. They go on the same invoice, so there are no surprise costs.',
   },
   {
     question: "What's the guarantee?",
-    answer: 'Starter Automation is live within 7 working days of me getting access, or I waive the final payment and still finish. Larger jobs get a dated plan in the quote. If I cannot deliver what we agreed, I refund your deposit.',
+    answer: 'Starter Automation is working within 7 working days of me getting access, or I waive the final payment and still finish. Larger jobs get a dated plan in the quote. If I cannot deliver what we agreed, I refund your deposit.',
   },
   {
     question: 'How does payment work?',

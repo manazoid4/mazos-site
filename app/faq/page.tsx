@@ -8,7 +8,7 @@ const PAGE_URL = `${SITE_URL}/faq`;
 
 export const metadata: Metadata = {
   title: 'FAQ',
-  description: 'Straight answers about automation for small businesses: the free plan and quote, Starter Automation from £295, optional extras, the guarantee, payment and ownership. No VAT added.',
+  description: 'Straight answers about automation for small businesses: the free plan and quote, Starter Automation from £195, optional extras, the guarantee, payment and ownership. No VAT added.',
   alternates: { canonical: PAGE_URL },
   openGraph: { images: [OG_IMAGE],
     title: 'Maz Works FAQ',
