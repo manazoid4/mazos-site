@@ -7,8 +7,8 @@
  * customers and take admin off the owner. It is not a website-fix shop.
  * Never describe it as "website repairs" or "small fixes".
  *
- * Pricing model (Offer v7): a low-cost Starter so anyone can begin, optional
- * extras priced up front and added to the invoice, and a small monthly care
+ * Pricing model (Offer v9): a low-cost Starter so anyone can begin, add-ons
+ * priced up front (£39 to £145) and added to the invoice, and a small monthly care
  * plan. Audience is every UK small business and team, not one niche.
  *
  * AI (Maz, 27 Sep): may be used behind the scenes to build or run things, but
