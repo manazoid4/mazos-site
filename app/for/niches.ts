@@ -119,6 +119,28 @@ export const NICHE_GUIDES: NicheGuide[] = [
       { name: 'Starter Automation', price: '£195', body: 'Booking and enquiry routes that work, confirmations and reminders, and a test enquiry followed through to a reply.' },
     ],
   },
+  {
+    id: 'architects',
+    name: 'Architects and architecture practices',
+    title: 'Enquiry gaps on architecture practice websites',
+    lede: 'A strong portfolio gets attention, but the next step still matters. If a potential client has to hunt for contact details or start from a blank email, every enquiry begins with extra back-and-forth.',
+    examples: [
+      { found: 'A small architecture practice had a dedicated contact page that showed only an address, phone number and email, with no project enquiry form.', cost: 'A prospective client could not send project type, location, budget or timescale in the first step.' },
+      { found: 'A rural architecture studio offered a complimentary site visit and consultation, but asked people to arrange it by phone or email; the only form on the page was for the newsletter.', cost: 'Someone interested in the consultation could not choose a time or send a project brief in one step.' },
+      { found: 'A residential architecture site had Home, Projects and About in the main menu, while its “contact us about your project” details appeared near the bottom of the homepage.', cost: 'The route from browsing work to starting a project was less direct than the portfolio itself.' },
+      { found: 'A small independent practice said it was taking new commissions selectively, but its public contact route was a general email address or Instagram.', cost: 'The site asked every new client to start from a blank message instead of a short qualified project enquiry.' },
+    ],
+    selfCheck: [
+      'Open one of your project pages on your phone. Can a client start an enquiry without hunting for contact details?',
+      'Does your first enquiry capture the basics you need: project type, location, rough budget and timescale?',
+      'If someone asks for a consultation, do they get an acknowledgement and clear next step without you typing it by hand?',
+    ],
+    fixes: [
+      { name: 'Starter Automation', price: '£195', body: 'A project enquiry captured in one place, acknowledged automatically and passed to you with the key details already collected.' },
+      { name: 'Business System', price: 'From £795', body: 'Enquiry, qualification, consultation, proposal and follow-up joined up so new-project admin does not start from scratch every time.' },
+      { name: 'Custom Software & Websites', price: 'From £1,950', body: 'A portfolio or practice site with project pages, enquiry flow or a client-facing tool built around how your practice actually works.' },
+    ],
+  },
 ];
 
 export function getNicheGuide(id: string) {
