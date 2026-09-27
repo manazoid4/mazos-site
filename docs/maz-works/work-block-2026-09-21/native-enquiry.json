@@ -5,7 +5,7 @@
     "result": "Native POST carries current choices; no enquiry data in URL; CSP allows only intended form destination",
     "sent": {
       "method": "POST",
-      "url": "https://formsubmit.co/info@mazworks.uk",
+      "url": "https://formsubmit.co/[the activated inbox]",
       "fields": {
         "_subject": "Maz Works — business enquiry",
         "_template": "table",
@@ -25,7 +25,7 @@
     "result": "Native POST carries current choices; no enquiry data in URL; CSP allows only intended form destination",
     "sent": {
       "method": "POST",
-      "url": "https://formsubmit.co/info@mazworks.uk",
+      "url": "https://formsubmit.co/[the activated inbox]",
       "fields": {
         "_subject": "Maz Works Objects — quote enquiry",
         "_template": "table",
@@ -48,7 +48,7 @@
     "result": "Native POST carries current choices; no enquiry data in URL; CSP allows only intended form destination",
     "sent": {
       "method": "POST",
-      "url": "https://formsubmit.co/info@mazworks.uk",
+      "url": "https://formsubmit.co/[the activated inbox]",
       "fields": {
         "_subject": "Maz Works — business enquiry",
         "_template": "table",
@@ -68,7 +68,7 @@
     "result": "Native POST carries current choices; no enquiry data in URL; CSP allows only intended form destination",
     "sent": {
       "method": "POST",
-      "url": "https://formsubmit.co/info@mazworks.uk",
+      "url": "https://formsubmit.co/[the activated inbox]",
       "fields": {
         "_subject": "Maz Works Objects — quote enquiry",
         "_template": "table",

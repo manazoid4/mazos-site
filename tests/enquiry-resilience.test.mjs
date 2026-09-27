@@ -10,7 +10,7 @@ test('both exported enquiry forms provide a native POST fallback instead of leak
     const form = html.match(/<form\b[^>]*>/)?.[0];
     assert.ok(form, `missing ${route} form`);
     assert.match(form, /method="[Pp][Oo][Ss][Tt]"/, route);
-    assert.match(form, /action="https:\/\/formsubmit\.co\/info@mazworks.uk"/, route);
+    assert.match(form, /action="https:\/\/formsubmit\.co\/cdecd22760836a83422b51da0a853f94"/, route);
     assert.match(html, /name="_subject"/);
     assert.match(html, /name="_template"/);
   }
