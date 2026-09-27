@@ -4,14 +4,14 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const exportRoot = path.join(process.cwd(), 'out');
-const NICHES = ['salons-and-beauty', 'dog-groomers', 'garages', 'cafes-and-food', 'clinics-and-therapists'];
+const NICHES = ['salons-and-beauty', 'dog-groomers', 'garages', 'cafes-and-food', 'clinics-and-therapists', 'architects'];
 
 test('each niche guide exports with real examples, a self-check, prices and a tagged Leak Check link', async () => {
   for (const id of NICHES) {
     const html = await readFile(path.join(exportRoot, 'for', `${id}.html`), 'utf8').catch(() => readFile(path.join(exportRoot, 'for', id, 'index.html'), 'utf8'));
     assert.match(html, /Real examples/, `${id}: examples section`);
     assert.match(html, /Check yours in 60 seconds/, `${id}: self-check section`);
-    assert.match(html, /£195|From £(1,250|2,950)/, `${id}: Offer v7 price`);
+    assert.match(html, /£195|From £(795|1,950)/, `${id}: Offer v8 price`);
     assert.doesNotMatch(html, /£(395|249|595|295)\b|From £(495|950|1,500|1,250|2,950)\b/, `${id}: retired price`);
     assert.doesNotMatch(html, /£150 fixed/, `${id}: retired Quick Win price`);
     assert.doesNotMatch(html, /Quick Win/, `${id}: retired Quick Win name`);
@@ -20,7 +20,7 @@ test('each niche guide exports with real examples, a self-check, prices and a ta
     assert.match(html, new RegExp(`/leak-check\\?src=for-${id}`), `${id}: tagged free check link`);
     assert.match(html, new RegExp(`<link rel="canonical" href="[^"]*/for/${id}"`), `${id}: canonical`);
     // Anonymised on purpose: never name the businesses the examples came from.
-    for (const name of ['Vines', 'Yumi', 'Casa Bake', 'Sandiacre', 'Hurley', 'Revive', 'Aeternum', 'Old Smithy', 'Lana', 'Dorsi', 'Elm Tree', 'Pawfect']) {
+    for (const name of ['Vines', 'Yumi', 'Casa Bake', 'Sandiacre', 'Hurley', 'Revive', 'Aeternum', 'Old Smithy', 'Lana', 'Dorsi', 'Elm Tree', 'Pawfect', 'A Small Studio', 'Range Studio', 'Morizzo', 'Arrigoni']) {
       assert.doesNotMatch(html, new RegExp(name, 'i'), `${id}: must not name ${name}`);
     }
   }
