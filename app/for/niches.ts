@@ -9,16 +9,23 @@
 export type NicheGuide = {
   id: string;
   name: string;
+  /** Short label for menus. */
+  shortName: string;
   title: string;
   lede: string;
   examples: { found: string; cost: string }[];
   selfCheck: string[];
   fixes: { name: string; price: string; body: string }[];
+  /** Optional illustrations. Must be labelled as illustrative, never passed off as client work. */
+  visuals?: { src: string; alt: string; caption: string }[];
+  /** Optional related page, e.g. physical models for architects. */
+  related?: { href: string; label: string; body: string };
 };
 
 export const NICHE_GUIDES: NicheGuide[] = [
   {
     id: 'salons-and-beauty',
+    shortName: 'Salons and beauty',
     name: 'Salons and beauty',
     title: 'Keep salon and beauty clients booking without chasing them',
     lede: 'Clients book on their phone, often late at night. If the booking route breaks, they book somewhere else and you never hear about it.',
@@ -40,6 +47,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
   },
   {
     id: 'dog-groomers',
+    shortName: 'Dog groomers',
     name: 'Dog groomers',
     title: 'Take dog grooming bookings while your hands are full',
     lede: 'You cannot answer the phone mid-groom. If your website cannot take the booking instead, the call goes to the next groomer on Google.',
@@ -60,6 +68,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
   },
   {
     id: 'garages',
+    shortName: 'Garages and MOT',
     name: 'Garages and MOT centres',
     title: 'Turn garage and MOT enquiries into booked jobs',
     lede: 'Most drivers search when something is already wrong. They want a number to tap or an MOT slot to book, fast.',
@@ -80,6 +89,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
   },
   {
     id: 'cafes-and-food',
+    shortName: 'Cafés and food',
     name: 'Cafes, bakeries and food',
     title: 'Get cafe, bakery and food customers through the door',
     lede: 'People check your hours, menu and number on their phone before they visit. Small errors quietly send them elsewhere.',
@@ -101,6 +111,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
   },
   {
     id: 'clinics-and-therapists',
+    shortName: 'Clinics and therapists',
     name: 'Clinics and therapists',
     title: 'Help clinic and therapy clients book with confidence',
     lede: 'Patients are often nervous before they book. A dead link or a missing number at the wrong moment is enough to stop them.',
@@ -121,6 +132,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
   },
   {
     id: 'architects',
+    shortName: 'Architects',
     name: 'Architects and architecture practices',
     title: 'Turn portfolio interest into qualified architecture projects',
     lede: 'A strong portfolio gets attention, but the next step still matters. If a potential client has to hunt for contact details or start from a blank email, every enquiry begins with extra back-and-forth.',
@@ -140,6 +152,15 @@ export const NICHE_GUIDES: NicheGuide[] = [
       { name: 'Business System', price: 'From £795', body: 'Enquiry, qualification, consultation, proposal and follow-up joined up so new-project admin does not start from scratch every time.' },
       { name: 'Custom Software & Websites', price: 'From £1,950', body: 'A portfolio or practice site with project pages, enquiry flow or a client-facing tool built around how your practice actually works.' },
     ],
+    visuals: [
+      { src: '/architecture/massing-model.svg', alt: 'Illustrative axonometric of a simple 1:500 massing model on a site base, with a QR plaque that opens the project page', caption: 'A simple massing model with a QR or tap plaque that opens the project page.' },
+      { src: '/architecture/site-plan.svg', alt: 'Illustrative site plan with a proposed dwelling, garage, trees, access road, north arrow and scale bar', caption: 'A clean site plan for a proposal or project page.' },
+    ],
+    related: {
+      href: '/3d-printing#architecture-property',
+      label: 'See models and drawings',
+      body: 'Simple printed concept and massing models, plus clear presentation drawings, linked to your project page.',
+    },
   },
 ];
 
