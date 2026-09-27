@@ -88,7 +88,7 @@ export default function Page() {
           <ul>
             {EXAMPLES.map(([who, what]) => <li key={who}><strong>{who}:</strong> {what}</li>)}
           </ul>
-          <p>Examples of the work, not client results.</p>
+          <p>Examples of the work, not client results. <a href="/for">See the guide for your trade</a>.</p>
         </div>
       </section>
 
