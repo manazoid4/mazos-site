@@ -6,7 +6,7 @@ import { LeakCheckForm } from './leak-check/leak-check-form';
 import { CallLink, PricingViewTracker } from './analytics';
 import { StickyCheckCta } from './sticky-cta';
 import { SampleReport } from './sample-report';
-import { CARE_PLAN, EXTRAS, FREE_STEP, GUARANTEE, OFFERS, PAYMENT_TERMS, THIRD_PARTY_NOTE } from './offers';
+import { CARE_PLAN, COMPARISON, EXTRA_GROUPS, FREE_STEP, GUARANTEE, NOT_INCLUDED, OFFERS, PROMISES } from './offers';
 
 const POSITIONING_EYEBROW = 'For UK small businesses and teams, in any trade';
 
@@ -117,7 +117,7 @@ export default function Page() {
         <PricingViewTracker targetId="pricing" />
         <p className="eyebrow">What I build</p>
         <h2 id="pricing-title">Start small. Add what you need.</h2>
-        <p className="s-small">Every job starts with the {FREE_STEP.short}. {PAYMENT_TERMS}</p>
+        <p className="s-small">Every job starts with a {FREE_STEP.short}. Pick a package, then add only the extras you want.</p>
         <div className="s-prices">
           {OFFERS.map((offer) => (
             <article className={`s-price${offer.tag ? ' s-price-main' : ''}`} key={offer.id}>
@@ -130,15 +130,50 @@ export default function Page() {
             </article>
           ))}
         </div>
-        <div className="s-extras" id="extras">
-          <h3>Optional extras</h3>
-          <p className="s-small">Add any of these to a package. One-off price, on the same invoice.</p>
-          <ul>
-            {EXTRAS.map((extra) => <li key={extra.name}><div><strong>{extra.name}</strong><span>{extra.what}</span></div><strong className="s-extras-price">{extra.price}</strong></li>)}
-          </ul>
-          <p className="s-extras-care"><strong>{CARE_PLAN.name}, {CARE_PLAN.price}.</strong> {CARE_PLAN.body}</p>
-          <p className="s-small">{THIRD_PARTY_NOTE}</p>
+
+        <div className="s-compare" id="compare">
+          <h3>Compare packages</h3>
+          <p className="s-small s-compare-hint">Swipe the table to see all three.</p>
+          <div className="s-compare-scroll" tabIndex={0} role="region" aria-label="Package comparison table">
+            <table>
+              <thead>
+                <tr><th scope="col"><span className="s-visually-hidden">What you get</span></th>{OFFERS.map((offer) => <th scope="col" key={offer.id}>{offer.name}</th>)}</tr>
+              </thead>
+              <tbody>
+                {COMPARISON.map(({ row, values }) => (
+                  <tr key={row}><th scope="row">{row}</th>{values.map((value, index) => <td key={OFFERS[index].id}>{value}</td>)}</tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
+
+        <ul className="s-promises" aria-label="Included with every package">
+          {PROMISES.map((promise) => <li key={promise.title}><strong>{promise.title}</strong><span>{promise.body}</span></li>)}
+        </ul>
+
+        <div className="s-extras" id="extras">
+          <h3>Add-ons</h3>
+          <p className="s-small">Standard set-ups with a fixed, one-off price. Add them to any package, or buy one on its own. They go on the same invoice.</p>
+          {EXTRA_GROUPS.map((group) => (
+            <div className="s-extras-group" key={group.title}>
+              <h4>{group.title}</h4>
+              <ul>
+                {group.items.map((extra) => <li key={extra.name}><div><strong>{extra.name}</strong><span>{extra.what}</span></div><strong className="s-extras-price">{extra.price}</strong></li>)}
+              </ul>
+            </div>
+          ))}
+          <div className="s-extras-care">
+            <h4>After it’s built</h4>
+            <p><strong>{CARE_PLAN.name}, {CARE_PLAN.price}.</strong> {CARE_PLAN.body}</p>
+          </div>
+        </div>
+
+        <div className="s-not-included">
+          <h3>What’s not included</h3>
+          <ul>{NOT_INCLUDED.map((item) => <li key={item}>{item}</li>)}</ul>
+        </div>
+
         <div className="s-guarantee">
           <strong>The guarantee.</strong> {GUARANTEE} You own everything I build.
         </div>

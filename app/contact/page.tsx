@@ -34,7 +34,7 @@ export default function ContactPage() {
           <ul className="s-ticks">
             {BIGGER_JOBS.map((job) => <li key={job.name}><strong>{job.name}, {job.price}.</strong> {job.body}</li>)}
           </ul>
-          <p className="s-small">Add-ons from £49, priced up front. {PAYMENT_TERMS} You own everything I build.</p>
+          <p className="s-small">Add-ons from £39, priced up front. {PAYMENT_TERMS} You own everything I build.</p>
         </div>
         <DemoRequestForm />
       </section>

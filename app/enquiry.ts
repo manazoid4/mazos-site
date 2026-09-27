@@ -19,7 +19,7 @@ export const ENQUIRY_SERVICES = [
   { id: 'reviews', label: 'Review requests and customer reminders (from £79)' },
   { id: 'care', label: 'Keep It Running (£19/month)' },
   { id: 'rebuild', label: 'Rebuild of an existing site or system' },
-  { id: 'google-profile', label: 'Google Business Profile setup (£79)' },
+  { id: 'google-profile', label: 'Google Business Profile setup (£49)' },
   { id: 'bundle', label: 'Starter plus optional extras' },
   { id: 'objects', label: 'Tap-to-review stands and signs' },
   { id: 'unsure', label: 'Not sure yet, help me work it out' },
