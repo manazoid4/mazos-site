@@ -5,32 +5,32 @@ export type MazWorksFaq = {
 
 export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   {
-    question: 'Is the check really free? What’s the catch?',
-    answer: 'It’s free. I test your site by hand and email you what I find within 3 working days. If nothing is worth paying for, I say so. No call, no automated sales emails, no obligation.',
+    question: 'Is the review really free? What’s the catch?',
+    answer: 'It’s free. I go through how customers reach you by hand and email you what to fix first within 3 working days. If nothing is worth paying for, I say so. No call, no automated sales emails, no obligation.',
   },
   {
-    question: 'What can you help with?',
-    answer: 'Broken booking links, confusing enquiry routes and wrong business information, so customers can actually reach you. Also websites, rebuilds, automation and physical products.',
+    question: 'What do you actually build?',
+    answer: 'Systems that turn enquiries into paying customers and take admin off your hands: booking and enquiry systems, confirmations and reminders, automated follow-up, internal tools, customer portals and websites. Built around the tools you already use where that makes sense.',
   },
   {
     question: 'How much does it cost?',
-    answer: 'The check is free. A Booking & Enquiry Repair is £395. Google Profile & Contact Setup is £249. Both together are £595. Always fixed before work starts. No VAT added.',
+    answer: 'The review is free. A Booking & Enquiry System starts from £495. Follow-up & Admin Automation starts from £950. Custom Systems & Websites start from £1,500. You get a fixed quote before any work starts. No VAT added.',
   },
   {
-    question: 'What do I get for £395?',
-    answer: 'One agreed customer journey (booking or enquiry) repaired and tested using what you already use, plus a dated Journey Receipt showing what changed.',
+    question: 'What do I get in a Booking & Enquiry System?',
+    answer: 'The route from someone finding you to being booked in, built and tested: booking, enquiry and call routes that reach you, automatic confirmations and reminders, and your Google Business Profile matched to your site. You get a dated before-and-after record of what changed.',
   },
   {
-    question: 'What do I get for £249?',
-    answer: 'Correct Google Business Profile information, working contact routes, a usable review-request process and a print-ready QR file. No ranking promises, and Google sets its own verification times.',
+    question: 'What does automation look like for a small business?',
+    answer: 'Things like quotes that follow themselves up, enquiries that land in one place with the right details, reminders that go out without you remembering, and repeat admin handled by a simple system instead of your evenings.',
   },
   {
     question: "What's the guarantee?",
-    answer: 'Your agreed repair works within 7 working days of getting access, or I waive the final payment and still finish. If I cannot deliver it, I refund your deposit.',
+    answer: 'A Booking & Enquiry System is live within 7 working days of me getting access, or I waive the final payment and still finish. Larger jobs get a dated plan in the quote. If I cannot deliver what we agreed, I refund your deposit.',
   },
   {
     question: 'How does payment work?',
-    answer: 'A deposit to start, the rest on agreed completion (for example £200 then £195 on a £395 repair). I confirm access before taking any payment. No VAT added.',
+    answer: 'A fixed quote first. Then half to start and the rest when it is live. I confirm access before taking any payment. No VAT added.',
   },
   {
     question: 'Do I own what you build?',
@@ -38,7 +38,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'Do I need a new website?',
-    answer: "Usually no. Most booking and enquiry problems are fixed on what you already have. I'll say plainly if a rebuild would genuinely help instead.",
+    answer: "Often not. Many booking and enquiry problems are solved with the tools you already have. I'll say plainly if a new site or a custom system would genuinely help instead.",
   },
   {
     question: 'What if my current web person can fix it?',
@@ -46,11 +46,11 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'Do I need to book a call?',
-    answer: "No. Send one line with the form, or send your website for a free check. Book the 15-minute walkthrough only if you'd rather talk it through.",
+    answer: "No. Send your website for the free review, or send one line with the enquiry form. Book the 15-minute call only if you'd rather talk it through.",
   },
   {
     question: 'Can you work with what I already use?',
-    answer: 'Yes. Wix, Squarespace, WordPress, Square, Fresha, Booksy and most others. I repair what you have wherever practical.',
+    answer: 'Yes. Wix, Squarespace, WordPress, Square, Fresha, Booksy, Google Workspace, spreadsheets and most others. I build on what you have wherever practical.',
   },
   {
     question: 'Do you pay for referrals?',
@@ -60,7 +60,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
 
 export const HOMEPAGE_FAQS = [
   MAZ_WORKS_FAQS[0],
-  MAZ_WORKS_FAQS[5],
+  MAZ_WORKS_FAQS[1],
+  MAZ_WORKS_FAQS[2],
   MAZ_WORKS_FAQS[7],
-  MAZ_WORKS_FAQS[9],
 ];

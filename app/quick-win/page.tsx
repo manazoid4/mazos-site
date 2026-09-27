@@ -8,12 +8,12 @@ const ENQUIRY_HREF = '/contact?service=repair#contact';
 
 export const metadata: Metadata = {
   title: 'Quick Win has moved',
-  description: 'Quick Win has been replaced by the Booking & Enquiry Repair. Same idea, properly scoped and tested.',
+  description: 'Quick Win has been replaced by the Booking & Enquiry System, properly scoped, tested and guaranteed.',
   alternates: { canonical: '/' },
   robots: { index: false, follow: true },
   openGraph: { images: [OG_IMAGE],
     title: 'Quick Win has moved — Maz Works',
-    description: 'This offer has been replaced by the Booking & Enquiry Repair.',
+    description: 'This offer has been replaced by the Booking & Enquiry System.',
     url: PAGE_URL,
     type: 'website',
   },
@@ -48,10 +48,10 @@ export default function QuickWinPage() {
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="quick-win-title">
         <p className="eyebrow">This offer has moved</p>
-        <h1 id="quick-win-title">Quick Win is now the Booking &amp; Enquiry Repair.</h1>
-        <p>Same idea — one thing fixed — but properly scoped, tested and backed by a guarantee. £395, fixed price agreed first.</p>
+        <h1 id="quick-win-title">Quick Win is now the Booking &amp; Enquiry System.</h1>
+        <p>Your booking and enquiry route built properly, with confirmations and reminders, tested end to end and backed by a guarantee. From £495, fixed quote agreed first.</p>
         <div className="mw-actions">
-          <a className="button button-signal" href={ENQUIRY_HREF}>Ask about a repair</a>
+          <a className="button button-signal" href={ENQUIRY_HREF}>Ask about a booking system</a>
         </div>
       </section>
 
@@ -80,13 +80,13 @@ export default function QuickWinPage() {
 
       <section className="mw-resource-cta" aria-labelledby="quick-win-cta-title">
         <div>
-          <p className="eyebrow">£200 to start · £195 on completion</p>
+          <p className="eyebrow">Half to start · the rest when it’s live</p>
           <h2 id="quick-win-cta-title">Tell me what’s broken.</h2>
-          <p>Send your website link. I’ll confirm the fix and price before you pay.</p>
+          <p>Send your website link. I’ll confirm the plan and a fixed quote before you pay.</p>
         </div>
         <div className="mw-actions">
           <a className="button button-signal" href={ENQUIRY_HREF}>Use the enquiry form</a>
-          <a className="text-link" href={`mailto:${CONTACT_EMAIL}?subject=Booking%20%26%20Enquiry%20Repair%20enquiry`}>Or email me <span aria-hidden="true">→</span></a>
+          <a className="text-link" href={`mailto:${CONTACT_EMAIL}?subject=Booking%20%26%20Enquiry%20System%20enquiry`}>Or email me <span aria-hidden="true">→</span></a>
         </div>
       </section>
 

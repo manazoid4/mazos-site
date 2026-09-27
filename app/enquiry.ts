@@ -11,13 +11,14 @@ export const SUBMIT_TIMEOUT_MS = 15000;
  * `label` is what the visitor sees and what arrives in the email.
  */
 export const ENQUIRY_SERVICES = [
-  { id: 'repair', label: 'Booking & Enquiry Repair (£395)' },
-  { id: 'google-profile', label: 'Google Profile & Contact Setup (£249)' },
-  { id: 'bundle', label: 'Both, Repair and Google Setup (£595)' },
-  { id: 'website', label: 'Website or landing page' },
-  { id: 'rebuild', label: 'Full rebuild' },
-  { id: 'automation', label: 'Automating repetitive admin' },
-  { id: 'software', label: 'Custom software or an internal tool' },
+  // Ids are stable deep-link keys (old outreach links use them); labels follow app/offers.ts.
+  { id: 'repair', label: 'Booking & Enquiry System (from £495)' },
+  { id: 'automation', label: 'Follow-up & Admin Automation (from £950)' },
+  { id: 'software', label: 'Custom system, portal or internal tool (from £1,500)' },
+  { id: 'website', label: 'New website (from £1,500)' },
+  { id: 'rebuild', label: 'Rebuild of an existing site or system' },
+  { id: 'google-profile', label: 'Google Business Profile and local visibility' },
+  { id: 'bundle', label: 'Booking system and Google profile together' },
   { id: 'objects', label: 'Tap-to-review stands and signs' },
   { id: 'unsure', label: 'Not sure yet, help me work it out' },
 ] as const;
@@ -29,7 +30,7 @@ export const DEFAULT_SERVICE_ID: EnquiryServiceId = 'unsure';
 /** Next step the visitor actually wants. */
 export const ENQUIRY_NEXT_STEPS = [
   'A fixed quote for a specific job',
-  'A free check of my website',
+  'A free review of how customers reach me',
   'A 15-minute call',
   'Just answer my question first',
 ] as const;
