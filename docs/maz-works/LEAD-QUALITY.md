@@ -10,7 +10,7 @@ Adopted by Maz on 28 Sep 2026. The full canonical rules live in the knowledge va
 
 **Gates:** problem ≥ 2, solution fit ≥ 1, verified contact route, evidence from the last 30 days, no exclusion.
 
-**Tiers:** Gold 8–10 · Silver 6–7 · Bronze = re-check queue (not counted). Gold does **not** need a limited company. The contact route is separate: cold email only to a confirmed Ltd/LLP (PECR); otherwise phone or walk-in.
+**Tiers:** Gold 8–10 · Silver 6–7 · Bench (re-check queue, not counted; HubSpot prefix `BENCH · `). Gold does **not** need a limited company. The contact route is separate: cold email only to a confirmed limited company (Ltd); otherwise phone or walk-in.
 
 **Never scored:** location, reviews, LinkedIn, gifts, assumed case-study willingness. Unknown budget, urgency and tools stay unknown until the owner says.
 
