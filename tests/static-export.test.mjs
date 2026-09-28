@@ -178,6 +178,9 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(prices, /working within 7 working days of me getting access/i);
   assert.match(prices, /\/leak-check\?package=Starter%20Automation#leak-check-form/);
   assert.doesNotMatch(prices, /\bAI\b/);
+  assert.match(prices, /\/leak-check\?package=Team%20training#leak-check-form/, 'every add-on can pre-fill the free plan form');
+  assert.match(prices, /<title>Prices: automation from £195, add-ons from £39, no VAT added/);
+  assert.match(prices, /Business System from £795, Custom Software &amp; Websites from £1,950, add-ons from £39 and Keep It Running £19\/month/);
 
   const contact = await readPage('/contact');
   for (const price of ['£195', 'From £795', 'From £1,950']) assert.match(contact, new RegExp(price));
