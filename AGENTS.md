@@ -26,7 +26,7 @@ Rules: branch + PR, never push to main. Never invent testimonials, clients or re
 ## Working with Maz (read every session)
 
 - **Start and end with the handover.** Read `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/HANDOVER.md` first (public summary: `docs/maz-works/SESSION-HANDOVER.md`). Before a session ends with work open, overwrite the private `HANDOVER.md` (4 sentence summary, Maz's open to-dos, next work), then update the public copy with no lead names or contact details.
-- Reply in **two short, plain paragraphs**: what he must do, and what changed. Details belong in PRs.
+- **Always end every reply with a one-paragraph summary** in plain words (Maz, 28 Sep, repeated several times). Keep replies short: what he must do, and what changed. Details belong in PRs.
 - **Remind him of his open to-dos** at the start and end of each session. He asks for this; he forgets things like posting. The list lives in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/STATUS.md` → "Maz's open to-dos". If a session ends with one still open, schedule a reminder with `send_later`.
 - Prefer free tiers and say plainly when something costs money.
 - **Email (all outreach):** every lead email, cold or warm, is sent by Maz from Gmail using the `info@mazworks.uk` From address (Gmail "Send mail as", live since 26 Sep 2026), and every reply to any `@mazworks.uk` address lands in Maz's Gmail via ImprovMX. Never send outreach through Resend or any other tool; Resend is only for the site's opt-in mail. Details: `docs/maz-works/EMAIL-SETUP.md`.
