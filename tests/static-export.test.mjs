@@ -221,6 +221,11 @@ test('homepage stays compact with four visible process steps', async () => {
   assert.match(html, /You pay half to start/);
   assert.match(html, /Working by the agreed date/);
   assert.match(html, /href="\/faq"/);
+  // How the work is set up (Maz, 28 Sep): existing tools, user access not passwords, tested first, optional care plan.
+  assert.match(html, /How I set it up/);
+  assert.match(html, /Built on what you already use/);
+  assert.match(html, /I never need your passwords/);
+  assert.match(html, /Keep It Running \(£19\/month\)/);
   const words = mainWordCount(html);
   assert.ok(words <= WORD_BUDGET, `homepage has ${words} words; budget is ${WORD_BUDGET}`);
 });

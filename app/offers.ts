@@ -169,6 +169,14 @@ export const CARE_PLAN = {
   body: 'I check that everything I built keeps working, fix it if it breaks, and make one small change a month when you ask. Cancel any time.',
 } as const;
 
+/** How the work is actually set up, in plain words (homepage "How I set it up"). */
+export const DELIVERY: { title: string; body: string }[] = [
+  { title: 'Built on what you already use', body: 'Your booking app, email, calendar or accounts software. If a new app is needed, you pay that company directly and I tell you the cost first.' },
+  { title: 'You add me as a user', body: 'I never need your passwords. Every account stays in your name, and you remove me when it’s done.' },
+  { title: 'Tested, then switched on', body: 'I test it on real examples. You see it working before you pay the rest.' },
+  { title: 'Help afterwards if you want it', body: `${CARE_PLAN.name} (${CARE_PLAN.price}) keeps it checked and makes small changes. Staff training is an add-on.` },
+];
+
 export const PAYMENT_TERMS = 'A free plan and fixed price before any work. Half to start, the rest when it is working. No VAT added.';
 
 export const THIRD_PARTY_NOTE = 'If you need a paid app, like a texting service, you pay that company directly and I tell you the cost up front. You own everything.';

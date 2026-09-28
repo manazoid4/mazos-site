@@ -7,7 +7,7 @@ import { LeakCheckForm } from './leak-check/leak-check-form';
 import { CallLink, PricingViewTracker } from './analytics';
 import { StickyCheckCta } from './sticky-cta';
 import { SampleReport } from './sample-report';
-import { CARE_PLAN, EXTRAS, FREE_STEP, GUARANTEE, OFFERS, PROMISES } from './offers';
+import { CARE_PLAN, DELIVERY, EXTRAS, FREE_STEP, GUARANTEE, OFFERS, PROMISES } from './offers';
 
 const [STARTER, ...BIGGER] = OFFERS;
 const POPULAR_EXTRAS = ['Missed-call text-back', 'Appointment reminders', 'Review requests', 'Google Business Profile setup']
@@ -173,6 +173,10 @@ export default function Page() {
         <ol className="s-steps">
           {STEPS.map(([number, title, body]) => <li key={number}><span>{number}</span><strong>{title}</strong><p>{body}</p></li>)}
         </ol>
+        <h3 className="s-subhead">How I set it up</h3>
+        <ul className="s-promises" aria-label="How the work is set up">
+          {DELIVERY.map((item) => <li key={item.title}><strong>{item.title}</strong><span>{item.body}</span></li>)}
+        </ul>
       </section>
 
       <section className="s-section s-about" id="about" aria-labelledby="about-title">
