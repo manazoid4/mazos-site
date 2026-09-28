@@ -161,3 +161,4 @@
 .s-bigger ul { padding-left: 20px; display: grid; gap: 6px; font-size: .95rem; }
 .s-price .button { justify-self: start; margin-top: 6px; }
 @media (min-width: 960px) { .s-prices.s-prices-home { grid-template-columns: 1fr 1.2fr; } }
+.s-extras li div .mw-service-link { font-size: .85rem; font-weight: 750; margin-top: 2px; }

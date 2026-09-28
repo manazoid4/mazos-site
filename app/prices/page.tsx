@@ -3,16 +3,20 @@ import { SiteFooter, SiteHeader } from '../site-chrome';
 import { BOOKING_URL, CHECK_REPLY_TIME, SITE_URL } from '../site';
 import { OG_IMAGE } from '../seo';
 import { CallLink, PricingViewTracker } from '../analytics';
-import { FREE_STEP } from '../offers';
+import { CARE_PLAN, EXTRAS, FREE_STEP, OFFERS } from '../offers';
 import { PriceList } from '../price-list';
 
 const PAGE_URL = `${SITE_URL}/prices`;
 
+const [STARTER, SYSTEM, CUSTOM] = OFFERS;
+const CHEAPEST_EXTRA = `£${Math.min(...EXTRAS.map((extra) => Number(extra.price.replace(/[^\d.]/g, ''))))}`;
+const lower = (price: string) => price.replace(/^From/, 'from');
+
 export const metadata: Metadata = {
-  title: { absolute: 'Prices: automation from £195, add-ons from £39, no VAT added | Maz Works' },
-  description: 'Every Maz Works price in one place. Starter Automation £195, Business System from £795, Custom Software & Websites from £1,950, add-ons from £39 and Keep It Running £19/month. Fixed quote first, no VAT added.',
+  title: { absolute: `Prices: automation ${lower(STARTER.price.startsWith('£') ? `from ${STARTER.price}` : STARTER.price)}, add-ons from ${CHEAPEST_EXTRA}, no VAT added | Maz Works` },
+  description: `Every Maz Works price in one place. ${STARTER.name} ${STARTER.price}, ${SYSTEM.name} ${lower(SYSTEM.price)}, ${CUSTOM.name} ${lower(CUSTOM.price)}, add-ons from ${CHEAPEST_EXTRA} and ${CARE_PLAN.name} ${CARE_PLAN.price}. Fixed quote first, no VAT added.`,
   alternates: { canonical: PAGE_URL },
-  openGraph: { title: 'Maz Works prices', description: 'Automation from £195. Add-ons from £39. Fixed quote first, no VAT added.', url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
+  openGraph: { title: 'Maz Works prices', description: `Automation from ${STARTER.price}. Add-ons from ${CHEAPEST_EXTRA}. Fixed quote first, no VAT added.`, url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
 };
 
 export default function PricesPage() {

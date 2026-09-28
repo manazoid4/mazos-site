@@ -50,7 +50,7 @@ export function PriceList({ checkHref }: { checkHref: string }) {
           <div className="s-extras-group" key={group.title}>
             <h4>{group.title}</h4>
             <ul>
-              {group.items.map((extra) => <li key={extra.name}><div><strong>{extra.name}</strong><span>{extra.what}</span></div><strong className="s-extras-price">{extra.price}</strong></li>)}
+              {group.items.map((extra) => <li key={extra.name}><div><strong>{extra.name}</strong><span>{extra.what}</span><PackageLink href={checkHref} pick={extra.name}>Ask for this <span aria-hidden="true">→</span></PackageLink></div><strong className="s-extras-price">{extra.price}</strong></li>)}
             </ul>
           </div>
         ))}

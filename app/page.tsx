@@ -140,7 +140,7 @@ export default function Page() {
             <h3>Popular add-ons</h3>
             <p className="s-small">Fixed, one-off prices. Buy one on its own or add it to Starter.</p>
             <ul>
-              {POPULAR_EXTRAS.map((extra) => <li key={extra.name}><div><strong>{extra.name}</strong><span>{extra.what}</span></div><strong className="s-extras-price">{extra.price}</strong></li>)}
+              {POPULAR_EXTRAS.map((extra) => <li key={extra.name}><div><strong>{extra.name}</strong><span>{extra.what}</span><PackageLink href="#check" pick={extra.name}>Ask for this <span aria-hidden="true">→</span></PackageLink></div><strong className="s-extras-price">{extra.price}</strong></li>)}
             </ul>
           </div>
         </div>
