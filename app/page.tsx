@@ -112,6 +112,7 @@ export default function Page() {
             <li>You get a short plan and a fixed price, with any extras listed</li>
             <li>If it isn’t worth automating, I say so</li>
           </ul>
+          <p className="s-small s-proof-line">Work you can open: <a href="/work/jobfilter">JobFilter</a>, my own software, live with paid plans. <a href="/work/scrap-finance-partners">Scrap Finance Partners</a>, a client website.</p>
           <p className="s-small"><a href="#example">See an example plan ↓</a></p>
         </div>
         <LeakCheckForm />
