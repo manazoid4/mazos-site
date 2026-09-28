@@ -1,10 +1,12 @@
 'use client';
 
-import { useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { CHECK_REPLY_TIME, CONTACT_EMAIL } from '../site';
 import { trackConversion } from '../analytics';
 import { EnquiryRecovery } from '../enquiry-recovery';
 import { NATIVE_FORM_ENDPOINT, buildRecoveryMailto, sendEnquiry } from '../enquiry';
+import { CHECK_PICK_EVENT } from '../package-link';
+import { EXTRAS, OFFERS } from '../offers';
 
 type SubmitState = 'idle' | 'sending' | 'sent' | 'error';
 type FailureReason = 'rejected' | 'timeout' | 'network';
@@ -17,6 +19,25 @@ const FAILURE_COPY: Record<FailureReason, string> = {
 
 const SERVICE_LABEL = 'Free Plan & Fixed Quote';
 
+/** One tap instead of typing: the problems owners name most. Each adds a line to the text box. */
+export const QUICK_PICKS = [
+  'Missed calls',
+  'Slow replies to enquiries',
+  'No-shows',
+  'Chasing quotes',
+  'Getting more reviews',
+  'Copying details between apps',
+] as const;
+
+/** Packages and add-ons a price card may name. Anything else in `?package=` is ignored. */
+const KNOWN_PACKAGES: string[] = [...OFFERS.map((offer) => offer.name), ...EXTRAS.map((extra) => extra.name)];
+
+/**
+ * Emailed by the form provider to the owner the moment they submit, so they
+ * hear back in seconds, not days. Promises nothing beyond the public reply time.
+ */
+export const AUTO_REPLY = `Thanks, I've got your message. I'll read it myself and email you a short plan and a fixed price within ${CHECK_REPLY_TIME}. No call needed and no obligation. If anything changes, email ${CONTACT_EMAIL}. Manazir, Maz Works`;
+
 export function LeakCheckForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
@@ -24,6 +45,33 @@ export function LeakCheckForm() {
   const [invalidField, setInvalidField] = useState('');
   const [failureReason, setFailureReason] = useState<FailureReason>('rejected');
   const [recoveryHref, setRecoveryHref] = useState(`mailto:${CONTACT_EMAIL}`);
+  const [picked, setPicked] = useState<string[]>([]);
+  const [pkg, setPkg] = useState('');
+
+  useEffect(() => {
+    const choose = (name: string | null) => {
+      if (name && KNOWN_PACKAGES.includes(name)) setPkg(name);
+    };
+    choose(new URLSearchParams(window.location.search).get('package'));
+    const onPick = (event: Event) => choose((event as CustomEvent<string>).detail);
+    window.addEventListener(CHECK_PICK_EVENT, onPick);
+    return () => window.removeEventListener(CHECK_PICK_EVENT, onPick);
+  }, []);
+
+  function togglePick(label: string) {
+    const box = formRef.current?.querySelector<HTMLTextAreaElement>('[name="problem"]');
+    const on = !picked.includes(label);
+    setPicked(on ? [...picked, label] : picked.filter((item) => item !== label));
+    if (!box) return;
+    const line = `${label}.`;
+    box.value = on
+      ? [box.value.trim(), line].filter(Boolean).join(' ')
+      : box.value.replace(line, '').replace(/\s{2,}/g, ' ').trim();
+    if (on && invalidField === 'problem') {
+      setInvalidField('');
+      setValidationError('');
+    }
+  }
 
   function focusField(name: string) {
     formRef.current?.querySelector<HTMLElement>(`[name="${name}"]`)?.focus();
@@ -48,7 +96,7 @@ export function LeakCheckForm() {
       setInvalidField(missing);
       setValidationError(
         missing === 'problem'
-          ? 'Add one line about the job you want off your plate.'
+          ? 'Tap a problem above, or add one line about the job.'
           : `Add your ${missing} so I can reply.`,
       );
       focusField(missing);
@@ -64,6 +112,7 @@ export function LeakCheckForm() {
       ['Email', email],
       ['The job', task],
       ['Website', website],
+      ['Interested in', pkg],
       ['Source', source],
     ]));
 
@@ -75,17 +124,20 @@ export function LeakCheckForm() {
       website,
       service: SERVICE_LABEL,
       problem: task,
+      interested_in: pkg || 'Not chosen',
       next_step: 'Email me a plan and fixed price',
       source,
       _replyto: email,
       _subject: subject,
       _template: 'table',
+      _autoresponse: AUTO_REPLY,
       _honey: honey,
       _url: window.location.href,
     });
 
     if (result.ok) {
       form.reset();
+      setPicked([]);
       setSubmitState('sent');
       trackConversion('Check submitted', { source });
       return;
@@ -113,7 +165,12 @@ export function LeakCheckForm() {
       <input type="hidden" name="_subject" value="Maz Works — free plan and quote" />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="service" value={SERVICE_LABEL} />
+      <input type="hidden" name="_autoresponse" value={AUTO_REPLY} />
+      <input type="hidden" name="interested_in" value={pkg || 'Not chosen'} />
       <p className="mw-form-kicker">Three fields. No call needed.</p>
+      {pkg ? (
+        <p className="mw-form-picked">Asking about: <strong>{pkg}</strong> <button type="button" className="text-link" onClick={() => setPkg('')}>Clear</button></p>
+      ) : null}
 
       <div className="mw-form-row">
         <label>
@@ -140,6 +197,17 @@ export function LeakCheckForm() {
           />
         </label>
       </div>
+
+      <fieldset className="mw-quick-picks">
+        <legend>What’s costing you customers or time? <small>Tap any that fit</small></legend>
+        <div>
+          {QUICK_PICKS.map((label) => (
+            <button type="button" key={label} aria-pressed={picked.includes(label)} onClick={() => togglePick(label)} disabled={submitState === 'sending'}>
+              {label}
+            </button>
+          ))}
+        </div>
+      </fieldset>
 
       <label>
         <span>What job do you want off your plate?</span>
@@ -179,7 +247,7 @@ export function LeakCheckForm() {
         <p className="mw-form-status" role="status" aria-live="polite">
           {submitState === 'sent' && (
             <>
-              Got it. I’ll email your plan and price within {CHECK_REPLY_TIME}.{' '}
+              Got it. A confirmation is on its way to your inbox now, and I’ll email your plan and price within {CHECK_REPLY_TIME}.{' '}
               <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); focusField('name'); }}>Send another</button>
             </>
           )}

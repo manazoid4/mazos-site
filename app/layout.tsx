@@ -51,7 +51,7 @@ const structuredData = {
         ...OFFERS.map((offer) => ({
           '@type': 'Offer',
           name: offer.name,
-          url: `${SITE_URL}/#pricing`,
+          url: `${SITE_URL}/prices`,
           priceSpecification: { '@type': 'PriceSpecification', minPrice: offer.from, priceCurrency: 'GBP' },
         })),
       ],

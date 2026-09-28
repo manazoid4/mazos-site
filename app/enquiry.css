@@ -161,3 +161,13 @@ button.text-link {
     padding-right: 0;
   }
 }
+
+/* Free plan form: tap-to-pick problems and a pre-filled package (28 Sep) */
+.mw-quick-picks { border: 0; padding: 0; margin: 0; min-width: 0; }
+.mw-quick-picks legend { padding: 0; margin-bottom: 8px; font-weight: 700; font-size: .95rem; }
+.mw-quick-picks legend small { font-weight: 400; color: var(--muted); }
+.mw-quick-picks div { display: flex; flex-wrap: wrap; gap: 8px; }
+.mw-quick-picks button { min-height: 44px; padding: 8px 14px; border: 1px solid var(--ink); background: var(--surface); color: var(--ink); font: inherit; font-size: .9rem; cursor: pointer; }
+.mw-quick-picks button[aria-pressed="true"] { background: var(--signal); font-weight: 750; }
+.mw-quick-picks button[aria-pressed="true"]::before { content: "✓ "; }
+.mw-form-picked { padding: 10px 12px; background: var(--signal); border: 1px solid var(--ink); font-size: .92rem; }

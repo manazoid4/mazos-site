@@ -8,8 +8,9 @@ export const dynamic = 'force-static';
 export default function sitemap(): MetadataRoute.Sitemap {
   const updated = new Date('2026-09-21');
   return [
-    { url: SITE_URL, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 1 },
+    { url: SITE_URL, lastModified: new Date('2026-09-28'), changeFrequency: 'monthly', priority: 1 },
     { url: `${SITE_URL}/leak-check`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.95 },
+    { url: `${SITE_URL}/prices`, lastModified: new Date('2026-09-28'), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/contact`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/lab`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.5 },
     { url: `${SITE_URL}/demos`, lastModified: updated, changeFrequency: 'monthly', priority: 0.95 },
