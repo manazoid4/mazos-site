@@ -3,6 +3,14 @@
 This repo is public. The full handover, open to-dos and research source names live in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/HANDOVER.md` and `ARCHITECTS-CONTEXT-PACK-2026-09-27.md`.
 
 
+## 28 Sep: sales pass (shorter homepage, instant confirmation, tap-to-pick)
+
+- Maz confirmed Offer v9 stays; the older brief built on the retired £395 Repair was out of date and was not used. Most of that brief (one form, sticky CTA, example plan, trust strip, analytics events, schema) was already live, so only three new things shipped.
+- Homepage prices now sell one first step: Starter £195, four popular add-ons, a short "Bigger jobs" list, promises and the guarantee. The comparison table, all twelve add-ons, care plan and "What's not included" moved to a new `/prices` page (in nav, sitemap and footer). Homepage on a 390px phone: 12,578px → about 10,270px tall. Homepage word budget lowered 1,900 → 1,600.
+- Free plan form: the provider now emails the owner a confirmation the moment they send (`_autoresponse`), on both the in-page and no-JavaScript paths. Research: only 23% of UK customers say they'd definitely try again after a slow reply (Moneypenny/Censuswide, 2026), and competitors promise replies in 2 to 24 hours.
+- Free plan form: six tap-to-pick problems (Missed calls, Slow replies, No-shows, Chasing quotes, Reviews, Copying details) fill the text box, so owners type less on a phone. Price cards pre-fill "Asking about: <package>" through `?package=` (only real package/add-on names accepted).
+- Location is not published anywhere (AGENTS.md rule, confirmed again by Maz 28 Sep).
+
 ## 27 Sep: navigation audit and architecture visuals
 
 - Follow-up, six wayfinding helps: What's new (current, linked in every footer), human site map `/site-map`, helpful 404, header marks the current section (`aria-current`), homepage On this page jump bar, Back to top link.

@@ -10,7 +10,7 @@ export type NavLink = { href: string; label: string };
 
 /** Shown in the header on desktop. Keep to four plus the free quote button. */
 export const PRIMARY_NAV: NavLink[] = [
-  { href: '/#pricing', label: 'Prices' },
+  { href: '/prices', label: 'Prices' },
   { href: '/for', label: 'Who it’s for' },
   { href: '/3d-printing', label: 'Objects' },
   { href: '/faq', label: 'FAQ' },
@@ -20,9 +20,9 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
   {
     title: 'What I do',
     links: [
-      { href: '/#pricing', label: 'Packages and prices' },
-      { href: '/#compare', label: 'Compare packages' },
-      { href: '/#extras', label: 'Add-ons' },
+      { href: '/prices', label: 'Packages and prices' },
+      { href: '/prices#compare', label: 'Compare packages' },
+      { href: '/prices#extras', label: 'All add-ons' },
       { href: '/#example', label: 'Example plan' },
       { href: '/contact', label: 'Bigger jobs' },
     ],
@@ -52,8 +52,6 @@ export const HOME_SECTIONS: NavLink[] = [
   { href: '#check', label: 'Free plan' },
   { href: '#example', label: 'Example' },
   { href: '#pricing', label: 'Prices' },
-  { href: '#compare', label: 'Compare' },
-  { href: '#extras', label: 'Add-ons' },
   { href: '#process', label: 'How it works' },
   { href: '#faq', label: 'Questions' },
 ];

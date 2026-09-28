@@ -72,7 +72,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
             <li key={fix.name}><strong>{fix.name}, {fix.price}.</strong> {fix.body}</li>
           ))}
         </ul>
-        <p className="mw-qw-lead">You own everything I build. <a href="/#pricing">See all prices</a>.</p>
+        <p className="mw-qw-lead">You own everything I build. <a href="/prices">See all prices</a>.</p>
       </section>
 
       {guide.visuals ? (
