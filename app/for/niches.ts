@@ -6,6 +6,23 @@
  * These are examples of businesses this applies to, not a limit: the same
  * review and systems work for any UK business customers book, call or enquire with.
  */
+import { EXTRAS, OFFERS } from '../offers';
+
+const offer = (id: string) => {
+  const found = OFFERS.find((item) => item.id === id);
+  if (!found) throw new Error(`Unknown offer ${id}`);
+  return found;
+};
+const addOn = (name: string, body: string) => {
+  const found = EXTRAS.find((item) => item.name === name);
+  if (!found) throw new Error(`Unknown add-on ${name}`);
+  return { name: `Add-on: ${found.name}`, price: found.price, body, pick: found.name };
+};
+/** Starter is ONE job (Offer v9). Anything more is a priced add-on or a Business System. */
+const starter = (body: string) => ({ name: offer('starter').name, price: offer('starter').price, body, pick: offer('starter').name });
+const system = (body: string) => ({ name: offer('business-system').name, price: offer('business-system').price, body, pick: offer('business-system').name });
+const custom = (body: string) => ({ name: offer('custom').name, price: offer('custom').price, body, pick: offer('custom').name });
+
 export type NicheGuide = {
   id: string;
   name: string;
@@ -15,7 +32,8 @@ export type NicheGuide = {
   lede: string;
   examples: { found: string; cost: string }[];
   selfCheck: string[];
-  fixes: { name: string; price: string; body: string }[];
+  /** `pick` is the exact package or add-on name that pre-fills the free plan form. */
+  fixes: { name: string; price: string; body: string; pick: string }[];
   /** Optional illustrations. Must be labelled as illustrative, never passed off as client work. */
   visuals?: { src: string; alt: string; caption: string }[];
   /** Optional related page, e.g. physical models for architects. */
@@ -41,8 +59,9 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Google your salon name. Is the title and description yours, spelled right?',
     ],
     fixes: [
-      { name: 'Starter Automation', price: '£195', body: 'One job set up to run itself: every booking or enquiry lands in one place, gets an instant confirmation, and reminders go out the day before.' },
-      { name: 'Business System', price: 'From £795', body: 'Rebooking prompts, review requests and no-show follow-ups that send themselves, so repeat visits do not depend on your memory.' },
+      starter('One job set up to run itself: every booking or enquiry lands in one place and gets an instant confirmation.'),
+      addOn('Appointment reminders', 'Clients get a reminder the day before, so fewer no-shows.'),
+      system('Rebooking prompts, review requests and no-show follow-ups joined up and sent for you, so repeat visits do not depend on your memory.'),
     ],
   },
   {
@@ -62,8 +81,9 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Does your Book button do what it says?',
     ],
     fixes: [
-      { name: 'Starter Automation', price: '£195', body: 'Missed calls answered with a text and your booking link, and every booking confirmed and reminded automatically, so you can keep grooming.' },
-      { name: 'New online booking', price: 'quoted in your free plan', body: 'If you have no booking tool yet. Most booking tools charge a monthly fee, and I tell you the cost before you commit.' },
+      starter('One job set up to run itself: every booking confirmed automatically, so you can keep grooming.'),
+      addOn('Missed-call text-back', 'Miss a call and the owner gets a text with your booking link, so they don’t ring another groomer.'),
+      addOn('Online booking setup', 'If you have no booking tool yet. Most booking tools charge a monthly fee, paid to them directly, and I tell you the cost before you commit.'),
     ],
   },
   {
@@ -83,8 +103,9 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Can a driver request an MOT without phoning?',
     ],
     fixes: [
-      { name: 'Starter Automation', price: '£195', body: 'Every quote or MOT request logged in one list with an instant reply, and a friendly follow-up if the customer goes quiet.' },
-      { name: 'Custom Software & Websites', price: 'From £1,950', body: 'A new site with online booking and job updates built in, when your current one can’t do it.' },
+      starter('One job set up to run itself: every quote or MOT request logged in one list with an instant reply.'),
+      addOn('Quote follow-up', 'A friendly reminder goes out if the customer goes quiet after a quote.'),
+      custom('A new site with online booking and job updates built in, when your current one can’t do it.'),
     ],
   },
   {
@@ -105,8 +126,9 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Tap your call button. Does it ring you?',
     ],
     fixes: [
-      { name: 'Starter Automation', price: '£195', body: 'Orders, bookings and messages gathered in one place with an automatic reply, plus review requests after each visit.' },
-      { name: 'Custom Software & Websites', price: 'From £1,950', body: 'A phone-first site with menu, hours, ordering or table booking built in, when your current one can’t do it.' },
+      starter('One job set up to run itself: orders, bookings and messages gathered in one place with an automatic reply.'),
+      addOn('Review requests', 'Customers are asked for a Google review after each visit.'),
+      custom('A phone-first site with menu, hours, ordering or table booking built in, when your current one can’t do it.'),
     ],
   },
   {
@@ -127,7 +149,8 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'Can a new patient see how to book in under 10 seconds?',
     ],
     fixes: [
-      { name: 'Starter Automation', price: '£195', body: 'New enquiries acknowledged straight away with the next step, plus confirmations and reminders so fewer appointments are missed.' },
+      starter('One job set up to run itself: new enquiries acknowledged straight away with the next step.'),
+      addOn('Appointment reminders', 'Patients and clients get a reminder the day before, so fewer appointments are missed.'),
     ],
   },
   {
@@ -148,9 +171,9 @@ export const NICHE_GUIDES: NicheGuide[] = [
       'If someone asks for a consultation, do they get an acknowledgement and clear next step without you typing it by hand?',
     ],
     fixes: [
-      { name: 'Starter Automation', price: '£195', body: 'A project enquiry captured in one place, acknowledged automatically and passed to you with the key details already collected.' },
-      { name: 'Business System', price: 'From £795', body: 'Enquiry, qualification, consultation, proposal and follow-up joined up so new-project admin does not start from scratch every time.' },
-      { name: 'Custom Software & Websites', price: 'From £1,950', body: 'A portfolio or practice site with project pages, enquiry flow or a client-facing tool built around how your practice actually works.' },
+      starter('One job set up to run itself: a project enquiry captured in one place, acknowledged automatically and passed to you with the key details already collected.'),
+      system('Enquiry, qualification, consultation, proposal and follow-up joined up so new-project admin does not start from scratch every time.'),
+      custom('A portfolio or practice site with project pages, enquiry flow or a client-facing tool built around how your practice actually works.'),
     ],
     visuals: [
       { src: '/architecture/massing-model.svg', alt: 'Illustrative axonometric of a simple 1:500 massing model on a site base, with a QR plaque that opens the project page', caption: 'A simple massing model with a QR or tap plaque that opens the project page.' },
