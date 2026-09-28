@@ -12,6 +12,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 This repo is the Maz Works marketing site. Before any sales, lead, offer or copy work, read the shared context:
 
+- **Lead rules: Lead Quality v2** (28 Sep 2026). Brief: `docs/maz-works/LEAD-QUALITY.md`. Canonical: vault `prompts/maz-works-niche-needs.md`. Gold does not need a limited company.
+
 - Focus (3 projects only): `NOW.md` in the vault → https://github.com/manazoid4/maz-works-knowledge-vault/blob/main/NOW.md
 - Lead rules, niche needs, gift rule (paying clients only), lead hand-off format: https://github.com/manazoid4/maz-works-knowledge-vault/blob/main/prompts/maz-works-niche-needs.md
 - Prompt library + `/mw-*` commands: https://github.com/manazoid4/maz-works-knowledge-vault/blob/main/prompts/maz-works-prompt-library.md

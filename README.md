@@ -1,5 +1,7 @@
 # Maz Works
 
+> **Lead and sales work:** follow Lead Quality v2, see [`docs/maz-works/LEAD-QUALITY.md`](docs/maz-works/LEAD-QUALITY.md). Offers and prices live only in `app/offers.ts`.
+
 Public portfolio and client-acquisition site for [Maz Works](https://mazworks.uk), Manazir Hussain's independent web, automation and AI/software studio.
 
 Maz Works is positioned around a simple idea: start with the real business problem, then build the smallest useful system that solves it. The site combines practical project proof with Manazir's earlier background in complaints, escalations and operations.
