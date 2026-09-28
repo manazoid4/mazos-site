@@ -1,13 +1,17 @@
 import { HOME_SECTIONS } from './nav';
 import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL } from './site';
-import { ServiceEnquiryLink } from './demo-request-form';
+import { PackageLink } from './package-link';
 import { SiteFooter, SiteHeader } from './site-chrome';
 import { HOMEPAGE_FAQS } from './faqs';
 import { LeakCheckForm } from './leak-check/leak-check-form';
 import { CallLink, PricingViewTracker } from './analytics';
 import { StickyCheckCta } from './sticky-cta';
 import { SampleReport } from './sample-report';
-import { CARE_PLAN, COMPARISON, EXTRA_GROUPS, FREE_STEP, GUARANTEE, NOT_INCLUDED, OFFERS, PROMISES } from './offers';
+import { CARE_PLAN, EXTRAS, FREE_STEP, GUARANTEE, OFFERS, PROMISES } from './offers';
+
+const [STARTER, ...BIGGER] = OFFERS;
+const POPULAR_EXTRAS = ['Missed-call text-back', 'Appointment reminders', 'Review requests', 'Google Business Profile setup']
+  .map((name) => EXTRAS.find((extra) => extra.name === name)!);
 
 const POSITIONING_EYEBROW = 'For UK small businesses and teams, in any trade';
 
@@ -121,70 +125,43 @@ export default function Page() {
 
       <section className="s-section" id="pricing" aria-labelledby="pricing-title">
         <PricingViewTracker targetId="pricing" />
-        <p className="eyebrow">What I build</p>
-        <h2 id="pricing-title">Start small. Add what you need.</h2>
-        <p className="s-small">Every job starts with a {FREE_STEP.short}. Pick a package, then add only the extras you want.</p>
-        <div className="s-prices">
-          {OFFERS.map((offer) => (
-            <article className={`s-price${offer.tag ? ' s-price-main' : ''}`} key={offer.id}>
-              {offer.tag ? <p className="s-price-tag">{offer.tag}</p> : null}
-              <h3>{offer.name}</h3>
-              <p className="s-price-amount">{offer.price}</p>
-              <p>{offer.body}</p>
-              <ul>{offer.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
-              <ServiceEnquiryLink service={offer.service}>Ask about this <span aria-hidden="true">→</span></ServiceEnquiryLink>
-            </article>
-          ))}
+        <p className="eyebrow">Prices</p>
+        <h2 id="pricing-title">Start with one job. Add only what you need.</h2>
+        <div className="s-prices s-prices-home">
+          <article className="s-price s-price-main">
+            <p className="s-price-tag">{STARTER.tag}</p>
+            <h3>{STARTER.name}</h3>
+            <p className="s-price-amount">{STARTER.price}</p>
+            <p>{STARTER.body}</p>
+            <ul>{STARTER.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
+            <PackageLink className="button button-signal" href="#check" pick={STARTER.name}>Get a free plan for this</PackageLink>
+          </article>
+          <div className="s-extras s-extras-home" id="extras">
+            <h3>Popular add-ons</h3>
+            <p className="s-small">Fixed, one-off prices. Buy one on its own or add it to Starter.</p>
+            <ul>
+              {POPULAR_EXTRAS.map((extra) => <li key={extra.name}><div><strong>{extra.name}</strong><span>{extra.what}</span></div><strong className="s-extras-price">{extra.price}</strong></li>)}
+            </ul>
+          </div>
         </div>
 
-        <div className="s-compare" id="compare">
-          <h3>Compare packages</h3>
-          <p className="s-small s-compare-hint">Swipe the table to see all three.</p>
-          <div className="s-compare-scroll" tabIndex={0} role="region" aria-label="Package comparison table">
-            <table>
-              <thead>
-                <tr><th scope="col"><span className="s-visually-hidden">What you get</span></th>{OFFERS.map((offer) => <th scope="col" key={offer.id}>{offer.name}</th>)}</tr>
-              </thead>
-              <tbody>
-                {COMPARISON.map(({ row, values }) => (
-                  <tr key={row}><th scope="row">{row}</th>{values.map((value, index) => <td key={OFFERS[index].id}>{value}</td>)}</tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        <div className="s-bigger">
+          <h3>Bigger jobs</h3>
+          <ul>
+            {BIGGER.map((offer) => <li key={offer.id}><strong>{offer.name}, {offer.price.replace(/^From/, 'from')}.</strong> {offer.body}</li>)}
+          </ul>
+          <p><strong>{CARE_PLAN.name}, {CARE_PLAN.price}</strong> if you want me to look after it afterwards.</p>
         </div>
 
         <ul className="s-promises" aria-label="Included with every package">
           {PROMISES.map((promise) => <li key={promise.title}><strong>{promise.title}</strong><span>{promise.body}</span></li>)}
         </ul>
-
-        <div className="s-extras" id="extras">
-          <h3>Add-ons</h3>
-          <p className="s-small">Standard set-ups with a fixed, one-off price. Add them to any package, or buy one on its own. They go on the same invoice.</p>
-          {EXTRA_GROUPS.map((group) => (
-            <div className="s-extras-group" key={group.title}>
-              <h4>{group.title}</h4>
-              <ul>
-                {group.items.map((extra) => <li key={extra.name}><div><strong>{extra.name}</strong><span>{extra.what}</span></div><strong className="s-extras-price">{extra.price}</strong></li>)}
-              </ul>
-            </div>
-          ))}
-          <div className="s-extras-care">
-            <h4>After it’s built</h4>
-            <p><strong>{CARE_PLAN.name}, {CARE_PLAN.price}.</strong> {CARE_PLAN.body}</p>
-          </div>
-        </div>
-
-        <div className="s-not-included">
-          <h3>What’s not included</h3>
-          <ul>{NOT_INCLUDED.map((item) => <li key={item}>{item}</li>)}</ul>
-        </div>
-
         <div className="s-guarantee">
           <strong>The guarantee.</strong> {GUARANTEE} You own everything I build.
         </div>
         <div className="s-actions">
           <a className="button button-signal" href="#check">Get a free plan and price</a>
+          <a className="button" href="/prices">Every price, compared</a>
         </div>
         <p className="s-small">Introduce a business and I&apos;ll thank you with £40 when they become a paying client. <a href="/faq#do-you-pay-for-referrals">How →</a></p>
       </section>

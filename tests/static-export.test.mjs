@@ -17,7 +17,8 @@ const exportRoot = path.join(root, 'out');
 // 1250 -> 1400 on 27 Sep (Offer v7): priced optional extras and the care plan added to the homepage.
 // 1400 -> 1600 on 27 Sep (Offer v8): each add-on now says in plain words what the customer gets (Maz's request).
 // 1600 -> 1900 on 27 Sep (Offer v9): ManyPets-style comparison table, promises and "what's not included" list.
-const WORD_BUDGET = 1900;
+// 1900 -> 1600 on 28 Sep: comparison table and all twelve add-ons moved to /prices; the homepage sells one first step.
+const WORD_BUDGET = 1600;
 // Same count as the homepage: all text inside <main>, including header, footer and closed answers.
 const CASE_STUDY_WORD_BUDGET = 320;
 
@@ -135,25 +136,24 @@ test('homepage proof is limited to real, honestly labelled work', async () => {
   assert.doesNotMatch(lab, /href="https:\/\/github.com\/manazoid4\/maz-pocket"/);
 });
 
-test('homepage shows a low-cost Starter, two bigger tiers, priced extras and a care plan (Offer v7)', async () => {
+test('homepage sells one first step: Starter, four popular add-ons, bigger jobs and a link to every price (28 Sep)', async () => {
   const html = await readPage('/');
   for (const [name, price] of [['Starter Automation', '£195'], ['Business System', 'From £795'], ['Custom Software &amp; Websites', 'From £1,950']]) {
     assert.match(html, new RegExp(name));
-    assert.match(html, new RegExp(price));
+    assert.match(html, new RegExp(price, 'i'));
   }
   assert.match(html, /id="extras"/);
-  for (const extra of ['Extra automation', 'Appointment reminders', 'Missed-call text-back', 'Review requests', 'Google Business Profile setup']) {
+  for (const extra of ['Appointment reminders', 'Missed-call text-back', 'Review requests', 'Google Business Profile setup']) {
     assert.match(html, new RegExp(extra));
   }
+  // The full comparison and all twelve add-ons live on /prices, so the phone page stays short.
+  assert.doesNotMatch(html, /id="compare"/);
+  assert.doesNotMatch(html, /Team training/);
+  assert.match(html, /href="\/prices"/);
   assert.match(html, /Keep It Running[\s\S]{0,30}£19\/month/);
   assert.doesNotMatch(html, /\bAI\b/, 'AI is used behind the scenes, never advertised (Maz, 27 Sep)');
   assert.match(html, /Free Plan &amp; Fixed Quote/);
   assert.match(html, /Half now, half when it works/);
-  assert.match(html, /id="compare"/);
-  assert.match(html, /What’s not included/);
-  assert.match(html, /Google Business Profile setup[\s\S]{0,300}£49/);
-  assert.match(html, /Single website page[\s\S]{0,300}£145/);
-  assert.match(html, /Team training[\s\S]{0,300}£39/);
   assert.match(html, /No VAT added/);
   assert.match(html, /you own everything i build/i);
   assert.match(html, /working within 7 working days of me getting access/i);
@@ -162,13 +162,39 @@ test('homepage shows a low-cost Starter, two bigger tiers, priced extras and a c
     assert.doesNotMatch(html, retired, `retired offer still on homepage: ${retired}`);
   }
   assert.doesNotMatch(html, /href="\/quick-win"/);
-  for (const id of ['repair', 'automation', 'software']) {
-    assert.match(html, new RegExp(`/contact\\?service=${id}#contact`));
+  assert.doesNotMatch(html, /\/contact\?service=/, 'homepage price cards lead to the free plan form, not a second form');
+
+  const prices = await readPage('/prices');
+  for (const [name, price] of [['Starter Automation', '£195'], ['Business System', 'From £795'], ['Custom Software &amp; Websites', 'From £1,950']]) {
+    assert.match(prices, new RegExp(name));
+    assert.match(prices, new RegExp(price));
   }
+  for (const id of ['compare', 'extras']) assert.match(prices, new RegExp(`id="${id}"`));
+  assert.match(prices, /What’s not included/);
+  assert.match(prices, /Google Business Profile setup[\s\S]{0,300}£49/);
+  assert.match(prices, /Single website page[\s\S]{0,300}£145/);
+  assert.match(prices, /Team training[\s\S]{0,300}£39/);
+  assert.match(prices, /Keep It Running[\s\S]{0,30}£19\/month/);
+  assert.match(prices, /working within 7 working days of me getting access/i);
+  assert.match(prices, /\/leak-check\?package=Starter%20Automation#leak-check-form/);
+  assert.doesNotMatch(prices, /\bAI\b/);
 
   const contact = await readPage('/contact');
   for (const price of ['£195', 'From £795', 'From £1,950']) assert.match(contact, new RegExp(price));
   assert.match(contact, /No VAT added/);
+});
+
+test('the free plan form confirms instantly and lets owners tap their problem', async () => {
+  for (const route of ['/', '/leak-check']) {
+    const html = await readPage(route);
+    assert.match(html, /name="_autoresponse" value="Thanks, I&#x27;ve got your message\. [^"]*within 3 working days/, `${route} form sends no instant confirmation`);
+    for (const pick of ['Missed calls', 'Slow replies to enquiries', 'No-shows', 'Chasing quotes']) {
+      assert.match(html, new RegExp(`<button type="button" aria-pressed="false"[^>]*>${pick}</button>`), `${route} missing quick pick ${pick}`);
+    }
+  }
+  const source = await readFile(path.join(root, 'app', 'leak-check', 'leak-check-form.tsx'), 'utf8');
+  assert.match(source, /_autoresponse: AUTO_REPLY/, 'the in-page (JavaScript) submission must also ask for the confirmation');
+  assert.match(source, /KNOWN_PACKAGES\.includes\(name\)/, '?package= only accepts real package and add-on names');
 });
 
 test('the free-check reply promise is 3 working days everywhere (Maz confirmed 27 Sep)', async () => {
@@ -496,7 +522,7 @@ test('every main page is one tap from the key routes, and the trade guides have 
   // and phones only saw "Free quote". Now every page carries the same map.
   for (const route of ['/', '/leak-check', '/contact', '/faq', '/lab', '/3d-printing', '/for', '/for/architects']) {
     const html = await readPage(route);
-    for (const href of ['/#pricing', '/for', '/3d-printing', '/faq', '/leak-check', '/for/architects', '/3d-printing#architecture-property']) {
+    for (const href of ['/prices', '/for', '/3d-printing', '/faq', '/leak-check', '/for/architects', '/3d-printing#architecture-property']) {
       assert.ok(html.includes(`href="${href}"`), `${route} is missing a link to ${href}`);
     }
     assert.match(html, /class="mw-menu-button"[^>]*aria-expanded="false"/, `${route} has no phone menu button`);

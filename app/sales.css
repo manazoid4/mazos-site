@@ -153,3 +153,11 @@
 @media (min-width: 721px) { .s-promises { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .s-compare-hint { margin: -6px 0 10px; }
 @media (min-width: 721px) { .s-compare-hint { display: none; } }
+
+/* Homepage prices, compact (28 Sep): Starter plus popular add-ons; the full list is on /prices */
+.s-extras-home { margin-top: 0; max-width: none; }
+.s-bigger { margin-top: 20px; padding: 18px 20px; border: 1px solid var(--line); background: var(--surface); max-width: 980px; display: grid; gap: 10px; }
+.s-bigger h3 { font-size: 1.15rem; letter-spacing: -.01em; }
+.s-bigger ul { padding-left: 20px; display: grid; gap: 6px; font-size: .95rem; }
+.s-price .button { justify-self: start; margin-top: 6px; }
+@media (min-width: 960px) { .s-prices.s-prices-home { grid-template-columns: 1fr 1.2fr; } }
