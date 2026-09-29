@@ -11,6 +11,10 @@ export type ProjectCaseStudy = {
   lede: string;
   role: string;
   scope: string[];
+  /** Real, checkable outcomes only. Rendered only when filled; never invent one. */
+  results?: string[];
+  /** A real quote the client has agreed to publish. Rendered only when filled. */
+  quote?: { text: string; who: string };
 };
 
 export type Project = {
@@ -53,7 +57,8 @@ export const FLAGSHIP_PROJECTS: Project[] = [
       { label: 'View code', href: 'https://github.com/manazoid4/JobFilterV1' },
     ],
     caseStudy: {
-      lede: 'Maz Works’ own product. It helps small building firms find public contracts that fit.',
+      // TODO(Maz): results stay empty until JobFilter has real, checkable numbers. No customer counts until true.
+      lede: 'Maz Works’ own product. It helps small building firms find public contracts that fit: it checks each one against their trade, area and deadline, then sends alerts.',
       role: 'Everything, end to end. The same full setup a client build gets.',
       scope: ['Finding public contracts', 'Trade-fit checks', 'Alerts and reminders', 'Paid plans and checkout', 'Domain, hosting and launch'],
     },
@@ -61,24 +66,28 @@ export const FLAGSHIP_PROJECTS: Project[] = [
   {
     id: 'scrap-finance-partners', name: 'Scrap Finance Partners', eyebrow: 'Flagship 02 / Client website', status: 'Client website / Live',
     relationship: 'Client work',
-    summary: 'A website for a specialist finance practice, with a simple enquiry form.',
-    problem: 'The client needed a clear, credible website that explains what they do and makes it easy to get in touch.',
+    summary: 'A website for a specialist finance practice, with lead capture.',
+    problem: 'The client needed a clear, credible way to explain a specialist service and to capture enquiries without extra admin.',
     insight: 'Keep it simple: clear positioning, plain pricing and one obvious way to enquire.',
     built: [
       'Clear positioning, service pages and pricing.',
-      'A short enquiry form.',
+      'Lead capture: one short enquiry form, so every enquiry arrives in one place.',
       'A mobile-friendly design, launched live.',
     ],
     proof: 'The live site is public.',
-    limitation: 'This shows the website that was built. It makes no claims about revenue or leads.',
+    limitation: 'This shows what was built. It makes no claims about revenue or leads.',
     image: { src: '/scrap-finance-partners.webp', mobileSrc: '/scrap-finance-partners-mobile.webp', alt: 'Scrap Finance Partners homepage explaining its Finance Health Check for UK scrap and recycling firms', caption: 'Live client site / specialist positioning and enquiry path', width: 1440, height: 1000 },
     links: [
       { label: 'View the live site', href: 'https://scrap-finance-partners.vercel.app' },
     ],
+    // Truth rule (context pack, 25 Sep): a delivered client build, but the client did not pay.
+    // Say "client build". Never "paid client", "paying client" or anything implying money changed hands.
     caseStudy: {
-      lede: 'A client website for a finance firm serving UK scrap and recycling businesses.',
-      role: 'Positioning, website design and build, enquiry form and launch.',
-      scope: ['Positioning', 'Website design and build', 'Enquiry form', 'Launch'],
+      lede: 'A client website for a finance firm serving UK scrap and recycling businesses, with lead capture built in.',
+      role: 'Positioning, website design and build, lead capture and launch.',
+      scope: ['Positioning', 'Website design and build', 'Lead capture', 'Launch'],
+      // TODO(Maz): add results only if the client confirms them in writing, e.g. enquiries in the first month.
+      // TODO(Maz): add a quote only if the client agrees to it being published, with their name and role.
     },
   },
 ];
