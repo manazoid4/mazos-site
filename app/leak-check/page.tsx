@@ -68,25 +68,27 @@ export default function LeakCheckPage() {
         <p>The chasing, copying, reminding or admin that eats your week, or the point where customers slip away. I look at how you work now and reply with a short plan and a fixed price, from £195.</p>
         <div className="mw-actions">
           <a className="button button-signal" href="#leak-check-form">Get my free plan and price</a>
-          <CallLink className="button" href={BOOKING_URL} placement="leak-check-hero">Or book a 15-minute call</CallLink>
+          <a className="button" href="#leak-check-return-title">See an example plan</a>
         </div>
         <p className="mw-hero-note">Written by me · emailed within {CHECK_REPLY_TIME} · no call, no obligation</p>
       </section>
 
-      <section className="mw-qw-section" aria-labelledby="leak-check-send-title">
-        <p className="eyebrow">Send your link</p>
-        <h2 id="leak-check-send-title">Three quick answers. Then I plan it myself.</h2>
-        <p className="mw-qw-lead">I’ll reply by email within {CHECK_REPLY_TIME}. Free for any UK business, in any trade.</p>
-        <LeakCheckForm />
+      <section className="mw-qw-section" aria-labelledby="leak-check-return-title">
+        <p className="eyebrow">What you get back</p>
+        <h2 id="leak-check-return-title">See an example first. Yours looks like this.</h2>
+        <ul className="mw-qw-list">
+          {RETURN.map((item) => <li key={item}>{item}</li>)}
+        </ul>
+        <div className="s-report-wrap"><SampleReport /></div>
+        <p className="mw-qw-lead">Honest outcomes, always allowed: &quot;This isn&apos;t worth automating yet.&quot; Or: &quot;The tool you already pay for can do this. Here&apos;s the setting.&quot;</p>
       </section>
 
-      <section className="mw-qw-section" aria-labelledby="leak-check-walkthrough-title">
-        <p className="eyebrow">Prefer to talk it through?</p>
-        <h2 id="leak-check-walkthrough-title">Show me the job on a call.</h2>
-        <p className="mw-qw-lead">Walk me through how it works now. 15 minutes, free and optional.</p>
-        <div className="mw-actions">
-          <CallLink className="button" href={BOOKING_URL} placement="leak-check-walkthrough">Book the 15-minute call</CallLink>
-        </div>
+      <section className="mw-qw-section" aria-labelledby="leak-check-send-title">
+        <p className="eyebrow">Your free plan</p>
+        <h2 id="leak-check-send-title">Tap what’s costing you. I plan it myself.</h2>
+        <p className="mw-qw-lead">I’ll reply by email within {CHECK_REPLY_TIME}. Free for any UK business, in any trade.</p>
+        <LeakCheckForm />
+        <p className="mw-qw-lead">Prefer to talk it through? <CallLink href={BOOKING_URL} placement="leak-check-walkthrough">Book a free 15-minute call</CallLink> and show me the job.</p>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="leak-check-checks-title">
@@ -95,31 +97,16 @@ export default function LeakCheckPage() {
         <ul className="mw-qw-list">
           {CHECKS.map((item) => <li key={item}>{item}</li>)}
         </ul>
-      </section>
-
-      <section className="mw-qw-section" aria-labelledby="leak-check-examples-title">
-        <p className="eyebrow">Any trade</p>
-        <h2 id="leak-check-examples-title">Built for any business that runs on customers.</h2>
-        <p className="mw-qw-lead">Trades, salons, clinics, cafés, shops, agencies and professional services. Guides by business type: {NICHE_GUIDES.map((guide, index) => (
+        <p className="mw-qw-lead">Built for any business that runs on customers. Guides by business type: {NICHE_GUIDES.map((guide, index) => (
           <span key={guide.id}>{index ? ' · ' : ''}<a href={`/for/${guide.id}`}>{guide.name}</a></span>
         ))}</p>
-      </section>
-
-      <section className="mw-qw-section" aria-labelledby="leak-check-return-title">
-        <p className="eyebrow">What you get back</p>
-        <h2 id="leak-check-return-title">A short plan and a fixed price.</h2>
-        <ul className="mw-qw-list">
-          {RETURN.map((item) => <li key={item}>{item}</li>)}
-        </ul>
-        <p className="mw-qw-lead">Honest outcomes, always allowed: &quot;This isn&apos;t worth automating yet.&quot; Or: &quot;The tool you already pay for can do this. Here&apos;s the setting.&quot;</p>
-        <div className="s-report-wrap"><SampleReport /></div>
       </section>
 
       <section className="mw-resource-cta" aria-labelledby="leak-check-cta-title">
         <div>
           <p className="eyebrow">Free first step</p>
           <h2 id="leak-check-cta-title">What would you take off your plate first?</h2>
-          <p>One line is enough. No discovery call before you get something useful.</p>
+          <p>A few taps is enough. No discovery call before you get something useful.</p>
         </div>
         <div className="mw-actions">
           <a className="button button-signal" href="#leak-check-form">Get the free plan and price</a>

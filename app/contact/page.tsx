@@ -23,7 +23,10 @@ export default function ContactPage() {
         <p className="eyebrow">Contact</p>
         <h1 id="contact-page-title">Tell me what you need built.</h1>
         <p className="s-lede">One line is enough. I reply by email with a plan and a fixed quote. No VAT added.</p>
-        <p className="s-note">Not sure where to start? <a href="/leak-check">Get the {FREE_STEP.name}</a>, emailed within {CHECK_REPLY_TIME}.</p>
+        <div className="s-actions">
+          <a className="button button-signal s-button-lg" href="/leak-check?src=contact#leak-check-form">Most owners start here: free plan and price</a>
+        </div>
+        <p className="s-note">The {FREE_STEP.name} takes a few taps and is emailed within {CHECK_REPLY_TIME}. Use the form below for a bigger build, a private demo or anything else.</p>
       </section>
 
       <section className="s-section s-check" id="contact" aria-labelledby="contact-title">

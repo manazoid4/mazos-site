@@ -72,6 +72,8 @@ async function internalTargetExists(urlPath) {
 
 test('homepage positions Maz Works as a systems builder, not a website-fix shop (Maz, 27 Sep)', async () => {
   const html = await readPage('/');
+  // Conversion rebuild (29 Sep): the hero leads with one concrete outcome, then the positioning line.
+  assert.match(html, /Miss a call, and the caller gets a text with your booking link/);
   assert.match(html, /I build the systems that turn enquiries into paying customers/);
   assert.match(html, /Automation, connected tools and custom software/);
   assert.match(html, /For UK small businesses and teams, in any trade/);
@@ -94,13 +96,27 @@ test('homepage has one way in: the free check form, with the call as the fallbac
   assert.match(html, /class="s-sticky/);
 });
 
-test('homepage trust strip states who, where and the terms', async () => {
+test('homepage puts the risk reversal straight under the hero, then who and where', async () => {
   const html = await readPage('/');
   const strip = html.match(/<ul class="s-trust"[\s\S]*?<\/ul>/)?.[0];
-  assert.ok(strip, 'trust strip must sit under the hero');
-  for (const item of [/Manazir/, /UK-wide/, /No VAT added/, /Delivery guarantee/]) {
+  assert.ok(strip, 'terms strip must sit under the hero');
+  for (const item of [/One fixed price, agreed first/, /Half now, half when it works/, /No VAT added/, /Delivery guarantee/]) {
     assert.match(strip, item);
   }
+  assert.ok(html.indexOf('class="s-trust"') < html.indexOf('id="trades"'), 'terms come before the rest of the page');
+  assert.match(html, /You deal with Manazir[^<]*UK-wide/);
+});
+
+test('homepage shows the six trades as cards and a labelled missed-call example (29 Sep rebuild)', async () => {
+  const html = await readPage('/');
+  for (const guide of ['salons-and-beauty', 'dog-groomers', 'garages', 'cafes-and-food', 'clinics-and-therapists', 'architects']) {
+    assert.match(html, new RegExp(`<ul class="s-trades"[\\s\\S]*href="/for/${guide}"`));
+  }
+  assert.match(html, /class="s-demo"/);
+  assert.match(html, /Missed-call text-back, £95\. Not a real customer\./);
+  assert.match(html, /Example messages\./);
+  // The example plan comes before the form, so owners see what they get first.
+  assert.ok(html.indexOf('id="example"') < html.indexOf('id="check"'), 'example plan must come before the form');
 });
 
 test('homepage shows a clearly labelled example report, not a real client', async () => {
@@ -494,7 +510,7 @@ test('case studies route to a plan and fixed price, not a blanket free demo', as
   for (const route of ['/work/jobfilter', '/work/scrap-finance-partners']) {
     const html = await readPage(route);
     assert.doesNotMatch(html, /free demo/i, `${route} still offers a free demo`);
-    assert.match(html, /Ask about a build like this/);
+    assert.match(html, /\/leak-check\?src=case-[a-z-]+#leak-check-form/, `${route} should lead to the free plan form`);
   }
 });
 
@@ -563,10 +579,11 @@ test('six wayfinding helps big sites use are in place', async () => {
   // 2. Human site map lists every trade guide and case study.
   const map = await readPage('/site-map');
   for (const href of ['/for/architects', '/for/garages', '/work/jobfilter', '/leak-check', '/whats-new']) assert.ok(map.includes(`href="${href}"`), `site map missing ${href}`);
-  // 3. What's new is current and linked from every page footer.
+  // 3. What's new stays reachable from the site map; the footer links the site map (29 Sep: off the main nav).
   const news = await readPage('/whats-new');
   assert.match(news, /Easier to find your way around/);
-  assert.ok(home.includes('href="/whats-new"') && home.includes('href="/site-map"'));
+  assert.ok(home.includes('href="/site-map"'));
+  assert.ok(!home.includes('href="/whats-new"'), 'What’s new is for buyers only once rewritten; kept off the nav for now');
   // 4. A helpful not-found page.
   const nf = await readFile(path.join(exportRoot, '404.html'), 'utf8');
   assert.match(nf, /That page has moved or never existed/);

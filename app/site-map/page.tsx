@@ -16,9 +16,10 @@ const EXTRA_GROUPS = [
   {
     title: 'Get started',
     links: [
-      { href: '/leak-check', label: 'Free plan and fixed quote' },
+      { href: '/leak-check', label: 'Free plan and price' },
       { href: '/contact', label: 'Bigger jobs and contact' },
       { href: '/demos', label: 'Private demos' },
+      { href: '/whats-new', label: 'What’s new' },
     ],
   },
   {

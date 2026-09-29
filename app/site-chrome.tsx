@@ -13,7 +13,7 @@ export function SiteHeader() {
       <nav aria-label="Primary navigation">
         <NavLinks />
         <SiteMenu />
-        <a className="mw-nav-cta" href="/leak-check">Free quote</a>
+        <a className="mw-nav-cta" href="/leak-check">Free plan</a>
       </nav>
     </header>
   );
@@ -37,7 +37,7 @@ export function SiteFooter() {
         ))}
         <nav aria-label="Get started">
           <p>Get started</p>
-          <a href="/leak-check">Free plan and quote</a>
+          <a href="/leak-check">Free plan and price</a>
           <a href="/demos">Private demos</a>
           <a href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20feedback`}>Feedback</a>
           <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn ↗</a>
@@ -46,7 +46,7 @@ export function SiteFooter() {
       </div>
 
       <div className="mw-footer-bottom">
-        <span>© 2026 Maz Works · <a href="/site-map">Site map</a> · <a href="/whats-new">What’s new</a></span>
+        <span>© 2026 Maz Works · <a href="/site-map">Site map</a></span>
         <a className="mw-back-top" href="#main-content">Back to top ↑</a>
         <span>Fixed quotes · No VAT added · Delivery guarantee</span>
       </div>

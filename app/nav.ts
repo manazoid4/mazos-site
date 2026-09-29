@@ -8,11 +8,11 @@ import { NICHE_GUIDES } from './for/niches';
  */
 export type NavLink = { href: string; label: string };
 
-/** Shown in the header on desktop. Keep to four plus the free quote button. */
+/** Shown in the header on desktop. Keep to four plus the free plan button. */
 export const PRIMARY_NAV: NavLink[] = [
+  { href: '/for', label: 'Your trade' },
   { href: '/prices', label: 'Prices' },
-  { href: '/for', label: 'Who it’s for' },
-  { href: '/3d-printing', label: 'Objects' },
+  { href: '/#process', label: 'How it works' },
   { href: '/faq', label: 'FAQ' },
 ];
 
@@ -24,6 +24,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/prices#compare', label: 'Compare packages' },
       { href: '/prices#extras', label: 'All add-ons' },
       { href: '/#example', label: 'Example plan' },
+      { href: '/leak-check', label: 'Free plan and price' },
       { href: '/contact', label: 'Bigger jobs' },
     ],
   },
@@ -35,22 +36,31 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
     ],
   },
   {
-    title: 'More',
+    title: 'Help',
     links: [
-      { href: '/3d-printing', label: 'Objects and tap stands' },
-      { href: '/3d-printing#architecture-property', label: 'Architecture models' },
       { href: '/faq', label: 'FAQ' },
-      { href: '/lab', label: 'Other builds' },
-      { href: '/whats-new', label: 'What’s new' },
+      { href: '/work/scrap-finance-partners', label: 'Client work' },
       { href: '/site-map', label: 'Site map' },
+    ],
+  },
+  {
+    // Kept apart from the service on purpose (29 Sep rebuild): Objects is a
+    // concept range and the Lab holds Maz's own products, so neither competes
+    // with the one thing a small business can buy today.
+    title: 'Other projects',
+    links: [
+      { href: '/3d-printing', label: 'Objects (concept range)' },
+      { href: '/3d-printing#architecture-property', label: 'Architecture models' },
+      { href: '/lab', label: 'Lab: my own products' },
     ],
   },
 ];
 
 /** Homepage "On this page" jump bar, in page order. */
 export const HOME_SECTIONS: NavLink[] = [
+  { href: '#trades', label: 'Your trade' },
+  { href: '#example', label: 'Example plan' },
   { href: '#check', label: 'Free plan' },
-  { href: '#example', label: 'Example' },
   { href: '#pricing', label: 'Prices' },
   { href: '#process', label: 'How it works' },
   { href: '#faq', label: 'Questions' },
