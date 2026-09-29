@@ -210,7 +210,7 @@
 
 .s-about-head { display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start; }
 .s-about-head > div > p { max-width: 680px; }
-.s-face { width: 72px; height: 72px; display: grid; place-items: center; border: 2px solid var(--ink); border-radius: 50%; background: var(--signal); font-family: var(--mono); font-weight: 800; font-size: 1.2rem; }
+.s-face { width: 72px; height: 72px; object-fit: cover; border: 2px solid var(--ink); border-radius: 50%; background: var(--surface); }
 
 @media (min-width: 721px) {
   .s-trades { grid-template-columns: repeat(3, minmax(0, 1fr)); }

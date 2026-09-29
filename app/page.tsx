@@ -205,8 +205,7 @@ export default function Page() {
 
       <section className="s-section s-about" id="about" aria-labelledby="about-title">
         <div className="s-about-head">
-          {/* TODO(Maz): add a real photo of yourself at public/maz.webp (square, 400px) and swap this monogram for an <img>. */}
-          <span className="s-face" aria-hidden="true">MH</span>
+          <img className="s-face" src="/maz.webp" alt="Manazir Hussain, who plans and builds every job" width={96} height={96} loading="lazy" />
           <div>
             <p className="eyebrow">Who you’re dealing with</p>
             <h2 id="about-title">I’m Manazir. I plan it and build it myself.</h2>
