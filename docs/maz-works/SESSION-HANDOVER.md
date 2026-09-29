@@ -3,6 +3,9 @@
 This repo is public. The full handover, open to-dos and research source names live in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/HANDOVER.md` and `ARCHITECTS-CONTEXT-PACK-2026-09-27.md`.
 
 
+## 28 Sep, night: Lead Quality v2
+Lead rules changed to Lead Quality v2 (brief: `docs/maz-works/LEAD-QUALITY.md`; canonical in the knowledge vault). Leads are found by a repeated business problem with evidence and a named paid fix, not by website cosmetics. Gold does not need a limited company; Ltd status only decides whether cold email is allowed. Existing leads were re-scored and a new batch of 20 (12 Gold, 8 Silver) was researched from dated job ads; all names and contacts stay in the private leads repo and HubSpot. No site code changed.
+
 ## 28 Sep, later: Codex plan audit (form truth, one-job Starter on guides)
 
 - Confirmation email: a real test showed the form email reaches Maz's Gmail in seconds, but no auto-reply arrived. FormSubmit's docs confirm autoresponses do not work over AJAX. The in-page message no longer promises an email; the auto-reply stays only on the no-JavaScript route, where FormSubmit supports it.
