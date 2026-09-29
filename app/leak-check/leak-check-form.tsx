@@ -48,6 +48,11 @@ export function LeakCheckForm() {
   const [recoveryHref, setRecoveryHref] = useState(`mailto:${CONTACT_EMAIL}`);
   const [picked, setPicked] = useState<string[]>([]);
   const [pkg, setPkg] = useState('');
+  // Without JavaScript the chips can't submit, so the text box stays required
+  // until the form hydrates; after that a tap is enough (validated in submitRequest).
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => setHydrated(true), []);
 
   useEffect(() => {
     const choose = (name: string | null) => {
@@ -211,10 +216,11 @@ export function LeakCheckForm() {
 
 
       <label>
-        <span>Anything else I should know? <small>(optional)</small></span>
+        <span>{hydrated ? <>Anything else I should know? <small>(optional)</small></> : 'What job do you want off your plate?'}</span>
         <textarea
           name="problem"
           rows={3}
+          required={!hydrated}
           placeholder="For example: chasing quotes, typing enquiries into a spreadsheet, reminding customers"
           aria-invalid={invalidField === 'problem' || undefined}
           aria-describedby={invalidField === 'problem' ? 'leak-check-error' : undefined}

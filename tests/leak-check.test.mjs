@@ -49,7 +49,11 @@ test('the free plan form puts the problem taps first, with typing and the websit
     assert.match(form, new RegExp(`name="${name}"`));
   }
   assert.match(form, /<input[^>]*name="website"(?![^>]*required)[^>]*>/, 'website is optional');
-  assert.match(form, /<textarea[^>]*name="problem"(?![^>]*required)[^>]*>/, 'free text is optional; a tap is enough');
+  // Chips need JavaScript, so the static HTML keeps the text box required for no-JS visitors;
+  // the source drops it once hydrated, when a tap is enough.
+  assert.match(form, /<textarea[^>]*name="problem"[^>]*required/, 'no-JS visitors must still describe the job');
+  const source = await readFile(path.join(root, 'app', 'leak-check', 'leak-check-form.tsx'), 'utf8');
+  assert.match(source, /required=\{!hydrated\}/);
   assert.ok(form.indexOf('mw-quick-picks') < form.indexOf('name="name"'), 'problem taps come before name and email');
   assert.doesNotMatch(form, /name="business"|name="nextStep"/);
   assert.match(form, /Get my free plan and price/);
