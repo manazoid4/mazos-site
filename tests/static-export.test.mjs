@@ -187,7 +187,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(contact, /No VAT added/);
 });
 
-test('the free plan form confirms instantly and lets owners tap their problem', async () => {
+test('the free plan form lets owners tap their problem, and only the no-JavaScript route asks for an auto-reply', async () => {
   for (const route of ['/', '/leak-check']) {
     const html = await readPage(route);
     assert.match(html, /name="_autoresponse" value="Thanks, I&#x27;ve got your message\. [^"]*within 3 working days/, `${route} form sends no instant confirmation`);
@@ -196,7 +196,9 @@ test('the free plan form confirms instantly and lets owners tap their problem', 
     }
   }
   const source = await readFile(path.join(root, 'app', 'leak-check', 'leak-check-form.tsx'), 'utf8');
-  assert.match(source, /_autoresponse: AUTO_REPLY/, 'the in-page (JavaScript) submission must also ask for the confirmation');
+  // FormSubmit ignores _autoresponse on AJAX, so the in-page route must neither send it nor promise an email.
+  assert.doesNotMatch(source, /_autoresponse: AUTO_REPLY/);
+  assert.doesNotMatch(source, /confirmation is on its way/i);
   assert.match(source, /KNOWN_PACKAGES\.includes\(name\)/, '?package= only accepts real package and add-on names');
 });
 
@@ -219,6 +221,11 @@ test('homepage stays compact with four visible process steps', async () => {
   assert.match(html, /You pay half to start/);
   assert.match(html, /Working by the agreed date/);
   assert.match(html, /href="\/faq"/);
+  // How the work is set up (Maz, 28 Sep): existing tools, user access not passwords, tested first, optional care plan.
+  assert.match(html, /How I set it up/);
+  assert.match(html, /Built on what you already use/);
+  assert.match(html, /I never need your passwords/);
+  assert.match(html, /Keep It Running \(£19\/month\)/);
   const words = mainWordCount(html);
   assert.ok(words <= WORD_BUDGET, `homepage has ${words} words; budget is ${WORD_BUDGET}`);
 });

@@ -6,11 +6,19 @@ This repo is public. The full handover, open to-dos and research source names li
 ## 28 Sep, night: Lead Quality v2
 Lead rules changed to Lead Quality v2 (brief: `docs/maz-works/LEAD-QUALITY.md`; canonical in the knowledge vault). Leads are found by a repeated business problem with evidence and a named paid fix, not by website cosmetics. Gold does not need a limited company; Ltd status only decides whether cold email is allowed. Existing leads were re-scored and a new batch of 20 (12 Gold, 8 Silver) was researched from dated job ads; all names and contacts stay in the private leads repo and HubSpot. No site code changed.
 
-## 28 Sep: sales pass (shorter homepage, instant confirmation, tap-to-pick)
+## 28 Sep, later: Codex plan audit (form truth, one-job Starter on guides)
+
+- Confirmation email: a real test showed the form email reaches Maz's Gmail in seconds, but no auto-reply arrived. FormSubmit's docs confirm autoresponses do not work over AJAX. The in-page message no longer promises an email; the auto-reply stays only on the no-JavaScript route, where FormSubmit supports it.
+- Trade guides: Starter £195 lines now describe one job only. The second job each guide mentioned is shown as its own priced add-on (reminders £79, missed-call text-back £95, quote follow-up £95, review requests £95, online booking £95). Prices come from `app/offers.ts`. Every line has a link that pre-fills the free plan form. A test blocks bundled Starter lines.
+- Homepage: a one-line link to real work (JobFilter, Scrap Finance Partners) now sits beside the free plan form.
+- Browser-checked: package pre-fill from /prices, guides and the homepage; unknown `?package=` ignored; problem buttons add and remove text without losing typed words; one POST on double-click; failed send keeps text and offers email; no-JavaScript form posts natively. No overflow at 320, 390, 768 or 1440px.
+- Not done, on purpose: the petrol/green recolour (no evidence it lifts enquiries, high risk of churn), CSS merging (Next already ships one CSS file per page), paid analytics.
+
+## 28 Sep: sales pass (shorter homepage, tap-to-pick)
 
 - Maz confirmed Offer v9 stays; the older brief built on the retired £395 Repair was out of date and was not used. Most of that brief (one form, sticky CTA, example plan, trust strip, analytics events, schema) was already live, so only three new things shipped.
 - Homepage prices now sell one first step: Starter £195, four popular add-ons, a short "Bigger jobs" list, promises and the guarantee. The comparison table, all twelve add-ons, care plan and "What's not included" moved to a new `/prices` page (in nav, sitemap and footer). Homepage on a 390px phone: 12,578px → about 10,270px tall. Homepage word budget lowered 1,900 → 1,600.
-- Free plan form: the provider now emails the owner a confirmation the moment they send (`_autoresponse`), on both the in-page and no-JavaScript paths. Research: only 23% of UK customers say they'd definitely try again after a slow reply (Moneypenny/Censuswide, 2026), and competitors promise replies in 2 to 24 hours.
+- Free plan form: `_autoresponse` added (later found to work only on the no-JavaScript route; see above). Research: only 23% of UK customers say they'd definitely try again after a slow reply (Moneypenny/Censuswide, 2026), and competitors promise replies in 2 to 24 hours.
 - Free plan form: six tap-to-pick problems (Missed calls, Slow replies, No-shows, Chasing quotes, Reviews, Copying details) fill the text box, so owners type less on a phone. Price cards pre-fill "Asking about: <package>" through `?package=` (only real package/add-on names accepted).
 - Location is not published anywhere (AGENTS.md rule, confirmed again by Maz 28 Sep).
 
