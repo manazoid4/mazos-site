@@ -33,8 +33,9 @@ export const QUICK_PICKS = [
 const KNOWN_PACKAGES: string[] = [...OFFERS.map((offer) => offer.name), ...EXTRAS.map((extra) => extra.name)];
 
 /**
- * Emailed by the form provider to the owner the moment they submit, so they
- * hear back in seconds, not days. Promises nothing beyond the public reply time.
+ * Auto-reply for the no-JavaScript route only. FormSubmit does not send
+ * autoresponses for AJAX submissions (checked 28 Sep: none arrived; its docs
+ * say so), so the in-page route never promises an email confirmation.
  */
 export const AUTO_REPLY = `Thanks, I've got your message. I'll read it myself and email you a short plan and a fixed price within ${CHECK_REPLY_TIME}. No call needed and no obligation. If anything changes, email ${CONTACT_EMAIL}. Manazir, Maz Works`;
 
@@ -130,7 +131,6 @@ export function LeakCheckForm() {
       _replyto: email,
       _subject: subject,
       _template: 'table',
-      _autoresponse: AUTO_REPLY,
       _honey: honey,
       _url: window.location.href,
     });
@@ -247,7 +247,7 @@ export function LeakCheckForm() {
         <p className="mw-form-status" role="status" aria-live="polite">
           {submitState === 'sent' && (
             <>
-              Got it. A confirmation is on its way to your inbox now, and I’ll email your plan and price within {CHECK_REPLY_TIME}.{' '}
+              Sent, and received. I’ll read it myself and email your plan and price within {CHECK_REPLY_TIME}. Check your junk folder if it hasn’t arrived by then.{' '}
               <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); focusField('name'); }}>Send another</button>
             </>
           )}

@@ -7,7 +7,7 @@ import { LeakCheckForm } from './leak-check/leak-check-form';
 import { CallLink, PricingViewTracker } from './analytics';
 import { StickyCheckCta } from './sticky-cta';
 import { SampleReport } from './sample-report';
-import { CARE_PLAN, EXTRAS, FREE_STEP, GUARANTEE, OFFERS, PROMISES } from './offers';
+import { CARE_PLAN, DELIVERY, EXTRAS, FREE_STEP, GUARANTEE, OFFERS, PROMISES } from './offers';
 
 const [STARTER, ...BIGGER] = OFFERS;
 const POPULAR_EXTRAS = ['Missed-call text-back', 'Appointment reminders', 'Review requests', 'Google Business Profile setup']
@@ -112,6 +112,7 @@ export default function Page() {
             <li>You get a short plan and a fixed price, with any extras listed</li>
             <li>If it isn’t worth automating, I say so</li>
           </ul>
+          <p className="s-small s-proof-line">Work you can open: <a href="/work/jobfilter">JobFilter</a>, my own software, live with paid plans. <a href="/work/scrap-finance-partners">Scrap Finance Partners</a>, a client website.</p>
           <p className="s-small"><a href="#example">See an example plan ↓</a></p>
         </div>
         <LeakCheckForm />
@@ -172,6 +173,10 @@ export default function Page() {
         <ol className="s-steps">
           {STEPS.map(([number, title, body]) => <li key={number}><span>{number}</span><strong>{title}</strong><p>{body}</p></li>)}
         </ol>
+        <h3 className="s-subhead">How I set it up</h3>
+        <ul className="s-promises" aria-label="How the work is set up">
+          {DELIVERY.map((item) => <li key={item.title}><strong>{item.title}</strong><span>{item.body}</span></li>)}
+        </ul>
       </section>
 
       <section className="s-section s-about" id="about" aria-labelledby="about-title">
