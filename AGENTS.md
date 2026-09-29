@@ -12,6 +12,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 This repo is the Maz Works marketing site. Before any sales, lead, offer or copy work, read the shared context:
 
+- **Lead rules: Lead Quality v2** (28 Sep 2026). Brief: `docs/maz-works/LEAD-QUALITY.md`. Canonical: vault `prompts/maz-works-niche-needs.md`. Gold does not need a limited company.
+
 - Focus (3 projects only): `NOW.md` in the vault → https://github.com/manazoid4/maz-works-knowledge-vault/blob/main/NOW.md
 - Lead rules, niche needs, gift rule (paying clients only), lead hand-off format: https://github.com/manazoid4/maz-works-knowledge-vault/blob/main/prompts/maz-works-niche-needs.md
 - Prompt library + `/mw-*` commands: https://github.com/manazoid4/maz-works-knowledge-vault/blob/main/prompts/maz-works-prompt-library.md
@@ -24,10 +26,13 @@ Rules: branch + PR, never push to main. Never invent testimonials, clients or re
 ## Working with Maz (read every session)
 
 - **Start and end with the handover.** Read `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/HANDOVER.md` first (public summary: `docs/maz-works/SESSION-HANDOVER.md`). Before a session ends with work open, overwrite the private `HANDOVER.md` (4 sentence summary, Maz's open to-dos, next work), then update the public copy with no lead names or contact details.
-- Reply in **two short, plain paragraphs**: what he must do, and what changed. Details belong in PRs.
+- **Always end every reply with a one-paragraph summary** in plain words (Maz, 28 Sep, repeated several times). Keep replies short: what he must do, and what changed. Details belong in PRs.
 - **Remind him of his open to-dos** at the start and end of each session. He asks for this; he forgets things like posting. The list lives in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/STATUS.md` → "Maz's open to-dos". If a session ends with one still open, schedule a reminder with `send_later`.
 - Prefer free tiers and say plainly when something costs money.
 - **Email (all outreach):** every lead email, cold or warm, is sent by Maz from Gmail using the `info@mazworks.uk` From address (Gmail "Send mail as", live since 26 Sep 2026), and every reply to any `@mazworks.uk` address lands in Maz's Gmail via ImprovMX. Never send outreach through Resend or any other tool; Resend is only for the site's opt-in mail. Details: `docs/maz-works/EMAIL-SETUP.md`.
 - **Posts:** every LinkedIn/public post follows his posting rules in `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/POSTING-RULES.md`. Hand over final text in a plain code block, no dashes, link in the first comment, and audit claims before handing over.
 - **HubSpot (standard, always):** company names start with the tier, `🥇 GOLD · `, `🥈 SILVER · ` or `BENCH · ` (Maz reads HubSpot on his phone, where custom properties don't show), and the `Lead tier`, `Contact route` and `Website problem` properties stay in sync. Every call is a HubSpot **Task** (type Call, due time, number + one-line script in the body). Emailed leads get lead status `Attempted to contact`. Inbox-only contacts are named `<Business> (team)`.
+- **To-dos + URLs (standard, Maz 28 Sep):** every lead is a HubSpot Task assigned to Maz (Gold first, then Silver, Bench as Re-check), and every task, pitch note and `Website problem` includes the business website and the exact evidence URL so he can see the problem himself. Verify a claim before stating it.
+- **YouTube URL from Maz (standard, 29 Sep):** treat it as project intelligence: follow the vault `prompts/youtube-video-intelligence.md` and save the note in vault `wiki/sources/video-intelligence/`. Search that index before new research or a strategic decision.
+- **Pitch + script (standard):** every lead in HubSpot gets a `📞 PITCH + SCRIPT` note: pitch, result, route and a 5-step call script for Gold/Silver; a one-line solution for Bench. Format in the vault `prompts/maz-works-niche-needs.md`.
 - **Leads (standard):** tier Gold 8–10 / Silver 6–7 / Bench, recorded in the private `maz-works-leads` repo and HubSpot together. Cold email only to confirmed limited companies; everyone else is phone or walk-in.
