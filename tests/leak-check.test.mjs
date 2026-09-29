@@ -26,7 +26,7 @@ test('the Free Plan & Fixed Quote has a dedicated shareable acquisition page', a
 
   assert.match(html, /Free Plan &amp; Fixed Quote/);
   assert.doesNotMatch(html, /Customer Journey Review|Booking &amp; Enquiry Check/);
-  assert.match(html, /Three fields\. No call needed\./);
+  assert.match(html, /Tap, add your name and email, done\. No call needed\./);
   assert.match(html, /within 3 working days/i);
   assert.doesNotMatch(html, /5 working days/i);
   assert.match(html, /any UK business/);
@@ -40,7 +40,7 @@ test('the Free Plan & Fixed Quote has a dedicated shareable acquisition page', a
   assert.match(html, /rel="canonical" href="https:\/\/www\.mazworks\.uk\/leak-check"/);
 });
 
-test('the free plan form asks for name, email and the job, with the website optional', async () => {
+test('the free plan form puts the problem taps first, with typing and the website optional', async () => {
   const html = await readPage('/leak-check');
   const form = /<form[^>]*id="leak-check-form"[\s\S]*?<\/form>/.exec(html)?.[0] || '';
 
@@ -49,6 +49,8 @@ test('the free plan form asks for name, email and the job, with the website opti
     assert.match(form, new RegExp(`name="${name}"`));
   }
   assert.match(form, /<input[^>]*name="website"(?![^>]*required)[^>]*>/, 'website is optional');
+  assert.match(form, /<textarea[^>]*name="problem"(?![^>]*required)[^>]*>/, 'free text is optional; a tap is enough');
+  assert.ok(form.indexOf('mw-quick-picks') < form.indexOf('name="name"'), 'problem taps come before name and email');
   assert.doesNotMatch(form, /name="business"|name="nextStep"/);
   assert.match(form, /Get my free plan and price/);
 });
@@ -71,6 +73,8 @@ test('homepage and shared navigation send the free first step to the dedicated p
   assert.match(home, /id="check"/);
   assert.match(home, /id="leak-check-form"/);
   assert.match(home, /href="#check">Get a free plan and price/);
-  assert.match(home, /href="\/leak-check">Free quote/);
+  assert.match(home, /href="\/leak-check">Free plan</);
+  // One name for the free first step everywhere (29 Sep): "free plan", never "leak check" in visible copy.
+  assert.doesNotMatch(home.replace(/<[^>]+>/g, ' '), /leak check/i);
   assert.doesNotMatch(home, /\?service=leak-check#contact/);
 });

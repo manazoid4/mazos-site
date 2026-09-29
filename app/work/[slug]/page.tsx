@@ -49,17 +49,17 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </div>
         </header>
 
+        <section className="case-section" aria-labelledby="built-title">
+          <header><p className="eyebrow">01 / What I built</p><h2 id="built-title">The work delivered.</h2></header>
+          <ol className="case-built">{project.built.map((item) => <li key={item}>{item}</li>)}</ol>
+        </section>
+
         <section className="case-section" aria-labelledby="problem-title">
-          <header><p className="eyebrow">01 / The problem</p><h2 id="problem-title">What needed fixing.</h2></header>
+          <header><p className="eyebrow">02 / The problem</p><h2 id="problem-title">What it had to solve.</h2></header>
           <div className="case-pair">
             <div><h3>Problem</h3><p>{project.problem}</p></div>
             <div><h3>Approach</h3><p>{project.insight}</p></div>
           </div>
-        </section>
-
-        <section className="case-section" aria-labelledby="built-title">
-          <header><p className="eyebrow">02 / What I built</p><h2 id="built-title">The work delivered.</h2></header>
-          <ol className="case-built">{project.built.map((item) => <li key={item}>{item}</li>)}</ol>
         </section>
 
         <section className="case-section" aria-labelledby="status-title">
@@ -68,15 +68,17 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <div><h3>Working now</h3><p>{project.proof}</p></div>
             <div className="limitation-panel"><h3>Still to prove</h3><p>{project.limitation}</p></div>
           </div>
+          {project.caseStudy.results?.length ? <ul className="case-built">{project.caseStudy.results.map((item) => <li key={item}>{item}</li>)}</ul> : null}
+          {project.caseStudy.quote ? <blockquote className="case-quote"><p>{project.caseStudy.quote.text}</p><footer>{project.caseStudy.quote.who}</footer></blockquote> : null}
         </section>
 
         <footer className="case-cta">
           <div>
             <h2>Have a similar problem?</h2>
-            <p>Tell me what you want built or fixed. You get a plan and a fixed price before any paid work.</p>
+            <p>Tell me the job. You get a plan and a fixed price before any paid work.</p>
           </div>
           <div className="case-cta-actions">
-            <a className="button button-signal" href={`/contact?service=${project.id === 'scrap-finance-partners' ? 'website' : 'software'}#contact`}>Ask about a build like this</a>
+            <a className="button button-signal" href={`/leak-check?src=case-${project.id}#leak-check-form`}>Get a free plan and price</a>
             {otherStudy && <a className="text-link" href={`/work/${otherStudy.id}`}>Read {otherStudy.name} <span aria-hidden="true">→</span></a>}
           </div>
         </footer>

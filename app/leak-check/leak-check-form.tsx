@@ -92,12 +92,12 @@ export function LeakCheckForm() {
     const page = window.location.pathname === '/' ? 'homepage' : window.location.pathname.replace(/^\//, '');
     const source = new URLSearchParams(window.location.search).get('src')?.trim() || `direct (${page})`;
 
-    const missing = !name ? 'name' : !email ? 'email' : !task ? 'problem' : '';
+    const missing = !task ? 'problem' : !name ? 'name' : !email ? 'email' : '';
     if (missing) {
       setInvalidField(missing);
       setValidationError(
         missing === 'problem'
-          ? 'Tap a problem above, or add one line about the job.'
+          ? 'Tap at least one problem, or add a line about the job.'
           : `Add your ${missing} so I can reply.`,
       );
       focusField(missing);
@@ -167,10 +167,21 @@ export function LeakCheckForm() {
       <input type="hidden" name="service" value={SERVICE_LABEL} />
       <input type="hidden" name="_autoresponse" value={AUTO_REPLY} />
       <input type="hidden" name="interested_in" value={pkg || 'Not chosen'} />
-      <p className="mw-form-kicker">Three fields. No call needed.</p>
+      <p className="mw-form-kicker">Tap, add your name and email, done. No call needed.</p>
       {pkg ? (
         <p className="mw-form-picked">Asking about: <strong>{pkg}</strong> <button type="button" className="text-link" onClick={() => setPkg('')}>Clear</button></p>
       ) : null}
+
+      <fieldset className="mw-quick-picks">
+        <legend>What’s costing you customers or time? <small>Tap any that fit</small></legend>
+        <div>
+          {QUICK_PICKS.map((label) => (
+            <button type="button" key={label} aria-pressed={picked.includes(label)} onClick={() => togglePick(label)} disabled={submitState === 'sending'}>
+              {label}
+            </button>
+          ))}
+        </div>
+      </fieldset>
 
       <div className="mw-form-row">
         <label>
@@ -198,23 +209,12 @@ export function LeakCheckForm() {
         </label>
       </div>
 
-      <fieldset className="mw-quick-picks">
-        <legend>What’s costing you customers or time? <small>Tap any that fit</small></legend>
-        <div>
-          {QUICK_PICKS.map((label) => (
-            <button type="button" key={label} aria-pressed={picked.includes(label)} onClick={() => togglePick(label)} disabled={submitState === 'sending'}>
-              {label}
-            </button>
-          ))}
-        </div>
-      </fieldset>
 
       <label>
-        <span>What job do you want off your plate?</span>
+        <span>Anything else I should know? <small>(optional)</small></span>
         <textarea
           name="problem"
           rows={3}
-          required
           placeholder="For example: chasing quotes, typing enquiries into a spreadsheet, reminding customers"
           aria-invalid={invalidField === 'problem' || undefined}
           aria-describedby={invalidField === 'problem' ? 'leak-check-error' : undefined}
@@ -247,7 +247,7 @@ export function LeakCheckForm() {
         <p className="mw-form-status" role="status" aria-live="polite">
           {submitState === 'sent' && (
             <>
-              Sent, and received. I’ll read it myself and email your plan and price within {CHECK_REPLY_TIME}. Check your junk folder if it hasn’t arrived by then.{' '}
+              <strong>Got it, thank you.</strong> What happens next: I read it myself, look at how you work now, and email your plan and fixed price from {CONTACT_EMAIL} within {CHECK_REPLY_TIME}. Nothing to pay and no call unless you want one. If it hasn’t arrived by then, check your junk folder.{' '}
               <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); focusField('name'); }}>Send another</button>
             </>
           )}

@@ -127,7 +127,7 @@ test('Objects is discoverable from shared chrome, homepage and sitemap while dig
     readFile(path.join(root, 'README.md'), 'utf8'),
   ]);
 
-  // Objects left the homepage in the 27 Sep sales overhaul; it stays in the footer and on /lab.
+  // Objects left the homepage in the 27 Sep sales overhaul; since 29 Sep it sits under "Other projects" in the menu and footer.
   const lab = await readPage('/lab');
   assert.match(home, /href="\/3d-printing"[^>]*>Objects/);
   assert.match(lab, /Maz Works Objects/);
