@@ -1,0 +1,121 @@
+
+> mazos-site@0.1.0 test
+> node --test tests/*.test.mjs
+
+✔ client demo routes are isolated behind one generic server gate (2.7592ms)
+✔ client-specific protected bundles are not committed to the public website repository (11.1357ms)
+✔ demo cookie is opaque, secure, HttpOnly and scoped to the client slug (0.5166ms)
+✔ protected content is requested only with an opaque session token (1.0676ms)
+✔ authenticated HTML always exposes a server-side logout control (0.4006ms)
+✔ database credential, session and protected-content tables are default-deny to browser roles (0.7616ms)
+✔ lifecycle labels support reusable prospect and client management (0.906ms)
+✔ rotating a demo passcode revokes every live session for that client (0.5327ms)
+✔ edge service stores only token hashes and binds validation to slug, expiry and revocation (0.5145ms)
+✔ logout propagates database lookup and revocation failures instead of reporting false success (0.8314ms)
+✔ unknown, inactive and incorrect credentials share the same public denial (0.9826ms)
+✔ remote protected imagery is restricted to an explicit allowlist (0.352ms)
+✔ private demos have a prominent plain-English public page (37.5271ms)
+✔ demos page builds credibility without fabricated client counts or invented proof (5.406ms)
+✔ delivery needs an explicit provider acknowledgement, not just HTTP 200 (48.8449ms)
+✔ delivery accepts both documented confirmation shapes and rejects provider errors (3.7694ms)
+✔ network loss and abort while reading confirmation never report delivery (6.2743ms)
+✔ email recovery preserves punctuation, multiline details and the reply address (0.5603ms)
+✔ both exported enquiry forms provide a native POST fallback instead of leaking fields into a GET URL (16.9037ms)
+✔ Objects required contacts are always available; only optional details can collapse (12.9623ms)
+✔ CSP permits the native provider destination without opening form submission to arbitrary sites (4.2721ms)
+✔ the enquiry captures which service the visitor actually wants (20.4475ms)
+✔ an enquiry can ask for a quote or an answer instead of an unpaid build (9.9045ms)
+✔ both enquiry forms fail safely with a recoverable email fallback (6.5485ms)
+✔ both forms can send a second enquiry without a page reload (2.4154ms)
+✔ missing required answers produce a visible message rather than a silent no-op (4.7198ms)
+✔ the Free Plan & Fixed Quote has a dedicated shareable acquisition page (22.3116ms)
+✔ the free plan form puts the problem taps first, with typing and the website optional (25.4013ms)
+✔ the Leak Check reuses the resilient enquiry delivery path (3.328ms)
+✔ homepage and shared navigation send the free first step to the dedicated page (5.6672ms)
+✔ MAZ Pocket AI bridge stays private-by-design and secret-free in source (15.7917ms)
+✔ AI bridge and discovery manifest are present in the static export (5.091ms)
+(node:28024) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/manaz/mazos-real-direction/api/subscribe.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\manaz\mazos-real-direction\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a valid email is added to Resend contacts and reported as joined (15.9163ms)
+✔ a bad email is refused before anything reaches Resend (1.9026ms)
+✔ a filled honeypot looks like success to the bot but sends nothing (3.184ms)
+✔ signing up twice still reads as joined (2.2479ms)
+✔ a Resend rejection is reported as a failure, never as joined (1.6364ms)
+✔ without JavaScript the form posts normally and is redirected back with the outcome (1.9674ms)
+✔ only POST is accepted (0.6318ms)
+✔ the /lab signup posts to the API, has a hidden honeypot and says how to unsubscribe (5.7179ms)
+✔ each signup emails Maz, from the verified domain, with the subscriber as reply-to (2.3444ms)
+✔ a failed notification never turns a saved signup into an error (1.6658ms)
+✔ no notification is sent when the signup itself failed (1.4226ms)
+✔ each niche guide exports with real examples, a self-check, prices and a tagged Leak Check link (39.8206ms)
+✔ Leak Check page links every niche guide and shows real examples (4.5844ms)
+✔ niche guides sell systems and outcomes, not website fixes (Maz, 27 Sep positioning) (13.6003ms)
+✔ Touch presents exactly three clear bundles with every base and artwork estimate (16.0301ms)
+✔ Objects enquiry keeps links optional and builds its estimate from shared pricing (5.7611ms)
+✔ Touch explains real-world limits without turning owner-visible copy into technical documentation (5.2843ms)
+✔ Objects includes an honest architecture and property use case (3.7558ms)
+✔ Objects is discoverable from shared chrome, homepage and sitemap while digital services remain (7.5368ms)
+✔ Objects page stays short (3.8504ms)
+✔ homepage positions Maz Works as a systems builder, not a website-fix shop (Maz, 27 Sep) (17.1275ms)
+✔ homepage has one way in: the free check form, with the call as the fallback (3.4317ms)
+✔ homepage puts the risk reversal straight under the hero, then who and where (3.2002ms)
+✔ homepage shows the plug picture, links every trade and plays labelled explainers (30 Sep refresh) (2.4962ms)
+✔ homepage shows a clearly labelled example report, not a real client (2.2652ms)
+✔ homepage has one set of service routes, not a duplicate problem chooser (1.8763ms)
+✔ homepage proof is limited to real, honestly labelled work (4.3563ms)
+✔ homepage sells one first step: Starter, four popular add-ons, bigger jobs and a link to every price (28 Sep) (8.5938ms)
+✔ the free plan form lets owners tap their problem, and only the no-JavaScript route asks for an auto-reply (6.533ms)
+✔ the free-check reply promise is 3 working days everywhere (Maz confirmed 27 Sep) (9.0953ms)
+✖ homepage stays compact with four visible process steps (5.268ms)
+✔ public contact uses the branded address while form delivery stays stable (5.0619ms)
+✔ contact request submits in-page instead of depending on the visitor email app (3.7519ms)
+✔ metadata and accessible navigation are present on public pages (6.6082ms)
+✔ same-page navigation points to existing homepage sections (2.375ms)
+✔ internal links and assets resolve inside the static export (47.1874ms)
+✔ flagship case studies remain available and use the expanded positioning (4.2888ms)
+✔ case studies stay short (2.6573ms)
+✔ legacy MazOS route stays out of homepage discovery and sitemap (4.5484ms)
+✔ structured data reflects Maz Works founder and broad service positioning (3.5689ms)
+✔ Vercel Analytics remains bundled into the static export (610.2091ms)
+✔ runtime and static-host hardening stay explicit (3.1073ms)
+✔ project memory keeps the Maz Works Knowledge Vault identity canonical (2.1173ms)
+✔ every indexable exported page is listed in the sitemap (52.3569ms)
+✔ every sitemap entry points at a page that was actually exported (6.0373ms)
+✔ retired Quick Win page stays reachable but noindexed and points to Starter Automation (4.0481ms)
+✔ retired offer terms are gone from every public page (12.2384ms)
+✔ the guarantee, no-VAT and referral lines appear where Maz's decisions require them (2.8039ms)
+✔ case studies route to a plan and fixed price, not a blanket free demo (4.2111ms)
+✔ no public page or shipped script leaks Maz's personal details (752.8837ms)
+✔ every main page is one tap from the key routes, and the trade guides have a hub (11.8271ms)
+✔ architecture drawings exist and are labelled illustrative (4.2979ms)
+✔ six wayfinding helps big sites use are in place (7.8067ms)
+✔ scroll reveal hides nothing without JavaScript and respects reduced motion (Codex brief 05) (4.127ms)
+✔ the hero demo animation survives CSS minification (4.8408ms)
+✔ no stylesheet sets text below the readable floor (33.0954ms)
+✔ the floor check reads every form a size can be written in (0.5558ms)
+ℹ tests 89
+ℹ suites 0
+ℹ pass 88
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2052.3898
+
+✖ failing tests:
+
+test at tests\static-export.test.mjs:236:1
+✖ homepage stays compact with four visible process steps (5.268ms)
+  AssertionError [ERR_ASSERTION]: homepage has 1603 words; budget is 1600
+      at TestContext.<anonymous> (file:///C:/Users/manaz/mazos-real-direction/tests/static-export.test.mjs:252:10)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
