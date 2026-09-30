@@ -289,3 +289,6 @@ h2 { font-weight: 650; }
   .s-inbox-item, .s-board-step, .s-board-result, .s-calendar-days b, .s-calendar > strong { opacity: 1 !important; transform: none !important; }
   .s-demo-dots { display: none; }
 }
+
+/* Objects configurator: small print on the lime "selected" state needs the darker ink for contrast. */
+.objects-choice-grid label > span > small { color: var(--charcoal) !important; }

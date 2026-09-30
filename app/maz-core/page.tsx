@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function MazCorePage() {
-  return <MazCoreConsole />;
+  return <div id="main-content" tabIndex={-1}><MazCoreConsole /></div>;
 }

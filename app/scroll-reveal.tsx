@@ -7,7 +7,10 @@ import { useEffect } from 'react';
  * - `[data-reveal]` sections ease in once, the first time they are 15% visible.
  *   Content is only hidden after this mounts (`.js-reveal` on <html>), so a page
  *   without JavaScript shows everything.
- * - `[data-pause-offscreen]` (the hero demo) pauses its CSS loop while off-screen.
+ * - `[data-pause-offscreen]` pictures start paused (`data-offscreen` is in the
+ *   server HTML) and only play while on screen, so nothing plays early or
+ *   freezes half-faded. Without JavaScript a <noscript> style in the layout
+ *   lets them run, so the finished frame always shows.
  * Reduced motion: CSS shows everything with no movement.
  */
 export function ScrollReveal() {
