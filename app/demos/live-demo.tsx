@@ -7,7 +7,7 @@ import { HEADACHE_PICKS, getSystem, systemPrice } from '../systems';
 import './live-demo.css';
 
 const TRADES = [...NICHE_GUIDES.map((guide) => ({ id: guide.id, label: guide.shortName })), { id: 'other', label: 'Other' }];
-const STEP_MS = 1600;
+const STEP_MS = 1100;
 
 /** Trade details so the demo reads like the visitor's own day, not a template. */
 type TradeDetail = { service: string; customer: string; slot: string; headache: string };

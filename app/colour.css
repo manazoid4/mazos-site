@@ -46,7 +46,7 @@
 .s-price-tag { background: var(--signal); }
 .s-price-deposit { color: var(--charcoal); }
 
-.button, .s-button-lg { transition: transform 120ms ease-out, box-shadow 120ms ease-out, background-color 140ms ease-out; }
+.button, .s-button-lg { transition: transform 84ms ease-out, box-shadow 84ms ease-out, background-color 98ms ease-out; }
 .button:hover, .s-button-lg:hover { transform: translateY(-1px); }
 
 .mw-quick-picks button:hover { background: var(--sage); }
@@ -99,47 +99,45 @@
 .mw-hub a:hover { background: var(--stone); }
 .mw-hub-name { color: var(--charcoal); }
 
-/* Pop layer (30 Sep, from the 15-site audit): calm base, a few deliberate
-   accents. Deep green anchors every page (ManyPets/Monzo), orange stays the
-   action colour, tinted chips and a soft glow add warmth without shouting. */
-:root { --deep: #1f3a33; --tint: #fff0e6; --tint-text: #b8480f; }
-
+/* Pill labels: a bold colour with dark text (high contrast), a different one per
+   section so the page reads as several colours, none of them an "error" red/orange. */
+:root { --pill: #ffd23f; }
 .s-hero .eyebrow,
 .s-section > .eyebrow,
 .s-check-copy .eyebrow,
 .s-about .eyebrow,
 .mw-section-heading .eyebrow,
-.mw-resource-hero .eyebrow { border-color: transparent; background: var(--tint); color: var(--tint-text); border-radius: 999px; padding: 4px 12px; }
+.mw-resource-hero .eyebrow {
+  display: inline-block; padding: 5px 14px; border: 2px solid var(--ink); border-radius: 999px;
+  background: var(--pill); color: var(--ink); font-weight: 800; letter-spacing: .06em;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.s-hero .eyebrow, .mw-resource-hero .eyebrow { --pill: #ffd23f; }
+.s-section:nth-of-type(4n + 1) > .eyebrow, .mw-section:nth-of-type(4n + 1) .eyebrow { --pill: #8fe3b8; }
+.s-section:nth-of-type(4n + 2) > .eyebrow, .mw-section:nth-of-type(4n + 2) .eyebrow { --pill: #9bd4ff; }
+.s-section:nth-of-type(4n + 3) > .eyebrow, .mw-section:nth-of-type(4n + 3) .eyebrow { --pill: #ffb9d9; }
+.s-section:nth-of-type(4n) > .eyebrow, .mw-section:nth-of-type(4n) .eyebrow { --pill: #ffd23f; }
+.s-check-copy .eyebrow, .s-about .eyebrow { --pill: var(--surface); }
 
 /* Soft colour glow behind the phone mockups (never wider than the column). */
 .s-demo, .ld-stage { position: relative; isolation: isolate; }
 .s-demo::before, .ld-stage::before {
   content: ""; position: absolute; z-index: -1; inset: -4% 0; pointer-events: none;
-  background: radial-gradient(45% 40% at 30% 35%, rgb(255 107 26 / .20), transparent 70%), radial-gradient(45% 45% at 75% 70%, rgb(31 58 51 / .16), transparent 70%);
+  background: radial-gradient(45% 40% at 30% 35%, rgb(255 107 26 / .20), transparent 70%), radial-gradient(45% 45% at 75% 70%, rgb(143 227 184 / .35), transparent 70%);
 }
 
-/* Trade cards: one tint each, deep icon chip. */
+/* Trade cards: one tint each, dark icon chip. */
 .s-trades li:nth-child(6n + 1) a { background: var(--clay); }
 .s-trades li:nth-child(6n + 2) a { background: var(--sage); }
 .s-trades li:nth-child(6n + 3) a { background: var(--mist); }
 .s-trades li:nth-child(6n + 4) a { background: var(--wheat); }
 .s-trades li:nth-child(6n + 5) a { background: var(--sand); }
-.s-trades li:nth-child(6n) a { background: var(--tint); }
+.s-trades li:nth-child(6n) a { background: #e6f4ea; }
 .s-trades a { border-color: transparent; }
-.s-trades svg { background: var(--deep); stroke: #fff; border-color: var(--deep); border-radius: 8px; }
+.s-trades svg { background: var(--ink); stroke: #fff; border-color: var(--ink); border-radius: 8px; }
 
-/* Selected chips in the live demo and builder use the deep green. */
-.ld-chip input:checked + span { background: var(--deep); border-color: var(--deep); }
+.ld-chip input:checked + span { background: var(--ink); border-color: var(--ink); }
 
-/* Deep green footer on every page: redefine the text tokens inside it. */
-.mw-site-footer {
-  --ink: #f4efe6; --muted: #bcc9c2; --line: #3d5a52; --soft-line: #3d5a52; --charcoal: #f4efe6;
-  background: var(--deep); color: var(--ink);
-  box-shadow: 0 0 0 100vmax var(--deep); clip-path: inset(0 -100vmax);
-  border-top: 0;
-}
-.mw-site-footer a { color: var(--ink); }
-.mw-site-footer a:hover { color: #fff; text-decoration-color: var(--signal); }
 /* The legacy .site-footer > div flex rule flattened the groups into one long column. */
 .mw-site-footer .mw-footer-groups { display: grid; }
 .mw-site-footer .mw-footer-groups a { text-decoration: none; }
