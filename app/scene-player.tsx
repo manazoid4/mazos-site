@@ -70,7 +70,8 @@ export function ScenePlayer({ tabs, children }: { tabs: Tab[]; children: ReactNo
           {child}
         </div>
       ))}
-      <noscript><style>{'.s-scene-panel[hidden]{display:block}.s-player-tabs{display:none}'}</style></noscript>
+      <div className="s-scene-action"><a className="button button-signal" href={`/leak-check?src=scene-${tabs[active].id}#leak-check-form`}>Get a free plan and price</a><p className="s-small">No call, no obligation.</p></div>
+      <noscript><style>{'.s-scene-panel[hidden]{display:block;visibility:visible}.s-scene-panel{grid-row:auto}.s-player-tabs{display:none}'}</style></noscript>
     </div>
   );
 }

@@ -185,3 +185,5 @@ export const THIRD_PARTY_NOTE = 'If you need a paid app, like a texting service,
 export const GUARANTEE = 'Starter Automation is working within 7 working days of me getting access, or you don’t pay the rest. I still finish it. Larger jobs get a dated plan in the quote. If I can’t deliver what we agreed, your deposit is refunded.';
 
 export const PRICE_RANGE = '£195–£1,950+';
+
+export const REFERRAL_THANK_YOU = '£40';

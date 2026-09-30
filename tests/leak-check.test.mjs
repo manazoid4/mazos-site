@@ -56,7 +56,7 @@ test('the free plan form puts the problem taps first, with typing and the websit
   assert.match(source, /required=\{!hydrated\}/);
   assert.ok(form.indexOf('mw-quick-picks') < form.indexOf('name="name"'), 'problem taps come before name and email');
   assert.doesNotMatch(form, /name="business"|name="nextStep"/);
-  assert.match(form, /Get my free plan and price/);
+  assert.match(form, /Get a free plan and price/);
 });
 
 test('the Leak Check reuses the resilient enquiry delivery path', async () => {
@@ -76,8 +76,8 @@ test('homepage and shared navigation send the free first step to the dedicated p
   // The homepage carries the check form itself; shared navigation points at the dedicated page.
   assert.match(home, /id="check"/);
   assert.match(home, /id="leak-check-form"/);
-  assert.match(home, /href="#check">Get a free plan and price/);
-  assert.match(home, /href="\/leak-check">Free plan</);
+  assert.match(home, /href="\/leak-check\?src=hero#leak-check-form">Get a free plan and price/);
+  assert.match(home, /href="\/leak-check\?src=header#leak-check-form">Get a free plan and price</);
   // One name for the free first step everywhere (29 Sep): "free plan", never "leak check" in visible copy.
   assert.doesNotMatch(home.replace(/<[^>]+>/g, ' '), /leak check/i);
   assert.doesNotMatch(home, /\?service=leak-check#contact/);

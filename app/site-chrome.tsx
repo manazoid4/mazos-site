@@ -13,7 +13,7 @@ export function SiteHeader() {
       <nav aria-label="Primary navigation">
         <NavLinks />
         <SiteMenu />
-        <a className="mw-nav-cta" href="/leak-check">Free plan</a>
+        <a className="mw-nav-cta" href="/leak-check?src=header#leak-check-form">Get a free plan and price</a>
       </nav>
     </header>
   );
@@ -37,7 +37,7 @@ export function SiteFooter() {
         ))}
         <nav aria-label="Get started">
           <p>Get started</p>
-          <a href="/leak-check">Free plan and price</a>
+          <a href="/leak-check?src=footer#leak-check-form">Get a free plan and price</a>
           <a href="/demos">Private demos</a>
           <a href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20feedback`}>Feedback</a>
           <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn ↗</a>

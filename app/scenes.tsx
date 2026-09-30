@@ -123,7 +123,7 @@ function MissedCallScene() {
       <HeroDemo />
       <div className="s-board-side">
         <p><strong>You’re with a customer and the phone rings.</strong></p>
-        <p>Instead of trying the next business on Google, the caller gets a text with your booking link within seconds.</p>
+        <p>The caller gets a text with your booking link.</p>
         <p className="s-board-result"><strong>They book with you, not the next business.</strong></p>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { StickyCheckCta } from '../sticky-cta';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { BOOKING_URL, CHECK_REPLY_TIME, SITE_URL } from '../site';
@@ -28,20 +29,21 @@ export default function PricesPage() {
         <h1 id="prices-title">Every price, in one place.</h1>
         <p className="s-lede">Fixed prices, agreed before any work starts. No VAT added. Not sure what you need? The {FREE_STEP.short} tells you, within {CHECK_REPLY_TIME}.</p>
         <div className="s-actions">
-          <a className="button button-signal s-button-lg" href="/leak-check">Get a free plan and price</a>
-          <CallLink className="button" href={BOOKING_URL} placement="prices">Or book a 15-minute call</CallLink>
+          <a className="button button-signal s-button-lg" href="/leak-check?src=prices#leak-check-form">Get a free plan and price</a>
+          <CallLink href={BOOKING_URL} placement="prices">Or book a 15-minute call</CallLink>
         </div>
       </section>
 
       <section className="s-section" id="pricing" aria-labelledby="prices-list-title">
         <PricingViewTracker targetId="pricing" />
         <h2 id="prices-list-title" className="s-visually-hidden">Packages, add-ons and terms</h2>
-        <PriceList checkHref="/leak-check" />
+        <PriceList checkHref="/leak-check?src=prices-package" />
         <div className="s-actions">
-          <a className="button button-signal" href="/leak-check">Get a free plan and price</a>
+          <a className="button button-signal" href="/leak-check?src=prices#leak-check-form">Get a free plan and price</a>
         </div>
       </section>
       <SiteFooter />
+      <StickyCheckCta href="/leak-check?src=prices-sticky#leak-check-form" />
     </main>
   );
 }

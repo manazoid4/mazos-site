@@ -21,7 +21,7 @@ export function StickyCheckCta({ href, hideWhenVisible }: { href: string; hideWh
 
   return (
     <div className={`s-sticky${hidden ? ' s-sticky-hidden' : ''}`} aria-hidden={hidden || undefined}>
-      <a className="button button-signal" href={href} tabIndex={hidden ? -1 : undefined}>Free plan and price</a>
+      <a className="button button-signal" href={href} tabIndex={hidden ? -1 : undefined}>Get a free plan and price</a>
       <span>Free · reply in {CHECK_REPLY_TIME}</span>
     </div>
   );

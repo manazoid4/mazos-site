@@ -1,7 +1,8 @@
 import { OG_IMAGE } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
-import { DemoRequestForm } from '../demo-request-form';
+import { LeakCheckForm } from '../leak-check/leak-check-form';
+import { StickyCheckCta } from '../sticky-cta';
 import { CallLink } from '../analytics';
 import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, SITE_URL } from '../site';
 import { FREE_STEP, OFFERS, PAYMENT_TERMS } from '../offers';
@@ -24,9 +25,9 @@ export default function ContactPage() {
         <h1 id="contact-page-title">Tell me what you need built.</h1>
         <p className="s-lede">One line is enough. I reply by email with a plan and a fixed quote. No VAT added.</p>
         <div className="s-actions">
-          <a className="button button-signal s-button-lg" href="/leak-check?src=contact#leak-check-form">Most owners start here: free plan and price</a>
+          <a className="button button-signal s-button-lg" href="/leak-check?src=contact#leak-check-form">Get a free plan and price</a>
         </div>
-        <p className="s-note">The {FREE_STEP.name} takes a few taps and is emailed within {CHECK_REPLY_TIME}. Use the form below for a bigger build, a private demo or anything else.</p>
+        <p className="s-note">The {FREE_STEP.name} takes a few taps and is emailed within {CHECK_REPLY_TIME}. Bigger job? Add a line in the optional details.</p>
       </section>
 
       <section className="s-section s-check" id="contact" aria-labelledby="contact-title">
@@ -37,11 +38,12 @@ export default function ContactPage() {
           <ul className="s-ticks">
             {BIGGER_JOBS.map((job) => <li key={job.name}><strong>{job.name}, {job.price}.</strong> {job.body}</li>)}
           </ul>
-          <p className="s-small">Add-ons from £39, priced up front. {PAYMENT_TERMS} You own everything I build.</p>
+          <p className="s-small">Optional extras are priced up front. {PAYMENT_TERMS} You own everything I build.</p>
         </div>
-        <DemoRequestForm />
+        <LeakCheckForm />
       </section>
       <SiteFooter />
+      <StickyCheckCta href="/leak-check?src=contact-sticky#leak-check-form" hideWhenVisible="leak-check-form" />
     </main>
   );
 }
