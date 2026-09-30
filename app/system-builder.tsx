@@ -5,7 +5,7 @@ import { NICHE_GUIDES } from './for/niches';
 import { quotePlan } from './offers';
 import { HEADACHE_PICKS, getSystem } from './systems';
 
-const TRADES = [...NICHE_GUIDES.map((guide) => ({ id: guide.id, label: guide.shortName })), { id: 'other', label: 'Other' }];
+const TRADES = [...NICHE_GUIDES.map((guide) => ({ id: guide.id, label: guide.shortName })), { id: 'creator', label: 'Trainer, maker or creator' }, { id: 'other', label: 'Something else, all welcome' }];
 
 /** Where "Send me this plan" lands: the free plan form, pre-filled and tagged src=builder. */
 export function builderHref(trade: string, headaches: string[]): string {
@@ -35,7 +35,7 @@ export function SystemBuilder({ presetTrade = '' }: { presetTrade?: string }) {
     <div className="s-builder" id="builder" role="group" aria-labelledby="builder-title">
       <h3 id="builder-title">Build my system</h3>
       <fieldset className="s-builder-step">
-        <legend><span>1</span> Your trade</legend>
+        <legend><span>1</span> What kind of business?</legend>
         <div className="s-chips">
           {TRADES.map((item) => (
             <label key={item.id} className="s-chip">

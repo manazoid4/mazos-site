@@ -50,7 +50,7 @@ export default function DemosPage() {
         <p className="eyebrow">After it goes live</p>
         <h2 id="changes-title">{CHANGES_WINDOW.name}, no extra charge.</h2>
         <ChangesWindow />
-        <p className="s-small">{GUARANTEE}</p>
+        
       </section>
 
       <section className="s-section" id="questions" aria-labelledby="questions-title">

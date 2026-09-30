@@ -102,7 +102,7 @@ test('homepage keeps the fixed terms with its package strip', async () => {
   const html = await readPage('/');
   const strip = html.match(/<ul class="s-trust"[\s\S]*?<\/ul>/)?.[0];
   assert.ok(strip, 'terms strip must sit under the hero');
-  for (const item of [/One fixed price, agreed first/, /Half now, half when it works/, /No VAT added/, /No contracts/]) {
+  for (const item of [/One fixed price/, /Half now, half when it works/, /Free demo first/]) {
     assert.match(strip, item);
   }
   assert.ok(html.indexOf('class="s-trust"') < html.indexOf('id="trades"'), 'terms come before the rest of the page');
@@ -170,9 +170,6 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.doesNotMatch(html, /\bAI\b/, 'AI is used behind the scenes, never advertised (Maz, 27 Sep)');
   assert.match(html, /Free Plan &amp; Fixed Quote/);
   assert.match(html, /Half now, half when it works/);
-  assert.match(html, /No VAT added/);
-  assert.match(html, /you own everything i build/i);
-  assert.match(html, /working within 7 working days of me getting access/i);
   assert.match(html, /£40 when they become a paying client/);
   for (const retired of [/£150/, /£395/, /£249/, /£595/, /Quick Win/, /£39\/month/, /founding/i, /Contact Setup/, /Enquiry Check/, /Customer Journey Review/, /From £495/, /From £950/, /From £1,500/, /£295/, /£1,250/, /£2,950/, /£49\/month/]) {
     assert.doesNotMatch(html, retired, `retired offer still on homepage: ${retired}`);
@@ -191,7 +188,6 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(prices, /Single website page[\s\S]{0,300}£145/);
   assert.match(prices, /Team training[\s\S]{0,300}£39/);
   assert.match(prices, /Keep It Running[\s\S]{0,30}£19\/month/);
-  assert.match(prices, /working within 7 working days of me getting access/i);
   assert.match(prices, /\/leak-check\?package=Starter%20Automation#leak-check-form/);
   assert.doesNotMatch(prices, /\bAI\b/);
   assert.match(prices, /\/leak-check\?package=Team%20training#leak-check-form/, 'every add-on can pre-fill the free plan form');
@@ -493,7 +489,6 @@ test('the guarantee, no-VAT and referral lines appear where Maz\'s decisions req
   assert.match(home, /£40 when they become a paying client/);
   assert.match(faq, /No VAT added/);
   assert.match(faq, /£40 by bank transfer/);
-  assert.match(faq, /working within 7 working days of me getting access/);
 });
 
 // 30 Sep: the free demo is real now, but only after a call (date agreed on the call).

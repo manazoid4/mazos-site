@@ -66,7 +66,7 @@ export default function Page() {
    <div className="s-check-copy"><p className="eyebrow">Prices and your free plan</p><h2 id="check-title">Tell me the job. I’ll send a plan and a price.</h2>
     <p>{STARTER.name}: {STARTER.price} for one job. Bigger systems are scoped first. <a href="/prices">Every price, compared →</a></p>
     <p>{CARE_PLAN.name}: {CARE_PLAN.price} if you want help afterwards.</p>
-    <p className="s-small">{GUARANTEE} You own everything I build.</p>
+    
     <p>{FREE_STEP.name}: {FREE_STEP.price}. If it isn’t worth automating, I say so.</p>
     <CallLink href={BOOKING_URL} className="text-link" placement="free-plan">Rather see it first? Book a call for a free demo</CallLink>
     <p className="s-small">Introduce a business: {REFERRAL_REWARD} when they become a paying client. <a href="/faq#do-you-pay-for-referrals">How →</a></p>

@@ -229,13 +229,10 @@ export const DEMO_STEPS: { title: string; body: string; note: string }[] = [
 ];
 
 export const PROMISES: { title: string; body: string }[] = [
-  { title: 'Free demo before you pay', body: 'After a short call, you get a working demo by the date we agree. No charge, no obligation.' },
-  { title: 'One fixed price, agreed first', body: 'You know the full cost before any work starts. Every item is invoiced clearly. No hourly rates, no surprises.' },
-  { title: 'Half now, half when it works', body: 'You only pay the rest once you’ve seen it working, so the risk isn’t all on you.' },
-  { title: '2 months of unlimited changes', body: 'After it goes live, ask for changes to what I built as often as you like, for two months.' },
-  { title: 'No contracts', body: 'Every package is a one-off. Keep It Running is monthly and you can cancel any time.' },
-  { title: 'No VAT added', body: 'The price you see is the price you pay. And you own everything I build.' },
-];
+  { title: 'Free demo first', body: 'After a short call, you get a working demo. No charge.' },
+  { title: 'One fixed price', body: 'You know the full cost before any work starts.' },
+  { title: 'Half now, half when it works', body: 'You pay the rest once you’ve seen it working.' },
+]; 
 
 /** What's not included, said plainly. */
 export const NOT_INCLUDED = [
@@ -263,7 +260,7 @@ export const PAYMENT_TERMS = 'A free plan and fixed price before any work. Half 
 export const THIRD_PARTY_NOTE = 'If you need a paid app, like a texting service, you pay that company directly and I tell you the cost up front. You own everything.';
 
 /** Applies to Starter Automation; larger jobs get a dated plan in the quote. */
-export const GUARANTEE = 'Starter Automation is working within 7 working days of me getting access, or you don’t pay the rest. I still finish it. Larger jobs get a dated plan in the quote. If I can’t deliver what we agreed, your deposit is refunded.';
+export const GUARANTEE = 'Working within 7 working days, or you don’t pay the rest.';
 
 export const PRICE_RANGE = '£195–£1,950+';
 

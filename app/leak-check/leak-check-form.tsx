@@ -29,6 +29,8 @@ export const QUICK_PICKS = [
   'Chasing quotes',
   'Getting more reviews',
   'Copying details between apps',
+  'Orders only by DM',
+  'No website to send people to',
 ] as const;
 
 /** Packages and add-ons a price card may name. Anything else in `?package=` is ignored. */
@@ -73,7 +75,7 @@ export function LeakCheckForm() {
     choose(params.get('package'));
     const ids = [...(params.get('systems') || '').split(','), ...params.getAll('headache').map((id) => HEADACHE_PICKS.find((pick) => pick.id === id)?.system || '')];
     const names = [...new Set(ids)].map((id) => SYSTEMS.find((system) => system.id === id)?.name).filter(Boolean) as string[];
-    const trade = [...NICHE_GUIDES.map((guide) => guide.id), 'other'].includes(params.get('trade') || '') ? params.get('trade')! : '';
+    const trade = [...NICHE_GUIDES.map((guide) => guide.id), 'creator', 'other'].includes(params.get('trade') || '') ? params.get('trade')! : '';
     if (names.length || trade) {
       setPlan({ systems: names.join(', '), trade });
       const box = formRef.current?.querySelector<HTMLTextAreaElement>('[name="problem"]');
@@ -263,7 +265,7 @@ export function LeakCheckForm() {
             name="problem"
             rows={3}
             required={!hydrated}
-            placeholder="For example: chasing quotes, typing enquiries into a spreadsheet, reminding customers"
+            placeholder="For example: orders come by DM, customers forget appointments, chasing quotes"
             aria-invalid={invalidField === 'problem' || undefined}
             aria-describedby={invalidField === 'problem' ? 'leak-check-error' : undefined}
             disabled={submitState === 'sending'}
@@ -271,12 +273,12 @@ export function LeakCheckForm() {
         </label>
 
         <label>
-          <span>Your website <small>(optional)</small></span>
+          <span>Website or Instagram <small>(if you have one)</small></span>
           <input
             name="website"
             inputMode="url"
             autoComplete="url"
-            placeholder="yourbusiness.co.uk"
+            placeholder="yourbusiness.co.uk or @yourname"
             disabled={submitState === 'sending'}
           />
         </label>

@@ -5,6 +5,9 @@ import { OG_IMAGE } from '../seo';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { NICHE_GUIDES } from './niches';
 import { BRAND_KIT } from '../offers';
+import { KitIcon } from '../brand-kit/kit-icon';
+
+const ICONS: Record<string, string> = { 'salons-and-beauty': 'scissors', 'dog-groomers': 'paw', garages: 'wrench', 'cafes-and-food': 'cup', 'clinics-and-therapists': 'heart', architects: 'ruler' };
 
 export const metadata: Metadata = {
   title: 'Who it’s for: guides by trade',
@@ -25,6 +28,7 @@ export default function ForHubPage() {
       </section>
 
       <a className="for-creators" href="/brand-kit">
+        <span className="for-creators-icons" aria-hidden="true"><KitIcon name="dumbbell" /><KitIcon name="camera" /><KitIcon name="brush" /></span>
         <span className="for-creators-tag">Trainers, coaches, makers, stylists, artists</span>
         <strong>I sell through social media</strong>
         <span>{`Brand Kit · ${BRAND_KIT.price}: your look, your own website, a profile that sells.`}</span>
@@ -36,6 +40,7 @@ export default function ForHubPage() {
         {NICHE_GUIDES.map((guide) => (
           <li key={guide.id}>
             <a href={`/for/${guide.id}`}>
+              <span className="mw-hub-icon"><KitIcon name={ICONS[guide.id] ?? 'spark'} /></span>
               <span className="mw-hub-name">{guide.shortName}</span>
               <strong>{guide.title}</strong>
             </a>
@@ -43,16 +48,8 @@ export default function ForHubPage() {
         ))}
       </ul>
 
-      <section className="mw-resource-cta" aria-labelledby="for-cta-title">
-        <div>
-          <p className="eyebrow">Not listed?</p>
-          <h2 id="for-cta-title">It works for any business customers book, call or enquire with.</h2>
-          <p>Tell me the job that eats your week. I’ll send a plan and a fixed price.</p>
-        </div>
-        <div className="mw-actions">
-          <a className="button button-signal" href="/leak-check?src=for-hub">Get a free plan and price</a>
-        </div>
-      </section>
+      <a className="for-else" href="/leak-check?src=for-hub&trade=other#leak-check-form"><span className="mw-hub-icon"><KitIcon name="spark" /></span><span><strong>Something else?</strong> Every kind of business is welcome. Tell me what you do.</span></a>
+
       <SiteFooter />
     </main>
   );
