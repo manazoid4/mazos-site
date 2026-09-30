@@ -7,11 +7,13 @@ const TEXT_BACK = EXTRAS.find((extra) => extra.name === 'Missed-call text-back')
  * goes out on its own, and the booking that follows. Pure CSS, so it costs no
  * JavaScript. Every row keeps its space from the first paint (only opacity and
  * transform animate), so nothing shifts. Reduced motion shows the finished
- * thread with no movement. Labelled as an example: not a real customer.
+ * thread with no movement. The loop pauses while off-screen (see
+ * scroll-reveal.tsx); a typing bubble and a Delivered tick show the send.
+ * Labelled as an example: not a real customer.
  */
 export function HeroDemo() {
   return (
-    <figure className="s-demo" aria-labelledby="demo-caption">
+    <figure className="s-demo" aria-labelledby="demo-caption" data-pause-offscreen>
       <div className="s-demo-phone" role="img" aria-label="Example phone screen: a missed call, then an automatic text with a booking link, then a new booking">
         <p className="s-demo-bar"><span>9:41</span><span>Messages</span></p>
         <ol className="s-demo-thread" aria-hidden="true">
@@ -21,7 +23,9 @@ export function HeroDemo() {
           </li>
           <li className="s-demo-row s-demo-text">
             <span className="s-demo-label">Sent automatically</span>
+            <span className="s-demo-dots"><i /><i /><i /></span>
             <span className="s-demo-bubble">Sorry we missed you! We’re with a customer. Book here and pick a time that suits: <u>yourbusiness.co.uk/book</u></span>
+            <small className="s-demo-delivered">Delivered ✓</small>
           </li>
           <li className="s-demo-row s-demo-booked">
             <span className="s-demo-icon s-demo-tick">✓</span>

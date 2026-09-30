@@ -185,11 +185,35 @@
 .s-demo figcaption { text-align: center; }
 
 /* Rows always hold their space; only opacity and transform move, so there is no layout shift. */
+.s-demo-text { position: relative; }
+.s-demo-dots { position: absolute; right: 0; top: 22px; display: none; gap: 4px; padding: 10px 12px; border-radius: 14px 14px 2px 14px; background: var(--ink); }
+.s-demo-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--surface); }
+.s-demo-delivered { font-family: var(--mono); font-size: .75rem !important; font-weight: 800; color: var(--charcoal); }
 @media (prefers-reduced-motion: no-preference) {
-  .s-demo-row { animation: s-demo-in 9s ease-out infinite both; }
-  .s-demo-missed { animation-name: s-demo-in-1; }
-  .s-demo-text { animation-name: s-demo-in-2; }
-  .s-demo-booked { animation-name: s-demo-in-3; }
+  /* Full shorthand on each rule: the CSS minifier turns a nameless shorthand into `animation: none`. */
+  .s-demo-missed { animation: s-demo-in-1 9s ease-out infinite both; }
+  .s-demo-label, .s-demo-bubble { animation: s-demo-in-2 9s ease-out infinite both; }
+  .s-demo-delivered { animation: s-demo-in-2b 9s ease-out infinite both; }
+  .s-demo-booked { animation: s-demo-in-3 9s ease-out infinite both; }
+  .s-demo-dots { display: flex; animation: s-demo-typing 9s ease-out infinite both; }
+  .s-demo-dots i { animation: s-demo-dot 900ms ease-in-out infinite; }
+  .s-demo-dots i:nth-child(2) { animation-delay: 150ms; }
+  .s-demo-dots i:nth-child(3) { animation-delay: 300ms; }
+  [data-offscreen] .s-demo-missed, [data-offscreen] .s-demo-label, [data-offscreen] .s-demo-bubble,
+  [data-offscreen] .s-demo-delivered, [data-offscreen] .s-demo-booked, [data-offscreen] .s-demo-dots,
+  [data-offscreen] .s-demo-dots i { animation-play-state: paused; }
+}
+@keyframes s-demo-typing { 0%, 11% { opacity: 0; } 13%, 21% { opacity: 1; } 24%, 100% { opacity: 0; } }
+@keyframes s-demo-dot { 0%, 100% { transform: translateY(0); opacity: .5; } 50% { transform: translateY(-3px); opacity: 1; } }
+/* Visibility, not opacity, so contrast checks never catch the label half-faded. */
+@keyframes s-demo-in-2b { 0%, 36% { visibility: hidden; transform: translateY(4px); } 38%, 90% { visibility: visible; transform: none; } 100% { visibility: hidden; } }
+
+/* Scroll reveal (scroll-reveal.tsx): hidden only once JS has mounted, shown once, opacity/transform only. */
+@media (prefers-reduced-motion: no-preference) {
+  .js-reveal [data-reveal] > * { transition: opacity 420ms ease-out, transform 420ms ease-out; }
+  .js-reveal [data-reveal]:not([data-shown]) > * { opacity: 0; transform: translateY(14px); }
+  .js-reveal [data-reveal] .s-trades > li, .js-reveal [data-reveal] .s-running > li { transition: opacity 420ms ease-out, transform 420ms ease-out; transition-delay: calc(var(--i, 0) * 60ms); }
+  .js-reveal [data-reveal]:not([data-shown]) .s-trades > li, .js-reveal [data-reveal]:not([data-shown]) .s-running > li { opacity: 0; transform: translateY(14px); }
 }
 @keyframes s-demo-in-1 { 0%, 2% { opacity: 0; transform: translateY(8px); } 8%, 90% { opacity: 1; transform: none; } 100% { opacity: 0; } }
 @keyframes s-demo-in-2 { 0%, 22% { opacity: 0; transform: translateY(8px); } 30%, 90% { opacity: 1; transform: none; } 100% { opacity: 0; } }

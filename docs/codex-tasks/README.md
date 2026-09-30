@@ -19,5 +19,5 @@ Rules for every brief (from `AGENTS.md`, non-negotiable):
 | 02 | [Trade illustrations and mock UI images](02-illustrations-mock-ui.md) | Medium |
 | 03 | [Structured data and social cards](03-schema-meta.md) | Small |
 | 04 | [Alt text and accessibility pass](04-a11y-alt-text.md) | Small |
-| 05 | [Scroll reveal component](05-scroll-reveal.md) | Small |
+| 05 | [Scroll reveal component](05-scroll-reveal.md) | Small · **Done by Claude (PR #86), skip in Codex** |
 | 06 | [/whats-new rewritten for buyers (optional)](06-whats-new-buyers.md) | Small |
