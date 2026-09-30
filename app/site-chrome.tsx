@@ -37,7 +37,7 @@ export function SiteFooter() {
         ))}
         <nav aria-label="Get started">
           <p>Get started</p>
-          <a href="/demos">Try a live demo</a>
+          <a href="/demos">Free demo</a>
           <a href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20feedback`}>Feedback</a>
           <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn ↗</a>
         </nav>

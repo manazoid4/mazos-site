@@ -79,7 +79,7 @@ export function LeakCheckForm() {
       const box = formRef.current?.querySelector<HTMLTextAreaElement>('[name="problem"]');
       if (box && names.length && !box.value) box.value = `From Build my system: ${names.join(', ')}.`;
     }
-    // The live demo passes on what the visitor already typed, so they don't type it twice.
+    // Links from elsewhere on the site can pass on what the visitor already typed.
     for (const [param, field] of [['website', 'website'], ['name', 'name']] as const) {
       const input = formRef.current?.querySelector<HTMLInputElement>(`[name="${field}"]`);
       const value = params.get(param)?.replace(/[<>]/g, '').slice(0, 80);

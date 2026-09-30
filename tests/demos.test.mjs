@@ -14,25 +14,28 @@ async function readPage(route) {
   throw new Error(`Missing static page for ${route}`);
 }
 
-test('free live demo is reachable and funnels into the free plan', async () => {
-  const [home, demos, sitemap] = await Promise.all([
-    readPage('/'),
-    readPage('/demos'),
-    readFile(path.join(out, 'sitemap.xml'), 'utf8'),
-  ]);
-
-  assert.match(home, /href="\/demos[^"]*"[^>]*>[^<]*(live demo|watch your own)/i);
-  assert.match(demos, /Watch your own system run, (<em>)?in your name/i);
-  assert.match(demos, /Business name/);
-  assert.match(demos, /Play my demo/);
-  assert.match(demos, /Nothing is saved or sent/i);
-  assert.match(demos, /Free plan and fixed price/i);
-  assert.match(demos, /Ask for a private demo/i);
+// 30 Sep (Maz): the free demo comes after a call, arrives by a date agreed on
+// the call, and is followed by the full plan and 2 months of unlimited changes.
+test('free demo page explains the call-first route and books a call', async () => {
+  const [home, demos, sitemap] = await Promise.all([readPage('/'), readPage('/demos'), readFile(path.join(out, 'sitemap.xml'), 'utf8')]);
+  assert.match(home, /href="\/demos"[^>]*>[^<]*free demo/i);
+  assert.match(demos, /Book a 15-minute call/);
+  assert.match(demos, /date (we agree|you get it|agreed on the call)/i);
+  assert.match(demos, /Nothing to pay yet/);
+  assert.match(demos, /href="https:\/\/cal\.com\/mazworks\/quick-chat\?utm_source=demos"/);
+  assert.match(demos, /2 months of unlimited changes/);
   assert.match(sitemap, /\/demos/);
+});
+
+test('unlimited changes are fenced so they never become free new work', async () => {
+  const demos = await readPage('/demos');
+  assert.match(demos, /Priced first, so it stays fair/);
+  assert.match(demos, /A new system, new job or new feature: I price it first/);
+  assert.match(demos, /start on the day it goes live/);
 });
 
 test('demos page builds credibility without fabricated client counts or invented proof', async () => {
   const demos = await readPage('/demos');
   assert.doesNotMatch(demos, /\b\d+\+? clients\b|trusted by|hundreds of|dozens of|five-star clients|client logos/i);
-  assert.match(demos, /not a real customer/i);
+  assert.doesNotMatch(demos, /20 seconds|type your business name/i, 'the old self-serve demo is gone');
 });
