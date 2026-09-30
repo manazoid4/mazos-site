@@ -57,19 +57,20 @@ export default function Page() {
    </a>)}</div>
    <SystemBuilder />
    <ul className="s-trust">{PROMISES.map(term => <li key={term.title}><strong>{term.title}</strong><span>{term.body}</span></li>)}</ul>
-   <p className="s-small" id="trades">Your trade: {NICHE_GUIDES.map((guide, i) => <span key={guide.id}>{i ? ' · ' : ''}<a href={`/for/${guide.id}`}>{guide.shortName}</a></span>)}. Any trade welcome.</p>
+   <p className="s-small" id="trades">Your trade: {NICHE_GUIDES.map((guide, i) => <span key={guide.id}>{i ? ' · ' : ''}<a href={`/for/${guide.id}`}>{guide.shortName}</a></span>)}. <a href="/brand-kit">Trainer, maker or creator? Brand Kit</a>. Any trade welcome.</p>
   </section>
   <section className="s-section" id="how" data-reveal aria-labelledby="how-title">
    <p className="eyebrow">See it working</p><h2 id="how-title">What changes in your day.</h2><Scenes />
   </section>
   <section className="s-section s-check" id="check" aria-labelledby="check-title">
-   <div className="s-check-copy"><p className="eyebrow">Prices and your free plan</p><h2 id="check-title">Tell me the job. I’ll send a plan and a price.</h2>
-    <p>{STARTER.name}: {STARTER.price} for one job. Bigger systems are scoped first. <a href="/prices">Every price, compared →</a></p>
-    <p>{CARE_PLAN.name}: {CARE_PLAN.price} if you want help afterwards.</p>
-    <p className="s-small">{GUARANTEE} You own everything I build.</p>
-    <p>{FREE_STEP.name}: {FREE_STEP.price}. If it isn’t worth automating, I say so.</p>
-    <CallLink href={BOOKING_URL} className="text-link" placement="free-plan">Rather see it first? Book a call for a free demo</CallLink>
-    <p className="s-small">Introduce a business: {REFERRAL_REWARD} when they become a paying client. <a href="/faq#do-you-pay-for-referrals">How →</a></p>
+   <div className="s-check-copy"><p className="eyebrow">Your free plan</p><h2 id="check-title">Tell me the job. I’ll send a plan and a price.</h2>
+    <ul className="s-check-list">
+     <li><strong>{FREE_STEP.name}: {FREE_STEP.price}.</strong> Not worth automating? I’ll say so.</li>
+     <li><strong>Starter Automation from {STARTER.price}</strong> for one job. <a href="/prices">See every price →</a></li>
+     <li>{CARE_PLAN.name}: {CARE_PLAN.price} if you want help afterwards.</li>
+    </ul>
+    <CallLink href={BOOKING_URL} className="button" placement="free-plan">Rather see it first? Book a call for a free demo</CallLink>
+    <p className="s-small">Know a business that needs this? {REFERRAL_REWARD} when they become a paying client. <a href="/faq#do-you-pay-for-referrals">How →</a></p>
    </div><LeakCheckForm />
   </section>
       <section className="s-section s-about" id="about" aria-labelledby="about-title">
@@ -79,7 +80,7 @@ export default function Page() {
             <p className="eyebrow">Who you’re dealing with</p>
             <h2 id="about-title">I’m Manazir. I plan it and build it myself.</h2>
             <p>I studied Computer Science at Swansea University, and now I run Maz Works: software, automation and websites for UK small businesses. No account managers, no hand-offs. Email me directly at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
-            <p><a className="s-linkedin" href={LINKEDIN_URL} rel="me noopener" target="_blank">Follow Maz Works on LinkedIn →</a> See what I’m building.</p>
+            <p><a className="button button-dark s-linkedin" href={LINKEDIN_URL} rel="me noopener" target="_blank">Connect on LinkedIn</a></p>
           </div>
         </div>
         <WalkthroughVideo />

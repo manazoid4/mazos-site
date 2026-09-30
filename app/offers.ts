@@ -174,13 +174,6 @@ export const BRAND_KIT_EXTRAS: { icon: string; name: string; price: string; what
   { icon: 'repeat', name: 'Rebooking reminders', price: getExtra('Rebooking reminders').price, what: 'Past clients get a nudge when they’re due back, so they buy again.' },
 ];
 
-/** Before and after, said the way owners say it. */
-export const BRAND_KIT_BEFORE_AFTER: { before: string; after: string }[] = [
-  { before: '“DM to order”, then answering the same question 20 times', after: 'A buy button that works while you train, bake or sleep' },
-  { before: 'Your link sends people to someone else’s shop', after: 'Your own website, with your name on it' },
-  { before: 'Every post looks a bit different', after: 'One look people recognise in a second' },
-  { before: 'Followers like your posts, then disappear', after: 'Followers join your list and come back to buy' },
-];
 
 /**
  * Side-by-side comparison, ManyPets style: same rows for every package, plain
@@ -232,17 +225,14 @@ export const DEMO_STEPS: { title: string; body: string; note: string }[] = [
   { title: 'We agree the demo', body: 'On the call we agree what the demo shows and the date you get it. If a demo won’t help, I say so and send a plan instead.', note: 'Date agreed on the call' },
   { title: 'Your free demo arrives', body: 'A working demo built around your business, sent by the date we agreed. Try it on your own phone.', note: 'Free, no obligation' },
   { title: 'Happy with it? Your full plan', body: 'A written plan and one fixed price. Every item listed and invoiced clearly. No extra charges later.', note: 'Nothing to pay yet' },
-  { title: 'I build it, you see it working', body: 'Half to start, the rest when it works. Then two months of unlimited changes.', note: 'Fixed price' },
+  { title: 'I build it, you see it working', body: 'You see it working, then you get two months of unlimited changes.', note: 'Fixed price' },
 ];
 
 export const PROMISES: { title: string; body: string }[] = [
-  { title: 'Free demo before you pay', body: 'After a short call, you get a working demo by the date we agree. No charge, no obligation.' },
-  { title: 'One fixed price, agreed first', body: 'You know the full cost before any work starts. Every item is invoiced clearly. No hourly rates, no surprises.' },
-  { title: 'Half now, half when it works', body: 'You only pay the rest once you’ve seen it working, so the risk isn’t all on you.' },
-  { title: '2 months of unlimited changes', body: 'After it goes live, ask for changes to what I built as often as you like, for two months.' },
-  { title: 'No contracts', body: 'Every package is a one-off. Keep It Running is monthly and you can cancel any time.' },
-  { title: 'No VAT added', body: 'The price you see is the price you pay. And you own everything I build.' },
-];
+  { title: 'Free demo first', body: 'After a short call, you get a working demo. No charge.' },
+  { title: 'One fixed price', body: 'You know the full cost before any work starts.' },
+  { title: 'No contracts', body: 'Every package is a one-off. Nothing is locked in.' },
+]; 
 
 /** What's not included, said plainly. */
 export const NOT_INCLUDED = [
@@ -265,12 +255,12 @@ export const DELIVERY: { title: string; body: string }[] = [
   { title: 'Help afterwards if you want it', body: `${CARE_PLAN.name} (${CARE_PLAN.price}) keeps it checked and makes small changes. Staff training is an add-on.` },
 ];
 
-export const PAYMENT_TERMS = 'A free plan and fixed price before any work. Half to start, the rest when it is working. No VAT added.';
+export const PAYMENT_TERMS = 'A free plan and fixed price before any work. No VAT added.';
 
 export const THIRD_PARTY_NOTE = 'If you need a paid app, like a texting service, you pay that company directly and I tell you the cost up front. You own everything.';
 
 /** Applies to Starter Automation; larger jobs get a dated plan in the quote. */
-export const GUARANTEE = 'Starter Automation is working within 7 working days of me getting access, or you don’t pay the rest. I still finish it. Larger jobs get a dated plan in the quote. If I can’t deliver what we agreed, your deposit is refunded.';
+export const GUARANTEE = 'Working within 7 working days, or you don’t pay the rest.';
 
 export const PRICE_RANGE = '£195–£1,950+';
 

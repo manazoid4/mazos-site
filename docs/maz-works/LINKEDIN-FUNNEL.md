@@ -52,7 +52,7 @@ What I set up:
 • Reminders that cut no-shows, and review requests after each visit
 • Enquiries from every app in one list, with quotes followed up for you
 
-How it works. We have a 15-minute call. We agree what a demo should show and the date you get it. You get a free working demo by that date. If you like it, I send the full plan and one fixed price, with every item listed. Half to start, the rest when it is working.
+How it works. We have a 15-minute call. We agree what a demo should show and the date you get it. You get a free working demo by that date. If you like it, I send the full plan and one fixed price, with every item listed.  
 
 After it goes live you get 2 months of unlimited changes to what I built. Anything new is priced first, so it stays fair for both of us.
 

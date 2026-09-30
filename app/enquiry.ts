@@ -23,6 +23,7 @@ export const ENQUIRY_SERVICES = [
   { id: 'google-profile', label: `Google Business Profile setup (${getExtra('Google Business Profile setup').price})` },
   { id: 'bundle', label: 'Starter plus optional extras' },
   { id: 'objects', label: 'Tap-to-review stands and signs' },
+  { id: 'brand-kit', label: 'Brand Kit: look, website and profile (£395)' },
   { id: 'unsure', label: 'Not sure yet, help me work it out' },
 ] as const;
 
