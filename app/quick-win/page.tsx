@@ -82,7 +82,7 @@ export default function QuickWinPage() {
 
       <section className="mw-resource-cta" aria-labelledby="quick-win-cta-title">
         <div>
-          <p className="eyebrow">Half to start · the rest when it’s live</p>
+          <p className="eyebrow">One fixed price</p>
           <h2 id="quick-win-cta-title">Tell me what’s broken.</h2>
           <p>Send your website link. I’ll confirm the plan and a fixed quote before you pay.</p>
         </div>

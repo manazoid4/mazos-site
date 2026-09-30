@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: 'Page not found', robots: { index: fa
 const ROUTES = [
   { href: '/', label: 'Home', body: 'What I do and how it works.' },
   { href: '/prices', label: 'Prices', body: 'Packages, add-ons and what’s included.' },
-  { href: '/for', label: 'Who it’s for', body: 'Guides for salons, garages, clinics, architects and more.' },
+  { href: '/for', label: 'Who it’s for', body: 'Trades, creators, coaches, makers and everyone else.' },
   { href: '/leak-check', label: 'Free plan and quote', body: 'Tell me the job; get a plan and a fixed price.' },
   { href: '/site-map', label: 'Site map', body: 'Every page in one list.' },
 ];

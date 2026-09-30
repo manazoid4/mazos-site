@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { DemoPath } from '../demo-path';
 import { fitDescription, OG_IMAGE } from '../seo';
-import { BRAND_KIT, BRAND_KIT_BEFORE_AFTER, BRAND_KIT_EXTRAS, PROMISES } from '../offers';
+import { BRAND_KIT, BRAND_KIT_EXTRAS } from '../offers';
 import { KitIcon } from './kit-icon';
 import './brand-kit.css';
 
@@ -31,10 +31,10 @@ export default function BrandKitPage() {
         <p className="s-lede">{BRAND_KIT.body}</p>
         <div className="bk-cta">
           <a className="button button-signal s-button-lg" href={ASK}>{`Get my Brand Kit · ${BRAND_KIT.price}`}</a>
-          <p className="s-small">Fixed price. Half to start, the rest when you love it.</p>
+          <p className="s-small">Fixed price, agreed before we start.</p>
         </div>
         <ul className="bk-who" aria-label="Made for">
-          {BRAND_KIT.forWho.map((who, i) => (
+          {BRAND_KIT.forWho.slice(0, 6).map((who, i) => (
             <li key={who.label} data-tone={i % 6}><KitIcon name={who.icon} /><span>{who.label}</span></li>
           ))}
         </ul>
@@ -54,26 +54,12 @@ export default function BrandKitPage() {
         </ul>
       </section>
 
-      <section className="s-section" aria-labelledby="bk-ba-title">
-        <p className="eyebrow">Before and after</p>
-        <h2 id="bk-ba-title">From “DM to order” to paid while you sleep.</h2>
-        <ul className="bk-ba">
-          {BRAND_KIT_BEFORE_AFTER.map((row) => (
-            <li key={row.before}>
-              <span className="bk-before"><small>Now</small>{row.before}</span>
-              <span className="bk-arrow" aria-hidden="true">→</span>
-              <span className="bk-after"><small>With the kit</small>{row.after}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
       <section className="s-section" aria-labelledby="bk-grow-title">
         <p className="eyebrow">When you’re ready to grow</p>
         <h2 id="bk-grow-title">Add what brings in more sales.</h2>
-        <p className="s-lede">Pick any, any time. Each one is set up once and then runs on its own.</p>
+        <p className="s-lede">Set up once, then it runs on its own.</p>
         <ul className="bk-grid bk-extras">
-          {BRAND_KIT_EXTRAS.map((extra, i) => (
+          {BRAND_KIT_EXTRAS.slice(0, 3).map((extra, i) => (
             <li key={extra.name} data-tone={(i + 2) % 6}>
               <span className="bk-badge"><KitIcon name={extra.icon} /></span>
               <strong>{extra.name} <span className="bk-price">{extra.price}</span></strong>
@@ -82,20 +68,16 @@ export default function BrandKitPage() {
             </li>
           ))}
         </ul>
-        <p className="s-small">Need a full shop, member area or app? That’s <a href="/prices">Custom Software &amp; Websites</a>.</p>
+        <p className="s-small">Booking, reviews and rebooking are on the <a href="/prices">prices page</a>. Need a full shop, member area or app? That’s <a href="/prices">Custom Software &amp; Websites</a>.</p>
       </section>
 
       <section className="s-section" aria-labelledby="bk-demo-title">
         <p className="eyebrow">See it before you pay</p>
         <h2 id="bk-demo-title">Start with a quick chat.</h2>
-        <DemoPath source="brand-kit" />
+        <DemoPath source="brand-kit" compact />
       </section>
 
-      <section className="s-section" aria-labelledby="bk-why-title">
-        <p className="eyebrow">What you can count on</p>
-        <h2 id="bk-why-title">No surprises.</h2>
-        <ul className="s-trust">{PROMISES.map((term) => <li key={term.title}><strong>{term.title}</strong><span>{term.body}</span></li>)}</ul>
-      </section>
+      <p className="bk-promise">Fixed price agreed first. No contracts, no VAT added, and you own everything.</p>
 
       <SiteFooter />
     </main>

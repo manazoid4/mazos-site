@@ -16,11 +16,11 @@ test('each niche guide exports with real examples, a self-check, prices and a ta
     assert.doesNotMatch(html, /£150 fixed/, `${id}: retired Quick Win price`);
     assert.doesNotMatch(html, /Quick Win/, `${id}: retired Quick Win name`);
     assert.doesNotMatch(html, /hacked/i, `${id}: must not say hacked`);
-    assert.match(html, /Not your trade\? The same approach works for any business customers book, call or enquire with\./, `${id}: broad-audience line`);
+    assert.match(html, /Not your trade\? Every kind of business is welcome\./, `${id}: broad-audience line`);
     assert.match(html, new RegExp(`/leak-check\\?src=for-${id}`), `${id}: tagged free check link`);
-    assert.match(html, /Starter Automation<!-- -->, <!-- -->£195/, `${id}: Starter shown`);
+    assert.match(html, /Starter Automation<!-- --> · <!-- -->£195/, `${id}: Starter shown`);
     // Offer v9: Starter is one job. Anything more on a guide is a separately priced add-on or a bigger package.
-    const starter = /<strong>Starter Automation<!-- -->, <!-- -->£195<!-- -->\.<\/strong> <!-- -->([^<]*)/.exec(html)?.[1] || '';
+    const starter = /<strong>Starter Automation<!-- --> · <!-- -->£195<\/strong><p class="mw-example-seen">([^<]*)/.exec(html)?.[1] || '';
     assert.match(starter, /^One job set up to run itself/, `${id}: Starter must read as one job`);
     assert.doesNotMatch(starter, /\b(plus|reminders? go out|follow-up|review requests)\b/i, `${id}: Starter line bundles a second job`);
     assert.doesNotMatch(html, /quoted in your free plan/, `${id}: fixed-price add-ons must show their price`);

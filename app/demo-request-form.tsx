@@ -143,7 +143,7 @@ export function DemoRequestForm() {
     }}>
       <input type="hidden" name="_subject" value="Maz Works — business enquiry" />
       <input type="hidden" name="_template" value="table" />
-      <p className="mw-form-kicker">Name, email and the problem are enough. Add the rest only if it helps.</p>
+      <p className="mw-form-kicker">Just your name, email and what you need.</p>
       <div className="mw-form-row">
         <label>
           <span>Name</span>
@@ -156,7 +156,7 @@ export function DemoRequestForm() {
       </div>
 
       <label>
-        <span>What’s broken, or what do you need?</span>
+        <span>What do you need help with?</span>
         <textarea
           name="problem"
           aria-invalid={invalidField === 'problem' || undefined}
@@ -164,7 +164,7 @@ export function DemoRequestForm() {
           rows={5}
           required
           disabled={submitState === 'sending'}
-          placeholder="For example: our Book now button opens an old page, or we need a new website."
+          placeholder="For example: I want my own website and a way for people to book or buy."
         />
       </label>
 

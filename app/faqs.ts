@@ -40,7 +40,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How does payment work?',
-    answer: 'A fixed quote first. Then half to start and the rest when it is live, all on one invoice. Software subscriptions or text-message costs, if any, are paid by you directly at cost. No VAT added.',
+    answer: 'A fixed quote first, with every item listed on one clear invoice. Software subscriptions or text-message costs, if any, are paid by you directly at cost. No VAT added.',
   },
   {
     question: 'Do I own what you build?',
