@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useId, useRef, useState } from 'react';
-import { NAV_GROUPS } from './nav';
+import { MENU_LINKS } from './nav';
 
 /**
- * Phone menu. A labelled "Menu" button (not a bare icon) opens every route,
- * grouped the same way as the footer. Closes on a link tap, Escape or a tap outside.
+ * Phone menu. A labelled "Menu" button (not a bare icon) opens a short list of
+ * the main pages; the footer holds the full map. Closes on a link tap, Escape or a tap outside.
  */
 export function SiteMenu() {
   const [open, setOpen] = useState(false);
@@ -30,14 +30,9 @@ export function SiteMenu() {
         {open ? 'Close' : 'Menu'}
       </button>
       <div className="mw-menu-panel" id={panelId} hidden={!open}>
-        {NAV_GROUPS.filter(group => group.title !== 'Other projects').map((group) => (
-          <div key={group.title}>
-            <p>{group.title}</p>
-            <ul>
-              {group.links.map((link) => <li key={link.href}><a href={link.href} onClick={() => setOpen(false)}>{link.label}</a></li>)}
-            </ul>
-          </div>
-        ))}
+        <ul>
+          {MENU_LINKS.map((link) => <li key={link.href}><a href={link.href} onClick={() => setOpen(false)}>{link.label}</a></li>)}
+        </ul>
       </div>
     </div>
   );
