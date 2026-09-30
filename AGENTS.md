@@ -44,3 +44,7 @@ Rules: branch + PR, never push to main. Never invent testimonials, clients or re
     3. a phone call asking for the owner by name, after a CTPS/TPS check.
   - **Follow-up:** one follow-up after 3 days by the next route, logged as a HubSpot task.
   - Never guess or scrape private email addresses or personal mobiles.
+- **Easy to read (standard, Maz 30 Sep):** break up every email, LinkedIn message, DM and note we send.
+  - Keep sentences short, one idea per line or short paragraph, with a blank line between them.
+  - Put the ask on its own line at the end.
+  - No walls of text: a LinkedIn note is 2 to 4 short lines, and an email is 4 to 6 short blocks.
