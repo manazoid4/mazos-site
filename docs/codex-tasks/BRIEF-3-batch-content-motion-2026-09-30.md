@@ -142,8 +142,8 @@ Goal: in 5 seconds a visitor knows what Maz Works does, what it costs to start, 
    This is transactional mail to someone who asked, so it is not outreach. `TODO(Maz)`: confirm this use of Resend.
 8. **Reply time as a token:** move "3 working days" into one constant. `TODO(Maz)`: decide whether it becomes "1 working day", a HubSpot task he owns. Change the constant only once he confirms.
 9. **Positioning clean-up:**
-   - remove Objects, Architecture models and Lab from the main menu and the "Other projects" group in the header menu;
-   - keep one small footer link, "Other things I've built", pointing to `/lab`;
+   - remove the "Other projects" group (Objects, Architecture models, Lab) from the header menu;
+   - keep them as small footer links. Objects/3D printing stays an optional differentiator per the standing decision; it just isn't the first thing a systems buyer sees;
    - keep the pages live, but `noindex` `maz-pocket-ai` and `maz-core` so an "AI" product never shows up in search next to the offer;
    - reframe the trade-guide "real examples" as lost customers or lost time, each with its system, keeping the evidence.
 10. **Bring across the invisible PR #88 fixes, but not its look:**
