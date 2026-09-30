@@ -59,6 +59,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
 /** Homepage "On this page" jump bar, in page order. */
 export const HOME_SECTIONS: NavLink[] = [
   { href: '#trades', label: 'Your trade' },
+  { href: '#how', label: 'See it working' },
   { href: '#example', label: 'Example plan' },
   { href: '#check', label: 'Free plan' },
   { href: '#pricing', label: 'Prices' },
