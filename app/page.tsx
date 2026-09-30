@@ -45,7 +45,7 @@ export default function Page() {
     <h1 id="intro-title">Systems that turn enquiries <em>into bookings</em> and take the admin off you.</h1>
     <p className="s-lede">Automation, connected tools and custom software. Start with one job from {STARTER.price}.</p>
     <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">Get a free plan and price</a><a className="text-link" href="/demos">Or see a free demo first <span aria-hidden="true">→</span></a></div>
-    <p className="s-note">I reply within {CHECK_REPLY_TIME}. No call needed, no obligation.</p>
+    <p className="s-note">I reply within {CHECK_REPLY_TIME}. No call needed.</p>
    </div><HeroDemo />
    <p className="s-small">Examples across packages: enquiries answered, bookings confirmed, quotes followed up. Each job is scoped and priced first.</p>
   </section>
@@ -66,11 +66,11 @@ export default function Page() {
   <section className="s-section s-check" id="check" aria-labelledby="check-title">
    <div className="s-check-copy"><p className="eyebrow">Your free plan</p><h2 id="check-title">Tell me the job. I’ll send a plan and a price.</h2>
     <ul className="s-check-list">
-     <li><strong>{FREE_STEP.name}: {FREE_STEP.price}.</strong> Not worth automating? I’ll say so.</li>
-     <li><strong>Starter Automation from {STARTER.price}</strong> for one job. <a href="/prices">See every price →</a></li>
-     <li>{CARE_PLAN.name}: {CARE_PLAN.price} if you want help afterwards.</li>
+     <li><strong>{FREE_STEP.name}: {FREE_STEP.price}.</strong> I tell you what to automate first — or if it is not worth it.</li>
+     <li><strong>One job from {STARTER.price}.</strong> <a href="/prices">See every price →</a></li>
+     <li><strong>{CARE_PLAN.name}: {CARE_PLAN.price}.</strong> Optional help after the included changes period.</li>
     </ul>
-    <CallLink href={BOOKING_URL} className="button" placement="free-plan">Rather see it first? Book a call for a free demo</CallLink>
+    <CallLink href={BOOKING_URL} className="button" placement="free-plan">Want to see it first? Book a free demo</CallLink>
     <p className="s-small">Know a business that needs this? {REFERRAL_REWARD} when they become a paying client. <a href="/faq#do-you-pay-for-referrals">How →</a></p>
    </div><LeakCheckForm />
   </section>
@@ -80,7 +80,7 @@ export default function Page() {
           <div>
             <p className="eyebrow">Who you’re dealing with</p>
             <h2 id="about-title">I’m Manazir. I plan it and build it myself.</h2>
-            <p>I studied Computer Science at Swansea University, and now I run Maz Works: software, automation and websites for UK small businesses. No account managers, no hand-offs. Email me directly at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+            <p>I studied Computer Science at Swansea University. Maz Works is me: I plan, build and test every job. Email me at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
             <p><a className="button button-dark s-linkedin" href={LINKEDIN_URL} rel="me noopener" target="_blank">Connect on LinkedIn</a></p>
           </div>
         </div>
