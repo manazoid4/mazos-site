@@ -18,7 +18,8 @@ const exportRoot = path.join(root, 'out');
 // 1400 -> 1600 on 27 Sep (Offer v8): each add-on now says in plain words what the customer gets (Maz's request).
 // 1600 -> 1900 on 27 Sep (Offer v9): ManyPets-style comparison table, promises and "what's not included" list.
 // 1900 -> 1600 on 28 Sep: comparison table and all twelve add-ons moved to /prices; the homepage sells one first step.
-const WORD_BUDGET = 1600;
+// 1600 -> 1850 on 30 Sep: Maz asked to keep the "What changes in your day" explainers (six short storyboards).
+const WORD_BUDGET = 1850;
 // Same count as the homepage: all text inside <main>, including header, footer and closed answers.
 const CASE_STUDY_WORD_BUDGET = 320;
 
@@ -114,7 +115,8 @@ test('homepage shows the six trades as cards and a labelled missed-call example 
   }
   assert.match(html, /class="s-demo"/);
   assert.match(html, /Missed-call text-back, £95\. Not a real customer\./);
-  assert.match(html, /Example messages\./);
+  assert.match(html, /What changes in your day\./);
+  assert.match(html, /Illustrations of how each system works, not real customers\./);
   // The example plan comes before the form, so owners see what they get first.
   assert.ok(html.indexOf('id="example"') < html.indexOf('id="check"'), 'example plan must come before the form');
 });
@@ -597,7 +599,7 @@ test('six wayfinding helps big sites use are in place', async () => {
 
 test('scroll reveal hides nothing without JavaScript and respects reduced motion (Codex brief 05)', async () => {
   const html = await readPage('/');
-  for (const id of ['trades', 'running', 'example', 'pricing', 'process']) {
+  for (const id of ['trades', 'how', 'example', 'pricing', 'process']) {
     assert.match(html, new RegExp(`id="${id}" data-reveal`), `#${id} should ease in on scroll`);
   }
   assert.doesNotMatch(html, /style="[^"]*opacity:\s*0/, 'no content may be hidden in the static HTML');

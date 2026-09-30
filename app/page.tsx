@@ -9,6 +9,7 @@ import { CallLink, PricingViewTracker } from './analytics';
 import { StickyCheckCta } from './sticky-cta';
 import { SampleReport } from './sample-report';
 import { HeroDemo } from './hero-demo';
+import { Scenes } from './scenes';
 import { ScrollReveal } from './scroll-reveal';
 import { NICHE_GUIDES } from './for/niches';
 import { CARE_PLAN, DELIVERY, EXTRAS, FREE_STEP, GUARANTEE, OFFERS, PROMISES } from './offers';
@@ -40,12 +41,6 @@ const TRADE_CARDS: Record<string, { line: string; icon: string }> = {
   architects: { line: 'Project enquiries captured with the key details, then followed up.', icon: 'M5 27V12l11-7 11 7v15ZM12 27v-8h8v8M5 27h22' },
 };
 
-/** What owners actually see once it's running. Mock messages, labelled as examples. */
-const RUNNING = [
-  { extra: extra('Missed-call text-back'), when: 'Straight after a missed call', message: 'Sorry we missed you! Book here: yourbusiness.co.uk/book' },
-  { extra: extra('Appointment reminders'), when: 'The day before', message: 'Hi Sam, see you tomorrow at 10:30. Reply C to change your time.' },
-  { extra: extra('Review requests'), when: 'After the visit', message: 'Thanks for coming in today! Would you leave us a quick Google review?' },
-];
 
 const STEPS = [
   ['01', 'Tell me the job', `Tap what’s costing you. I reply within ${CHECK_REPLY_TIME}.`],
@@ -119,19 +114,10 @@ export default function Page() {
         <p className="s-small">Not listed? It works for any trade. <a href="#check">Tell me the job</a>.</p>
       </section>
 
-      <section className="s-section" id="running" data-reveal aria-labelledby="running-title">
-        <p className="eyebrow">What your customers see</p>
-        <h2 id="running-title">Messages that go out without you.</h2>
-        <ul className="s-running">
-          {RUNNING.map((item, index) => (
-            <li key={item.extra.name} style={{ '--i': index } as CSSProperties}>
-              <span className="s-running-when">{item.when}</span>
-              <p className="s-running-bubble">{item.message}</p>
-              <span className="s-running-name"><strong>{item.extra.name}</strong> {item.extra.price}</span>
-            </li>
-          ))}
-        </ul>
-        <p className="s-small">Example messages. You choose the wording.</p>
+      <section className="s-section" id="how" data-reveal aria-labelledby="how-title">
+        <p className="eyebrow">See it working</p>
+        <h2 id="how-title">What changes in your day.</h2>
+        <Scenes />
       </section>
 
       <section className="s-section" id="example" data-reveal aria-labelledby="example-title">
