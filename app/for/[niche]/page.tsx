@@ -79,7 +79,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
       {guide.visuals ? (
         <section className="mw-qw-section" aria-labelledby="niche-visuals-title">
           <p className="eyebrow">What it can look like</p>
-          <h2 id="niche-visuals-title">Drawings and models, linked to the project.</h2>
+          <h2 id="niche-visuals-title">{guide.id === 'architects' ? 'Drawings and models, linked to the project.' : 'A look at the job running itself.'}</h2>
           <div className="mw-figures">
             {guide.visuals.map((visual) => (
               <figure key={visual.src}>
@@ -89,7 +89,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
               </figure>
             ))}
           </div>
-          <p className="mw-qw-lead">Illustrations made for this page, not client work.</p>
+          <a className="button button-signal" href={checkHref}>Get a free plan and price</a>
         </section>
       ) : null}
 

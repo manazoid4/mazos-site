@@ -47,6 +47,11 @@ export const NICHE_GUIDES: NicheGuide[] = [
     name: 'Salons and beauty',
     title: 'Keep salon and beauty clients booking without chasing them',
     lede: 'Clients book on their phone, often late at night. If the booking route breaks, they book somewhere else and you never hear about it.',
+    visuals: [
+      { src: '/salons/booking-confirmation.svg', alt: 'A salon appointment booked online and confirmed without a phone call', caption: 'Illustration made for this page, not client work.' },
+      { src: '/salons/appointment-reminder.svg', alt: 'A reminder sent the day before a salon appointment', caption: 'Illustration made for this page, not client work.' },
+      { src: '/salons/rebooking-prompt.svg', alt: 'A past salon client invited to book their next visit', caption: 'Illustration made for this page, not client work.' },
+    ],
     examples: [
       { found: 'A salon homepage showing unrelated casino content, a New York address and info@example.com instead of the salon’s own details.', cost: 'Anyone searching for the salon saw gambling content under its name.' },
       { found: 'A skin clinic where every Book a Treatment button opened an old booking page saying the business was no longer available.', cost: 'Clients ready to book were told the clinic had closed.' },
@@ -70,6 +75,10 @@ export const NICHE_GUIDES: NicheGuide[] = [
     name: 'Dog groomers',
     title: 'Take dog grooming bookings while your hands are full',
     lede: 'You cannot answer the phone mid-groom. If your website cannot take the booking instead, the call goes to the next groomer on Google.',
+    visuals: [
+      { src: '/groomers/missed-call.svg', alt: 'A missed grooming call followed by a text with a booking link', caption: 'Illustration made for this page, not client work.' },
+      { src: '/groomers/next-groom.svg', alt: 'A reminder that the next groom is due with a booking link', caption: 'Illustration made for this page, not client work.' },
+    ],
     examples: [
       { found: 'A groomer with over a thousand clients and no way to book online, only a form or a phone call. A review mentioned calls going unanswered.', cost: 'Owners who could not get through booked elsewhere.' },
       { found: 'A groomer whose "Book here" button opened a contact page instead of a booking system.', cost: 'Clients expected to book and got a form instead.' },
@@ -83,7 +92,8 @@ export const NICHE_GUIDES: NicheGuide[] = [
     fixes: [
       starter('One job set up to run itself: every booking confirmed automatically, so you can keep grooming.'),
       addOn('Missed-call text-back', 'Miss a call and the owner gets a text with your booking link, so they don’t ring another groomer.'),
-      addOn('Online booking setup', 'If you have no booking tool yet. Most booking tools charge a monthly fee, paid to them directly, and I tell you the cost before you commit.'),
+      addOn('Online booking setup', 'Customers choose a slot themselves. Any booking-tool subscription is paid separately.'),
+      system('Bookings, rebooking and customer records joined up, so you can see who is due back.'),
     ],
   },
   {
@@ -92,6 +102,11 @@ export const NICHE_GUIDES: NicheGuide[] = [
     name: 'Garages and MOT centres',
     title: 'Turn garage and MOT enquiries into booked jobs',
     lede: 'Most drivers search when something is already wrong. They want a number to tap or an MOT slot to book, fast.',
+    visuals: [
+      { src: '/garages/mot-reminder.svg', alt: 'An MOT reminder invites the driver to choose an available slot', caption: 'Illustration made for this page, not client work.' },
+      { src: '/garages/quote-follow-up.svg', alt: 'An unanswered garage quote receives a friendly nudge after three days', caption: 'Illustration made for this page, not client work.' },
+      { src: '/garages/job-list.svg', alt: 'Garage enquiries arranged by awaiting quote, booked and ready', caption: 'Illustration made for this page, not client work.' },
+    ],
     examples: [
       { found: 'A garage homepage with template filler text ("Lorem ipsum") sitting right under the words "trusted repairs".', cost: 'It undercut the trust line directly above it.' },
       { found: 'A garage trading since 1961 whose phone number could not be tapped anywhere on the site, with no email address either.', cost: 'Drivers on their phone had one awkward way to get in touch.' },
@@ -114,6 +129,10 @@ export const NICHE_GUIDES: NicheGuide[] = [
     name: 'Cafes, bakeries and food',
     title: 'Get cafe, bakery and food customers through the door',
     lede: 'People check your hours, menu and number on their phone before they visit. Small errors quietly send them elsewhere.',
+    visuals: [
+      { src: '/cafes/shared-inbox.svg', alt: 'Café orders and messages gathered into one list', caption: 'Illustration made for this page, not client work.' },
+      { src: '/cafes/review-request.svg', alt: 'A post-visit message links to the café’s Google review page', caption: 'Illustration made for this page, not client work.' },
+    ],
     examples: [
       { found: 'A bakery contact page listing "Email@example.com", a US-style phone number and placeholder Latin reviews signed with a made-up name.', cost: 'Customers could not reach the business from its own contact page.' },
       { found: 'An ice cream parlour with hundreds of Google reviews whose website showed a security warning on every phone.', cost: 'Visitors were told the site was not safe to open.' },
@@ -137,6 +156,10 @@ export const NICHE_GUIDES: NicheGuide[] = [
     name: 'Clinics and therapists',
     title: 'Help clinic and therapy clients book with confidence',
     lede: 'Patients are often nervous before they book. A dead link or a missing number at the wrong moment is enough to stop them.',
+    visuals: [
+      { src: '/clinics/intake-form.svg', alt: 'An intake form link sent before the first appointment', caption: 'Illustration made for this page, not client work.' },
+      { src: '/clinics/appointment-reminder.svg', alt: 'A clinic appointment reminder with a route to change the time', caption: 'Illustration made for this page, not client work.' },
+    ],
     examples: [
       { found: 'An aesthetics clinic whose "Skin Consultation" menu link opened a page-not-found error.', cost: 'Patients ready to book hit a dead end.' },
       { found: 'An opticians whose footer phone link was empty on every page.', cost: 'Tapping it did nothing.' },
@@ -151,6 +174,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
     fixes: [
       starter('One job set up to run itself: new enquiries acknowledged straight away with the next step.'),
       addOn('Appointment reminders', 'Patients and clients get a reminder the day before, so fewer appointments are missed.'),
+      system('Enquiries, intake links and appointment updates joined up on the tools your practice already uses.'),
     ],
   },
   {
@@ -176,8 +200,8 @@ export const NICHE_GUIDES: NicheGuide[] = [
       custom('A portfolio or practice site with project pages, enquiry flow or a client-facing tool built around how your practice actually works.'),
     ],
     visuals: [
-      { src: '/architecture/massing-model.svg', alt: 'Illustrative axonometric of a simple 1:500 massing model on a site base, with a QR plaque that opens the project page', caption: 'A simple massing model with a QR or tap plaque that opens the project page.' },
-      { src: '/architecture/site-plan.svg', alt: 'Illustrative site plan with a proposed dwelling, garage, trees, access road, north arrow and scale bar', caption: 'A clean site plan for a proposal or project page.' },
+      { src: '/architecture/massing-model.svg', alt: 'Illustrative axonometric of a simple 1:500 massing model on a site base, with a QR plaque that opens the project page', caption: 'Illustration made for this page, not client work.' },
+      { src: '/architecture/site-plan.svg', alt: 'Illustrative site plan with a proposed dwelling, garage, trees, access road, north arrow and scale bar', caption: 'Illustration made for this page, not client work.' },
     ],
     related: {
       href: '/3d-printing#architecture-property',
