@@ -1,0 +1,201 @@
+
+> mazos-site@0.1.0 verify
+> npm run typecheck && npm run build && npm test && npm run smoke
+
+
+> mazos-site@0.1.0 typecheck
+> tsc --noEmit
+
+
+> mazos-site@0.1.0 build
+> next build
+
+▲ Next.js 16.3.8 (Turbopack)
+✓ Running next.config.js took 34ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 2.2s
+  Running TypeScript ...
+  Finished TypeScript in 2.6s ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/32) ...
+  Generating static pages using 11 workers (8/32) 
+  Generating static pages using 11 workers (16/32) 
+  Generating static pages using 11 workers (24/32) 
+✓ Generating static pages using 11 workers (32/32) in 901ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /3d-printing
+├ ○ /brand-kit
+├ ○ /contact
+├ ○ /demos
+├ ○ /faq
+├ ○ /for
+├   /for/[niche]
+│ ├ ● /for/salons-and-beauty
+│ ├ ● /for/dog-groomers
+│ ├ ● /for/garages
+│ └ ● [+3 more paths]
+├ ○ /icon.svg
+├ ○ /lab
+├ ○ /leak-check
+├ ○ /linkedin
+├ ○ /maz-core
+├ ○ /maz-pocket-ai
+├ ○ /mazos
+├ ○ /prices
+├ ○ /quick-win
+├ ○ /robots.txt
+├ ○ /rotareason
+├ ○ /site-map
+├ ○ /sitemap.xml
+├ ○ /what-we-do
+├ ○ /whats-new
+└   /work/[slug]
+  ├ ● /work/jobfilter
+  └ ● /work/scrap-finance-partners
+
+
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML (uses generateStaticParams)
+
+
+> mazos-site@0.1.0 test
+> node --test tests/*.test.mjs
+
+✔ all eleven systems map to an actual offer or extra and explain 3–4 steps (1.4626ms)
+✔ all exported pages meet title, description and skip-target budgets (80.2447ms)
+✔ every trade-guide example names a real system and leads with a lost customer or lost time (1.3079ms)
+✔ no lime or cream left from the old palette (30 Sep orange swap) (56.3335ms)
+✔ nothing picked: start with Starter Automation (1.7121ms)
+✔ a standard add-on can be bought alone at its own price (0.5825ms)
+✔ the first job that needs building is Starter Automation (0.3302ms)
+✔ an extra job to build uses Extra automation, never on its own (1.3933ms)
+✔ add-ons and a Starter add up line by line (0.3744ms)
+✔ copying between apps (Business System) quotes the package, weekly report included (0.5286ms)
+✔ when the parts cost more than a Business System, recommend that instead (0.4948ms)
+✔ every headache maps to a real system (0.271ms)
+✔ builder and calculator hard-code no prices (10.1616ms)
+✔ client demo routes are isolated behind one generic server gate (3.8182ms)
+✔ client-specific protected bundles are not committed to the public website repository (12.1121ms)
+✔ demo cookie is opaque, secure, HttpOnly and scoped to the client slug (0.4528ms)
+✔ protected content is requested only with an opaque session token (0.573ms)
+✔ authenticated HTML always exposes a server-side logout control (0.3221ms)
+✔ database credential, session and protected-content tables are default-deny to browser roles (0.7304ms)
+✔ lifecycle labels support reusable prospect and client management (0.4817ms)
+✔ rotating a demo passcode revokes every live session for that client (0.5739ms)
+✔ edge service stores only token hashes and binds validation to slug, expiry and revocation (0.4077ms)
+✔ logout propagates database lookup and revocation failures instead of reporting false success (0.544ms)
+✔ unknown, inactive and incorrect credentials share the same public denial (0.4298ms)
+✔ remote protected imagery is restricted to an explicit allowlist (0.2701ms)
+✔ free demo page explains the call-first route and books a call (15.2631ms)
+✔ unlimited changes are fenced so they never become free new work (4.1721ms)
+✔ demos page builds credibility without fabricated client counts or invented proof (3.2476ms)
+(node:5812) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/manaz/.codex/worktrees/mazos-linkedin-goals/api/enquiry.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\manaz\.codex\worktrees\mazos-linkedin-goals\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ only reports confirmation after both messages are accepted (4.2041ms)
+✔ owner acceptance survives confirmation failure without inviting a duplicate fallback (2.307ms)
+✔ owner failure allows fallback and does not send a misleading confirmation (0.5797ms)
+✔ delivery needs an explicit provider acknowledgement, not just HTTP 200 (32.2806ms)
+✔ delivery accepts both documented confirmation shapes and rejects provider errors (2.4513ms)
+✔ network loss and abort while reading confirmation never report delivery (10.5933ms)
+✔ email recovery preserves punctuation, multiline details and the reply address (0.551ms)
+✔ both exported enquiry forms provide a native POST fallback instead of leaking fields into a GET URL (12.941ms)
+✔ Objects required contacts are always available; only optional details can collapse (9.5405ms)
+✔ CSP permits the native provider destination without opening form submission to arbitrary sites (5.4526ms)
+✔ the enquiry captures which service the visitor actually wants (15.0599ms)
+✔ an enquiry can ask for a quote or an answer instead of an unpaid build (4.1815ms)
+✔ both enquiry forms fail safely with a recoverable email fallback (3.9348ms)
+✔ both forms can send a second enquiry without a page reload (3.0104ms)
+✔ missing required answers produce a visible message rather than a silent no-op (8.3848ms)
+✔ the Free Plan & Fixed Quote has a dedicated shareable acquisition page (13.0373ms)
+✔ the free plan form puts the problem taps first, with typing and the website optional (6.5058ms)
+✔ the Leak Check reuses the resilient enquiry delivery path (4.436ms)
+✔ homepage and shared navigation send the free first step to the dedicated page (3.659ms)
+(node:25740) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/manaz/.codex/worktrees/mazos-linkedin-goals/app/linkedin-source.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\manaz\.codex\worktrees\mazos-linkedin-goals\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ LinkedIn source survives booking and creator enquiry links (3.1853ms)
+✔ unrecognised sources and unrelated links stay unchanged (0.5103ms)
+✔ MAZ Pocket AI bridge stays private-by-design and secret-free in source (14.1334ms)
+✔ AI bridge and discovery manifest are present in the static export (4.1741ms)
+(node:2128) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/manaz/.codex/worktrees/mazos-linkedin-goals/api/subscribe.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\manaz\.codex\worktrees\mazos-linkedin-goals\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a valid email is added to Resend contacts and reported as joined (14.6208ms)
+✔ a bad email is refused before anything reaches Resend (3.9595ms)
+✔ a filled honeypot looks like success to the bot but sends nothing (3.4277ms)
+✔ signing up twice still reads as joined (1.807ms)
+✔ a Resend rejection is reported as a failure, never as joined (1.3779ms)
+✔ without JavaScript the form posts normally and is redirected back with the outcome (1.7101ms)
+✔ only POST is accepted (0.3753ms)
+✔ the /lab signup posts to the API, has a hidden honeypot and says how to unsubscribe (5.4076ms)
+✔ each signup emails Maz, from the verified domain, with the subscriber as reply-to (1.6257ms)
+✔ a failed notification never turns a saved signup into an error (1.4713ms)
+✔ no notification is sent when the signup itself failed (1.3222ms)
+✔ each niche guide exports with real examples, a self-check, prices and a tagged Leak Check link (33.0706ms)
+✔ Leak Check page links every niche guide and shows real examples (3.7198ms)
+✔ niche guides sell systems and outcomes, not website fixes (Maz, 27 Sep positioning) (14.4422ms)
+✔ Touch presents exactly three clear bundles with every base and artwork estimate (17.6325ms)
+✔ Objects enquiry keeps links optional and builds its estimate from shared pricing (5.5538ms)
+✔ Touch explains real-world limits without turning owner-visible copy into technical documentation (3.5908ms)
+✔ Objects includes an honest architecture and property use case (3.3288ms)
+✔ Objects is discoverable from shared chrome, homepage and sitemap while digital services remain (6.5952ms)
+✔ Objects page stays short (3.1852ms)
+✔ homepage positions Maz Works as a systems builder, not a website-fix shop (Maz, 27 Sep) (18.86ms)
+✔ homepage has one way in: the free check form, with the call as the fallback (2.9829ms)
+✔ homepage keeps the fixed terms with its package strip (2.8529ms)
+✔ homepage shows six trade links and a labelled missed-call example (29 Sep rebuild) (2.1335ms)
+✔ what-we-do shows a clearly labelled example report, not a real client (2.1991ms)
+✔ homepage has one set of service routes, not a duplicate problem chooser (2.0772ms)
+✔ homepage proof is limited to real, honestly labelled work (6.0623ms)
+✔ homepage sells one first step: Starter, four popular add-ons, bigger jobs and a link to every price (28 Sep) (7.0125ms)
+✔ the free plan form lets owners tap their problem, and only the no-JavaScript route asks for an auto-reply (4.1668ms)
+✔ the free-check reply promise is 1 working day everywhere (Maz confirmed 27 Sep) (9.2174ms)
+✔ homepage has five sections and keeps process detail on what-we-do (brief v2) (4.2118ms)
+✔ public contact uses the branded address while form delivery stays stable (2.6329ms)
+✔ contact request submits in-page instead of depending on the visitor email app (4.0873ms)
+✔ metadata and accessible navigation are present on public pages (7.2893ms)
+✔ same-page navigation points to existing homepage sections (1.9397ms)
+✔ internal links and assets resolve inside the static export (40.1584ms)
+✔ flagship case studies remain available and use the expanded positioning (4.5773ms)
+✔ case studies stay short (3.2887ms)
+✔ legacy MazOS route stays out of homepage discovery and sitemap (4.1503ms)
+✔ structured data reflects Maz Works founder and broad service positioning (2.892ms)
+✔ Vercel Analytics remains bundled into the static export (650.0077ms)
+✔ runtime and static-host hardening stay explicit (2.018ms)
+✔ project memory keeps the Maz Works Knowledge Vault identity canonical (1.315ms)
+✔ every indexable exported page is listed in the sitemap (46.773ms)
+✔ every sitemap entry points at a page that was actually exported (6.1693ms)
+✔ retired Quick Win page stays reachable but noindexed and points to Starter Automation (3.7931ms)
+✔ retired offer terms are gone from every public page (10.3511ms)
+✔ the guarantee, no-VAT and referral lines appear where Maz's decisions require them (2.6309ms)
+✔ case studies route to a plan and fixed price, not a blanket free demo (2.7337ms)
+✔ no public page or shipped script leaks Maz's personal details (1108.9362ms)
+✔ every main page is one tap from the key routes, and the trade guides have a hub (17.5824ms)
+✔ architecture drawings exist and are labelled illustrative (3.7448ms)
+✔ six wayfinding helps big sites use are in place (6.0758ms)
+✔ scroll reveal hides nothing without JavaScript and respects reduced motion (Codex brief 05) (8.1932ms)
+✔ the hero demo animation survives CSS minification (4.8739ms)
+✔ no stylesheet sets text below the readable floor (35.0229ms)
+✔ the floor check reads every form a size can be written in (0.3869ms)
+ℹ tests 108
+ℹ suites 0
+ℹ pass 108
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2471.1254
+
+> mazos-site@0.1.0 smoke
+> node scripts/smoke.mjs
+
+Local static HTML and asset smoke checks passed.

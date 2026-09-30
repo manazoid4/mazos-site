@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
-import { OFFERS, PROMISES } from '../offers';
+import { BRAND_KIT, CHANGES_WINDOW, OFFERS, PROMISES } from '../offers';
 import { DemoPath } from '../demo-path';
+import { CampaignLink } from '../campaign-link';
+import { CHECK_REPLY_TIME } from '../site';
 
 const STARTER = OFFERS[0];
 
@@ -29,6 +31,7 @@ export default function LinkedInPage() {
           <p className="eyebrow">You found me on LinkedIn</p>
           <h1 id="li-title">Hi, I’m Maz. I build the systems that stop enquiries slipping away.</h1>
           <p className="s-lede">{`Missed calls, slow replies, no-shows, chasing quotes. I set it up once so it runs on its own. From ${STARTER.price}, fixed price agreed first.`}</p>
+          <p className="s-small">Trainer, maker or creator? <CampaignLink href="/brand-kit?src=linkedin">{`See the ${BRAND_KIT.name} · ${BRAND_KIT.price}`}</CampaignLink>.</p>
         </div>
       </section>
 
@@ -36,7 +39,29 @@ export default function LinkedInPage() {
         <p className="eyebrow">See it before you pay</p>
         <h2 id="li-demo-title">Start with a free demo.</h2>
         <DemoPath source="linkedin" />
-        <p className="s-small">Prefer to write it down? <a href="/leak-check?src=linkedin#leak-check-form">Get a free plan and price</a>.</p>
+        <p className="s-small">Prefer to write it down? <CampaignLink href="/leak-check?src=linkedin#leak-check-form">Get a free plan and price</CampaignLink>. I reply within {CHECK_REPLY_TIME}.</p>
+        <div className="s-faq"><details>
+          <summary>What do the two months of changes cover?</summary>
+          <p>{CHANGES_WINDOW.body}</p>
+          <ul>{CHANGES_WINDOW.notCovered.map((item) => <li key={item}>{item}</li>)}</ul>
+        </details></div>
+      </section>
+
+      <section className="s-section" aria-labelledby="li-work-title">
+        <p className="eyebrow">Work you can open yourself</p>
+        <h2 id="li-work-title">A real product. A real client build.</h2>
+        <div className="s-proof">
+          <a className="s-proof-card" href="/work/jobfilter">
+            <span>My own product · software</span>
+            <strong>JobFilter</strong>
+            <span>Finds and filters public contracts for small trades firms. Live, with paid plans.</span>
+          </a>
+          <a className="s-proof-card" href="/work/scrap-finance-partners">
+            <span>Client build · website</span>
+            <strong>Specialist finance firm</strong>
+            <span>A website I designed and built. See the actual work.</span>
+          </a>
+        </div>
       </section>
 
       <section className="s-section" aria-labelledby="li-why-title">
