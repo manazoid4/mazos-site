@@ -1463,10 +1463,15 @@ main {
 
 /* Page transitions: header stays, content cross-fades, a package card becomes its section. */
 @view-transition { navigation: auto; }
-.mw-site-header { view-transition-name: site-header; }
+.mw-site-header { view-transition-name: site-header; position: relative; z-index: 60; }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }
 .s-video { margin: 20px 0; max-width: 860px; }
 .s-video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 3px solid var(--ink); background: var(--ink); }
 .mw-demo-form[data-sent] :is(.mw-form-summary, .mw-form-row, .mw-form-kicker, .mw-form-picked, .mw-form-submit > button, .mw-form-submit > p:not([role])) { display: none; }
+
+/* Tap targets (30 Sep audit): every link and button a thumb has to hit is at least 44px tall. */
+.s-system-detail > a, .mw-service-link, .mw-footer-groups a { display: inline-flex; align-items: center; min-height: 44px; }
+.mw-footer-groups a { padding-block: 2px; }
+.s-lab-links a, .mw-project-links a, .project-links a { display: inline-flex; align-items: center; min-height: 44px; }
