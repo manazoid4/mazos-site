@@ -130,3 +130,35 @@ h2 { font-weight: 650; }
   .s-board-step:not(:last-child)::after { content: ""; position: absolute; right: -22px; top: 36px; width: 16px; height: 2px; background: var(--line); }
   .s-board-phone { grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 48px; }
 }
+
+/* A different reading rhythm for each decision. */
+.s-home { --s-gap: clamp(64px, 9vw, 112px); }
+.s-example { max-width: 960px; margin-inline: auto; }
+.s-example > h2 { max-width: 30ch; }
+.s-check { background: var(--tint); border-radius: 28px; padding: clamp(22px, 4vw, 48px); margin-top: var(--s-gap); }
+.s-about { margin-top: 48px; padding-top: 36px; border-top: 1px solid var(--soft-line); }
+.s-about h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+.s-delivery { margin-top: 24px; max-width: 880px; }
+.s-delivery summary { cursor: pointer; padding: 16px 0; font-weight: 650; }
+.s-delivery ul { list-style: none; display: grid; gap: 24px; padding-block: 16px; }
+.s-delivery li { display: grid; gap: 8px; }
+.s-delivery li span { color: var(--muted); }
+.s-proof-card img { max-height: 240px; }
+.s-final .s-actions { align-items: center; }
+.s-final .s-actions > a:not(.button) { color: white; }
+.s-board-steps { padding: 0; }
+@media (min-width: 721px) {
+  .s-delivery ul { grid-template-columns: 1fr 1fr; }
+  .s-proof { max-width: none; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .s-proof-card { grid-template-columns: 120px 1fr; column-gap: 18px; }
+  .s-proof-card img { grid-row: span 3; height: 160px; object-fit: cover; }
+}
+@media (max-width: 720px) {
+  .s-hero { padding-top: 28px; }
+  .s-hero-split h1 { font-size: 2.25rem; }
+  .s-lede { font-size: 1.05rem; }
+  .s-hero .s-actions { margin-top: 20px; }
+  .s-plug { max-width: 330px; }
+  .s-check { margin-inline: -8px; padding: 22px 16px; }
+  .s-check .mw-demo-form { padding: 18px 14px; }
+}

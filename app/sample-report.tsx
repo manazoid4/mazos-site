@@ -1,3 +1,8 @@
+import { EXTRAS, OFFERS } from './offers';
+const starter = OFFERS[0];
+const reminder = EXTRAS.find((extra) => extra.name === 'Appointment reminders')!;
+const total = starter.from + Number(reminder.price.replace(/[^0-9.]/g, ''));
+
 /**
  * A clearly labelled example of the free plan and fixed quote. The business is
  * fictional; the kind of plan matches what a real reply looks like.
@@ -5,21 +10,21 @@
 const FINDINGS = [
   {
     level: 'Fix now',
-    title: 'Enquiries arrive in four places and some are missed',
-    evidence: 'Phone, email, the website form and Instagram messages each go to a different place. Nobody sees them all in one list.',
-    impact: 'A new client who messages on a busy Saturday may not hear back until Tuesday.',
+    title: 'Enquiries scattered across four apps',
+    evidence: 'Calls, emails, forms and DMs stay separate.',
+    impact: 'Saturday’s enquiry waits until Tuesday.',
   },
   {
     level: 'Fix soon',
-    title: 'Reminders are sent by hand, when someone remembers',
-    evidence: 'The booking tool can send reminders, but they are switched off. Staff text clients the night before instead.',
-    impact: 'Missed reminders mean more no-shows, and the texting takes time every evening.',
+    title: 'Reminders still sent by hand',
+    evidence: 'The booking app’s reminders are switched off.',
+    impact: 'Staff spend evenings texting.',
   },
   {
     level: 'Working well',
     title: 'Online booking itself',
-    evidence: 'The booking page is quick and clear on a phone.',
-    impact: 'No change needed. The plan builds on it.',
+    evidence: 'Easy to book on a phone.',
+    impact: 'Keep it.',
   },
 ];
 
@@ -41,9 +46,9 @@ export function SampleReport() {
           </li>
         ))}
       </ol>
-      <p className="s-report-untested"><em>Not included:</em> a new website. The current one works, so there’s no reason to pay for one.</p>
+      <p className="s-report-untested"><em>Not included:</em> a new website. This one works.</p>
       <footer>
-        <p><strong>The quote.</strong> Starter Automation, <strong>£195</strong>: every enquiry lands in one list and gets an instant reply. Add-on, <strong>£79</strong>: appointment reminders switched on. Total £274, No VAT added. Working within 7 working days of access, or you don’t pay the rest.</p>
+        <p><strong>The quote.</strong> {starter.name}, <strong>{starter.price}</strong>: every enquiry lands in one list and gets an instant reply. Add-on, <strong>{reminder.price}</strong>: appointment reminders switched on. Total £{total}, No VAT added. Working within 7 working days of access, or you don’t pay the rest.</p>
         <p className="s-small">If nothing is worth automating, the plan says so.</p>
       </footer>
     </article>

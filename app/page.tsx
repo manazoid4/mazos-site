@@ -65,12 +65,11 @@ export default function Page() {
         <div>
           <p className="eyebrow">{POSITIONING_EYEBROW}</p>
           <h1 id="intro-title">Your phone, inbox and booking app, finally working together.</h1>
-          <p className="s-lede">I’m Manazir, UK-wide. I build the systems that turn enquiries into paying customers: missed calls texted back, reminders sent, reviews asked for. All on the tools you already use, from {STARTER.price}.</p>
+          <p className="s-lede">I build the systems that turn enquiries into paying customers. Less chasing, fewer missed calls. On your existing tools, from {STARTER.price}.</p>
           <div className="s-actions">
             <a className="button button-signal s-button-lg" href="#check">Get a free plan and price</a>
-            <CallLink className="button" href={BOOKING_URL} placement="hero">Or book a 15-minute call</CallLink>
           </div>
-          <p className="s-note">{FREE_STEP.name}, emailed within {CHECK_REPLY_TIME}. No call needed, no obligation.</p>
+          <p className="s-note">Emailed within {CHECK_REPLY_TIME}. No call, no obligation.</p>
           <p className="s-trade-pills" id="trades"><span>See it for your trade:</span>{NICHE_GUIDES.map((guide) => <a key={guide.id} href={`/for/${guide.id}`}>{guide.shortName}</a>)}</p>
         </div>
         <PlugHero />
@@ -91,9 +90,9 @@ export default function Page() {
         <Scenes />
       </section>
 
-      <section className="s-section" id="example" data-reveal aria-labelledby="example-title">
+      <section className="s-section s-example" id="example" data-reveal aria-labelledby="example-title">
         <p className="eyebrow">What you get back</p>
-        <h2 id="example-title">An example plan, before you ask for yours.</h2>
+        <h2 id="example-title">Here’s what your plan looks like.</h2>
         <SampleReport />
       </section>
 
@@ -102,8 +101,8 @@ export default function Page() {
           <p className="eyebrow">{FREE_STEP.name} · {FREE_STEP.price}</p>
           <h2 id="check-title">Tell me the job. I’ll send a plan and a price.</h2>
           <ul className="s-ticks">
-            <li>Tap what’s costing you. Typing is optional</li>
-                        <li>You get a plan like the one above, with a fixed price</li>
+            <li>Tap a problem, add your name and email</li>
+                        <li>A plan and fixed price, by email</li>
             <li>If it isn’t worth automating, I say so</li>
           </ul>
         </div>
@@ -120,12 +119,12 @@ export default function Page() {
             <h3>{STARTER.name}</h3>
             <p className="s-price-amount">{STARTER.price}</p>
             <p>{STARTER.body}</p>
-            <ul>{STARTER.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
-            <PackageLink className="button button-signal" href="#check" pick={STARTER.name}>Get a free plan for this</PackageLink>
+            <p className="s-small">{STARTER.bullets[2]}</p>
+            <PackageLink className="button button-signal" href="#check" pick={STARTER.name}>Get a free plan and price</PackageLink>
           </article>
           <div className="s-extras s-extras-home" id="extras">
             <h3>Popular add-ons</h3>
-            <p className="s-small">Fixed, one-off prices. Buy one on its own or add it to Starter. <a href="/prices#extras">What each one does</a></p>
+            <p className="s-small">One-off. Buy alone or add to Starter. <a href="/prices#extras">What each one does</a></p>
             <ul>
               {POPULAR_EXTRAS.map((item) => <li key={item.name}><div><strong>{item.name}</strong><PackageLink href="#check" pick={item.name}>Ask for this <span aria-hidden="true">→</span></PackageLink></div><strong className="s-extras-price">{item.price}</strong></li>)}
             </ul>
@@ -156,19 +155,17 @@ export default function Page() {
         <ol className="s-steps">
           {STEPS.map(([number, title, body]) => <li key={number}><span>{number}</span><strong>{title}</strong><p>{body}</p></li>)}
         </ol>
-        <h3 className="s-subhead">How I set it up</h3>
-        <ul className="s-promises" aria-label="How the work is set up">
-          {DELIVERY.map((item) => <li key={item.title}><strong>{item.title}</strong><span>{item.body}</span></li>)}
-        </ul>
-      </section>
+        <details className="s-delivery"><summary>How I set it up</summary>
+          <ul>{DELIVERY.map((item) => <li key={item.title}><strong>{item.title}</strong><span>{item.body}</span></li>)}</ul>
+        </details>
 
-      <section className="s-section s-about" id="about" aria-labelledby="about-title">
+      <div className="s-about" id="about" aria-labelledby="about-title">
         <div className="s-about-head">
           <img className="s-face" src="/maz.webp" alt="Manazir Hussain, who plans and builds every job" width={96} height={96} loading="lazy" />
           <div>
             <p className="eyebrow">Who you’re dealing with</p>
-            <h2 id="about-title">I’m Manazir. I plan it and build it myself.</h2>
-            <p>I build software, automation and websites for UK small businesses. No account managers, no hand-offs. Email me directly at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+            <h2 id="about-title">One person, start to finish.</h2>
+            <p>I’m Manazir, UK-wide. I plan and build your system myself. Reach me at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
           </div>
         </div>
         <p className="s-small">Work you can open yourself:</p>
@@ -183,6 +180,7 @@ export default function Page() {
           ))}
         </div>
         <p className="s-small"><a href="/lab">Other things I’ve built →</a></p>
+      </div>
       </section>
 
       <section className="s-section" id="faq" aria-labelledby="faq-title">
@@ -192,15 +190,14 @@ export default function Page() {
           {HOMEPAGE_FAQS.map((faq) => <details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}
         </div>
         <p className="s-small"><a href="/faq">All questions →</a></p>
-      </section>
-
-      <section className="s-final" aria-labelledby="final-title">
-        <h2 id="final-title">Stop losing the customers who called when you were busy.</h2>
+      <div className="s-final" aria-labelledby="final-title">
+        <h2 id="final-title">What would you stop chasing?</h2>
         <p>A free plan and fixed price within {CHECK_REPLY_TIME}. No call, no obligation.</p>
         <div className="s-actions">
           <a className="button button-signal s-button-lg" href="#check">Get a free plan and price</a>
-          <CallLink className="button" href={BOOKING_URL} placement="footer-cta">Book a 15-minute call</CallLink>
+          <CallLink href={BOOKING_URL} placement="footer-cta">Prefer a call?</CallLink>
         </div>
+      </div>
       </section>
 
       <SiteFooter />
