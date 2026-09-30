@@ -1,3 +1,1063 @@
+/*
+ * Maz Works clean pass.
+ * Loaded last so it can calm the accumulated component styles without
+ * rewriting the behaviour or the resource pages.
+ */
+
+main {
+  width: min(1160px, calc(100% - 40px));
+}
+
+.mw-site-header {
+  min-height: 66px;
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-site-header nav {
+  gap: 20px;
+}
+
+.mw-nav-cta {
+  min-height: 40px !important;
+  padding-inline: 12px;
+  border-color: var(--soft-line);
+  background: transparent;
+  color: var(--ink);
+}
+
+.mw-nav-cta:hover {
+  border-color: var(--line);
+  background: var(--signal);
+}
+
+.mw-hero {
+  padding-top: clamp(58px, 7vw, 84px);
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-hero-copy {
+  max-width: 850px;
+}
+
+.mw-hero h1 {
+  max-width: 850px;
+  font-size: clamp(2.5rem, 5vw, 4.35rem);
+  line-height: 1;
+}
+
+.mw-lede {
+  max-width: 680px;
+  margin-top: 18px;
+  font-size: clamp(.98rem, 1.3vw, 1.08rem);
+}
+
+.mw-actions {
+  margin-top: 22px;
+}
+
+.button {
+  min-height: 46px;
+  padding: 10px 16px;
+}
+
+.mw-hero-note,
+.mw-hero-proof {
+  max-width: 620px;
+}
+
+.mw-capabilities {
+  margin-top: 28px;
+  padding: 15px 0 17px;
+  gap: 0;
+  border-top: 1px solid var(--soft-line);
+}
+
+.mw-capabilities span {
+  padding: 0;
+  border: 0;
+  color: var(--muted);
+  letter-spacing: .025em;
+}
+
+.mw-capabilities span + span::before {
+  content: '·';
+  margin-inline: 10px;
+  color: var(--soft-line);
+}
+
+.mw-hero-update {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 9px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: .72rem;
+}
+
+.mw-hero-update > span {
+  width: 7px;
+  height: 7px;
+  overflow: hidden;
+  display: inline-block;
+  border-radius: 50%;
+  background: var(--signal);
+  color: transparent;
+}
+
+.mw-hero-update a {
+  color: var(--ink);
+  font-weight: 650;
+  text-decoration-color: var(--signal);
+}
+
+.mw-hero-update small {
+  color: var(--muted);
+}
+
+.mw-section {
+  padding: clamp(56px, 7vw, 78px) 0;
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-section-heading {
+  margin-bottom: clamp(24px, 3.5vw, 34px);
+}
+
+.mw-heading-inline {
+  grid-template-columns: minmax(0, 1fr) minmax(220px, .48fr);
+  gap: clamp(24px, 5vw, 56px);
+}
+
+.mw-section-heading h2,
+.mw-contact h2 {
+  font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+}
+
+/* Services should read like three capabilities, not three boxed products. */
+.mw-service-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(22px, 4vw, 42px);
+  border: 0;
+}
+
+.mw-service-card,
+.mw-service-card:first-child,
+.mw-service-card:nth-child(2),
+.mw-service-card:last-child {
+  min-height: 0;
+  padding: 18px 0 0;
+  border: 0 !important;
+  border-top: 1px solid var(--soft-line) !important;
+}
+
+.mw-service-card h3 {
+  font-size: clamp(1.25rem, 1.8vw, 1.65rem);
+}
+
+.mw-service-card p {
+  max-width: 340px;
+  margin-top: 9px;
+}
+
+.mw-service-link {
+  margin-top: 10px;
+}
+
+.mw-disclosure {
+  margin-top: 18px;
+  border-top-color: var(--soft-line);
+  border-bottom: 0;
+}
+
+.mw-disclosure > summary {
+  min-height: 52px;
+  padding-block: 11px;
+}
+
+.mw-disclosure-body,
+.mw-disclosure-copy {
+  padding-top: 10px;
+}
+
+.mw-measure-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top-color: var(--soft-line);
+}
+
+.mw-measure-grid > div {
+  padding-block: 13px;
+}
+
+/* Proof remains prominent, but the rows are quieter and easier to scan. */
+.mw-work-list {
+  border-top-color: var(--soft-line);
+}
+
+.mw-work-row {
+  min-height: 0;
+  padding: 22px 0;
+  grid-template-columns: 34px minmax(0, 1fr) 155px;
+  gap: 18px;
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-work-main h3 {
+  font-size: clamp(1.55rem, 2.6vw, 2.25rem);
+}
+
+.mw-work-problem {
+  margin-top: 8px;
+  font-size: .9rem;
+}
+
+.mw-work-summary {
+  margin-top: 6px;
+  font-size: .84rem;
+}
+
+.mw-work-role {
+  font-size: .74rem;
+}
+
+/* Pricing stays transparent without presenting three heavy boxes. */
+.mw-price-grid {
+  gap: clamp(22px, 4vw, 42px);
+  border: 0;
+}
+
+.mw-price-option,
+.mw-price-option:first-child,
+.mw-price-option:last-child {
+  min-height: 0;
+  padding: 18px 0 0 !important;
+  border: 0 !important;
+  border-top: 1px solid var(--soft-line) !important;
+}
+
+.mw-price-option > strong {
+  font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+}
+
+.mw-price-option > span {
+  margin-top: 10px;
+}
+
+.mw-price-option > small {
+  margin-top: 12px;
+  padding-top: 0;
+}
+
+.mw-price-option > .mw-service-link {
+  margin-top: 12px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.mw-pricing-foot {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--soft-line);
+}
+
+.mw-objects-strip {
+  margin-top: 0;
+  min-height: 0;
+  padding: 24px 0;
+  grid-template-columns: 160px minmax(0, 1fr) auto;
+  gap: 24px;
+  border-top: 1px solid var(--soft-line);
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.mw-objects-strip img {
+  width: 160px;
+  height: 108px;
+}
+
+.mw-objects-strip h3 {
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+}
+
+.mw-about {
+  display: block;
+}
+
+.mw-about > .mw-section-heading {
+  margin-bottom: 18px;
+}
+
+.mw-faq-list details {
+  border-color: var(--soft-line);
+}
+
+.mw-faq-more {
+  margin-top: 10px;
+  justify-content: flex-start;
+}
+
+.mw-contact {
+  padding: clamp(58px, 7vw, 82px) 0;
+  border-top: 0;
+}
+
+/* The JobFilter-derived resource pages stay useful but lose the boxed-release feel. */
+.mw-resource-hero {
+  padding: clamp(52px, 7vw, 78px) 0 clamp(38px, 5vw, 56px);
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-resource-row {
+  padding: 22px 0;
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-resource-row h2 {
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+}
+
+.mw-resource-cta {
+  padding: clamp(36px, 5vw, 54px) 0;
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-updates-layout {
+  gap: clamp(26px, 5vw, 54px);
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-update-card {
+  border-top-color: var(--soft-line);
+  border-bottom-color: var(--soft-line);
+}
+
+.mw-update-meta span {
+  padding: 0;
+  border: 0;
+  background: transparent !important;
+}
+
+.mw-update-meta span:first-child {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--signal);
+  text-decoration-thickness: 3px;
+}
+
+/* One compact footer: secondary routes stay discoverable without three visual columns. */
+.mw-site-footer.mw-footer-clean {
+  padding: 30px 0 22px;
+  display: grid;
+  grid-template-columns: minmax(230px, .8fr) minmax(0, 1.2fr);
+  align-items: start;
+  gap: 28px 48px;
+  border-top: 1px solid var(--soft-line);
+}
+
+.mw-footer-brand {
+  gap: 6px;
+}
+
+.mw-footer-brand > span,
+.mw-footer-brand > a {
+  max-width: 370px;
+}
+
+.mw-footer-links {
+  display: flex;
+  justify-content: flex-end;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+}
+
+.mw-footer-links a {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--muted);
+  font-size: .74rem;
+}
+
+.mw-footer-links a:hover {
+  color: var(--ink);
+}
+
+.mw-footer-bottom {
+  grid-column: 1 / -1;
+  padding-top: 14px;
+  border-top-color: var(--soft-line);
+}
+
+@media (max-width: 900px) {
+  .mw-service-grid,
+  .mw-price-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .mw-work-row {
+    grid-template-columns: 30px 1fr;
+  }
+
+  .mw-work-links {
+    grid-column: 2;
+  }
+
+  .mw-objects-strip {
+    grid-template-columns: 120px 1fr;
+  }
+
+  .mw-objects-strip img {
+    width: 120px;
+    height: 90px;
+  }
+
+  .mw-objects-strip .text-link {
+    grid-column: 2;
+  }
+
+  .mw-site-footer.mw-footer-clean {
+    grid-template-columns: 1fr;
+  }
+
+  .mw-footer-links {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 620px) {
+  main {
+    width: min(100% - 28px, 1160px);
+  }
+
+  .mw-hero {
+    padding-top: 40px;
+  }
+
+  .mw-hero h1 {
+    font-size: clamp(2.25rem, 11vw, 3.3rem);
+  }
+
+  .mw-capabilities span + span::before {
+    margin-inline: 7px;
+  }
+
+  .mw-section {
+    padding-block: 44px;
+  }
+
+  .mw-measure-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mw-objects-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .mw-objects-strip img {
+    width: 136px;
+    height: 92px;
+  }
+
+  .mw-objects-strip .text-link {
+    grid-column: 1;
+  }
+
+  .mw-footer-links {
+    gap-inline: 14px;
+  }
+
+  .mw-footer-bottom {
+    gap: 6px;
+  }
+}
+
+/* Short-site pass: work rows no longer carry an index column. */
+.mw-work-row {
+  grid-template-columns: minmax(0, 1fr) 155px;
+}
+
+/* Tighter mobile rhythm so the homepage stays near four screens. */
+@media (max-width: 760px) {
+  .mw-work-row,
+  .mw-heading-inline {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .mw-section-heading h2,
+  .mw-contact h2 {
+    font-size: clamp(1.7rem, 8vw, 2.2rem);
+  }
+
+  .mw-section {
+    padding-block: 28px;
+  }
+
+  .mw-work-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+
+  .mw-work-links a {
+    white-space: nowrap;
+  }
+
+  .mw-price-option {
+    padding: 16px;
+  }
+
+  .mw-process-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .mw-process-strip li {
+    padding: 0;
+    border: 0;
+  }
+}
+
+/* What I build: six equal routes in (three by two), laid out as one quiet band under the
+   hero. Overrides the generic .mw-service-link pill so each item reads as a
+   single tappable row rather than a small mono button. */
+.mw-builds {
+  margin: 34px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  list-style: none;
+  border-top: 1px solid var(--soft-line);
+}
+
+.mw-builds li + li {
+  border-left: 1px solid var(--soft-line);
+}
+
+.mw-builds li:nth-child(3n + 1) {
+  border-left: 0;
+}
+
+.mw-builds li:nth-child(3n + 1) .mw-service-link {
+  padding-left: 0;
+}
+
+.mw-builds li:nth-child(n + 4) {
+  border-top: 1px solid var(--soft-line);
+}
+
+.mw-builds .mw-service-link {
+  min-height: 100%;
+  margin: 0;
+  padding: 18px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  font-family: var(--sans);
+  font-size: inherit;
+  font-weight: 400;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background-color .15s ease;
+}
+
+.mw-builds li:first-child .mw-service-link {
+  padding-left: 0;
+}
+
+.mw-builds .mw-service-link:hover,
+.mw-builds .mw-service-link:focus-visible {
+  background: var(--surface);
+}
+
+.mw-builds strong {
+  font-size: 1.05rem;
+  line-height: 1.25;
+  font-weight: 650;
+  letter-spacing: -.01em;
+}
+
+.mw-builds strong::after {
+  content: '\00a0→';
+  color: var(--muted);
+}
+
+.mw-builds span {
+  color: var(--muted);
+  font-size: .9rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 860px) {
+  .mw-builds {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mw-builds li:nth-child(even) {
+    border-left: 1px solid var(--soft-line);
+  }
+
+  .mw-builds li:nth-child(even) .mw-service-link {
+    padding-left: 12px;
+  }
+
+  .mw-builds li:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .mw-builds li:nth-child(odd) .mw-service-link {
+    padding-left: 0;
+  }
+
+  .mw-builds .mw-service-link {
+    padding: 14px 12px 16px;
+  }
+
+  .mw-builds li:nth-child(odd) .mw-service-link {
+    padding-left: 0;
+  }
+
+  .mw-builds span {
+    font-size: .85rem;
+  }
+
+  .mw-builds li:nth-child(n + 3) {
+    border-top: 1px solid var(--soft-line);
+  }
+}
+
+@media (max-width: 359px) {
+  .mw-builds {
+    grid-template-columns: 1fr;
+  }
+
+  .mw-builds li + li {
+    border-left: 0;
+    border-top: 1px solid var(--soft-line);
+  }
+
+  .mw-builds .mw-service-link {
+    padding: 14px 0;
+  }
+}
+
+/* Mailing list: a quiet second route for visitors not ready to enquire. */
+.mw-newsletter {
+  margin: 0 0 56px;
+  padding: 28px 0 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px 48px;
+  align-items: end;
+  border-top: 1px solid var(--soft-line);
+}
+
+.mw-newsletter h2 {
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+}
+
+.mw-newsletter-copy p {
+  margin-top: 8px;
+  max-width: 460px;
+  color: var(--muted);
+}
+
+.mw-newsletter-row {
+  display: flex;
+  gap: 8px;
+}
+
+.mw-newsletter-row input {
+  flex: 1;
+  min-width: 0;
+  min-height: 46px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font: inherit;
+  color: var(--ink);
+}
+
+.mw-newsletter-row .button {
+  padding-inline: 22px;
+  border: 1px solid var(--line);
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 650;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.mw-newsletter-row .button:hover {
+  background: var(--signal);
+  color: var(--ink);
+}
+
+.mw-newsletter-trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.mw-newsletter-error {
+  margin-top: 8px;
+  color: #9d1c1c;
+  font-size: .85rem;
+}
+
+.mw-newsletter-done {
+  font-weight: 650;
+}
+
+@media (max-width: 760px) {
+  .mw-newsletter {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .mw-newsletter-row {
+    flex-direction: column;
+  }
+}
+
+/* ==== Folded in from mazworks-friction-pass.css (Batch 3 CSS consolidation, 30 Sep 2026). Order kept so the cascade is unchanged. ==== */
+/* 26 Sep conversion/friction pass. Kept separate so a later design agent can replace it cleanly. */
+
+.mw-work-row-with-proof {
+  align-items: start;
+}
+
+.mw-work-proof {
+  grid-column: 1 / -1;
+  margin: 6px 0 8px;
+}
+
+.mw-work-proof picture,
+.mw-work-proof img {
+  display: block;
+  width: 100%;
+}
+
+.mw-work-proof img {
+  height: auto;
+  border: 1px solid var(--soft-line);
+  background: var(--surface);
+  object-fit: cover;
+  object-position: top;
+}
+
+.mw-work-proof-primary img {
+  max-height: 430px;
+}
+
+.mw-work-proof-secondary {
+  max-width: 620px;
+}
+
+.mw-work-proof-secondary img {
+  max-height: 235px;
+}
+
+.mw-work-proof figcaption {
+  margin-top: 7px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: .75rem;
+}
+
+.mw-leak-check {
+  margin-top: 18px;
+  border-top: 1px solid var(--soft-line);
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.mw-leak-check > summary {
+  min-height: 52px;
+  padding: 11px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 650;
+}
+
+.mw-leak-check > summary::-webkit-details-marker {
+  display: none;
+}
+
+.mw-leak-check > summary::after {
+  content: '+';
+  color: var(--muted);
+  font-family: var(--mono);
+}
+
+.mw-leak-check[open] > summary::after {
+  content: '−';
+}
+
+.mw-leak-check > summary small {
+  margin-left: auto;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.mw-leak-options {
+  padding: 4px 0 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 28px;
+}
+
+.mw-leak-options .mw-service-link {
+  min-height: 44px;
+  margin: 0;
+  padding: 11px 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--soft-line);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: .9rem;
+  font-weight: 550;
+  text-decoration: none;
+}
+
+.mw-leak-options .mw-service-link::after {
+  content: ' →';
+  margin-left: auto;
+  color: var(--muted);
+}
+
+.mw-care-plan {
+  margin-top: 30px;
+  padding: 20px 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 18px 32px;
+  border-top: 1px solid var(--soft-line);
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.mw-care-plan h3 {
+  margin-top: 3px;
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+}
+
+.mw-care-plan > div > p:last-child {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+.mw-care-prices {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 7px 16px;
+  white-space: nowrap;
+}
+
+.mw-care-prices strong {
+  font-size: 1.15rem;
+}
+
+.mw-care-prices span {
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+.mw-care-plan > .mw-service-link {
+  margin: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .mw-work-proof-primary img {
+    max-height: none;
+  }
+
+  .mw-work-proof-secondary {
+    max-width: 100%;
+  }
+
+  .mw-work-proof-secondary img {
+    max-height: 210px;
+  }
+
+  .mw-leak-check > summary {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .mw-leak-check > summary small {
+    width: calc(100% - 26px);
+    margin-left: 0;
+  }
+
+  .mw-leak-options {
+    grid-template-columns: 1fr;
+  }
+
+  .mw-care-plan {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .mw-care-plan > .mw-service-link {
+    white-space: normal;
+  }
+}
+
+/* Pricing: free first step, then four fixed-price options. */
+.mw-free-check {
+  margin: 0 0 28px;
+  padding: 16px 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 24px;
+  border: 1px solid var(--soft-line);
+  background: var(--surface);
+}
+
+.mw-free-check p {
+  margin: 0;
+  max-width: 60ch;
+}
+
+.mw-free-check .mw-service-link {
+  margin: 0;
+}
+
+.mw-price-grid.mw-price-grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 1100px) {
+  .mw-price-grid.mw-price-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .mw-price-grid.mw-price-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Offer v5: two primary packages, the repair highlighted. */
+.mw-price-grid.mw-price-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 640px) {
+  .mw-price-grid.mw-price-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mw-price-option-highlight {
+  position: relative;
+}
+
+.mw-price-option-highlight::before {
+  content: 'Start here';
+  position: absolute;
+  top: -14px;
+  left: 0;
+  padding: 3px 10px;
+  background: var(--signal);
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: .72rem;
+  font-weight: 650;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+
+.mw-price-bullets {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+}
+
+.mw-price-bullets li {
+  padding-left: 14px;
+  position: relative;
+  font-size: .84rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.mw-price-bullets li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+}
+
+.mw-secondary-offers {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--soft-line);
+}
+
+.mw-secondary-offers .eyebrow {
+  margin: 0 0 10px;
+}
+
+/* A dated before/after example so a visitor knows what a Journey Receipt looks like. */
+.mw-journey-receipt {
+  margin: 24px 0;
+  padding: 16px 18px;
+  border: 1px solid var(--soft-line);
+  background: var(--surface);
+  overflow-x: auto;
+}
+
+.mw-journey-receipt table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: .82rem;
+}
+
+.mw-journey-receipt th,
+.mw-journey-receipt td {
+  text-align: left;
+  padding: 8px 10px 8px 0;
+  vertical-align: top;
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.mw-journey-receipt th {
+  color: var(--muted);
+  font-weight: 650;
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+}
+
+.mw-tell-maz .mw-demo-form {
+  max-width: 640px;
+}
+
+/* ==== Folded in from sales.css (Batch 3 CSS consolidation, 30 Sep 2026). Order kept so the cascade is unchanged. ==== */
 /* Sales pages (homepage, /contact, /lab). Loaded last; every class is `s-` prefixed
    so it never fights the older layered stylesheets. Mobile first. */
 
@@ -383,3 +1443,30 @@
 @media (prefers-reduced-motion: reduce) {
   .s-demo[data-live] .s-demo-row, .s-package-card { transition: none; }
 }
+
+/* Batch 3 (30 Sep): the free plan form in two short steps (JavaScript only). */
+.mw-demo-form[data-step="1"] [data-part="2"], .mw-demo-form[data-step="2"] [data-part="1"], .mw-demo-form[data-sent] [data-part="1"] { display: none; }
+.mw-form-part { display: grid; gap: inherit; }
+.mw-form-progress { display: grid; gap: 6px; font-family: var(--mono); font-size: .78rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.mw-form-progress i { display: block; height: 6px; border: 1px solid var(--ink); background: var(--surface); overflow: hidden; }
+.mw-form-progress b { display: block; height: 100%; background: var(--signal); transform-origin: left; transition: transform 240ms ease-out; }
+.mw-form-next { justify-self: start; }
+.mw-form-summary { padding: 12px 14px; border: 1px solid var(--ink); background: var(--paper); display: grid; gap: 4px; font-size: .92rem; }
+.mw-form-summary p { overflow-wrap: anywhere; }
+.mw-form-summary .text-link { justify-self: start; }
+.mw-form-tick { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--ok); color: var(--surface); font-weight: 800; }
+@media (prefers-reduced-motion: no-preference) {
+  .mw-form-tick { animation: s-tick-in 420ms cubic-bezier(.2, .8, .2, 1.4) both; }
+}
+@media (prefers-reduced-motion: reduce) { .mw-form-progress b { transition: none; } }
+@keyframes s-tick-in { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
+
+/* Page transitions: header stays, content cross-fades, a package card becomes its section. */
+@view-transition { navigation: auto; }
+.mw-site-header { view-transition-name: site-header; }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
+.s-video { margin: 20px 0; max-width: 860px; }
+.s-video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 3px solid var(--ink); background: var(--ink); }
+.mw-demo-form[data-sent] :is(.mw-form-summary, .mw-form-row, .mw-form-kicker, .mw-form-picked, .mw-form-submit > button, .mw-form-submit > p:not([role])) { display: none; }

@@ -58,6 +58,10 @@ export function LeakCheckForm() {
   // Without JavaScript the chips can't submit, so the text box stays required
   // until the form hydrates; after that a tap is enough (validated in submitRequest).
   const [hydrated, setHydrated] = useState(false);
+  // Batch 3: with JavaScript the form is two short steps (the job, then who to
+  // reply to) with a summary before sending. Without it, every field shows at once.
+  const [step, setStep] = useState<1 | 2>(1);
+  const [summary, setSummary] = useState({ task: '', website: '' });
 
   useEffect(() => { setHydrated(true); requestId.current = crypto.randomUUID(); }, []);
 
@@ -96,6 +100,23 @@ export function LeakCheckForm() {
     }
   }
 
+  function goToDetails() {
+    const box = formRef.current?.querySelector<HTMLTextAreaElement>('[name="problem"]');
+    const site = formRef.current?.querySelector<HTMLInputElement>('[name="website"]');
+    const task = box?.value.trim() || '';
+    if (!task) {
+      setInvalidField('problem');
+      setValidationError('Tap at least one problem, or add a line about the job.');
+      focusField('problem');
+      return;
+    }
+    setValidationError('');
+    setInvalidField('');
+    setSummary({ task, website: site?.value.trim() || '' });
+    setStep(2);
+    window.setTimeout(() => focusField('name'), 0);
+  }
+
   function focusField(name: string) {
     formRef.current?.querySelector<HTMLElement>(`[name="${name}"]`)?.focus();
   }
@@ -116,6 +137,7 @@ export function LeakCheckForm() {
 
     const missing = !task ? 'problem' : !name ? 'name' : !email ? 'email' : '';
     if (missing) {
+      if (missing === 'problem') setStep(1);
       setInvalidField(missing);
       setValidationError(
         missing === 'problem'
@@ -163,6 +185,7 @@ export function LeakCheckForm() {
     if (result.ok) {
       form.reset();
       setPicked([]);
+      setStep(1);
       setConfirmationSent(result.confirmationSent === true);
       setSubmitState('sent');
       trackConversion('Form submitted', { source });
@@ -180,6 +203,8 @@ export function LeakCheckForm() {
     <form
       className="mw-demo-form"
       id="leak-check-form"
+      data-step={hydrated && submitState !== 'sent' ? step : undefined}
+      data-sent={submitState === 'sent' || undefined}
       action={NATIVE_FORM_ENDPOINT}
       method="post"
       ref={formRef}
@@ -199,102 +224,122 @@ export function LeakCheckForm() {
       <input type="hidden" name="interested_in" value={pkg || 'Not chosen'} />
       <input type="hidden" name="systems" value={plan.systems} />
       <input type="hidden" name="trade" value={plan.trade} />
-      <p className="mw-form-kicker">Tap, add your name and email, done. No call needed.</p>
+      <p className="mw-form-kicker">Tap what fits, then tell me where to send your plan. No call needed.</p>
       {pkg ? (
         <p className="mw-form-picked">Asking about: <strong>{pkg}</strong> <button type="button" className="text-link" onClick={() => setPkg('')}>Clear</button></p>
       ) : null}
       {plan.systems ? <p className="mw-form-picked">Your plan: <strong>{plan.systems}</strong></p> : null}
 
-      <fieldset className="mw-quick-picks">
-        <legend>What’s costing you customers or time? <small>Tap any that fit</small></legend>
-        <div>
-          {QUICK_PICKS.map((label) => (
-            <button type="button" key={label} aria-pressed={picked.includes(label)} onClick={() => togglePick(label)} disabled={submitState === 'sending'}>
-              {label}
-            </button>
-          ))}
+      {hydrated && submitState !== 'sent' ? (
+        <div className="mw-form-progress" aria-hidden="true">
+          <span>Step {step} of 2 · {step === 1 ? 'The job' : 'Where to send your plan'}</span>
+          <i><b style={{ transform: `scaleX(${step / 2})` }} /></i>
         </div>
-      </fieldset>
+      ) : null}
+      <div className="mw-form-part" data-part="1">
+        <fieldset className="mw-quick-picks">
+          <legend>What’s costing you customers or time? <small>Tap any that fit</small></legend>
+          <div>
+            {QUICK_PICKS.map((label) => (
+              <button type="button" key={label} aria-pressed={picked.includes(label)} onClick={() => togglePick(label)} disabled={submitState === 'sending'}>
+                {label}
+              </button>
+            ))}
+          </div>
+        </fieldset>
 
-      <div className="mw-form-row">
         <label>
-          <span>Name</span>
-          <input
-            name="name"
-            autoComplete="name"
-            required
-            aria-invalid={invalidField === 'name' || undefined}
-            aria-describedby={invalidField === 'name' ? 'leak-check-error' : undefined}
+          <span>{hydrated ? <>Anything else I should know? <small>(optional)</small></> : 'What job do you want off your plate?'}</span>
+          <textarea
+            name="problem"
+            rows={3}
+            required={!hydrated}
+            placeholder="For example: chasing quotes, typing enquiries into a spreadsheet, reminding customers"
+            aria-invalid={invalidField === 'problem' || undefined}
+            aria-describedby={invalidField === 'problem' ? 'leak-check-error' : undefined}
             disabled={submitState === 'sending'}
           />
         </label>
+
         <label>
-          <span>Email</span>
+          <span>Your website <small>(optional)</small></span>
           <input
-            name="email"
-            type="email"
-            autoComplete="email"
-            required
-            aria-invalid={invalidField === 'email' || undefined}
-            aria-describedby={invalidField === 'email' ? 'leak-check-error' : undefined}
+            name="website"
+            inputMode="url"
+            autoComplete="url"
+            placeholder="yourbusiness.co.uk"
             disabled={submitState === 'sending'}
           />
         </label>
+
+        {hydrated ? <button type="button" className="button button-dark mw-form-next" onClick={goToDetails} disabled={submitState === 'sending'}>Next: where to send it</button> : null}
       </div>
 
+      <div className="mw-form-part" data-part="2">
+        {hydrated && summary.task ? (
+          <div className="mw-form-summary">
+            <p><strong>Your job:</strong> {summary.task}</p>
+            {summary.website ? <p><strong>Website:</strong> {summary.website}</p> : null}
+            {pkg ? <p><strong>Asking about:</strong> {pkg}</p> : null}
+            <button type="button" className="text-link" onClick={() => { setStep(1); window.setTimeout(() => focusField('problem'), 0); }}>Change</button>
+          </div>
+        ) : null}
+        <div className="mw-form-row">
+          <label>
+            <span>Name</span>
+            <input
+              name="name"
+              autoComplete="name"
+              required
+              aria-invalid={invalidField === 'name' || undefined}
+              aria-describedby={invalidField === 'name' ? 'leak-check-error' : undefined}
+              disabled={submitState === 'sending'}
+            />
+          </label>
+          <label>
+            <span>Email</span>
+            <input
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              aria-invalid={invalidField === 'email' || undefined}
+              aria-describedby={invalidField === 'email' ? 'leak-check-error' : undefined}
+              disabled={submitState === 'sending'}
+            />
+          </label>
+        </div>
 
-      <label>
-        <span>{hydrated ? <>Anything else I should know? <small>(optional)</small></> : 'What job do you want off your plate?'}</span>
-        <textarea
-          name="problem"
-          rows={3}
-          required={!hydrated}
-          placeholder="For example: chasing quotes, typing enquiries into a spreadsheet, reminding customers"
-          aria-invalid={invalidField === 'problem' || undefined}
-          aria-describedby={invalidField === 'problem' ? 'leak-check-error' : undefined}
-          disabled={submitState === 'sending'}
-        />
-      </label>
 
-      <label>
-        <span>Your website <small>(optional)</small></span>
-        <input
-          name="website"
-          inputMode="url"
-          autoComplete="url"
-          placeholder="yourbusiness.co.uk"
-          disabled={submitState === 'sending'}
-        />
-      </label>
+        <label className="mw-honeypot" aria-hidden="true">
+          <span>Company website</span>
+          <input name="_honey" tabIndex={-1} autoComplete="off" />
+        </label>
 
-      <label className="mw-honeypot" aria-hidden="true">
-        <span>Company website</span>
-        <input name="_honey" tabIndex={-1} autoComplete="off" />
-      </label>
-
-      <div className="mw-form-submit">
-        <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
-          {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Get my free plan and price'}
-        </button>
-        <p>I reply myself within {CHECK_REPLY_TIME} with a plan and fixed price. Free, no obligation.</p>
-        <p id="leak-check-error" className="mw-form-status mw-form-error" role="alert">{validationError}</p>
-        <p className="mw-form-status" role="status" aria-live="polite">
-          {submitState === 'sent' && (
-            <>
-              <strong>Got it, thank you.</strong> {confirmationSent ? "Check your inbox. The confirmation is the same kind of instant reply I set up for clients. " : "Your enquiry arrived. An instant email confirmation could not be confirmed. "} What happens next: I read it myself, look at how you work now, and email your plan and fixed price from {CONTACT_EMAIL} within {CHECK_REPLY_TIME}. Nothing to pay and no call unless you want one. If it hasn’t arrived by then, check your junk folder.{' '}
-              <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); focusField('name'); }}>Send another</button>
-            </>
-          )}
-          {submitState === 'error' && (
-            <>
-              {FAILURE_COPY[failureReason]} Nothing you typed has been lost —{' '}
-              <a href={recoveryHref}>send it by email instead</a>, or email{' '}
-              <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
-            </>
-          )}
-        </p>
-        {submitState === 'error' && <EnquiryRecovery href={recoveryHref} />}
+        <div className="mw-form-submit">
+          <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
+            {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Get my free plan and price'}
+          </button>
+          <p>I reply myself within {CHECK_REPLY_TIME} with a plan and fixed price. Free, no obligation.</p>
+          <p className="mw-form-status" role="status" aria-live="polite">
+            {submitState === 'sent' && (
+              <>
+                <span className="mw-form-tick" aria-hidden="true">✓</span> <strong>Got it, thank you.</strong> {confirmationSent ? "Check your inbox. The confirmation is the same kind of instant reply I set up for clients. " : "Your request arrived safely. The instant confirmation email did not go out this time. "} What happens next: I read it myself, look at how you work now, and email your plan and fixed price from {CONTACT_EMAIL} within {CHECK_REPLY_TIME}. Nothing to pay and no call unless you want one. If it hasn’t arrived by then, check your junk folder.{' '}
+                <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); setStep(1); window.setTimeout(() => focusField('problem'), 0); }}>Send another</button>
+              </>
+            )}
+            {submitState === 'error' && (
+              <>
+                {FAILURE_COPY[failureReason]} Nothing you typed has been lost —{' '}
+                <a href={recoveryHref}>send it by email instead</a>, or email{' '}
+                <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+              </>
+            )}
+          </p>
+          {submitState === 'error' && <EnquiryRecovery href={recoveryHref} />}
+        </div>
       </div>
+      <p id="leak-check-error" className="mw-form-status mw-form-error" role="alert">{validationError}</p>
     </form>
   );
 }

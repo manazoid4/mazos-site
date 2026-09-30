@@ -9,6 +9,8 @@ import { ScrollReveal } from '../scroll-reveal';
 import { ServiceSchema } from '../service-schema';
 import { SystemBuilder } from '../system-builder';
 import { CostCalculator } from '../cost-calculator';
+import { WalkthroughVideo } from '../walkthrough-video';
+import { StickyCheckCta } from '../sticky-cta';
 export const metadata: Metadata = {
  title: 'What we do: systems that work for you',
  description: 'See how enquiries, bookings and follow-ups work together. Three packages, clear prices, and a free plan for your business.',
@@ -21,10 +23,11 @@ export default function WhatWeDo() {
    <p className="s-lede">I build automation, connected tools and custom software that turn enquiries into bookings and take admin off you.</p>
    <nav className="s-actions" aria-label="Choose a package">{OFFERS.map(offer=><a className="button" key={offer.id} href={`#${offer.id}`}>{offer.name} · {offer.price}</a>)}</nav>
   </section>
+  <WalkthroughVideo />
   <section className="s-section s-build" id="build-my-system" aria-labelledby="build-my-system-title"><p className="eyebrow">Your business, your plan</p><h2 id="build-my-system-title">Build your system in two taps.</h2>
    <div className="s-build-grid"><SystemBuilder /><CostCalculator /></div>
   </section>
-  {OFFERS.map((offer,index)=><section className="s-section s-package-detail" id={offer.id} key={offer.id} aria-labelledby={`${offer.id}-title`}>
+  {OFFERS.map((offer,index)=><section className="s-section s-package-detail" id={offer.id} key={offer.id} aria-labelledby={`${offer.id}-title`} style={{ viewTransitionName: `package-${offer.id}` }}>
    <p className="eyebrow">{index === 0 ? 'For one repeated job' : index === 1 ? 'For owners joining up several jobs' : 'For a business normal apps do not fit'}</p>
    <h2 id={`${offer.id}-title`}>{offer.name}</h2><p className="s-price-amount">{offer.price}</p><p>{offer.body}</p>
    <Storyboard system={SYSTEMS.find(system=>system.id===offer.id)!} /><p className="s-small">Illustrations of how it works, not real customers.</p>
@@ -52,6 +55,6 @@ export default function WhatWeDo() {
   </section>
   <section className="s-section" id="example"><h2>An example of the plan you get.</h2><SampleReport /></section>
   <section className="s-final"><h2>Start with the job that costs you time.</h2><p>A personal reply within {CHECK_REPLY_TIME}. No obligation.</p><a className="button button-signal" href="/leak-check">Get a free plan and price</a></section>
-  <SiteFooter /><ScrollReveal />
+  <SiteFooter /><StickyCheckCta href="/leak-check" /><ScrollReveal />
  </main>;
 }

@@ -26,7 +26,7 @@ test('the Free Plan & Fixed Quote has a dedicated shareable acquisition page', a
 
   assert.match(html, /Free Plan &amp; Fixed Quote/);
   assert.doesNotMatch(html, /Customer Journey Review|Booking &amp; Enquiry Check/);
-  assert.match(html, /Tap, add your name and email, done\. No call needed\./);
+  assert.match(html, /Tap what fits, then tell me where to send your plan\. No call needed\./);
   assert.match(html, /within 1 working day/i);
   assert.doesNotMatch(html, /5 working days/i);
   assert.match(html, /any UK business/);
