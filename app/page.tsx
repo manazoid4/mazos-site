@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import { HOME_SECTIONS } from './nav';
 import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL } from './site';
 import { PackageLink } from './package-link';
@@ -8,6 +9,7 @@ import { CallLink, PricingViewTracker } from './analytics';
 import { StickyCheckCta } from './sticky-cta';
 import { SampleReport } from './sample-report';
 import { HeroDemo } from './hero-demo';
+import { ScrollReveal } from './scroll-reveal';
 import { NICHE_GUIDES } from './for/niches';
 import { CARE_PLAN, DELIVERY, EXTRAS, FREE_STEP, GUARANTEE, OFFERS, PROMISES } from './offers';
 
@@ -100,12 +102,12 @@ export default function Page() {
         {HOME_SECTIONS.map((section) => <a key={section.href} href={section.href}>{section.label}</a>)}
       </nav>
 
-      <section className="s-section" id="trades" aria-labelledby="trades-title">
+      <section className="s-section" id="trades" data-reveal aria-labelledby="trades-title">
         <p className="eyebrow">Pick your trade</p>
         <h2 id="trades-title">See what it looks like in a business like yours.</h2>
         <ul className="s-trades">
-          {NICHE_GUIDES.map((guide) => (
-            <li key={guide.id}>
+          {NICHE_GUIDES.map((guide, index) => (
+            <li key={guide.id} style={{ '--i': index } as CSSProperties}>
               <a href={`/for/${guide.id}`}>
                 <svg viewBox="0 0 32 32" width="40" height="40" aria-hidden="true" focusable="false"><path d={TRADE_CARDS[guide.id]?.icon} /></svg>
                 <strong>{guide.shortName}</strong>
@@ -117,12 +119,12 @@ export default function Page() {
         <p className="s-small">Not listed? It works for any trade. <a href="#check">Tell me the job</a>.</p>
       </section>
 
-      <section className="s-section" id="running" aria-labelledby="running-title">
+      <section className="s-section" id="running" data-reveal aria-labelledby="running-title">
         <p className="eyebrow">What your customers see</p>
         <h2 id="running-title">Messages that go out without you.</h2>
         <ul className="s-running">
-          {RUNNING.map((item) => (
-            <li key={item.extra.name}>
+          {RUNNING.map((item, index) => (
+            <li key={item.extra.name} style={{ '--i': index } as CSSProperties}>
               <span className="s-running-when">{item.when}</span>
               <p className="s-running-bubble">{item.message}</p>
               <span className="s-running-name"><strong>{item.extra.name}</strong> {item.extra.price}</span>
@@ -132,7 +134,7 @@ export default function Page() {
         <p className="s-small">Example messages. You choose the wording.</p>
       </section>
 
-      <section className="s-section" id="example" aria-labelledby="example-title">
+      <section className="s-section" id="example" data-reveal aria-labelledby="example-title">
         <p className="eyebrow">What you get back</p>
         <h2 id="example-title">An example plan, before you ask for yours.</h2>
         <SampleReport />
@@ -151,7 +153,7 @@ export default function Page() {
         <LeakCheckForm />
       </section>
 
-      <section className="s-section" id="pricing" aria-labelledby="pricing-title">
+      <section className="s-section" id="pricing" data-reveal aria-labelledby="pricing-title">
         <PricingViewTracker targetId="pricing" />
         <p className="eyebrow">Prices</p>
         <h2 id="pricing-title">Start with one job. Add only what you need.</h2>
@@ -191,7 +193,7 @@ export default function Page() {
         <p className="s-small">Introduce a business and I&apos;ll thank you with £40 when they become a paying client. <a href="/faq#do-you-pay-for-referrals">How →</a></p>
       </section>
 
-      <section className="s-section" id="process" aria-labelledby="process-title">
+      <section className="s-section" id="process" data-reveal aria-labelledby="process-title">
         <p className="eyebrow">How it works</p>
         <h2 id="process-title">Four simple steps.</h2>
         <ol className="s-steps">
@@ -246,6 +248,7 @@ export default function Page() {
 
       <SiteFooter />
       <StickyCheckCta href="#check" hideWhenVisible="check" />
+      <ScrollReveal />
     </main>
   );
 }

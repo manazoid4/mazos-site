@@ -594,3 +594,26 @@ test('six wayfinding helps big sites use are in place', async () => {
   const guide = await readPage('/for/architects');
   assert.match(guide, /href="\/for" aria-current="page"/);
 });
+
+test('scroll reveal hides nothing without JavaScript and respects reduced motion (Codex brief 05)', async () => {
+  const html = await readPage('/');
+  for (const id of ['trades', 'running', 'example', 'pricing', 'process']) {
+    assert.match(html, new RegExp(`id="${id}" data-reveal`), `#${id} should ease in on scroll`);
+  }
+  assert.doesNotMatch(html, /style="[^"]*opacity:\s*0/, 'no content may be hidden in the static HTML');
+  assert.match(html, /class="s-demo" [^>]*data-pause-offscreen/, 'hero demo pauses off-screen');
+  const css = await readFile(path.join(root, 'app', 'sales.css'), 'utf8');
+  const hidden = css.match(/[^{}]*:not\(\[data-shown\]\)[^{]*\{[^}]*\}/g) || [];
+  assert.ok(hidden.length > 0);
+  for (const rule of hidden) assert.match(rule, /^\s*\.js-reveal /, `hidden state must be scoped to .js-reveal: ${rule.trim().slice(0, 80)}`);
+  assert.match(css, /@media \(prefers-reduced-motion: no-preference\) \{\s*\.js-reveal/, 'reveal only runs when motion is allowed');
+});
+
+test('the hero demo animation survives CSS minification', async () => {
+  const cssDir = path.join(exportRoot, '_next', 'static', 'chunks');
+  const files = (await readdir(cssDir)).filter((name) => name.endsWith('.css'));
+  const css = (await Promise.all(files.map((name) => readFile(path.join(cssDir, name), 'utf8')))).join('\n');
+  for (const name of ['s-demo-in-1', 's-demo-in-2', 's-demo-in-3', 's-demo-typing']) {
+    assert.match(css, new RegExp(`animation:[^;}]*\\b${name}\\b`), `${name} must be applied with a duration, not stripped to animation:none`);
+  }
+});
