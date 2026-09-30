@@ -16,13 +16,18 @@ export function ScrollReveal() {
     const root = document.documentElement;
     root.classList.add('js-reveal');
 
+    // The observer also fires on the first pixel of overlap, so check how much is
+    // really on screen: 15% of the section, or a quarter of the viewport for
+    // sections too tall to ever reach 15%.
+    const enoughVisible = (entry: IntersectionObserverEntry) =>
+      entry.intersectionRatio >= 0.15 || entry.intersectionRect.height >= window.innerHeight * 0.25;
     const reveal = new IntersectionObserver((entries) => {
       for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
+        if (!entry.isIntersecting || !enoughVisible(entry)) continue;
         entry.target.setAttribute('data-shown', 'true');
         reveal.unobserve(entry.target);
       }
-    }, { threshold: 0.15 });
+    }, { threshold: [0, 0.05, 0.1, 0.15, 0.25, 0.5] });
     document.querySelectorAll('[data-reveal]:not([data-shown])').forEach((element) => reveal.observe(element));
 
     const pause = new IntersectionObserver((entries) => {
