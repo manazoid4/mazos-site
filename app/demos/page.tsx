@@ -2,90 +2,68 @@ import { fitDescription } from '../seo';
 import { OG_IMAGE } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
+import { OFFERS } from '../offers';
+import { LiveDemo } from './live-demo';
 
-const DEMO_DESCRIPTION = 'See how Maz Works turns a real business problem into a private working demo before a full build is agreed.';
+const DEMO_DESCRIPTION = 'Free live demo: type your business name and watch your own system run, in your name, in 20 seconds. Then get a free plan and fixed price.';
 
 export const metadata: Metadata = {
-  title: 'Private business demos',
+  title: 'Free live demo of your system',
   description: DEMO_DESCRIPTION,
   alternates: { canonical: '/demos' },
   openGraph: { images: [OG_IMAGE],
-    title: 'Private business demos — Maz Works',
-    description: fitDescription('See the useful part working before committing to the full build.'),
+    title: 'Free live demo — Maz Works',
+    description: fitDescription('Watch your own system run, in your business name, in 20 seconds.'),
     url: '/demos',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Private business demos — Maz Works',
-    description: fitDescription('See the useful part working before committing to the full build.'),
+    title: 'Free live demo — Maz Works',
+    description: fitDescription('Watch your own system run, in your business name, in 20 seconds.'),
     images: [OG_IMAGE.url],
   },
 };
 
-const DEMO_TYPES = [
-  {
-    title: 'Website direction',
-    body: 'See how your site could look and guide customers first.',
-  },
-  {
-    title: 'Customer journey',
-    body: 'Make ordering, booking or contacting you easier for customers.',
-  },
-  {
-    title: 'Follow-up & admin',
-    body: 'Show how chasing, copying or missed follow-ups could be simpler.',
-  },
-  {
-    title: 'Physical + digital',
-    body: 'Link your website to review taps, menu stands or signs.',
-  },
-];
+const STARTER = OFFERS[0];
 
 export default function DemosPage() {
   return (
     <main>
       <SiteHeader />
 
-      <section className="mw-hero" id="main-content" tabIndex={-1} aria-labelledby="demos-title">
-        <div className="mw-hero-copy">
-          <p className="eyebrow">Maz Works / Private demos</p>
-          <h1 id="demos-title">See the idea working before you pay for the full build.</h1>
-          <p className="mw-lede">For suitable projects, I build a private demo around your business. No templates and no slide decks.</p>
-          <div className="mw-actions">
-            <a className="button button-signal" href="/contact#contact">Ask for a private demo</a>
-            <a className="text-link" href="#examples">What a demo can show <span aria-hidden="true">↓</span></a>
-          </div>
-          <p className="mw-hero-note">Each demo is shared only with its business. Public examples stay selective by design.</p>
-        </div>
-        <div className="mw-capabilities" aria-label="Private demo benefits">
-          <span>Built around your business</span>
-          <span>Private link + access code</span>
-          <span>No commitment to the full build</span>
-          <span>Plain-English walkthrough</span>
-          <span>Works on phone and desktop</span>
-          <span>Next step agreed only if useful</span>
-        </div>
-      </section>
-
-      <section className="mw-section" id="examples" aria-labelledby="examples-title">
+      <section className="mw-section" id="main-content" tabIndex={-1} aria-labelledby="demos-title">
         <header className="mw-section-heading">
-          <p className="eyebrow">What I can demonstrate</p>
-          <h2 id="examples-title">A working direction, not a promise on a page.</h2>
-          <p>See what changes for customers or staff before a bigger project.</p>
+          <p className="eyebrow">Free live demo</p>
+          <h1 id="demos-title">Watch your own system run, in your name.</h1>
+          <p className="mw-lede">Type your business name, pick your trade and what costs you most. Twenty seconds later you see it working for you.</p>
         </header>
-        <div className="mw-outcome-list">
-          {DEMO_TYPES.map((item) => <div key={item.title}><strong>{item.title}</strong><span>{item.body}</span></div>)}
+        <LiveDemo />
+      </section>
+
+      <section className="mw-section" aria-labelledby="next-title">
+        <header className="mw-section-heading">
+          <p className="eyebrow">From demo to done</p>
+          <h2 id="next-title">Three steps. You only pay at the last one.</h2>
+        </header>
+        <ol className="ld-funnel">
+          <li aria-current="step"><strong>Free live demo</strong><span>What you just watched. No sign-up.</span></li>
+          <li><strong>Free plan and fixed price</strong><span>I look at how you work now and reply within 1 working day.</span></li>
+          <li><strong>I build it on your tools</strong><span>{`From ${STARTER.price}. Half to start, the rest when it works.`}</span></li>
+        </ol>
+        <div className="mw-actions">
+          <a className="button button-signal" href="/leak-check?src=demos-page#leak-check-form">Get my free plan and price</a>
+          <a className="text-link" href="/prices">See every price <span aria-hidden="true">→</span></a>
         </div>
       </section>
 
-      <section className="mw-section mw-pricing" aria-labelledby="privacy-title">
+      <section className="mw-section" aria-labelledby="private-title">
         <header className="mw-section-heading">
-          <p className="eyebrow">Built for real conversations</p>
-          <h2 id="privacy-title">Your business stays the focus.</h2>
-          <p>Client demos sit behind a private link and access code. Only the people you choose see them.</p>
+          <p className="eyebrow">Bigger jobs</p>
+          <h2 id="private-title">For custom builds, a private demo on your real setup.</h2>
+          <p>Before a bigger project is agreed, I can build a private working demo around your business, behind a link and access code only you see.</p>
         </header>
         <div className="mw-actions">
-          <a className="button button-signal" href="/contact#contact">Request yours</a>
+          <a className="button" href="/contact#contact">Ask for a private demo</a>
         </div>
       </section>
 
