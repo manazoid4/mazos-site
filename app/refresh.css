@@ -222,3 +222,10 @@ h2 { font-weight: 650; }
   .js-reveal .s-calendar-guarantee[data-shown] .s-calendar > strong { animation: s-day-tick 350ms ease-out 2.2s both; }
 }
 @keyframes s-day-tick { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.s-why { padding-bottom: clamp(48px, 7vw, 80px); }
+.s-why h2 { margin-bottom: 24px; }
+.s-why ul { list-style: none; display: grid; gap: 0 40px; max-width: 900px; padding: 0; margin-bottom: 24px; }
+.s-why li { display: flex; gap: 14px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--soft-line); }
+.s-why svg { flex: 0 0 20px; fill: none; stroke: var(--accent); stroke-width: 2; }
+.s-why > p { margin-top: 12px; }
+@media (min-width: 721px) { .s-why ul { grid-template-columns: 1fr 1fr; } }
