@@ -3,7 +3,7 @@ import test from 'node:test';
 import { linkedInHref } from '../app/linkedin-source.ts';
 
 test('LinkedIn source survives booking and creator enquiry links', () => {
-  for (const source of ['linkedin', 'linkedin-profile', 'linkedin-featured', 'linkedin-post']) {
+  for (const source of ['linkedin', 'linkedin-profile', 'linkedin-featured', 'linkedin-post', 'linkedin-company']) {
     const query = `?src=${source}`;
     assert.equal(linkedInHref('/brand-kit?src=linkedin', query), `/brand-kit?src=${source}`);
     assert.equal(linkedInHref('/leak-check?package=Brand%20Kit&src=brand-kit#leak-check-form', query), `/leak-check?package=Brand+Kit&src=${source}#leak-check-form`);
