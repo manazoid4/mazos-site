@@ -1,3 +1,5 @@
+import { OFFERS, FREE_STEP } from '../offers';
+import { fitDescription } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { SITE_URL, BOOKING_URL, CHECK_REPLY_TIME } from '../site';
@@ -11,12 +13,12 @@ import { NICHE_GUIDES } from '../for/niches';
 const PAGE_URL = `${SITE_URL}/leak-check`;
 
 export const metadata: Metadata = {
-  title: { absolute: 'Free Plan & Fixed Quote: automate the job that eats your week | Maz Works' },
-  description: 'Tell me the job that eats your week or loses you customers. I reply within 3 working days with a plan and a fixed price, from £195. Free, no obligation, no call needed.',
+  title: { absolute: 'Free plan and fixed quote | Maz Works' },
+  description: fitDescription(`Tell me the job that eats your week or loses you customers. I reply within ${CHECK_REPLY_TIME} with a plan and a fixed price, from ${OFFERS[0].price}. Free, no obligation, no call needed.`),
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: 'Free Plan & Fixed Quote — Maz Works',
-    description: 'Tell me the job you want off your plate. A plan and fixed price within 3 working days.',
+    description: fitDescription('Tell me the job you want off your plate. A plan and fixed price within 1 working day.'),
     url: PAGE_URL,
     type: 'website',
     images: [OG_IMAGE],
@@ -35,7 +37,7 @@ const CHECKS = [
 const RETURN = [
   'What to automate first, and why',
   'What I would leave alone, and why',
-  'A fixed price, starting from £195, with any optional extras listed separately',
+  `A fixed price, starting from ${OFFERS[0].price}, with any optional extras listed separately`,
   'Any software or text-message costs you would pay directly',
   'A date it would be live by',
 ];
@@ -45,7 +47,7 @@ export default function LeakCheckPage() {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: 'Maz Works Free Plan & Fixed Quote',
-    description: 'A free plan and fixed price for automating a job a small business does by hand.',
+    description: fitDescription('A free plan and fixed price for automating a job a small business does by hand.'),
     url: PAGE_URL,
     provider: { '@type': 'Organization', name: 'Maz Works', url: SITE_URL },
     areaServed: [
@@ -63,9 +65,9 @@ export default function LeakCheckPage() {
       <SiteHeader />
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="leak-check-title">
-        <p className="eyebrow">Free Plan &amp; Fixed Quote · £0</p>
+        <p className="eyebrow">{FREE_STEP.name} · {FREE_STEP.price}</p>
         <h1 id="leak-check-title">Tell me the job. I’ll send a plan and a price.</h1>
-        <p>The chasing, copying, reminding or admin that eats your week, or the point where customers slip away. I look at how you work now and reply with a short plan and a fixed price, from £195.</p>
+        <p>The chasing, copying, reminding or admin that eats your week, or the point where customers slip away. I look at how you work now and reply with a short plan and a fixed price, from {OFFERS[0].price}.</p>
         <div className="mw-actions">
           <a className="button button-signal" href="#leak-check-form">Get my free plan and price</a>
           <a className="button" href="#leak-check-return-title">See an example plan</a>

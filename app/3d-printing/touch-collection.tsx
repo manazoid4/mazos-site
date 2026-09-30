@@ -31,7 +31,7 @@ export function TouchCollection() {
             <div className="objects-bundle-number" aria-hidden="true">0{index + 1}</div>
             <figure className="objects-bundle-visual">
               <Image src={bundle.image} alt={bundle.imageAlt} width={bundle.imageWidth} height={bundle.imageHeight} sizes="(max-width: 760px) 100vw, 48vw" unoptimized />
-              <figcaption>Concept visual</figcaption>
+              <figcaption>Illustrative sketch</figcaption>
             </figure>
             <div className="objects-bundle-copy">
               <div className="objects-bundle-title">

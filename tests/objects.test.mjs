@@ -56,7 +56,7 @@ test('Touch presents exactly three clear bundles with every base and artwork est
   assert.match(html, /Optional \+£10/i);
   const formSource = await readFile(path.join(root, 'app', '3d-printing', 'touch-enquiry-form.tsx'), 'utf8');
   assert.match(formSource, /No payment now\. You see the design and final price first\./);
-  assert.equal((html.match(/Concept visual/g) || []).length >= 4, true);
+  assert.equal((html.match(/Illustrative sketch/g) || []).length >= 4, true);
 });
 
 test('Objects enquiry keeps links optional and builds its estimate from shared pricing', async () => {

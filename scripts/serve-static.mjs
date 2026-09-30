@@ -1,4 +1,5 @@
 import { createReadStream } from 'node:fs';
+import { createGzip } from 'node:zlib';
 import { access, stat } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import path from 'node:path';
@@ -54,6 +55,11 @@ async function resolveRequest(requestUrl) {
 const server = createServer(async (request, response) => {
   try {
     const requestPath = new URL(request.url ?? '/', 'http://localhost').pathname;
+    // Explicit opt-in for the real transactional function during local acceptance tests.
+    if (requestPath === '/api/enquiry' && process.env.LOCAL_ENQUIRY === '1') {
+      const { default: enquiry } = await import('../api/enquiry.js');
+      return await enquiry(request, response);
+    }
     if (requestPath === '/_vercel/insights/script.js') {
       response.writeHead(200, {
         'Cache-Control': 'no-store',
@@ -70,11 +76,15 @@ const server = createServer(async (request, response) => {
       return;
     }
 
+    const gzip = /\bgzip\b/.test(request.headers['accept-encoding'] || '') && /\.(html|css|js|json|svg|txt|xml)$/.test(filePath);
     response.writeHead(200, {
+      ...(gzip ? { 'Content-Encoding': 'gzip', Vary: 'Accept-Encoding' } : {}),
       'Content-Type': contentTypes.get(path.extname(filePath)) ?? 'application/octet-stream',
       'Cache-Control': filePath.endsWith('.html') ? 'no-cache' : 'public, max-age=3600',
     });
-    createReadStream(filePath).pipe(response);
+    const stream = createReadStream(filePath);
+    if (gzip) stream.pipe(createGzip()).pipe(response);
+    else stream.pipe(response);
   } catch (error) {
     response.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
     response.end(error instanceof Error ? error.message : 'Server error');

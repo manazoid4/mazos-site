@@ -1,15 +1,11 @@
 import type { Metadata } from 'next';
+import { ConversionTracker } from './analytics';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
-import './simplified.css';
-import './credibility.css';
-import './final-friction.css';
 import './enquiry.css';
-import './resource-pages.css';
-import './clean-pass.css';
-import './mazworks-friction-pass.css';
 import './sales.css';
 import './wayfinding.css';
+import './colour.css';
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, PERSON_NAME, SITE_NAME, SITE_URL } from './site';
 import { OG_IMAGE, SITE_DESCRIPTION, SITE_TITLE } from './seo';
 import { FREE_STEP, OFFERS, PRICE_RANGE } from './offers';
@@ -90,7 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
         <a className="skip-link" href="#main-content">Skip to main content</a>
         {children}
-        <Analytics />
+        <Analytics /><ConversionTracker />
       </body>
     </html>
   );

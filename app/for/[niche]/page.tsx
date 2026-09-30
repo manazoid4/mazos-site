@@ -1,3 +1,9 @@
+import { ServiceSchema } from '../../service-schema';
+import { getSystem, systemsForTrade } from '../../systems';
+import { Scenes } from '../../scenes';
+import { SystemBuilder } from '../../system-builder';
+import { ScrollReveal } from '../../scroll-reveal';
+import { fitDescription } from '../../seo';
 import { OG_IMAGE } from '../../seo';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -16,10 +22,10 @@ export async function generateMetadata({ params }: { params: Promise<{ niche: st
   const guide = getNicheGuide(niche);
   if (!guide) return {};
   return {
-    title: guide.title,
-    description: `${guide.lede} Real examples, a 60-second self-check and what I’d set up, with fixed prices.`,
+    title: `${guide.shortName}: business systems`,
+    description: fitDescription(`${guide.lede} Real examples, a 60-second self-check and what I’d set up, with fixed prices.`),
     alternates: { canonical: `/for/${guide.id}` },
-    openGraph: { title: `${guide.title} — Maz Works`, description: guide.lede, url: `/for/${guide.id}`, images: [OG_IMAGE] },
+    openGraph: { title: `${guide.title} — Maz Works`, description: fitDescription(guide.lede), url: `/for/${guide.id}`, images: [OG_IMAGE] },
   };
 }
 
@@ -31,7 +37,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
 
   return (
     <main>
-      <SiteHeader />
+      <SiteHeader /><ServiceSchema path={`/for/${guide.id}`} />
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="niche-title">
         <Breadcrumbs items={[{ href: '/for', label: 'Who it’s for' }, { label: guide.shortName }]} />
@@ -50,10 +56,18 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <h2 id="niche-examples-title">Where customers slip away.</h2>
         <p className="mw-qw-lead">Real things I found looking at UK businesses in September 2026. Names left out on purpose.</p>
         <ul className="mw-qw-list">
-          {guide.examples.map((example) => (
-            <li key={example.found}><strong>{example.found}</strong> {example.cost}</li>
-          ))}
+          {guide.examples.map((example) => {
+            const system = getSystem(example.system);
+            return <li key={example.found}><strong>{example.cost}</strong><p>Observed: {example.found}</p><p>System that answers it: <a href={`/what-we-do#${system.id}`}>{system.name}</a>. The free plan checks what fits.</p></li>;
+          })}
         </ul>
+      </section>
+
+      <section className="mw-qw-section" id="day" aria-labelledby="niche-day-title">
+        <p className="eyebrow">See it working</p>
+        <h2 id="niche-day-title">What changes in your day.</h2>
+        <Scenes systems={systemsForTrade(guide.id)} />
+        <SystemBuilder presetTrade={guide.id} />
       </section>
 
       <section className="mw-qw-section" aria-labelledby="niche-self-check-title">
@@ -109,7 +123,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         </div>
       </section>
 
-      <SiteFooter />
+      <SiteFooter /><ScrollReveal />
     </main>
   );
 }

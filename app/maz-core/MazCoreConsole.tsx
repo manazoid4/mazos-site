@@ -203,7 +203,7 @@ export default function MazCoreConsole() {
   const deviceOnline = Boolean(cardputer && cardputer.ok !== false);
 
   return (
-    <main className="corePage">
+    <main className="corePage" id="main-content" tabIndex={-1}>
       <div className="coreShell">
         <header className="coreHeader">
           <div>

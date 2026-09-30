@@ -28,7 +28,7 @@ export function PriceList({ checkHref }: { checkHref: string }) {
         <div className="s-compare-scroll" tabIndex={0} role="region" aria-label="Package comparison table">
           <table>
             <thead>
-              <tr><th scope="col"><span className="s-visually-hidden">What you get</span></th>{OFFERS.map((offer) => <th scope="col" key={offer.id}>{offer.name}</th>)}</tr>
+              <tr><th scope="col"><span className="s-visually-hidden">What you get</span></th>{OFFERS.map((offer) => <th scope="col" key={offer.id} tabIndex={0}>{offer.name}</th>)}</tr>
             </thead>
             <tbody>
               {COMPARISON.map(({ row, values }) => (

@@ -1,3 +1,5 @@
+import { ServiceSchema } from '../service-schema';
+import { fitDescription } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { BOOKING_URL, CHECK_REPLY_TIME, SITE_URL } from '../site';
@@ -13,16 +15,16 @@ const CHEAPEST_EXTRA = `£${Math.min(...EXTRAS.map((extra) => Number(extra.price
 const lower = (price: string) => price.replace(/^From/, 'from');
 
 export const metadata: Metadata = {
-  title: { absolute: `Prices: automation ${lower(STARTER.price.startsWith('£') ? `from ${STARTER.price}` : STARTER.price)}, add-ons from ${CHEAPEST_EXTRA}, no VAT added | Maz Works` },
-  description: `Every Maz Works price in one place. ${STARTER.name} ${STARTER.price}, ${SYSTEM.name} ${lower(SYSTEM.price)}, ${CUSTOM.name} ${lower(CUSTOM.price)}, add-ons from ${CHEAPEST_EXTRA} and ${CARE_PLAN.name} ${CARE_PLAN.price}. Fixed quote first, no VAT added.`,
+  title: { absolute: 'Prices and packages | Maz Works' },
+  description: fitDescription(`Every Maz Works price in one place. ${STARTER.name} ${STARTER.price}, ${SYSTEM.name} ${lower(SYSTEM.price)}, ${CUSTOM.name} ${lower(CUSTOM.price)}, add-ons from ${CHEAPEST_EXTRA} and ${CARE_PLAN.name} ${CARE_PLAN.price}. Fixed quote first, no VAT added.`),
   alternates: { canonical: PAGE_URL },
-  openGraph: { title: 'Maz Works prices', description: `Automation from ${STARTER.price}. Add-ons from ${CHEAPEST_EXTRA}. Fixed quote first, no VAT added.`, url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
+  openGraph: { title: 'Maz Works prices', description: fitDescription(`Automation from ${STARTER.price}. Add-ons from ${CHEAPEST_EXTRA}. Fixed quote first, no VAT added.`), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
 };
 
 export default function PricesPage() {
   return (
     <main className="s-home">
-      <SiteHeader />
+      <SiteHeader /><ServiceSchema path="/prices" />
       <section className="s-hero s-hero-short" id="main-content" tabIndex={-1} aria-labelledby="prices-title">
         <p className="eyebrow">Prices</p>
         <h1 id="prices-title">Every price, in one place.</h1>

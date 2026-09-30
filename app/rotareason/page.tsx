@@ -1,3 +1,4 @@
+import { fitDescription } from '../seo';
 import type { Metadata } from 'next';
 import RotaReasonClient from './RotaReasonClient';
 

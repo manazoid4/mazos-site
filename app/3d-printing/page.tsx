@@ -1,3 +1,4 @@
+import { fitDescription } from '../seo';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Breadcrumbs } from '../breadcrumbs';
@@ -9,23 +10,23 @@ import { TouchEnquiryForm } from './touch-enquiry-form';
 import { TouchSelectionProvider } from './touch-selection';
 
 export const metadata: Metadata = {
-  title: 'Maz Works Objects — tap stands, architecture models and drawings',
-  description: 'Custom countertop tap stands, small-batch business gifts, simple architectural presentation models, signs and useful 3D-printed objects for real workplaces.',
+  title: 'Objects: tap stands and signs',
+  description: fitDescription('Custom countertop tap stands, small-batch business gifts, simple architectural presentation models, signs and useful 3D-printed objects for real workplaces.'),
   alternates: { canonical: '/3d-printing' },
   openGraph: {
     title: 'Maz Works Objects — Touch + Business Gifting',
-    description: 'One tap. One useful next step. Plus useful physical objects for client gifting, project presentation and real workplaces.',
+    description: fitDescription('One tap. One useful next step. Plus useful physical objects for client gifting, project presentation and real workplaces.'),
     url: '/3d-printing',
     images: [{
-      url: '/objects/touch-three-hero.webp', width: 1536, height: 1024,
-      alt: 'Concept visual of the black-and-white Touch Three stand',
+      url: '/objects/touch-three-hero.png', width: 1536, height: 1024,
+      alt: 'Illustrative sketch of the Touch Three stand with three tap discs for menu, reviews and bookings',
     }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Maz Works Objects — Touch + Business Gifting',
-    description: 'One tap. One useful next step.',
-    images: ['/objects/touch-three-hero.webp'],
+    description: fitDescription('One tap. One useful next step.'),
+    images: ['/objects/touch-three-hero.png'],
   },
 };
 
@@ -67,8 +68,8 @@ export default function ObjectsPage() {
             </div>
           </div>
           <figure className="objects-hero-visual">
-            <Image src="/objects/touch-three-hero.webp" alt="Concept render of a low rounded black stand holding three white tap discs for menu, reviews and bookings" width={1536} height={1024} sizes="(max-width: 800px) 100vw, 52vw" priority unoptimized />
-            <figcaption><span>Concept visual</span><span>Touch Three / 3 tap points</span></figcaption>
+            <Image src="/objects/touch-three-hero.svg" alt="Sketch of a low angled stand holding three tap discs for menu, reviews and bookings, with labelled tap points" width={1536} height={1024} sizes="(max-width: 800px) 100vw, 52vw" priority unoptimized />
+            <figcaption><span>Illustrative sketch</span><span>Touch Three / 3 tap points</span></figcaption>
           </figure>
         </section>
 

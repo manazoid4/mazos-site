@@ -1,3 +1,4 @@
+import { fitDescription } from '../seo';
 import { OG_IMAGE } from '../seo';
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '../breadcrumbs';
@@ -9,11 +10,11 @@ const PAGE_URL = `${SITE_URL}/whats-new`;
 
 export const metadata: Metadata = {
   title: "What's New",
-  description: 'Recent Maz Works site and product improvements, explained plainly with what changed and why it matters.',
+  description: fitDescription('Recent Maz Works site and product improvements, explained plainly with what changed and why it matters.'),
   alternates: { canonical: PAGE_URL },
   openGraph: { images: [OG_IMAGE],
     title: "What's New at Maz Works",
-    description: 'Recent improvements to Maz Works, explained without release-note noise.',
+    description: fitDescription('Recent improvements to Maz Works, explained without release-note noise.'),
     url: PAGE_URL,
     type: 'website',
   },
