@@ -26,9 +26,9 @@ export function ScenePlayer({ tabs, children }: { tabs: Tab[]; children: ReactNo
   }, []);
 
   useEffect(() => {
-    if (picked || !visible) return;
+    if (picked || !visible || active === tabs.length - 1) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const timer = window.setTimeout(() => setActive((current) => (current + 1) % tabs.length), tabs[active].durationMs);
+    const timer = window.setTimeout(() => setActive((current) => Math.min(current + 1, tabs.length - 1)), tabs[active].durationMs);
     return () => window.clearTimeout(timer);
   }, [active, picked, visible, tabs]);
 

@@ -7,7 +7,7 @@ const TEXT_BACK = EXTRAS.find((extra) => extra.name === 'Missed-call text-back')
  * goes out on its own, and the booking that follows. Pure CSS, so it costs no
  * JavaScript. Every row keeps its space from the first paint (only opacity and
  * transform animate), so nothing shifts. Reduced motion shows the finished
- * thread with no movement. The loop pauses while off-screen (see
+ * thread with no movement. The sequence plays once and pauses while off-screen (see
  * scroll-reveal.tsx); a typing bubble and a Delivered tick show the send.
  * Labelled as an example: not a real customer.
  */

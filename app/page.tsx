@@ -155,7 +155,7 @@ export default function Page() {
         <p className="eyebrow">How it works</p>
         <h2 id="process-title">Four simple steps.</h2>
         <ol className="s-steps">
-          {STEPS.map(([number, title, body]) => <li key={number} data-reveal><span>{number}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10" /></svg></span><strong>{title}</strong><p>{body}</p></li>)}
+          {STEPS.map(([number, title, body]) => <li key={number} data-reveal><svg className="s-step-line" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0L100 100" pathLength="1" /></svg><span>{number}<svg className="s-step-tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10" /></svg></span><strong>{title}</strong><p>{body}</p></li>)}
         </ol>
         <details className="s-delivery"><summary>How I set it up</summary>
           <ul><li><strong>{DELIVERY[0].title}</strong><span>I never need your passwords. You add me as a user.</span></li><li><strong>Tested with you</strong><span>Optional: {CARE_PLAN.name} ({CARE_PLAN.price}) afterwards.</span></li></ul>
