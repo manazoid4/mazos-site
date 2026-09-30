@@ -75,6 +75,15 @@ What holds it back, most costly first:
   - take 390px and 1280px screenshots of every changed page;
   - list every `TODO(Maz)`;
   - make the PR body a checkbox list of deliverables, each with its evidence.
+- **Screen recordings (Maz, 30 Sep): the executor records them itself; Maz does not.**
+  - Record with Playwright's `recordVideo`, using Chromium at `/opt/pw-browsers/chromium*` or the local Chrome, never `playwright install`. Serve `out/` locally.
+  - Record one video per changed page at 390px (phone) and 1280px (desktop). Scroll slowly top to bottom, pausing on each animation long enough to see it play.
+  - Each batch also records a short click-through of its key flow:
+    - Batch 1: homepage → "What I build" card → `/what-we-do` → free plan form submitted to a test inbox, then the confirmation email shown on screen if reachable;
+    - Batch 2: the builder picking a trade and headaches → price → pre-filled form; the calculator; the tappable phone;
+    - Batch 3: page transitions and the 2-step form.
+  - Convert the videos to `.mp4` (ffmpeg if available; otherwise keep `.webm`). Save them in `docs/recordings/batch-N/` only when each file is under 5 MB, and otherwise attach or link them in the PR. List every file with one line on what it shows.
+  - End every batch with a short **"Maz: what I need from you"** list. It covers only things an agent truly cannot do (for example recording his own face and voice for the Batch 3 video, approving the preview, or pasting a key into Vercel), each with exact steps and the time it takes. If there is nothing, write "Nothing".
 
 ## Batch 1: Foundation and clarity
 Goal: in 5 seconds a visitor knows what Maz Works does, what it costs to start, and what to do next, and the site proves the product on them.
@@ -139,8 +148,8 @@ Goal: in 5 seconds a visitor knows what Maz Works does, what it costs to start, 
    - honeypot plus a basic rate limit, and no secrets in the client;
    - the success screen says "Check your inbox. The confirmation is the same kind of instant reply I set up for clients."
 
-   This is transactional mail to someone who asked, so it is not outreach. `TODO(Maz)`: confirm this use of Resend.
-8. **Reply time as a token:** move "3 working days" into one constant. `TODO(Maz)`: decide whether it becomes "1 working day", a HubSpot task he owns. Change the constant only once he confirms.
+   This is transactional mail to someone who asked, so it is not outreach. **Approved by Maz, 30 Sep.**
+8. **Reply time: 1 working day** (Maz decided on 30 Sep). Put it in one constant (for example `CHECK_REPLY_TIME` in `enquiry.ts`) and change every "3 working days" to "1 working day" across the site, the FAQ, the confirmation email and the tests. Afterwards grep `app/`, `api/`, `tests/` and `scripts/` so none remain there (docs and this brief keep the old wording as history).
 9. **Positioning clean-up:**
    - remove the "Other projects" group (Objects, Architecture models, Lab) from the header menu;
    - keep them as small footer links. Objects/3D printing stays an optional differentiator per the standing decision; it just isn't the first thing a systems buyer sees;
@@ -242,9 +251,9 @@ Done when:
 - the handover is updated.
 
 ## TODO(Maz)
-- Confirm Resend for the instant confirmation email (Batch 1).
-- Decide the reply time, "3 working days" or "1 working day" (Batch 1).
+- ~~Confirm Resend for the instant confirmation email~~: approved 30 Sep.
+- ~~Decide the reply time~~: 1 working day, decided 30 Sep. Maz must reply to every free-plan request within 1 working day once Batch 1 is live.
 - Record a 60-second walkthrough video (Batch 3).
 
 ## Executor prompt (paste per batch)
-> Work in manazoid4/mazos-site. Start a fresh branch from main (or use the branch you are given). Read AGENTS.md, `docs/codex-tasks/ANIMATION-GUIDE.md` and `docs/codex-tasks/BRIEF-3-batch-content-motion-2026-09-30.md`, then do **Batch N only**. Keep the live look exactly (same fonts, weights and borders); the only palette change is Batch 1's orange tokens. Follow every rule under "Rules for every batch": prices only through `app/offers.ts`, nothing invented, no "AI" in the offer, no website-fix wording. Run `npm run verify` and Lighthouse on `/`, `/what-we-do`, `/prices`, `/leak-check` and `/for/garages`, and take 390/1280 screenshots of every changed page. Open one PR titled "Batch N: …" whose body is the batch's deliverables as checkboxes with evidence, plus the TODO(Maz) list. Do not merge. Stop and report if any budget fails.
+> Work in manazoid4/mazos-site. Start a fresh branch from main (or use the branch you are given). Read AGENTS.md, `docs/codex-tasks/ANIMATION-GUIDE.md` and `docs/codex-tasks/BRIEF-3-batch-content-motion-2026-09-30.md`, then do **Batch N only**. Keep the live look exactly (same fonts, weights and borders); the only palette change is Batch 1's orange tokens. Follow every rule under "Rules for every batch": prices only through `app/offers.ts`, nothing invented, no "AI" in the offer, no website-fix wording. Run `npm run verify` and Lighthouse on `/`, `/what-we-do`, `/prices`, `/leak-check` and `/for/garages`, and take 390/1280 screenshots of every changed page. Record the screen yourself with Playwright (see "Screen recordings" in the rules) and link every recording in the PR. Open one PR titled "Batch N: …" whose body is the batch's deliverables as checkboxes with evidence, the recordings, and a "Maz: what I need from you" list (exact steps, or "Nothing"). Do not merge. Stop and report if any budget fails.
