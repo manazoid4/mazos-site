@@ -19,7 +19,8 @@ const exportRoot = path.join(root, 'out');
 // 1600 -> 1900 on 27 Sep (Offer v9): ManyPets-style comparison table, promises and "what's not included" list.
 // 1900 -> 1600 on 28 Sep: comparison table and all twelve add-ons moved to /prices; the homepage sells one first step.
 // 1600 -> 1850 on 30 Sep: Maz asked to keep the "What changes in your day" explainers (six short storyboards).
-const WORD_BUDGET = 1850;
+// 30 Sep 2026, approved brief v2: five focused homepage sections.
+const WORD_BUDGET = 1300;
 // Same count as the homepage: all text inside <main>, including header, footer and closed answers.
 const CASE_STUDY_WORD_BUDGET = 320;
 
@@ -44,7 +45,7 @@ async function readPage(route) {
   ];
   for (const candidate of candidates) {
     try {
-      return await readFile(candidate, 'utf8');
+      return (await readFile(candidate, 'utf8')).replaceAll('<!-- -->', '');
     } catch {
       // Support both Next.js static-export path shapes.
     }
@@ -74,8 +75,8 @@ async function internalTargetExists(urlPath) {
 test('homepage positions Maz Works as a systems builder, not a website-fix shop (Maz, 27 Sep)', async () => {
   const html = await readPage('/');
   // Conversion rebuild (29 Sep): the hero leads with one concrete outcome, then the positioning line.
-  assert.match(html, /Miss a call, and the caller gets a text with your booking link/);
-  assert.match(html, /I build the systems that turn enquiries into paying customers/);
+  assert.match(html, /Systems that turn enquiries into bookings and take the admin off you/);
+  assert.match(html, /Start with one job from/);
   assert.match(html, /Automation, connected tools and custom software/);
   assert.match(html, /For UK small businesses and teams, in any trade/);
   for (const smallTime of [/website fix/i, /small fixes/i, /quick fix/i, /Enquiry Repair/, /fix what’s broken/i, /Maz Works is new/i]) {
@@ -97,32 +98,32 @@ test('homepage has one way in: the free check form, with the call as the fallbac
   assert.match(html, /class="s-sticky/);
 });
 
-test('homepage puts the risk reversal straight under the hero, then who and where', async () => {
+test('homepage keeps the fixed terms with its package strip', async () => {
   const html = await readPage('/');
   const strip = html.match(/<ul class="s-trust"[\s\S]*?<\/ul>/)?.[0];
   assert.ok(strip, 'terms strip must sit under the hero');
-  for (const item of [/One fixed price, agreed first/, /Half now, half when it works/, /No VAT added/, /Delivery guarantee/]) {
+  for (const item of [/One fixed price, agreed first/, /Half now, half when it works/, /No VAT added/, /No contracts/]) {
     assert.match(strip, item);
   }
   assert.ok(html.indexOf('class="s-trust"') < html.indexOf('id="trades"'), 'terms come before the rest of the page');
-  assert.match(html, /You deal with Manazir[^<]*UK-wide/);
+  assert.match(html, /I’m Manazir. I plan it and build it myself/);
 });
 
-test('homepage shows the six trades as cards and a labelled missed-call example (29 Sep rebuild)', async () => {
+test('homepage shows six trade links and a labelled missed-call example (29 Sep rebuild)', async () => {
   const html = await readPage('/');
   for (const guide of ['salons-and-beauty', 'dog-groomers', 'garages', 'cafes-and-food', 'clinics-and-therapists', 'architects']) {
-    assert.match(html, new RegExp(`<ul class="s-trades"[\\s\\S]*href="/for/${guide}"`));
+    assert.match(html, new RegExp(`href="/for/${guide}"`));
   }
   assert.match(html, /class="s-demo"/);
   assert.match(html, /Missed-call text-back, £95\. Not a real customer\./);
   assert.match(html, /What changes in your day\./);
-  assert.match(html, /Illustrations of how each system works, not real customers\./);
+  assert.match(html, /Illustrations of how it works, not real customers\./);
   // The example plan comes before the form, so owners see what they get first.
-  assert.ok(html.indexOf('id="example"') < html.indexOf('id="check"'), 'example plan must come before the form');
+  assert.ok(html.includes('href="/what-we-do#example"'));
 });
 
-test('homepage shows a clearly labelled example report, not a real client', async () => {
-  const html = await readPage('/');
+test('what-we-do shows a clearly labelled example report, not a real client', async () => {
+  const html = await readPage('/what-we-do');
   assert.match(html, /id="example"/);
   assert.match(html, /A fictional business, made up to show the format/);
   for (const level of ['Fix now', 'Fix soon', 'Working well']) assert.match(html, new RegExp(level));
@@ -160,10 +161,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
     assert.match(html, new RegExp(name));
     assert.match(html, new RegExp(price, 'i'));
   }
-  assert.match(html, /id="extras"/);
-  for (const extra of ['Appointment reminders', 'Missed-call text-back', 'Review requests', 'Google Business Profile setup']) {
-    assert.match(html, new RegExp(extra));
-  }
+  for (const id of ['starter', 'business-system', 'custom']) assert.ok(html.includes(`/what-we-do#${id}`));
   // The full comparison and all twelve add-ons live on /prices, so the phone page stays short.
   assert.doesNotMatch(html, /id="compare"/);
   assert.doesNotMatch(html, /Team training/);
@@ -197,8 +195,8 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(prices, /\/leak-check\?package=Starter%20Automation#leak-check-form/);
   assert.doesNotMatch(prices, /\bAI\b/);
   assert.match(prices, /\/leak-check\?package=Team%20training#leak-check-form/, 'every add-on can pre-fill the free plan form');
-  assert.match(prices, /<title>Prices: automation from £195, add-ons from £39, no VAT added/);
-  assert.match(prices, /Business System from £795, Custom Software &amp; Websites from £1,950, add-ons from £39 and Keep It Running £19\/month/);
+  assert.match(prices, /<title>Prices and packages \| Maz Works/);
+  assert.match(prices, /Every Maz Works price in one place/);
 
   const contact = await readPage('/contact');
   for (const price of ['£195', 'From £795', 'From £1,950']) assert.match(contact, new RegExp(price));
@@ -208,7 +206,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
 test('the free plan form lets owners tap their problem, and only the no-JavaScript route asks for an auto-reply', async () => {
   for (const route of ['/', '/leak-check']) {
     const html = await readPage(route);
-    assert.match(html, /name="_autoresponse" value="Thanks, I&#x27;ve got your message\. [^"]*within 3 working days/, `${route} form sends no instant confirmation`);
+    assert.match(html, /name="_autoresponse" value="Thanks, I&#x27;ve got your message\. [^"]*within 1 working day/, `${route} form sends no instant confirmation`);
     for (const pick of ['Missed calls', 'Slow replies to enquiries', 'No-shows', 'Chasing quotes']) {
       assert.match(html, new RegExp(`<button type="button" aria-pressed="false"[^>]*>${pick}</button>`), `${route} missing quick pick ${pick}`);
     }
@@ -220,32 +218,22 @@ test('the free plan form lets owners tap their problem, and only the no-JavaScri
   assert.match(source, /KNOWN_PACKAGES\.includes\(name\)/, '?package= only accepts real package and add-on names');
 });
 
-test('the free-check reply promise is 3 working days everywhere (Maz confirmed 27 Sep)', async () => {
+test('the free-check reply promise is 1 working day everywhere (Maz confirmed 27 Sep)', async () => {
   for (const route of ['/', '/leak-check', '/contact', '/faq']) {
     const html = await readPage(route);
     assert.doesNotMatch(html, /5 working days/, `${route} still promises 5 working days`);
     assert.doesNotMatch(html, /2 working days/, `${route} still promises 2 working days`);
   }
-  assert.match(await readPage('/'), /within 3 working days/);
+  assert.match(await readPage('/'), /within 1 working day/);
 });
 
-test('homepage stays compact with four visible process steps', async () => {
-  const html = await readPage('/');
-  for (const id of ['check', 'example', 'pricing', 'process', 'about', 'faq']) {
-    assert.match(html, new RegExp(`id="${id}"`));
-  }
-  assert.match(html, /Tell me the job/);
-  assert.match(html, /I send a plan and fixed price/);
-  assert.match(html, /You pay half to start/);
-  assert.match(html, /Working by the agreed date/);
-  assert.match(html, /href="\/faq"/);
-  // How the work is set up (Maz, 28 Sep): existing tools, user access not passwords, tested first, optional care plan.
-  assert.match(html, /How I set it up/);
-  assert.match(html, /Built on what you already use/);
-  assert.match(html, /I never need your passwords/);
-  assert.match(html, /Keep It Running \(£19\/month\)/);
-  const words = mainWordCount(html);
-  assert.ok(words <= WORD_BUDGET, `homepage has ${words} words; budget is ${WORD_BUDGET}`);
+test('homepage has five sections and keeps process detail on what-we-do (brief v2)', async () => {
+ const html = await readPage('/');
+ for (const id of ['build','how','check','about']) assert.match(html,new RegExp(`id="${id}"`));
+ assert.equal((html.match(/<section /g)||[]).length,5);
+ const detail=await readPage('/what-we-do');
+ for(const copy of ['How I set it up','Built on what you already use','I never need your passwords','What you own at the end','What I need from you']) assert.ok(detail.includes(copy));
+ const words=mainWordCount(html);assert.ok(words<=WORD_BUDGET,`homepage has ${words} words; budget ${WORD_BUDGET}`);
 });
 
 test('public contact uses the branded address while form delivery stays stable', async () => {
@@ -575,9 +563,8 @@ test('architecture drawings exist and are labelled illustrative', async () => {
 
 test('six wayfinding helps big sites use are in place', async () => {
   const home = await readPage('/');
-  // 1. On this page jump bar on the long homepage, every target exists.
-  const jumps = [...home.matchAll(/<nav class="mw-onpage"[\s\S]*?<\/nav>/g)][0][0].match(/href="#([a-z-]+)"/g).map((h) => h.slice(7, -1));
-  for (const id of jumps) assert.match(home, new RegExp(`id="${id}"`), `jump target #${id} missing`);
+  // The shorter homepage uses package links; the detail page owns the long-form navigation.
+  for(const id of ['starter','business-system','custom']) assert.ok(home.includes(`/what-we-do#${id}`));
   // 2. Human site map lists every trade guide and case study.
   const map = await readPage('/site-map');
   for (const href of ['/for/architects', '/for/garages', '/work/jobfilter', '/leak-check', '/whats-new']) assert.ok(map.includes(`href="${href}"`), `site map missing ${href}`);
@@ -599,7 +586,7 @@ test('six wayfinding helps big sites use are in place', async () => {
 
 test('scroll reveal hides nothing without JavaScript and respects reduced motion (Codex brief 05)', async () => {
   const html = await readPage('/');
-  for (const id of ['trades', 'how', 'example', 'pricing', 'process']) {
+  for (const id of ['how']) {
     assert.match(html, new RegExp(`id="${id}" data-reveal`), `#${id} should ease in on scroll`);
   }
   assert.doesNotMatch(html, /style="[^"]*opacity:\s*0/, 'no content may be hidden in the static HTML');

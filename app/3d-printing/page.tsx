@@ -1,3 +1,4 @@
+import { fitDescription } from '../seo';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Breadcrumbs } from '../breadcrumbs';
@@ -9,12 +10,12 @@ import { TouchEnquiryForm } from './touch-enquiry-form';
 import { TouchSelectionProvider } from './touch-selection';
 
 export const metadata: Metadata = {
-  title: 'Maz Works Objects — tap stands, architecture models and drawings',
-  description: 'Custom countertop tap stands, small-batch business gifts, simple architectural presentation models, signs and useful 3D-printed objects for real workplaces.',
+  title: 'Objects: tap stands and signs',
+  description: fitDescription('Custom countertop tap stands, small-batch business gifts, simple architectural presentation models, signs and useful 3D-printed objects for real workplaces.'),
   alternates: { canonical: '/3d-printing' },
   openGraph: {
     title: 'Maz Works Objects — Touch + Business Gifting',
-    description: 'One tap. One useful next step. Plus useful physical objects for client gifting, project presentation and real workplaces.',
+    description: fitDescription('One tap. One useful next step. Plus useful physical objects for client gifting, project presentation and real workplaces.'),
     url: '/3d-printing',
     images: [{
       url: '/objects/touch-three-hero.webp', width: 1536, height: 1024,
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Maz Works Objects — Touch + Business Gifting',
-    description: 'One tap. One useful next step.',
+    description: fitDescription('One tap. One useful next step.'),
     images: ['/objects/touch-three-hero.webp'],
   },
 };

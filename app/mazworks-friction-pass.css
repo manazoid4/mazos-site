@@ -248,7 +248,8 @@
   top: -14px;
   left: 0;
   padding: 3px 10px;
-  background: var(--accent, #e6ff38);
+  background: var(--signal);
+  border: 1px solid var(--ink);
   color: var(--ink);
   font-family: var(--mono);
   font-size: .72rem;

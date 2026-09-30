@@ -185,3 +185,23 @@ export const THIRD_PARTY_NOTE = 'If you need a paid app, like a texting service,
 export const GUARANTEE = 'Starter Automation is working within 7 working days of me getting access, or you don’t pay the rest. I still finish it. Larger jobs get a dated plan in the quote. If I can’t deliver what we agreed, your deposit is refunded.';
 
 export const PRICE_RANGE = '£195–£1,950+';
+
+export function getOffer(id: Offer['id']): Offer {
+  const offer = OFFERS.find(item => item.id === id);
+  if (!offer) throw new Error(`Unknown offer: ${id}`);
+  return offer;
+}
+export function getExtra(name: string): Extra {
+  const extra = EXTRAS.find(item => item.name === name);
+  if (!extra) throw new Error(`Unknown extra: ${name}`);
+  return extra;
+}
+export function workingBy(id: Offer['id']): string {
+  return id === 'starter' ? 'Within 7 working days of access' : 'Date agreed in your fixed quote';
+}
+export const REFERRAL_REWARD = '£40';
+
+export function priceAmount(price: string): number { return Number(price.replace(/[^0-9.]/g, '')); }
+export function formatPrice(amount: number): string { return `£${amount.toLocaleString('en-GB')}`; }
+export const LOWEST_EXTRA_PRICE = formatPrice(Math.min(...EXTRAS.map(extra => priceAmount(extra.price))));
+export const EXAMPLE_PLAN_TOTAL = formatPrice(OFFERS[0].from + priceAmount(getExtra('Appointment reminders').price));

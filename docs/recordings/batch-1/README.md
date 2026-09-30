@@ -1,0 +1,54 @@
+# Batch 1 recordings
+
+Chromium via local Chrome; Playwright recordVideo; slow scroll with animation pauses.
+
+- [3d-printing-1280.mp4](./3d-printing-1280.mp4) — /3d-printing, 1280px, top-to-bottom scroll.
+- [3d-printing-390.mp4](./3d-printing-390.mp4) — /3d-printing, 390px, top-to-bottom scroll.
+- [contact-1280.mp4](./contact-1280.mp4) — /contact, 1280px, top-to-bottom scroll.
+- [contact-390.mp4](./contact-390.mp4) — /contact, 390px, top-to-bottom scroll.
+- [demos-1280.mp4](./demos-1280.mp4) — /demos, 1280px, top-to-bottom scroll.
+- [demos-390.mp4](./demos-390.mp4) — /demos, 390px, top-to-bottom scroll.
+- [faq-1280.mp4](./faq-1280.mp4) — /faq, 1280px, top-to-bottom scroll.
+- [faq-390.mp4](./faq-390.mp4) — /faq, 390px, top-to-bottom scroll.
+- [for-1280.mp4](./for-1280.mp4) — /for, 1280px, top-to-bottom scroll.
+- [for-390.mp4](./for-390.mp4) — /for, 390px, top-to-bottom scroll.
+- [for-architects-1280.mp4](./for-architects-1280.mp4) — /for/architects, 1280px, top-to-bottom scroll.
+- [for-architects-390.mp4](./for-architects-390.mp4) — /for/architects, 390px, top-to-bottom scroll.
+- [for-cafes-and-food-1280.mp4](./for-cafes-and-food-1280.mp4) — /for/cafes-and-food, 1280px, top-to-bottom scroll.
+- [for-cafes-and-food-390.mp4](./for-cafes-and-food-390.mp4) — /for/cafes-and-food, 390px, top-to-bottom scroll.
+- [for-clinics-and-therapists-1280.mp4](./for-clinics-and-therapists-1280.mp4) — /for/clinics-and-therapists, 1280px, top-to-bottom scroll.
+- [for-clinics-and-therapists-390.mp4](./for-clinics-and-therapists-390.mp4) — /for/clinics-and-therapists, 390px, top-to-bottom scroll.
+- [for-dog-groomers-1280.mp4](./for-dog-groomers-1280.mp4) — /for/dog-groomers, 1280px, top-to-bottom scroll.
+- [for-dog-groomers-390.mp4](./for-dog-groomers-390.mp4) — /for/dog-groomers, 390px, top-to-bottom scroll.
+- [for-garages-1280.mp4](./for-garages-1280.mp4) — /for/garages, 1280px, top-to-bottom scroll.
+- [for-garages-390.mp4](./for-garages-390.mp4) — /for/garages, 390px, top-to-bottom scroll.
+- [for-salons-and-beauty-1280.mp4](./for-salons-and-beauty-1280.mp4) — /for/salons-and-beauty, 1280px, top-to-bottom scroll.
+- [for-salons-and-beauty-390.mp4](./for-salons-and-beauty-390.mp4) — /for/salons-and-beauty, 390px, top-to-bottom scroll.
+- [home-1280.mp4](./home-1280.mp4) — /, 1280px, top-to-bottom scroll.
+- [home-390.mp4](./home-390.mp4) — /, 390px, top-to-bottom scroll.
+- [lab-1280.mp4](./lab-1280.mp4) — /lab, 1280px, top-to-bottom scroll.
+- [lab-390.mp4](./lab-390.mp4) — /lab, 390px, top-to-bottom scroll.
+- [leak-check-1280.mp4](./leak-check-1280.mp4) — /leak-check, 1280px, top-to-bottom scroll.
+- [leak-check-390.mp4](./leak-check-390.mp4) — /leak-check, 390px, top-to-bottom scroll.
+- [maz-core-1280.mp4](./maz-core-1280.mp4) — /maz-core, 1280px, top-to-bottom scroll.
+- [maz-core-390.mp4](./maz-core-390.mp4) — /maz-core, 390px, top-to-bottom scroll.
+- [maz-pocket-ai-1280.mp4](./maz-pocket-ai-1280.mp4) — /maz-pocket-ai, 1280px, top-to-bottom scroll.
+- [maz-pocket-ai-390.mp4](./maz-pocket-ai-390.mp4) — /maz-pocket-ai, 390px, top-to-bottom scroll.
+- [mazos-1280.mp4](./mazos-1280.mp4) — /mazos, 1280px, top-to-bottom scroll.
+- [mazos-390.mp4](./mazos-390.mp4) — /mazos, 390px, top-to-bottom scroll.
+- [prices-1280.mp4](./prices-1280.mp4) — /prices, 1280px, top-to-bottom scroll.
+- [prices-390.mp4](./prices-390.mp4) — /prices, 390px, top-to-bottom scroll.
+- [quick-win-1280.mp4](./quick-win-1280.mp4) — /quick-win, 1280px, top-to-bottom scroll.
+- [quick-win-390.mp4](./quick-win-390.mp4) — /quick-win, 390px, top-to-bottom scroll.
+- [rotareason-1280.mp4](./rotareason-1280.mp4) — /rotareason, 1280px, top-to-bottom scroll.
+- [rotareason-390.mp4](./rotareason-390.mp4) — /rotareason, 390px, top-to-bottom scroll.
+- [site-map-1280.mp4](./site-map-1280.mp4) — /site-map, 1280px, top-to-bottom scroll.
+- [site-map-390.mp4](./site-map-390.mp4) — /site-map, 390px, top-to-bottom scroll.
+- [what-we-do-1280.mp4](./what-we-do-1280.mp4) — /what-we-do, 1280px, top-to-bottom scroll.
+- [what-we-do-390.mp4](./what-we-do-390.mp4) — /what-we-do, 390px, top-to-bottom scroll.
+- [whats-new-1280.mp4](./whats-new-1280.mp4) — /whats-new, 1280px, top-to-bottom scroll.
+- [whats-new-390.mp4](./whats-new-390.mp4) — /whats-new, 390px, top-to-bottom scroll.
+- [work-jobfilter-1280.mp4](./work-jobfilter-1280.mp4) — /work/jobfilter, 1280px, top-to-bottom scroll.
+- [work-jobfilter-390.mp4](./work-jobfilter-390.mp4) — /work/jobfilter, 390px, top-to-bottom scroll.
+- [work-scrap-finance-partners-1280.mp4](./work-scrap-finance-partners-1280.mp4) — /work/scrap-finance-partners, 1280px, top-to-bottom scroll.
+- [work-scrap-finance-partners-390.mp4](./work-scrap-finance-partners-390.mp4) — /work/scrap-finance-partners, 390px, top-to-bottom scroll.

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { CHECK_REPLY_TIME, CONTACT_EMAIL } from '../site';
 import { trackConversion } from '../analytics';
 import { EnquiryRecovery } from '../enquiry-recovery';
-import { NATIVE_FORM_ENDPOINT, buildRecoveryMailto, sendEnquiry } from '../enquiry';
+import { NATIVE_FORM_ENDPOINT, buildRecoveryMailto, sendPlanEnquiry } from '../enquiry';
 import { CHECK_PICK_EVENT } from '../package-link';
 import { EXTRAS, OFFERS } from '../offers';
 
@@ -40,6 +40,9 @@ const KNOWN_PACKAGES: string[] = [...OFFERS.map((offer) => offer.name), ...EXTRA
 export const AUTO_REPLY = `Thanks, I've got your message. I'll read it myself and email you a short plan and a fixed price within ${CHECK_REPLY_TIME}. No call needed and no obligation. If anything changes, email ${CONTACT_EMAIL}. Manazir, Maz Works`;
 
 export function LeakCheckForm() {
+  const requestId = useRef('');
+  const started = useRef(false);
+  const [confirmationSent, setConfirmationSent] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
   const [validationError, setValidationError] = useState('');
@@ -52,7 +55,7 @@ export function LeakCheckForm() {
   // until the form hydrates; after that a tap is enough (validated in submitRequest).
   const [hydrated, setHydrated] = useState(false);
 
-  useEffect(() => setHydrated(true), []);
+  useEffect(() => { setHydrated(true); requestId.current = crypto.randomUUID(); }, []);
 
   useEffect(() => {
     const choose = (name: string | null) => {
@@ -65,6 +68,7 @@ export function LeakCheckForm() {
   }, []);
 
   function togglePick(label: string) {
+    if (!started.current) { started.current = true; trackConversion('Form started', { placement: window.location.pathname }); }
     const box = formRef.current?.querySelector<HTMLTextAreaElement>('[name="problem"]');
     const on = !picked.includes(label);
     setPicked(on ? [...picked, label] : picked.filter((item) => item !== label));
@@ -124,7 +128,8 @@ export function LeakCheckForm() {
 
     setSubmitState('sending');
 
-    const result = await sendEnquiry({
+    const result = await sendPlanEnquiry({
+      request_id: requestId.current,
       name,
       email,
       website,
@@ -143,7 +148,11 @@ export function LeakCheckForm() {
     if (result.ok) {
       form.reset();
       setPicked([]);
+      setConfirmationSent(result.confirmationSent === true);
       setSubmitState('sent');
+      trackConversion('Form submitted', { source });
+      if (result.confirmationSent) trackConversion('Confirmation sent', { source });
+      requestId.current = crypto.randomUUID();
       trackConversion('Check submitted', { source });
       return;
     }
@@ -161,6 +170,7 @@ export function LeakCheckForm() {
       ref={formRef}
       onSubmit={submitRequest}
       onInput={(event) => {
+        if (!started.current) { started.current = true; trackConversion('Form started', { placement: window.location.pathname }); }
         if ((event.target as HTMLInputElement).name === invalidField) {
           setInvalidField('');
           setValidationError('');
@@ -253,7 +263,7 @@ export function LeakCheckForm() {
         <p className="mw-form-status" role="status" aria-live="polite">
           {submitState === 'sent' && (
             <>
-              <strong>Got it, thank you.</strong> What happens next: I read it myself, look at how you work now, and email your plan and fixed price from {CONTACT_EMAIL} within {CHECK_REPLY_TIME}. Nothing to pay and no call unless you want one. If it hasn’t arrived by then, check your junk folder.{' '}
+              <strong>Got it, thank you.</strong> {confirmationSent ? "Check your inbox. The confirmation is the same kind of instant reply I set up for clients. " : "Your enquiry arrived. An instant email confirmation could not be confirmed. "} What happens next: I read it myself, look at how you work now, and email your plan and fixed price from {CONTACT_EMAIL} within {CHECK_REPLY_TIME}. Nothing to pay and no call unless you want one. If it hasn’t arrived by then, check your junk folder.{' '}
               <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); focusField('name'); }}>Send another</button>
             </>
           )}

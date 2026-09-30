@@ -12,7 +12,7 @@ export type NavLink = { href: string; label: string };
 export const PRIMARY_NAV: NavLink[] = [
   { href: '/for', label: 'Your trade' },
   { href: '/prices', label: 'Prices' },
-  { href: '/#process', label: 'How it works' },
+  { href: '/what-we-do', label: 'What we do' },
   { href: '/faq', label: 'FAQ' },
 ];
 
@@ -23,7 +23,8 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/prices', label: 'Packages and prices' },
       { href: '/prices#compare', label: 'Compare packages' },
       { href: '/prices#extras', label: 'All add-ons' },
-      { href: '/#example', label: 'Example plan' },
+      { href: '/what-we-do#example', label: 'Example plan' },
+      { href: '/what-we-do', label: 'What we do' },
       { href: '/leak-check', label: 'Free plan and price' },
       { href: '/contact', label: 'Bigger jobs' },
     ],
@@ -58,11 +59,8 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
 
 /** Homepage "On this page" jump bar, in page order. */
 export const HOME_SECTIONS: NavLink[] = [
-  { href: '#trades', label: 'Your trade' },
+  { href: '#build', label: 'What I build' },
   { href: '#how', label: 'See it working' },
-  { href: '#example', label: 'Example plan' },
-  { href: '#check', label: 'Free plan' },
-  { href: '#pricing', label: 'Prices' },
-  { href: '#process', label: 'How it works' },
-  { href: '#faq', label: 'Questions' },
+  { href: '#check', label: 'Free plan and prices' },
+  { href: '#about', label: 'About Maz' },
 ];

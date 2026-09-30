@@ -1,0 +1,42 @@
+[
+  {
+    "route": "/",
+    "performance": 98,
+    "accessibility": 100,
+    "cls": 0,
+    "tbt": 130,
+    "failures": []
+  },
+  {
+    "route": "/what-we-do",
+    "performance": 98,
+    "accessibility": 100,
+    "cls": 0,
+    "tbt": 132,
+    "failures": []
+  },
+  {
+    "route": "/prices",
+    "performance": 97,
+    "accessibility": 100,
+    "cls": 0,
+    "tbt": 134,
+    "failures": []
+  },
+  {
+    "route": "/leak-check",
+    "performance": 97,
+    "accessibility": 100,
+    "cls": 0,
+    "tbt": 134,
+    "failures": []
+  },
+  {
+    "route": "/for/garages",
+    "performance": 97,
+    "accessibility": 100,
+    "cls": 0,
+    "tbt": 134,
+    "failures": []
+  }
+]

@@ -1,3 +1,5 @@
+import { OFFERS, FREE_STEP } from '../offers';
+import { fitDescription } from '../seo';
 import { OG_IMAGE } from '../seo';
 import type { Metadata } from 'next';
 import { CONTACT_EMAIL, SITE_URL } from '../site';
@@ -8,12 +10,12 @@ const ENQUIRY_HREF = '/contact?service=repair#contact';
 
 export const metadata: Metadata = {
   title: 'Quick Win has moved',
-  description: 'Quick Win has been replaced by Starter Automation: one job set up to run itself, £195.',
+  description: fitDescription(`Quick Win has been replaced by Starter Automation: one job set up to run itself, ${OFFERS[0].price}.`),
   alternates: { canonical: '/' },
   robots: { index: false, follow: true },
   openGraph: { images: [OG_IMAGE],
     title: 'Quick Win has moved — Maz Works',
-    description: 'This offer has been replaced by Starter Automation.',
+    description: fitDescription('This offer has been replaced by Starter Automation.'),
     url: PAGE_URL,
     type: 'website',
   },
@@ -49,7 +51,7 @@ export default function QuickWinPage() {
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="quick-win-title">
         <p className="eyebrow">This offer has moved</p>
         <h1 id="quick-win-title">Quick Win is now Starter Automation.</h1>
-        <p>One job you do by hand, set up to run itself, tested and backed by a guarantee. £195, fixed price agreed first, with optional extras if you want them.</p>
+        <p>One job you do by hand, set up to run itself, tested and backed by a guarantee. {OFFERS[0].price}, fixed price agreed first, with optional extras if you want them.</p>
         <div className="mw-actions">
           <a className="button button-signal" href={ENQUIRY_HREF}>Ask about Starter Automation</a>
         </div>

@@ -1,12 +1,14 @@
 :root {
-  --paper: #f3f0e8;
-  --surface: #fbfaf5;
+  --paper: #f6f6f3;
+  --surface: #ffffff;
   --ink: #151615;
   --charcoal: #20211f;
   --muted: #5d605b;
   --line: #20211f;
-  --soft-line: #b9b7ae;
-  --signal: #dfff2f;
+  --soft-line: #c9cbc6;
+  --signal: #ff6b1a;
+  --signal-text: #c2410c;
+  --ok: #0f7a4f;
   --mono: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
   --sans: "Aptos", "Segoe UI Variable", Arial, system-ui, sans-serif;
 }
@@ -34,7 +36,7 @@ section { scroll-margin-top: 80px; }
 
 .site-header { min-height: 80px; display: flex; align-items: center; justify-content: space-between; gap: 32px; border-bottom: 1px solid var(--line); }
 .brand { display: inline-flex; align-items: center; gap: 11px; min-height: 48px; text-decoration: none; }
-.brand-mark { width: 42px; height: 42px; display: grid; place-items: center; background: var(--ink); color: var(--signal); font-family: var(--mono); font-size: .75rem; font-weight: 900; letter-spacing: -.06em; }
+.brand-mark { width: 42px; height: 42px; display: grid; place-items: center; background: var(--ink); color: var(--surface); font-family: var(--mono); font-size: .75rem; font-weight: 900; letter-spacing: -.06em; }
 .brand > span:last-child { display: grid; line-height: 1; }
 .brand strong { font-size: .96rem; letter-spacing: -.02em; }
 .brand small { margin-top: 5px; color: var(--muted); font-family: var(--mono); font-size: .72rem; }
@@ -111,7 +113,7 @@ section { scroll-margin-top: 80px; }
 .build-list p, .process-column p { color: #c8c9c2; font-size: .82rem; }
 .process-column ol { border-top: 1px solid #666860; list-style: none; }
 .process-column li { min-height: 124px; padding: 20px 0; display: grid; grid-template-columns: 48px 100px 1fr; align-items: center; gap: 15px; border-bottom: 1px solid #666860; }
-.process-column li > span { color: var(--signal); font-family: var(--mono); font-size: .72rem; }
+.process-column li > span { color: var(--surface); font-family: var(--mono); font-size: .72rem; }
 .process-column li strong { font-size: 1.05rem; }
 
 .client-quiet { padding: clamp(90px, 12vw, 155px) 0; display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(60px, 9vw, 120px); border-bottom: 1px solid var(--line); }

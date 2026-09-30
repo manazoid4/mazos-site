@@ -1,3 +1,4 @@
+import { OFFERS, getExtra, EXAMPLE_PLAN_TOTAL } from './offers';
 /**
  * A clearly labelled example of the free plan and fixed quote. The business is
  * fictional; the kind of plan matches what a real reply looks like.
@@ -43,7 +44,7 @@ export function SampleReport() {
       </ol>
       <p className="s-report-untested"><em>Not included:</em> a new website. The current one works, so there’s no reason to pay for one.</p>
       <footer>
-        <p><strong>The quote.</strong> Starter Automation, <strong>£195</strong>: every enquiry lands in one list and gets an instant reply. Add-on, <strong>£79</strong>: appointment reminders switched on. Total £274, No VAT added. Working within 7 working days of access, or you don’t pay the rest.</p>
+        <p><strong>The quote.</strong> Starter Automation, <strong>{OFFERS[0].price}</strong>: every enquiry lands in one list and gets an instant reply. Add-on, <strong>{getExtra('Appointment reminders').price}</strong>: appointment reminders switched on. Total {EXAMPLE_PLAN_TOTAL}, No VAT added. Working within 7 working days of access, or you don’t pay the rest.</p>
         <p className="s-small">If nothing is worth automating, the plan says so.</p>
       </footer>
     </article>
