@@ -1,0 +1,53 @@
+
+> mazos-site@0.1.0 build
+> next build
+
+▲ Next.js 16.3.4 (Turbopack)
+✓ Running next.config.js took 35ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 2.5s
+  Running TypeScript ...
+  Finished TypeScript in 3.5s ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/29) ...
+  Generating static pages using 11 workers (7/29) 
+  Generating static pages using 11 workers (14/29) 
+  Generating static pages using 11 workers (21/29) 
+✓ Generating static pages using 11 workers (29/29) in 765ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /3d-printing
+├ ○ /contact
+├ ○ /demos
+├ ○ /faq
+├ ○ /for
+├   /for/[niche]
+│ ├ ● /for/salons-and-beauty
+│ ├ ● /for/dog-groomers
+│ ├ ● /for/garages
+│ └ ● [+3 more paths]
+├ ○ /icon.svg
+├ ○ /lab
+├ ○ /leak-check
+├ ○ /maz-core
+├ ○ /maz-pocket-ai
+├ ○ /mazos
+├ ○ /prices
+├ ○ /quick-win
+├ ○ /robots.txt
+├ ○ /rotareason
+├ ○ /site-map
+├ ○ /sitemap.xml
+├ ○ /whats-new
+└   /work/[slug]
+  ├ ● /work/jobfilter
+  └ ● /work/scrap-finance-partners
+
+
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML (uses generateStaticParams)
+

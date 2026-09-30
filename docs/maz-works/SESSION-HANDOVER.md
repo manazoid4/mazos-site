@@ -53,3 +53,7 @@ The first protected CI run caught one useful issue: the Objects page reached 936
 
 ### Standing guardrails
 Maz Works remains a systems/automation/custom-software business for UK small businesses and teams, with websites and physical objects as routes inside the offer. Never invent clients, results or testimonials; never publish Maz's location, personal email or phone; never advertise AI; and use branch + PR rather than pushing directly to `main`.
+
+## 30 September: real-direction work paused for agent handover
+
+Brief 07 steps 1–7 and brief 01 are committed on `claude/real-direction`; nothing is merged. The remaining work, exact verification state and performance shortfall are recorded in `docs/codex-tasks/HANDOVER-real-direction-2026-09-30.md`. Continue with the missing brief 02 SVGs, then briefs 03, 04 and 06, full verification and review evidence. No PR is open yet; Claude reviews the eventual PR before Maz merges.
