@@ -3,104 +3,59 @@ import type { Metadata } from 'next';
 import { Breadcrumbs } from '../breadcrumbs';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { SITE_URL } from '../site';
-import { formatUpdateDate, LATEST_MAZ_WORKS_UPDATE, MAZ_WORKS_UPDATES } from '../updates';
+import { OFFERS } from '../offers';
 
 const PAGE_URL = `${SITE_URL}/whats-new`;
 
+// Brief 06: written for buyers. Each entry is something an owner can use today,
+// with a link to it. No internal tooling, tests or refactors, and no results.
+const SHIPPED = [
+  { title: 'See each system working', href: '/#how', body: 'Short animations show what happens after a missed call, a booking, a finished job or a quote, in a normal working day.' },
+  { title: 'A free plan in a few taps', href: '/leak-check', body: 'Tap what’s costing you, add your name and email, and I reply with a plan and a fixed price. Typing is optional.' },
+  { title: 'A guide for your trade', href: '/for', body: 'Salons, groomers, garages, cafés, clinics and architects each have a page with real examples and pictures of the systems.' },
+  { title: 'Every price in one place', href: '/prices', body: `Packages from ${OFFERS[0].price}, every add-on with a plain line on what you get, and what isn’t included.` },
+  { title: 'Easier to find your way around', href: '/site-map', body: 'The same menu on every page, a site map, and a free plan button that stays one tap away on phones.' },
+];
+
 export const metadata: Metadata = {
-  title: "What's New",
-  description: 'Recent Maz Works site and product improvements, explained plainly with what changed and why it matters.',
+  title: 'What I’ve shipped lately',
+  description: 'New things on Maz Works you can use today: the free plan, trade guides, prices in one place and short animations of each system.',
   alternates: { canonical: PAGE_URL },
-  openGraph: { images: [OG_IMAGE],
-    title: "What's New at Maz Works",
-    description: 'Recent improvements to Maz Works, explained without release-note noise.',
-    url: PAGE_URL,
-    type: 'website',
-  },
+  openGraph: { images: [OG_IMAGE], title: 'What I’ve shipped lately — Maz Works', description: 'New things on Maz Works you can use today.', url: PAGE_URL, type: 'website' },
 };
 
 export default function WhatsNewPage() {
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: "What's New at Maz Works",
+    '@type': 'ItemList',
+    name: 'What I’ve shipped lately',
     url: PAGE_URL,
-    dateModified: LATEST_MAZ_WORKS_UPDATE.publishedAt,
-    hasPart: MAZ_WORKS_UPDATES.map((update) => ({
-      '@type': 'Article',
-      headline: update.title,
-      datePublished: update.publishedAt,
-      url: `${PAGE_URL}#${update.id}`,
-      description: update.summary,
-    })),
+    itemListElement: SHIPPED.map((item, index) => ({ '@type': 'ListItem', position: index + 1, name: item.title, url: `${SITE_URL}${item.href}` })),
   };
 
   return (
     <main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
       <SiteHeader />
-
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="updates-title">
         <Breadcrumbs items={[{ label: 'What’s new' }]} />
-        <p className="eyebrow">Updates</p>
-        <h1 id="updates-title">What&apos;s new at Maz Works.</h1>
-        <p>Real changes to the site and customer journey. Short release notes, what changed, and no invented results.</p>
-        <div className="mw-actions">
-          <a className="button button-signal" href={`#${LATEST_MAZ_WORKS_UPDATE.id}`}>Latest update</a>
-          <a className="text-link" href="/lab">See the work <span aria-hidden="true">→</span></a>
-        </div>
+        <p className="eyebrow">Updated September 2026</p>
+        <h1 id="updates-title">What I’ve shipped lately.</h1>
+        <p>New things on the site you can use today. Each one links straight to it.</p>
       </section>
-
-      <div className="mw-updates-layout">
-        <nav className="mw-updates-nav" aria-label="Update history">
-          <p className="eyebrow">Jump to an update</p>
-          <ol>
-            {MAZ_WORKS_UPDATES.map((update, index) => (
-              <li key={update.id}>
-                <a href={`#${update.id}`}>
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <time dateTime={update.publishedAt}>{formatUpdateDate(update.publishedAt)}</time>
-                </a>
-              </li>
-            ))}
-          </ol>
-        </nav>
-
-        <section className="mw-update-list" aria-label="Maz Works updates">
-          {MAZ_WORKS_UPDATES.map((update, index) => (
-            <article className="mw-update-card" id={update.id} key={update.id}>
-              <header>
-                <div className="mw-update-meta">
-                  <span>{index === 0 ? 'LATEST' : 'UPDATE'}</span>
-                  <span>{update.label}</span>
-                  <time dateTime={update.publishedAt}>{formatUpdateDate(update.publishedAt)}</time>
-                </div>
-                <h2>{update.title}</h2>
-                <p>{update.summary}</p>
-              </header>
-              <ul>
-                {update.items.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-            </article>
+      <section className="mw-qw-section" aria-label="Recently shipped">
+        <ul className="s-why-list">
+          {SHIPPED.map((item) => (
+            <li key={item.title}>
+              <strong><a href={item.href}>{item.title}</a></strong>
+              <span>{item.body}</span>
+            </li>
           ))}
-        </section>
-      </div>
-
-      <section className="mw-resource-cta" aria-labelledby="updates-cta-title">
-        <div>
-          <p className="eyebrow">Free first step</p>
-          <h2 id="updates-cta-title">Tell me the job that eats your week.</h2>
-          <p>I’ll send a plan and a fixed price. No call needed.</p>
-        </div>
+        </ul>
         <div className="mw-actions">
-          <a className="button button-signal" href="/leak-check?src=whats-new">Get a free plan and price</a>
-          <a className="text-link" href="/site-map">Site map <span aria-hidden="true">→</span></a>
+          <a className="button button-signal" href="/leak-check?src=whats-new#leak-check-form">Get a free plan and price</a>
         </div>
       </section>
-
       <SiteFooter />
     </main>
   );
