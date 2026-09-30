@@ -36,3 +36,11 @@ Rules: branch + PR, never push to main. Never invent testimonials, clients or re
 - **YouTube URL from Maz (standard, 29 Sep):** treat it as project intelligence: follow the vault `prompts/youtube-video-intelligence.md` and save the note in vault `wiki/sources/video-intelligence/`. Search that index before new research or a strategic decision.
 - **Pitch + script (standard):** every lead in HubSpot gets a `📞 PITCH + SCRIPT` note: pitch, result, route and a 5-step call script for Gold/Silver; a one-line solution for Bench. Format in the vault `prompts/maz-works-niche-needs.md`.
 - **Leads (standard):** tier Gold 8–10 / Silver 6–7 / Bench, recorded in the private `maz-works-leads` repo and HubSpot together. Cold email only to confirmed limited companies; everyone else is phone or walk-in.
+- **Contact the owner directly (standard, Maz 30 Sep):** every outreach goes to the owner or decision-maker by name, never a generic "the team" pitch.
+  - **Before drafting,** find the owner using Companies House officers, the LinkedIn company page, the About/Team page and review sites. Note their name and profile URL, plus one personal hook from their own words (for example a LinkedIn About line), in HubSpot.
+  - **Route order:**
+    1. LinkedIn message to the owner (short "Before you hire…" style, 300 characters or fewer, one message plus a subject line);
+    2. email to the owner's own business address, or the public inbox addressed to them, only when the company is a confirmed Ltd;
+    3. a phone call asking for the owner by name, after a CTPS/TPS check.
+  - **Follow-up:** one follow-up after 3 days by the next route, logged as a HubSpot task.
+  - Never guess or scrape private email addresses or personal mobiles.
