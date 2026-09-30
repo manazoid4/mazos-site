@@ -36,8 +36,8 @@ const BOARDS: Record<string, Board & { label: string; plan: string }> = {
     plan: price('Starter Automation'),
     steps: [
       { icon: 'inbox', title: 'Enquiries arrive everywhere', detail: 'Phone, email, web form, Instagram.' },
-      { icon: 'list', title: 'They land in one list', detail: 'Each gets an instant reply.' },
-      { icon: 'check', title: 'You answer from one place', detail: 'No more checking five apps.' },
+      { icon: 'list', title: 'One list, one instant reply', detail: 'Each gets an instant reply.' },
+      { icon: 'check', title: 'You answer from one place', detail: 'No more checking each app.' },
     ],
     result: 'Nothing slips through on a busy Saturday.',
   },
@@ -46,8 +46,8 @@ const BOARDS: Record<string, Board & { label: string; plan: string }> = {
     plan: price('Appointment reminders'),
     steps: [
       { icon: 'calendar', title: 'A booking is made', detail: 'In the app you already use.' },
-      { icon: 'message', title: 'A reminder the day before', detail: '“See you at 10:30. Reply C to change.”' },
-      { icon: 'check', title: 'They turn up, or move it', detail: 'The slot isn’t wasted.' },
+      { icon: 'message', title: 'A reminder the day before', detail: '“Your appointment is tomorrow.”' },
+      { icon: 'check', title: 'They confirm or move it', detail: 'The slot isn’t wasted.' },
     ],
     result: 'Fewer no-shows, no texting at night.',
   },
@@ -56,7 +56,7 @@ const BOARDS: Record<string, Board & { label: string; plan: string }> = {
     plan: price('Review requests'),
     steps: [
       { icon: 'check', title: 'The job is done', detail: 'Marked finished as normal.' },
-      { icon: 'message', title: 'A thank-you asks for a review', detail: 'With a link to your Google page.' },
+      { icon: 'message', title: 'A thank-you with a link', detail: 'Opens your Google review page.' },
       { icon: 'star', title: 'A new review arrives', detail: 'You’re told so you can reply.' },
     ],
     result: 'More reviews, without asking face to face.',
@@ -71,11 +71,38 @@ const BOARDS: Record<string, Board & { label: string; plan: string }> = {
     ],
     result: 'Quotes don’t go cold because you were busy.',
   },
+  booking: {
+    label: 'Online booking', plan: price('Online booking setup'),
+    steps: [
+      { icon: 'clock', title: 'It’s ten at night', detail: 'Your customer has a moment.' },
+      { icon: 'calendar', title: 'They choose a slot', detail: 'From your available appointments.' },
+      { icon: 'check', title: 'The booking is confirmed', detail: 'No phone call needed.' },
+    ],
+    result: 'Bookings while you’re off the clock.',
+  },
+  rebooking: {
+    label: 'Rebooking', plan: price('Rebooking reminders'),
+    steps: [
+      { icon: 'calendar', title: 'Their next visit is due', detail: 'Based on their last appointment.' },
+      { icon: 'message', title: 'A helpful nudge arrives', detail: 'With your booking link.' },
+      { icon: 'check', title: 'They pick their next visit', detail: 'Without you chasing them.' },
+    ],
+    result: 'Keep in touch between visits.',
+  },
+  weekly: {
+    label: 'Weekly report', plan: `${price('Weekly report')} · included with Business System`,
+    steps: [
+      { icon: 'inbox', title: 'Monday’s email is here', detail: 'Enquiries and bookings together.' },
+      { icon: 'doc', title: 'See what needs attention', detail: 'Quotes waiting. Money due.' },
+      { icon: 'check', title: 'Choose what to do first', detail: 'No spreadsheet round-up.' },
+    ],
+    result: 'Start the week knowing what’s waiting.',
+  },
 };
 
 function Storyboard({ board }: { board: Board & { plan: string } }) {
   return (
-    <div className="s-board">
+    <div className="s-board" data-pause-offscreen>
       <ol className="s-board-steps">
         {board.steps.map((step, index) => (
           <li key={step.title} className="s-board-step" style={{ ['--i' as string]: index }}>
@@ -92,7 +119,7 @@ function Storyboard({ board }: { board: Board & { plan: string } }) {
 
 function MissedCallScene() {
   return (
-    <div className="s-board s-board-phone">
+    <div className="s-board s-board-phone" data-pause-offscreen>
       <HeroDemo />
       <div className="s-board-side">
         <p><strong>You’re with a customer and the phone rings.</strong></p>

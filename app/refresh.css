@@ -162,3 +162,16 @@ h2 { font-weight: 650; }
   .s-check { margin-inline: -8px; padding: 22px 16px; }
   .s-check .mw-demo-form { padding: 18px 14px; }
 }
+/* Stable player height: scene changes must never move the next section. */
+.s-player { display: grid; }
+.s-player-tabs { grid-column: 1; grid-row: 1; }
+.s-scene-panel { grid-column: 1; grid-row: 2; align-self: start; }
+.s-scene-panel[hidden] { display: block; visibility: hidden; pointer-events: none; }
+.s-scene-panel[hidden] * { animation-play-state: paused !important; }
+[data-offscreen] .s-board-step, [data-offscreen] .s-board-result { animation-play-state: paused; }
+.s-board-step svg { background: none; border-radius: 0; padding: 4px; }
+@media (max-width: 720px) {
+  .s-board-step { grid-template-columns: 32px 1fr; padding: 12px; }
+  .s-board-step svg { grid-row: span 2; width: 28px; height: 28px; }
+  .s-board-phone .s-demo { max-width: 260px; }
+}

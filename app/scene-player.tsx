@@ -43,10 +43,18 @@ export function ScenePlayer({ tabs, children }: { tabs: Tab[]; children: ReactNo
             id={`scene-tab-${tab.id}`}
             aria-selected={index === active}
             aria-controls={`scene-${tab.id}`}
+            tabIndex={index === active ? 0 : -1}
+            onKeyDown={(event) => {
+              const next = event.key === 'ArrowRight' ? (index + 1) % tabs.length : event.key === 'ArrowLeft' ? (index - 1 + tabs.length) % tabs.length : event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : -1;
+              if (next < 0) return;
+              event.preventDefault(); setActive(next); setPicked(true);
+              document.getElementById(`scene-tab-${tabs[next].id}`)?.focus();
+            }}
+            onFocus={() => setPicked(true)}
             onClick={() => { setActive(index); setPicked(true); }}
           >
             {tab.label}
-            {index === active && !picked ? <span className="s-player-progress" style={{ animationDuration: `${tab.durationMs}ms` }} aria-hidden="true" /> : null}
+            {index === active && !picked ? <span className="s-player-progress" style={{ animationDuration: `${tab.durationMs}ms`, animationPlayState: visible ? 'running' : 'paused' }} aria-hidden="true" /> : null}
           </button>
         ))}
       </div>
