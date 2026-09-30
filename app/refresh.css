@@ -209,3 +209,16 @@ h2 { font-weight: 650; }
 }
 @keyframes s-process-line { from { transform: scale(0); } to { transform: scale(1); } }
 @keyframes s-process-tick { from { opacity: 0; transform: scale(.5); } to { opacity: 1; transform: scale(1); } }
+.s-calendar-guarantee { display: grid; gap: 28px; align-items: center; }
+.s-calendar { max-width: 320px; }
+.s-calendar > span { font-size: .85rem; color: var(--muted); }
+.s-calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-block: 12px; }
+.s-calendar-days > span { display: grid; place-items: center; position: relative; min-height: 38px; border-radius: 7px; background: var(--paper); font-size: .8rem; }
+.s-calendar-days b { position: absolute; inset: 0; display: grid; place-items: center; background: var(--tint); border-radius: 7px; font-size: 1rem; }
+.s-calendar > strong { color: var(--accent); }
+@media (min-width: 721px) { .s-calendar-guarantee { grid-template-columns: 280px 1fr; } }
+@media (prefers-reduced-motion: no-preference) {
+  .js-reveal .s-calendar-guarantee[data-shown] .s-calendar-days b { animation: s-day-tick 350ms ease-out both; animation-delay: calc(var(--i) * .3s); }
+  .js-reveal .s-calendar-guarantee[data-shown] .s-calendar > strong { animation: s-day-tick 350ms ease-out 2.2s both; }
+}
+@keyframes s-day-tick { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }

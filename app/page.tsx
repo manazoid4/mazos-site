@@ -6,13 +6,14 @@ import { HOMEPAGE_FAQS } from './faqs';
 import { LeakCheckForm } from './leak-check/leak-check-form';
 import { CallLink, PricingViewTracker } from './analytics';
 import { StickyCheckCta } from './sticky-cta';
+import { DeliveryCalendar } from './delivery-calendar';
 import { InboxStory } from './inbox-story';
 import { SampleReport } from './sample-report';
 import { PlugHero } from './plug-hero';
 import { Scenes } from './scenes';
 import { ScrollReveal } from './scroll-reveal';
 import { NICHE_GUIDES } from './for/niches';
-import { CARE_PLAN, DELIVERY, EXTRAS, FREE_STEP, GUARANTEE, OFFERS, PROMISES } from './offers';
+import { CARE_PLAN, DELIVERY, EXTRAS, FREE_STEP, OFFERS, PROMISES } from './offers';
 
 const [STARTER, ...BIGGER] = OFFERS;
 const extra = (name: string) => EXTRAS.find((item) => item.name === name)!;
@@ -140,9 +141,7 @@ export default function Page() {
           <p><strong>{CARE_PLAN.name}, {CARE_PLAN.price}</strong> if you want me to look after it afterwards.</p>
         </div>
 
-        <div className="s-guarantee">
-          <strong>The guarantee.</strong> {GUARANTEE} You own everything I build.
-        </div>
+        <DeliveryCalendar />
         <div className="s-actions">
           <a className="button button-signal" href="#check">Get a free plan and price</a>
           <a className="button" href="/prices">Every price, compared</a>
