@@ -82,11 +82,28 @@ Goal: a visitor knows in 5 seconds what Maz Works does, what it costs to start a
 
    Never put orange text on the canvas at `--signal`, and never pair orange with cream. Grep for any hard-coded lime or cream values and replace them with tokens.
 
+8. **New page `/what-we-do`** (Maz asked on 30 Sep). It explains "this is what we do" properly, as a fuller version of the homepage animations. Sections:
+   - **Top:** one plain line on what Maz Works builds, then the 3 packages as jump links.
+   - **One section per package** (Starter Automation, Business System, Custom Software & Websites), each with:
+     - who it's for;
+     - a larger animated walkthrough in 4 steps: what triggers it → what happens on its own → what you see → the result;
+     - a before-and-after strip ("today you…" / "with this…");
+     - what's included, what's not, and the working-by date;
+     - the price from `offers.ts`;
+     - one CTA to the free plan form.
+   - **Every system in detail:** reuse the day-scene storyboards (missed calls, enquiries, reminders, reviews, quotes, booking, rebooking, weekly report) as the building blocks. The tools are named generically ("your calendar", "your booking app", "your email"), with no brand names unless we can confirm each one is supported.
+   - **What you own at the end:** your accounts, your tools, and handover notes.
+   - **What I need from you:** access, one call, and sign-off.
+   - **Closing CTA.**
+
+   All animations are labelled "Illustrations of how it works, not real customers". The page is added to the nav and the sitemap, and the homepage "What I build" cards link to its sections. It gets its own title, description and Service JSON-LD, and the page must hit the same Lighthouse and contrast budgets.
+
 Done when:
 - all 15 pages pass the title/description tests;
 - the Service schema test passes;
 - the homepage above the fold at 390px shows the H1, the price and the CTA;
 - the word budget still passes (raise it only with a dated comment);
+- `/what-we-do` is live in the nav and sitemap, passes the SEO tests and scores 95+ on Lighthouse;
 - Lighthouse is on budget;
 - colour contrast passes on every route (Lighthouse accessibility 100), with no leftover `#dfff2f` or `#f3f0e8`.
 
