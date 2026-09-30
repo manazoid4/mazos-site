@@ -19,7 +19,7 @@ const EXTRA_GROUPS = [
     links: [
       { href: '/leak-check', label: 'Free plan and price' },
       { href: '/contact', label: 'Bigger jobs and contact' },
-      { href: '/demos', label: 'Private demos' },
+      { href: '/demos', label: 'Free demo' },
       { href: '/whats-new', label: 'What’s new' },
     ],
   },

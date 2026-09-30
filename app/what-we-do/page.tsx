@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { SYSTEMS } from '../systems';
 import { Storyboard } from '../scenes';
-import { OFFERS, NOT_INCLUDED, workingBy } from '../offers';
+import { CHANGES_WINDOW, OFFERS, NOT_INCLUDED, workingBy } from '../offers';
+import { ChangesWindow, DemoPath } from '../demo-path';
 import { CHECK_REPLY_TIME } from '../site';
 import { SampleReport } from '../sample-report';
 import { ScrollReveal } from '../scroll-reveal';
@@ -44,8 +45,9 @@ export default function WhatWeDo() {
    <p>Standard add-ons use tools you already have. I check support first. A new build gets its own fixed quote.</p>
    <SystemExplorer />
   </section>
-  <section className="s-section" id="process"><h2>How it works.</h2>
-   <ol className="s-steps">{[['Tell me the job',`I reply within ${CHECK_REPLY_TIME}.`],['Your plan and fixed price','Scope, app costs and date agreed first.'],['Half to start','Once access is ready, I build and test with you.'],['See it working','The rest is due when the agreed work works.']].map(([title,body],index)=><li key={title}><span>0{index+1}</span><strong>{title}</strong><p>{body}</p></li>)}</ol>
+  <section className="s-section" id="process"><p className="eyebrow">From first call to live</p><h2>How it works.</h2>
+   <DemoPath source="what-we-do" />
+   <h3>{CHANGES_WINDOW.name}</h3><ChangesWindow />
    <CostCalculator />
    <DeliveryTabs />
   </section>

@@ -496,10 +496,12 @@ test('the guarantee, no-VAT and referral lines appear where Maz\'s decisions req
   assert.match(faq, /working within 7 working days of me getting access/);
 });
 
+// 30 Sep: the free demo is real now, but only after a call (date agreed on the call).
+// Case study bodies still lead to the free plan form; the shared nav may link /demos.
 test('case studies route to a plan and fixed price, not a blanket free demo', async () => {
   for (const route of ['/work/jobfilter', '/work/scrap-finance-partners']) {
-    const html = await readPage(route);
-    assert.doesNotMatch(html, /free demo/i, `${route} still offers a free demo`);
+    const html = (await readPage(route)).replace(/\/demos.{0,40}?Free demo/g, '');
+    assert.doesNotMatch(html, /free (live )?demo/i, `${route} still offers a free demo`);
     assert.match(html, /\/leak-check\?src=case-[a-z-]+#leak-check-form/, `${route} should lead to the free plan form`);
   }
 });

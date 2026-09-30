@@ -2,70 +2,66 @@ import { fitDescription } from '../seo';
 import { OG_IMAGE } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
-import { OFFERS } from '../offers';
-import { BOOKING_URL } from '../site';
-import { LiveDemo } from './live-demo';
+import { CHANGES_WINDOW, GUARANTEE } from '../offers';
+import { CHECK_REPLY_TIME } from '../site';
+import { ChangesWindow, DemoPath } from '../demo-path';
 
-const DEMO_DESCRIPTION = 'Free live demo: type your business name and watch your own system run, in your name, in 20 seconds. Then get a free plan and fixed price.';
+const DEMO_DESCRIPTION = 'Book a 15-minute call and get a free working demo built around your business, by a date we agree. Then one fixed price and 2 months of unlimited changes.';
 
 export const metadata: Metadata = {
-  title: 'Free live demo of your system',
+  title: 'Free demo, built around your business',
   description: DEMO_DESCRIPTION,
   alternates: { canonical: '/demos' },
   openGraph: { images: [OG_IMAGE],
-    title: 'Free live demo — Maz Works',
-    description: fitDescription('Watch your own system run, in your business name, in 20 seconds.'),
+    title: 'Free demo, built around your business — Maz Works',
+    description: fitDescription('A short call, then a free working demo by the date we agree. See it before you pay.'),
     url: '/demos',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free live demo — Maz Works',
-    description: fitDescription('Watch your own system run, in your business name, in 20 seconds.'),
+    title: 'Free demo, built around your business — Maz Works',
+    description: fitDescription('A short call, then a free working demo by the date we agree. See it before you pay.'),
     images: [OG_IMAGE.url],
   },
 };
 
-const STARTER = OFFERS[0];
+const FAQ = [
+  ['Is the demo really free?', 'Yes. You pay nothing for the call or the demo, and you are under no obligation to go ahead.'],
+  ['When do I get it?', 'We agree the date on the call, based on what the demo needs to show. You know it before we hang up.'],
+  ['What if a demo won’t help?', 'Some jobs are clearer as a written plan. If so, I tell you on the call and send the plan and fixed price instead.'],
+  ['What happens after the demo?', 'If you like it, I send the full plan with one fixed price. Every item is listed and invoiced clearly, with no extra charges later.'],
+  ['What counts as a change in the 2 months?', 'Anything that adjusts what I built: wording, timings, steps, notifications, fixes. Something new, like another system or app, is priced first so it stays fair.'],
+];
 
 export default function DemosPage() {
   return (
-    <main>
+    <main className="s-home">
       <SiteHeader />
 
-      <section className="mw-section" id="main-content" tabIndex={-1} aria-labelledby="demos-title">
-        <header className="mw-section-heading">
-          <p className="eyebrow">Free live demo</p>
-          <h1 id="demos-title">Watch your own system run, <em>in your name</em>.</h1>
-          <p className="mw-lede">Type your business name, pick your trade and what costs you most. Twenty seconds later you see it working for you.</p>
-        </header>
-        <LiveDemo />
+      <section className="s-hero s-hero-short" id="main-content" tabIndex={-1} aria-labelledby="demos-title">
+        <p className="eyebrow">See it before you pay</p>
+        <h1 id="demos-title">A free demo, <em>built around your business</em>.</h1>
+        <p className="s-lede">A short call first. Then a working demo of your system, by a date we agree on the call. Only if you like it do we talk price.</p>
+        <DemoPath source="demos" />
+        <p className="s-small">Prefer to write it down? <a href="/leak-check?src=demos-page#leak-check-form">Get a free plan and price instead</a>. I reply within {CHECK_REPLY_TIME}.</p>
       </section>
 
-      <section className="mw-section" aria-labelledby="next-title">
-        <header className="mw-section-heading">
-          <p className="eyebrow">From demo to done</p>
-          <h2 id="next-title">Three steps. You only pay at the last one.</h2>
-        </header>
-        <ol className="ld-funnel">
-          <li aria-current="step"><strong>Free live demo</strong><span>What you just watched. No sign-up.</span></li>
-          <li><strong>Free plan and fixed price</strong><span>I look at how you work now and reply within 1 working day.</span></li>
-          <li><strong>I build it on your tools</strong><span>{`From ${STARTER.price}. Half to start, the rest when it works.`}</span></li>
-        </ol>
-        <div className="mw-actions">
-          <a className="button button-signal" href="/leak-check?src=demos-page#leak-check-form">Get my free plan and price</a>
-          <a className="text-link" href={`${BOOKING_URL}?utm_source=demos`}>Rather talk? 15-minute call <span aria-hidden="true">→</span></a>
-        </div>
+      <section className="s-section" id="changes" aria-labelledby="changes-title">
+        <p className="eyebrow">After it goes live</p>
+        <h2 id="changes-title">{CHANGES_WINDOW.name}, no extra charge.</h2>
+        <ChangesWindow />
+        <p className="s-small">{GUARANTEE}</p>
       </section>
 
-      <section className="mw-section" aria-labelledby="private-title">
-        <header className="mw-section-heading">
-          <p className="eyebrow">Bigger jobs</p>
-          <h2 id="private-title">For custom builds, a private demo on your real setup.</h2>
-          <p>Before a bigger project is agreed, I can build a private working demo around your business, behind a link and access code only you see.</p>
-        </header>
-        <div className="mw-actions">
-          <a className="button" href="/contact#contact">Ask for a private demo</a>
+      <section className="s-section" id="questions" aria-labelledby="questions-title">
+        <p className="eyebrow">Straight answers</p>
+        <h2 id="questions-title">Questions people ask first.</h2>
+        <div className="dp-faq">
+          {FAQ.map(([question, answer]) => (
+            <details key={question}><summary>{question}</summary><p>{answer}</p></details>
+          ))}
         </div>
+        <p className="s-small">Your demo sits behind a private link and access code. Only the people you choose see it.</p>
       </section>
 
       <SiteFooter />

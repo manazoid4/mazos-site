@@ -149,17 +149,55 @@ export const COMPARISON: { row: string; values: [string, string, string] }[] = [
 ];
 
 /** Short "why it's different" blocks: bold heading, one plain sentence. */
+/**
+ * Changes window (Maz, 30 Sep): after go-live, two months of unlimited changes
+ * to what was built. Generous on purpose, with a clear line so it never turns
+ * into free new work: changes adjust the agreed build; anything new is quoted first.
+ */
+export const CHANGES_WINDOW = {
+  name: '2 months of unlimited changes',
+  short: '2 months of changes',
+  body: 'For two months after it goes live, ask for as many changes to what I built as you like. No extra charge.',
+  covered: [
+    'Wording, messages and email or text templates',
+    'Timings, reminders, steps and who gets notified',
+    'Anything not working the way we agreed',
+    'Small layout and design tweaks to what I built',
+  ],
+  notCovered: [
+    'A new system, new job or new feature: I price it first',
+    'Connecting a new app, or rebuilding after you switch apps',
+    'Paid app or text-message costs, which you pay directly',
+  ],
+  howItWorks: 'Send changes by email whenever you like. I reply within 1 working day and agree a date for each one. The two months start on the day it goes live. After that, Keep It Running covers small changes.',
+} as const;
+
+/**
+ * The free demo (Maz, 30 Sep): not a self-serve toy and not a blanket promise.
+ * A short call first; on the call we agree what the demo shows and the date it
+ * arrives. Then the full plan, then the build, then the changes window.
+ */
+export const DEMO_STEPS: { title: string; body: string; note: string }[] = [
+  { title: 'Book a 15-minute call', body: 'Tell me the job that costs you time or customers. No slides, no pressure.', note: 'Free' },
+  { title: 'We agree the demo', body: 'On the call we agree what the demo shows and the date you get it. If a demo won’t help, I say so and send a plan instead.', note: 'Date agreed on the call' },
+  { title: 'Your free demo arrives', body: 'A working demo built around your business, sent by the date we agreed. Try it on your own phone.', note: 'Free, no obligation' },
+  { title: 'Happy with it? Your full plan', body: 'A written plan and one fixed price. Every item listed and invoiced clearly. No extra charges later.', note: 'Nothing to pay yet' },
+  { title: 'I build it, you see it working', body: 'Half to start, the rest when it works. Then two months of unlimited changes.', note: 'Fixed price' },
+];
+
 export const PROMISES: { title: string; body: string }[] = [
-  { title: 'One fixed price, agreed first', body: 'You know the full cost before any work starts. No hourly rates, no surprise invoices.' },
+  { title: 'Free demo before you pay', body: 'After a short call, you get a working demo by the date we agree. No charge, no obligation.' },
+  { title: 'One fixed price, agreed first', body: 'You know the full cost before any work starts. Every item is invoiced clearly. No hourly rates, no surprises.' },
   { title: 'Half now, half when it works', body: 'You only pay the rest once you’ve seen it working, so the risk isn’t all on you.' },
+  { title: '2 months of unlimited changes', body: 'After it goes live, ask for changes to what I built as often as you like, for two months.' },
   { title: 'No contracts', body: 'Every package is a one-off. Keep It Running is monthly and you can cancel any time.' },
-  { title: 'No VAT added', body: 'The price you see is the price you pay.' },
+  { title: 'No VAT added', body: 'The price you see is the price you pay. And you own everything I build.' },
 ];
 
 /** What's not included, said plainly. */
 export const NOT_INCLUDED = [
   'Paid apps or text-message costs. You pay those companies directly, and I tell you the cost up front.',
-  'Changes after it’s handed over, unless you have Keep It Running.',
+  'Changes after the 2-month changes window, unless you have Keep It Running.',
   'New features beyond the agreed plan. Those get their own fixed price first.',
 ];
 

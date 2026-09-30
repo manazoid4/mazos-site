@@ -44,7 +44,7 @@ export default function Page() {
    <div><p className="eyebrow">For small businesses and teams, in any trade</p>
     <h1 id="intro-title">Systems that turn enquiries <em>into bookings</em> and take the admin off you.</h1>
     <p className="s-lede">Automation, connected tools and custom software. Start with one job from {STARTER.price}.</p>
-    <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">Get a free plan and price</a><a className="text-link" href="/demos#live-demo">Or watch your own demo in 20 seconds <span aria-hidden="true">→</span></a></div>
+    <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">Get a free plan and price</a><a className="text-link" href="/demos">Or see a free demo first <span aria-hidden="true">→</span></a></div>
     <p className="s-note">I reply within {CHECK_REPLY_TIME}. No call needed, no obligation.</p>
    </div><HeroDemo />
    <p className="s-small">Examples across packages: enquiries answered, bookings confirmed, quotes followed up. Each job is scoped and priced first.</p>
@@ -68,7 +68,7 @@ export default function Page() {
     <p>{CARE_PLAN.name}: {CARE_PLAN.price} if you want help afterwards.</p>
     <p className="s-small">{GUARANTEE} You own everything I build.</p>
     <p>{FREE_STEP.name}: {FREE_STEP.price}. If it isn’t worth automating, I say so.</p>
-    <CallLink href={BOOKING_URL} className="text-link" placement="free-plan">Rather talk? Book a 15-minute call</CallLink>
+    <CallLink href={BOOKING_URL} className="text-link" placement="free-plan">Rather see it first? Book a call for a free demo</CallLink>
     <p className="s-small">Introduce a business: {REFERRAL_REWARD} when they become a paying client. <a href="/faq#do-you-pay-for-referrals">How →</a></p>
    </div><LeakCheckForm />
   </section>

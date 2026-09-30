@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { HEADACHE_PICKS, SYSTEMS, systemPrice } from './systems';
+import { SYSTEMS, systemPrice } from './systems';
 import './interactive.css';
 
 const LIST = SYSTEMS.filter((system) => !system.packageId);
@@ -9,7 +9,7 @@ const STEP_MS = 650;
 
 /**
  * "Every system, explained" as a picker. Tap a job, watch its steps run,
- * then ask for it or try it in your own business name.
+ * then ask for it or book a free demo.
  * - All panels are in the page (search, no-JavaScript); with JavaScript one shows.
  * - Deep links like /what-we-do#missed-calls open that system.
  * - Reduced motion shows every step at once.
@@ -53,8 +53,6 @@ export function SystemExplorer() {
       </div>
       {LIST.map((system, index) => {
         const isActive = active === system.id;
-        const headache = HEADACHE_PICKS.find((pick) => pick.system === system.id)?.id;
-        const demo = `/demos?${headache ? `h=${headache}&` : ''}src=explorer#live-demo`;
         return (
           <article key={system.id} id={system.id} role="tabpanel" aria-labelledby={`se-tab-${system.id}`} className="se-panel" data-tone={index % 6} hidden={live && !isActive}>
             <h3>{system.name}</h3>
@@ -71,7 +69,7 @@ export function SystemExplorer() {
             <p className="se-price">{systemPrice(system)}</p>
             <div className="se-actions">
               <a className="button button-signal" href={`/leak-check?package=${encodeURIComponent(system.offerName)}`}>Ask for this system</a>
-              <a className="se-try" href={demo}>Watch it run in my business name →</a>
+              <a className="se-try" href="/demos">See a free demo first →</a>
               {live ? <button type="button" className="se-replay" onClick={() => play(system.id)}>Replay</button> : null}
             </div>
           </article>
