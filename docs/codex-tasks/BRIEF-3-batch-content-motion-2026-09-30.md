@@ -5,7 +5,7 @@ Base: `main` at the PR #89 merge (the live look, including "What changes in your
 Branch: `claude/mazos-site-sales-overhaul-stekjl`. Open one PR per batch. Merge each only when it is green and Maz has seen the preview.
 
 ## Rules for every batch (non-negotiable)
-- Keep the live look: the current fonts, weights, hard borders, ink/signal/neon palette. Do not redesign.
+- Keep the live look: the current fonts, weights and hard borders. The only palette change is the Batch 1 orange swap. Do not redesign.
 - Prices only from `app/offers.ts`. No invented clients, reviews, logos, stats or results. No "AI" in the offer. Never "quick fixes", "small fixes" or "website repairs".
 - No new JS animation libraries. Use CSS first, then tiny client islands only if needed.
 - Every animation:
@@ -72,13 +72,23 @@ Goal: a visitor knows in 5 seconds what Maz Works does, what it costs to start a
 
    Do not port the look.
 6. Update `/whats-new` with this week's work.
+7. **Colour: hi-vis orange** (Maz chose it on 30 Sep, after research against Impeccable's warning that AI-made sites default to a cream background, or near-black with one neon accent, plus the Radix and Refactoring UI colour-role guidance). Change the tokens only, in `globals.css`:
+   - `--paper` `#f6f6f3` replaces the cream;
+   - `--surface` `#ffffff`;
+   - `--signal` `#ff6b1a`, used only as a fill behind ink text (6.4:1) and always with an ink border, because orange against the canvas is only 2.7:1;
+   - new `--signal-text` `#c2410c` for any orange text or links (4.8:1);
+   - new `--ok` `#0f7a4f` for result and success states (white text 5.4:1);
+   - `--soft-line` `#c9cbc6`.
+
+   Never put orange text on the canvas at `--signal`, and never pair orange with cream. Grep for any hard-coded lime or cream values and replace them with tokens.
 
 Done when:
 - all 15 pages pass the title/description tests;
 - the Service schema test passes;
 - the homepage above the fold at 390px shows the H1, the price and the CTA;
 - the word budget still passes (raise it only with a dated comment);
-- Lighthouse is on budget.
+- Lighthouse is on budget;
+- colour contrast passes on every route (Lighthouse accessibility 100), with no leftover `#dfff2f` or `#f3f0e8`.
 
 ## Batch 2: Motion and visual effects (smooth, not flashy)
 Goal: the site feels alive and joined up without slowing down.
