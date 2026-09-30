@@ -106,7 +106,7 @@ Goal: the site feels alive and joined up without slowing down.
    - the add-on groups expand smoothly with `<details>` and `interpolate-size`;
    - the "Keep It Running" price chip settles into place when seen.
 6. **Pick your trade:** cards flip to show the one system that trade gets most, using a CSS 3D transform, with a flat fallback under reduced motion.
-7. **Section dividers:** a thin neon line draws across as each section enters.
+7. **Section dividers:** a thin orange (`--signal`) line draws across as each section enters.
 
 Done when:
 - every effect passes reduced motion, off-screen pause and no-JS checks;
