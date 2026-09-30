@@ -2,11 +2,12 @@ import { ServiceSchema } from '../service-schema';
 import { fitDescription } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
-import { BOOKING_URL, CHECK_REPLY_TIME, SITE_URL } from '../site';
+import { CHECK_REPLY_TIME, SITE_URL } from '../site';
 import { OG_IMAGE } from '../seo';
-import { CallLink, PricingViewTracker } from '../analytics';
-import { CARE_PLAN, EXTRAS, FREE_STEP, OFFERS } from '../offers';
+import { PricingViewTracker } from '../analytics';
+import { CARE_PLAN, CHANGES_WINDOW, EXTRAS, FREE_STEP, OFFERS } from '../offers';
 import { PriceList } from '../price-list';
+import { ChangesWindow } from '../demo-path';
 
 const PAGE_URL = `${SITE_URL}/prices`;
 
@@ -31,7 +32,7 @@ export default function PricesPage() {
         <p className="s-lede">Fixed prices, agreed before any work starts. No VAT added. Not sure what you need? The {FREE_STEP.short} tells you, within {CHECK_REPLY_TIME}.</p>
         <div className="s-actions">
           <a className="button button-signal s-button-lg" href="/leak-check">Get a free plan and price</a>
-          <CallLink className="button" href={BOOKING_URL} placement="prices">Or book a 15-minute call</CallLink>
+          <a className="button" href="/demos">Or see a free demo first</a>
         </div>
       </section>
 
@@ -42,6 +43,11 @@ export default function PricesPage() {
         <div className="s-actions">
           <a className="button button-signal" href="/leak-check">Get a free plan and price</a>
         </div>
+      </section>
+      <section className="s-section" id="changes" aria-labelledby="changes-title">
+        <p className="eyebrow">After it goes live</p>
+        <h2 id="changes-title">{CHANGES_WINDOW.name}, included.</h2>
+        <ChangesWindow />
       </section>
       <SiteFooter />
     </main>

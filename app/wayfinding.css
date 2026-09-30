@@ -102,3 +102,4 @@ html { scroll-behavior: smooth; }
 .mw-footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; }
 .mw-footer-bottom a { color: var(--ink); }
 .mw-back-top { font-weight: 700; }
+.mw-menu-panel li:last-child a { border-bottom: 0 !important; }

@@ -40,10 +40,10 @@ export function HeroDemo() {
       const run = (next: Step) => {
         if (element.hasAttribute('data-offscreen')) { timer.current = window.setTimeout(() => run(next), 500); return; }
         setStep(next);
-        if (next < 3) timer.current = window.setTimeout(() => run((next + 1) as Step), next === 0 ? 700 : 1600);
+        if (next < 3) timer.current = window.setTimeout(() => run((next + 1) as Step), next === 0 ? 500 : 1100);
         else setPlayed(true);
       };
-      timer.current = window.setTimeout(() => run(1), 600);
+      timer.current = window.setTimeout(() => run(1), 400);
     }, { threshold: 0.4 });
     observer.observe(element);
     return () => { observer.disconnect(); window.clearTimeout(timer.current); };
@@ -53,7 +53,7 @@ export function HeroDemo() {
     window.clearTimeout(timer.current);
     setPlayed(true);
     setStep(1);
-    timer.current = window.setTimeout(() => setStep(2), 1400);
+    timer.current = window.setTimeout(() => setStep(2), 1000);
   };
   const on = (row: Step) => (live ? (step >= row ? ' is-on' : ' is-off') : '');
 

@@ -1,7 +1,16 @@
-import { OFFERS, getExtra, EXAMPLE_PLAN_TOTAL } from './offers';
+'use client';
+
+import { useState } from 'react';
+import { OFFERS, getExtra, formatPrice, priceAmount } from './offers';
+import './interactive.css';
+
 /**
- * A clearly labelled example of the free plan and fixed quote. The business is
- * fictional; the kind of plan matches what a real reply looks like.
+ * A clearly labelled, interactive example of the free plan and fixed quote.
+ * The business is fictional; the kind of plan matches what a real reply looks like.
+ * - Findings open and close (native <details>, so it works without JavaScript).
+ * - The quote is a little builder: switch the add-on on or off and watch the
+ *   total and the working date change, the way a real reply can be adjusted.
+ * Every price comes from offers.ts.
  */
 const FINDINGS = [
   {
@@ -25,27 +34,45 @@ const FINDINGS = [
 ];
 
 export function SampleReport() {
+  const reminders = getExtra('Appointment reminders');
+  const [withReminders, setWithReminders] = useState(true);
+  const total = OFFERS[0].from + (withReminders ? priceAmount(reminders.price) : 0);
+
   return (
-    <article className="s-report" aria-label="Example plan and quote for a fictional business">
+    <article className="s-report sp" aria-label="Example plan and quote for a fictional business">
       <header>
         <span className="s-report-badge">Example</span>
         <p><strong>Plan and fixed quote: Hollybank Hair</strong></p>
-        <p className="s-small">A fictional business, made up to show the format.</p>
+        <p className="s-small">A fictional business, made up to show the format. Tap a finding to open it.</p>
       </header>
-      <ol>
-        {FINDINGS.map((finding) => (
-          <li key={finding.title}>
-            <span className={`s-level s-level-${finding.level.split(' ')[0].toLowerCase()}`}>{finding.level}</span>
-            <strong>{finding.title}</strong>
-            <p><em>What I found:</em> {finding.evidence}</p>
-            <p><em>What it means:</em> {finding.impact}</p>
-          </li>
-        ))}
-      </ol>
+      <div className="sp-findings">
+        {FINDINGS.map((finding, index) => {
+          const tone = finding.level.split(' ')[0].toLowerCase();
+          return (
+            <details key={finding.title} className={`sp-finding sp-${tone}`} open={index === 0}>
+              <summary>
+                <span className={`s-level s-level-${tone}`}>{finding.level}</span>
+                <strong>{finding.title}</strong>
+              </summary>
+              <p><em>What I found:</em> {finding.evidence}</p>
+              <p><em>What it means:</em> {finding.impact}</p>
+            </details>
+          );
+        })}
+      </div>
       <p className="s-report-untested"><em>Not included:</em> a new website. The current one works, so there’s no reason to pay for one.</p>
       <footer>
-        <p><strong>The quote.</strong> Starter Automation, <strong>{OFFERS[0].price}</strong>: every enquiry lands in one list and gets an instant reply. Add-on, <strong>{getExtra('Appointment reminders').price}</strong>: appointment reminders switched on. Total {EXAMPLE_PLAN_TOTAL}, No VAT added. Working within 7 working days of access, or you don’t pay the rest.</p>
+        <p><strong>The quote.</strong> Switch the add-on to see how the total moves.</p>
+        <ul className="sp-quote">
+          <li><span><strong>{OFFERS[0].name}</strong> every enquiry lands in one list and gets an instant reply</span><b>{OFFERS[0].price}</b></li>
+          <li className={withReminders ? 'is-on' : ''}>
+            <label><input type="checkbox" checked={withReminders} onChange={(event) => setWithReminders(event.target.checked)} /><span><strong>Add-on:</strong> appointment reminders switched on</span></label>
+            <b>{reminders.price}</b>
+          </li>
+        </ul>
+        <p className="sp-total" aria-live="polite"><strong>Total {formatPrice(total)}</strong> · No VAT added · Working within 7 working days of access, or you don’t pay the rest.</p>
         <p className="s-small">If nothing is worth automating, the plan says so.</p>
+        <a className="button" href="/leak-check?src=example-plan#leak-check-form">Get one like this for my business</a>
       </footer>
     </article>
   );

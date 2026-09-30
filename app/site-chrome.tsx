@@ -1,7 +1,7 @@
 import { NAV_GROUPS } from './nav';
 import { NavLinks } from './nav-links';
 import { SiteMenu } from './site-menu';
-import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL } from './site';
+import { CONTACT_EMAIL, LINKEDIN_URL } from './site';
 
 export function SiteHeader() {
   return (
@@ -37,11 +37,9 @@ export function SiteFooter() {
         ))}
         <nav aria-label="Get started">
           <p>Get started</p>
-          <a href="/leak-check">Free plan and price</a>
-          <a href="/demos">Private demos</a>
+          <a href="/demos">Free demo</a>
           <a href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20feedback`}>Feedback</a>
           <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn ↗</a>
-          <a href={GITHUB_URL} target="_blank" rel="noreferrer">GitHub ↗</a>
         </nav>
       </div>
 
