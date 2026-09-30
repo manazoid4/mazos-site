@@ -1,5 +1,16 @@
 # Maz Works
 
+> ## 📘 Playbooks: start here
+> Working on this with any agent (Codex, Gemini, OpenCode, Claude)? Open **[PLAYBOOKS.md](PLAYBOOKS.md)**: one page with the start prompt and links to every playbook.
+>
+> | Job | Playbook |
+> |-----|----------|
+> | Find creator leads on Instagram + DMs | [6](docs/playbooks/6-instagram-creator-leads.md) |
+> | LinkedIn owners, notes and posts | [7](docs/playbooks/7-linkedin-engine.md) |
+> | Hand a coding task to an agent | [8](docs/playbooks/8-coding-tasks-for-agents.md) |
+> | Monday review | [9](docs/playbooks/9-weekly-review.md) |
+> | Ship a site change | [1](docs/playbooks/1-ship-a-site-change.md) |
+
 > **Lead and sales work:** follow Lead Quality v2, see [`docs/maz-works/LEAD-QUALITY.md`](docs/maz-works/LEAD-QUALITY.md). Offers and prices live only in `app/offers.ts`.
 
 Public portfolio and client-acquisition site for [Maz Works](https://mazworks.uk), Manazir Hussain's independent web, automation and AI/software studio.
