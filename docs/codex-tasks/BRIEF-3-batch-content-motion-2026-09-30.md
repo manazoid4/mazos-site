@@ -10,7 +10,7 @@ Branch: `claude/mazos-site-sales-overhaul-stekjl`. Open one PR per batch. Merge 
 - No new JS animation libraries. Use CSS first, then tiny client islands only if needed.
 - Every animation:
   - uses a full `animation:` shorthand with the keyframe name, because the minifier drops nameless shorthand;
-  - animates only `transform` and `opacity`;
+  - animates only `transform` and `opacity`, with two exceptions: `stroke-dashoffset` for drawn lines and icons (per ANIMATION-GUIDE.md), and `height` via `interpolate-size` on `<details>`, which may move content only below the element the visitor opened;
   - pauses off-screen with `data-pause-offscreen` / `data-offscreen`;
   - is static under `prefers-reduced-motion`;
   - is visible without JS.
@@ -54,8 +54,10 @@ Gaps in our site:
 ## Batch 1: Content first (what we do, clearly)
 Goal: a visitor knows in 5 seconds what Maz Works does, what it costs to start and what to do next.
 1. **Hero:** H1 states the job in plain words, for example "Systems that turn enquiries into bookings and take admin off your plate." Keep the phone animation as the proof on the right. Under the H1:
-   - three outcome chips: "Every enquiry answered", "Fewer no-shows", "Hours back each week";
-   - the "From £195" price read from offers.
+   - three outcome chips labelled as examples across packages, e.g. "What clients choose: every enquiry answered · fewer no-shows · hours back each week";
+   - separately, the Starter price read from offers with its one-job scope, e.g. "Start with one job from £195".
+
+   Never place the chips so the entry price reads as including all three outcomes, because reminders and other add-ons are priced separately in `offers.ts`.
 2. **New "What I build" strip** straight after the hero: the three packages as outcome cards, each with the name, the price from offers, one line on who it's for and "Working by …" from the comparison table. Each card links to `/prices#<id>`.
 3. **Reorder the homepage:** Hero → What I build → What changes in your day → Pick your trade → Example plan → Free plan form → Prices → How it works → About → FAQ.
 4. **Trust line** (true facts only): "Runs on the tools you already use. You own it. Fixed price, agreed first." Keep the 7-day guarantee next to the prices.
