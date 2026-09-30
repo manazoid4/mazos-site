@@ -615,7 +615,7 @@ test('the hero demo animation survives CSS minification', async () => {
   const cssDir = path.join(exportRoot, '_next', 'static', 'chunks');
   const files = (await readdir(cssDir)).filter((name) => name.endsWith('.css'));
   const css = (await Promise.all(files.map((name) => readFile(path.join(cssDir, name), 'utf8')))).join('\n');
-  for (const name of ['s-demo-in-1', 's-demo-in-2', 's-demo-in-3', 's-demo-typing', 's-plug-in', 's-plug-wire', 's-step-in', 's-inbox-settle', 's-process-line', 's-process-tick', 's-day-tick']) {
+  for (const name of ['s-demo-in-1', 's-demo-in-2', 's-demo-in-3', 's-demo-typing', 's-plug-in', 's-plug-wire', 's-step-in', 's-inbox-settle', 's-process-line', 's-process-tick', 's-day-tick', 's-calendar-ring', 's-plug-glow', 's-plug-tick', 's-progress', 's-demo-in-2b']) {
     assert.match(css, new RegExp(`animation:[^;}]*\\b${name}\\b`), `${name} must be applied with a duration, not stripped to animation:none`);
   }
 });
