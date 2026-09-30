@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const PROJECTS = [
   { name: 'JobFilter', type: 'My own product · built and launched', summary: 'Finds public contracts that suit small trades firms.', links: [{ label: 'Case study', href: '/work/jobfilter' }, { label: 'Try it', href: 'https://jobfilter.uk/find-jobs' }] },
   { name: 'Scrap Finance Partners', type: 'Client website', summary: 'A website for a specialist finance practice.', links: [{ label: 'Case study', href: '/work/scrap-finance-partners' }, { label: 'View site', href: 'https://scrap-finance-partners.vercel.app' }] },
-  { name: 'Agent Nudge', type: 'Released', summary: 'Stops AI tools clashing over the same files.', links: [{ label: 'Try the demo', href: 'https://agent-nudge-bay.vercel.app/demo/overview' }, { label: 'View code', href: 'https://github.com/manazoid4/agent-nudge' }] },
+  { name: 'Agent Nudge', type: 'Released', summary: 'Stops coding tools clashing over the same files.', links: [{ label: 'Try the demo', href: 'https://agent-nudge-bay.vercel.app/demo/overview' }, { label: 'View code', href: 'https://github.com/manazoid4/agent-nudge' }] },
   { name: 'OpenFlowKit', type: 'Open source', summary: 'Voice-to-text in the browser, cleaned up for you.', links: [{ label: 'Try it', href: 'https://openflowkit-dusky.vercel.app' }] },
   { name: 'Khutba.io', type: 'Live prototype', summary: 'Live translated captions for mosque screens.', links: [{ label: 'Try the demo', href: 'https://khutba-io.vercel.app/demo' }] },
   { name: 'MAZ Pocket', type: 'In progress', summary: 'A pocket device to talk to your PC and approve its actions.', links: [{ label: 'Ask about this build', href: '/contact?service=software#contact' }] },

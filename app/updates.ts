@@ -12,6 +12,7 @@ export type MazWorksUpdate = {
  * outcomes, usage numbers or performance claims.
  */
 export const MAZ_WORKS_UPDATES: MazWorksUpdate[] = [
+ { id:'build-my-system',publishedAt:'2026-09-30',label:'NEW',title:'Build your own system and see the price',summary:'Pick your trade and what costs you time, and see the systems and a fixed price straight away.',items:['Build my system: tap your headaches and send the plan straight to the free plan form.','A cost calculator that uses only your own numbers.','The phone on the homepage now plays: call, get the text, book.','Each trade guide shows its three most useful systems working.','The free plan form is now two short steps with a summary before you send.'] },
  { id:'systems-and-free-plan',publishedAt:'2026-09-30',label:'BETTER',title:'See the system before you ask',summary:'A shorter homepage and a fuller walkthrough of each package.',items:['See what happens from first enquiry to the next action, with prices alongside.','Free-plan requests now use an instant confirmation email, with a personal reply within 1 working day.'] },
   {
     id: 'easier-navigation',

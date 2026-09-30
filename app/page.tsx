@@ -1,5 +1,6 @@
 import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL } from './site';
 import { SystemBuilder } from './system-builder';
+import { WalkthroughVideo } from './walkthrough-video';
 import { SiteFooter, SiteHeader } from './site-chrome';
 import { LeakCheckForm } from './leak-check/leak-check-form';
 import { CallLink } from './analytics';
@@ -50,7 +51,7 @@ export default function Page() {
   </section>
   <section className="s-section" id="build" aria-labelledby="build-title">
    <p className="eyebrow">What I build</p><h2 id="build-title">One job, a joined-up system, or something built for you.</h2>
-   <div className="s-prices">{OFFERS.map(offer => <a className="s-price s-package-card" href={`/what-we-do#${offer.id}`} key={offer.id}>
+   <div className="s-prices">{OFFERS.map(offer => <a className="s-price s-package-card" href={`/what-we-do#${offer.id}`} key={offer.id} style={{ viewTransitionName: `package-${offer.id}` }}>
     <svg className="s-package-icon" viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><path pathLength={1} d={PACKAGE_ICONS[offer.id]} /></svg>
     <h3>{offer.name}</h3><p className="s-price-amount">{offer.price}</p><p>{offer.body}</p><p><strong>{workingBy(offer.id)}</strong></p><span>See how it works →</span>
    </a>)}</div>
@@ -80,6 +81,7 @@ export default function Page() {
             <p>I build software, automation and websites for UK small businesses. No account managers, no hand-offs. Email me directly at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
           </div>
         </div>
+        <WalkthroughVideo />
         <p className="s-small">Work you can open yourself:</p>
         <div className="s-proof">
           {PROOF.map((item) => (

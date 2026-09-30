@@ -61,15 +61,14 @@ export function HeroDemo() {
     <figure className="s-demo" aria-labelledby="demo-caption" data-pause-offscreen data-live={live || undefined} ref={root}>
       <div className="s-demo-phone" role={live ? 'group' : 'img'} aria-label={live ? 'Example phone you can play: be the customer' : 'Example phone screen: a missed call, then an automatic text with a booking link, then a new booking'}>
         <p className="s-demo-bar"><span>9:41</span><span>Messages</span></p>
-        {live ? (
-          <div className="s-demo-play">
-            {step === 0 || step === 3 ? (
-              <button type="button" className="s-demo-call" onClick={call}>
-                {step === 3 ? 'Try it: call again' : 'Call'}
-              </button>
-            ) : <span className="s-demo-hint">{step === 1 ? 'Ringing… no answer' : 'Tap Book in the text'}</span>}
-          </div>
-        ) : null}
+        {/* Always rendered so hydration never moves the thread (CLS 0). */}
+        <div className="s-demo-play">
+          {!live ? <span className="s-demo-hint">Watch what happens</span> : step === 0 || step === 3 ? (
+            <button type="button" className="s-demo-call" onClick={call}>
+              {step === 3 ? 'Try it: call again' : 'Call'}
+            </button>
+          ) : <span className="s-demo-hint">{step === 1 ? 'Ringing… no answer' : 'Tap Book in the text'}</span>}
+        </div>
         <ol className="s-demo-thread" aria-hidden={live ? undefined : true}>
           <li className={`s-demo-row s-demo-missed${on(1)}`}>
             <span className="s-demo-icon">✕</span>

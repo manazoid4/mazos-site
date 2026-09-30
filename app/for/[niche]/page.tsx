@@ -1,5 +1,8 @@
 import { ServiceSchema } from '../../service-schema';
-import { getSystem } from '../../systems';
+import { getSystem, systemsForTrade } from '../../systems';
+import { Scenes } from '../../scenes';
+import { SystemBuilder } from '../../system-builder';
+import { ScrollReveal } from '../../scroll-reveal';
 import { fitDescription } from '../../seo';
 import { OG_IMAGE } from '../../seo';
 import type { Metadata } from 'next';
@@ -60,6 +63,13 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         </ul>
       </section>
 
+      <section className="mw-qw-section" id="day" aria-labelledby="niche-day-title">
+        <p className="eyebrow">See it working</p>
+        <h2 id="niche-day-title">What changes in your day.</h2>
+        <Scenes systems={systemsForTrade(guide.id)} />
+        <SystemBuilder presetTrade={guide.id} />
+      </section>
+
       <section className="mw-qw-section" aria-labelledby="niche-self-check-title">
         <p className="eyebrow">Check yours in 60 seconds</p>
         <h2 id="niche-self-check-title">Three quick tests on your phone.</h2>
@@ -113,7 +123,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         </div>
       </section>
 
-      <SiteFooter />
+      <SiteFooter /><ScrollReveal />
     </main>
   );
 }
