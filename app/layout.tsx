@@ -5,6 +5,7 @@ import './globals.css';
 import './enquiry.css';
 import './sales.css';
 import './wayfinding.css';
+import './colour.css';
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, PERSON_NAME, SITE_NAME, SITE_URL } from './site';
 import { OG_IMAGE, SITE_DESCRIPTION, SITE_TITLE } from './seo';
 import { FREE_STEP, OFFERS, PRICE_RANGE } from './offers';

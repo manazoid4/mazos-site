@@ -17,6 +17,10 @@ The `/3d-printing` route is a deliberate sub-brand surface inside Maz Works rath
 
 All object imagery is original generated concept work and must be a line sketch in the architecture-page style (ink lines, light grid, orange only as an accent fill), labelled **Illustrative sketch**, until real photos of physical prototypes replace it. Never use generated renders. Fredoka is available under the SIL Open Font License 1.1; its use is scoped through `next/font` so the existing site typography does not regress.
 
+## Colour layer (30 Sep, Maz: "can't be bland")
+
+Hi-vis orange stays the action colour. `app/colour.css` (loaded last) adds a modern-marketing supporting set: lilac, sky, mint, pink, sun and blue. Use them as full-bleed bands (hero lilac, free plan sun, about sky), card fills, pills and highlights, always with ink borders and hard offset shadows. Text stays ink or charcoal on these fills. No lime or cream hexes.
+
 ## Chosen direction — Quiet Framework
 
 Maz Works should feel like a calm, evidence-led studio page for a hands-on software builder. The page is an evidence surface, not an agency funnel and not a product dashboard.
