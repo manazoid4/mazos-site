@@ -1,12 +1,12 @@
-# LinkedIn funnel (30 Sep 2026)
+# LinkedIn funnel (30 Sep 2026, updated for the call-first free demo)
 
 One path from LinkedIn to a paid job:
 
-profile or post → **www.mazworks.uk/linkedin** → live demo in their business name → free plan and fixed price (or 15-minute call) → paid build.
+profile or post → **www.mazworks.uk/linkedin** → 15-minute call → free demo by the date agreed on the call → full plan and fixed price → build → 2 months of unlimited changes.
 
-Every link carries `src=`, so the Source line on each free plan request shows which LinkedIn spot sent it.
+Every link carries a tag (`src=` on the site, `utm_source=` on the call link), so each request shows which LinkedIn spot sent it.
 
-Research behind this: a 15-site audit and LinkedIn best practice (Justin Welsh, Dataslayer 2026, Social Media Today), summarised in the PR. Treat third-party reach numbers as "worth doing", not facts to quote.
+Research behind this: a 15-site audit plus LinkedIn best practice (Justin Welsh, Dataslayer 2026, Social Media Today). Treat third-party reach numbers as "worth doing", not facts to quote.
 
 ## Links (paste exactly)
 
@@ -15,32 +15,30 @@ Research behind this: a 15-site audit and LinkedIn best practice (Justin Welsh, 
 | Profile Website field, and custom button if Premium allows it | `https://www.mazworks.uk/linkedin?src=linkedin-profile` |
 | Featured 1 | `https://www.mazworks.uk/linkedin?src=linkedin-featured` |
 | Featured 2 | `https://www.mazworks.uk/leak-check?src=linkedin-featured#leak-check-form` |
-| Featured 3 | `https://www.mazworks.uk/what-we-do#example` |
+| Featured 3 | `https://www.mazworks.uk/prices` |
 | Company page button (Visit website) | `https://www.mazworks.uk/linkedin?src=linkedin-company` |
 | First comment on posts | `https://www.mazworks.uk/linkedin?src=linkedin-post` |
-| DM to an owner (personalised demo) | see "DM demo link" below |
 
-Custom profile button: since 2025 it needs Premium Business. Maz has Premium, so check the tier. If the option isn't there, the Website field plus Featured do the same job.
-
-Follow button: set **Follow** as the main profile button (Settings → Visibility), so people who aren't ready yet still see the posts.
+- **Custom profile button:** it needs Premium Business. If yours doesn't have the option, the Website field plus Featured do the same job.
+- **Follow button:** set Follow as the main profile button, so people who aren't ready yet still see your posts.
 
 ## Headline (pick one, 220 characters max)
 
 ```
-I build the systems UK small businesses run on | Missed calls, no-shows and chasing handled on their own | From £195, fixed price agreed first
+I build the systems UK small businesses run on | Free demo before you pay | Fixed price, 2 months of unlimited changes
 ```
 
 ```
-Founder, Maz Works | Fewer missed enquiries and no-shows for UK small businesses | Watch your own live demo in 20 seconds ↓
+Founder, Maz Works | Fewer missed enquiries and no-shows | Free demo first, then one fixed price ↓
 ```
 
 ## Banner (1584 × 396)
 
-- Keep the text on the **right half**; the photo covers the bottom left.
-- Background: deep green `#1f3a33`.
-  - Line 1, sand `#efe9dd`: `Less admin. More booked-in customers.`
-  - Line 2, orange `#ff6b1a`: `Watch your own live demo: mazworks.uk/linkedin`
-- Canva: search "LinkedIn banner", use a plain one and set those two colours. It takes about 5 minutes and the free plan is enough.
+- Keep the text on the right half; your photo covers the bottom left.
+- Background: sand `#efe9dd`.
+- Line 1, ink `#1b1c19`: `See it working before you pay.`
+- Line 2 on a yellow `#ffd23f` pill: `Free demo · Fixed price · 2 months of changes`
+- Canva's free plan is enough. It takes about 5 minutes.
 
 ## About (paste as is)
 
@@ -54,47 +52,42 @@ What I set up:
 • Reminders that cut no-shows, and review requests after each visit
 • Enquiries from every app in one list, with quotes followed up for you
 
-How it works. You tell me the job. I send a free plan and a fixed price within 1 working day. Half to start, the rest when it is working. No VAT added, no contracts, and you own everything I build.
+How it works. We have a 15-minute call. We agree what a demo should show and the date you get it. You get a free working demo by that date. If you like it, I send the full plan and one fixed price, with every item listed. Half to start, the rest when it is working.
 
-Automation from £195. Business System from £795. Custom software and websites from £1,950.
+After it goes live you get 2 months of unlimited changes to what I built. Anything new is priced first, so it stays fair for both of us.
 
-I plan it and build it myself, so you deal with one person from start to finish.
+Automation from £195. No VAT added, no contracts, and you own everything I build.
 
-Want to see it first? Type your business name at mazworks.uk/linkedin and watch your own system run in 20 seconds. No sign-up.
+Book your call at mazworks.uk/linkedin
 
 info@mazworks.uk
 ```
 
 ## Featured (in this order)
 
-1. **Link:** `.../linkedin?src=linkedin-featured`. Title: `Watch your own system run in 20 seconds`. Description: `Type your business name. See the missed call, the text back and the booking, in your name.`
-2. **Link:** the free plan. Title: `Free plan and fixed price`. Description: `Tap what costs you time. Reply within 1 working day.`
-3. **Link:** the example plan. Title: `What a plan looks like`.
+1. **Link:** `.../linkedin?src=linkedin-featured`
+   - Title: `Free demo before you pay`
+   - Description: `A 15-minute call, then a working demo built around your business by a date we agree.`
+2. **Link:** the free plan
+   - Title: `Rather write it down? Free plan and fixed price`
+   - Description: `Tap what costs you time. Reply within 1 working day.`
+3. **Link:** prices
+   - Title: `Every price, in one place`
 
-## DM demo link (the personal touch)
+## DM to an owner
 
-The demo link fills in the owner's business, first name, website, trade and headache, and plays on open. Build one for each Gold or Silver lead and log it in HubSpot:
-
-```
-https://www.mazworks.uk/demos?b=<Business+Name>&n=<FirstName>&w=<theirsite.co.uk>&t=<trade>&h=<headache>&src=linkedin-dm#live-demo
-```
-
-- `t`: `salons-and-beauty`, `dog-groomers`, `garages`, `cafes-and-food`, `clinics-and-therapists`, `architects`, `other`
-- `h`: `missed-calls`, `slow-replies`, `no-shows`, `chasing-quotes`, `few-reviews`, `copying`, `admin-at-night`
-
-Example: `https://www.mazworks.uk/demos?b=Bloom+Hair+Studio&n=Jess&w=bloomhair.co.uk&t=salons-and-beauty&h=missed-calls&src=linkedin-dm#live-demo`
-
-DM (300 characters or fewer, owner by name, Maz approves each one, 5 a day max per LINKEDIN-MCP.md):
+The DM must be 300 characters or fewer and go to the owner by name. You approve each one, 5 a day max (per LINKEDIN-MCP.md).
 
 ```
 Hi Jess, loved your post about Saturday being your busiest day.
 
-I made a 20 second demo of what a missed call text back would look like for Bloom Hair Studio.
+I build the systems that text back missed calls with a booking link. Happy to show you a free demo for Bloom Hair Studio after a quick call.
 
-Want me to send the link?
+Want the link to book one?
 ```
 
-Only send the link after they reply "yes". This keeps the link out of cold first messages and makes the reply the first signal of interest. Follow up once after 3 days by the next route.
+- Only send the booking link after they say yes.
+- Follow up once after 3 days, by the next route.
 
 ## Launch post (personal profile, then repost from the page)
 
@@ -103,17 +96,13 @@ Some customers are lost before you ever hear from them.
 
 The phone rings while you are with someone. They don't leave a message. They book with whoever answers next.
 
-I built something so you can see what that looks like fixed, in your own business name, before you spend anything.
+I would rather show you the fix than describe it. So here is how I work now:
 
-Type your business name, pick your trade and what costs you most. In about 20 seconds you watch it run:
+• A 15-minute call about the job that costs you time
+• A free working demo, built around your business, by a date we agree on the call
+• If you like it, one fixed price with every item listed, then 2 months of unlimited changes once it is live
 
-• The call you missed gets a text back with your booking link
-• The customer picks a time
-• It lands in your diary while you carry on working
-
-No sign-up and nothing is saved. If it looks useful, I send a free plan and a fixed price within 1 working day.
-
-The link is in the comments.
+No slides and no obligation. The link is in the comments.
 
 What is the one job you would hand over first?
 
@@ -123,27 +112,28 @@ What is the one job you would hand over first?
 First comment:
 
 ```
-Watch your own demo: www.mazworks.uk/linkedin?src=linkedin-post
+Book your call: www.mazworks.uk/linkedin?src=linkedin-post
 ```
 
 ```
 Website: www.mazworks.uk
 ```
 
-Checklist (POSTING-RULES.md):
-- no dashes;
-- link only in the first comment;
-- hook under 140 characters;
-- about 190 words;
-- one ask;
-- 3 hashtags;
-- no AI and no invented results;
-- the live demo is self-serve, not a promise to build a free custom demo.
+## Checklist before posting (from POSTING-RULES.md)
+
+- No dashes.
+- The link goes only in the first comment.
+- Keep the hook under 140 characters.
+- About 150 words.
+- One ask.
+- 3 hashtags.
+- No AI and no invented results.
+- The free demo is always scoped on the call. Never promise a blanket free build.
 
 ## Rhythm
 
-- Post 2 to 4 times a week, same topic words: bookings, enquiries, no-shows, small business, UK.
+- Post 2 to 4 times a week. Reuse the same topic words: bookings, enquiries, no-shows, small business, UK.
 - Spend 10 to 15 minutes commenting on local owners' posts around each post.
-- Reply to every comment in the first hour, and don't edit the post in that hour.
-- Once a month, turn a checklist post into a 5 or 6 slide PDF (documents get the most engagement).
-- Measure free plan requests by Source (`linkedin-*`), calls booked and deposits, not likes.
+- Reply to every comment in the first hour, and don't edit the post during that hour.
+- Once a month, turn a checklist post into a 5 or 6 slide PDF.
+- Measure by requests tagged linkedin, calls booked and deposits, not likes.
