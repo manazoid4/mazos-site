@@ -42,7 +42,7 @@ export default function Page() {
   <SiteHeader />
   <section className="s-hero s-hero-split" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
    <div><p className="eyebrow">For UK small businesses and teams, in any trade</p>
-    <h1 id="intro-title">Systems that turn enquiries into bookings and take the admin off you.</h1>
+    <h1 id="intro-title">Systems that turn enquiries <em>into bookings</em> and take the admin off you.</h1>
     <p className="s-lede">Automation, connected tools and custom software. Start with one job from {STARTER.price}.</p>
     <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">Get a free plan and price</a><a className="text-link" href="/demos#live-demo">Or watch your own demo in 20 seconds <span aria-hidden="true">→</span></a></div>
     <p className="s-note">I reply within {CHECK_REPLY_TIME}. No call needed, no obligation.</p>

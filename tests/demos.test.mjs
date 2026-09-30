@@ -22,7 +22,7 @@ test('free live demo is reachable and funnels into the free plan', async () => {
   ]);
 
   assert.match(home, /href="\/demos[^"]*"[^>]*>[^<]*(live demo|watch your own)/i);
-  assert.match(demos, /Watch your own system run, in your name/i);
+  assert.match(demos, /Watch your own system run, (<em>)?in your name/i);
   assert.match(demos, /Business name/);
   assert.match(demos, /Play my demo/);
   assert.match(demos, /Nothing is saved or sent/i);
