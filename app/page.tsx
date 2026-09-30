@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'react';
 import { HOME_SECTIONS } from './nav';
 import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL } from './site';
 import { PackageLink } from './package-link';
@@ -8,7 +7,8 @@ import { LeakCheckForm } from './leak-check/leak-check-form';
 import { CallLink, PricingViewTracker } from './analytics';
 import { StickyCheckCta } from './sticky-cta';
 import { SampleReport } from './sample-report';
-import { HeroDemo } from './hero-demo';
+import { PlugHero } from './plug-hero';
+import { Scenes } from './scenes';
 import { ScrollReveal } from './scroll-reveal';
 import { NICHE_GUIDES } from './for/niches';
 import { CARE_PLAN, DELIVERY, EXTRAS, FREE_STEP, GUARANTEE, OFFERS, PROMISES } from './offers';
@@ -28,23 +28,6 @@ const TERMS = [
   PROMISES.find((promise) => promise.title.startsWith('Half now'))!,
   PROMISES.find((promise) => promise.title.startsWith('No VAT'))!,
   { title: 'Delivery guarantee', body: 'Working on time, or you don’t pay the rest.' },
-];
-
-/** One concrete line per trade, matching what each trade guide offers. */
-const TRADE_CARDS: Record<string, { line: string; icon: string }> = {
-  'salons-and-beauty': { line: 'Bookings confirmed and reminded, so fewer no-shows.', icon: 'M8 7a3 3 0 1 0 0 .1M8 25a3 3 0 1 0 0 .1M10.5 9 26 23M10.5 23 26 9' },
-  'dog-groomers': { line: 'Miss a call mid-groom and the owner gets your booking link.', icon: 'M16 26c-5 0-8-3-8-6s3-5 8-5 8 2 8 5-3 6-8 6ZM7 12a2.5 3 0 1 0 0 .1M13 7a2.5 3 0 1 0 0 .1M19 7a2.5 3 0 1 0 0 .1M25 12a2.5 3 0 1 0 0 .1' },
-  garages: { line: 'Every quote and MOT request logged, with a follow-up if they go quiet.', icon: 'M5 20h22M7 20l3-7h12l3 7M9 24a2 2 0 1 0 0 .1M23 24a2 2 0 1 0 0 .1M5 20v4h22v-4' },
-  'cafes-and-food': { line: 'Orders and messages in one place, and a review asked for after each visit.', icon: 'M7 12h15v7a6 6 0 0 1-6 6h-3a6 6 0 0 1-6-6ZM22 14h3a3 3 0 0 1 0 6h-3M11 4v4M15 4v4M19 4v4' },
-  'clinics-and-therapists': { line: 'New enquiries answered at once, and reminders the day before.', icon: 'M13 5h6v8h8v6h-8v8h-6v-8H5v-6h8Z' },
-  architects: { line: 'Project enquiries captured with the key details, then followed up.', icon: 'M5 27V12l11-7 11 7v15ZM12 27v-8h8v8M5 27h22' },
-};
-
-/** What owners actually see once it's running. Mock messages, labelled as examples. */
-const RUNNING = [
-  { extra: extra('Missed-call text-back'), when: 'Straight after a missed call', message: 'Sorry we missed you! Book here: yourbusiness.co.uk/book' },
-  { extra: extra('Appointment reminders'), when: 'The day before', message: 'Hi Sam, see you tomorrow at 10:30. Reply C to change your time.' },
-  { extra: extra('Review requests'), when: 'After the visit', message: 'Thanks for coming in today! Would you leave us a quick Google review?' },
 ];
 
 const STEPS = [
@@ -81,57 +64,31 @@ export default function Page() {
       <section className="s-hero s-hero-split" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
         <div>
           <p className="eyebrow">{POSITIONING_EYEBROW}</p>
-          <h1 id="intro-title">Miss a call, and the caller gets a text with your booking link.</h1>
-          <p className="s-lede">One of the systems I set up. I build the systems that turn enquiries into paying customers: automation, connected tools and custom software that take the chasing and admin off you. From {STARTER.price}.</p>
+          <h1 id="intro-title">Your phone, inbox and booking app, finally working together.</h1>
+          <p className="s-lede">I’m Manazir, UK-wide. I build the systems that turn enquiries into paying customers: missed calls texted back, reminders sent, reviews asked for. All on the tools you already use, from {STARTER.price}.</p>
           <div className="s-actions">
             <a className="button button-signal s-button-lg" href="#check">Get a free plan and price</a>
             <CallLink className="button" href={BOOKING_URL} placement="hero">Or book a 15-minute call</CallLink>
           </div>
           <p className="s-note">{FREE_STEP.name}, emailed within {CHECK_REPLY_TIME}. No call needed, no obligation.</p>
+          <p className="s-trade-pills" id="trades"><span>See it for your trade:</span>{NICHE_GUIDES.map((guide) => <a key={guide.id} href={`/for/${guide.id}`}>{guide.shortName}</a>)}</p>
         </div>
-        <HeroDemo />
+        <PlugHero />
       </section>
 
       <ul className="s-trust" aria-label="The terms, before you ask">
         {TERMS.map((term) => <li key={term.title}><strong>{term.title}</strong><span>{term.body}</span></li>)}
       </ul>
-      <p className="s-small s-trust-who">You deal with Manazir, who plans it and builds it. UK-wide, done remotely.</p>
 
       <nav className="mw-onpage" aria-label="On this page">
         <span>On this page</span>
         {HOME_SECTIONS.map((section) => <a key={section.href} href={section.href}>{section.label}</a>)}
       </nav>
 
-      <section className="s-section" id="trades" data-reveal aria-labelledby="trades-title">
-        <p className="eyebrow">Pick your trade</p>
-        <h2 id="trades-title">See what it looks like in a business like yours.</h2>
-        <ul className="s-trades">
-          {NICHE_GUIDES.map((guide, index) => (
-            <li key={guide.id} style={{ '--i': index } as CSSProperties}>
-              <a href={`/for/${guide.id}`}>
-                <svg viewBox="0 0 32 32" width="40" height="40" aria-hidden="true" focusable="false"><path d={TRADE_CARDS[guide.id]?.icon} /></svg>
-                <strong>{guide.shortName}</strong>
-                <span>{TRADE_CARDS[guide.id]?.line}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-        <p className="s-small">Not listed? It works for any trade. <a href="#check">Tell me the job</a>.</p>
-      </section>
-
-      <section className="s-section" id="running" data-reveal aria-labelledby="running-title">
-        <p className="eyebrow">What your customers see</p>
-        <h2 id="running-title">Messages that go out without you.</h2>
-        <ul className="s-running">
-          {RUNNING.map((item, index) => (
-            <li key={item.extra.name} style={{ '--i': index } as CSSProperties}>
-              <span className="s-running-when">{item.when}</span>
-              <p className="s-running-bubble">{item.message}</p>
-              <span className="s-running-name"><strong>{item.extra.name}</strong> {item.extra.price}</span>
-            </li>
-          ))}
-        </ul>
-        <p className="s-small">Example messages. You choose the wording.</p>
+      <section className="s-section s-how" id="how" data-reveal aria-labelledby="how-title">
+        <p className="eyebrow">See it working</p>
+        <h2 id="how-title">What changes in your day.</h2>
+        <Scenes />
       </section>
 
       <section className="s-section" id="example" data-reveal aria-labelledby="example-title">
@@ -168,9 +125,9 @@ export default function Page() {
           </article>
           <div className="s-extras s-extras-home" id="extras">
             <h3>Popular add-ons</h3>
-            <p className="s-small">Fixed, one-off prices. Buy one on its own or add it to Starter.</p>
+            <p className="s-small">Fixed, one-off prices. Buy one on its own or add it to Starter. <a href="/prices#extras">What each one does</a></p>
             <ul>
-              {POPULAR_EXTRAS.map((item) => <li key={item.name}><div><strong>{item.name}</strong><span>{item.what}</span><PackageLink href="#check" pick={item.name}>Ask for this <span aria-hidden="true">→</span></PackageLink></div><strong className="s-extras-price">{item.price}</strong></li>)}
+              {POPULAR_EXTRAS.map((item) => <li key={item.name}><div><strong>{item.name}</strong><PackageLink href="#check" pick={item.name}>Ask for this <span aria-hidden="true">→</span></PackageLink></div><strong className="s-extras-price">{item.price}</strong></li>)}
             </ul>
           </div>
         </div>

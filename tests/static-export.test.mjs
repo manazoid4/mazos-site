@@ -72,8 +72,8 @@ async function internalTargetExists(urlPath) {
 
 test('homepage positions Maz Works as a systems builder, not a website-fix shop (Maz, 27 Sep)', async () => {
   const html = await readPage('/');
-  // Conversion rebuild (29 Sep): the hero leads with one concrete outcome, then the positioning line.
-  assert.match(html, /Miss a call, and the caller gets a text with your booking link/);
+  // 30 Sep refresh: the hero shows Maz Works plugging into the tools a business already uses.
+  assert.match(html, /Your phone, inbox and booking app, finally working together/);
   assert.match(html, /I build the systems that turn enquiries into paying customers/);
   assert.match(html, /Automation, connected tools and custom software/);
   assert.match(html, /For UK small businesses and teams, in any trade/);
@@ -103,18 +103,24 @@ test('homepage puts the risk reversal straight under the hero, then who and wher
   for (const item of [/One fixed price, agreed first/, /Half now, half when it works/, /No VAT added/, /Delivery guarantee/]) {
     assert.match(strip, item);
   }
-  assert.ok(html.indexOf('class="s-trust"') < html.indexOf('id="trades"'), 'terms come before the rest of the page');
-  assert.match(html, /You deal with Manazir[^<]*UK-wide/);
+  assert.ok(html.indexOf('class="s-trust"') < html.indexOf('id="how"'), 'terms come before the rest of the page');
+  assert.match(html, /I’m Manazir, UK-wide/);
 });
 
-test('homepage shows the six trades as cards and a labelled missed-call example (29 Sep rebuild)', async () => {
+test('homepage shows the plug picture, links every trade and plays labelled explainers (30 Sep refresh)', async () => {
   const html = await readPage('/');
+  const pills = html.match(/<p class="s-trade-pills"[\s\S]*?<\/p>/)?.[0] || '';
   for (const guide of ['salons-and-beauty', 'dog-groomers', 'garages', 'cafes-and-food', 'clinics-and-therapists', 'architects']) {
-    assert.match(html, new RegExp(`<ul class="s-trades"[\\s\\S]*href="/for/${guide}"`));
+    assert.match(pills, new RegExp(`href="/for/${guide}"`), `hero is missing a link to /for/${guide}`);
   }
-  assert.match(html, /class="s-demo"/);
+  assert.match(html, /class="s-plug"[^>]*data-pause-offscreen/);
+  assert.match(html, /I plug into what you already use/);
+  for (const tab of ['Missed calls', 'Enquiries', 'Reminders', 'Reviews', 'Quotes']) assert.match(html, new RegExp(`role="tab"[^>]*>${tab}`));
+  // Without JavaScript every scene is readable: hidden panels are un-hidden by a <noscript> style.
+  assert.match(html, /<noscript><style>\.s-scene-panel\[hidden\]\{display:block\}/);
   assert.match(html, /Missed-call text-back, £95\. Not a real customer\./);
-  assert.match(html, /Example messages\./);
+  assert.match(html, /Illustrations of how each system works, not real customers\./);
+  for (const name of ['Appointment reminders, £79', 'Review requests, £95', 'Quote follow-up, £95', 'Starter Automation, £195']) assert.match(html, new RegExp(name));
   // The example plan comes before the form, so owners see what they get first.
   assert.ok(html.indexOf('id="example"') < html.indexOf('id="check"'), 'example plan must come before the form');
 });
@@ -597,7 +603,7 @@ test('six wayfinding helps big sites use are in place', async () => {
 
 test('scroll reveal hides nothing without JavaScript and respects reduced motion (Codex brief 05)', async () => {
   const html = await readPage('/');
-  for (const id of ['trades', 'running', 'example', 'pricing', 'process']) {
+  for (const id of ['how', 'example', 'pricing', 'process']) {
     assert.match(html, new RegExp(`id="${id}" data-reveal`), `#${id} should ease in on scroll`);
   }
   assert.doesNotMatch(html, /style="[^"]*opacity:\s*0/, 'no content may be hidden in the static HTML');
@@ -613,7 +619,7 @@ test('the hero demo animation survives CSS minification', async () => {
   const cssDir = path.join(exportRoot, '_next', 'static', 'chunks');
   const files = (await readdir(cssDir)).filter((name) => name.endsWith('.css'));
   const css = (await Promise.all(files.map((name) => readFile(path.join(cssDir, name), 'utf8')))).join('\n');
-  for (const name of ['s-demo-in-1', 's-demo-in-2', 's-demo-in-3', 's-demo-typing']) {
+  for (const name of ['s-demo-in-1', 's-demo-in-2', 's-demo-in-3', 's-demo-typing', 's-plug-in', 's-plug-wire', 's-step-in']) {
     assert.match(css, new RegExp(`animation:[^;}]*\\b${name}\\b`), `${name} must be applied with a duration, not stripped to animation:none`);
   }
 });
