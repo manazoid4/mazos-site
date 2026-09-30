@@ -6,6 +6,7 @@ import { HOMEPAGE_FAQS } from './faqs';
 import { LeakCheckForm } from './leak-check/leak-check-form';
 import { CallLink, PricingViewTracker } from './analytics';
 import { StickyCheckCta } from './sticky-cta';
+import { InboxStory } from './inbox-story';
 import { SampleReport } from './sample-report';
 import { PlugHero } from './plug-hero';
 import { Scenes } from './scenes';
@@ -93,7 +94,7 @@ export default function Page() {
       <section className="s-section s-example" id="example" data-reveal aria-labelledby="example-title">
         <p className="eyebrow">What you get back</p>
         <h2 id="example-title">Here’s what your plan looks like.</h2>
-        <SampleReport />
+        <div className="s-example-split"><InboxStory /><SampleReport /></div>
       </section>
 
       <section className="s-section s-check" id="check" aria-labelledby="check-title">

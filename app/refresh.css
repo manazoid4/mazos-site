@@ -175,3 +175,20 @@ h2 { font-weight: 650; }
   .s-board-step svg { grid-row: span 2; width: 28px; height: 28px; }
   .s-board-phone .s-demo { max-width: 260px; }
 }
+.s-example { max-width: none; }
+.s-example-split { display: grid; gap: 32px; align-items: start; }
+.s-inbox-story { margin: 0; padding: 32px 8px; }
+.s-inbox-story figcaption { font-size: 1.3rem; font-weight: 650; max-width: 22ch; margin-bottom: 30px; }
+.s-inbox-list { border-radius: 20px; padding: 18px; background: var(--tint); }
+.s-inbox-heading { display: flex; justify-content: space-between; font-size: .8rem; margin-bottom: 14px; gap: 12px; }
+.s-inbox-item { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; margin-top: 8px; padding: 14px; background: var(--surface); border-radius: 12px; }
+.s-inbox-item > span:first-child { grid-column: 1 / -1; font-size: .8rem; color: var(--muted); }
+.s-inbox-item > span:last-child { font-size: .8rem; color: var(--accent); }
+.s-inbox-item strong { font-size: .9rem; }
+.s-inbox-story > p { margin-top: 16px; }
+@media (min-width: 900px) { .s-example-split { grid-template-columns: .8fr 1.2fr; gap: 48px; } }
+@media (prefers-reduced-motion: no-preference) {
+  .js-reveal .s-inbox-story:not([data-shown]) .s-inbox-item { transform: translateX(calc((var(--i) - 1) * 24px)) rotate(calc((var(--i) - 1) * 5deg)); }
+  .js-reveal .s-inbox-story[data-shown] .s-inbox-item { animation: s-inbox-settle 1.2s ease-out both; animation-delay: calc(var(--i) * .25s); }
+}
+@keyframes s-inbox-settle { from { transform: translateX(calc((var(--i) - 1) * 24px)) rotate(calc((var(--i) - 1) * 5deg)); opacity: .6; } to { transform: none; opacity: 1; } }
