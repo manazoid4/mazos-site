@@ -119,3 +119,4 @@ html { scroll-behavior: smooth; }
 .for-creators-icons { display: flex; gap: 8px; } .for-creators-icons .bk-icon { width: 34px; height: 34px; padding: 6px; background: #fff; border: 2px solid #151615; border-radius: 10px; }
 .for-else { display: flex; align-items: center; gap: 12px; width: min(100% - 32px, 1120px); margin: 20px auto; box-sizing: border-box; padding: 14px 16px; border: 2px dashed #151615; border-radius: 16px; color: inherit; text-decoration: none; }
 .for-else .mw-hub-icon { margin: 0; background: #ffb020; flex: none; }
+.s-linkedin { display: inline-block; margin-top: 10px; }

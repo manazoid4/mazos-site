@@ -102,7 +102,7 @@ test('homepage keeps the fixed terms with its package strip', async () => {
   const html = await readPage('/');
   const strip = html.match(/<ul class="s-trust"[\s\S]*?<\/ul>/)?.[0];
   assert.ok(strip, 'terms strip must sit under the hero');
-  for (const item of [/One fixed price/, /Half now, half when it works/, /Free demo first/]) {
+  for (const item of [/One fixed price/, /No contracts/, /Free demo first/]) {
     assert.match(strip, item);
   }
   assert.ok(html.indexOf('class="s-trust"') < html.indexOf('id="trades"'), 'terms come before the rest of the page');
@@ -169,7 +169,6 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(html, /Keep It Running[\s\S]{0,30}£19\/month/);
   assert.doesNotMatch(html, /\bAI\b/, 'AI is used behind the scenes, never advertised (Maz, 27 Sep)');
   assert.match(html, /Free Plan &amp; Fixed Quote/);
-  assert.match(html, /Half now, half when it works/);
   assert.match(html, /£40 when they become a paying client/);
   for (const retired of [/£150/, /£395/, /£249/, /£595/, /Quick Win/, /£39\/month/, /founding/i, /Contact Setup/, /Enquiry Check/, /Customer Journey Review/, /From £495/, /From £950/, /From £1,500/, /£295/, /£1,250/, /£2,950/, /£49\/month/]) {
     assert.doesNotMatch(html, retired, `retired offer still on homepage: ${retired}`);

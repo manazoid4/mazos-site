@@ -3,6 +3,12 @@
 This repo is public. The full handover, open to-dos and research source names live in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/HANDOVER.md` and `ARCHITECTS-CONTEXT-PACK-2026-09-27.md`.
 
 
+## 1 Oct: playbooks, simpler promises (PR #98)
+- Maz confirmed Brand Kit at £395. "Half now, half later" wording removed everywhere (reads as desperate); promises are now free demo first, one fixed price, no contracts.
+- Homepage About has a Connect on LinkedIn button; the footer already links the company page. Maz's personal profile URL is still needed.
+- Five playbooks for other agents in `docs/playbooks/` (ship a change, offer and voice, design, forms and conversion, leads), linked from `AGENTS.md`. Claude usage resets Sunday 4 Oct; other agents should follow these until then.
+- Maz to do: merge #98; send personal LinkedIn URL; decide #88.
+
 ## 30 Sep, late: Brand Kit for creators + About/LinkedIn (PR claude/brand-kit)
 - PR #97 merged and live.
 - New `/brand-kit` page for people who sell through social media (trainers, coaches, makers, bakers, stylists, artists). Brand Kit £395: your look, a one-page website, a profile that sells, 12 post templates, a buy button, Google listing. Six creator add-ons, three reusing standard add-on prices. All data in `BRAND_KIT*` in `app/offers.ts`; bright icons in `app/brand-kit/kit-icon.tsx`. Linked from the phone menu, footer and sitemap; `?package=Brand Kit` pre-fills the form. No lead names on the site (leads stay private).

@@ -38,7 +38,7 @@ export default function ContactPage() {
           <ul className="s-ticks">
             {BIGGER_JOBS.map((job) => <li key={job.name}><strong>{job.name}, {job.price}.</strong> {job.body}</li>)}
           </ul>
-          <p className="s-small">Fixed price first. Half to start, the rest when it works.</p>
+          <p className="s-small">Fixed price, agreed first.</p>
         </div>
         <DemoRequestForm />
       </section>
