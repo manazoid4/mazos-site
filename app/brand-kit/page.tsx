@@ -31,7 +31,7 @@ export default function BrandKitPage() {
         <p className="s-lede">{BRAND_KIT.body}</p>
         <div className="bk-cta">
           <a className="button button-signal s-button-lg" href={ASK}>{`Get my Brand Kit · ${BRAND_KIT.price}`}</a>
-          <p className="s-small">Fixed price. Half to start, the rest when you love it.</p>
+          <p className="s-small">Fixed price, agreed before we start.</p>
         </div>
         <ul className="bk-who" aria-label="Made for">
           {BRAND_KIT.forWho.slice(0, 6).map((who, i) => (
@@ -77,7 +77,7 @@ export default function BrandKitPage() {
         <DemoPath source="brand-kit" compact />
       </section>
 
-      <p className="bk-promise">Fixed price agreed first. Half to start, the rest when it works. No contracts, no VAT, you own everything.</p>
+      <p className="bk-promise">Fixed price agreed first. No contracts, no VAT added, and you own everything.</p>
 
       <SiteFooter />
     </main>

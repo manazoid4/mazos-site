@@ -48,7 +48,7 @@ export const MAZ_WORKS_UPDATES: MazWorksUpdate[] = [
     items: [
       'A low-cost starting package so any business can try one job first.',
       'Add-ons grouped by what they help with: winning customers, getting found, less admin and team help.',
-      'Promises spelled out: one fixed price agreed first, half now and half when it works, no contracts, no VAT added.',
+      'Promises spelled out: one fixed price agreed first, no contracts, no VAT added.',
       'Trade guides now lead with outcomes, like turning enquiries into booked jobs.',
     ],
   },

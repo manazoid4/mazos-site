@@ -225,13 +225,13 @@ export const DEMO_STEPS: { title: string; body: string; note: string }[] = [
   { title: 'We agree the demo', body: 'On the call we agree what the demo shows and the date you get it. If a demo won’t help, I say so and send a plan instead.', note: 'Date agreed on the call' },
   { title: 'Your free demo arrives', body: 'A working demo built around your business, sent by the date we agreed. Try it on your own phone.', note: 'Free, no obligation' },
   { title: 'Happy with it? Your full plan', body: 'A written plan and one fixed price. Every item listed and invoiced clearly. No extra charges later.', note: 'Nothing to pay yet' },
-  { title: 'I build it, you see it working', body: 'Half to start, the rest when it works. Then two months of unlimited changes.', note: 'Fixed price' },
+  { title: 'I build it, you see it working', body: 'You see it working, then you get two months of unlimited changes.', note: 'Fixed price' },
 ];
 
 export const PROMISES: { title: string; body: string }[] = [
   { title: 'Free demo first', body: 'After a short call, you get a working demo. No charge.' },
   { title: 'One fixed price', body: 'You know the full cost before any work starts.' },
-  { title: 'Half now, half when it works', body: 'You pay the rest once you’ve seen it working.' },
+  { title: 'No contracts', body: 'Every package is a one-off. Nothing is locked in.' },
 ]; 
 
 /** What's not included, said plainly. */
@@ -255,7 +255,7 @@ export const DELIVERY: { title: string; body: string }[] = [
   { title: 'Help afterwards if you want it', body: `${CARE_PLAN.name} (${CARE_PLAN.price}) keeps it checked and makes small changes. Staff training is an add-on.` },
 ];
 
-export const PAYMENT_TERMS = 'A free plan and fixed price before any work. Half to start, the rest when it is working. No VAT added.';
+export const PAYMENT_TERMS = 'A free plan and fixed price before any work. No VAT added.';
 
 export const THIRD_PARTY_NOTE = 'If you need a paid app, like a texting service, you pay that company directly and I tell you the cost up front. You own everything.';
 
