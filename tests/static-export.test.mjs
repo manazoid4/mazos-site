@@ -75,10 +75,10 @@ async function internalTargetExists(urlPath) {
 test('homepage positions Maz Works as a systems builder, not a website-fix shop (Maz, 27 Sep)', async () => {
   const html = await readPage('/');
   // Conversion rebuild (29 Sep): the hero leads with one concrete outcome, then the positioning line.
-  assert.match(html, /Systems that turn enquiries into bookings and take the admin off you/);
+  assert.match(html, /Systems that turn enquiries (<em>)?into bookings(<\/em>)? and take the admin off you/);
   assert.match(html, /Start with one job from/);
   assert.match(html, /Automation, connected tools and custom software/);
-  assert.match(html, /For UK small businesses and teams, in any trade/);
+  assert.match(html, /For small businesses and teams, in any trade/);
   for (const smallTime of [/website fix/i, /small fixes/i, /quick fix/i, /Enquiry Repair/, /fix what’s broken/i, /Maz Works is new/i]) {
     assert.doesNotMatch(html, smallTime, `homepage reads as small-time: ${smallTime}`);
   }
@@ -496,10 +496,12 @@ test('the guarantee, no-VAT and referral lines appear where Maz\'s decisions req
   assert.match(faq, /working within 7 working days of me getting access/);
 });
 
+// 30 Sep: the free demo is real now, but only after a call (date agreed on the call).
+// Case study bodies still lead to the free plan form; the shared nav may link /demos.
 test('case studies route to a plan and fixed price, not a blanket free demo', async () => {
   for (const route of ['/work/jobfilter', '/work/scrap-finance-partners']) {
-    const html = await readPage(route);
-    assert.doesNotMatch(html, /free demo/i, `${route} still offers a free demo`);
+    const html = (await readPage(route)).replace(/\/demos.{0,40}?Free demo/g, '');
+    assert.doesNotMatch(html, /free (live )?demo/i, `${route} still offers a free demo`);
     assert.match(html, /\/leak-check\?src=case-[a-z-]+#leak-check-form/, `${route} should lead to the free plan form`);
   }
 });

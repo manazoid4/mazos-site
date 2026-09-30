@@ -3,6 +3,34 @@
 This repo is public. The full handover, open to-dos and research source names live in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/HANDOVER.md` and `ARCHITECTS-CONTEXT-PACK-2026-09-27.md`.
 
 
+## 30 Sep, evening: menu, colour, free live demo, LinkedIn funnel (PR #97)
+- Batches 1–3 and the Next 16.3.8 security bump (#96) are merged and live on www.mazworks.uk. #88 (older real-direction homepage) is still open: 22 conflicts with the batches, waiting on Maz to close it or cherry-pick from it.
+- Phone menu is 7 links (`MENU_LINKS` in `app/nav.ts`); the full map stays in the footer and `/site-map`. The footer is two columns on phones, deep green, and no longer links GitHub (posting rules).
+- Palette: the candy pastels are gone. The base is sand/sage/mist/clay/wheat, and a 15-site audit added a measured pop: deep green `--deep`, orange-tinted pill labels, a marker highlight on headline `<em>`, a glow behind phone mockups, and a tint per trade card. Orange stays the action colour.
+- **Free demo = call first (Maz, 30 Sep).** The self-serve animated demo was removed. The route is:
+  1. A 15-minute call.
+  2. On the call, agree what the demo shows and the date it arrives.
+  3. The free demo arrives by that date.
+  4. If they're happy, the full plan with one fixed price, every item invoiced clearly and no extra charges.
+  5. Build: half to start, the rest when it works.
+  6. 2 months of unlimited changes from go-live.
+
+  Source of truth: `DEMO_STEPS` and `CHANGES_WINDOW` in `app/offers.ts`.
+  - Changes are fenced. Adjustments to what was built are unlimited; a new system, feature or app is priced first.
+  - Tests in `tests/demos.test.mjs` guard this.
+  - It is shown on `/demos`, `/what-we-do`, `/prices` and `/linkedin`, and in the homepage promises.
+- `/what-we-do` is interactive:
+  - a live estimator: sliders and share chips, no preset numbers;
+  - "How I set it up" tabs;
+  - a system picker that runs each system's steps;
+  - an example plan whose findings open and whose quote recalculates.
+- Section pills are bold multi-colour with dark text, and the hero no longer says "UK". The footer is back on the page colour. Animations are about 30% faster.
+- `/linkedin` (noindex) is the one LinkedIn link: a hello, the free demo path and the promises. Copy pack: `docs/maz-works/LINKEDIN-FUNNEL.md`.
+- Found, not touched:
+  - The main checkout `C:\Users\manaz\mazos-site` has 9 uncommitted Objects files, on branch `agents/objects-sales-clarity` (from 8 Sep).
+  - These local-only branches were never pushed: `agents/maz-works-enquiry-resilience-20260921` (3 commits), `agents/maz-works-client-funnel` (Aug) and `agents/lead-quality-v2-20260928` (its brief is already in main).
+- Maz to do: merge #97; paste the LinkedIn headline, About, Featured, banner and Website link from the pack; post the launch post; decide #88.
+
 ## 30 Sep: Brief 3, all three batches (PRs stacked: Batch 1 → 2 → 3)
 - Batch 1 (Codex, finished by Claude): `app/systems.ts` is the one source of truth for systems; the palette is hi-vis orange on off-white (lime and cream are gone, including the favicon, drawings and share images); the homepage has 5 sections; there is a new `/what-we-do`; `api/enquiry.js` sends an instant confirmation through Resend with FormSubmit as the fallback; reply time is 1 working day everywhere (`CHECK_REPLY_TIME`); trade-guide examples lead with the lost customer or lost time and name their system.
 - Batch 2: "Build my system" (homepage, `/what-we-do`, every trade guide) priced by `quotePlan()` in `offers.ts`, unit-tested against the Offer v9 rules; the cost calculator uses only the visitor's own numbers; the hero phone is playable (Call, then Book); cards lift and draw their icon; scene tabs swipe; the compare table highlights a column; `<details>` open smoothly; scroll-driven reveal where supported.

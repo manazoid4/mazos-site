@@ -53,7 +53,9 @@ test('an enquiry can ask for a quote or an answer instead of an unpaid build', a
 
   assert.match(html, /What would be most useful next\?/);
   assert.match(html, /A free plan and fixed price/);
-  assert.doesNotMatch(html, /free live demo|free demo/i);
+  // The form never offers an unpaid build; the free demo is booked by call from /demos (30 Sep).
+  const withoutNavLink = html.replace(/\/demos.{0,40}?Free demo/g, '');
+  assert.doesNotMatch(withoutNavLink, /free live demo|free demo/i);
   assert.match(html, /A fixed quote for a specific job/);
   assert.match(html, /Just answer my question first/);
 });

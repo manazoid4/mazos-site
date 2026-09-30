@@ -23,7 +23,7 @@ export function Storyboard({ system }: { system: System }) {
   </div>;
 }
 export function Scenes({ systems = SYSTEMS.filter(system => !system.packageId && system.id !== 'missed-calls') }: { systems?: System[] }) {
-  return <><ScenePlayer tabs={systems.map(system => ({ id: system.id, label: system.name, durationMs: 7000 }))}>
+  return <><ScenePlayer tabs={systems.map(system => ({ id: system.id, label: system.name, durationMs: 5000 }))}>
     {systems.map(system => <Storyboard key={system.id} system={system} />)}
   </ScenePlayer><p className="s-small">Illustrations of how it works, not real customers.</p></>;
 }

@@ -2,91 +2,66 @@ import { fitDescription } from '../seo';
 import { OG_IMAGE } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
+import { CHANGES_WINDOW, GUARANTEE } from '../offers';
+import { CHECK_REPLY_TIME } from '../site';
+import { ChangesWindow, DemoPath } from '../demo-path';
 
-const DEMO_DESCRIPTION = 'See how Maz Works turns a real business problem into a private working demo before a full build is agreed.';
+const DEMO_DESCRIPTION = 'Book a 15-minute call and get a free working demo built around your business, by a date we agree. Then one fixed price and 2 months of unlimited changes.';
 
 export const metadata: Metadata = {
-  title: 'Private business demos',
+  title: 'Free demo, built around your business',
   description: DEMO_DESCRIPTION,
   alternates: { canonical: '/demos' },
   openGraph: { images: [OG_IMAGE],
-    title: 'Private business demos — Maz Works',
-    description: fitDescription('See the useful part working before committing to the full build.'),
+    title: 'Free demo, built around your business — Maz Works',
+    description: fitDescription('A short call, then a free working demo by the date we agree. See it before you pay.'),
     url: '/demos',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Private business demos — Maz Works',
-    description: fitDescription('See the useful part working before committing to the full build.'),
+    title: 'Free demo, built around your business — Maz Works',
+    description: fitDescription('A short call, then a free working demo by the date we agree. See it before you pay.'),
     images: [OG_IMAGE.url],
   },
 };
 
-const DEMO_TYPES = [
-  {
-    title: 'Website direction',
-    body: 'See how your site could look and guide customers first.',
-  },
-  {
-    title: 'Customer journey',
-    body: 'Make ordering, booking or contacting you easier for customers.',
-  },
-  {
-    title: 'Follow-up & admin',
-    body: 'Show how chasing, copying or missed follow-ups could be simpler.',
-  },
-  {
-    title: 'Physical + digital',
-    body: 'Link your website to review taps, menu stands or signs.',
-  },
+const FAQ = [
+  ['Is the demo really free?', 'Yes. You pay nothing for the call or the demo, and you are under no obligation to go ahead.'],
+  ['When do I get it?', 'We agree the date on the call, based on what the demo needs to show. You know it before we hang up.'],
+  ['What if a demo won’t help?', 'Some jobs are clearer as a written plan. If so, I tell you on the call and send the plan and fixed price instead.'],
+  ['What happens after the demo?', 'If you like it, I send the full plan with one fixed price. Every item is listed and invoiced clearly, with no extra charges later.'],
+  ['What counts as a change in the 2 months?', 'Anything that adjusts what I built: wording, timings, steps, notifications, fixes. Something new, like another system or app, is priced first so it stays fair.'],
 ];
 
 export default function DemosPage() {
   return (
-    <main>
+    <main className="s-home">
       <SiteHeader />
 
-      <section className="mw-hero" id="main-content" tabIndex={-1} aria-labelledby="demos-title">
-        <div className="mw-hero-copy">
-          <p className="eyebrow">Maz Works / Private demos</p>
-          <h1 id="demos-title">See the idea working before you pay for the full build.</h1>
-          <p className="mw-lede">For suitable projects, I build a private demo around your business. No templates and no slide decks.</p>
-          <div className="mw-actions">
-            <a className="button button-signal" href="/contact#contact">Ask for a private demo</a>
-            <a className="text-link" href="#examples">What a demo can show <span aria-hidden="true">↓</span></a>
-          </div>
-          <p className="mw-hero-note">Each demo is shared only with its business. Public examples stay selective by design.</p>
-        </div>
-        <div className="mw-capabilities" aria-label="Private demo benefits">
-          <span>Built around your business</span>
-          <span>Private link + access code</span>
-          <span>No commitment to the full build</span>
-          <span>Plain-English walkthrough</span>
-          <span>Works on phone and desktop</span>
-          <span>Next step agreed only if useful</span>
-        </div>
+      <section className="s-hero s-hero-short" id="main-content" tabIndex={-1} aria-labelledby="demos-title">
+        <p className="eyebrow">See it before you pay</p>
+        <h1 id="demos-title">A free demo, <em>built around your business</em>.</h1>
+        <p className="s-lede">A short call first. Then a working demo of your system, by a date we agree on the call. Only if you like it do we talk price.</p>
+        <DemoPath source="demos" />
+        <p className="s-small">Prefer to write it down? <a href="/leak-check?src=demos-page#leak-check-form">Get a free plan and price instead</a>. I reply within {CHECK_REPLY_TIME}.</p>
       </section>
 
-      <section className="mw-section" id="examples" aria-labelledby="examples-title">
-        <header className="mw-section-heading">
-          <p className="eyebrow">What I can demonstrate</p>
-          <h2 id="examples-title">A working direction, not a promise on a page.</h2>
-          <p>See what changes for customers or staff before a bigger project.</p>
-        </header>
-        <div className="mw-outcome-list">
-          {DEMO_TYPES.map((item) => <div key={item.title}><strong>{item.title}</strong><span>{item.body}</span></div>)}
-        </div>
+      <section className="s-section" id="changes" aria-labelledby="changes-title">
+        <p className="eyebrow">After it goes live</p>
+        <h2 id="changes-title">{CHANGES_WINDOW.name}, no extra charge.</h2>
+        <ChangesWindow />
+        <p className="s-small">{GUARANTEE}</p>
       </section>
 
-      <section className="mw-section mw-pricing" aria-labelledby="privacy-title">
-        <header className="mw-section-heading">
-          <p className="eyebrow">Built for real conversations</p>
-          <h2 id="privacy-title">Your business stays the focus.</h2>
-          <p>Client demos sit behind a private link and access code. Only the people you choose see them.</p>
-        </header>
-        <div className="mw-actions">
-          <a className="button button-signal" href="/contact#contact">Request yours</a>
+      <section className="s-section" id="questions" aria-labelledby="questions-title">
+        <p className="eyebrow">Straight answers</p>
+        <h2 id="questions-title">Questions people ask first.</h2>
+        <div className="dp-faq">
+          {FAQ.map(([question, answer]) => (
+            <details key={question}><summary>{question}</summary><p>{answer}</p></details>
+          ))}
         </div>
+        <p className="s-small">Your demo sits behind a private link and access code. Only the people you choose see it.</p>
       </section>
 
       <SiteFooter />
