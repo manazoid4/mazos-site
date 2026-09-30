@@ -12,6 +12,7 @@ export type MazWorksUpdate = {
  * outcomes, usage numbers or performance claims.
  */
 export const MAZ_WORKS_UPDATES: MazWorksUpdate[] = [
+ { id:'systems-and-free-plan',publishedAt:'2026-09-30',label:'BETTER',title:'See the system before you ask',summary:'A shorter homepage and a fuller walkthrough of each package.',items:['See what happens from first enquiry to the next action, with prices alongside.','Free-plan requests now use an instant confirmation email, with a personal reply within 1 working day.'] },
   {
     id: 'easier-navigation',
     publishedAt: '2026-09-27',

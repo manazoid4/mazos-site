@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ConversionTracker } from './analytics';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import './simplified.css';
@@ -90,7 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
         <a className="skip-link" href="#main-content">Skip to main content</a>
         {children}
-        <Analytics />
+        <Analytics /><ConversionTracker />
       </body>
     </html>
   );

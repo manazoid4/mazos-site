@@ -1,0 +1,402 @@
+[
+  {
+    "route": "/contact",
+    "width": 1280,
+    "file": "contact-1280.mp4",
+    "bytes": 365292,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/contact",
+    "width": 390,
+    "file": "contact-390.mp4",
+    "bytes": 307850,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/3d-printing",
+    "width": 1280,
+    "file": "3d-printing-1280.mp4",
+    "bytes": 1293065,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/3d-printing",
+    "width": 390,
+    "file": "3d-printing-390.mp4",
+    "bytes": 903059,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/demos",
+    "width": 390,
+    "file": "demos-390.mp4",
+    "bytes": 312719,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/demos",
+    "width": 1280,
+    "file": "demos-1280.mp4",
+    "bytes": 357904,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/faq",
+    "width": 1280,
+    "file": "faq-1280.mp4",
+    "bytes": 794853,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/for",
+    "width": 390,
+    "file": "for-390.mp4",
+    "bytes": 287161,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/faq",
+    "width": 390,
+    "file": "faq-390.mp4",
+    "bytes": 706445,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/for",
+    "width": 1280,
+    "file": "for-1280.mp4",
+    "bytes": 314885,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/lab",
+    "width": 390,
+    "file": "lab-390.mp4",
+    "bytes": 301982,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/lab",
+    "width": 1280,
+    "file": "lab-1280.mp4",
+    "bytes": 395415,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/leak-check",
+    "width": 390,
+    "file": "leak-check-390.mp4",
+    "bytes": 646422,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/leak-check",
+    "width": 1280,
+    "file": "leak-check-1280.mp4",
+    "bytes": 873288,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/maz-core",
+    "width": 390,
+    "file": "maz-core-390.mp4",
+    "bytes": 109476,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/maz-core",
+    "width": 1280,
+    "file": "maz-core-1280.mp4",
+    "bytes": 120848,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/",
+    "width": 1280,
+    "file": "home-1280.mp4",
+    "bytes": 1337897,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/",
+    "width": 390,
+    "file": "home-390.mp4",
+    "bytes": 948918,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/maz-pocket-ai",
+    "width": 390,
+    "file": "maz-pocket-ai-390.mp4",
+    "bytes": 137478,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/maz-pocket-ai",
+    "width": 1280,
+    "file": "maz-pocket-ai-1280.mp4",
+    "bytes": 170257,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/mazos",
+    "width": 390,
+    "file": "mazos-390.mp4",
+    "bytes": 14989,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/mazos",
+    "width": 1280,
+    "file": "mazos-1280.mp4",
+    "bytes": 35469,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/quick-win",
+    "width": 390,
+    "file": "quick-win-390.mp4",
+    "bytes": 299454,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/prices",
+    "width": 390,
+    "file": "prices-390.mp4",
+    "bytes": 884414,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/prices",
+    "width": 1280,
+    "file": "prices-1280.mp4",
+    "bytes": 1005704,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/quick-win",
+    "width": 1280,
+    "file": "quick-win-1280.mp4",
+    "bytes": 391083,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/rotareason",
+    "width": 390,
+    "file": "rotareason-390.mp4",
+    "bytes": 185082,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/rotareason",
+    "width": 1280,
+    "file": "rotareason-1280.mp4",
+    "bytes": 266114,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/site-map",
+    "width": 390,
+    "file": "site-map-390.mp4",
+    "bytes": 201536,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/site-map",
+    "width": 1280,
+    "file": "site-map-1280.mp4",
+    "bytes": 234601,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/whats-new",
+    "width": 1280,
+    "file": "whats-new-1280.mp4",
+    "bytes": 825987,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/whats-new",
+    "width": 390,
+    "file": "whats-new-390.mp4",
+    "bytes": 748263,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/work/jobfilter",
+    "width": 390,
+    "file": "work-jobfilter-390.mp4",
+    "bytes": 306687,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/work/jobfilter",
+    "width": 1280,
+    "file": "work-jobfilter-1280.mp4",
+    "bytes": 368880,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/what-we-do",
+    "width": 1280,
+    "file": "what-we-do-1280.mp4",
+    "bytes": 2305692,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/what-we-do",
+    "width": 390,
+    "file": "what-we-do-390.mp4",
+    "bytes": 1908203,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/work/scrap-finance-partners",
+    "width": 1280,
+    "file": "work-scrap-finance-partners-1280.mp4",
+    "bytes": 365835,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/work/scrap-finance-partners",
+    "width": 390,
+    "file": "work-scrap-finance-partners-390.mp4",
+    "bytes": 283081,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/for/architects",
+    "width": 390,
+    "file": "for-architects-390.mp4",
+    "bytes": 811452,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/for/architects",
+    "width": 1280,
+    "file": "for-architects-1280.mp4",
+    "bytes": 921127,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/for/cafes-and-food",
+    "width": 1280,
+    "file": "for-cafes-and-food-1280.mp4",
+    "bytes": 652900,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/for/cafes-and-food",
+    "width": 390,
+    "file": "for-cafes-and-food-390.mp4",
+    "bytes": 522765,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/for/clinics-and-therapists",
+    "width": 390,
+    "file": "for-clinics-and-therapists-390.mp4",
+    "bytes": 496609,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/for/clinics-and-therapists",
+    "width": 1280,
+    "file": "for-clinics-and-therapists-1280.mp4",
+    "bytes": 582673,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/for/dog-groomers",
+    "width": 1280,
+    "file": "for-dog-groomers-1280.mp4",
+    "bytes": 618713,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/for/dog-groomers",
+    "width": 390,
+    "file": "for-dog-groomers-390.mp4",
+    "bytes": 484864,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/for/garages",
+    "width": 390,
+    "file": "for-garages-390.mp4",
+    "bytes": 491444,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/for/garages",
+    "width": 1280,
+    "file": "for-garages-1280.mp4",
+    "bytes": 605988,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/for/salons-and-beauty",
+    "width": 1280,
+    "file": "for-salons-and-beauty-1280.mp4",
+    "bytes": 684220,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "route": "/for/salons-and-beauty",
+    "width": 390,
+    "file": "for-salons-and-beauty-390.mp4",
+    "bytes": 579413,
+    "overflow": false,
+    "errors": []
+  }
+]

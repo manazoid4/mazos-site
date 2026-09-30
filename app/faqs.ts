@@ -1,3 +1,5 @@
+import { CHECK_REPLY_TIME } from './site';
+import { OFFERS, CARE_PLAN, getExtra, REFERRAL_REWARD } from './offers';
 export type MazWorksFaq = {
   question: string;
   answer: string;
@@ -6,7 +8,7 @@ export type MazWorksFaq = {
 export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   {
     question: 'Is the plan really free? What’s the catch?',
-    answer: 'It’s free. Tell me the job you want off your plate and I reply within 3 working days with a plan and a fixed price. If it isn’t worth automating, I say so. No call, no automated sales emails, no obligation.',
+    answer: `It’s free. Tell me the job you want off your plate and I reply within ${CHECK_REPLY_TIME} with a plan and a fixed price. If it isn’t worth automating, I say so. No call, no automated sales emails, no obligation.`,
   },
   {
     question: 'What do you actually build?',
@@ -14,23 +16,23 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How much does it cost?',
-    answer: 'Starter Automation is £195 for one job set up to run itself. A Business System, where several jobs are joined up, starts from £795. Custom Software & Websites start from £1,950. Add-ons like appointment reminders (£79) or missed-call text-back (£95) are priced up front and go on the same invoice. Keep It Running is £19 a month. No VAT added.',
+    answer: `Starter Automation is ${OFFERS[0].price} for one job set up to run itself. A Business System, where several jobs are joined up, starts from ${OFFERS[1].price.replace('From ', '')}. Custom Software & Websites start from ${OFFERS[2].price.replace('From ', '')}. Add-ons like appointment reminders (${getExtra('Appointment reminders').price}) or missed-call text-back (${getExtra('Review requests').price}) are priced up front and go on the same invoice. Keep It Running is ${CARE_PLAN.price}. No VAT added.`,
   },
   {
-    question: 'What can the £195 Starter do?',
+    question: `What can the ${OFFERS[0].price} Starter do?`,
     answer: 'One job you currently do by hand, set up to run itself on the tools you already use. For example: every enquiry logged in one list with an instant reply, or booking confirmations and reminders sent automatically. Working within 7 working days of access.',
   },
   {
     question: 'How do the optional extras work?',
-    answer: 'They are add-ons with a fixed, one-off price, like appointment reminders (£79), review requests (£95) or missed-call text-back (£95). Add them when you order, or later. They go on the same invoice, so there are no surprise costs.',
+    answer: `They are add-ons with a fixed, one-off price, like appointment reminders (${getExtra('Appointment reminders').price}), review requests (${getExtra('Review requests').price}) or missed-call text-back (${getExtra('Review requests').price}). Add them when you order, or later. They go on the same invoice, so there are no surprise costs.`,
   },
   {
     question: 'Can I buy an add-on on its own?',
-    answer: 'Yes. Standard add-ons, like appointment reminders (£79) or Google Business Profile setup (£49), can be bought on their own or added to any package. The one exception is Extra automation, which adds a second job to a package; a first job of your own is Starter Automation (£195).',
+    answer: `Yes. Standard add-ons, like appointment reminders (${getExtra('Appointment reminders').price}) or Google Business Profile setup (${getExtra('Google Business Profile setup').price}), can be bought on their own or added to any package. The one exception is Extra automation, which adds a second job to a package; a first job of your own is Starter Automation (${OFFERS[0].price}).`,
   },
   {
     question: 'What isn’t included?',
-    answer: 'Paid apps or text-message costs, which you pay those companies directly (I tell you the cost up front). Changes after handover, unless you have Keep It Running at £19 a month. And new features beyond the agreed plan, which get their own fixed price first.',
+    answer: `Paid apps or text-message costs, which you pay those companies directly (I tell you the cost up front). Changes after handover, unless you have Keep It Running at ${CARE_PLAN.price}. And new features beyond the agreed plan, which get their own fixed price first.`,
   },
   {
     question: "What's the guarantee?",
@@ -62,7 +64,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'Do you pay for referrals?',
-    answer: 'Yes. £40 by bank transfer when a business you introduce becomes a new paying client. One per new client, and only if they were not already talking to me.',
+    answer: `Yes. ${REFERRAL_REWARD} by bank transfer when a business you introduce becomes a new paying client. One per new client, and only if they were not already talking to me.`,
   },
 ];
 

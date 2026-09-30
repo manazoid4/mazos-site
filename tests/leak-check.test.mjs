@@ -27,7 +27,7 @@ test('the Free Plan & Fixed Quote has a dedicated shareable acquisition page', a
   assert.match(html, /Free Plan &amp; Fixed Quote/);
   assert.doesNotMatch(html, /Customer Journey Review|Booking &amp; Enquiry Check/);
   assert.match(html, /Tap, add your name and email, done\. No call needed\./);
-  assert.match(html, /within 3 working days/i);
+  assert.match(html, /within 1 working day/i);
   assert.doesNotMatch(html, /5 working days/i);
   assert.match(html, /any UK business/);
   assert.doesNotMatch(html, /Nottingham/);
@@ -63,7 +63,7 @@ test('the Leak Check reuses the resilient enquiry delivery path', async () => {
   const source = await readFile(path.join(root, 'app', 'leak-check', 'leak-check-form.tsx'), 'utf8');
 
   assert.match(source, /NATIVE_FORM_ENDPOINT/);
-  assert.match(source, /sendEnquiry/);
+  assert.match(source, /sendPlanEnquiry/);
   assert.match(source, /buildRecoveryMailto/);
   assert.match(source, /_honey/);
   assert.match(source, /source/);

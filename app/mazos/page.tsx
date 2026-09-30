@@ -1,9 +1,10 @@
+import { fitDescription } from '../seo';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Page moved',
-  description: 'The MAZos concept page has moved into the main Maz Works portfolio.',
+  description: fitDescription('The MAZos concept page has moved into the main Maz Works portfolio.'),
   alternates: { canonical: '/' },
   robots: { index: false, follow: true },
 };

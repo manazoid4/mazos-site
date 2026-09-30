@@ -334,7 +334,7 @@ export default function RotaReasonClient() {
   };
 
   return (
-    <main id="main-content" className={styles.shell}>
+    <main id="main-content" tabIndex={-1} className={styles.shell}>
       <header className={styles.topbar}>
         <div className={styles.brandGroup}>
           <a href="/" className={styles.backLink}>Maz Works</a>
@@ -491,3 +491,4 @@ export default function RotaReasonClient() {
     </main>
   );
 }
+

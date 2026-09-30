@@ -9,4 +9,4 @@ export const GITHUB_URL = 'https://github.com/manazoid4';
 export const BOOKING_URL = 'https://cal.com/mazworks/quick-chat';
 export const LINKEDIN_URL = 'https://www.linkedin.com/company/maz-works';
 // The free-check reply promise. Change it here and every page follows.
-export const CHECK_REPLY_TIME = '3 working days';
+export { CHECK_REPLY_TIME } from './reply-time.js';

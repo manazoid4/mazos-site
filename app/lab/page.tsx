@@ -1,3 +1,4 @@
+import { fitDescription } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { NewsletterSignup } from '../newsletter-signup';
@@ -5,7 +6,7 @@ import { SITE_URL } from '../site';
 
 export const metadata: Metadata = {
   title: 'Other builds',
-  description: 'Products, prototypes, open-source tools and a client website built by Manazir Hussain, founder of Maz Works.',
+  description: fitDescription('Products, prototypes, open-source tools and a client website built by Manazir Hussain, founder of Maz Works.'),
   alternates: { canonical: `${SITE_URL}/lab` },
 };
 

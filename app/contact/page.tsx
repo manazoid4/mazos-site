@@ -1,16 +1,17 @@
+import { fitDescription } from '../seo';
 import { OG_IMAGE } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { DemoRequestForm } from '../demo-request-form';
 import { CallLink } from '../analytics';
 import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, SITE_URL } from '../site';
-import { FREE_STEP, OFFERS, PAYMENT_TERMS } from '../offers';
+import { FREE_STEP, OFFERS, PAYMENT_TERMS, LOWEST_EXTRA_PRICE } from '../offers';
 
 export const metadata: Metadata = {
-  title: { absolute: 'Contact Maz Works | Booking systems, automation and custom tools' },
-  description: 'Tell Manazir what you need: automation from £195, a joined-up business system, review and reminder systems, custom software or a website. One line is enough. Fixed quote, No VAT added.',
+  title: { absolute: 'Contact Maz Works' },
+  description: fitDescription(`Tell Manazir what you need: automation from ${OFFERS[0].price}, a joined-up business system, review and reminder systems, custom software or a website. One line is enough. Fixed quote, No VAT added.`),
   alternates: { canonical: `${SITE_URL}/contact` },
-  openGraph: { images: [OG_IMAGE], title: 'Contact Maz Works', description: 'Tell me what you need built. Fixed quote, No VAT added.', url: `${SITE_URL}/contact`, type: 'website' },
+  openGraph: { images: [OG_IMAGE], title: 'Contact Maz Works', description: fitDescription('Tell me what you need built. Fixed quote, No VAT added.'), url: `${SITE_URL}/contact`, type: 'website' },
 };
 
 const BIGGER_JOBS = OFFERS.map((offer) => ({ name: offer.name, price: offer.price, body: offer.body }));
@@ -37,7 +38,7 @@ export default function ContactPage() {
           <ul className="s-ticks">
             {BIGGER_JOBS.map((job) => <li key={job.name}><strong>{job.name}, {job.price}.</strong> {job.body}</li>)}
           </ul>
-          <p className="s-small">Add-ons from £39, priced up front. {PAYMENT_TERMS} You own everything I build.</p>
+          <p className="s-small">Add-ons from {LOWEST_EXTRA_PRICE}, priced up front. {PAYMENT_TERMS} You own everything I build.</p>
         </div>
         <DemoRequestForm />
       </section>

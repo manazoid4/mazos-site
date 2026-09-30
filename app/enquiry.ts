@@ -1,3 +1,4 @@
+import { OFFERS, CARE_PLAN, getExtra } from './offers';
 import { CONTACT_EMAIL, FORM_DELIVERY_EMAIL } from './site';
 
 export const FORM_ENDPOINT = `https://formsubmit.co/ajax/${FORM_DELIVERY_EMAIL}`;
@@ -12,14 +13,14 @@ export const SUBMIT_TIMEOUT_MS = 15000;
  */
 export const ENQUIRY_SERVICES = [
   // Ids are stable deep-link keys (old outreach links use them); labels follow app/offers.ts.
-  { id: 'repair', label: 'Starter Automation (£195)' },
-  { id: 'automation', label: 'Business System (from £795)' },
-  { id: 'software', label: 'Custom software or internal tool (from £1,950)' },
-  { id: 'website', label: 'Website with the system built in (from £1,950)' },
-  { id: 'reviews', label: 'Review requests and customer reminders (from £79)' },
-  { id: 'care', label: 'Keep It Running (£19/month)' },
+  { id: 'repair', label: `Starter Automation (${OFFERS[0].price})` },
+  { id: 'automation', label: `Business System (${OFFERS[1].price.toLowerCase()})` },
+  { id: 'software', label: `Custom software or internal tool (${OFFERS[2].price.toLowerCase()})` },
+  { id: 'website', label: `Website with the system built in (${OFFERS[2].price.toLowerCase()})` },
+  { id: 'reviews', label: `Review requests and customer reminders (from ${getExtra('Appointment reminders').price})` },
+  { id: 'care', label: `Keep It Running (${CARE_PLAN.price})` },
   { id: 'rebuild', label: 'Rebuild of an existing site or system' },
-  { id: 'google-profile', label: 'Google Business Profile setup (£49)' },
+  { id: 'google-profile', label: `Google Business Profile setup (${getExtra('Google Business Profile setup').price})` },
   { id: 'bundle', label: 'Starter plus optional extras' },
   { id: 'objects', label: 'Tap-to-review stands and signs' },
   { id: 'unsure', label: 'Not sure yet, help me work it out' },
@@ -51,7 +52,7 @@ export function readServiceFromLocation(): EnquiryServiceId | null {
   return match ? match.id : null;
 }
 
-export type EnquiryResult = { ok: true } | { ok: false; reason: 'rejected' | 'timeout' | 'network' };
+export type EnquiryResult = { ok: true; confirmationSent?: boolean } | { ok: false; reason: 'rejected' | 'timeout' | 'network' };
 
 /** Posts the enquiry and normalises FormSubmit's `success: "false"` body into a real failure. */
 export async function sendEnquiry(payload: Record<string, string>, timeoutMs = SUBMIT_TIMEOUT_MS): Promise<EnquiryResult> {
@@ -94,4 +95,16 @@ export function buildRecoveryMailto(subject: string, fields: Array<[string, stri
     .map(([label, value]) => `${label}: ${value}`)
     .join('\n');
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+/** Transactional first; native/AJAX FormSubmit remains the independently usable fallback. */
+export async function sendPlanEnquiry(payload: Record<string, string>): Promise<EnquiryResult> {
+  try {
+    const response = await fetch('/api/enquiry', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload), signal: AbortSignal.timeout(20000) });
+    const result = await response.json();
+    if (response.ok && result.ok === true) return { ok: true, confirmationSent: result.confirmationSent === true };
+    // Validation and abuse rejections must not bypass the server via fallback.
+    if (response.status === 400 || response.status === 413 || response.status === 429) return {ok:false,reason:'rejected'};
+  } catch { /* A static host, unavailable function or network timeout can use the existing transport. */ }
+  return sendEnquiry(payload);
 }
