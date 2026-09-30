@@ -1,10 +1,12 @@
 import { StickyCheckCta } from '../../sticky-cta';
-import { OG_IMAGE } from '../../seo';
+import { OG_IMAGE, fitDescription, priceNumber } from '../../seo';
+import { SITE_URL } from '../../site';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Breadcrumbs } from '../../breadcrumbs';
 import { SiteFooter, SiteHeader } from '../../site-chrome';
 import { NICHE_GUIDES, getNicheGuide } from '../niches';
+import { OFFERS } from '../../offers';
 
 export const dynamicParams = false;
 
@@ -17,8 +19,8 @@ export async function generateMetadata({ params }: { params: Promise<{ niche: st
   const guide = getNicheGuide(niche);
   if (!guide) return {};
   return {
-    title: guide.title,
-    description: `${guide.lede} Real examples, a 60-second self-check and what I’d set up, with fixed prices.`,
+    title: `${guide.shortName}: automation from ${OFFERS[0].price}`,
+    description: fitDescription(`${guide.lede} Real examples, a self-check and fixed prices.`),
     alternates: { canonical: `/for/${guide.id}` },
     openGraph: { title: `${guide.title} — Maz Works`, description: guide.lede, url: `/for/${guide.id}`, images: [OG_IMAGE] },
   };
@@ -30,8 +32,21 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
   if (!guide) notFound();
   const checkHref = `/leak-check?src=for-${guide.id}&trade=${guide.id}#leak-check-form`;
 
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `Automation for ${guide.name.toLowerCase()}`,
+    serviceType: guide.name,
+    description: guide.lede,
+    url: `${SITE_URL}/for/${guide.id}`,
+    provider: { '@id': `${SITE_URL}/#maz-works` },
+    areaServed: { '@type': 'Country', name: 'United Kingdom' },
+    offers: { '@type': 'Offer', name: OFFERS[0].name, price: priceNumber(OFFERS[0].price), priceCurrency: 'GBP' },
+  };
+
   return (
     <main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
       <SiteHeader />
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="niche-title">

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { ProjectLinks } from '../../project-elements';
 import { CASE_STUDY_PROJECTS, getCaseStudyProject } from '../../projects';
 import { SiteFooter, SiteHeader } from '../../site-chrome';
+import { fitDescription } from '../../seo';
 
 export const dynamicParams = false;
 
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!project) return {};
   return {
     title: `${project.name} case study`,
-    description: `${project.caseStudy.lede} See what I built and where it stands.`,
+    description: fitDescription(`${project.caseStudy.lede} See what I built and where it stands.`),
     alternates: { canonical: `/work/${project.id}` },
     openGraph: {
       title: `${project.name} case study — Maz Works`,

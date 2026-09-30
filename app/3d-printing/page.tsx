@@ -9,8 +9,8 @@ import { TouchEnquiryForm } from './touch-enquiry-form';
 import { TouchSelectionProvider } from './touch-selection';
 
 export const metadata: Metadata = {
-  title: 'Maz Works Objects — tap stands, architecture models and drawings',
-  description: 'Custom countertop tap stands, small-batch business gifts, simple architectural presentation models, signs and useful 3D-printed objects for real workplaces.',
+  title: 'Objects: tap stands and architecture models',
+  description: 'Countertop tap stands, small-batch business gifts, simple architecture presentation models and signs, 3D-printed for real workplaces.',
   alternates: { canonical: '/3d-printing' },
   openGraph: {
     title: 'Maz Works Objects — Touch + Business Gifting',

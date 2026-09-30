@@ -1,4 +1,10 @@
 import { CONTACT_EMAIL, FORM_DELIVERY_EMAIL } from './site';
+import { CARE_PLAN, EXTRAS, OFFERS } from './offers';
+
+const [STARTER_OFFER, SYSTEM_OFFER, CUSTOM_OFFER] = OFFERS;
+const extraPrice = (name: string) => EXTRAS.find((extra) => extra.name === name)!.price;
+const lowerFrom = (price: string) => price.replace(/^From/, 'from');
+const cheapest = (names: string[]) => `from £${Math.min(...names.map((name) => Number(extraPrice(name).replace(/[^\d.]/g, ''))))}`;
 
 export const FORM_ENDPOINT = `https://formsubmit.co/ajax/${FORM_DELIVERY_EMAIL}`;
 export const NATIVE_FORM_ENDPOINT = `https://formsubmit.co/${FORM_DELIVERY_EMAIL}`;
@@ -12,14 +18,14 @@ export const SUBMIT_TIMEOUT_MS = 15000;
  */
 export const ENQUIRY_SERVICES = [
   // Ids are stable deep-link keys (old outreach links use them); labels follow app/offers.ts.
-  { id: 'repair', label: 'Starter Automation (£195)' },
-  { id: 'automation', label: 'Business System (from £795)' },
-  { id: 'software', label: 'Custom software or internal tool (from £1,950)' },
-  { id: 'website', label: 'Website with the system built in (from £1,950)' },
-  { id: 'reviews', label: 'Review requests and customer reminders (from £79)' },
-  { id: 'care', label: 'Keep It Running (£19/month)' },
+  { id: 'repair', label: `${STARTER_OFFER.name} (${STARTER_OFFER.price})` },
+  { id: 'automation', label: `${SYSTEM_OFFER.name} (${lowerFrom(SYSTEM_OFFER.price)})` },
+  { id: 'software', label: `Custom software or internal tool (${lowerFrom(CUSTOM_OFFER.price)})` },
+  { id: 'website', label: `Website with the system built in (${lowerFrom(CUSTOM_OFFER.price)})` },
+  { id: 'reviews', label: `Review requests and customer reminders (${cheapest(['Review requests', 'Appointment reminders', 'Rebooking reminders'])})` },
+  { id: 'care', label: `${CARE_PLAN.name} (${CARE_PLAN.price})` },
   { id: 'rebuild', label: 'Rebuild of an existing site or system' },
-  { id: 'google-profile', label: 'Google Business Profile setup (£49)' },
+  { id: 'google-profile', label: `Google Business Profile setup (${extraPrice('Google Business Profile setup')})` },
   { id: 'bundle', label: 'Starter plus optional extras' },
   { id: 'objects', label: 'Tap-to-review stands and signs' },
   { id: 'unsure', label: 'Not sure yet, help me work it out' },

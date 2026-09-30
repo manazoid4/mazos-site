@@ -12,12 +12,12 @@ import { NICHE_GUIDES } from '../for/niches';
 const PAGE_URL = `${SITE_URL}/leak-check`;
 
 export const metadata: Metadata = {
-  title: { absolute: 'Free Plan & Fixed Quote: automate the job that eats your week | Maz Works' },
-  description: 'Tell me the job that eats your week or loses you customers. I reply within 3 working days with a plan and a fixed price, from £195. Free, no obligation, no call needed.',
+  title: { absolute: `Free plan and fixed price in ${CHECK_REPLY_TIME} | Maz Works` },
+  description: `Tell me the job that eats your week or loses you customers. I reply within ${CHECK_REPLY_TIME} with a plan and a fixed price. Free, no call needed.`,
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: 'Free Plan & Fixed Quote — Maz Works',
-    description: 'Tell me the job you want off your plate. A plan and fixed price within 3 working days.',
+    description: `Tell me the job you want off your plate. A plan and fixed price within ${CHECK_REPLY_TIME}.`,
     url: PAGE_URL,
     type: 'website',
     images: [OG_IMAGE],

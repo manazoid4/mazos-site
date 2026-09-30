@@ -201,7 +201,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(prices, /\/leak-check\?src=prices-package&amp;package=Starter%20Automation#leak-check-form/);
   assert.doesNotMatch(prices, /\bAI\b/);
   assert.match(prices, /\/leak-check\?src=prices-package&amp;package=Team%20training#leak-check-form/, 'every add-on can pre-fill the free plan form');
-  assert.match(prices, /<title>Prices: automation from £195, add-ons from £39, no VAT added/);
+  assert.match(prices, /<title>Prices from £195, add-ons from £39 \| Maz Works<\/title>/);
   assert.match(prices, /Business System from £795, Custom Software &amp; Websites from £1,950, add-ons from £39 and Keep It Running £19\/month/);
 
   const contact = await readPage('/contact');
@@ -617,5 +617,67 @@ test('the hero demo animation survives CSS minification', async () => {
   const css = (await Promise.all(files.map((name) => readFile(path.join(cssDir, name), 'utf8')))).join('\n');
   for (const name of ['s-demo-in-1', 's-demo-in-2', 's-demo-in-3', 's-demo-typing', 's-plug-in', 's-plug-wire', 's-step-in', 's-inbox-settle', 's-process-line', 's-process-tick', 's-day-tick', 's-calendar-ring', 's-plug-glow', 's-plug-tick', 's-progress', 's-demo-in-2b']) {
     assert.match(css, new RegExp(`animation:[^;}]*\\b${name}\\b`), `${name} must be applied with a duration, not stripped to animation:none`);
+  }
+});
+
+test('every page has a title of 60 characters or fewer and a description of 155 or fewer (brief 03)', async () => {
+  const files = [];
+  async function walk(dir) {
+    for (const entry of await readdir(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) { if (entry.name !== '_next') await walk(full); } else if (entry.name.endsWith('.html')) files.push(full);
+    }
+  }
+  await walk(exportRoot);
+  const decode = (s) => s.replace(/&amp;/g, '&').replace(/&#x27;/g, "'").replace(/&quot;/g, '"');
+  const long = [];
+  for (const file of files) {
+    const html = await readFile(file, 'utf8');
+    const title = decode(html.match(/<title>([^<]*)<\/title>/)?.[1] || '');
+    const description = decode(html.match(/<meta name="description" content="([^"]*)"/)?.[1] || '');
+    const name = path.relative(exportRoot, file);
+    if (title.length > 60) long.push(`${name} title ${title.length}`);
+    if (description.length > 155) long.push(`${name} description ${description.length}`);
+  }
+  assert.deepEqual(long, []);
+});
+
+test('structured data matches offers.ts and claims nothing we cannot back up (brief 03)', async () => {
+  const offersSource = await readFile(path.join(root, 'app', 'offers.ts'), 'utf8');
+  const expected = {
+    'Starter Automation': Number(offersSource.match(/name: 'Starter Automation',[\s\S]*?price: '£([\d,]+)'/)[1].replace(',', '')),
+    'Business System': Number(offersSource.match(/name: 'Business System',[\s\S]*?price: 'From £([\d,]+)'/)[1].replace(',', '')),
+    'Custom Software & Websites': Number(offersSource.match(/name: 'Custom Software & Websites',[\s\S]*?price: 'From £([\d,]+)'/)[1].replace(',', '')),
+  };
+  const prices = await readPage('/prices');
+  const blocks = [...prices.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
+  const services = blocks.flatMap((block) => block['@graph'] || [block]).filter((node) => node['@type'] === 'Service');
+  assert.equal(services.length, 3, 'one Service per package on /prices');
+  for (const service of services) {
+    const offer = service.offers;
+    const price = offer.price ?? offer.priceSpecification?.minPrice;
+    assert.equal(price, expected[service.name], `${service.name} structured price must match offers.ts`);
+    assert.equal(offer.priceCurrency, 'GBP');
+  }
+  for (const route of ['/', '/prices', '/faq', '/leak-check', '/for/garages', '/for/architects', '/contact']) {
+    const html = await readPage(route);
+    for (const block of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+      JSON.parse(block[1]); // must be valid JSON
+      assert.doesNotMatch(block[1], /aggregateRating|ratingValue|"review"|telephone|streetAddress/i, `${route}: structured data claims ratings, a phone or an address`);
+    }
+  }
+  const guide = await readPage('/for/garages');
+  assert.match(guide, /"@type":"Service","name":"Automation for garages and mot centres"/i);
+  const faq = await readPage('/faq');
+  const faqData = JSON.parse(faq.match(/<script type="application\/ld\+json">(\{"@context":"https:\/\/schema.org","@type":"FAQPage"[\s\S]*?)<\/script>/)[1]);
+  for (const question of faqData.mainEntity.map((q) => q.name)) {
+    assert.ok(decodeURIComponent(faq).includes(question.replace(/'/g, '&#x27;')) || faq.includes(question), `FAQ schema question not shown on the page: ${question}`);
+  }
+});
+
+test('FAQ answers and form labels read prices from offers.ts, never typed-in amounts', async () => {
+  for (const file of ['faqs.ts', 'enquiry.ts', 'seo.ts']) {
+    const source = await readFile(path.join(root, 'app', file), 'utf8');
+    assert.doesNotMatch(source.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, ''), /£\d/, `${file} hard-codes a price`);
   }
 });
