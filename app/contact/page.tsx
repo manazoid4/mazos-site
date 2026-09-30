@@ -8,8 +8,8 @@ import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, SITE_URL } from '../site'
 import { FREE_STEP, OFFERS, PAYMENT_TERMS } from '../offers';
 
 export const metadata: Metadata = {
-  title: { absolute: 'Contact Maz Works | Booking systems, automation and custom tools' },
-  description: 'Tell Manazir what you need: automation from £195, a joined-up business system, review and reminder systems, custom software or a website. One line is enough. Fixed quote, No VAT added.',
+  title: { absolute: 'Contact Maz Works: bigger builds and private demos' },
+  description: 'Most owners start with the free plan and price. For a bigger build, a private demo or anything else, send one line here. Fixed quote, no VAT added.',
   alternates: { canonical: `${SITE_URL}/contact` },
   openGraph: { images: [OG_IMAGE], title: 'Contact Maz Works', description: 'Tell me what you need built. Fixed quote, No VAT added.', url: `${SITE_URL}/contact`, type: 'website' },
 };

@@ -8,8 +8,12 @@ const source = await readFile(new URL('../app/enquiry.ts', import.meta.url), 'ut
 const { outputText } = ts.transpileModule(source, {
   compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
 });
+// enquiry.ts reads its price labels from offers.ts, so load the real offers module too.
+const offersSource = await readFile(new URL('../app/offers.ts', import.meta.url), 'utf8');
+const offers = {};
+new Function('exports', ts.transpileModule(offersSource, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText)(offers);
 const enquiry = {};
-new Function('exports', 'require', 'window', outputText)(enquiry, () => ({ CONTACT_EMAIL: 'recipient@example.com' }), globalThis);
+new Function('exports', 'require', 'window', outputText)(enquiry, (name) => (name === './offers' ? offers : { CONTACT_EMAIL: 'recipient@example.com' }), globalThis);
 
 test('delivery needs an explicit provider acknowledgement, not just HTTP 200', async (t) => {
   t.mock.method(globalThis, 'fetch', async () => new Response('{}'));

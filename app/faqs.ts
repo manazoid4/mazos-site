@@ -1,3 +1,11 @@
+import { CARE_PLAN, EXTRAS, OFFERS, REFERRAL_THANK_YOU } from './offers';
+
+// Prices in answers are read from offers.ts so an answer can never disagree with the price list.
+const [STARTER, SYSTEM, CUSTOM] = OFFERS;
+const P = (name: string) => EXTRAS.find((extra) => extra.name === name)!.price;
+const from = (price: string) => price.replace(/^From /, '');
+const MONTHLY = CARE_PLAN.price.replace('/month', ' a month');
+
 export type MazWorksFaq = {
   question: string;
   answer: string;
@@ -14,23 +22,23 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How much does it cost?',
-    answer: 'Starter Automation is £195 for one job set up to run itself. A Business System, where several jobs are joined up, starts from £795. Custom Software & Websites start from £1,950. Add-ons like appointment reminders (£79) or missed-call text-back (£95) are priced up front and go on the same invoice. Keep It Running is £19 a month. No VAT added.',
+    answer: `${STARTER.name} is ${STARTER.price} for one job set up to run itself. A ${SYSTEM.name}, where several jobs are joined up, starts from ${from(SYSTEM.price)}. ${CUSTOM.name} start from ${from(CUSTOM.price)}. Add-ons like appointment reminders (${P('Appointment reminders')}) or missed-call text-back (${P('Missed-call text-back')}) are priced up front and go on the same invoice. ${CARE_PLAN.name} is ${MONTHLY}. No VAT added.`,
   },
   {
-    question: 'What can the £195 Starter do?',
+    question: `What can the ${STARTER.price} Starter do?`,
     answer: 'One job you currently do by hand, set up to run itself on the tools you already use. For example: every enquiry logged in one list with an instant reply, or booking confirmations and reminders sent automatically. Working within 7 working days of access.',
   },
   {
     question: 'How do the optional extras work?',
-    answer: 'They are add-ons with a fixed, one-off price, like appointment reminders (£79), review requests (£95) or missed-call text-back (£95). Add them when you order, or later. They go on the same invoice, so there are no surprise costs.',
+    answer: `They are add-ons with a fixed, one-off price, like appointment reminders (${P('Appointment reminders')}), review requests (${P('Review requests')}) or missed-call text-back (${P('Missed-call text-back')}). Add them when you order, or later. They go on the same invoice, so there are no surprise costs.`,
   },
   {
     question: 'Can I buy an add-on on its own?',
-    answer: 'Yes. Standard add-ons, like appointment reminders (£79) or Google Business Profile setup (£49), can be bought on their own or added to any package. The one exception is Extra automation, which adds a second job to a package; a first job of your own is Starter Automation (£195).',
+    answer: `Yes. Standard add-ons, like appointment reminders (${P('Appointment reminders')}) or Google Business Profile setup (${P('Google Business Profile setup')}), can be bought on their own or added to any package. The one exception is Extra automation, which adds a second job to a package; a first job of your own is ${STARTER.name} (${STARTER.price}).`,
   },
   {
     question: 'What isn’t included?',
-    answer: 'Paid apps or text-message costs, which you pay those companies directly (I tell you the cost up front). Changes after handover, unless you have Keep It Running at £19 a month. And new features beyond the agreed plan, which get their own fixed price first.',
+    answer: `Paid apps or text-message costs, which you pay those companies directly (I tell you the cost up front). Changes after handover, unless you have ${CARE_PLAN.name} at ${MONTHLY}. And new features beyond the agreed plan, which get their own fixed price first.`,
   },
   {
     question: "What's the guarantee?",
@@ -62,7 +70,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'Do you pay for referrals?',
-    answer: 'Yes. £40 by bank transfer when a business you introduce becomes a new paying client. One per new client, and only if they were not already talking to me.',
+    answer: `Yes. ${REFERRAL_THANK_YOU} by bank transfer when a business you introduce becomes a new paying client. One per new client, and only if they were not already talking to me.`,
   },
 ];
 

@@ -1,3 +1,4 @@
+import { OFFERS } from '../offers';
 import { OG_IMAGE } from '../seo';
 import type { Metadata } from 'next';
 import { MAZ_WORKS_FAQS } from '../faqs';
@@ -8,7 +9,7 @@ const PAGE_URL = `${SITE_URL}/faq`;
 
 export const metadata: Metadata = {
   title: 'FAQ',
-  description: 'Straight answers about automation for small businesses: the free plan and quote, Starter Automation from £195, optional extras, the guarantee, payment and ownership. No VAT added.',
+  description: `Straight answers: the free plan, prices from ${OFFERS[0].price}, add-ons, the guarantee, payment and who owns what. No VAT added.`,
   alternates: { canonical: PAGE_URL },
   openGraph: { images: [OG_IMAGE],
     title: 'Maz Works FAQ',
