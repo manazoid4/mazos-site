@@ -34,7 +34,7 @@ export default function DemosPage() {
       <section className="mw-section" id="main-content" tabIndex={-1} aria-labelledby="demos-title">
         <header className="mw-section-heading">
           <p className="eyebrow">Free live demo</p>
-          <h1 id="demos-title">Watch your own system run, in your name.</h1>
+          <h1 id="demos-title">Watch your own system run, <em>in your name</em>.</h1>
           <p className="mw-lede">Type your business name, pick your trade and what costs you most. Twenty seconds later you see it working for you.</p>
         </header>
         <LiveDemo />
