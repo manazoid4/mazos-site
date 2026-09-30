@@ -6,6 +6,7 @@ import { HOMEPAGE_FAQS } from './faqs';
 import { LeakCheckForm } from './leak-check/leak-check-form';
 import { CallLink, PricingViewTracker } from './analytics';
 import { StickyCheckCta } from './sticky-cta';
+import { WhyMaz } from './why-maz';
 import { DeliveryCalendar } from './delivery-calendar';
 import { InboxStory } from './inbox-story';
 import { SampleReport } from './sample-report';
@@ -112,6 +113,7 @@ export default function Page() {
       </section>
 
       <section className="s-section" id="pricing" data-reveal aria-labelledby="pricing-title">
+        <WhyMaz />
         <PricingViewTracker targetId="pricing" />
         <p className="eyebrow">Prices</p>
         <h2 id="pricing-title">Start with one job. Add only what you need.</h2>
