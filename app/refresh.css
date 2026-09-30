@@ -1,0 +1,132 @@
+/* 30 Sep refresh: "real over polished". Calm navy and soft lime, no hard black
+   borders, rounded cards, pill buttons, sentence-case labels, a heading font
+   with character. Loaded last so it can calm the older layered stylesheets
+   without rewriting them. Every animation here respects reduced motion and
+   animates only transform, opacity or stroke-dashoffset. */
+
+:root {
+  --paper: #f5f6f3;
+  --surface: #ffffff;
+  --ink: #13293a;
+  --charcoal: #23384a;
+  --muted: #56666f;
+  --line: #c9d2d6;
+  --soft-line: #e1e6e8;
+  --signal: #c7ea6e;
+  --accent: #13405a;
+  --tint: #ebf5dc;
+  --radius: 18px;
+  --shadow: 0 1px 2px rgba(19, 41, 58, .05), 0 10px 28px -16px rgba(19, 41, 58, .22);
+}
+
+h1, h2, .s-price-amount { font-family: var(--font-display), var(--sans); letter-spacing: -.02em; }
+h1 { font-weight: 700; }
+h2 { font-weight: 650; }
+
+/* Labels: calm sentence case instead of shouty mono capitals. */
+.eyebrow, .relationship, .s-demo-label, .s-price-tag, .s-level, .s-report-badge, .s-demo-tag, .mw-onpage span {
+  font-family: var(--sans); text-transform: none; letter-spacing: 0; font-weight: 650; font-size: .85rem;
+}
+.eyebrow { color: var(--accent); }
+
+/* Buttons and chips: pills with soft edges. */
+.button, .mw-nav-cta, .mw-menu-button, .mw-onpage a { border-radius: 999px; border-color: var(--line); }
+.button-signal { border-color: transparent; box-shadow: 0 8px 20px -10px rgba(110, 160, 20, .7); }
+.button-signal:hover { background: #d6f188; }
+.mw-site-header, .s-trust, .s-trust li, .s-steps, .s-steps li, .s-faq, .s-faq details { border-color: var(--soft-line); }
+
+/* Cards instead of boxes. */
+.s-price, .s-extras, .s-bigger, .s-promises li, .s-guarantee, .s-report, .s-found, .mw-demo-form {
+  border: 1px solid var(--soft-line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); overflow: hidden;
+}
+.s-price-main { border-width: 1px; }
+.s-promises li { border-left-width: 1px; }
+.s-guarantee { border-left: 4px solid var(--signal); }
+.s-report header, .s-report li, .s-report-untested { border-color: var(--soft-line); }
+.s-report footer { background: var(--tint); }
+.s-report-badge, .s-demo-tag { background: var(--tint); color: var(--accent); border-radius: 999px; }
+.s-level { border-color: transparent; border-radius: 999px; }
+.s-price-tag { background: var(--tint); border-color: transparent; border-radius: 999px; }
+.s-ticks li::before { border: 0; border-radius: 50%; background: var(--signal); }
+.s-final { border-radius: 28px; background: var(--ink); }
+.brand-mark { border-radius: 10px; background: var(--ink); }
+.s-proof-card img { border: 1px solid var(--soft-line); border-radius: 14px; }
+.s-face { border: 3px solid var(--surface); box-shadow: 0 8px 20px -10px rgba(0, 0, 0, .35); }
+.mw-demo-form input, .mw-demo-form textarea { border-radius: 12px; border-color: var(--line); }
+.mw-quick-picks button { border-radius: 999px; border-color: var(--line); background: var(--surface); }
+.mw-quick-picks button[aria-pressed="true"] { background: var(--tint); border-color: var(--accent); }
+
+/* Hero demo phone (used inside the Missed calls scene). */
+.s-demo-phone { border: 1px solid var(--soft-line); border-radius: 30px; box-shadow: 0 30px 60px -32px rgba(15, 35, 45, .4), 0 0 0 8px var(--surface); }
+.s-demo-bubble, .s-demo-dots { background: var(--accent); }
+.s-demo-icon { border: 0; }
+
+/* Trade links under the hero. */
+.s-trade-pills { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: .9rem; }
+.s-trade-pills span { color: var(--muted); margin-right: 4px; }
+.s-trade-pills a { padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); text-decoration: none; font-weight: 650; }
+.s-trade-pills a:hover, .s-trade-pills a:focus-visible { border-color: var(--accent); background: var(--tint); }
+
+/* ---- Plug hero ---- */
+.s-plug { margin: 0; width: 100%; max-width: 460px; justify-self: center; }
+.s-plug svg { width: 100%; height: auto; overflow: visible; }
+.s-plug-tile { fill: var(--surface); stroke: var(--soft-line); filter: drop-shadow(0 6px 14px rgba(19, 41, 58, .08)); }
+.s-plug-icon-bg { fill: var(--tint); }
+.s-plug-icon { fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.s-plug-label { fill: var(--ink); font-family: var(--sans); font-size: 15px; font-weight: 650; }
+.s-plug-bus { fill: var(--signal); }
+.s-plug-wire { stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 46; stroke-dashoffset: 0; }
+.s-plug-tick circle { fill: var(--signal); }
+.s-plug-tick path { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.s-plug-body { fill: var(--ink); }
+.s-plug-prong { fill: #8a99a3; }
+.s-plug-name { fill: #fff; font-family: var(--font-display), var(--sans); font-size: 17px; font-weight: 700; text-anchor: middle; }
+.s-plug-sub { fill: #b9c6ce; font-family: var(--sans); font-size: 12.5px; text-anchor: middle; }
+.s-plug-cable { fill: none; stroke: var(--ink); stroke-width: 7; stroke-linecap: round; }
+.s-plug figcaption { text-align: center; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Full shorthand on every rule: the CSS minifier turns a nameless shorthand into `animation: none`. */
+  .s-plug-plug { animation: s-plug-in 10s cubic-bezier(.2, .8, .2, 1) infinite both; }
+  .s-plug-bus { animation: s-plug-glow 10s ease-out infinite both; }
+  .s-plug-wire { animation: s-plug-wire 10s ease-out infinite both; animation-delay: var(--d); }
+  .s-plug-tick { transform-box: fill-box; transform-origin: center; animation: s-plug-tick 10s ease-out infinite both; animation-delay: calc(var(--d) + .4s); }
+  [data-offscreen] .s-plug-plug, [data-offscreen] .s-plug-bus, [data-offscreen] .s-plug-wire, [data-offscreen] .s-plug-tick { animation-play-state: paused; }
+}
+@keyframes s-plug-in { 0% { transform: translateX(80px); } 12%, 86% { transform: none; } 95%, 100% { transform: translateX(80px); } }
+@keyframes s-plug-glow { 0%, 12% { opacity: .25; } 16%, 86% { opacity: 1; } 95%, 100% { opacity: .25; } }
+@keyframes s-plug-wire { 0% { stroke-dashoffset: 46; } 5%, 52% { stroke-dashoffset: 0; } 58%, 100% { stroke-dashoffset: 46; } }
+@keyframes s-plug-tick { 0% { opacity: 0; transform: scale(.4); } 5%, 48% { opacity: 1; transform: none; } 54%, 100% { opacity: 0; transform: scale(.4); } }
+
+/* ---- Scene player and storyboards ---- */
+.s-player-tabs { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 14px; scrollbar-width: none; }
+.s-player-tabs button { position: relative; flex: 0 0 auto; min-height: 44px; padding: 8px 16px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font: inherit; font-weight: 650; font-size: .92rem; cursor: pointer; overflow: hidden; }
+.s-player-tabs button[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.s-player-progress { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: var(--signal); transform-origin: left; transform: scaleX(0); }
+@media (prefers-reduced-motion: no-preference) { .s-player-progress { animation: s-progress linear forwards; animation-name: s-progress; } }
+@keyframes s-progress { to { transform: scaleX(1); } }
+
+.s-board { padding: clamp(18px, 3vw, 32px); border: 1px solid var(--soft-line); border-radius: 24px; background: var(--surface); box-shadow: var(--shadow); max-width: 1040px; }
+.s-board-steps { list-style: none; display: grid; gap: 14px; counter-reset: step; }
+.s-board-step { position: relative; padding: 18px; border-radius: 16px; background: var(--paper); display: grid; gap: 6px; align-content: start; }
+.s-board-step svg { width: 40px; height: 40px; padding: 8px; border-radius: 12px; background: var(--tint); fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.s-board-step strong { font-size: 1.02rem; }
+.s-board-step span { color: var(--muted); font-size: .92rem; line-height: 1.45; }
+.s-board-result { margin-top: 16px; padding: 14px 18px; border-radius: 14px; background: var(--tint); display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; justify-content: space-between; }
+.s-board-result span { color: var(--muted); font-size: .88rem; }
+.s-board-phone { display: grid; gap: 24px; align-items: center; }
+.s-board-side p + p { margin-top: 10px; }
+.s-board-side p { max-width: 460px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .s-board-step { animation: s-step-in 600ms cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(var(--i) * 1.1s + .2s); }
+  .s-board-result { animation: s-step-in 600ms cubic-bezier(.2, .8, .2, 1) 3.6s both; }
+  .s-board-phone .s-board-result { animation-delay: 5s; }
+}
+@keyframes s-step-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+@media (min-width: 721px) {
+  .s-board-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+  .s-board-step:not(:last-child)::after { content: ""; position: absolute; right: -22px; top: 36px; width: 16px; height: 2px; background: var(--line); }
+  .s-board-phone { grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 48px; }
+}

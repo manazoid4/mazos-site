@@ -10,9 +10,14 @@ import './clean-pass.css';
 import './mazworks-friction-pass.css';
 import './sales.css';
 import './wayfinding.css';
+import './refresh.css';
+import { Bricolage_Grotesque } from 'next/font/google';
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, PERSON_NAME, SITE_NAME, SITE_URL } from './site';
 import { OG_IMAGE, SITE_DESCRIPTION, SITE_TITLE } from './seo';
 import { FREE_STEP, OFFERS, PRICE_RANGE } from './offers';
+
+// Headings get a font with some character (30 Sep refresh); body text stays on fast system fonts.
+const display = Bricolage_Grotesque({ subsets: ['latin'], display: 'swap', variable: '--font-display' });
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -85,7 +90,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={display.variable}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
         <a className="skip-link" href="#main-content">Skip to main content</a>
