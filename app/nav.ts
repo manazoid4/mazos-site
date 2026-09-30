@@ -22,6 +22,7 @@ export const MENU_LINKS: NavLink[] = [
   { href: '/demos', label: 'Free demo' },
   { href: '/what-we-do', label: 'What we do' },
   { href: '/for', label: 'Your trade' },
+  { href: '/brand-kit', label: 'Brand Kit for creators' },
   { href: '/work/scrap-finance-partners', label: 'Client work' },
   { href: '/faq', label: 'FAQ' },
   { href: '/site-map', label: 'Everything else' },
@@ -42,6 +43,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
     title: 'Who it’s for',
     links: [
       ...NICHE_GUIDES.map((guide) => ({ href: `/for/${guide.id}`, label: guide.shortName })),
+      { href: '/brand-kit', label: 'Creators and makers' },
       { href: '/for', label: 'All trades' },
     ],
   },
