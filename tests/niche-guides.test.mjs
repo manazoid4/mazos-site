@@ -47,3 +47,44 @@ test('niche guides sell systems and outcomes, not website fixes (Maz, 27 Sep pos
     assert.doesNotMatch(html, /Website leaks|put right|leftover template text replaced|pointed at your real booking page/i, `${id}: website-fix wording`);
   }
 });
+
+test('every trade guide offers a Starter and a bigger system, with real package names and honest visuals (brief 01/02)', async () => {
+  const [niches, offers] = await Promise.all([
+    readFile(path.join(process.cwd(), 'app', 'for', 'niches.ts'), 'utf8'),
+    readFile(path.join(process.cwd(), 'app', 'offers.ts'), 'utf8'),
+  ]);
+  const realNames = new Set([...offers.matchAll(/name: '([^']+)'/g)].map((m) => m[1]));
+  for (const id of NICHES) {
+    const block = niches.slice(niches.indexOf(`id: '${id}'`), niches.indexOf('\n  },\n', niches.indexOf(`id: '${id}'`)));
+    assert.match(block, /starter\(/, `${id}: offers a Starter`);
+    assert.match(block, /system\(|custom\(/, `${id}: offers a bigger system or custom build`);
+    for (const [, name] of block.matchAll(/addOn\('([^']+)'/g)) assert.ok(realNames.has(name), `${id}: add-on "${name}" is not in offers.ts`);
+    const visuals = [...block.matchAll(/src: '([^']+)'[^}]*caption: '([^']+)'/g)];
+    assert.ok(visuals.length >= 2, `${id}: at least two illustrations`);
+    for (const [, src, caption] of visuals) {
+      assert.equal(caption, 'Illustration made for this page, not client work.', `${id}: ${src} caption must be honest`);
+      await readFile(path.join(process.cwd(), 'public', src)); // the file must exist
+    }
+  }
+});
+
+test('brief 02 illustrations are labelled, accessible, small and free of real details', async () => {
+  const files = [
+    'salons/booking-confirmation', 'salons/appointment-reminder', 'salons/rebooking-prompt',
+    'groomers/missed-call', 'groomers/next-groom',
+    'garages/mot-reminder', 'garages/quote-follow-up', 'garages/job-list',
+    'cafes/shared-inbox', 'cafes/review-request',
+    'clinics/intake-form', 'clinics/appointment-reminder',
+    'mock/missed-call', 'mock/enquiry-list', 'mock/weekly-summary',
+  ];
+  for (const name of files) {
+    const svg = await readFile(path.join(process.cwd(), 'public', `${name}.svg`), 'utf8');
+    assert.match(svg, /ILLUSTRATIVE ONLY/, `${name}: label`);
+    assert.match(svg, /viewBox="/, `${name}: viewBox`);
+    assert.match(svg, /role="img"/, `${name}: role`);
+    assert.match(svg, /<title[^>]*>[^<]+<\/title>/, `${name}: title`);
+    assert.ok(Buffer.byteLength(svg) < 12 * 1024, `${name}: over 12 KB`);
+    assert.doesNotMatch(svg, /@import|url\(http|font-face/, `${name}: external fonts`);
+    assert.doesNotMatch(svg, /\b0\d{3,4}\s?\d{3}\s?\d{3,4}\b|@(?!media)[a-z0-9-]+\.[a-z]/i, `${name}: phone number or email`);
+  }
+});

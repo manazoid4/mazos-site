@@ -561,7 +561,7 @@ test('every main page is one tap from the key routes, and the trade guides have 
   }
   const guide = await readPage('/for/architects');
   assert.match(guide, /"@type":"BreadcrumbList"/);
-  assert.match(guide, /Illustrations made for this page, not client work/);
+  assert.match(guide, /Illustrations? made for this page, not client work/);
   const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
   assert.match(sitemap, /mazworks\.uk\/for</);
 });
