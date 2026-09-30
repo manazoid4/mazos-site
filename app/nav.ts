@@ -16,14 +16,21 @@ export const PRIMARY_NAV: NavLink[] = [
   { href: '/faq', label: 'FAQ' },
 ];
 
-export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
+/** Phone menu: short on purpose, one screen, no scrolling. The full map lives in the footer and /site-map. */
+export const MENU_LINKS: NavLink[] = [
+  { href: '/prices', label: 'Packages and prices' },
+  { href: '/what-we-do', label: 'What we do' },
+  { href: '/for', label: 'Your trade' },
+  { href: '/work/scrap-finance-partners', label: 'Client work' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/site-map', label: 'Everything else' },
+];
+
+export const NAV_GROUPS:{ title: string; links: NavLink[] }[] = [
   {
     title: 'What I do',
     links: [
       { href: '/prices', label: 'Packages and prices' },
-      { href: '/prices#compare', label: 'Compare packages' },
-      { href: '/prices#extras', label: 'All add-ons' },
-      { href: '/what-we-do#example', label: 'Example plan' },
       { href: '/what-we-do', label: 'What we do' },
       { href: '/leak-check', label: 'Free plan and price' },
       { href: '/contact', label: 'Bigger jobs' },

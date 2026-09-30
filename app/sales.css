@@ -1230,7 +1230,7 @@ main {
 .s-trust-who { margin-top: 12px; }
 
 .s-demo { margin: 0; justify-self: center; width: 100%; max-width: 340px; }
-.s-demo-phone { border: 3px solid var(--ink); border-radius: 28px; background: var(--surface); padding: 14px 14px 20px; box-shadow: 8px 8px 0 var(--signal); }
+.s-demo-phone { border: 3px solid var(--ink); border-radius: 28px; background: var(--surface); padding: 14px 14px 20px; box-shadow: 0 20px 50px rgba(20, 22, 18, .14); }
 .s-demo-bar { display: flex; justify-content: space-between; font-family: var(--mono); font-size: .75rem; font-weight: 800; padding: 0 6px 10px; border-bottom: 1px solid var(--soft-line); }
 .s-demo-thread { list-style: none; display: grid; gap: 12px; padding-top: 14px; }
 .s-demo-row { display: flex; gap: 10px; align-items: flex-start; font-size: .9rem; line-height: 1.35; }
@@ -1281,7 +1281,7 @@ main {
 
 .s-trades { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 980px; }
 .s-trades a { height: 100%; padding: 16px; display: grid; gap: 6px; align-content: start; border: 1px solid var(--line); background: var(--surface); text-decoration: none; color: var(--ink); transition: transform 140ms ease-out, box-shadow 140ms ease-out; }
-.s-trades a:hover, .s-trades a:focus-visible { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--signal); }
+.s-trades a:hover, .s-trades a:focus-visible { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(20, 22, 18, .1); }
 .s-trades svg { fill: none; stroke: var(--ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; background: var(--signal); border: 1px solid var(--ink); padding: 4px; }
 .s-trades strong { font-size: 1rem; text-decoration: underline; text-underline-offset: .2em; }
 .s-trades span { color: var(--muted); font-size: .88rem; line-height: 1.4; }
@@ -1374,7 +1374,7 @@ main {
 .s-chip { position: relative; }
 .s-chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
 .s-chip span { display: inline-block; padding: 9px 14px; min-height: 44px; border: 1px solid var(--ink); background: var(--surface); font-weight: 700; font-size: .92rem; line-height: 1.6; }
-.s-chip input:checked + span { background: var(--signal); box-shadow: 3px 3px 0 var(--ink); }
+.s-chip input:checked + span { background: var(--signal); }
 .s-chip input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 2px; }
 .s-builder-result { border-top: 1px solid var(--line); padding-top: 14px; display: grid; gap: 12px; }
 .s-builder-day { list-style: none; padding: 0; display: grid; gap: 8px; counter-reset: day; }
@@ -1407,7 +1407,7 @@ main {
 /* Package cards lift on hover and focus; their icon draws in once. */
 .s-package-icon { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linecap: square; }
 .s-package-card { transition: transform 160ms ease-out, box-shadow 160ms ease-out; }
-.s-package-card:hover, .s-package-card:focus-visible { transform: translate(-3px, -3px); box-shadow: 6px 6px 0 var(--ink); }
+.s-package-card:hover, .s-package-card:focus-visible { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(20, 22, 18, .08), 0 12px 28px rgba(20, 22, 18, .1); }
 
 /* Prices table: the column you hover or focus stands out (no animation). */
 .s-compare table:has(:is(th, td):nth-child(2):is(:hover, :focus)) :is(th, td):nth-child(2),
