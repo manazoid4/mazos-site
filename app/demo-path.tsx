@@ -1,6 +1,7 @@
 import { CHANGES_WINDOW, CARE_PLAN, DEMO_STEPS } from './offers';
 import { BOOKING_URL } from './site';
 import './demo-path.css';
+import { CampaignLink } from './campaign-link';
 
 /**
  * The free demo route, as five plain numbered steps (Maz, 30 Sep).
@@ -22,7 +23,7 @@ export function DemoPath({ source = 'site', compact = false }: { source?: string
         ))}
       </ol>
       <div className="dp-cta">
-        <a className="button button-signal s-button-lg" href={`${BOOKING_URL}?utm_source=${encodeURIComponent(source)}`}>Book a call for your free demo</a>
+        <CampaignLink className="button button-signal s-button-lg" href={`${BOOKING_URL}?utm_source=${encodeURIComponent(source)}`}>Book a call for your free demo</CampaignLink>
         <p className="dp-micro">15 minutes · free · no obligation</p>
       </div>
     </div>
