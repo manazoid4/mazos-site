@@ -44,7 +44,7 @@ export default function Page() {
    <div><p className="eyebrow">For UK small businesses and teams, in any trade</p>
     <h1 id="intro-title">Systems that turn enquiries into bookings and take the admin off you.</h1>
     <p className="s-lede">Automation, connected tools and custom software. Start with one job from {STARTER.price}.</p>
-    <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">Get a free plan and price</a></div>
+    <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">Get a free plan and price</a><a className="text-link" href="/demos#live-demo">Or watch your own demo in 20 seconds <span aria-hidden="true">→</span></a></div>
     <p className="s-note">I reply within {CHECK_REPLY_TIME}. No call needed, no obligation.</p>
    </div><HeroDemo />
    <p className="s-small">Examples across packages: enquiries answered, bookings confirmed, quotes followed up. Each job is scoped and priced first.</p>
