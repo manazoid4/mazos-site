@@ -71,3 +71,9 @@
 .ld-funnel li::before { content: counter(ld); font-family: var(--mono); font-size: .76rem; font-weight: 800; color: var(--signal-text); }
 .ld-funnel li[aria-current] { border-color: var(--ink); }
 .ld-funnel span { color: var(--muted); font-size: .92rem; }
+
+/* LinkedIn landing hello */
+.li-hello { display: grid; gap: 20px; grid-template-columns: auto minmax(0, 1fr); align-items: start; }
+.li-photo { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; filter: grayscale(1); }
+@media (max-width: 560px) { .li-hello { grid-template-columns: 1fr; } .li-photo { width: 72px; height: 72px; } }
+.ld-funnel a { color: inherit; text-decoration-color: var(--signal); text-underline-offset: 4px; }

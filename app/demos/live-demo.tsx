@@ -54,7 +54,7 @@ const clean = (text: string | null | undefined, max: number) => (text ?? '').rep
  * - The demo has its own link (?b=&n=&w=&t=&h=) so an owner can send it on.
  * - Reduced motion shows every step at once. Nothing is sent anywhere.
  */
-export function LiveDemo() {
+export function LiveDemo({ source = 'live-demo' }: { source?: string }) {
   const [name, setName] = useState('');
   const [owner, setOwner] = useState('');
   const [website, setWebsite] = useState('');
@@ -118,7 +118,10 @@ export function LiveDemo() {
   };
 
   const planParams = new URLSearchParams(builderHref(trade, [headache]).split('?')[1]!.split('#')[0]);
-  planParams.set('src', 'live-demo');
+  planParams.set('src', source);
+  if (name.trim()) planParams.set('business', name.trim());
+  if (first) planParams.set('name', first);
+  if (website.trim()) planParams.set('website', website.trim());
   const planHref = `/leak-check?${planParams.toString()}#leak-check-form`;
 
   return (
