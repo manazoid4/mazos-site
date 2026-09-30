@@ -7,6 +7,8 @@ import { EnquiryRecovery } from '../enquiry-recovery';
 import { NATIVE_FORM_ENDPOINT, buildRecoveryMailto, sendPlanEnquiry } from '../enquiry';
 import { CHECK_PICK_EVENT } from '../package-link';
 import { EXTRAS, OFFERS } from '../offers';
+import { HEADACHE_PICKS, SYSTEMS } from '../systems';
+import { NICHE_GUIDES } from '../for/niches';
 
 type SubmitState = 'idle' | 'sending' | 'sent' | 'error';
 type FailureReason = 'rejected' | 'timeout' | 'network';
@@ -51,6 +53,8 @@ export function LeakCheckForm() {
   const [recoveryHref, setRecoveryHref] = useState(`mailto:${CONTACT_EMAIL}`);
   const [picked, setPicked] = useState<string[]>([]);
   const [pkg, setPkg] = useState('');
+  // Picks carried over from "Build my system" (?systems= with JS, ?headache= without).
+  const [plan, setPlan] = useState({ systems: '', trade: '' });
   // Without JavaScript the chips can't submit, so the text box stays required
   // until the form hydrates; after that a tap is enough (validated in submitRequest).
   const [hydrated, setHydrated] = useState(false);
@@ -61,7 +65,16 @@ export function LeakCheckForm() {
     const choose = (name: string | null) => {
       if (name && KNOWN_PACKAGES.includes(name)) setPkg(name);
     };
-    choose(new URLSearchParams(window.location.search).get('package'));
+    const params = new URLSearchParams(window.location.search);
+    choose(params.get('package'));
+    const ids = [...(params.get('systems') || '').split(','), ...params.getAll('headache').map((id) => HEADACHE_PICKS.find((pick) => pick.id === id)?.system || '')];
+    const names = [...new Set(ids)].map((id) => SYSTEMS.find((system) => system.id === id)?.name).filter(Boolean) as string[];
+    const trade = [...NICHE_GUIDES.map((guide) => guide.id), 'other'].includes(params.get('trade') || '') ? params.get('trade')! : '';
+    if (names.length || trade) {
+      setPlan({ systems: names.join(', '), trade });
+      const box = formRef.current?.querySelector<HTMLTextAreaElement>('[name="problem"]');
+      if (box && names.length && !box.value) box.value = `From Build my system: ${names.join(', ')}.`;
+    }
     const onPick = (event: Event) => choose((event as CustomEvent<string>).detail);
     window.addEventListener(CHECK_PICK_EVENT, onPick);
     return () => window.removeEventListener(CHECK_PICK_EVENT, onPick);
@@ -136,6 +149,8 @@ export function LeakCheckForm() {
       service: SERVICE_LABEL,
       problem: task,
       interested_in: pkg || 'Not chosen',
+      systems: plan.systems,
+      trade: plan.trade,
       next_step: 'Email me a plan and fixed price',
       source,
       _replyto: email,
@@ -182,10 +197,13 @@ export function LeakCheckForm() {
       <input type="hidden" name="service" value={SERVICE_LABEL} />
       <input type="hidden" name="_autoresponse" value={AUTO_REPLY} />
       <input type="hidden" name="interested_in" value={pkg || 'Not chosen'} />
+      <input type="hidden" name="systems" value={plan.systems} />
+      <input type="hidden" name="trade" value={plan.trade} />
       <p className="mw-form-kicker">Tap, add your name and email, done. No call needed.</p>
       {pkg ? (
         <p className="mw-form-picked">Asking about: <strong>{pkg}</strong> <button type="button" className="text-link" onClick={() => setPkg('')}>Clear</button></p>
       ) : null}
+      {plan.systems ? <p className="mw-form-picked">Your plan: <strong>{plan.systems}</strong></p> : null}
 
       <fieldset className="mw-quick-picks">
         <legend>What’s costing you customers or time? <small>Tap any that fit</small></legend>

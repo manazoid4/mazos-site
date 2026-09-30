@@ -16,6 +16,7 @@ export function ScenePlayer({ tabs, children }: { tabs: Tab[]; children: ReactNo
   const [picked, setPicked] = useState(false);
   const [visible, setVisible] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const touch = useRef<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
     const element = rootRef.current;
@@ -33,7 +34,21 @@ export function ScenePlayer({ tabs, children }: { tabs: Tab[]; children: ReactNo
   }, [active, picked, visible, tabs]);
 
   return (
-    <div className="s-player" ref={rootRef}>
+    <div
+      className="s-player"
+      ref={rootRef}
+      // Swipe left or right on a phone to change scene (Batch 2).
+      onTouchStart={(event) => { touch.current = { x: event.touches[0].clientX, y: event.touches[0].clientY }; }}
+      onTouchEnd={(event) => {
+        const start = touch.current; touch.current = null;
+        if (!start) return;
+        const dx = event.changedTouches[0].clientX - start.x;
+        const dy = event.changedTouches[0].clientY - start.y;
+        if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+        setActive((current) => (current + (dx < 0 ? 1 : -1) + tabs.length) % tabs.length);
+        setPicked(true);
+      }}
+    >
       <div className="s-player-tabs" role="tablist" aria-label="Pick a system to see it working">
         {tabs.map((tab, index) => (
           <button

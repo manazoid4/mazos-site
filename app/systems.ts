@@ -102,3 +102,14 @@ export function getSystem(id: string): System {
   if (!system) throw new Error(`Unknown system: ${id}`);
   return system;
 }
+
+/** The "Build my system" headaches, each answered by one system above. */
+export const HEADACHE_PICKS: { id: string; label: string; system: string }[] = [
+  { id: 'missed-calls', label: 'Missed calls', system: 'missed-calls' },
+  { id: 'slow-replies', label: 'Slow replies', system: 'enquiries' },
+  { id: 'no-shows', label: 'No-shows', system: 'reminders' },
+  { id: 'chasing-quotes', label: 'Chasing quotes', system: 'quotes' },
+  { id: 'few-reviews', label: 'Few reviews', system: 'reviews' },
+  { id: 'copying', label: 'Copying between apps', system: 'business-system' },
+  { id: 'admin-at-night', label: 'Admin at night', system: 'booking' },
+];

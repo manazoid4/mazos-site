@@ -301,3 +301,85 @@
  .s-package-detail .s-board-steps, .s-before-after { grid-template-columns: 1fr; }
  .s-before-after p + p { border-left: 0; border-top: 1px solid var(--line); }
 }
+
+/* Batch 2 (30 Sep): builder, calculator, playable phone and motion that explains.
+   Same fonts, weights and hard borders; only transform and opacity animate. */
+.s-builder, .s-calc { margin-top: 28px; padding: clamp(16px, 3vw, 24px); border: 3px solid var(--ink); background: var(--surface); display: grid; gap: 16px; max-width: 1040px; }
+.s-builder h3, .s-calc h3 { font-size: 1.3rem; letter-spacing: -.02em; }
+.s-builder-step { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; }
+.s-builder-step legend { font-weight: 800; margin-bottom: 10px; display: flex; gap: 10px; align-items: baseline; }
+.s-builder-step legend > span { display: inline-grid; place-items: center; width: 26px; height: 26px; background: var(--ink); color: var(--surface); font-family: var(--mono); font-size: .8rem; }
+.s-builder-step legend small { font-weight: 500; color: var(--muted); }
+.s-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.s-chip { position: relative; }
+.s-chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.s-chip span { display: inline-block; padding: 9px 14px; min-height: 44px; border: 1px solid var(--ink); background: var(--surface); font-weight: 700; font-size: .92rem; line-height: 1.6; }
+.s-chip input:checked + span { background: var(--signal); box-shadow: 3px 3px 0 var(--ink); }
+.s-chip input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 2px; }
+.s-builder-result { border-top: 1px solid var(--line); padding-top: 14px; display: grid; gap: 12px; }
+.s-builder-day { list-style: none; padding: 0; display: grid; gap: 8px; counter-reset: day; }
+.s-builder-day li { counter-increment: day; display: grid; grid-template-columns: 30px 1fr; column-gap: 10px; padding: 10px 12px; border: 1px solid var(--soft-line); }
+.s-builder-day li::before { content: counter(day, decimal-leading-zero); grid-row: span 2; font-family: var(--mono); font-weight: 800; font-size: .8rem; color: var(--signal-text); }
+.s-builder-day span { color: var(--muted); font-size: .92rem; }
+.s-builder-lines { list-style: none; padding: 0; display: grid; gap: 4px; font-size: .95rem; }
+.s-builder-lines li, .s-builder-total { display: flex; justify-content: space-between; gap: 12px; }
+.s-builder-total { padding: 10px 12px; background: var(--ink); color: var(--surface); font-weight: 800; }
+.s-builder-total strong { font-size: 1.4rem; letter-spacing: -.02em; }
+.s-builder .button { justify-self: start; }
+.s-build-grid { display: grid; gap: 0 24px; align-items: start; }
+@media (min-width: 980px) { .s-build-grid { grid-template-columns: 3fr 2fr; } }
+.s-calc-fields { display: grid; gap: 12px; }
+.s-calc-fields label { display: grid; gap: 4px; font-weight: 700; font-size: .92rem; }
+.s-calc-fields input { min-height: 44px; padding: 8px 10px; border: 1px solid var(--ink); font: inherit; background: var(--surface); }
+.s-calc-result { padding: 12px 14px; border: 1px solid var(--ink); background: var(--paper); }
+.s-calc-result strong { font-size: 1.3rem; }
+
+/* Playable hero phone: rows keep their space; is-off only fades them. */
+.s-demo[data-live] .s-demo-row, .s-demo[data-live] .s-demo-label, .s-demo[data-live] .s-demo-bubble, .s-demo[data-live] .s-demo-delivered { animation-name: none; }
+.s-demo[data-live] .s-demo-row { transition: opacity 320ms ease-out, transform 320ms ease-out; }
+.s-demo[data-live] .s-demo-row.is-off { opacity: 0; transform: translateY(8px); visibility: hidden; }
+.s-demo-play { display: flex; justify-content: center; align-items: center; min-height: 52px; padding-top: 10px; }
+.s-demo-call, .s-demo-book { min-height: 44px; padding: 8px 18px; border: 2px solid var(--ink); background: var(--signal); color: var(--ink); font: inherit; font-weight: 800; cursor: pointer; }
+.s-demo-book { min-height: 36px; margin-left: 4px; padding: 4px 12px; border-color: var(--surface); }
+.s-demo-call:focus-visible, .s-demo-book:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.s-demo-hint { font-family: var(--mono); font-size: .8rem; font-weight: 800; color: var(--muted); }
+
+/* Package cards lift on hover and focus; their icon draws in once. */
+.s-package-icon { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linecap: square; }
+.s-package-card { transition: transform 160ms ease-out, box-shadow 160ms ease-out; }
+.s-package-card:hover, .s-package-card:focus-visible { transform: translate(-3px, -3px); box-shadow: 6px 6px 0 var(--ink); }
+
+/* Prices table: the column you hover or focus stands out (no animation). */
+.s-compare table:has(:is(th, td):nth-child(2):is(:hover, :focus)) :is(th, td):nth-child(2),
+.s-compare table:has(:is(th, td):nth-child(3):is(:hover, :focus)) :is(th, td):nth-child(3),
+.s-compare table:has(:is(th, td):nth-child(4):is(:hover, :focus)) :is(th, td):nth-child(4) { background: #fff1e8; }
+.s-compare thead th:is(:hover, :focus):not(:first-child) { background: var(--signal); color: var(--ink); outline: none; }
+
+/* Day scenes: a line joins the steps as they play (desktop only). */
+@media (min-width: 721px) {
+  .s-board-steps { position: relative; }
+  .s-board-steps::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: var(--ink); transform-origin: left; z-index: 0; }
+  .s-board-step { background: var(--surface); z-index: 1; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .s-builder-day li { animation: s-build-in 360ms cubic-bezier(.2, .8, .2, 1) both; }
+  .s-package-icon path { stroke-dasharray: 1; stroke-dashoffset: 0; animation: s-draw-in 900ms ease-out 200ms both; }
+  .js-reveal .s-board-steps::before { animation: s-line-in 3.3s linear .2s both; }
+  [data-offscreen] .s-board-steps::before { animation-play-state: paused; }
+  /* Scroll-driven reveal where supported; the IntersectionObserver version stays as the fallback. */
+  @supports (animation-timeline: view()) {
+    .js-reveal [data-reveal]:not([data-shown]) > *, .js-reveal [data-reveal] > * { opacity: 1; transform: none; transition: none; }
+    [data-reveal] > * { animation: s-reveal-in linear both; animation-timeline: view(); animation-range: entry 0% entry 60%; }
+  }
+  details { interpolate-size: allow-keywords; }
+  details::details-content { height: 0; overflow: clip; transition: height 260ms ease-out, content-visibility 260ms allow-discrete; }
+  details[open]::details-content { height: auto; }
+}
+@keyframes s-build-in { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
+@keyframes s-draw-in { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes s-line-in { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes s-reveal-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .s-demo[data-live] .s-demo-row, .s-package-card { transition: none; }
+}

@@ -205,3 +205,47 @@ export function priceAmount(price: string): number { return Number(price.replace
 export function formatPrice(amount: number): string { return `£${amount.toLocaleString('en-GB')}`; }
 export const LOWEST_EXTRA_PRICE = formatPrice(Math.min(...EXTRAS.map(extra => priceAmount(extra.price))));
 export const EXAMPLE_PLAN_TOTAL = formatPrice(OFFERS[0].from + priceAmount(getExtra('Appointment reminders').price));
+
+export type PlanJob = { name: string; offerName: string };
+export type PlanQuote = {
+  offer: Offer | null;
+  lines: { label: string; price: string }[];
+  total: number;
+  totalLabel: string;
+  workingBy: string;
+  note: string;
+};
+
+/**
+ * Prices a set of chosen jobs by the Offer v9 rules (AGENTS.md), for the
+ * "Build my system" tool. Everything is read from this file:
+ * - a standard add-on can be bought alone at its own price;
+ * - a job that needs building is Starter Automation, and each further one is
+ *   Extra automation (which only ever adds to a package);
+ * - asking for a package (Business System, Custom) quotes that package;
+ * - the weekly report is included in a Business System;
+ * - when the parts cost more than a Business System, recommend that instead.
+ */
+export function quotePlan(jobs: PlanJob[]): PlanQuote {
+  const starter = getOffer('starter');
+  const business = getOffer('business-system');
+  const extraJob = getExtra('Extra automation');
+  const unique = jobs.filter((job, index) => jobs.findIndex(other => other.offerName === job.offerName && other.name === job.name) === index);
+  const packageJob = [...OFFERS].reverse().find(offer => offer.id !== 'starter' && unique.some(job => job.offerName === offer.name));
+  const packageQuote = (offer: Offer, note: string): PlanQuote => ({
+    offer, lines: [{ label: offer.name, price: offer.price }], total: offer.from, totalLabel: offer.price, workingBy: workingBy(offer.id), note,
+  });
+  if (packageJob) return packageQuote(packageJob, packageJob.id === 'business-system' ? 'Everything you picked joined up, with the weekly report included. Exact price in your fixed quote.' : 'Scoped with you first. Exact price in your fixed quote.');
+  if (!unique.length) return { offer: starter, lines: [{ label: `${starter.name}: one job of your choice`, price: starter.price }], total: starter.from, totalLabel: starter.price, workingBy: workingBy('starter'), note: 'Pick what costs you time and the plan builds itself.' };
+  const lines: PlanQuote['lines'] = [];
+  let builds = 0;
+  for (const job of unique) {
+    const extra = EXTRAS.find(item => item.name === job.offerName && item.name !== extraJob.name);
+    if (extra) { lines.push({ label: extra.name, price: extra.price }); continue; }
+    lines.push(builds === 0 ? { label: `${starter.name}: ${job.name.toLowerCase()}`, price: starter.price } : { label: `${extraJob.name}: ${job.name.toLowerCase()}`, price: extraJob.price });
+    builds++;
+  }
+  const total = lines.reduce((sum, line) => sum + priceAmount(line.price), 0);
+  if (total > business.from) return packageQuote(business, `Your picks add up to ${formatPrice(total)} on their own, more than a ${business.name}, so I would quote that instead, with the weekly report included.`);
+  return { offer: builds ? starter : null, lines, total, totalLabel: formatPrice(total), workingBy: workingBy('starter'), note: 'Fixed price, agreed before any work starts. No VAT added.' };
+}

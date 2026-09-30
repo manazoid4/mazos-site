@@ -1,4 +1,5 @@
 import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL } from './site';
+import { SystemBuilder } from './system-builder';
 import { SiteFooter, SiteHeader } from './site-chrome';
 import { LeakCheckForm } from './leak-check/leak-check-form';
 import { CallLink } from './analytics';
@@ -28,6 +29,13 @@ const PROOF = [
   },
 ];
 
+/** One drawn line per package: one job, jobs joined up, a system built for you. */
+const PACKAGE_ICONS: Record<string, string> = {
+  starter: 'M8 24h24M26 16l8 8-8 8',
+  'business-system': 'M10 12h10v10H10ZM28 26h10v10H28ZM20 17h13v9M15 22v9h13',
+  custom: 'M8 8h32v32H8ZM8 20h32M20 20v20M26 28h8M26 33h5',
+};
+
 export default function Page() {
  return <main className="s-home">
   <SiteHeader />
@@ -43,8 +51,10 @@ export default function Page() {
   <section className="s-section" id="build" aria-labelledby="build-title">
    <p className="eyebrow">What I build</p><h2 id="build-title">One job, a joined-up system, or something built for you.</h2>
    <div className="s-prices">{OFFERS.map(offer => <a className="s-price s-package-card" href={`/what-we-do#${offer.id}`} key={offer.id}>
+    <svg className="s-package-icon" viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><path pathLength={1} d={PACKAGE_ICONS[offer.id]} /></svg>
     <h3>{offer.name}</h3><p className="s-price-amount">{offer.price}</p><p>{offer.body}</p><p><strong>{workingBy(offer.id)}</strong></p><span>See how it works →</span>
    </a>)}</div>
+   <SystemBuilder />
    <ul className="s-trust">{PROMISES.map(term => <li key={term.title}><strong>{term.title}</strong><span>{term.body}</span></li>)}</ul>
    <p className="s-small" id="trades">Your trade: {NICHE_GUIDES.map((guide, i) => <span key={guide.id}>{i ? ' · ' : ''}<a href={`/for/${guide.id}`}>{guide.shortName}</a></span>)}. Any trade welcome.</p>
   </section>
