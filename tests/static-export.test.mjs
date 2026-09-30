@@ -130,7 +130,7 @@ test('homepage shows a clearly labelled example report, not a real client', asyn
   assert.match(html, /id="example"/);
   assert.match(html, /A fictional business, made up to show the format/);
   for (const level of ['Fix now', 'Fix soon', 'Working well']) assert.match(html, new RegExp(level));
-  assert.match(html, /Total £274/);
+  assert.match(html.replace(/<!--.*?-->/g, ''), /Total £274/);
 });
 
 test('homepage has one set of service routes, not a duplicate problem chooser', async () => {

@@ -120,3 +120,33 @@ Visitors should see Maz Works, Manazir Hussain, “useful software, AI tools and
 - Builder's Journal — personal and editorial, but too slow to establish shipped proof.
 
 Evidence Index can influence the selected-work list. Builder's Journal can influence About copy and future project notes. Neither should replace Quiet Framework.
+
+
+# Real direction
+
+Mode: persuade. Audience: UK business owners on a phone between jobs.
+Keep Claude's navy, soft lime, white surfaces, Bricolage headings and system body.
+Use generous space, quiet rounded edges and one primary action per decision.
+Never substitute decorative motion for an explanation or imply illustrative work is real.
+
+## Three sketches before each section
+
+| Section | Picture | Motion / interaction | Plain text | Choice |
+| --- | --- | --- | --- | --- |
+| Hero | Tools plugged together | Existing plug connects them | Service list | Plug and one outcome sentence |
+| Systems | Eight separate diagrams | Select one short storyboard | Eight descriptions | Storyboard; one shared action |
+| Example plan | Screenshot of report | Scattered messages settle beside report | Long findings | Animation + shortened honest report |
+| Free plan | A paper enquiry slip | Tap problem, optional workload, two fields | Open-ended questionnaire | Taps; optional detail disclosed |
+| Why Maz | Six illustrated cards | Rotating promise carousel | Two-column promise list | Quiet two-column list with small marks |
+| Prices | Three equal cards | Package selector | Price list | One Starter card beside add-on list |
+| Process | Four boxes | Line connects checked steps in view | Four paragraphs | Scroll line + four short steps |
+| Guarantee | Mini calendar | Days tick to working | Repeated guarantee | Calendar beside canonical guarantee |
+| About | Existing portrait and real work | Project slideshow | Biography | Small portrait + real work links |
+| FAQ / close | Answer cards | Native disclosures | Full answers | Disclosures then one final action |
+| Trade guides | Trade-specific job screens | Interactive fake dashboard | Long feature list | Labelled SVGs; verified findings unchanged |
+| Contact | Two competing forms | Choose contact method | Contact directory | Same free plan form; email/call as text links |
+
+Conversion links use “Get a free plan and price”; navigation keeps descriptive labels.
+Mock screens explain a job, carry honest labels and contain no invented performance claims.
+Brief 02 requests the older illustration palette: retain that exact palette inside those
+assets, and document a proposed calm-palette update for Maz and Claude rather than break it.
