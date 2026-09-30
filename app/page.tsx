@@ -154,7 +154,7 @@ export default function Page() {
         <p className="eyebrow">How it works</p>
         <h2 id="process-title">Four simple steps.</h2>
         <ol className="s-steps">
-          {STEPS.map(([number, title, body]) => <li key={number}><span>{number}</span><strong>{title}</strong><p>{body}</p></li>)}
+          {STEPS.map(([number, title, body]) => <li key={number} data-reveal><span>{number}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10" /></svg></span><strong>{title}</strong><p>{body}</p></li>)}
         </ol>
         <details className="s-delivery"><summary>How I set it up</summary>
           <ul>{DELIVERY.map((item) => <li key={item.title}><strong>{item.title}</strong><span>{item.body}</span></li>)}</ul>

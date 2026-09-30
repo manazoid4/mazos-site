@@ -192,3 +192,20 @@ h2 { font-weight: 650; }
   .js-reveal .s-inbox-story[data-shown] .s-inbox-item { animation: s-inbox-settle 1.2s ease-out both; animation-delay: calc(var(--i) * .25s); }
 }
 @keyframes s-inbox-settle { from { transform: translateX(calc((var(--i) - 1) * 24px)) rotate(calc((var(--i) - 1) * 5deg)); opacity: .6; } to { transform: none; opacity: 1; } }
+.s-steps { border: 0; gap: 0; }
+.s-steps li { position: relative; border: 0; padding: 18px 12px 24px 0; }
+.s-steps li::before { content: ''; position: absolute; top: 42px; bottom: -20px; left: 19px; width: 2px; background: var(--signal); transform-origin: top; }
+.s-steps li:last-child::before { display: none; }
+.s-steps li > span { z-index: 1; display: grid; place-content: center; align-self: start; width: 40px; height: 40px; border-radius: 50%; background: var(--tint); font-family: var(--sans); font-size: .85rem; }
+.s-steps svg { position: absolute; width: 20px; height: 20px; margin: 25px 0 0 28px; background: var(--signal); border-radius: 50%; padding: 3px; fill: none; stroke: var(--ink); stroke-width: 2; }
+@media (min-width: 721px) {
+  .s-steps li { grid-template-columns: 1fr; gap: 12px; padding-right: 24px; }
+  .s-steps li::before { left: 40px; top: 37px; right: 0; bottom: auto; width: auto; height: 2px; transform-origin: left; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js-reveal .s-steps li:not([data-shown])::before { transform: scaleY(0); }
+  .js-reveal .s-steps li[data-shown]::before { animation: s-process-line 900ms ease-out both; }
+  .js-reveal .s-steps li[data-shown] svg { animation: s-process-tick 350ms ease-out 700ms both; }
+}
+@keyframes s-process-line { from { transform: scale(0); } to { transform: scale(1); } }
+@keyframes s-process-tick { from { opacity: 0; transform: scale(.5); } to { opacity: 1; transform: scale(1); } }
