@@ -133,6 +133,56 @@ export const EXTRA_GROUPS: { title: string; items: Extra[] }[] = [
 export const EXTRAS: Extra[] = EXTRA_GROUPS.flatMap((group) => group.items);
 
 /**
+ * Brand Kit (Maz, 30 Sep): for people who are great at what they do and sell
+ * through social media: trainers, coaches, makers, bakers, stylists, artists.
+ * A polished look, their own one-page website and a social profile that sells,
+ * then the same systems as everyone else when they're ready to grow.
+ * One page only: anything bigger is Custom Software & Websites.
+ */
+export const BRAND_KIT = {
+  name: 'Brand Kit',
+  price: '£395',
+  from: 395,
+  body: 'Look as good as your work, everywhere people find you. Then turn followers into paying customers.',
+  includes: [
+    { icon: 'palette', title: 'Your look, sorted', what: 'Your logo tidied, plus your colours and fonts picked, so everything matches.' },
+    { icon: 'globe', title: 'Your own website', what: 'One page with your name: who you are, what you sell, and a big button to buy or book.' },
+    { icon: 'phone', title: 'A profile that sells', what: 'Your bio rewritten, your link fixed and your highlight covers made, on Instagram and TikTok.' },
+    { icon: 'layers', title: '12 post templates', what: 'Ready-made designs for Canva, in your colours. Swap the photo and post.' },
+    { icon: 'cart', title: 'Paid straight away', what: 'Your plan, product or session can be bought on your site. Money goes into your own account.' },
+    { icon: 'pin', title: 'Found on Google', what: 'Your Google listing set up, so people searching your name find you, not someone else.' },
+  ],
+  forWho: [
+    { icon: 'dumbbell', label: 'Personal trainers' },
+    { icon: 'bolt', label: 'Coaches' },
+    { icon: 'gift', label: 'Makers and Etsy sellers' },
+    { icon: 'cake', label: 'Bakers and home cooks' },
+    { icon: 'scissors', label: 'Hair, nails and beauty' },
+    { icon: 'camera', label: 'Photographers' },
+    { icon: 'brush', label: 'Artists and designers' },
+    { icon: 'music', label: 'Musicians and DJs' },
+  ],
+} as const;
+
+/** Add-ons written for people who sell through social media. Reuses standard add-ons where one fits. */
+export const BRAND_KIT_EXTRAS: { icon: string; name: string; price: string; what: string }[] = [
+  { icon: 'chat', name: 'Instant DM replies', price: '£95', what: 'Someone comments or messages a word like “PLAN” and gets your link straight away, even while you sleep.' },
+  { icon: 'mail', name: 'Email list and welcome email', price: '£79', what: 'A sign-up box on your site, and every new subscriber gets a friendly welcome email. Your followers, owned by you.' },
+  { icon: 'box', name: 'Order updates', price: '£79', what: 'Buyers get “order received” and “it’s on its way” messages without you typing them.' },
+  { icon: 'calendar', name: 'Online booking setup', price: getExtra('Online booking setup').price, what: 'Clients book sessions, classes or collections themselves, day or night.' },
+  { icon: 'star', name: 'Review requests', price: getExtra('Review requests').price, what: 'Happy clients are asked for a review, so the next person trusts you faster.' },
+  { icon: 'repeat', name: 'Rebooking reminders', price: getExtra('Rebooking reminders').price, what: 'Past clients get a nudge when they’re due back, so they buy again.' },
+];
+
+/** Before and after, said the way owners say it. */
+export const BRAND_KIT_BEFORE_AFTER: { before: string; after: string }[] = [
+  { before: '“DM to order”, then answering the same question 20 times', after: 'A buy button that works while you train, bake or sleep' },
+  { before: 'Your link sends people to someone else’s shop', after: 'Your own website, with your name on it' },
+  { before: 'Every post looks a bit different', after: 'One look people recognise in a second' },
+  { before: 'Followers like your posts, then disappear', after: 'Followers join your list and come back to buy' },
+];
+
+/**
  * Side-by-side comparison, ManyPets style: same rows for every package, plain
  * answers. Column order matches OFFERS.
  */

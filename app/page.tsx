@@ -1,4 +1,4 @@
-import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL } from './site';
+import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, LINKEDIN_URL } from './site';
 import { SystemBuilder } from './system-builder';
 import { WalkthroughVideo } from './walkthrough-video';
 import { SiteFooter, SiteHeader } from './site-chrome';
@@ -78,7 +78,8 @@ export default function Page() {
           <div>
             <p className="eyebrow">Who you’re dealing with</p>
             <h2 id="about-title">I’m Manazir. I plan it and build it myself.</h2>
-            <p>I build software, automation and websites for UK small businesses. No account managers, no hand-offs. Email me directly at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+            <p>I studied Computer Science at Swansea University, and now I run Maz Works: software, automation and websites for UK small businesses. No account managers, no hand-offs. Email me directly at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+            <p><a className="s-linkedin" href={LINKEDIN_URL} rel="me noopener" target="_blank">Follow Maz Works on LinkedIn →</a> See what I’m building.</p>
           </div>
         </div>
         <WalkthroughVideo />

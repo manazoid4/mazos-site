@@ -3,6 +3,13 @@
 This repo is public. The full handover, open to-dos and research source names live in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/HANDOVER.md` and `ARCHITECTS-CONTEXT-PACK-2026-09-27.md`.
 
 
+## 30 Sep, late: Brand Kit for creators + About/LinkedIn (PR claude/brand-kit)
+- PR #97 merged and live.
+- New `/brand-kit` page for people who sell through social media (trainers, coaches, makers, bakers, stylists, artists). Brand Kit £395: your look, a one-page website, a profile that sells, 12 post templates, a buy button, Google listing. Six creator add-ons, three reusing standard add-on prices. All data in `BRAND_KIT*` in `app/offers.ts`; bright icons in `app/brand-kit/kit-icon.tsx`. Linked from the phone menu, footer and sitemap; `?package=Brand Kit` pre-fills the form. No lead names on the site (leads stay private).
+- Homepage About now says Maz studied Computer Science at Swansea University and links to the Maz Works LinkedIn page.
+- Next (queued, not done): add Maz's personal LinkedIn profile URL once he gives it (not found in any repo); add a LinkedIn follow link to the footer and `/brand-kit`; tag outbound LinkedIn links with UTM; a browser check of `/brand-kit` at 390px; a guard test for the Brand Kit page.
+- Maz to decide: is £395 the right Brand Kit price?
+
 ## 30 Sep, evening: menu, colour, free live demo, LinkedIn funnel (PR #97)
 - Batches 1–3 and the Next 16.3.8 security bump (#96) are merged and live on www.mazworks.uk. #88 (older real-direction homepage) is still open: 22 conflicts with the batches, waiting on Maz to close it or cherry-pick from it.
 - Phone menu is 7 links (`MENU_LINKS` in `app/nav.ts`); the full map stays in the footer and `/site-map`. The footer is two columns on phones, deep green, and no longer links GitHub (posting rules).
