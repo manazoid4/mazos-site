@@ -3,6 +3,7 @@ import { OG_IMAGE } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { OFFERS } from '../offers';
+import { BOOKING_URL } from '../site';
 import { LiveDemo } from './live-demo';
 
 const DEMO_DESCRIPTION = 'Free live demo: type your business name and watch your own system run, in your name, in 20 seconds. Then get a free plan and fixed price.';
@@ -52,7 +53,7 @@ export default function DemosPage() {
         </ol>
         <div className="mw-actions">
           <a className="button button-signal" href="/leak-check?src=demos-page#leak-check-form">Get my free plan and price</a>
-          <a className="text-link" href="/prices">See every price <span aria-hidden="true">→</span></a>
+          <a className="text-link" href={`${BOOKING_URL}?utm_source=demos`}>Rather talk? 15-minute call <span aria-hidden="true">→</span></a>
         </div>
       </section>
 
