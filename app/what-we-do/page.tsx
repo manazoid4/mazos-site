@@ -7,6 +7,8 @@ import { CHECK_REPLY_TIME } from '../site';
 import { SampleReport } from '../sample-report';
 import { ScrollReveal } from '../scroll-reveal';
 import { ServiceSchema } from '../service-schema';
+import { SystemBuilder } from '../system-builder';
+import { CostCalculator } from '../cost-calculator';
 export const metadata: Metadata = {
  title: 'What we do: systems that work for you',
  description: 'See how enquiries, bookings and follow-ups work together. Three packages, clear prices, and a free plan for your business.',
@@ -18,6 +20,9 @@ export default function WhatWeDo() {
    <p className="eyebrow">What we do</p><h1>The systems your business runs on.</h1>
    <p className="s-lede">I build automation, connected tools and custom software that turn enquiries into bookings and take admin off you.</p>
    <nav className="s-actions" aria-label="Choose a package">{OFFERS.map(offer=><a className="button" key={offer.id} href={`#${offer.id}`}>{offer.name} · {offer.price}</a>)}</nav>
+  </section>
+  <section className="s-section s-build" id="build-my-system" aria-labelledby="build-my-system-title"><p className="eyebrow">Your business, your plan</p><h2 id="build-my-system-title">Build your system in two taps.</h2>
+   <div className="s-build-grid"><SystemBuilder /><CostCalculator /></div>
   </section>
   {OFFERS.map((offer,index)=><section className="s-section s-package-detail" id={offer.id} key={offer.id} aria-labelledby={`${offer.id}-title`}>
    <p className="eyebrow">{index === 0 ? 'For one repeated job' : index === 1 ? 'For owners joining up several jobs' : 'For a business normal apps do not fit'}</p>
