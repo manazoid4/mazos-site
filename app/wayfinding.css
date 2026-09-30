@@ -120,3 +120,12 @@ html { scroll-behavior: smooth; }
 .for-else { display: flex; align-items: center; gap: 12px; width: min(100% - 32px, 1120px); margin: 20px auto; box-sizing: border-box; padding: 14px 16px; border: 2px dashed #151615; border-radius: 16px; color: inherit; text-decoration: none; }
 .for-else .mw-hub-icon { margin: 0; background: #ffb020; flex: none; }
 .s-linkedin { display: inline-block; margin-top: 10px; }
+
+.mw-niche-badge { display: inline-grid; place-items: center; width: 84px; height: 84px; border-radius: 22px; background: #ffb020; color: #151615; border: 2px solid #151615; box-shadow: 4px 4px 0 #151615; margin-bottom: 14px; }
+.mw-qw-list .mw-example { display: grid; gap: 6px; padding: 14px 0; border-bottom: 1px solid var(--soft-line); list-style: none; }
+.mw-qw-list .mw-example:last-child { border-bottom: 0; }
+.mw-example strong { font-size: 1.1rem; line-height: 1.3; }
+.mw-example-seen { margin: 0; color: var(--muted); font-size: .95rem; }
+.mw-example-fix { font-weight: 800; color: var(--signal-text); }
+.s-check-list { padding-left: 0; list-style: none; display: grid; gap: 10px; margin: 14px 0 18px; }
+.s-check-copy .button { margin: 4px 0 14px; }
