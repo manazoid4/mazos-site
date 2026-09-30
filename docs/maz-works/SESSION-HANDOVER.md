@@ -3,6 +3,17 @@
 This repo is public. The full handover, open to-dos and research source names live in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/HANDOVER.md` and `ARCHITECTS-CONTEXT-PACK-2026-09-27.md`.
 
 
+## 30 Sep, evening: menu, colour, free live demo, LinkedIn funnel (PR #97)
+- Batches 1–3 and the Next 16.3.8 security bump (#96) are merged and live on www.mazworks.uk. #88 (older real-direction homepage) is still open: 22 conflicts with the batches, waiting on Maz to close it or cherry-pick from it.
+- Phone menu is 7 links (`MENU_LINKS` in `app/nav.ts`); the full map stays in the footer and `/site-map`. The footer is two columns on phones, deep green, and no longer links GitHub (posting rules).
+- Palette: the candy pastels are gone. The base is sand/sage/mist/clay/wheat, and a 15-site audit added a measured pop: deep green `--deep`, orange-tinted pill labels, a marker highlight on headline `<em>`, a glow behind phone mockups, and a tint per trade card. Orange stays the action colour.
+- `/demos` is a self-serve, personalised live demo (`app/demos/live-demo.tsx`):
+  - The visitor enters their business name, first name, website, trade and main problem, then watches it run in their name with trade-specific services.
+  - It ends on the package and price, and links to the free plan form with those details pre-filled (`src=` kept).
+  - Visitors can copy a link to their own demo (`?b=&n=&w=&t=&h=`).
+- `/linkedin` (noindex) is the one LinkedIn link: a hello, the live demo, then free plan, a 15-minute call or prices. Copy pack: `docs/maz-works/LINKEDIN-FUNNEL.md`.
+- Maz to do: merge #97; paste the LinkedIn headline, About, Featured, banner and Website link from the pack; post the launch post; decide #88.
+
 ## 30 Sep: Brief 3, all three batches (PRs stacked: Batch 1 → 2 → 3)
 - Batch 1 (Codex, finished by Claude): `app/systems.ts` is the one source of truth for systems; the palette is hi-vis orange on off-white (lime and cream are gone, including the favicon, drawings and share images); the homepage has 5 sections; there is a new `/what-we-do`; `api/enquiry.js` sends an instant confirmation through Resend with FormSubmit as the fallback; reply time is 1 working day everywhere (`CHECK_REPLY_TIME`); trade-guide examples lead with the lost customer or lost time and name their system.
 - Batch 2: "Build my system" (homepage, `/what-we-do`, every trade guide) priced by `quotePlan()` in `offers.ts`, unit-tested against the Offer v9 rules; the cost calculator uses only the visitor's own numbers; the hero phone is playable (Call, then Book); cards lift and draw their icon; scene tabs swipe; the compare table highlights a column; `<details>` open smoothly; scroll-driven reveal where supported.
