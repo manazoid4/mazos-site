@@ -8,6 +8,7 @@ import { CallLink } from '../analytics';
 import { StickyCheckCta } from '../sticky-cta';
 import { SampleReport } from '../sample-report';
 import { LeakCheckForm } from './leak-check-form';
+import { NICHE_GUIDES } from '../for/niches';
 
 const PAGE_URL = `${SITE_URL}/leak-check`;
 
@@ -81,6 +82,9 @@ export default function LeakCheckPage() {
         </ul>
         <div className="s-report-wrap"><SampleReport /></div>
         <p className="mw-qw-lead">Sometimes the answer is: &quot;This isn&apos;t worth automating yet.&quot; If the tool you already pay for can do it, I’ll tell you.</p>
+        <p className="mw-qw-lead">Built for any business that runs on customers: {NICHE_GUIDES.map((guide, index) => (
+          <span key={guide.id}>{index ? ' · ' : ''}<a href={`/for/${guide.id}`}>{guide.shortName}</a></span>
+        ))}</p>
       </section>
 
       <SiteFooter />
