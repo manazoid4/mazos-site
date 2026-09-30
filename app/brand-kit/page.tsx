@@ -5,6 +5,7 @@ import { fitDescription, OG_IMAGE } from '../seo';
 import { BRAND_KIT, BRAND_KIT_EXTRAS } from '../offers';
 import { KitIcon } from './kit-icon';
 import './brand-kit.css';
+import { CampaignLink } from '../campaign-link';
 
 /**
  * Brand Kit (Maz, 30 Sep): for people who sell through social media. Plain
@@ -30,7 +31,7 @@ export default function BrandKitPage() {
         <h1 id="bk-title">You’re great at what you do. <em>Now look it, and sell it.</em></h1>
         <p className="s-lede">{BRAND_KIT.body}</p>
         <div className="bk-cta">
-          <a className="button button-signal s-button-lg" href={ASK}>{`Get my Brand Kit · ${BRAND_KIT.price}`}</a>
+          <CampaignLink className="button button-signal s-button-lg" href={ASK}>{`Get my Brand Kit · ${BRAND_KIT.price}`}</CampaignLink>
           <p className="s-small">Fixed price, agreed before we start.</p>
         </div>
         <ul className="bk-who" aria-label="Made for">
@@ -64,7 +65,7 @@ export default function BrandKitPage() {
               <span className="bk-badge"><KitIcon name={extra.icon} /></span>
               <strong>{extra.name} <span className="bk-price">{extra.price}</span></strong>
               <p>{extra.what}</p>
-              <a href={`/leak-check?package=${encodeURIComponent(extra.name)}&src=brand-kit#leak-check-form`}>Add this</a>
+              <CampaignLink href={`/leak-check?package=${encodeURIComponent(extra.name)}&src=brand-kit#leak-check-form`}>Add this</CampaignLink>
             </li>
           ))}
         </ul>

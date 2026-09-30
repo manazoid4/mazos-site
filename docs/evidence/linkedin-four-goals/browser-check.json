@@ -1,0 +1,23 @@
+{
+  "widths": [
+    390,
+    768,
+    1280,
+    1440
+  ],
+  "pages": [
+    "/linkedin",
+    "/brand-kit"
+  ],
+  "checks": [
+    "no horizontal overflow",
+    "one h1 per page",
+    "booking attribution",
+    "creator route source and package",
+    "direct enquiry source",
+    "changes disclosure",
+    "no JavaScript fallback"
+  ],
+  "runtimeErrors": [],
+  "formSubmissions": 0
+}
