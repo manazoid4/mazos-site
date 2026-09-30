@@ -78,7 +78,7 @@ test('homepage positions Maz Works as a systems builder, not a website-fix shop 
   assert.match(html, /Systems that turn enquiries (<em>)?into bookings(<\/em>)? and take the admin off you/);
   assert.match(html, /Start with one job from/);
   assert.match(html, /Automation, connected tools and custom software/);
-  assert.match(html, /For UK small businesses and teams, in any trade/);
+  assert.match(html, /For small businesses and teams, in any trade/);
   for (const smallTime of [/website fix/i, /small fixes/i, /quick fix/i, /Enquiry Repair/, /fix what’s broken/i, /Maz Works is new/i]) {
     assert.doesNotMatch(html, smallTime, `homepage reads as small-time: ${smallTime}`);
   }

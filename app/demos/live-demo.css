@@ -7,11 +7,11 @@
 .ld-field { display: grid; gap: 8px; border: 0; padding: 0; margin: 0; min-width: 0; }
 .ld-field > span, .ld-field legend { font-family: var(--mono); font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .ld-field small { text-transform: none; letter-spacing: 0; font-weight: 500; }
-.ld-field input[type="text"], .ld-field input:not([type]) { min-height: 48px; padding: 10px 14px; border: 1px solid var(--soft-line); background: var(--paper, #fbfaf7); font: inherit; font-size: 1rem; transition: border-color 160ms ease-out, box-shadow 160ms ease-out; }
+.ld-field input[type="text"], .ld-field input:not([type]) { min-height: 48px; padding: 10px 14px; border: 1px solid var(--soft-line); background: var(--paper, #fbfaf7); font: inherit; font-size: 1rem; transition: border-color 112ms ease-out, box-shadow 112ms ease-out; }
 .ld-field input:not([type]):focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(255, 107, 26, .25); }
 .ld-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .ld-chip input { position: absolute; opacity: 0; pointer-events: none; }
-.ld-chip span { display: inline-flex; min-height: 40px; align-items: center; padding: 6px 14px; border: 1px solid var(--soft-line); border-radius: 999px; background: var(--surface); font-size: .92rem; cursor: pointer; transition: background-color 160ms ease-out, border-color 160ms ease-out, transform 160ms ease-out; }
+.ld-chip span { display: inline-flex; min-height: 40px; align-items: center; padding: 6px 14px; border: 1px solid var(--soft-line); border-radius: 999px; background: var(--surface); font-size: .92rem; cursor: pointer; transition: background-color 112ms ease-out, border-color 112ms ease-out, transform 112ms ease-out; }
 .ld-chip span:hover { border-color: var(--ink); }
 .ld-chip input:checked + span { background: var(--ink); border-color: var(--ink); color: var(--surface); }
 .ld-chip input:focus-visible + span { outline: 3px solid var(--signal); outline-offset: 2px; }
@@ -28,27 +28,27 @@
 .ld-phone-name small { font-weight: 500; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .ld-steps { list-style: none; display: grid; gap: 18px; padding: 0; margin: 0; }
-.ld-step { position: relative; display: grid; grid-template-columns: 14px 1fr; gap: 14px; opacity: .22; transform: translateY(6px); transition: opacity 420ms ease-out, transform 420ms cubic-bezier(.2, .7, .2, 1); }
+.ld-step { position: relative; display: grid; grid-template-columns: 14px 1fr; gap: 14px; opacity: .22; transform: translateY(6px); transition: opacity 294ms ease-out, transform 294ms cubic-bezier(.2, .7, .2, 1); }
 .ld-step::before { content: ""; position: absolute; left: 6px; top: 18px; bottom: -20px; width: 1px; background: var(--soft-line); }
 .ld-step:last-child::before { display: none; }
 .ld-step.is-on { opacity: 1; transform: none; }
-.ld-dot { width: 14px; height: 14px; margin-top: 3px; border-radius: 50%; border: 1px solid var(--ink); background: var(--surface); transition: background-color 300ms ease-out; }
+.ld-dot { width: 14px; height: 14px; margin-top: 3px; border-radius: 50%; border: 1px solid var(--ink); background: var(--surface); transition: background-color 210ms ease-out; }
 .ld-step.is-on .ld-dot { background: var(--ink); }
-.ld-step.is-now .ld-dot { background: var(--signal); border-color: var(--signal); animation: ld-pulse 1.4s ease-out infinite; }
+.ld-step.is-now .ld-dot { background: var(--signal); border-color: var(--signal); animation: ld-pulse 980ms ease-out infinite; }
 .ld-step-copy { display: grid; gap: 3px; min-width: 0; }
 .ld-step-copy small { color: var(--muted); }
 .ld-bubble { position: relative; margin-top: 10px; padding: 12px 14px; border-radius: 16px 16px 16px 4px; background: var(--sand); font-size: .92rem; line-height: 1.45; overflow-wrap: anywhere; }
-.ld-typing { position: absolute; inset: 0; display: flex; align-items: center; gap: 5px; padding: 0 14px; background: var(--sand); border-radius: inherit; animation: ld-hide 0s linear 900ms forwards; }
-.ld-typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: ld-bounce 900ms ease-in-out infinite; }
-.ld-typing i:nth-child(2) { animation-delay: 150ms; }
-.ld-typing i:nth-child(3) { animation-delay: 300ms; }
+.ld-typing { position: absolute; inset: 0; display: flex; align-items: center; gap: 5px; padding: 0 14px; background: var(--sand); border-radius: inherit; animation: ld-hide 0s linear 630ms forwards; }
+.ld-typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: ld-bounce 630ms ease-in-out infinite; }
+.ld-typing i:nth-child(2) { animation-delay: 105ms; }
+.ld-typing i:nth-child(3) { animation-delay: 210ms; }
 
 .ld-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--stone); }
-.ld-progress b { display: block; height: 100%; background: var(--signal); transform-origin: left; transition: transform 600ms ease-out; }
+.ld-progress b { display: block; height: 100%; background: var(--signal); transform-origin: left; transition: transform 420ms ease-out; }
 .ld-idle { margin-top: 18px; font-size: .88rem; color: var(--muted); }
 
-.ld-offer { display: grid; gap: 12px; max-width: 420px; padding: 20px; border-left: 3px solid var(--signal); background: var(--surface); box-shadow: var(--card-shadow); opacity: 0; transform: translateY(10px); visibility: hidden; transition: opacity 500ms ease-out, transform 500ms ease-out, visibility 0s 500ms; }
-.ld-offer.is-on { opacity: 1; transform: none; visibility: visible; transition: opacity 500ms ease-out 200ms, transform 500ms ease-out 200ms, visibility 0s; }
+.ld-offer { display: grid; gap: 12px; max-width: 420px; padding: 20px; border-left: 3px solid var(--signal); background: var(--surface); box-shadow: var(--card-shadow); opacity: 0; transform: translateY(10px); visibility: hidden; transition: opacity 350ms ease-out, transform 350ms ease-out, visibility 0s 350ms; }
+.ld-offer.is-on { opacity: 1; transform: none; visibility: visible; transition: opacity 350ms ease-out 140ms, transform 350ms ease-out 140ms, visibility 0s; }
 .ld-result { font-size: 1.15rem; font-weight: 750; }
 .ld-price strong { white-space: nowrap; }
 .ld-actions { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
