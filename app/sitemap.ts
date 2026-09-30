@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/lab`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.5 },
     { url: `${SITE_URL}/demos`, lastModified: updated, changeFrequency: 'monthly', priority: 0.95 },
     { url: `${SITE_URL}/3d-printing`, lastModified: updated, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE_URL}/brand-kit`, lastModified: new Date('2026-09-30'), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/for`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITE_URL}/site-map`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.3 },
     { url: `${SITE_URL}/whats-new`, lastModified: new Date('2026-09-27'), changeFrequency: 'weekly', priority: 0.4 },

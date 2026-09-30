@@ -6,7 +6,7 @@ import { trackConversion } from '../analytics';
 import { EnquiryRecovery } from '../enquiry-recovery';
 import { NATIVE_FORM_ENDPOINT, buildRecoveryMailto, sendPlanEnquiry } from '../enquiry';
 import { CHECK_PICK_EVENT } from '../package-link';
-import { EXTRAS, OFFERS } from '../offers';
+import { BRAND_KIT, BRAND_KIT_EXTRAS, EXTRAS, OFFERS } from '../offers';
 import { HEADACHE_PICKS, SYSTEMS } from '../systems';
 import { NICHE_GUIDES } from '../for/niches';
 
@@ -32,7 +32,7 @@ export const QUICK_PICKS = [
 ] as const;
 
 /** Packages and add-ons a price card may name. Anything else in `?package=` is ignored. */
-const KNOWN_PACKAGES: string[] = [...OFFERS.map((offer) => offer.name), ...EXTRAS.map((extra) => extra.name)];
+const KNOWN_PACKAGES: string[] = [...OFFERS.map((offer) => offer.name), ...EXTRAS.map((extra) => extra.name), BRAND_KIT.name, ...BRAND_KIT_EXTRAS.map((extra) => extra.name)];
 
 /**
  * Auto-reply for the no-JavaScript route only. FormSubmit does not send
