@@ -13,6 +13,8 @@ Rules for every brief (from `AGENTS.md`, non-negotiable):
 - `npm run verify` must pass before the PR. Stay within the homepage word budget in `tests/static-export.test.mjs`.
 - Respect `prefers-reduced-motion`. No layout shift (CLS stays 0).
 
+Before any motion work, read [ANIMATION-GUIDE.md](ANIMATION-GUIDE.md).
+
 | # | Brief | Size |
 | --- | --- | --- |
 | 01 | [Architects template to the other five trades](01-trade-guides-template.md) | Large |
