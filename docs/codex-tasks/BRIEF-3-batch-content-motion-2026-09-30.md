@@ -139,8 +139,8 @@ Goal: in 5 seconds a visitor knows what Maz Works does, what it costs to start, 
    - honeypot plus a basic rate limit, and no secrets in the client;
    - the success screen says "Check your inbox. The confirmation is the same kind of instant reply I set up for clients."
 
-   This is transactional mail to someone who asked, so it is not outreach. `TODO(Maz)`: confirm this use of Resend.
-8. **Reply time as a token:** move "3 working days" into one constant. `TODO(Maz)`: decide whether it becomes "1 working day", a HubSpot task he owns. Change the constant only once he confirms.
+   This is transactional mail to someone who asked, so it is not outreach. **Approved by Maz, 30 Sep.**
+8. **Reply time: 1 working day** (Maz decided on 30 Sep). Put it in one constant (for example `CHECK_REPLY_TIME` in `enquiry.ts`) and change every "3 working days" to "1 working day" across the site, the FAQ, the confirmation email and the tests. Grep afterwards so none remain.
 9. **Positioning clean-up:**
    - remove the "Other projects" group (Objects, Architecture models, Lab) from the header menu;
    - keep them as small footer links. Objects/3D printing stays an optional differentiator per the standing decision; it just isn't the first thing a systems buyer sees;
@@ -242,8 +242,8 @@ Done when:
 - the handover is updated.
 
 ## TODO(Maz)
-- Confirm Resend for the instant confirmation email (Batch 1).
-- Decide the reply time, "3 working days" or "1 working day" (Batch 1).
+- ~~Confirm Resend for the instant confirmation email~~: approved 30 Sep.
+- ~~Decide the reply time~~: 1 working day, decided 30 Sep. Maz must reply to every free-plan request within 1 working day once Batch 1 is live.
 - Record a 60-second walkthrough video (Batch 3).
 
 ## Executor prompt (paste per batch)
