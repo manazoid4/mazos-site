@@ -63,6 +63,7 @@ export function LiveDemo({ source = 'live-demo' }: { source?: string }) {
   const [pickedHeadache, setPickedHeadache] = useState(false);
   const [step, setStep] = useState(-1);
   const [copied, setCopied] = useState(false);
+  const [src, setSrc] = useState(source);
   const timer = useRef<number | undefined>(undefined);
   const stage = useRef<HTMLDivElement>(null);
 
@@ -99,6 +100,9 @@ export function LiveDemo({ source = 'live-demo' }: { source?: string }) {
     const t = params.get('t') ?? '';
     const h = params.get('h') ?? '';
     if (b) setName(b);
+    // Keep the channel tag (e.g. linkedin-featured, linkedin-dm) so leads show where they came from.
+    const tag = params.get('src')?.replace(/[^a-z0-9-]/gi, '').slice(0, 40);
+    if (tag) setSrc(tag);
     setOwner(clean(params.get('n'), 30));
     setWebsite(clean(params.get('w'), 60));
     if (TRADES.some((item) => item.id === t)) setTrade(t);
@@ -118,7 +122,7 @@ export function LiveDemo({ source = 'live-demo' }: { source?: string }) {
   };
 
   const planParams = new URLSearchParams(builderHref(trade, [headache]).split('?')[1]!.split('#')[0]);
-  planParams.set('src', source);
+  planParams.set('src', src);
   if (name.trim()) planParams.set('business', name.trim());
   if (first) planParams.set('name', first);
   if (website.trim()) planParams.set('website', website.trim());

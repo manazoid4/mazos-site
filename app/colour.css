@@ -140,3 +140,7 @@
 }
 .mw-site-footer a { color: var(--ink); }
 .mw-site-footer a:hover { color: #fff; text-decoration-color: var(--signal); }
+/* The legacy .site-footer > div flex rule flattened the groups into one long column. */
+.mw-site-footer .mw-footer-groups { display: grid; }
+.mw-site-footer .mw-footer-groups a { text-decoration: none; }
+.mw-site-footer .mw-footer-groups a:hover { text-decoration: underline; }
