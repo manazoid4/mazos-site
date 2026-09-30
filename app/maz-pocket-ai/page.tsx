@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function MazPocketAiPage() {
-  return <MazPocketAiBridge />;
+  return <div id="main-content" tabIndex={-1}><MazPocketAiBridge /></div>;
 }

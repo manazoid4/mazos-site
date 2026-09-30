@@ -13,7 +13,7 @@ const TEXT_BACK = EXTRAS.find((extra) => extra.name === 'Missed-call text-back')
  */
 export function HeroDemo() {
   return (
-    <figure className="s-demo" aria-labelledby="demo-caption" data-pause-offscreen>
+    <figure className="s-demo" aria-labelledby="demo-caption" data-pause-offscreen data-offscreen="">
       <div className="s-demo-phone" role="img" aria-label="Example phone screen: a missed call, then an automatic text with a booking link, then a new booking">
         <p className="s-demo-bar"><span>9:41</span><span>Messages</span></p>
         <ol className="s-demo-thread" aria-hidden="true">

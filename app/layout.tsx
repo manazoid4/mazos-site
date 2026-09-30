@@ -93,6 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={display.variable}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+        <noscript><style>{'[data-offscreen] *{animation-play-state:running!important}'}</style></noscript>
         <a className="skip-link" href="#main-content">Skip to main content</a>
         {children}
         <Analytics />

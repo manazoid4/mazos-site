@@ -102,7 +102,7 @@ const BOARDS: Record<string, Board & { label: string; plan: string }> = {
 
 function Storyboard({ board }: { board: Board & { plan: string } }) {
   return (
-    <div className="s-board" data-pause-offscreen>
+    <div className="s-board" data-pause-offscreen data-offscreen="">
       <ol className="s-board-steps">
         {board.steps.map((step, index) => (
           <li key={step.title} className="s-board-step" style={{ ['--i' as string]: index }}>
@@ -119,7 +119,7 @@ function Storyboard({ board }: { board: Board & { plan: string } }) {
 
 function MissedCallScene() {
   return (
-    <div className="s-board s-board-phone" data-pause-offscreen>
+    <div className="s-board s-board-phone" data-pause-offscreen data-offscreen="">
       <HeroDemo />
       <div className="s-board-side">
         <p><strong>You’re with a customer and the phone rings.</strong></p>

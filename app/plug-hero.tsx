@@ -14,7 +14,7 @@ const TOOLS = [
 
 export function PlugHero() {
   return (
-    <figure className="s-plug" data-pause-offscreen aria-labelledby="plug-caption">
+    <figure className="s-plug" data-pause-offscreen data-offscreen="" aria-labelledby="plug-caption">
       <svg viewBox="0 0 440 324" role="img" aria-label="Your phone, booking app, email and Google reviews, with a Maz Works plug connecting them all">
         <rect className="s-plug-bus" x="250" y="20" width="14" height="284" rx="7" />
         {TOOLS.map((tool, index) => {
