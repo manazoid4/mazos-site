@@ -1,3 +1,4 @@
+import { fitDescription } from '../seo';
 import { OG_IMAGE } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
@@ -10,13 +11,13 @@ export const metadata: Metadata = {
   alternates: { canonical: '/demos' },
   openGraph: { images: [OG_IMAGE],
     title: 'Private business demos — Maz Works',
-    description: 'See the useful part working before committing to the full build.',
+    description: fitDescription('See the useful part working before committing to the full build.'),
     url: '/demos',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Private business demos — Maz Works',
-    description: 'See the useful part working before committing to the full build.',
+    description: fitDescription('See the useful part working before committing to the full build.'),
     images: [OG_IMAGE.url],
   },
 };

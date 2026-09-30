@@ -1,0 +1,6 @@
+{
+ "check": "CSS consolidation, 10 global files to 4",
+ "method": "Full-page screenshots of all 25 exported routes at 390 and 1280 (reduced motion), before and after, compared pixel by pixel",
+ "screenshots": 50,
+ "changedPixels": 0
+}

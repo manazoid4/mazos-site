@@ -30,7 +30,7 @@ export function SiteMenu() {
         {open ? 'Close' : 'Menu'}
       </button>
       <div className="mw-menu-panel" id={panelId} hidden={!open}>
-        {NAV_GROUPS.map((group) => (
+        {NAV_GROUPS.filter(group => group.title !== 'Other projects').map((group) => (
           <div key={group.title}>
             <p>{group.title}</p>
             <ul>

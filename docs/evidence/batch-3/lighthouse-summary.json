@@ -1,0 +1,189 @@
+{
+ "tool": "Lighthouse 13.5.0, mobile, local static export",
+ "date": "2026-09-30",
+ "sideProjects": [
+  "/3d-printing",
+  "/rotareason",
+  "/lab",
+  "/maz-core",
+  "/maz-pocket-ai",
+  "/mazos"
+ ],
+ "routes": [
+  {
+   "route": "/3d-printing",
+   "performance": 93,
+   "accessibility": 97,
+   "cls": 0,
+   "tbt": 80
+  },
+  {
+   "route": "/contact",
+   "performance": 96,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 175
+  },
+  {
+   "route": "/demos",
+   "performance": 97,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 137
+  },
+  {
+   "route": "/faq",
+   "performance": 97,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 130
+  },
+  {
+   "route": "/for/architects",
+   "performance": 97,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 139
+  },
+  {
+   "route": "/for/cafes-and-food",
+   "performance": 97,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 139
+  },
+  {
+   "route": "/for/clinics-and-therapists",
+   "performance": 99,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 133
+  },
+  {
+   "route": "/for/dog-groomers",
+   "performance": 95,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 147
+  },
+  {
+   "route": "/for/garages",
+   "performance": 97,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 127
+  },
+  {
+   "route": "/for/salons-and-beauty",
+   "performance": 97,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 132
+  },
+  {
+   "route": "/for",
+   "performance": 97,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 133
+  },
+  {
+   "route": "/",
+   "performance": 95,
+   "accessibility": 100,
+   "cls": 0.0,
+   "tbt": 135
+  },
+  {
+   "route": "/lab",
+   "performance": 96,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 180
+  },
+  {
+   "route": "/leak-check",
+   "performance": 97,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 136
+  },
+  {
+   "route": "/maz-core",
+   "performance": 98,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 162
+  },
+  {
+   "route": "/maz-pocket-ai",
+   "performance": 97,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 137
+  },
+  {
+   "route": "/mazos",
+   "performance": 99,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 134
+  },
+  {
+   "route": "/prices",
+   "performance": 96,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 152
+  },
+  {
+   "route": "/quick-win",
+   "performance": 96,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 134
+  },
+  {
+   "route": "/rotareason",
+   "performance": 97,
+   "accessibility": 96,
+   "cls": 0,
+   "tbt": 138
+  },
+  {
+   "route": "/site-map",
+   "performance": 97,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 128
+  },
+  {
+   "route": "/what-we-do",
+   "performance": 96,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 157
+  },
+  {
+   "route": "/whats-new",
+   "performance": 96,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 181
+  },
+  {
+   "route": "/work/jobfilter",
+   "performance": 97,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 129
+  },
+  {
+   "route": "/work/scrap-finance-partners",
+   "performance": 98,
+   "accessibility": 100,
+   "cls": 0,
+   "tbt": 143
+  }
+ ]
+}

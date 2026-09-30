@@ -179,7 +179,7 @@ export default function MazPocketAiBridge() {
   }, [api, connected]);
 
   return (
-    <main className="aiBridgePage">
+    <main className="aiBridgePage" id="main-content" tabIndex={-1}>
       <div className="aiBridgeShell">
         <header>
           <p className="eyebrow">MAZ WORKS / PRIVATE TOOL</p>

@@ -8,7 +8,7 @@ import { useEffect, useRef, type ReactNode } from 'react';
  * dashboard on a paid Vercel plan; on Hobby the calls are harmless no-ops, so
  * the site is ready the day the plan changes.
  */
-export type ConversionEvent = 'Check submitted' | 'Enquiry sent' | 'Call clicked' | 'Pricing viewed';
+export type ConversionEvent = 'Check submitted' | 'Enquiry sent' | 'Call clicked' | 'Pricing viewed' | 'CTA clicked' | 'Form started' | 'Form submitted' | 'Confirmation sent' | 'What-we-do section viewed';
 
 export function trackConversion(name: ConversionEvent, data?: Record<string, string>) {
   try {
@@ -43,4 +43,18 @@ export function PricingViewTracker({ targetId }: { targetId: string }) {
     return () => observer.disconnect();
   }, [targetId]);
   return null;
+}
+
+export function ConversionTracker() {
+ useEffect(() => {
+  const click = (event: MouseEvent) => { const link = (event.target as Element).closest?.('a'); if (!link) return;
+   const href = link.getAttribute('href') || '';
+   if (href.includes('/leak-check') || href === '#check') trackConversion('CTA clicked', {placement: link.closest('section')?.id || 'navigation',page:location.pathname});
+  };
+  document.addEventListener('click', click);
+  const observer = new IntersectionObserver(entries => { for (const entry of entries) if (entry.isIntersecting) {trackConversion('What-we-do section viewed',{section:entry.target.id});observer.unobserve(entry.target);} },{threshold:0.1});
+  if (location.pathname === '/what-we-do') document.querySelectorAll('section[id]').forEach(section => observer.observe(section));
+  return () => {document.removeEventListener('click',click);observer.disconnect();};
+ }, []);
+ return null;
 }

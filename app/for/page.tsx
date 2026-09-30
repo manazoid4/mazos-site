@@ -1,3 +1,4 @@
+import { fitDescription } from '../seo';
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '../breadcrumbs';
 import { OG_IMAGE } from '../seo';
@@ -6,7 +7,7 @@ import { NICHE_GUIDES } from './niches';
 
 export const metadata: Metadata = {
   title: 'Who it’s for: guides by trade',
-  description: 'Short guides for salons, dog groomers, garages, cafés, clinics and architects: where customers slip away, a 60-second self-check, and what I’d set up.',
+  description: fitDescription('Short guides for salons, dog groomers, garages, cafés, clinics and architects: where customers slip away, a 60-second self-check, and what I’d set up.'),
   alternates: { canonical: '/for' },
   openGraph: { title: 'Who it’s for — Maz Works', url: '/for', images: [OG_IMAGE] },
 };
