@@ -19,6 +19,7 @@ const PATHS: Record<string, string> = {
   box: 'M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10',
   calendar: 'M4 5h16v16H4zM4 10h16M9 3v4M15 3v4',
   star: 'M12 3l2.8 5.8 6.2.9-4.5 4.4 1 6.2L12 17.4l-5.5 2.9 1-6.2L3 9.7l6.2-.9z',
+  dog: 'M5 9c-2 0-3 3-2 6 1 2 3 2 4 0M19 9c2 0 3 3 2 6-1 2-3 2-4 0M7 8c0-3 2.5-5 5-5s5 2 5 5v6c0 4-2.500 6-5 6s-5-2-5-6zM9.500 11h.01M14.500 11h.01M12 14l-1.500 1.500h3zM12 15.500v1.500',
   paw: 'M8 10a2 2 0 1 0 0-.1M16 10a2 2 0 1 0 0-.1M4.5 14a2 2 0 1 0 0-.1M19.5 14a2 2 0 1 0 0-.1M12 12c-3 0-5 3-5 5.5 0 2 2 2 5 1.5 3 .5 5 .5 5-1.5 0-2.500-2-5.500-5-5.500',
   wrench: 'M14.5 6.5a4 4 0 0 0 5 5L21 13l-8 8-4-4 8-8zM10 14l-6 6',
   heart: 'M12 20s-8-5-8-11a4.500 4.500 0 0 1 8-2.500A4.500 4.500 0 0 1 20 9c0 6-8 11-8 11',
@@ -28,9 +29,11 @@ const PATHS: Record<string, string> = {
   repeat: 'M17 2l3 3-3 3M4 11V9a4 4 0 0 1 4-4h12M7 22l-3-3 3-3M20 13v2a4 4 0 0 1-4 4H4',
 };
 
-export function KitIcon({ name }: { name: string }) {
+export const NICHE_ICONS: Record<string, string> = { 'salons-and-beauty': 'scissors', 'dog-groomers': 'dog', garages: 'wrench', 'cafes-and-food': 'cup', 'clinics-and-therapists': 'heart', architects: 'ruler' };
+
+export function KitIcon({ name, size = 28 }: { name: string; size?: number }) {
   return (
-    <svg className="bk-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"
+    <svg className="bk-icon" viewBox="0 0 24 24" width={size} height={size} aria-hidden="true" focusable="false"
       fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
       <path d={PATHS[name] ?? PATHS.star} />
     </svg>

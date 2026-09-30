@@ -5,9 +5,7 @@ import { OG_IMAGE } from '../seo';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { NICHE_GUIDES } from './niches';
 import { BRAND_KIT } from '../offers';
-import { KitIcon } from '../brand-kit/kit-icon';
-
-const ICONS: Record<string, string> = { 'salons-and-beauty': 'scissors', 'dog-groomers': 'paw', garages: 'wrench', 'cafes-and-food': 'cup', 'clinics-and-therapists': 'heart', architects: 'ruler' };
+import { KitIcon, NICHE_ICONS } from '../brand-kit/kit-icon';
 
 export const metadata: Metadata = {
   title: 'Who it’s for: guides by trade',
@@ -40,7 +38,7 @@ export default function ForHubPage() {
         {NICHE_GUIDES.map((guide) => (
           <li key={guide.id}>
             <a href={`/for/${guide.id}`}>
-              <span className="mw-hub-icon"><KitIcon name={ICONS[guide.id] ?? 'spark'} /></span>
+              <span className="mw-hub-icon"><KitIcon name={NICHE_ICONS[guide.id] ?? 'spark'} /></span>
               <span className="mw-hub-name">{guide.shortName}</span>
               <strong>{guide.title}</strong>
             </a>

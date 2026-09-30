@@ -10,6 +10,7 @@ import { notFound } from 'next/navigation';
 import { Breadcrumbs } from '../../breadcrumbs';
 import { SiteFooter, SiteHeader } from '../../site-chrome';
 import { NICHE_GUIDES, getNicheGuide } from '../niches';
+import { KitIcon, NICHE_ICONS } from '../../brand-kit/kit-icon';
 
 export const dynamicParams = false;
 
@@ -41,24 +42,24 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="niche-title">
         <Breadcrumbs items={[{ href: '/for', label: 'Who it’s for' }, { label: guide.shortName }]} />
+        <span className="mw-niche-badge" aria-hidden="true"><KitIcon name={NICHE_ICONS[guide.id] ?? 'spark'} size={56} /></span>
         <p className="eyebrow">{guide.name}</p>
         <h1 id="niche-title">{guide.title}.</h1>
         <p>{guide.lede}</p>
         <div className="mw-actions">
           <a className="button button-signal" href={checkHref}>Get a free plan and price</a>
         </div>
-        <p className="mw-hero-note">Free · no call required · I plan it myself</p>
-        <p className="mw-hero-note">Not your trade? The same approach works for any business customers book, call or enquire with.</p>
+        <p className="mw-hero-note">Free · no call needed. Not your trade? Every kind of business is welcome.</p>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="niche-examples-title">
         <p className="eyebrow">Real examples</p>
         <h2 id="niche-examples-title">Where customers slip away.</h2>
-        <p className="mw-qw-lead">Real things I found looking at UK businesses in September 2026. Names left out on purpose.</p>
+        <p className="mw-qw-lead">Real things I found at UK businesses. Names left out.</p>
         <ul className="mw-qw-list">
           {guide.examples.map((example) => {
             const system = getSystem(example.system);
-            return <li key={example.found}><strong>{example.cost}</strong><p>Observed: {example.found}</p><p>System that answers it: <a href={`/what-we-do#${system.id}`}>{system.name}</a>. The free plan checks what fits.</p></li>;
+            return <li key={example.found} className="mw-example"><strong>{example.cost}</strong><p className="mw-example-seen">What I saw: {example.found}</p><a className="mw-example-fix" href={`/what-we-do#${system.id}`}>The fix: {system.name} →</a></li>;
           })}
         </ul>
       </section>
@@ -83,10 +84,10 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <h2 id="niche-fix-title">Fixed prices, agreed first.</h2>
         <ul className="mw-qw-list">
           {guide.fixes.map((fix) => (
-            <li key={fix.name}><strong>{fix.name}, {fix.price}.</strong> {fix.body} <a href={`/leak-check?src=for-${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form`}>Get a free plan for this →</a></li>
+            <li key={fix.name} className="mw-example"><strong>{fix.name} · {fix.price}</strong><p className="mw-example-seen">{fix.body}</p><a className="mw-example-fix" href={`/leak-check?src=for-${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form`}>Get a free plan for this →</a></li>
           ))}
         </ul>
-        <p className="mw-qw-lead">You own everything I build. <a href="/prices">See all prices</a>.</p>
+        <p className="mw-qw-lead"><a href="/prices">See all prices</a></p>
       </section>
 
       {guide.visuals ? (
