@@ -236,3 +236,54 @@
     font-size: 1.5rem;
   }
 }
+
+/* Line-sketch visuals (30 Sep): ink border, white paper, caption below so it never covers the drawing. */
+.objects-hero-visual,
+.objects-bundle-visual,
+.objects-bundle:first-child .objects-bundle-visual,
+.objects-bundle:nth-child(2) .objects-bundle-visual,
+.objects-bundle:last-child .objects-bundle-visual {
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: auto;
+  margin-right: 0;
+  overflow: hidden;
+  border: 2px solid var(--objects-black);
+  border-radius: 0;
+  background: #fff;
+}
+
+.objects-hero-visual img,
+.objects-bundle-visual img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+}
+
+.objects-hero-visual figcaption,
+.objects-bundle-visual figcaption {
+  position: static;
+  border-top: 2px solid var(--objects-black);
+  background: var(--objects-white);
+  padding: 8px 12px;
+}
+
+.objects-hero-visual figcaption span:first-child,
+.objects-bundle-visual figcaption {
+  padding: 8px 12px;
+}
+
+.objects-hero-visual figcaption { align-items: center; }
+
+@media (max-width: 700px) {
+  .objects-bundle-visual figcaption {
+    padding: 6px 8px;
+    font-size: .72rem;
+    letter-spacing: .02em;
+    white-space: normal;
+  }
+}
+
+.objects-page .objects-bundle .objects-bundle-visual { border-radius: 0; }
+.objects-page .objects-bundle .objects-bundle-visual figcaption { width: 100%; }

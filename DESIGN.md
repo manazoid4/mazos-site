@@ -15,7 +15,7 @@ The `/3d-printing` route is a deliberate sub-brand surface inside Maz Works rath
 | Shape language | Product-led circular cuts and low rounded masses; surrounding UI stays mostly crisp and structural |
 | Anti-references | Generic SaaS cards, a conventional pricing table, stock installations, excessive glow, dense e-commerce controls and competitor imagery |
 
-All object imagery is original generated concept work and must remain visibly labelled **Concept visual** until physical prototypes replace it. Fredoka is available under the SIL Open Font License 1.1; its use is scoped through `next/font` so the existing site typography does not regress.
+All object imagery is original generated concept work and must be a line sketch in the architecture-page style (ink lines, light grid, orange only as an accent fill), labelled **Illustrative sketch**, until real photos of physical prototypes replace it. Never use generated renders. Fredoka is available under the SIL Open Font License 1.1; its use is scoped through `next/font` so the existing site typography does not regress.
 
 ## Chosen direction — Quiet Framework
 
