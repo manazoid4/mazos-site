@@ -174,13 +174,6 @@ export const BRAND_KIT_EXTRAS: { icon: string; name: string; price: string; what
   { icon: 'repeat', name: 'Rebooking reminders', price: getExtra('Rebooking reminders').price, what: 'Past clients get a nudge when they’re due back, so they buy again.' },
 ];
 
-/** Before and after, said the way owners say it. */
-export const BRAND_KIT_BEFORE_AFTER: { before: string; after: string }[] = [
-  { before: '“DM to order”, then answering the same question 20 times', after: 'A buy button that works while you train, bake or sleep' },
-  { before: 'Your link sends people to someone else’s shop', after: 'Your own website, with your name on it' },
-  { before: 'Every post looks a bit different', after: 'One look people recognise in a second' },
-  { before: 'Followers like your posts, then disappear', after: 'Followers join your list and come back to buy' },
-];
 
 /**
  * Side-by-side comparison, ManyPets style: same rows for every package, plain
