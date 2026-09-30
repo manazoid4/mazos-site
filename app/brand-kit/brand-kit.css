@@ -36,3 +36,5 @@
   .bk-arrow { justify-self: center; transform: rotate(90deg); }
 }
 @media (prefers-reduced-motion: reduce) { .bk-grid li { transition: none; } .bk-grid li:hover { transform: none; } }
+
+.bk-promise { margin: 28px 0 0; padding: 14px 18px; border-radius: 14px; background: var(--sage); font-weight: 700; }
