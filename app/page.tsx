@@ -14,7 +14,7 @@ import { PlugHero } from './plug-hero';
 import { Scenes } from './scenes';
 import { ScrollReveal } from './scroll-reveal';
 import { NICHE_GUIDES } from './for/niches';
-import { CARE_PLAN, DELIVERY, EXTRAS, FREE_STEP, OFFERS, PROMISES } from './offers';
+import { CARE_PLAN, DELIVERY, EXTRAS, FREE_STEP, OFFERS, PROMISES, REFERRAL_THANK_YOU } from './offers';
 
 const [STARTER, ...BIGGER] = OFFERS;
 const extra = (name: string) => EXTRAS.find((item) => item.name === name)!;
@@ -70,7 +70,7 @@ export default function Page() {
           <h1 id="intro-title">Your phone, inbox and booking app, finally working together.</h1>
           <p className="s-lede">I build the systems that turn enquiries into paying customers. Less chasing, fewer missed calls. On your existing tools, from {STARTER.price}.</p>
           <div className="s-actions">
-            <a className="button button-signal s-button-lg" href="#check">Get a free plan and price</a>
+            <a className="button button-signal s-button-lg" href="/leak-check?src=hero#leak-check-form">Get a free plan and price</a>
           </div>
           <p className="s-note">Emailed within {CHECK_REPLY_TIME}. No call, no obligation.</p>
           <p className="s-trade-pills" id="trades"><span>See it for your trade:</span>{NICHE_GUIDES.map((guide) => <a key={guide.id} href={`/for/${guide.id}`}>{guide.shortName}</a>)}</p>
@@ -130,7 +130,7 @@ export default function Page() {
             <h3>Popular add-ons</h3>
             <p className="s-small">One-off. Buy alone or add to Starter. <a href="/prices#extras">What each one does</a></p>
             <ul>
-              {POPULAR_EXTRAS.map((item) => <li key={item.name}><div><strong>{item.name}</strong><PackageLink href="#check" pick={item.name}>Ask for this <span aria-hidden="true">→</span></PackageLink></div><strong className="s-extras-price">{item.price}</strong></li>)}
+              {POPULAR_EXTRAS.map((item) => <li key={item.name}><div><strong>{item.name}</strong><PackageLink href="#check" pick={item.name}>Get a free plan and price <span aria-hidden="true">→</span></PackageLink></div><strong className="s-extras-price">{item.price}</strong></li>)}
             </ul>
           </div>
         </div>
@@ -138,17 +138,17 @@ export default function Page() {
         <div className="s-bigger">
           <h3>Bigger jobs</h3>
           <ul>
-            {BIGGER.map((offer) => <li key={offer.id}><strong>{offer.name}, {offer.price.replace(/^From/, 'from')}.</strong> {offer.body}</li>)}
+            {BIGGER.map((offer) => <li key={offer.id}><strong>{offer.name}, {offer.price.replace(/^From/, 'from')}.</strong></li>)}
           </ul>
           <p><strong>{CARE_PLAN.name}, {CARE_PLAN.price}</strong> if you want me to look after it afterwards.</p>
         </div>
 
         <DeliveryCalendar />
         <div className="s-actions">
-          <a className="button button-signal" href="#check">Get a free plan and price</a>
+          <a className="button button-signal" href="/leak-check?src=home-prices#leak-check-form">Get a free plan and price</a>
           <a className="button" href="/prices">Every price, compared</a>
         </div>
-        <p className="s-small">Introduce a business and I&apos;ll thank you with £40 when they become a paying client. <a href="/faq#do-you-pay-for-referrals">How →</a></p>
+        <p className="s-small">Introduce a business and I&apos;ll thank you with {REFERRAL_THANK_YOU} when they become a paying client. <a href="/faq#do-you-pay-for-referrals">How →</a></p>
       </section>
 
       <section className="s-section" id="process" data-reveal aria-labelledby="process-title">
@@ -158,7 +158,7 @@ export default function Page() {
           {STEPS.map(([number, title, body]) => <li key={number} data-reveal><span>{number}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10" /></svg></span><strong>{title}</strong><p>{body}</p></li>)}
         </ol>
         <details className="s-delivery"><summary>How I set it up</summary>
-          <ul>{DELIVERY.map((item) => <li key={item.title}><strong>{item.title}</strong><span>{item.body}</span></li>)}</ul>
+          <ul><li><strong>{DELIVERY[0].title}</strong><span>I never need your passwords. You add me as a user.</span></li><li><strong>Tested with you</strong><span>Optional: {CARE_PLAN.name} ({CARE_PLAN.price}) afterwards.</span></li></ul>
         </details>
 
       <div className="s-about" id="about" aria-labelledby="about-title">
@@ -196,14 +196,14 @@ export default function Page() {
         <h2 id="final-title">What would you stop chasing?</h2>
         <p>A free plan and fixed price within {CHECK_REPLY_TIME}. No call, no obligation.</p>
         <div className="s-actions">
-          <a className="button button-signal s-button-lg" href="#check">Get a free plan and price</a>
+          <a className="button button-signal s-button-lg" href="/leak-check?src=home-final#leak-check-form">Get a free plan and price</a>
           <CallLink href={BOOKING_URL} placement="footer-cta">Prefer a call?</CallLink>
         </div>
       </div>
       </section>
 
       <SiteFooter />
-      <StickyCheckCta href="#check" hideWhenVisible="check" />
+      <StickyCheckCta href="/leak-check?src=home-sticky#leak-check-form" hideWhenVisible="check" />
       <ScrollReveal />
     </main>
   );

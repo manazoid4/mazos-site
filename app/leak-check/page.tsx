@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { SITE_URL, BOOKING_URL, CHECK_REPLY_TIME } from '../site';
+import { FREE_STEP, OFFERS } from '../offers';
 import { OG_IMAGE } from '../seo';
 import { CallLink } from '../analytics';
 import { StickyCheckCta } from '../sticky-cta';
@@ -35,7 +36,7 @@ const CHECKS = [
 const RETURN = [
   'What to automate first, and why',
   'What I would leave alone, and why',
-  'A fixed price, starting from £195, with any optional extras listed separately',
+  `A fixed price, starting from ${OFFERS[0].price}, with optional extras separate`,
   'Any software or text-message costs you would pay directly',
   'A date it would be live by',
 ];
@@ -51,11 +52,11 @@ export default function LeakCheckPage() {
     areaServed: [
       { '@type': 'Country', name: 'United Kingdom' },
     ],
-    offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
+    offers: { '@type': 'Offer', price: FREE_STEP.price.replace(/[^0-9.]/g, ''), priceCurrency: 'GBP' },
   };
 
   return (
-    <main>
+    <main className="s-form-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }}
@@ -63,14 +64,22 @@ export default function LeakCheckPage() {
       <SiteHeader />
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="leak-check-title">
-        <p className="eyebrow">Free Plan &amp; Fixed Quote · £0</p>
+        <p className="eyebrow">{FREE_STEP.name} · {FREE_STEP.price}</p>
         <h1 id="leak-check-title">Tell me the job. I’ll send a plan and a price.</h1>
-        <p>The chasing, copying, reminding or admin that eats your week, or the point where customers slip away. I look at how you work now and reply with a short plan and a fixed price, from £195.</p>
+        <p>Tap the job you want off your plate. I’ll email a plan and fixed price. No call needed.</p>
         <div className="mw-actions">
-          <a className="button button-signal" href="#leak-check-form">Get my free plan and price</a>
-          <a className="button" href="#leak-check-return-title">See an example plan</a>
+          <a className="button button-signal" href="#leak-check-form">Get a free plan and price</a>
+
         </div>
         <p className="mw-hero-note">Written by me · emailed within {CHECK_REPLY_TIME} · no call, no obligation</p>
+      </section>
+
+      <section className="mw-qw-section" aria-labelledby="leak-check-send-title">
+        <p className="eyebrow">Your free plan</p>
+        <h2 id="leak-check-send-title">Tap what’s costing you. I plan it myself.</h2>
+        <p className="mw-qw-lead">I’ll reply by email within {CHECK_REPLY_TIME}. Free for any UK business, in any trade.</p>
+        <LeakCheckForm />
+        <p className="mw-qw-lead">Prefer to talk it through? <CallLink href={BOOKING_URL} placement="leak-check-walkthrough">Book a free 15-minute call</CallLink> and show me the job.</p>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="leak-check-return-title">
@@ -83,13 +92,7 @@ export default function LeakCheckPage() {
         <p className="mw-qw-lead">Honest outcomes, always allowed: &quot;This isn&apos;t worth automating yet.&quot; Or: &quot;The tool you already pay for can do this. Here&apos;s the setting.&quot;</p>
       </section>
 
-      <section className="mw-qw-section" aria-labelledby="leak-check-send-title">
-        <p className="eyebrow">Your free plan</p>
-        <h2 id="leak-check-send-title">Tap what’s costing you. I plan it myself.</h2>
-        <p className="mw-qw-lead">I’ll reply by email within {CHECK_REPLY_TIME}. Free for any UK business, in any trade.</p>
-        <LeakCheckForm />
-        <p className="mw-qw-lead">Prefer to talk it through? <CallLink href={BOOKING_URL} placement="leak-check-walkthrough">Book a free 15-minute call</CallLink> and show me the job.</p>
-      </section>
+
 
       <section className="mw-qw-section" aria-labelledby="leak-check-checks-title">
         <p className="eyebrow">Jobs I automate most</p>
@@ -108,9 +111,7 @@ export default function LeakCheckPage() {
           <h2 id="leak-check-cta-title">What would you take off your plate first?</h2>
           <p>A few taps is enough. No discovery call before you get something useful.</p>
         </div>
-        <div className="mw-actions">
-          <a className="button button-signal" href="#leak-check-form">Get the free plan and price</a>
-        </div>
+
       </section>
 
       <SiteFooter />

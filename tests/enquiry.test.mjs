@@ -23,39 +23,13 @@ async function readPage(route) {
 
 const readSource = (...parts) => readFile(path.join(root, ...parts), 'utf8');
 
-test('the enquiry captures which service the visitor actually wants', async () => {
+test('contact uses the same quick free-plan form with optional qualification', async () => {
   const html = await readPage('/contact');
-  const enquirySource = await readSource('app', 'enquiry.ts');
-
-  assert.match(html, /What do you need help with\?/);
-  for (const label of [
-    'Starter Automation (£195)',
-    'Business System (from £795)',
-    'Website with the system built in (from £1,950)',
-    'Review requests and customer reminders (from £79)',
-    'Keep It Running (£19/month)',
-    'Custom software or internal tool (from £1,950)',
-    'Tap-to-review stands and signs',
-    'Not sure yet',
-  ]) {
-    assert.ok(html.includes(label.replace(/&/g, '&amp;')), `Missing service option: ${label}`);
-  }
-
-  // CTAs deep-link with ?service=<id>; the ids must stay stable for those links to work.
-  for (const id of ['repair', 'google-profile', 'bundle', 'website', 'automation', 'software', 'objects', 'unsure']) {
-    assert.match(enquirySource, new RegExp(`id: '${id}'`));
-  }
-  assert.match(enquirySource, /readServiceFromLocation/);
-});
-
-test('an enquiry can ask for a quote or an answer instead of an unpaid build', async () => {
-  const html = await readPage('/contact');
-
-  assert.match(html, /What would be most useful next\?/);
-  assert.match(html, /A free plan and fixed price/);
+  for (const name of ['name', 'email', 'problem', 'interested_in', 'trade', 'source', 'enquiries_per_week']) assert.match(html, new RegExp(`name="${name}"`));
+  assert.match(html, /Get a free plan and price/);
+  assert.doesNotMatch(html, /name="business"|name="nextStep"/);
+  assert.match(html, /Roughly how many enquiries a week/);
   assert.doesNotMatch(html, /free live demo|free demo/i);
-  assert.match(html, /A fixed quote for a specific job/);
-  assert.match(html, /Just answer my question first/);
 });
 
 test('both enquiry forms fail safely with a recoverable email fallback', async () => {

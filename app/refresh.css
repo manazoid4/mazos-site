@@ -229,3 +229,37 @@ h2 { font-weight: 650; }
 .s-why svg { flex: 0 0 20px; fill: none; stroke: var(--accent); stroke-width: 2; }
 .s-why > p { margin-top: 12px; }
 @media (min-width: 721px) { .s-why ul { grid-template-columns: 1fr 1fr; } }
+/* Shared page rollout: quiet surfaces, legible chips and one form. */
+.mw-resource-hero, .mw-qw-section, .mw-resource-cta, .mw-related { border-color: var(--soft-line); }
+.mw-qw-list li, .mw-resource-grid > *, .mw-niche-grid > *, .mw-figures figure { border-color: var(--soft-line); border-radius: 16px; }
+.mw-resource-cta { border-radius: 24px; background: var(--tint); }
+.mw-resource-cta .eyebrow, .mw-resource-cta h2, .mw-resource-cta p { color: var(--ink); }
+.mw-related { border-radius: 16px; }
+.mw-form-details { margin-block: 12px; }
+.mw-form-details summary { cursor: pointer; padding-block: 12px; font-weight: 600; }
+.mw-form-details label { margin-top: 14px; }
+.mw-volume { border: 0; padding: 0; margin: 18px 0; }
+.mw-volume legend { font-weight: 650; font-size: .9rem; margin-bottom: 10px; }
+.mw-volume small { font-weight: 400; }
+.mw-volume > div { display: flex; flex-wrap: wrap; gap: 8px; }
+.mw-volume label { position: relative; display: flex; align-items: center; gap: 7px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 99px; min-height: 44px; cursor: pointer; }
+.mw-volume label:has(:checked) { background: var(--tint); border-color: var(--accent); }
+.mw-volume input { width: 16px; height: 16px; padding: 0; accent-color: var(--accent); }
+.mw-volume span { font-size: .85rem; }
+.mw-form-success { border-radius: 20px; background: var(--surface); padding: 28px; scroll-margin-top: 30px; }
+.mw-form-success p { margin-top: 16px; }
+.s-scene-action { grid-row: 3; margin-top: 20px; }
+.s-scene-action p { margin-top: 10px; }
+.s-form-page #leak-check-send-title, .s-form-page #leak-check-send-title + p { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.s-form-page .mw-resource-hero { padding-bottom: 16px; }
+.s-form-page .mw-qw-section:has(#leak-check-send-title) { padding-top: 12px; border: 0; }
+.s-form-page .mw-qw-section:has(#leak-check-send-title) > .eyebrow { display: none; }
+.s-form-page .mw-demo-form { max-width: 760px; margin-top: 0; }
+.s-sticky .button { font-size: .8rem; }
+@media (max-width: 720px) {
+  .mw-site-header .mw-nav-cta { display: none; }
+  .s-sticky { gap: 10px; }
+  .s-sticky > span { font-size: .75rem; max-width: 90px; }
+  .mw-resource-hero h1 { font-size: clamp(2rem, 8vw, 2.6rem); }
+  .mw-form-row { grid-template-columns: 1fr; }
+}

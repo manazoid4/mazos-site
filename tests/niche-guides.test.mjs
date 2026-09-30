@@ -24,7 +24,7 @@ test('each niche guide exports with real examples, a self-check, prices and a ta
     assert.match(starter, /^One job set up to run itself/, `${id}: Starter must read as one job`);
     assert.doesNotMatch(starter, /\b(plus|reminders? go out|follow-up|review requests)\b/i, `${id}: Starter line bundles a second job`);
     assert.doesNotMatch(html, /quoted in your free plan/, `${id}: fixed-price add-ons must show their price`);
-    assert.match(html, new RegExp(`/leak-check\\?src=for-${id}&amp;package=Starter%20Automation#leak-check-form`), `${id}: Starter pre-fills the form`);
+    assert.match(html, new RegExp(`/leak-check\\?src=for-${id}&amp;package=Starter%20Automation&amp;trade=${id}#leak-check-form`), `${id}: Starter pre-fills the form`);
     assert.match(html, new RegExp(`<link rel="canonical" href="[^"]*/for/${id}"`), `${id}: canonical`);
     // Anonymised on purpose: never name the businesses the examples came from.
     for (const name of ['Vines', 'Yumi', 'Casa Bake', 'Sandiacre', 'Hurley', 'Revive', 'Aeternum', 'Old Smithy', 'Lana', 'Dorsi', 'Elm Tree', 'Pawfect', 'A Small Studio', 'Range Studio', 'Morizzo', 'Arrigoni']) {

@@ -6,7 +6,7 @@ export type MazWorksFaq = {
 export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   {
     question: 'Is the plan really free? What’s the catch?',
-    answer: 'It’s free. Tell me the job you want off your plate and I reply within 3 working days with a plan and a fixed price. If it isn’t worth automating, I say so. No call, no automated sales emails, no obligation.',
+    answer: 'Free, no call, no obligation. I email your plan and price within 3 working days. If it isn’t worth doing, I say so.',
   },
   {
     question: 'What do you actually build?',
@@ -46,7 +46,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'Is this only for certain trades?',
-    answer: 'No. If your business has customers, enquiries and admin, it fits: trades, salons, clinics, cafés, shops, agencies, charities and professional services, anywhere in the UK.',
+    answer: 'No. Any UK business with customers, enquiries or admin can ask.',
   },
   {
     question: 'Do I need a new website?',

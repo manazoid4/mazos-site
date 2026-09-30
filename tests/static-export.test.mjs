@@ -117,7 +117,7 @@ test('homepage shows the plug picture, links every trade and plays labelled expl
   assert.match(html, /I plug into what you already use/);
   for (const tab of ['Missed calls', 'Enquiries', 'Reminders', 'Reviews', 'Quotes']) assert.match(html, new RegExp(`role="tab"[^>]*>${tab}`));
   // Without JavaScript every scene is readable: hidden panels are un-hidden by a <noscript> style.
-  assert.match(html, /<noscript><style>\.s-scene-panel\[hidden\]\{display:block\}/);
+  assert.match(html, /<noscript><style>\.s-scene-panel\[hidden\]\{display:block;visibility:visible\}/);
   assert.match(html, /Missed-call text-back, £95\. Not a real customer\./);
   assert.match(html, /Illustrations of how each system works, not real customers\./);
   for (const name of ['Appointment reminders, £79', 'Review requests, £95', 'Quote follow-up, £95', 'Starter Automation, £195']) assert.match(html, new RegExp(name));
@@ -179,7 +179,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(html, /No VAT added/);
   assert.match(html, /you own everything i build/i);
   assert.match(html, /working within 7 working days of me getting access/i);
-  assert.match(html, /£40 when they become a paying client/);
+  assert.match(html.replace(/<!--.*?-->/g, ''), /£40 when they become a paying client/);
   for (const retired of [/£150/, /£395/, /£249/, /£595/, /Quick Win/, /£39\/month/, /founding/i, /Contact Setup/, /Enquiry Check/, /Customer Journey Review/, /From £495/, /From £950/, /From £1,500/, /£295/, /£1,250/, /£2,950/, /£49\/month/]) {
     assert.doesNotMatch(html, retired, `retired offer still on homepage: ${retired}`);
   }
@@ -198,9 +198,9 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(prices, /Team training[\s\S]{0,300}£39/);
   assert.match(prices, /Keep It Running[\s\S]{0,30}£19\/month/);
   assert.match(prices, /working within 7 working days of me getting access/i);
-  assert.match(prices, /\/leak-check\?package=Starter%20Automation#leak-check-form/);
+  assert.match(prices, /\/leak-check\?src=prices-package&amp;package=Starter%20Automation#leak-check-form/);
   assert.doesNotMatch(prices, /\bAI\b/);
-  assert.match(prices, /\/leak-check\?package=Team%20training#leak-check-form/, 'every add-on can pre-fill the free plan form');
+  assert.match(prices, /\/leak-check\?src=prices-package&amp;package=Team%20training#leak-check-form/, 'every add-on can pre-fill the free plan form');
   assert.match(prices, /<title>Prices: automation from £195, add-ons from £39, no VAT added/);
   assert.match(prices, /Business System from £795, Custom Software &amp; Websites from £1,950, add-ons from £39 and Keep It Running £19\/month/);
 
@@ -247,7 +247,7 @@ test('homepage stays compact with four visible process steps', async () => {
   assert.match(html, /How I set it up/);
   assert.match(html, /Built on what you already use/);
   assert.match(html, /I never need your passwords/);
-  assert.match(html, /Keep It Running \(£19\/month\)/);
+  assert.match(html.replace(/<!--.*?-->/g, ''), /Keep It Running \(£19\/month\)/);
   const words = mainWordCount(html);
   assert.ok(words <= WORD_BUDGET, `homepage has ${words} words; budget is ${WORD_BUDGET}`);
 });
@@ -263,20 +263,16 @@ test('public contact uses the branded address while form delivery stays stable',
 
 test('contact request submits in-page instead of depending on the visitor email app', async () => {
   const html = await readPage('/contact');
-  const formSource = await readFile(path.join(root, 'app', 'demo-request-form.tsx'), 'utf8');
+  const formSource = await readFile(path.join(root, 'app', 'leak-check', 'leak-check-form.tsx'), 'utf8');
   const enquirySource = await readFile(path.join(root, 'app', 'enquiry.ts'), 'utf8');
   const vercelConfig = JSON.parse(await readFile(path.join(root, 'vercel.json'), 'utf8'));
   const csp = vercelConfig.headers[0].headers.find((header) => header.key === 'Content-Security-Policy')?.value || '';
 
-  assert.match(html, /Send enquiry/);
+  assert.match(html, /Get a free plan and price/);
   assert.match(html, /name="name"/);
   assert.match(html, /name="email"/);
-  assert.match(html, /name="business"/);
   assert.match(html, /name="problem"/);
   assert.match(html, /name="service"/);
-  assert.match(html, /name="nextStep"/);
-  assert.match(html, /A 15-minute call/);
-  assert.match(html, /sent directly from this form/i);
   assert.match(enquirySource, /https:\/\/formsubmit\.co\/ajax\//);
   assert.match(enquirySource, /fetch\(FORM_ENDPOINT/);
   assert.match(formSource, /role="status"/);
@@ -506,7 +502,7 @@ test('the guarantee, no-VAT and referral lines appear where Maz\'s decisions req
   const home = await readPage('/');
   const faq = await readPage('/faq');
   assert.match(home, /No VAT added/);
-  assert.match(home, /£40 when they become a paying client/);
+  assert.match(home.replace(/<!--.*?-->/g, ''), /£40 when they become a paying client/);
   assert.match(faq, /No VAT added/);
   assert.match(faq, /£40 by bank transfer/);
   assert.match(faq, /working within 7 working days of me getting access/);

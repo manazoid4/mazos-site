@@ -12,8 +12,9 @@ export const CHECK_PICK_EVENT = 'maz-check-pick';
  * Without JavaScript it is a plain link to the form.
  */
 export function PackageLink({ href, pick, className = 'mw-service-link', children }: { href: string; pick: string; className?: string; children: ReactNode }) {
-  const samePage = href.startsWith('#');
-  const url = samePage ? href : `${href}?package=${encodeURIComponent(pick)}#leak-check-form`;
+  const samePage = false;
+  const base = href.startsWith('#') ? '/leak-check?src=home-price' : href;
+  const url = `${base}${base.includes('?') ? '&' : '?src=price-card&'}package=${encodeURIComponent(pick)}#leak-check-form`;
   return (
     <a
       className={className}

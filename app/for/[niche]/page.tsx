@@ -1,3 +1,4 @@
+import { StickyCheckCta } from '../../sticky-cta';
 import { OG_IMAGE } from '../../seo';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -27,7 +28,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
   const { niche } = await params;
   const guide = getNicheGuide(niche);
   if (!guide) notFound();
-  const checkHref = `/leak-check?src=for-${guide.id}`;
+  const checkHref = `/leak-check?src=for-${guide.id}&trade=${guide.id}#leak-check-form`;
 
   return (
     <main>
@@ -69,7 +70,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <h2 id="niche-fix-title">Fixed prices, agreed first.</h2>
         <ul className="mw-qw-list">
           {guide.fixes.map((fix) => (
-            <li key={fix.name}><strong>{fix.name}, {fix.price}.</strong> {fix.body} <a href={`/leak-check?src=for-${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form`}>Get a free plan for this →</a></li>
+            <li key={fix.name}><strong>{fix.name}, {fix.price}.</strong> {fix.body} <a href={`/leak-check?src=for-${guide.id}&package=${encodeURIComponent(fix.pick)}&trade=${guide.id}#leak-check-form`}>Get a free plan and price →</a></li>
           ))}
         </ul>
         <p className="mw-qw-lead">You own everything I build. <a href="/prices">See all prices</a>.</p>
@@ -105,11 +106,12 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
           <p>Tell me the job. I&apos;ll send a plan and a fixed price.</p>
         </div>
         <div className="mw-actions">
-          <a className="button button-signal" href={checkHref}>Get the free plan and price</a>
+          <a className="button button-signal" href={checkHref}>Get a free plan and price</a>
         </div>
       </section>
 
       <SiteFooter />
+      <StickyCheckCta href={checkHref} />
     </main>
   );
 }

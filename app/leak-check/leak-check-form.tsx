@@ -17,6 +17,7 @@ const FAILURE_COPY: Record<FailureReason, string> = {
   network: 'That could not reach me — your connection may have dropped.',
 };
 
+const TRADES = ['salons-and-beauty', 'dog-groomers', 'garages', 'cafes-and-food', 'clinics-and-therapists', 'architects'];
 const SERVICE_LABEL = 'Free Plan & Fixed Quote';
 
 /** One tap instead of typing: the problems owners name most. Each adds a line to the text box. */
@@ -48,6 +49,9 @@ export function LeakCheckForm() {
   const [recoveryHref, setRecoveryHref] = useState(`mailto:${CONTACT_EMAIL}`);
   const [picked, setPicked] = useState<string[]>([]);
   const [pkg, setPkg] = useState('');
+  const [trade, setTrade] = useState('');
+  const [source, setSource] = useState('direct');
+  const [detailsOpen, setDetailsOpen] = useState(false);
   // Without JavaScript the chips can't submit, so the text box stays required
   // until the form hydrates; after that a tap is enough (validated in submitRequest).
   const [hydrated, setHydrated] = useState(false);
@@ -58,7 +62,11 @@ export function LeakCheckForm() {
     const choose = (name: string | null) => {
       if (name && KNOWN_PACKAGES.includes(name)) setPkg(name);
     };
-    choose(new URLSearchParams(window.location.search).get('package'));
+    const params = new URLSearchParams(window.location.search);
+    choose(params.get('package'));
+    const requestedTrade = params.get('trade') || params.get('src')?.replace(/^for-/, '') || '';
+    if (TRADES.includes(requestedTrade)) setTrade(requestedTrade);
+    setSource((params.get('src') || `direct (${window.location.pathname})`).replace(/[^a-zA-Z0-9_ /()-]/g, '').slice(0, 80));
     const onPick = (event: Event) => choose((event as CustomEvent<string>).detail);
     window.addEventListener(CHECK_PICK_EVENT, onPick);
     return () => window.removeEventListener(CHECK_PICK_EVENT, onPick);
@@ -94,8 +102,7 @@ export function LeakCheckForm() {
     const task = String(data.get('problem') || '').trim();
     const website = String(data.get('website') || '').trim();
     const honey = String(data.get('_honey') || '').trim();
-    const page = window.location.pathname === '/' ? 'homepage' : window.location.pathname.replace(/^\//, '');
-    const source = new URLSearchParams(window.location.search).get('src')?.trim() || `direct (${page})`;
+    const volume = String(data.get('enquiries_per_week') || 'Not given');
 
     const missing = !task ? 'problem' : !name ? 'name' : !email ? 'email' : '';
     if (missing) {
@@ -105,7 +112,8 @@ export function LeakCheckForm() {
           ? 'Tap at least one problem, or add a line about the job.'
           : `Add your ${missing} so I can reply.`,
       );
-      focusField(missing);
+      if (missing === 'problem') setDetailsOpen(true);
+      requestAnimationFrame(() => focusField(missing));
       return;
     }
 
@@ -120,6 +128,8 @@ export function LeakCheckForm() {
       ['Website', website],
       ['Interested in', pkg],
       ['Source', source],
+      ['Trade', trade],
+      ['Enquiries per week', volume],
     ]));
 
     setSubmitState('sending');
@@ -133,6 +143,8 @@ export function LeakCheckForm() {
       interested_in: pkg || 'Not chosen',
       next_step: 'Email me a plan and fixed price',
       source,
+      trade: trade || 'Not given',
+      enquiries_per_week: volume,
       _replyto: email,
       _subject: subject,
       _template: 'table',
@@ -151,6 +163,15 @@ export function LeakCheckForm() {
     setFailureReason(result.reason);
     setSubmitState('error');
   }
+
+  if (submitState === 'sent') return (
+    <div className="mw-form-success" id="leak-check-form" role="status" tabIndex={-1} ref={(element) => element?.focus()}>
+      <h3>Got it, thank you.</h3>
+      <p>I’ll read it myself and email your plan and fixed price from {CONTACT_EMAIL} within {CHECK_REPLY_TIME}. No payment or call needed.</p>
+      <p>While you wait: <a href={trade ? `/for/${trade}` : '/#example'}>{trade ? 'check the three tips for your trade' : 'see what your plan will look like'}</a>.</p>
+      <p className="s-small">If it hasn’t arrived by then, check your junk folder or email me.</p>
+    </div>
+  );
 
   return (
     <form
@@ -171,6 +192,8 @@ export function LeakCheckForm() {
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="service" value={SERVICE_LABEL} />
       <input type="hidden" name="_autoresponse" value={AUTO_REPLY} />
+      <input type="hidden" name="trade" value={trade} />
+      <input type="hidden" name="source" value={source} />
       <input type="hidden" name="interested_in" value={pkg || 'Not chosen'} />
       <p className="mw-form-kicker">Tap, add your name and email, done. No call needed.</p>
       {pkg ? (
@@ -188,6 +211,10 @@ export function LeakCheckForm() {
         </div>
       </fieldset>
 
+      <fieldset className="mw-volume">
+        <legend>Roughly how many enquiries a week? <small>(optional)</small></legend>
+        <div>{['Under 10', '10–50', '50+'].map((value) => <label key={value}><input type="radio" name="enquiries_per_week" value={value} disabled={submitState === 'sending'} /><span>{value}</span></label>)}</div>
+      </fieldset>
       <div className="mw-form-row">
         <label>
           <span>Name</span>
@@ -215,6 +242,8 @@ export function LeakCheckForm() {
       </div>
 
 
+      <details className="mw-form-details" open={!hydrated || detailsOpen} onToggle={(event) => setDetailsOpen(event.currentTarget.open)}>
+      <summary>Add a detail or website (optional)</summary>
       <label>
         <span>{hydrated ? <>Anything else I should know? <small>(optional)</small></> : 'What job do you want off your plate?'}</span>
         <textarea
@@ -239,24 +268,19 @@ export function LeakCheckForm() {
         />
       </label>
 
+      </details>
       <label className="mw-honeypot" aria-hidden="true">
         <span>Company website</span>
         <input name="_honey" tabIndex={-1} autoComplete="off" />
       </label>
 
       <div className="mw-form-submit">
-        <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
-          {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Get my free plan and price'}
+        <button className="button button-dark" type="submit" disabled={submitState === 'sending'}>
+          {submitState === 'sending' ? 'Sending…' : 'Get a free plan and price'}
         </button>
         <p>I reply myself within {CHECK_REPLY_TIME} with a plan and fixed price. Free, no obligation.</p>
         <p id="leak-check-error" className="mw-form-status mw-form-error" role="alert">{validationError}</p>
         <p className="mw-form-status" role="status" aria-live="polite">
-          {submitState === 'sent' && (
-            <>
-              <strong>Got it, thank you.</strong> What happens next: I read it myself, look at how you work now, and email your plan and fixed price from {CONTACT_EMAIL} within {CHECK_REPLY_TIME}. Nothing to pay and no call unless you want one. If it hasn’t arrived by then, check your junk folder.{' '}
-              <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); focusField('name'); }}>Send another</button>
-            </>
-          )}
           {submitState === 'error' && (
             <>
               {FAILURE_COPY[failureReason]} Nothing you typed has been lost —{' '}
