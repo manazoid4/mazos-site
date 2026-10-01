@@ -41,7 +41,7 @@ export default function LinkedInPage() {
         <DemoPath source="linkedin" />
         <p className="s-small">Prefer to write it down? <CampaignLink href="/leak-check?src=linkedin#leak-check-form">Get a free plan and price</CampaignLink>. I reply within {CHECK_REPLY_TIME}.</p>
         <div className="s-faq"><details>
-          <summary>What do the two months of changes cover?</summary>
+          <summary>What do the 30 days of tweaks cover?</summary>
           <p>{CHANGES_WINDOW.body}</p>
           <ul>{CHANGES_WINDOW.notCovered.map((item) => <li key={item}>{item}</li>)}</ul>
         </details></div>

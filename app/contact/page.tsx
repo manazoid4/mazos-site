@@ -5,7 +5,7 @@ import { SiteFooter, SiteHeader } from '../site-chrome';
 import { DemoRequestForm } from '../demo-request-form';
 import { CallLink } from '../analytics';
 import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, SITE_URL } from '../site';
-import { FREE_STEP, OFFERS, PAYMENT_TERMS, LOWEST_EXTRA_PRICE } from '../offers';
+import { ALL_OFFERS, FREE_STEP, OFFERS, PAYMENT_TERMS, LOWEST_EXTRA_PRICE } from '../offers';
 
 export const metadata: Metadata = {
   title: { absolute: 'Contact Maz Works' },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: { images: [OG_IMAGE], title: 'Contact Maz Works', description: fitDescription('Tell me what you need built. Fixed quote, No VAT added.'), url: `${SITE_URL}/contact`, type: 'website' },
 };
 
-const BIGGER_JOBS = OFFERS.map((offer) => ({ name: offer.name, price: offer.price, body: offer.body }));
+const BIGGER_JOBS = ALL_OFFERS.map((offer) => ({ name: offer.name, price: offer.price, body: offer.body }));
 
 export default function ContactPage() {
   return (

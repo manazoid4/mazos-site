@@ -74,3 +74,37 @@ test('builder and calculator hard-code no prices', async () => {
     assert.doesNotMatch(await fs.readFile(file, 'utf8'), /£\s?\d/, file);
   }
 });
+
+// Offer v10 (2 Oct): commercial guard rails. Read docs/maz-works/OFFER-V10.md before changing these.
+const { ALL_OFFERS, EXTRAS, TRACKS, CARE_PLANS, CHANGES_WINDOW, PAYMENT_TERMS } = modules.offers;
+
+test('every offer has one track and a full spec: who, included, excluded, delivery, changes, upsell', () => {
+  const tracks = new Set(TRACKS.map((track) => track.id));
+  assert.equal(tracks.size, 4);
+  for (const offer of ALL_OFFERS) {
+    assert.ok(tracks.has(offer.track), offer.id);
+    for (const field of ['forWho', 'delivery', 'changes', 'upsell']) assert.ok(offer[field]?.length > 10, `${offer.id}.${field}`);
+    assert.ok(offer.includes.length >= 1 && offer.excludes.length >= 1, `${offer.id} needs included and excluded lists`);
+  }
+});
+
+test('brand work and website work stay separate, and the bundle is cheaper than both', () => {
+  const kit = getOffer('brand-kit');
+  const page = getOffer('sales-page');
+  assert.equal(kit.track, 'brand');
+  assert.ok(kit.excludes.some((line) => /website/i.test(line)), 'the kit must exclude the website');
+  assert.ok(!kit.includes.some((line) => /website|payment|Google/i.test(line)), 'no website, payments or Google in the kit');
+  assert.ok(getOffer('brand-sales-page').from < kit.from + page.from, 'the bundle must reward buying both');
+});
+
+test('no add-on is priced below the £95 floor, and care covers real time', () => {
+  for (const extra of EXTRAS) assert.ok(priceAmount(extra.price) >= 95, `${extra.name} is under the floor`);
+  assert.ok(priceAmount(CARE_PLANS[0].price) >= 49);
+  assert.ok(!/unlimited/i.test(JSON.stringify(CHANGES_WINDOW)), 'changes are never unlimited');
+  assert.doesNotMatch(PAYMENT_TERMS, /half|deposit/i);
+});
+
+test('three jobs to build is a Business System, even when the parts are cheaper', () => {
+  const quote = quotePlan([getSystem('enquiries'), { name: 'Stock alerts', offerName: 'Starter Automation' }, { name: 'Invoice chasing', offerName: 'Starter Automation' }]);
+  assert.equal(quote.offer.id, 'business-system');
+});

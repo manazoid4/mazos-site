@@ -8,7 +8,7 @@ import './wayfinding.css';
 import './colour.css';
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, PERSON_NAME, SITE_NAME, SITE_URL } from './site';
 import { OG_IMAGE, SITE_DESCRIPTION, SITE_TITLE } from './seo';
-import { FREE_STEP, OFFERS, PRICE_RANGE } from './offers';
+import { ALL_OFFERS, FREE_STEP, PRICE_RANGE } from './offers';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -44,7 +44,7 @@ const structuredData = {
       description: 'Business automation, booking and enquiry systems, Google Business Profile setup, automated follow-up, review systems, custom software and websites for UK small businesses, with fixed quotes. Also customer-growth systems, rebuilds and physical products.',
       makesOffer: [
         { '@type': 'Offer', name: FREE_STEP.name, price: '0', priceCurrency: 'GBP', url: `${SITE_URL}/leak-check` },
-        ...OFFERS.map((offer) => ({
+        ...ALL_OFFERS.map((offer) => ({
           '@type': 'Offer',
           name: offer.name,
           url: `${SITE_URL}/prices`,

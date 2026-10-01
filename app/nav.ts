@@ -42,7 +42,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
     title: 'Who it’s for',
     links: [
       ...NICHE_GUIDES.map((guide) => ({ href: `/for/${guide.id}`, label: guide.shortName })),
-      { href: '/brand-kit', label: 'Creators and makers (Brand Kit)' },
+      { href: '/brand-kit', label: 'Creators and makers' },
       { href: '/for', label: 'All trades' },
     ],
   },

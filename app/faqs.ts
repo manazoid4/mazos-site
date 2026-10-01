@@ -1,5 +1,5 @@
 import { CHECK_REPLY_TIME } from './site';
-import { OFFERS, CARE_PLAN, getExtra, REFERRAL_REWARD } from './offers';
+import { OFFERS, CARE_PLANS, CHANGES_WINDOW, DELIVERY_PROMISE, PAYMENT_TERMS, getExtra, getOffer, REFERRAL_REWARD } from './offers';
 export type MazWorksFaq = {
   question: string;
   answer: string;
@@ -16,7 +16,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How much does it cost?',
-    answer: `Starter Automation is ${OFFERS[0].price} for one job set up to run itself. A Business System, where several jobs are joined up, starts from ${OFFERS[1].price.replace('From ', '')}. Custom Software & Websites start from ${OFFERS[2].price.replace('From ', '')}. Add-ons like appointment reminders (${getExtra('Appointment reminders').price}) or missed-call text-back (${getExtra('Review requests').price}) are priced up front and go on the same invoice. Keep It Running is ${CARE_PLAN.price}. No VAT added.`,
+    answer: `Starter Automation is ${OFFERS[0].price} for one job set up to run itself. A Business System, where up to three jobs are joined up, starts from ${OFFERS[1].price.replace('From ', '')}. Custom Software starts from ${OFFERS[2].price.replace('From ', '')}. A Sales Page is ${getOffer('sales-page').price} and a full Website starts from ${getOffer('website').price.replace('From ', '')}. Add-ons like appointment reminders (${getExtra('Appointment reminders').price}) or missed-call text-back (${getExtra('Missed-call text-back').price}) are priced up front. Care plans are ${CARE_PLANS[0].price} or ${CARE_PLANS[1].price}. No VAT added.`,
   },
   {
     question: `What can the ${OFFERS[0].price} Starter do?`,
@@ -24,7 +24,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How do the optional extras work?',
-    answer: `They are add-ons with a fixed, one-off price, like appointment reminders (${getExtra('Appointment reminders').price}), review requests (${getExtra('Review requests').price}) or missed-call text-back (${getExtra('Review requests').price}). Add them when you order, or later. They go on the same invoice, so there are no surprise costs.`,
+    answer: `They are add-ons with a fixed, one-off price, like appointment reminders (${getExtra('Appointment reminders').price}), review requests (${getExtra('Review requests').price}) or missed-call text-back (${getExtra('Missed-call text-back').price}). Add them when you order, or later. They go on the same invoice, so there are no surprise costs.`,
   },
   {
     question: 'Can I buy an add-on on its own?',
@@ -32,15 +32,15 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'What isn’t included?',
-    answer: `Paid apps or text-message costs, which you pay those companies directly (I tell you the cost up front). Changes after handover, unless you have Keep It Running at ${CARE_PLAN.price}. And new features beyond the agreed plan, which get their own fixed price first.`,
+    answer: `Paid apps or text-message costs, which you pay those companies directly (I tell you the cost up front). Changes after the 30-day tweaks window, unless you have a care plan (from ${CARE_PLANS[0].price}). And new features beyond the agreed plan, which get their own fixed price first.`,
   },
   {
-    question: "What's the guarantee?",
-    answer: 'Starter Automation is working within 7 working days of me getting access, or I waive the final payment and still finish. Larger jobs get a dated plan in the quote. If I cannot deliver what we agreed, I refund your deposit.',
+    question: 'How long does it take?',
+    answer: `${DELIVERY_PROMISE} After it goes live you get ${CHANGES_WINDOW.short}, and anything not working as agreed is fixed free for 90 days.`,
   },
   {
     question: 'How does payment work?',
-    answer: 'A fixed quote first, with every item listed on one clear invoice. Software subscriptions or text-message costs, if any, are paid by you directly at cost. No VAT added.',
+    answer: `${PAYMENT_TERMS} Software subscriptions or text-message costs, if any, are paid by you directly at cost.`,
   },
   {
     question: 'Do I own what you build?',
