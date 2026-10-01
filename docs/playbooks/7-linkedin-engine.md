@@ -40,7 +40,7 @@ Topic rotation:
 1. A real problem seen this week (no business named) and the simple fix
 2. A before/after of a free demo (only if real)
 3. A "how it works" in 4 steps (call, demo, plan, build)
-4. For creators: why "DM to order" loses sales, and the Brand Kit fix
+4. For creators: why "DM to order" loses sales, and the Sales Page fix
 5. A lesson from building (JobFilter, Scrap Finance Partners)
 
 ## Quality bar

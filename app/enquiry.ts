@@ -1,4 +1,4 @@
-import { OFFERS, CARE_PLAN, getExtra } from './offers';
+import { OFFERS, CARE_PLANS, getExtra, getOffer } from './offers';
 import { CONTACT_EMAIL, FORM_DELIVERY_EMAIL } from './site';
 
 export const FORM_ENDPOINT = `https://formsubmit.co/ajax/${FORM_DELIVERY_EMAIL}`;
@@ -16,14 +16,16 @@ export const ENQUIRY_SERVICES = [
   { id: 'repair', label: `Starter Automation (${OFFERS[0].price})` },
   { id: 'automation', label: `Business System (${OFFERS[1].price.toLowerCase()})` },
   { id: 'software', label: `Custom software or internal tool (${OFFERS[2].price.toLowerCase()})` },
-  { id: 'website', label: `Website with the system built in (${OFFERS[2].price.toLowerCase()})` },
+  { id: 'website', label: `Website with enquiries built in (${getOffer('website').price.toLowerCase()})` },
+  { id: 'sales-page', label: `Sales Page: book or buy from one page (${getOffer('sales-page').price})` },
+  { id: 'brand-sales-page', label: `Brand + Sales Page (${getOffer('brand-sales-page').price})` },
   { id: 'reviews', label: `Review requests and customer reminders (from ${getExtra('Appointment reminders').price})` },
-  { id: 'care', label: `Keep It Running (${CARE_PLAN.price})` },
+  { id: 'care', label: `Care plan (${CARE_PLANS[0].name} ${CARE_PLANS[0].price}, or ${CARE_PLANS[1].name} ${CARE_PLANS[1].price})` },
   { id: 'rebuild', label: 'Rebuild of an existing site or system' },
   { id: 'google-profile', label: `Google Business Profile setup (${getExtra('Google Business Profile setup').price})` },
   { id: 'bundle', label: 'Starter plus optional extras' },
   { id: 'objects', label: 'Tap-to-review stands and signs' },
-  { id: 'brand-kit', label: 'Brand Kit: look, website and profile (£395)' },
+  { id: 'brand-kit', label: `Brand & Content Kit: look, voice and profile (${getOffer('brand-kit').price})` },
   { id: 'unsure', label: 'Not sure yet, help me work it out' },
 ] as const;
 
