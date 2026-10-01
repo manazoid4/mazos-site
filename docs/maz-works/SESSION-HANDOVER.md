@@ -1,5 +1,11 @@
 # Maz Works: latest session handover (public copy)
 
+## 1 Oct evening: handover for a new Claude instance
+- Everything up to PR #102 is live. Open: #103 (friction pass), #104 (outreach copy-paste pack), #105 (Social Cat creator-growth research).
+- Before #104 merges, move its messages to named prospects into the private leads repo and keep only the reusable templates here.
+- All agents use the shared agent operating policy saved in the private memory repo as their system prompt.
+- The full start-here brief (repos, acquisition pack, rules, to-dos) is private: `unified-memory-database` → `spine/projects/mazworks-site/NEW-INSTANCE-HANDOFF.md`.
+
 ## LinkedIn four-goal update (Codex, 30 Sep)
 
 Branch `agents/linkedin-four-goals` adds real-work links, the creator route, changes-scope disclosure and preservation of LinkedIn campaign tags. Prices and scope copy use `app/offers.ts`; the existing design is reused. Details and evidence: `LINKEDIN-FOUR-GOALS.md` and `docs/evidence/linkedin-four-goals/`. Maz: review the PR preview before merging; share the LinkedIn screenshots and personal profile URL when ready. Nothing was posted, sent or merged by this task.
