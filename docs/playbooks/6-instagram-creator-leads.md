@@ -1,4 +1,4 @@
-# 6. Instagram creator leads (Brand Kit)
+# 6. Instagram creator leads (Sales Page, Brand & Content Kit)
 
 Goal: 10 good creator leads a day, each with a ready DM Maz can send in under a minute.
 
@@ -37,11 +37,11 @@ Save the list to the private repo manazoid4/maz-works-leads under creators/YYYY-
 ```
 Hi {first name}, love {specific thing: your 12-week plan / the lavender bar / your nail sets}.
 
-Quick idea: your own simple site with a buy button, so people can pay without DMing you first.
+Quick idea: one page where your followers can book or buy straight away, and join your email list, without DMing you first.
 
 I build these for trainers and makers. Want me to mock one up for you, free?
 ```
-Rules: one DM, no links in the first message, no pitch deck, no price unless asked (Brand Kit £395). If they say yes: book the 15-minute call, agree what the mock-up shows and the date.
+Rules: one DM, no links in the first message, no pitch deck, no price unless asked (prices only from `app/offers.ts`: Sales Page, Brand & Content Kit, or the Brand + Sales Page bundle). Sell the outcome (bookings, buyers, an email list they own), never "a website". Most creators with an existing look need the Sales Page, not brand work. If they say yes: book the 15-minute call, agree what the mock-up shows and the date.
 
 ## Follow-up (after 3 days, once)
 ```

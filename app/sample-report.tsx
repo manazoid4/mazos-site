@@ -70,7 +70,7 @@ export function SampleReport() {
             <b>{reminders.price}</b>
           </li>
         </ul>
-        <p className="sp-total" aria-live="polite"><strong>Total {formatPrice(total)}</strong> · No VAT added · Working within 7 working days of access, or you don’t pay the rest.</p>
+        <p className="sp-total" aria-live="polite"><strong>Total {formatPrice(total)}</strong> · No VAT added · Working within 7 working days of access.</p>
         <p className="s-small">If nothing is worth automating, the plan says so.</p>
         <a className="button" href="/leak-check?src=example-plan#leak-check-form">Get one like this for my business</a>
       </footer>

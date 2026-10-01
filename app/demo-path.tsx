@@ -1,4 +1,4 @@
-import { CHANGES_WINDOW, CARE_PLAN, DEMO_STEPS } from './offers';
+import { CHANGES_WINDOW, CARE_PLANS, DEMO_STEPS } from './offers';
 import { BOOKING_URL } from './site';
 import './demo-path.css';
 import { CampaignLink } from './campaign-link';
@@ -30,14 +30,14 @@ export function DemoPath({ source = 'site', compact = false }: { source?: string
   );
 }
 
-/** What "2 months of unlimited changes" covers, and where the line is. */
+/** What the tweaks window and fix promise cover, and where the line is. */
 export function ChangesWindow() {
   return (
     <div className="cw">
       <p className="cw-lede"><strong>{CHANGES_WINDOW.name}.</strong> {CHANGES_WINDOW.body}</p>
       <div className="cw-cols">
         <div className="cw-yes">
-          <h3>Included, as often as you like</h3>
+          <h3>Included</h3>
           <ul>{CHANGES_WINDOW.covered.map((item) => <li key={item}>{item}</li>)}</ul>
         </div>
         <div className="cw-no">
@@ -45,7 +45,7 @@ export function ChangesWindow() {
           <ul>{CHANGES_WINDOW.notCovered.map((item) => <li key={item}>{item}</li>)}</ul>
         </div>
       </div>
-      <p className="cw-how">{CHANGES_WINDOW.howItWorks} ({CARE_PLAN.name}, {CARE_PLAN.price}.)</p>
+      <p className="cw-how">{CHANGES_WINDOW.howItWorks} ({CARE_PLANS.map((plan) => `${plan.name}, ${plan.price}`).join('; ')}.)</p>
     </div>
   );
 }

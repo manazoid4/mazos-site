@@ -1475,3 +1475,13 @@ main {
 .s-system-detail > a, .mw-service-link, .mw-footer-groups a { display: inline-flex; align-items: center; min-height: 44px; }
 .mw-footer-groups a { padding-block: 2px; }
 .s-lab-links a, .mw-project-links a, .project-links a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Offer v10: four kinds of work, and each package's spec folded away for phones. */
+.s-tracks { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.s-tracks li { display: grid; gap: 4px; padding: 14px 16px; border: 1px solid var(--line); background: var(--surface); }
+.s-tracks small { font-size: .85rem; opacity: .8; }
+.s-track-title { margin: 32px 0 12px; }
+.s-offer-spec { border-top: 1px solid var(--line); padding-top: 8px; font-size: .92rem; }
+.s-offer-spec summary { cursor: pointer; font-weight: 750; min-height: 44px; display: flex; align-items: center; }
+.s-offer-spec p { margin: 6px 0 2px; }
+.s-offer-spec ul { margin-bottom: 4px; }

@@ -5,7 +5,7 @@ import { SiteFooter, SiteHeader } from '../site-chrome';
 import { CHECK_REPLY_TIME, SITE_URL } from '../site';
 import { OG_IMAGE } from '../seo';
 import { PricingViewTracker } from '../analytics';
-import { CARE_PLAN, CHANGES_WINDOW, EXTRAS, FREE_STEP, OFFERS } from '../offers';
+import { CARE_PLAN, CHANGES_WINDOW, EXTRAS, FREE_STEP, OFFERS, getOffer } from '../offers';
 import { PriceList } from '../price-list';
 import { ChangesWindow } from '../demo-path';
 
@@ -17,7 +17,7 @@ const lower = (price: string) => price.replace(/^From/, 'from');
 
 export const metadata: Metadata = {
   title: { absolute: 'Prices and packages | Maz Works' },
-  description: fitDescription(`Every Maz Works price in one place. ${STARTER.name} ${STARTER.price}, ${SYSTEM.name} ${lower(SYSTEM.price)}, ${CUSTOM.name} ${lower(CUSTOM.price)}, add-ons from ${CHEAPEST_EXTRA} and ${CARE_PLAN.name} ${CARE_PLAN.price}. Fixed quote first, no VAT added.`),
+  description: fitDescription(`Every Maz Works price in one place. ${STARTER.name} ${STARTER.price}, ${SYSTEM.name} ${lower(SYSTEM.price)}, ${CUSTOM.name} ${lower(CUSTOM.price)}, ${getOffer('sales-page').name} ${getOffer('sales-page').price}, add-ons from ${CHEAPEST_EXTRA} and ${CARE_PLAN.name} ${CARE_PLAN.price}. Fixed quote first, no VAT added.`),
   alternates: { canonical: PAGE_URL },
   openGraph: { title: 'Maz Works prices', description: fitDescription(`Automation from ${STARTER.price}. Add-ons from ${CHEAPEST_EXTRA}. Fixed quote first, no VAT added.`), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
 };

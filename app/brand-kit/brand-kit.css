@@ -38,3 +38,9 @@
 @media (prefers-reduced-motion: reduce) { .bk-grid li { transition: none; } .bk-grid li:hover { transform: none; } }
 
 .bk-promise { margin: 28px 0 0; padding: 14px 18px; border-radius: 14px; background: var(--sage); font-weight: 700; }
+
+/* Offer v10: the creator journey, content to email list. */
+.bk-path { list-style: none; counter-reset: step; padding: 0; margin: 20px 0 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); }
+.bk-path li { counter-increment: step; display: grid; gap: 4px; padding: 16px; border-radius: 16px; background: var(--surface); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--tone); }
+.bk-path strong::before { content: counter(step) ". "; }
+.bk-path span { color: var(--muted); font-size: .95rem; }

@@ -4,7 +4,7 @@ import { Breadcrumbs } from '../breadcrumbs';
 import { OG_IMAGE } from '../seo';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { NICHE_GUIDES } from './niches';
-import { BRAND_KIT } from '../offers';
+import { BRAND_KIT, getOffer } from '../offers';
 import { KitIcon, NICHE_ICONS } from '../brand-kit/kit-icon';
 
 export const metadata: Metadata = {
@@ -29,8 +29,8 @@ export default function ForHubPage() {
         <span className="for-creators-icons" aria-hidden="true"><KitIcon name="dumbbell" /><KitIcon name="camera" /><KitIcon name="brush" /></span>
         <span className="for-creators-tag">Trainers, coaches, makers, stylists, artists</span>
         <strong>I sell through social media</strong>
-        <span>{`Brand Kit · ${BRAND_KIT.price}: your look, your own website, a profile that sells.`}</span>
-        <span className="mw-hub-go">See the Brand Kit →</span>
+        <span>{`Creators: ${BRAND_KIT.name} ${BRAND_KIT.price} · Sales Page ${getOffer('sales-page').price} · both ${getOffer('brand-sales-page').price}`}</span>
+        <span className="mw-hub-go">See the creator options →</span>
       </a>
 
       <h2 className="for-sub">I run a business customers book or call</h2>

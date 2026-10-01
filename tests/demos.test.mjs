@@ -15,7 +15,8 @@ async function readPage(route) {
 }
 
 // 30 Sep (Maz): the free demo comes after a call, arrives by a date agreed on
-// the call, and is followed by the full plan and 2 months of unlimited changes.
+// the call, and is followed by the full plan. Offer v10 (2 Oct): then 30 days of
+// tweaks and a 90-day fix promise, never "unlimited changes".
 test('free demo page explains the call-first route and books a call', async () => {
   const [home, demos, sitemap] = await Promise.all([readPage('/'), readPage('/demos'), readFile(path.join(out, 'sitemap.xml'), 'utf8')]);
   assert.match(home, /href="\/demos"[^>]*>[^<]*free demo/i);
@@ -23,15 +24,17 @@ test('free demo page explains the call-first route and books a call', async () =
   assert.match(demos, /date (we agree|you get it|agreed on the call)/i);
   assert.match(demos, /Nothing to pay yet/);
   assert.match(demos, /href="https:\/\/cal\.com\/mazworks\/quick-chat\?utm_source=demos"/);
-  assert.match(demos, /2 months of unlimited changes/);
+  assert.match(demos, /30 days of tweaks/);
+  assert.doesNotMatch(demos, /unlimited/i);
   assert.match(sitemap, /\/demos/);
 });
 
-test('unlimited changes are fenced so they never become free new work', async () => {
+test('changes after go-live are fenced so they never become free new work', async () => {
   const demos = await readPage('/demos');
   assert.match(demos, /Priced first, so it stays fair/);
-  assert.match(demos, /A new system, new job or new feature: I price it first/);
-  assert.match(demos, /start on the day it goes live/);
+  assert.match(demos, /A new page, job or feature: I price it first/);
+  assert.match(demos, /fixed free for 90 days/);
+  assert.match(demos, /up to two rounds/);
 });
 
 test('demos page builds credibility without fabricated client counts or invented proof', async () => {
