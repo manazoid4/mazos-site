@@ -2,7 +2,7 @@
 
 ## 1 Oct evening: handover for a new Claude instance
 - Everything up to PR #102 is live. Open: #103 (friction pass), #104 (outreach copy-paste pack), #105 (Social Cat creator-growth research).
-- Before #104 merges, move its messages to named prospects into the private leads repo and keep only the reusable templates here.
+- #104 is public, so its named-prospect messages are already exposed. Do this now, not at merge: move them to the private leads repo and remove them from the public branch and its history (or close #104 and reopen it with the reusable templates only).
 - All agents use the shared agent operating policy saved in the private memory repo as their system prompt.
 - The full start-here brief (repos, acquisition pack, rules, to-dos) is private: `unified-memory-database` → `spine/projects/mazworks-site/NEW-INSTANCE-HANDOFF.md`.
 
