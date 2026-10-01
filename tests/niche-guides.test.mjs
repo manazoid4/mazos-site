@@ -11,8 +11,8 @@ test('each niche guide exports with real examples, a self-check, prices and a ta
     const html = await readFile(path.join(exportRoot, 'for', `${id}.html`), 'utf8').catch(() => readFile(path.join(exportRoot, 'for', id, 'index.html'), 'utf8'));
     assert.match(html, /Real examples/, `${id}: examples section`);
     assert.match(html, /Check yours in 60 seconds/, `${id}: self-check section`);
-    assert.match(html, /£195|From £(795|1,950)/, `${id}: Offer v8 price`);
-    assert.doesNotMatch(html, /£(395|249|595|295)\b|From £(495|950|1,500|1,250|2,950)\b/, `${id}: retired price`);
+    assert.match(html, /£195|From £(795|2,950)/, `${id}: current price`);
+    assert.doesNotMatch(html, /£(395|249)\b|£19\/month|From £(495|950|1,500|1,250)\b|Custom Software &amp; Websites/, `${id}: retired price`);
     assert.doesNotMatch(html, /£150 fixed/, `${id}: retired Quick Win price`);
     assert.doesNotMatch(html, /Quick Win/, `${id}: retired Quick Win name`);
     assert.doesNotMatch(html, /hacked/i, `${id}: must not say hacked`);
