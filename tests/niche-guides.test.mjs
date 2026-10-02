@@ -6,22 +6,23 @@ import path from 'node:path';
 const exportRoot = path.join(process.cwd(), 'out');
 const NICHES = ['salons-and-beauty', 'dog-groomers', 'garages', 'cafes-and-food', 'clinics-and-therapists', 'architects'];
 
-test('each niche guide exports with real examples, a self-check, prices and a tagged Leak Check link', async () => {
+test('each niche guide exports with prices, a priced second task and a tagged free-plan link (no website-fix examples, conversion fixes 2 Oct)', async () => {
   for (const id of NICHES) {
     const html = await readFile(path.join(exportRoot, 'for', `${id}.html`), 'utf8').catch(() => readFile(path.join(exportRoot, 'for', id, 'index.html'), 'utf8'));
-    assert.match(html, /Real examples/, `${id}: examples section`);
-    assert.match(html, /Check yours in 60 seconds/, `${id}: self-check section`);
+    // Conversion fixes (2 Oct): broken-website examples and the website self-check made Maz look like a repair shop.
+    assert.doesNotMatch(html, /Real examples|Check yours in 60 seconds|What I saw:/, `${id}: website-fix examples removed`);
     assert.match(html, /£149|From £(595|2,450)/, `${id}: current price`);
     assert.doesNotMatch(html, /£(395|249)\b|£19\/month|From £(495|950|1,500|1,250)\b|Custom Software &amp; Websites/, `${id}: retired price`);
     assert.doesNotMatch(html, /£150 fixed/, `${id}: retired Quick Win price`);
     assert.doesNotMatch(html, /Quick Win/, `${id}: retired Quick Win name`);
     assert.doesNotMatch(html, /hacked/i, `${id}: must not say hacked`);
-    assert.match(html, /Not your trade\? Every kind of business is welcome\./, `${id}: broad-audience line`);
+    assert.match(html, /Free plan, no call needed\. Most start with one task at £149\./, `${id}: price and person on the first screen`);
+    assert.doesNotMatch(html, /Another job/, `${id}: second task is named as an add-on`);
     assert.match(html, new RegExp(`/free-plan\\?src=for-${id}`), `${id}: tagged free check link`);
     assert.match(html, /Starter Automation<!-- --> · <!-- -->£149/, `${id}: Starter shown`);
     // Offer v9: Starter is one job. Anything more on a guide is a separately priced add-on or a bigger package.
     const starter = /<strong>Starter Automation<!-- --> · <!-- -->£149<\/strong><p class="mw-example-seen">([^<]*)/.exec(html)?.[1] || '';
-    assert.match(starter, /^One job set up to run itself/, `${id}: Starter must read as one job`);
+    assert.match(starter, /^One task set up to run itself/, `${id}: Starter must read as one task`);
     assert.doesNotMatch(starter, /\b(plus|reminders? go out|follow-up|review requests)\b/i, `${id}: Starter line bundles a second job`);
     assert.doesNotMatch(html, /quoted in your free plan/, `${id}: fixed-price add-ons must show their price`);
     assert.match(html, new RegExp(`/free-plan\\?src=for-${id}&amp;package=Starter%20Automation#leak-check-form`), `${id}: Starter pre-fills the form`);

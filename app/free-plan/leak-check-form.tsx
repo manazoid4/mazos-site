@@ -29,6 +29,8 @@ export const QUICK_PICKS = [
   'Slow replies to enquiries',
   'No-shows',
   'Chasing quotes',
+  'Chasing invoices',
+  'Paperwork and forms',
   'Getting more reviews',
   'Copying details between apps',
   'Orders only by DM',

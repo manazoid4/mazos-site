@@ -60,7 +60,7 @@ test('four customer types, each with pains, recipes, a calculator preset and rea
 test('each type page is short: pains → fix, three priced recipes, a labelled demo business and one main button (polish, 2 Oct)', async () => {
   for (const type of types.CUSTOMER_TYPES) {
     const html = await readPage(`/for/${type.id}`);
-    assert.match(html, /Your problem, and the job that fixes it/, `${type.id}: pains`);
+    assert.match(html, /Your problem, and the task that fixes it/, `${type.id}: pains`);
     assert.match(html, /Three ways in/, `${type.id}: recipes`);
     for (const recipe of type.recipes) assert.ok(html.includes(recipe.name.replace(/&/g, '&amp;')), `${type.id}: ${recipe.name}`);
     assert.match(html, /Demo business, not a client/, `${type.id}: labelled demo business`);
@@ -97,31 +97,32 @@ test('the homepage asks "What do you run?" and reaches every type page and the l
 test('every explainer animation has a reduced-motion still', async () => {
   const css = await fs.readFile(path.join(root, 'app', 'explainers.css'), 'utf8');
   const animated = (css.match(/animation:/g) || []).length;
-  assert.ok(animated >= 5, 'explainers animate');
+  assert.ok(animated >= 4, 'explainers animate');
   assert.ok(css.includes('prefers-reduced-motion: no-preference'), 'motion only when allowed');
   assert.doesNotMatch(css.replace(/@media [^{]*prefers-reduced-motion: no-preference\)[\s\S]*?\n}\n/g, ''), /animation:/, 'no animation runs outside the no-preference block');
   const prices = await readPage('/prices');
-  assert.match(prices, /class="ex ex-tiles"/, 'prices page shows the tiles-join animation');
+  // Conversion fixes (2 Oct): the tiles-join animation was removed (unreadable mid-animation; the value line says it).
+  assert.doesNotMatch(prices, /class="ex ex-tiles"/);
 });
 
 test('the drafted free plan quotes only prices from offers.ts and picks the right rung', () => {
   const starter = draft.draftFreePlan({ name: 'Sam Example', trade: 'trades', problem: 'Missed calls' });
   assert.equal(starter.offer.id, 'starter');
-  assert.match(starter.text, /Trades Starter: missed-call text-back \(£149\)/);
+  assert.match(starter.text, /Starter Automation: missed-call text-back \(£149\)/);
   assert.match(starter.text, /Guarantee:/);
   assert.match(starter.text, /Day 0: free plan and scope sheet/);
   assert.doesNotMatch(starter.text, /£195|£795|£2,950/);
 
   const system = draft.draftFreePlan({ name: 'Sam', trade: 'trades', problem: 'Missed calls\nChasing quotes\nGetting more reviews' });
   assert.equal(system.offer.id, 'business-system');
-  assert.match(system.text, /Trades System: calls, quotes and reviews \(From £595\)/);
+  assert.match(system.text, /Business System: calls, quotes and reviews \(From £595\)/);
 
   const creator = draft.draftFreePlan({ name: 'Jo', trade: 'creators', systems: 'keyword-dm' });
   assert.equal(creator.offer.id, 'creator-starter');
 
   const asked = draft.draftFreePlan({ name: 'Jo', trade: 'salons-and-beauty', package: 'Business System' });
   assert.equal(asked.offer.id, 'business-system');
-  assert.match(asked.text, /Salon System/);
+  assert.match(asked.text, /Business System: booking, reminders and rebooking/);
 
   const unknown = draft.draftFreePlan({ name: '', trade: '', problem: 'something odd' });
   assert.equal(unknown.offer.id, 'starter');
@@ -153,7 +154,7 @@ test('scope sheet and buy-now intake pages export, noindexed, reading from offer
 
 test('sales check: a plumber, a salon owner and a creator reach "Get my free plan" in two taps knowing the price', async () => {
   const home = await readPage('/');
-  for (const [type, recipe] of [['trades', 'missed-call text-back'], ['appointments', 'reminders that cut no-shows'], ['creators', 'comment to get it']]) {
+  for (const [type, recipe] of [['trades', 'missed-call text-back'], ['appointments', 'reminders that cut no-shows'], ['creators', 'comment a word, get your guide']]) {
     // Tap 1: the tile on the homepage, which already shows a recipe and its price.
     const tile = new RegExp(`<a href="/for/${type}">[\\s\\S]*?<em>[^<]*${recipe}[^<]*£\\d+</em>`, 'i');
     assert.match(home, tile, `${type}: tile shows recipe and price`);

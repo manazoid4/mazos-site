@@ -93,7 +93,7 @@ export const SYSTEMS: System[] = [
   ...OFFERS.map(offer => ({ id: offer.id, packageId: offer.id, name: offer.name, headache: offer.body, offerName: offer.name, trades,
     steps: [
       {icon:'inbox' as const,title:offer.id === 'starter' ? 'One task takes your time' : offer.id === 'business-system' ? 'A customer gets in touch' : 'Your team needs a tool',detail:offer.id === 'starter' ? 'For example, an enquiry arrives.' : 'Start with the way you work today.'},
-      {icon:'list' as const,title:offer.id === 'starter' ? 'That job runs on its own' : offer.id === 'business-system' ? 'Details move between your tools' : 'Your system handles the task',detail:offer.id === 'starter' ? 'An instant reply and a saved record.' : 'Built around your agreed process.'},
+      {icon:'list' as const,title:offer.id === 'starter' ? 'That task runs on its own' : offer.id === 'business-system' ? 'Details move between your tools' : 'Your system handles the task',detail:offer.id === 'starter' ? 'An instant reply and a saved record.' : 'Built around your agreed process.'},
       {icon:'doc' as const,title:'You see what needs you',detail:offer.id === 'starter' ? 'One list to answer from.' : 'Customer details and the next action together.'},
       {icon:'check' as const,title:'You carry on with the work',detail:'Less copying and chasing.'}
     ], result:offer.id === 'starter' ? 'One task off your plate.' : offer.id === 'business-system' ? 'A joined-up customer journey.' : 'A tool built to fit your business.' }))
