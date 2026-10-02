@@ -170,7 +170,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(html, /Keep It Running[\s\S]{0,30}£49\/month/);
   assert.doesNotMatch(html, /\bAI\b/, 'AI is used behind the scenes, never advertised (Maz, 27 Sep)');
   assert.match(html, /Free Plan &amp; Fixed Quote/);
-  assert.match(html, /10% of their first project when they become a paying client/);
+  assert.match(html, /send you (?:<!-- -->)?£50(?:<!-- -->)? when they become a paying client/);
   // Offer v10 (2 Oct): £595, £2,950 and £49/month are live prices again; £19/month, the £395 Brand Kit and unlimited changes are retired.
   for (const retired of [/£150/, /£395/, /£249/, /Quick Win/, /£39\/month/, /£19\/month/, /founding/i, /Contact Setup/, /Enquiry Check/, /Customer Journey Review/, /From £495/, /From £950/, /From £1,500/, /£1,250/, /Custom Software &amp; Websites/, /unlimited changes/i]) {
     assert.doesNotMatch(html, retired, `retired offer still on homepage: ${retired}`);
@@ -491,9 +491,9 @@ test('the guarantee, no-VAT and referral lines appear where Maz\'s decisions req
   const home = await readPage('/');
   const faq = await readPage('/faq');
   assert.match(home, /No VAT added/);
-  assert.match(home, /10% of their first project when they become a paying client/);
+  assert.match(home, /send you (?:<!-- -->)?£50(?:<!-- -->)? when they become a paying client/);
   assert.match(faq, /No VAT added/);
-  assert.match(faq, /10% of their first project by bank transfer/);
+  assert.match(faq, /£50 by bank transfer, no limit/);
   assert.doesNotMatch(faq, /deposit|final payment|pay the rest/i, 'no payment-split wording (Maz, 1 Oct)');
 });
 

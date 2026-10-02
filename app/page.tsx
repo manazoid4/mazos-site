@@ -71,7 +71,7 @@ export default function Page() {
      <li><strong>{CARE_PLAN.name}: {CARE_PLAN.price}.</strong> Optional help after the included changes period.</li>
     </ul>
     <CallLink href={BOOKING_URL} className="button" placement="free-plan">Want to see it first? Book a free demo</CallLink>
-    <p className="s-small">Know a business that needs this? {REFERRAL_REWARD} when they become a paying client. <a href="/faq#do-you-pay-for-referrals">How →</a></p>
+    <p className="s-small">Know a business that needs this? I'll send you {REFERRAL_REWARD} when they become a paying client. <a href="/faq#do-you-pay-for-referrals">How →</a></p>
    </div><LeakCheckForm />
   </section>
       <section className="s-section s-about" id="about" aria-labelledby="about-title">

@@ -36,7 +36,7 @@ Add-ons: £95 to £295, each a set-up on tools the client already has. Floor £9
 - **Extra automation £95 → £145, and three builds quote a Business System.** A second job is real work; three jobs is a system.
 - **Care £19/month → £49 and £195/month.** £19 did not cover one hour. Two tiers create recurring revenue and a reason to keep improving.
 - **Payment.** Pay when you've seen it working, before go-live; £1,000+ jobs in signed-off stages. Removed "you don't pay the rest" and "refund your deposit" wording (Maz, 1 Oct: splits read as desperate).
-- **Referral £40 → 10% of the first project.** Scales with bigger jobs, costs nothing unless a sale happens.
+- **Referral £40 → £50 flat (changed 2 Oct).** Scales with bigger jobs, costs nothing unless a sale happens.
 - **Kept on purpose:** Starter Automation at £195 as the way in (fenced to one job, credited toward a Business System). Business System floor £795, now defined as up to three jobs.
 
 ## Where Maz was losing money
