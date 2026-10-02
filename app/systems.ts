@@ -1,4 +1,4 @@
-import { EXTRAS, OFFERS, type Offer } from './offers';
+import { ALL_OFFERS, EXTRAS, OFFERS, type Offer } from './offers';
 export type SystemStep = { icon: 'phone' | 'inbox' | 'list' | 'calendar' | 'message' | 'check' | 'star' | 'doc' | 'clock'; title: string; detail: string };
 export type System = { id: string; name: string; headache: string; steps: SystemStep[]; result: string; offerName: string; trades: string[]; packageId?: Offer['id'] };
 const BOARDS = {
@@ -14,7 +14,7 @@ const BOARDS = {
   },
   reminders: {
     label: 'Reminders',
-    offerName: 'Appointment reminders',
+    offerName: 'Starter Automation',
     steps: [
       { icon: 'calendar', title: 'A booking is made', detail: 'In the app you already use.' },
       { icon: 'message', title: 'A reminder the day before', detail: '“Your appointment is tomorrow.”' },
@@ -24,7 +24,7 @@ const BOARDS = {
   },
   reviews: {
     label: 'Reviews',
-    offerName: 'Review requests',
+    offerName: 'Starter Automation',
     steps: [
       { icon: 'check', title: 'The job is done', detail: 'Marked finished as normal.' },
       { icon: 'message', title: 'A thank-you with a link', detail: 'Opens your Google review page.' },
@@ -34,7 +34,7 @@ const BOARDS = {
   },
   quotes: {
     label: 'Quotes',
-    offerName: 'Quote follow-up',
+    offerName: 'Starter Automation',
     steps: [
       { icon: 'doc', title: 'You send a quote', detail: 'The way you do now.' },
       { icon: 'clock', title: 'No reply after 3 days', detail: 'A friendly nudge goes out.' },
@@ -43,7 +43,7 @@ const BOARDS = {
     result: 'Quotes don’t go cold because you were busy.',
   },
   booking: {
-    label: 'Online booking', offerName: 'Online booking setup',
+    label: 'Online booking', offerName: 'Starter Automation',
     steps: [
       { icon: 'clock', title: 'It’s ten at night', detail: 'Your customer has a moment.' },
       { icon: 'calendar', title: 'They choose a slot', detail: 'From your available appointments.' },
@@ -52,7 +52,7 @@ const BOARDS = {
     result: 'Bookings while you’re off the clock.',
   },
   rebooking: {
-    label: 'Rebooking', offerName: 'Rebooking reminders',
+    label: 'Rebooking', offerName: 'Starter Automation',
     steps: [
       { icon: 'calendar', title: 'Their next visit is due', detail: 'Based on their last appointment.' },
       { icon: 'message', title: 'A helpful nudge arrives', detail: 'With your booking link.' },
@@ -69,12 +69,22 @@ const BOARDS = {
     ],
     result: 'Start the week knowing what’s waiting.',
   },
+  'keyword-dm': {
+    label: 'Comment to get it', offerName: 'Creator Starter',
+    steps: [
+      { icon: 'message', title: 'Someone comments “PLAN”', detail: 'On your post, at any hour.' },
+      { icon: 'doc', title: 'Your free resource lands in their DMs', detail: 'Sent for you, straight away.' },
+      { icon: 'inbox', title: 'They join your email list', detail: 'In your name, with a welcome email.' },
+      { icon: 'check', title: 'You see who’s warm', detail: 'Ready for your next offer.' },
+    ],
+    result: 'Followers become a list you own.',
+  },
 };
 
 const trades = ['salons-and-beauty', 'dog-groomers', 'garages', 'cafes-and-food', 'clinics-and-therapists', 'architects', 'other'];
-const headaches: Record<string, string> = { enquiries: 'Slow replies and copying details between apps', reminders: 'No-shows', reviews: 'Few reviews', quotes: 'Chasing quotes', booking: 'Booking calls interrupt your work', rebooking: 'Customers forget to return', weekly: 'Admin at night' };
+const headaches: Record<string, string> = { enquiries: 'Slow replies and copying details between apps', reminders: 'No-shows', reviews: 'Few reviews', quotes: 'Chasing quotes', booking: 'Booking calls interrupt your work', rebooking: 'Customers forget to return', weekly: 'Admin at night', 'keyword-dm': 'Followers but no list' };
 export const SYSTEMS: System[] = [
-  { id: 'missed-calls', name: 'Missed calls', headache: 'Missed calls', offerName: 'Missed-call text-back', trades, steps: [
+  { id: 'missed-calls', name: 'Missed calls', headache: 'Missed calls', offerName: 'Starter Automation', trades, steps: [
     {icon:'phone',title:'A call goes unanswered',detail:'You are with a customer.'},
     {icon:'message',title:'A text goes out',detail:'With your booking link.'},
     {icon:'calendar',title:'They choose a time',detail:'You see the booking in your diary.'}
@@ -89,7 +99,7 @@ export const SYSTEMS: System[] = [
     ], result:offer.id === 'starter' ? 'One task off your plate.' : offer.id === 'business-system' ? 'A joined-up customer journey.' : 'A tool built to fit your business.' }))
 ];
 export function systemPrice(system: System): string {
-  const offer = [...OFFERS, ...EXTRAS].find(item => item.name === system.offerName);
+  const offer = [...ALL_OFFERS, ...EXTRAS].find(item => item.name === system.offerName);
   if (!offer) throw new Error(`Unknown system offer: ${system.offerName}`);
   return `${offer.name}, ${offer.price}${system.id === 'weekly' ? ' · included with Business System' : ''}`;
 }

@@ -17,9 +17,9 @@ const lower = (price: string) => price.replace(/^From/, 'from');
 
 export const metadata: Metadata = {
   title: { absolute: 'Prices and packages | Maz Works' },
-  description: fitDescription(`Every Maz Works price in one place. ${STARTER.name} ${STARTER.price}, ${SYSTEM.name} ${lower(SYSTEM.price)}, ${CUSTOM.name} ${lower(CUSTOM.price)}, ${getOffer('sales-page').name} ${getOffer('sales-page').price}, add-ons from ${CHEAPEST_EXTRA} and ${CARE_PLAN.name} ${CARE_PLAN.price}. Fixed quote first, no VAT added.`),
+  description: fitDescription(`Every Maz Works price in one place. ${STARTER.name} ${STARTER.price}, ${SYSTEM.name} ${lower(SYSTEM.price)}, ${CUSTOM.name} ${lower(CUSTOM.price)}, ${getOffer('creator-launch').name} ${getOffer('creator-launch').price}, one-day set-ups from ${CHEAPEST_EXTRA} and ${CARE_PLAN.name} ${CARE_PLAN.price}. Fixed quote first, no VAT added.`),
   alternates: { canonical: PAGE_URL },
-  openGraph: { title: 'Maz Works prices', description: fitDescription(`Automation from ${STARTER.price}. Add-ons from ${CHEAPEST_EXTRA}. Fixed quote first, no VAT added.`), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
+  openGraph: { title: 'Maz Works prices', description: fitDescription(`Automation from ${STARTER.price}. One-day set-ups from ${CHEAPEST_EXTRA}. Fixed quote first, no VAT added.`), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
 };
 
 export default function PricesPage() {
@@ -31,7 +31,7 @@ export default function PricesPage() {
         <h1 id="prices-title">Every price, in one place.</h1>
         <p className="s-lede">Fixed prices, agreed before any work starts. No VAT added. Not sure what you need? The {FREE_STEP.short} tells you, within {CHECK_REPLY_TIME}.</p>
         <div className="s-actions">
-          <a className="button button-signal s-button-lg" href="/free-plan">Get a free plan and price</a>
+          <a className="button button-signal s-button-lg" href="/free-plan">Get my free plan</a>
           <a className="button" href="/demos">Or see a free demo first</a>
         </div>
       </section>

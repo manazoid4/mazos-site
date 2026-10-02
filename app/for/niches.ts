@@ -6,7 +6,7 @@
  * These are examples of businesses this applies to, not a limit: the same
  * review and systems work for any UK business customers book, call or enquire with.
  */
-import { EXTRAS, OFFERS, WEB_OFFERS } from '../offers';
+import { AUTOMATION_MENU, EXTRAS, OFFERS, WEB_OFFERS } from '../offers';
 
 const offer = (id: string) => {
   const found = OFFERS.find((item) => item.id === id);
@@ -17,6 +17,12 @@ const addOn = (name: string, body: string) => {
   const found = EXTRAS.find((item) => item.name === name);
   if (!found) throw new Error(`Unknown add-on ${name}`);
   return { name: `Add-on: ${found.name}`, price: found.price, body, pick: found.name };
+};
+/** A second job from the automation menu, shown with the Starter price (Offer v11: menu jobs are Starters). */
+const menuJob = (name: string, body: string) => {
+  const found = AUTOMATION_MENU.find((item) => item.name === name);
+  if (!found) throw new Error(`Unknown menu job ${name}`);
+  return { name: `Another job: ${found.name}`, price: offer('starter').price, body, pick: offer('starter').name };
 };
 /** Starter is ONE job (Offer v9). Anything more is a priced add-on or a Business System. */
 const starter = (body: string) => ({ name: offer('starter').name, price: offer('starter').price, body, pick: offer('starter').name });
@@ -62,7 +68,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
     ],
     fixes: [
       starter('One job set up to run itself: every booking or enquiry lands in one place and gets an instant confirmation.'),
-      addOn('Appointment reminders', 'Clients get a reminder the day before, so fewer no-shows.'),
+      menuJob('Appointment reminders', 'Clients get a reminder the day before, so fewer no-shows.'),
       system('Rebooking prompts, review requests and no-show follow-ups joined up and sent for you, so repeat visits do not depend on your memory.'),
     ],
   },
@@ -84,8 +90,8 @@ export const NICHE_GUIDES: NicheGuide[] = [
     ],
     fixes: [
       starter('One job set up to run itself: every booking confirmed automatically, so you can keep grooming.'),
-      addOn('Missed-call text-back', 'Miss a call and the owner gets a text with your booking link, so they don’t ring another groomer.'),
-      addOn('Online booking setup', 'If you have no booking tool yet. Most booking tools charge a monthly fee, paid to them directly, and I tell you the cost before you commit.'),
+      menuJob('Missed-call text-back', 'Miss a call and the owner gets a text with your booking link, so they don’t ring another groomer.'),
+      menuJob('Online booking', 'If you have no booking tool yet. Most booking tools charge a monthly fee, paid to them directly, and I tell you the cost before you commit.'),
     ],
   },
   {
@@ -106,7 +112,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
     ],
     fixes: [
       starter('One job set up to run itself: every quote or MOT request logged in one list with an instant reply.'),
-      addOn('Quote follow-up', 'A friendly reminder goes out if the customer goes quiet after a quote.'),
+      menuJob('Quote follow-up', 'A friendly reminder goes out if the customer goes quiet after a quote.'),
       website('A new site with online booking and job updates built in, when your current one can’t do it.'),
     ],
   },
@@ -129,7 +135,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
     ],
     fixes: [
       starter('One job set up to run itself: orders, bookings and messages gathered in one place with an automatic reply.'),
-      addOn('Review requests', 'Customers are asked for a Google review after each visit.'),
+      menuJob('Review requests', 'Customers are asked for a Google review after each visit.'),
       website('A phone-first site with menu, hours, ordering or table booking built in, when your current one can’t do it.'),
     ],
   },
@@ -152,7 +158,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
     ],
     fixes: [
       starter('One job set up to run itself: new enquiries acknowledged straight away with the next step.'),
-      addOn('Appointment reminders', 'Patients and clients get a reminder the day before, so fewer appointments are missed.'),
+      menuJob('Appointment reminders', 'Patients and clients get a reminder the day before, so fewer appointments are missed.'),
     ],
   },
   {

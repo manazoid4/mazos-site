@@ -11,16 +11,16 @@ test('each niche guide exports with real examples, a self-check, prices and a ta
     const html = await readFile(path.join(exportRoot, 'for', `${id}.html`), 'utf8').catch(() => readFile(path.join(exportRoot, 'for', id, 'index.html'), 'utf8'));
     assert.match(html, /Real examples/, `${id}: examples section`);
     assert.match(html, /Check yours in 60 seconds/, `${id}: self-check section`);
-    assert.match(html, /£195|From £(795|2,950)/, `${id}: current price`);
+    assert.match(html, /£149|From £(595|2,450)/, `${id}: current price`);
     assert.doesNotMatch(html, /£(395|249)\b|£19\/month|From £(495|950|1,500|1,250)\b|Custom Software &amp; Websites/, `${id}: retired price`);
     assert.doesNotMatch(html, /£150 fixed/, `${id}: retired Quick Win price`);
     assert.doesNotMatch(html, /Quick Win/, `${id}: retired Quick Win name`);
     assert.doesNotMatch(html, /hacked/i, `${id}: must not say hacked`);
     assert.match(html, /Not your trade\? Every kind of business is welcome\./, `${id}: broad-audience line`);
     assert.match(html, new RegExp(`/free-plan\\?src=for-${id}`), `${id}: tagged free check link`);
-    assert.match(html, /Starter Automation<!-- --> · <!-- -->£195/, `${id}: Starter shown`);
+    assert.match(html, /Starter Automation<!-- --> · <!-- -->£149/, `${id}: Starter shown`);
     // Offer v9: Starter is one job. Anything more on a guide is a separately priced add-on or a bigger package.
-    const starter = /<strong>Starter Automation<!-- --> · <!-- -->£195<\/strong><p class="mw-example-seen">([^<]*)/.exec(html)?.[1] || '';
+    const starter = /<strong>Starter Automation<!-- --> · <!-- -->£149<\/strong><p class="mw-example-seen">([^<]*)/.exec(html)?.[1] || '';
     assert.match(starter, /^One job set up to run itself/, `${id}: Starter must read as one job`);
     assert.doesNotMatch(starter, /\b(plus|reminders? go out|follow-up|review requests)\b/i, `${id}: Starter line bundles a second job`);
     assert.doesNotMatch(html, /quoted in your free plan/, `${id}: fixed-price add-ons must show their price`);

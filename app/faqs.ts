@@ -1,5 +1,5 @@
 import { CHECK_REPLY_TIME } from './site';
-import { OFFERS, CARE_PLANS, CHANGES_WINDOW, DELIVERY_PROMISE, PAYMENT_TERMS, getExtra, getOffer, REFERRAL_REWARD } from './offers';
+import { OFFERS, CARE_PLANS, CHANGES_WINDOW, DELIVERY_PROMISE, PAYMENT_TERMS, SETUP_PRICE, STARTER_GUARANTEE, getExtra, getOffer, REFERRAL_REWARD } from './offers';
 export type MazWorksFaq = {
   question: string;
   answer: string;
@@ -16,19 +16,19 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How much does it cost?',
-    answer: `Starter Automation is ${OFFERS[0].price} for one job set up to run itself. A Business System, where up to three jobs are joined up, starts from ${OFFERS[1].price.replace('From ', '')}. Custom Software starts from ${OFFERS[2].price.replace('From ', '')}. A Sales Page is ${getOffer('sales-page').price} and a full Website starts from ${getOffer('website').price.replace('From ', '')}. Add-ons like appointment reminders (${getExtra('Appointment reminders').price}) or missed-call text-back (${getExtra('Missed-call text-back').price}) are priced up front. Care plans are ${CARE_PLANS[0].price} or ${CARE_PLANS[1].price}. No VAT added.`,
+    answer: `A one-day set-up is ${SETUP_PRICE}. Starter Automation is ${OFFERS[0].price} for one job from the automation menu, set up to run itself. A Business System, where three jobs are joined up with a weekly report, starts from ${OFFERS[1].price.replace('From ', '')}. Custom Software starts from ${OFFERS[2].price.replace('From ', '')}. For creators, Creator Starter is ${getOffer('creator-starter').price} and Creator Launch is ${getOffer('creator-launch').price}. A full Website starts from ${getOffer('website').price.replace('From ', '')}. Care plans are ${CARE_PLANS[0].price} or ${CARE_PLANS[1].price}. No VAT added.`,
   },
   {
     question: `What can the ${OFFERS[0].price} Starter do?`,
-    answer: 'One job you currently do by hand, set up to run itself on the tools you already use. For example: every enquiry logged in one list with an instant reply, or booking confirmations and reminders sent automatically. Working within 7 working days of access.',
+    answer: `One job from the automation menu, set up to run itself on the tools you already use: missed-call text-back, appointment reminders, review requests, quote follow-up, payment reminders, online booking and more. Usually working within 7 working days of you adding me to your apps. ${STARTER_GUARANTEE}`,
   },
   {
     question: 'How do the optional extras work?',
-    answer: `They are add-ons with a fixed, one-off price, like appointment reminders (${getExtra('Appointment reminders').price}), review requests (${getExtra('Review requests').price}) or missed-call text-back (${getExtra('Missed-call text-back').price}). Add them when you order, or later. They go on the same invoice, so there are no surprise costs.`,
+    answer: `One-day set-ups are ${SETUP_PRICE} each: one small thing set up in a day, like a review QR card, a quote template or your booking link added everywhere. Add-ons like Extra automation (${getExtra('Extra automation').price}) add to a package. Everything goes on the same invoice, so there are no surprise costs.`,
   },
   {
     question: 'Can I buy an add-on on its own?',
-    answer: `Yes. Standard add-ons, like appointment reminders (${getExtra('Appointment reminders').price}) or Google Business Profile setup (${getExtra('Google Business Profile setup').price}), can be bought on their own or added to any package. The one exception is Extra automation, which adds a second job to a package; a first job of your own is Starter Automation (${OFFERS[0].price}).`,
+    answer: `Yes. One-day set-ups (${SETUP_PRICE} each), like a Google listing tidy or a review QR card, can be bought on their own or added to any package. Anything that runs on its own is a job from the automation menu: the first is Starter Automation (${OFFERS[0].price}), and Extra automation (${getExtra('Extra automation').price}) adds another to a package.`,
   },
   {
     question: 'What isn’t included?',
