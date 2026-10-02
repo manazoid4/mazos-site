@@ -2,21 +2,6 @@
 .ex { margin: 16px 0 0; }
 .ex figcaption { margin-top: 10px; }
 
-/* 1. Tiles join: three Starter tiles slide into one System line. */
-.ex-tiles-row { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; min-height: 92px; }
-.ex-tile { display: grid; gap: 2px; padding: 12px 10px; border: 1px solid var(--ink); background: var(--surface); font-weight: 750; font-size: .92rem; text-align: center; }
-.ex-tile small { font-weight: 600; color: var(--muted); font-size: .8rem; }
-.ex-tile-sum { position: absolute; inset: 0; background: var(--signal); align-content: center; opacity: 0; }
-@media (prefers-reduced-motion: no-preference) {
-  .ex-tile:not(.ex-tile-sum) { animation: ex-tile-in 6s ease-in-out infinite; animation-delay: calc(var(--i) * 120ms); }
-  .ex-tile-sum { animation: ex-sum-in 6s ease-in-out infinite; }
-  @keyframes ex-tile-in { 0%, 35% { transform: none; opacity: 1; } 50%, 85% { transform: translateX(calc((1 - var(--i)) * 34%)) scale(.6); opacity: 0; } 100% { transform: none; opacity: 1; } }
-  @keyframes ex-sum-in { 0%, 45% { opacity: 0; transform: scale(.9); } 55%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
-}
-@media (prefers-reduced-motion: reduce) {
-  .ex-tiles-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .ex-tile-sum { position: static; opacity: 1; }
-}
 
 /* 2. Tweaks timeline: a 90-day bar, the first third fills as the tweaks window, the rest as the fix promise. */
 .ex-bar { position: relative; height: 44px; margin: 28px 0 26px; border: 1px solid var(--ink); background: var(--surface); display: flex; overflow: visible; }

@@ -37,6 +37,8 @@ const PICK_TO_JOB: Record<string, string> = {
   'Slow replies to enquiries': 'one-list',
   'No-shows': 'reminders',
   'Chasing quotes': 'quote-follow-up',
+  'Chasing invoices': 'payment-reminders',
+  'Paperwork and forms': 'onboarding',
   'Getting more reviews': 'reviews',
   'Copying details between apps': 'one-list',
   'Orders only by DM': 'dm-replies',

@@ -16,12 +16,10 @@ test('all exported pages meet title, description and skip-target budgets',async(
  const decode=text=>text.replace(/&amp;/g,'&').replace(/&#x27;/g,"'").replace(/&quot;/g,'"');
  for(const file of files){const html=await fs.readFile('out/'+file,'utf8');const title=decode(html.match(/<title>(.*?)<\/title>/)[1]);const desc=decode(html.match(/<meta name="description" content="([^"]*)/)[1]);assert.ok(title.length<=60,`${file}: title ${title.length}`);assert.ok(desc.length<=155,`${file}: description ${desc.length}`);if(html.includes('href="#main-content"'))assert.match(html,/<[^>]*id="main-content"[^>]*tabindex="-1"/,file);}
 });
-test('every trade-guide example names a real system and leads with a lost customer or lost time',async()=>{
+test('trade guides carry no broken-website examples (conversion fixes, 2 Oct: they read as a repair shop)',async()=>{
  const source=await fs.readFile('app/for/niches.ts','utf8');
- const ids=new Set(modules.systems.SYSTEMS.map(system=>system.id));
- const examples=[...source.matchAll(/cost: '([^\n]*?)', system: '([^']+)' \}/g)];
- assert.ok(examples.length>=20,`found ${examples.length} examples`);
- for(const [,cost,system] of examples){assert.ok(ids.has(system),`unknown system ${system}`);assert.match(cost,/^Lost (customer|time)/);}
+ assert.doesNotMatch(source,/examples: \[|selfCheck: \[/);
+ assert.match(source,/Add a second task: /);
 });
 test('no lime or cream left from the old palette (30 Sep orange swap)',async()=>{
  const files=(await fs.readdir('app',{recursive:true})).map(file=>'app/'+file).concat((await fs.readdir('public',{recursive:true})).map(file=>'public/'+file)).filter(file=>/\.(css|svg|tsx?)$/.test(file));
