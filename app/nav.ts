@@ -1,4 +1,5 @@
 import { NICHE_GUIDES } from './for/niches';
+import { CUSTOMER_TYPES } from './customer-types';
 
 /**
  * One map of the site, used by the header menu, the footer and tests, so every
@@ -41,9 +42,9 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
   {
     title: 'Who it’s for',
     links: [
+      ...CUSTOMER_TYPES.map((type) => ({ href: `/for/${type.id}`, label: type.name })),
       ...NICHE_GUIDES.map((guide) => ({ href: `/for/${guide.id}`, label: guide.shortName })),
-      { href: '/brand-kit', label: 'Creators and makers' },
-      { href: '/for', label: 'All trades' },
+      { href: '/for', label: 'All kinds of business' },
     ],
   },
   {

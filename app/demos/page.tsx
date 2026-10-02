@@ -43,7 +43,7 @@ export default function DemosPage() {
         <h1 id="demos-title">A free demo, <em>built around your business</em>.</h1>
         <p className="s-lede">A short call first. Then a working demo of your system, by a date we agree on the call. Only if you like it do we talk price.</p>
         <DemoPath source="demos" />
-        <p className="s-small">Prefer to write it down? <a href="/free-plan?src=demos-page#leak-check-form">Get a free plan and price instead</a>. I usually reply within {CHECK_REPLY_TIME}.</p>
+        <p className="s-small">Prefer to write it down? <a href="/free-plan?src=demos-page#leak-check-form">Get my free plan instead</a>. I usually reply within {CHECK_REPLY_TIME}.</p>
       </section>
 
       <section className="s-section" id="changes" aria-labelledby="changes-title">

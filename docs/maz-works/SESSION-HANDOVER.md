@@ -17,4 +17,8 @@ Branch `agents/linkedin-four-goals` adds real-work links, the creator route, cha
 
 This repo is public. The full handover, open to-dos and research source names live in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/HANDOVER.md` and `ARCHITECTS-CONTEXT-PACK-2026-09-27.md`.
 
+## 2 Oct: Offer v11 + site by customer type (Claude, PRs on `agents/offer-v11` and `agents/site-v11`, merged 2 Oct on Maz's go)
+
+Offer v11 proposes lower prices and one fix ladder (free plan, £49 one-day set-up, Starter £149, Business System from £595, Custom from £2,450), a 16-job automation menu, Creator Starter £149 and Creator Launch £595, and "always included" on every card: see `OFFER-V11.md`. The site now asks "What do you run?" and sends trades, appointments, creators and offices to their own page with a pain table, named recipes, prices, a calculator preset, own-it vs rent-it and day-numbered next steps; `/brand-kit` moved to `/for/creators`. Sales engine pieces in `SALES-ENGINE.md`: the free-plan form sends a drafted reply, `/scope-sheet` prints a scope sheet from `app/offers.ts`, `/start` is the after-payment intake, and the enquiry function syncs HubSpot and schedules follow-ups once the env vars exist. 122 tests, smoke, 390px screenshots (`screenshots-v11/`) and mobile Lighthouse 94–96 pass. Maz approved and merged both; still to add: Stripe links and the two env vars.
+
 - 2 Oct (late): `GOALS.md` added at the repo top; every PR now carries a "Test it yourself" checklist (`.github/pull_request_template.md`). Open PRs and Maz's to-dos are in the private memory repo handover.

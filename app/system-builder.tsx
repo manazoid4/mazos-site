@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { NICHE_GUIDES } from './for/niches';
+import { CUSTOMER_TYPES } from './customer-types';
 import { quotePlan } from './offers';
 import { HEADACHE_PICKS, getSystem } from './systems';
 
-const TRADES = [...NICHE_GUIDES.map((guide) => ({ id: guide.id, label: guide.shortName })), { id: 'creator', label: 'Trainer, maker or creator' }, { id: 'other', label: 'Something else, all welcome' }];
+const TRADES = [...CUSTOMER_TYPES.map((type) => ({ id: type.id, label: `${type.name}: ${type.examples.split(',').slice(0, 2).join(',').toLowerCase()}…` })), { id: 'other', label: 'Something else, all welcome' }];
 
 /** Where "Send me this plan" lands: the free plan form, pre-filled and tagged src=builder. */
 export function builderHref(trade: string, headaches: string[]): string {

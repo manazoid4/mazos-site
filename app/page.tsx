@@ -9,7 +9,9 @@ import { HeroDemo } from './hero-demo';
 import { Scenes } from './scenes';
 import { ScrollReveal } from './scroll-reveal';
 import { NICHE_GUIDES } from './for/niches';
-import { CARE_PLAN, FREE_STEP, OFFERS, PROMISES, REFERRAL_REWARD, getOffer, workingBy } from './offers';
+import { CUSTOMER_TYPES } from './customer-types';
+import { KitIcon } from './brand-kit/kit-icon';
+import { CARE_PLAN, FREE_STEP, LADDER, OFFERS, PROMISES, REFERRAL_REWARD, getOffer } from './offers';
 const STARTER = OFFERS[0];
 const PROOF = [
   {
@@ -30,13 +32,6 @@ const PROOF = [
   },
 ];
 
-/** One drawn line per package: one job, jobs joined up, a system built for you. */
-const PACKAGE_ICONS: Record<string, string> = {
-  starter: 'M8 24h24M26 16l8 8-8 8',
-  'business-system': 'M10 12h10v10H10ZM28 26h10v10H28ZM20 17h13v9M15 22v9h13',
-  custom: 'M8 8h32v32H8ZM8 20h32M20 20v20M26 28h8M26 33h5',
-};
-
 export default function Page() {
  return <main className="s-home">
   <SiteHeader />
@@ -44,21 +39,22 @@ export default function Page() {
    <div><p className="eyebrow">For small businesses and teams, in any trade</p>
     <h1 id="intro-title">Systems that turn enquiries <em>into bookings</em> and take the admin off you.</h1>
     <p className="s-lede">Automation, connected tools and custom software. Start with one job from {STARTER.price}.</p>
-    <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">Get a free plan and price</a><a className="text-link" href="/demos">Or see a free demo first <span aria-hidden="true">→</span></a></div>
+    <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">Get my free plan</a><a className="text-link" href="/demos">Or see a free demo first <span aria-hidden="true">→</span></a></div>
     <p className="s-note">I usually reply within {CHECK_REPLY_TIME}. No call needed.</p>
    </div><HeroDemo />
    <p className="s-small">Examples across packages: enquiries answered, bookings confirmed, quotes followed up. Each job is scoped and priced first.</p>
   </section>
   <section className="s-section" id="build" aria-labelledby="build-title">
-   <p className="eyebrow">What I build</p><h2 id="build-title">One job, a joined-up system, or something built for you.</h2>
-   <div className="s-prices">{OFFERS.map(offer => <a className="s-price s-package-card" href={`/what-we-do#${offer.id}`} key={offer.id} style={{ viewTransitionName: `package-${offer.id}` }}>
-    <svg className="s-package-icon" viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><path pathLength={1} d={PACKAGE_ICONS[offer.id]} /></svg>
-    <h3>{offer.name}</h3><p className="s-price-amount">{offer.price}</p><p>{offer.body}</p><p><strong>{workingBy(offer.id)}</strong></p><span>See how it works →</span>
-   </a>)}</div>
+   <p className="eyebrow">What do you run?</p><h2 id="build-title">Pick yours. See your problems, the fix and the price.</h2>
+   <ul className="s-types" aria-label="Kinds of business">{CUSTOMER_TYPES.map(type => <li key={type.id}><a href={`/for/${type.id}`}>
+    <span className="s-type-icon" aria-hidden="true"><KitIcon name={type.icon} /></span>
+    <strong>{type.name}</strong><span>{type.examples}</span><em>{type.recipes[0].name.split(':')[1]?.trim() ?? type.recipes[0].name} · {type.recipes[0].offer.price}</em>
+   </a></li>)}</ul>
+   <ol className="s-ladder s-ladder-mini" aria-label="The fix ladder">{LADDER.map(rung => <li key={rung.step}><a href={rung.href}><strong>{rung.step}</strong><b>{rung.price}</b></a></li>)}</ol>
    <SystemBuilder />
    <ul className="s-trust">{PROMISES.map(term => <li key={term.title}><strong>{term.title}</strong><span>{term.body}</span></li>)}</ul>
-   <p className="s-small" id="trades">Your trade: {NICHE_GUIDES.map((guide, i) => <span key={guide.id}>{i ? ' · ' : ''}<a href={`/for/${guide.id}`}>{guide.shortName}</a></span>)}. <a href="/brand-kit">Trainer, maker or creator? See creator options</a>. Any trade welcome.</p>
-   <p className="s-small">Need somewhere customers can book or buy? <a href="/prices#websites">{getOffer('website').name} {getOffer('website').price.toLowerCase()}</a>, with the system built in, or <a href="/prices#creators">{getOffer('creator-launch').name} {getOffer('creator-launch').price}</a> for creators.</p>
+   <p className="s-small" id="trades">Your trade: {NICHE_GUIDES.map((guide, i) => <span key={guide.id}>{i ? ' · ' : ''}<a href={`/for/${guide.id}`}>{guide.shortName}</a></span>)}. <a href="/for/creators">Trainer, maker or creator? See creator options</a>. Any trade welcome.</p>
+   <p className="s-small">Need somewhere customers can book or buy? <a href="/prices#websites">{getOffer('website').name} {getOffer('website').price.toLowerCase()}</a>, with the system built in, or <a href="/prices#creators">{getOffer('creator-launch').name} {getOffer('creator-launch').price}</a> for creators. <a href="/prices">Every price →</a></p>
   </section>
   <section className="s-section" id="how" data-reveal aria-labelledby="how-title">
    <p className="eyebrow">See it working</p><h2 id="how-title">What changes in your day.</h2><Scenes />
