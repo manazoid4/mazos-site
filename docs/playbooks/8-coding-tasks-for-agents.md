@@ -6,7 +6,7 @@ Goal: turn any idea into a brief another agent (Codex, OpenCode, Gemini) can bui
 ```
 Repo: manazoid4/mazos-site. Read AGENTS.md, then docs/playbooks/1-ship-a-site-change.md and any playbook named below.
 
-Goal (one sentence, the customer outcome): <e.g. trainers can see a Brand Kit example on their phone>
+Goal (one sentence, the customer outcome): <e.g. trainers can see a Sales Page example on their phone>
 Page(s): <route(s)>
 Change: <exactly what to add, remove or reword>
 Must not change: prices outside app/offers.ts, colours, animations, other pages

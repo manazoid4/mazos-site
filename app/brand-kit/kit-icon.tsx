@@ -1,4 +1,4 @@
-/** Bold line icons for the Brand Kit page. Decorative: the label next to each one carries the meaning. */
+/** Bold line icons for the creators page. Decorative: the label next to each one carries the meaning. */
 const PATHS: Record<string, string> = {
   dumbbell: 'M6 7v10M3 9v6M18 7v10M21 9v6M6 12h12',
   bolt: 'M13 2 4 14h7l-1 8 9-12h-7z',

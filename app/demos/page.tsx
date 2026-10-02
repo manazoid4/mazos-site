@@ -2,11 +2,11 @@ import { fitDescription } from '../seo';
 import { OG_IMAGE } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
-import { CHANGES_WINDOW, GUARANTEE } from '../offers';
+import { CHANGES_WINDOW, DELIVERY_PROMISE } from '../offers';
 import { CHECK_REPLY_TIME } from '../site';
 import { ChangesWindow, DemoPath } from '../demo-path';
 
-const DEMO_DESCRIPTION = 'Book a 15-minute call and get a free working demo built around your business, by a date we agree. Then one fixed price and 2 months of unlimited changes.';
+const DEMO_DESCRIPTION = 'Book a 15-minute call and get a free working demo built around your business, by a date we agree. Then one fixed price and 30 days of tweaks.';
 
 export const metadata: Metadata = {
   title: 'Free demo, built around your business',
@@ -30,7 +30,7 @@ const FAQ = [
   ['When do I get it?', 'We agree the date on the call, based on what the demo needs to show. You know it before we hang up.'],
   ['What if a demo won’t help?', 'Some jobs are clearer as a written plan. If so, I tell you on the call and send the plan and fixed price instead.'],
   ['What happens after the demo?', 'If you like it, I send the full plan with one fixed price. Every item is listed and invoiced clearly, with no extra charges later.'],
-  ['What counts as a change in the 2 months?', 'Anything that adjusts what I built: wording, timings, steps, notifications, fixes. Something new, like another system or app, is priced first so it stays fair.'],
+  ['What counts as a tweak in the 30 days?', 'Anything that adjusts what I built: wording, timings, steps, notifications, small layout changes, in up to two rounds. Anything not working as agreed is fixed free for 90 days. Something new, like another page, system or app, is priced first so it stays fair.'],
 ];
 
 export default function DemosPage() {

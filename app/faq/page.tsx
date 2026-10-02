@@ -10,7 +10,7 @@ const PAGE_URL = `${SITE_URL}/faq`;
 
 export const metadata: Metadata = {
   title: 'FAQ',
-  description: fitDescription(`Straight answers about automation for small businesses: the free plan and quote, Starter Automation from ${OFFERS[0].price}, optional extras, the guarantee, payment and ownership. No VAT added.`),
+  description: fitDescription(`Straight answers about automation for small businesses: the free plan and quote, Starter Automation from ${OFFERS[0].price}, optional extras, delivery dates, payment and ownership. No VAT added.`),
   alternates: { canonical: PAGE_URL },
   openGraph: { images: [OG_IMAGE],
     title: 'Maz Works FAQ',

@@ -51,7 +51,7 @@ export default function QuickWinPage() {
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="quick-win-title">
         <p className="eyebrow">This offer has moved</p>
         <h1 id="quick-win-title">Quick Win is now Starter Automation.</h1>
-        <p>One job you do by hand, set up to run itself, tested and backed by a guarantee. {OFFERS[0].price}, fixed price agreed first, with optional extras if you want them.</p>
+        <p>One job you do by hand, set up to run itself, tested and working within 7 working days of access. {OFFERS[0].price}, fixed price agreed first, with optional extras if you want them.</p>
         <div className="mw-actions">
           <a className="button button-signal" href={ENQUIRY_HREF}>Ask about Starter Automation</a>
         </div>
