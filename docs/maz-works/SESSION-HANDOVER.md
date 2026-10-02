@@ -24,3 +24,4 @@ Offer v11 proposes lower prices and one fix ladder (free plan, £49 one-day set-
 - 2 Oct (late): `GOALS.md` added at the repo top; every PR now carries a "Test it yourself" checklist (`.github/pull_request_template.md`). Open PRs and Maz's to-dos are in the private memory repo handover.
 
 - 2 Oct (polish, PR #115): type pages cut to 5 screens or fewer, /prices folded under 8,000px, homepage under 600 words, one main button "Get my free plan" everywhere, labelled demo businesses, 44px taps, /quick-win redirected, outreach templates added. Lighthouse 95+ on 7 pages.
+- 2 Oct (later): Offer v12 draft: same prices, one ladder for every business and creator (Launch Page £595, Website = Launch Page + 4 pages), free set-ups in every package, parts-value on price cards, competitor price audit (docs/maz-works/PRICE-AUDIT-2026-10.md).

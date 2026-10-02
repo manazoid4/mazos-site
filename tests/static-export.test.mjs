@@ -126,7 +126,7 @@ test('what-we-do shows a clearly labelled example report, not a real client', as
   assert.match(html, /id="example"/);
   assert.match(html, /A fictional business, made up to show the format/);
   for (const level of ['Fix now', 'Fix soon', 'Working well']) assert.match(html, new RegExp(level));
-  assert.match(html, /Total £294/);
+  assert.match(html, /Total £248/);
 });
 
 test('homepage has one set of service routes, not a duplicate problem chooser', async () => {
@@ -180,7 +180,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.doesNotMatch(html, /\/contact\?service=/, 'homepage price cards lead to the free plan form, not a second form');
 
   const pricesAgain = await readPage('/prices');
-  for (const [name, price] of [['Starter Automation', '£149'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450'], ['Creator Starter', '£149'], ['Creator Launch', '£595'], ['Website', 'From £1,495']]) {
+  for (const [name, price] of [['Starter Automation', '£149'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450'], ['Starter for creators', '£149'], ['Launch Page', '£595'], ['Website', 'From £1,495']]) {
     assert.match(pricesAgain, new RegExp(name));
     assert.match(pricesAgain, new RegExp(price));
   }

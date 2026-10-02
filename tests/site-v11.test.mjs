@@ -73,7 +73,7 @@ test('each type page is short: pains → fix, three priced recipes, a labelled d
     assert.match(html, new RegExp(`<link rel="canonical" href="[^"]*/for/${type.id}"`), `${type.id}: canonical`);
   }
   const creators = await readPage('/for/creators');
-  assert.match(creators, /Creator Starter/);
+  assert.match(creators, /Starter for creators/);
   assert.match(creators, /Comment to get it/, 'creators page shows the keyword-DM scene');
 });
 

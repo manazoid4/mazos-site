@@ -70,7 +70,7 @@ const BOARDS = {
     result: 'Start the week knowing what’s waiting.',
   },
   'keyword-dm': {
-    label: 'Comment to get it', offerName: 'Creator Starter',
+    label: 'Comment to get it', offerName: 'Starter for creators',
     steps: [
       { icon: 'message', title: 'Someone comments “PLAN”', detail: 'On your post, at any hour.' },
       { icon: 'doc', title: 'Your free resource lands in their DMs', detail: 'Sent for you, straight away.' },

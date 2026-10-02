@@ -1,4 +1,4 @@
-import { ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, OWN_VS_RENT, PROMISES, STARTER_GUARANTEE, TRACKS, UPGRADE_CREDITS, type Offer } from './offers';
+import { ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, OWN_VS_RENT, PACKAGE_VALUE, PRICE_MATCH, formatPrice, PROMISES, STARTER_GUARANTEE, TRACKS, UPGRADE_CREDITS, type Offer } from './offers';
 import { PackageLink } from './package-link';
 import { NextSteps, TilesJoin, TweaksTimeline } from './explainers';
 import { CostCalculator } from './cost-calculator';
@@ -20,6 +20,7 @@ export function OfferCard({ offer, checkHref }: { offer: Offer; checkHref: strin
       {offer.tag ? <p className="s-price-tag">{offer.tag}</p> : null}
       <h3>{offer.name}</h3>
       <p className="s-price-amount">{offer.price}</p>
+      <PartsValue offer={offer} />
       <p>{offer.body}</p>
       <ul>{offer.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
       {offer.guarantee ? <p className="s-price-guarantee"><strong>Guarantee:</strong> {offer.guarantee}</p> : null}
@@ -40,6 +41,13 @@ export function OfferCard({ offer, checkHref }: { offer: Offer; checkHref: strin
       <BuyNow name={offer.name} />
     </article>
   );
+}
+
+/** "Bought one by one: £865" under the price, from the prices in offers.ts (Offer v12). */
+function PartsValue({ offer }: { offer: Offer }) {
+  const value = PACKAGE_VALUE[offer.id];
+  if (!value || value.total <= offer.from) return null;
+  return <p className="s-price-value">Bought one by one: <s>{formatPrice(value.total)}</s> <span>({value.parts.map((part) => part.label).join(', ')})</span></p>;
 }
 
 /** The fix ladder: five rungs, same for every kind of business. */
@@ -69,12 +77,12 @@ export function OwnVsRent() {
   return (
     <div className="s-own" id="own-vs-rent">
       <h3>Own it, or rent it?</h3>
-      <p className="s-small">Agencies sell the same missed-call text-back on a monthly plan. Here it’s yours after one payment.</p>
+      <p className="s-small">Agencies rent the same missed-call text-back, and pay-monthly websites, by the month. Here it’s yours after one payment.</p>
       <table>
         <thead><tr><th scope="col"><span className="s-visually-hidden">Row</span></th><th scope="col">Maz Works</th><th scope="col">Monthly agency</th></tr></thead>
         <tbody>{OWN_VS_RENT.map((row) => <tr key={row.row}><th scope="row">{row.row}</th><td className="s-own-yes">{row.own}</td><td>{row.rent}</td></tr>)}</tbody>
       </table>
-      <p className="s-small">Agency figure is a typical UK list price seen in October 2026, not a quote from any one company.</p>
+      <p className="s-small">Monthly figures are UK list prices seen in October 2026, not a quote from any one company.</p>
     </div>
   );
 }
@@ -110,11 +118,12 @@ function Fold({ id, title, children }: { id: string; title: string; children: Re
 export function PriceList({ checkHref }: { checkHref: string }) {
   return (
     <>
-      <h3 className="s-track-title" id="ladder">Five steps, one for every size of job</h3>
+      <h3 className="s-track-title" id="ladder">Four steps, one for every size of job</h3>
       <Ladder />
 
       {LANES.map((lane) => (
         <div key={lane.id}>
+          {lane.id === 'websites' ? <span id="creators" /> : null}
           <h3 className="s-track-title" id={lane.id}>{lane.title}</h3>
           <p className="s-small">{lane.note}</p>
           <div className="s-prices">
@@ -124,6 +133,7 @@ export function PriceList({ checkHref }: { checkHref: string }) {
         </div>
       ))}
       <p className="s-small">{STARTER_GUARANTEE} {UPGRADE_CREDITS.join(' ')}</p>
+      <p className="s-guarantee" id="price-match"><strong>UK price match.</strong> {PRICE_MATCH}</p>
 
       <Fold id="automation-menu" title="The automation menu: what each job does">
         <p className="s-small">A Starter is one of these. A Business System is three joined up, plus the weekly report.</p>

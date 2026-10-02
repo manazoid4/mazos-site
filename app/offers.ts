@@ -35,6 +35,23 @@
  *   never "unlimited"; one invoice when the client has seen it working; jobs of
  *   £1,000+ billed in stages; never "half now, half later".
  *
+ * Offer v12 (2 Oct 2026, PROPOSED in a draft PR: Maz merges to approve).
+ * Same headline prices, clearer and more in each box (Maz: "creator pricing
+ * and website pricing are completely different"; "a lot more value"):
+ * - One ladder for everyone. Creators use the same steps as every business:
+ *   Starter £149 (theirs is comment-to-get-it) and Launch Page £595.
+ * - Pages add up: a Launch Page is one page; a Website is a Launch Page plus
+ *   four more pages (same inclusions), so £1,495 is visibly less than
+ *   £595 + 4 × £295.
+ * - Every package includes free one-day set-ups (Starter 2, bigger packages 3),
+ *   because those are the items free tools and £30 gigs undercut on their own.
+ * - Business System adds team training and a first month of Keep It Running,
+ *   so it is clearly cheaper than buying the parts (PACKAGE_VALUE).
+ * Competitor check behind it: docs/maz-works/PRICE-AUDIT-2026-10.md.
+ * Approved by Maz (2 Oct) on top: a UK price match (PRICE_MATCH), one-day
+ * set-ups no longer sold on their own (free inside packages, £49 each for
+ * more), and Extra automation down from £145 to £99.
+ *
  * AI (Maz, 27 Sep): may be used behind the scenes to build or run things, but
  * is never advertised or sold as an offer. No 'AI assistant' or 'AI agent' copy.
  */
@@ -100,7 +117,11 @@ export const ALWAYS_INCLUDED: { title: string; body: string }[] = [
   { title: '30 days of tweaks + 90-day fix promise', body: 'Two rounds of tweaks, and anything I built that isn’t working as agreed is fixed free for 90 days.' },
   { title: '30-day “still working?” check', body: 'I check in a month later and fix anything that drifted.' },
   { title: 'No contracts, no monthly fee', body: 'One-off price. Care plans are optional and cancel any time.' },
+  { title: 'UK price match', body: 'Found the same done-for-you job cheaper from a UK business? Send me their written quote. I’ll match it, or tell you plainly what’s different.' },
 ];
+
+/** Price match (Maz, 2 Oct): fenced to a written quote from a UK business for the same scope, as a one-off price. */
+export const PRICE_MATCH = 'Found the same done-for-you job cheaper from a UK business? Send me their written quote for the same scope as a one-off price. I’ll match it, or tell you plainly what’s different.';
 
 /** Starter money-back guarantee (competitors offer 30-day refunds; we match it, fenced to our build). */
 export const STARTER_GUARANTEE = 'If your Starter job hasn’t run on a real customer within 30 days of going live, you get a full refund.';
@@ -122,13 +143,14 @@ export const OFFERS: Offer[] = [
     bullets: [
       'Pick one: missed-call text-back, reminders, review requests, quote follow-up…',
       'Set up on the tools you already use, and tested with you',
-      'Usually working within 7 working days',
+      'Plus 2 one-day set-ups of your choice, free',
     ],
     forWho: 'Owners who want one boring job off their plate before committing to more.',
     includes: [
       'One job from the automation menu: one thing starts it, then up to three things happen automatically',
       'Built on up to two apps you already use',
       'Tested on real examples with you, then switched on',
+      'Two one-day set-ups of your choice, free (for example your Google listing tidy and a review QR card)',
       'Everything in “always included” below',
     ],
     excludes: [
@@ -152,15 +174,17 @@ export const OFFERS: Offer[] = [
     body: 'Three jobs from the menu joined up, plus a weekly report, so a customer goes from first enquiry to paid without you chasing.',
     bullets: [
       'Three jobs joined up: for example missed calls, quotes and reviews',
-      'One place for customer details your team can see',
       'A weekly email: what came in and what is due',
+      'Team training, 3 set-ups and a month of care included',
     ],
     forWho: 'Owners who copy details between apps and chase customers by hand.',
     includes: [
       'Three connected jobs from the automation menu',
       'One customer list your team can see',
       'Weekly report email (worth the add-on price on its own)',
-      'One team walkthrough on video, plus a staff cheat sheet',
+      'Team training: a one-hour call for your staff, plus a cheat sheet',
+      'Three one-day set-ups of your choice, free',
+      'First month of Keep It Running free, then only if you want it',
       'Everything in “always included” below',
     ],
     excludes: [
@@ -210,65 +234,67 @@ export const CREATOR_OFFERS: Offer[] = [
     id: 'creator-starter',
     track: 'automation',
     service: 'creator-starter',
-    name: 'Creator Starter',
+    name: 'Starter for creators',
     price: '£149',
     from: 149,
-    tag: 'Start here',
-    body: 'Someone comments a word, gets your free resource, and joins an email list you own. Set up once, runs while you sleep.',
+    tag: 'Same Starter, creator job',
+    body: 'The same Starter Automation every business gets, with the creator job: someone comments a word, gets your free resource and joins an email list you own.',
     bullets: [
       'Keyword DM reply → free resource → email list + welcome email',
-      'Link-in-bio sorted on two platforms',
-      '5 caption templates and highlight covers in your colours',
+      'Plus 2 set-ups free: profile tidy and your link everywhere',
+      'Usually working within 7 working days',
     ],
     forWho: 'Creators with followers who want a list they own and a path from a post to a sale.',
     includes: [
-      'One keyword auto-reply on Instagram (or TikTok) that sends your free resource',
-      'Email list in your name, plus one welcome email written with you',
-      'Link-in-bio page or tidy on two platforms',
-      '5 caption templates and highlight covers, in your colours',
+      'One job from the menu: a keyword auto-reply on Instagram (or TikTok) that sends your free resource, adds them to your list and sends a welcome email written with you',
+      'Email list in your name, so it leaves with you if an app changes its rules',
+      'Two one-day set-ups free: profile tidy (bio, link, highlight covers) and your link added everywhere',
+      'Built on tools with free plans where they fit your size, so running it can cost £0 a month',
       'Everything in “always included” below',
     ],
     excludes: [
-      'A sales page or payments (that’s Creator Launch)',
-      'Writing your posts, running ads, or the DM app’s monthly fee (paid by you)',
+      'A sales page or payments (that’s a Launch Page)',
+      'Writing your posts, running ads, or a DM app’s fee if you outgrow its free plan (paid by you, told up front)',
       'Brand design beyond colours you already use',
     ],
     delivery: 'Usually working within 7 working days of you adding me to your accounts.',
     changes: TWEAKS,
-    upsell: 'Its price comes off Creator Launch booked within 60 days.',
+    upsell: 'Its price comes off a Launch Page booked within 60 days.',
     guarantee: STARTER_GUARANTEE,
   },
   {
     id: 'creator-launch',
     track: 'web',
     service: 'sales-page',
-    name: 'Creator Launch',
+    name: 'Launch Page',
     price: '£595',
     from: 595,
-    body: 'One page that sells up to three things, in a look that’s yours, with every buyer added to your list.',
+    tag: 'One page that does the selling',
+    body: 'One page, written for you, where people book, buy or enquire, in a look that’s yours, with every customer added to your list. For any business or creator.',
     bullets: [
-      'Sales page for up to three things: sessions, downloads or a course',
-      'Payments and downloads go straight to your own account',
-      'Brand look, 12 post templates and 3 launch posts',
+      'One page that books, sells up to three things, or takes enquiries',
+      'Payments, bookings and emails go to your own accounts',
+      'Brand tidy, 12 post templates and 2 set-ups included',
     ],
-    forWho: 'Creators with one offer ready to sell: a coaching call, a download, a workshop.',
+    forWho: 'Anyone with one thing to sell or book: a coaching call, a download, a service, a trade with no website yet.',
     includes: [
       'One page on your own domain, written with you on a 45-minute call',
-      'Book or buy on the page: up to three things, through your own accounts',
-      'Digital resources sent automatically after payment',
+      'Book, buy or enquire on the page: up to three things, through your own accounts',
+      'Digital resources sent automatically after payment, or an instant reply to every enquiry',
       'Email sign-up plus a 3-email welcome series, list in your name',
-      'Brand look: colours, fonts, logo tidied; 12 Canva templates; 3 launch posts; QR poster',
+      'Brand tidy: colours, fonts and logo tidied; 12 Canva post templates; 3 launch posts; QR poster',
+      'Two one-day set-ups of your choice, free',
       'Launch checklist and a 30-day stats check',
       'Everything in “always included” below',
     ],
     excludes: [
-      'Extra pages, a shop with more than three products, a blog or a member area (Custom Software)',
+      'More pages (a Website is a Launch Page plus four more pages), a shop with more than three products, a blog or a member area',
       'An illustrated logo, photography, writing your posts, or running ads',
       'App, domain and payment fees (paid by you, told up front)',
     ],
     delivery: 'Live within 15 working days of your content and access.',
     changes: `Two rounds of changes before launch, then ${TWEAKS.charAt(0).toLowerCase()}${TWEAKS.slice(1)}`,
-    upsell: 'Creator Starter if you haven’t got it, then Keep It Growing.',
+    upsell: 'A Website when you need more pages: the Launch Page price comes off within 60 days.',
   },
 ];
 
@@ -281,14 +307,15 @@ export const WEB_OFFERS: Offer[] = [
     name: 'Website',
     price: 'From £1,495',
     from: 1495,
-    body: 'A full website with enquiries and bookings built in, not just a brochure.',
+    body: 'Everything in a Launch Page, plus four more pages: a full website with enquiries and bookings built in, not just a brochure.',
     bullets: [
-      'Up to five pages, copy written for you',
+      'Everything in a Launch Page, plus four more pages (five in all)',
       'Enquiries land in one list with an instant reply (a Starter Automation, included)',
-      'Your Google Maps listing set up to match',
+      'Google Maps listing, review QR card and 3 check-ups included',
     ],
     forWho: 'Businesses that need more than one page: several services, areas or audiences.',
     includes: [
+      'Everything in a Launch Page: brand tidy, 12 post templates, email list and welcome series',
       'Up to five pages, copy written for you and built for phones',
       'Enquiry or booking flow with an instant reply and one list (Starter Automation included)',
       'Google Maps listing set up and basic search set-up',
@@ -297,7 +324,7 @@ export const WEB_OFFERS: Offer[] = [
       'Everything in “always included” below',
     ],
     excludes: [
-      'Brand design or a new logo',
+      'Full brand design or a new logo (the brand tidy is included)',
       'A shop with more than ten products, a member area or customer logins (Custom Software)',
       'Blog posts, ongoing search work, ads, or domain and hosting fees',
     ],
@@ -307,24 +334,26 @@ export const WEB_OFFERS: Offer[] = [
   },
 ];
 
+/** Pages and websites, smallest first: a Website is a Launch Page plus four more pages. */
+const LAUNCH_PAGE = CREATOR_OFFERS[1];
+export const PAGE_OFFERS: Offer[] = [LAUNCH_PAGE, ...WEB_OFFERS];
+
 /** Every offer, for selectors, schema and the "known packages" list. */
 export const ALL_OFFERS: Offer[] = [...OFFERS, ...CREATOR_OFFERS, ...WEB_OFFERS];
 
 /** The three lanes the price page is organised in. ≤7 headline prices in total. */
 export const LANES: { id: string; title: string; offers: Offer[]; note: string }[] = [
-  { id: 'systems', title: 'Automation and custom software', offers: OFFERS, note: 'One job, three joined up, or something built for you.' },
-  { id: 'creators', title: 'Creators, coaches and makers', offers: CREATOR_OFFERS, note: 'Done for you and owned by you, instead of renting a link-in-bio app.' },
-  { id: 'websites', title: 'Websites', offers: WEB_OFFERS, note: 'Copy written for you, bookings built in, no monthly fee.' },
+  { id: 'systems', title: 'Automation and custom software', offers: OFFERS, note: 'One job, three joined up, or something built for you. Creators: your Starter is comment-to-get-it, same price.' },
+  { id: 'websites', title: 'Pages and websites', offers: PAGE_OFFERS, note: 'Same prices for every business and creator. A Website is a Launch Page plus four more pages.' },
 ];
 
 /**
- * The fix ladder: the same five steps for every kind of business, so a buyer
+ * The fix ladder: the same four steps for every kind of business, so a buyer
  * always knows what the next rung costs.
  */
 export const LADDER: { step: string; what: string; price: string; href: string }[] = [
   { step: 'Free plan', what: 'I look at your setup and send 3 fixes and the right step.', price: FREE_STEP.price, href: '/free-plan' },
-  { step: 'One-day set-up', what: 'One small thing set up in a day. No ongoing work.', price: '£49', href: '/prices#set-ups' },
-  { step: 'Starter', what: 'One job from the automation menu that runs by itself.', price: OFFERS[0].price, href: '/prices#systems' },
+  { step: 'Starter', what: 'One job from the automation menu that runs by itself, plus 2 one-day set-ups free.', price: OFFERS[0].price, href: '/prices#systems' },
   { step: 'Business System', what: 'Three jobs joined up, plus a weekly report.', price: OFFERS[1].price.toLowerCase(), href: '/prices#systems' },
   { step: 'Custom', what: 'Software, a portal or an app built for you.', price: OFFERS[2].price.toLowerCase(), href: '/prices#systems' },
 ];
@@ -375,8 +404,8 @@ export const SETUP_PRICE = '£49';
 export const EXTRA_GROUPS: { id: string; title: string; note: string; items: Extra[] }[] = [
   {
     id: 'set-ups',
-    title: `One-day set-ups, ${SETUP_PRICE} each`,
-    note: 'One small thing, set up in a day, on tools you already have. Buy one on its own or add it to any package.',
+    title: 'One-day set-ups, free with every package',
+    note: `One small thing, set up in a day, on tools you already have. Two come free with a Starter or Launch Page, three with a Business System. Want more? ${SETUP_PRICE} each, added to a package. Not sold on their own.`,
     items: [
       { name: 'Booking link everywhere', price: SETUP_PRICE, what: 'Your booking or quote link added to Instagram, your Google listing and WhatsApp, with a voicemail that mentions it.' },
       { name: 'Google listing tidy', price: SETUP_PRICE, what: 'Your Google Maps listing checked and filled in properly: hours, photos, services and booking link.' },
@@ -393,7 +422,7 @@ export const EXTRA_GROUPS: { id: string; title: string; note: string; items: Ext
     title: 'Add to a package',
     note: 'Bigger set-ups that only make sense alongside a package. They go on the same invoice.',
     items: [
-      { name: 'Extra automation', price: '£145', what: 'One more job from the automation menu, added to a package.' },
+      { name: 'Extra automation', price: '£99', what: 'One more job from the automation menu, added to a package.' },
       { name: 'Weekly report', price: '£145', what: 'One simple email each week: enquiries, bookings, quotes waiting and money due. Included with a Business System.' },
       { name: 'Extra website page', price: '£295', what: 'One more page on your site or sales page, for a service or an offer, written and styled to match.' },
       { name: 'Team training', price: '£95', what: 'A one-hour video call showing your staff how everything works, plus a short written guide to keep.' },
@@ -443,12 +472,15 @@ export const COMPARISON: { row: string; values: [string, string, string] }[] = [
  * 2 Oct competitor teardown (UK trades agencies ~£197/month), rounded.
  */
 export const RENT_MONTHLY = 197;
+/** Pay-monthly trade websites (tradiesite.co.uk, £97 a month, checked 2 Oct 2026). */
+export const WEBSITE_RENT_MONTHLY = 97;
 export const OWN_VS_RENT: { row: string; own: string; rent: string }[] = [
   { row: 'Missed-call text-back', own: `${OFFERS[0].price} once`, rent: `about £${RENT_MONTHLY} a month` },
   { row: 'After one year', own: OFFERS[0].price, rent: `about £${(RENT_MONTHLY * 12).toLocaleString('en-GB')}` },
   { row: 'Minimum term', own: 'None', rent: 'Often 6 to 12 months' },
   { row: 'Who owns the accounts', own: 'You', rent: 'Usually them' },
   { row: 'If you stop paying', own: 'It keeps running', rent: 'It switches off' },
+  { row: 'A website, over 3 years', own: `${WEB_OFFERS[0].price.replace(/^From /, 'from ')} once`, rent: `about £${(WEBSITE_RENT_MONTHLY * 36).toLocaleString('en-GB')} (£${WEBSITE_RENT_MONTHLY} a month)` },
 ];
 
 /**
@@ -550,8 +582,35 @@ export const DELIVERY_PROMISE = 'Starter Automation is usually working within 7 
 /** Upgrade credits that make the next sale the natural one. */
 export const UPGRADE_CREDITS = [
   `Starter Automation’s ${OFFERS[0].price} comes off a ${OFFERS[1].name} booked within 60 days.`,
-  `${CREATOR_OFFERS[0].name}’s ${CREATOR_OFFERS[0].price} comes off ${CREATOR_OFFERS[1].name} booked within 60 days.`,
+  `${CREATOR_OFFERS[0].name}’s ${CREATOR_OFFERS[0].price} comes off a ${CREATOR_OFFERS[1].name} booked within 60 days.`,
+  `A ${CREATOR_OFFERS[1].name}’s ${CREATOR_OFFERS[1].price} comes off a ${WEB_OFFERS[0].name} booked within 60 days.`,
 ];
+
+/**
+ * What each package's parts would cost bought one by one, from the prices in
+ * this file (Offer v12). Shown on the price cards so the package is visibly
+ * the better deal. Only priced parts count; the brand tidy, templates and
+ * "always included" items are extra on top.
+ */
+export const PACKAGE_VALUE: Partial<Record<OfferId, { parts: { label: string; price: number }[]; total: number }>> = (() => {
+  const setup = priceAmount(SETUP_PRICE);
+  const extraJob = priceAmount(getExtra('Extra automation').price);
+  const page = priceAmount(getExtra('Extra website page').price);
+  const build = (parts: { label: string; price: number }[]) => ({ parts, total: parts.reduce((sum, part) => sum + part.price, 0) });
+  return {
+    starter: build([{ label: 'one automation job', price: OFFERS[0].from }, { label: '2 one-day set-ups', price: 2 * setup }]),
+    'creator-starter': build([{ label: 'one automation job', price: CREATOR_OFFERS[0].from }, { label: '2 one-day set-ups', price: 2 * setup }]),
+    'business-system': build([
+      { label: 'first automation job', price: OFFERS[0].from },
+      { label: '2 more jobs', price: 2 * extraJob },
+      { label: 'weekly report', price: priceAmount(getExtra('Weekly report').price) },
+      { label: 'team training', price: priceAmount(getExtra('Team training').price) },
+      { label: '3 one-day set-ups', price: 3 * setup },
+      { label: 'a month of Keep It Running', price: priceAmount(CARE_PLANS[0].price) },
+    ]),
+    website: build([{ label: 'Launch Page', price: CREATOR_OFFERS[1].from }, { label: '4 more pages', price: 4 * page }]),
+  };
+})();
 
 export const PRICE_RANGE = `${OFFERS[0].price}–${OFFERS[2].price.replace(/^From /, '')}+`;
 
@@ -597,13 +656,16 @@ export type PlanQuote = {
   note: string;
 };
 
+/** One-day set-ups that come free with a Starter. */
+const INCLUDED_SETUPS = 2;
+
 /** Three or more jobs to build is a Business System, whatever the parts add up to. */
 const BUSINESS_SYSTEM_JOBS = 3;
 
 /**
  * Prices a set of chosen jobs by the offer rules above, for the
  * "Build my system" tool. Everything is read from this file:
- * - a one-day set-up or add-on can be bought alone at its own price;
+ * - one-day set-ups are never sold alone: two ride free with a Starter, £49 each after that;
  * - a job from the automation menu is Starter Automation, and each further
  *   one is Extra automation (which only ever adds to a package);
  * - asking for a package (Business System, Custom) quotes that package;
@@ -623,13 +685,19 @@ export function quotePlan(jobs: PlanJob[]): PlanQuote {
   if (packageJob) return packageQuote(packageJob, packageJob.id === 'business-system' ? 'Everything you picked joined up, with the weekly report included. Exact price in your scope sheet.' : 'Scoped with you first. Exact price in your scope sheet.');
   if (!unique.length) return { offer: starter, lines: [{ label: `${starter.name}: one job of your choice`, price: starter.price }], total: starter.from, totalLabel: starter.price, workingBy: workingBy('starter'), note: 'Pick what costs you time and the plan builds itself.' };
   const lines: PlanQuote['lines'] = [];
+  const setupNames = new Set(EXTRA_GROUPS[0].items.map(item => item.name));
+  const setups: string[] = [];
   let builds = 0;
   for (const job of unique) {
     const extra = EXTRAS.find(item => item.name === job.offerName && item.name !== extraJob.name);
+    if (extra && setupNames.has(extra.name)) { setups.push(extra.name); continue; }
     if (extra) { lines.push({ label: extra.name, price: extra.price }); continue; }
     lines.push(builds === 0 ? { label: `${starter.name}: ${job.name.toLowerCase()}`, price: starter.price } : { label: `${extraJob.name}: ${job.name.toLowerCase()}`, price: extraJob.price });
     builds++;
   }
+  // One-day set-ups are not sold on their own (Maz, 2 Oct): they ride free with a Starter, £49 each beyond two.
+  if (setups.length && !builds) { lines.unshift({ label: `${starter.name}: one job of your choice`, price: starter.price }); builds = 1; }
+  setups.forEach((name, index) => lines.push({ label: `${name} (one-day set-up)`, price: index < INCLUDED_SETUPS ? 'Included' : SETUP_PRICE }));
   const total = lines.reduce((sum, line) => sum + priceAmount(line.price), 0);
   if (total > business.from) return packageQuote(business, `Your picks add up to ${formatPrice(total)} on their own, more than a ${business.name}, so I would quote that instead, with the weekly report included.`);
   if (builds >= BUSINESS_SYSTEM_JOBS) return packageQuote(business, `${builds} jobs to build is a ${business.name}: joined up, with the weekly report included.`);
