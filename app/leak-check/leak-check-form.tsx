@@ -331,7 +331,7 @@ export function LeakCheckForm() {
           <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
             {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Get my free plan and price'}
           </button>
-          <p>I reply myself within {CHECK_REPLY_TIME} with a plan and fixed price. Free, no obligation.</p>
+          <p>I reply myself within {CHECK_REPLY_TIME} with a plan and fixed price. Free, no obligation. <a href="/privacy">How I use your details</a>.</p>
           <p className="mw-form-status" role="status" aria-live="polite">
             {submitState === 'sent' && (
               <>

@@ -51,6 +51,8 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
     links: [
       { href: '/faq', label: 'FAQ' },
       { href: '/work/scrap-finance-partners', label: 'Client work' },
+      { href: '/terms', label: 'Terms of work' },
+      { href: '/privacy', label: 'Privacy' },
       { href: '/site-map', label: 'Site map' },
     ],
   },

@@ -609,3 +609,24 @@ test('the hero demo animation survives CSS minification', async () => {
     assert.match(css, new RegExp(`animation:[^;}]*\\b${name}\\b`), `${name} must be applied with a duration, not stripped to animation:none`);
   }
 });
+
+// 2 Oct: the site collects personal details, so it needs a privacy notice; and every job needs written terms.
+test('terms and privacy pages exist, are linked from every footer and match the price list', async () => {
+  const [home, terms, privacy, leak, sitemap] = await Promise.all([readPage('/'), readPage('/terms'), readPage('/privacy'), readPage('/leak-check'), readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8')]);
+  for (const href of ['/terms', '/privacy']) {
+    assert.match(home, new RegExp(`href="${href}"`), `footer links ${href}`);
+    assert.match(sitemap, new RegExp(`${href}</loc>`));
+  }
+  assert.match(terms, /The quote is the agreement/);
+  assert.match(terms, /the date moves by the same number of days/);
+  assert.match(terms, /Keep It Running is £49\/month/);
+  assert.match(terms, /limited to the price you paid/);
+  assert.doesNotMatch(terms, /unlimited|deposit|pay the rest/i);
+  for (const processor of ['Resend', 'FormSubmit', 'HubSpot', 'Cal.com', 'Vercel', 'Supabase', 'ico.org.uk']) assert.match(privacy, new RegExp(processor));
+  assert.match(leak, /href="\/privacy"[^>]*>How I use your details/);
+});
+
+test('free demos are fenced to bigger jobs; small jobs get a written plan', async () => {
+  const demos = await readPage('/demos');
+  assert.match(demos, /Smaller jobs get a written plan instead/);
+});
