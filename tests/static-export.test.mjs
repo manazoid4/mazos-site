@@ -162,7 +162,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
     assert.match(html, new RegExp(price, 'i'));
   }
   assert.match(html, /href="\/prices#websites"/, 'websites and sales pages are one tap from the homepage');
-  for (const id of ['starter', 'business-system', 'custom']) assert.ok(html.includes(`/what-we-do#${id}`));
+  for (const id of ['trades', 'appointments', 'creators', 'offices']) assert.ok(html.includes(`/for/${id}`), `homepage tile for ${id}`);
   // The full comparison and all twelve add-ons live on /prices, so the phone page stays short.
   assert.doesNotMatch(html, /id="compare"/);
   assert.doesNotMatch(html, /Team training/);
@@ -567,7 +567,7 @@ test('architecture drawings exist and are labelled illustrative', async () => {
 test('six wayfinding helps big sites use are in place', async () => {
   const home = await readPage('/');
   // The shorter homepage uses package links; the detail page owns the long-form navigation.
-  for(const id of ['starter','business-system','custom']) assert.ok(home.includes(`/what-we-do#${id}`));
+  for(const id of ['trades','appointments','creators','offices']) assert.ok(home.includes(`/for/${id}`));
   // 2. Human site map lists every trade guide and case study.
   const map = await readPage('/site-map');
   for (const href of ['/for/architects', '/for/garages', '/work/jobfilter', '/free-plan', '/whats-new']) assert.ok(map.includes(`href="${href}"`), `site map missing ${href}`);

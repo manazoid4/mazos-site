@@ -44,7 +44,7 @@ export default function FaqPage() {
         <h1 id="faq-title">Questions? Straight answers.</h1>
         <p>Quick, plain answers before you book a call.</p>
         <div className="mw-actions">
-          <a className="button button-signal" href="/free-plan">Get a free plan and price</a>
+          <a className="button button-signal" href="/free-plan">Get my free plan</a>
         </div>
       </section>
 

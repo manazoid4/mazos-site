@@ -31,7 +31,7 @@ export default function LinkedInPage() {
           <p className="eyebrow">You found me on LinkedIn</p>
           <h1 id="li-title">Hi, I’m Maz. I build the systems that stop enquiries slipping away.</h1>
           <p className="s-lede">{`Missed calls, slow replies, no-shows, chasing quotes. I set it up once so it runs on its own. From ${STARTER.price}, fixed price agreed first.`}</p>
-          <p className="s-small">Trainer, maker or creator? <CampaignLink href="/brand-kit?src=linkedin">{`See ${CREATOR_OFFERS[0].name} · ${CREATOR_OFFERS[0].price}`}</CampaignLink>.</p>
+          <p className="s-small">Trainer, maker or creator? <CampaignLink href="/for/creators?src=linkedin">{`See ${CREATOR_OFFERS[0].name} · ${CREATOR_OFFERS[0].price}`}</CampaignLink>.</p>
         </div>
       </section>
 
@@ -39,7 +39,7 @@ export default function LinkedInPage() {
         <p className="eyebrow">See it before you pay</p>
         <h2 id="li-demo-title">Start with a free demo.</h2>
         <DemoPath source="linkedin" />
-        <p className="s-small">Prefer to write it down? <CampaignLink href="/free-plan?src=linkedin#leak-check-form">Get a free plan and price</CampaignLink>. I usually reply within {CHECK_REPLY_TIME}.</p>
+        <p className="s-small">Prefer to write it down? <CampaignLink href="/free-plan?src=linkedin#leak-check-form">Get my free plan</CampaignLink>. I usually reply within {CHECK_REPLY_TIME}.</p>
         <div className="s-faq"><details>
           <summary>What do the 30 days of tweaks cover?</summary>
           <p>{CHANGES_WINDOW.body}</p>
