@@ -46,7 +46,7 @@ export default function DemosPage() {
         <p className="s-small">I usually reply within {CHECK_REPLY_TIME}.</p>
       </section>
 
-      <p className="s-section s-small"><a className="s-details-link" href="/prices#next">After it goes live: {CHANGES_WINDOW.name} and the 90-day fix promise →</a></p>
+      <p className="s-section s-small"><a className="s-details-link" href="/prices#next">After it goes live: {CHANGES_WINDOW.name} →</a></p>
 
       <section className="s-section" id="questions" aria-labelledby="questions-title">
         <p className="eyebrow">Straight answers</p>
