@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
-import { CHANGES_WINDOW, OFFERS, workingBy } from '../offers';
-import { DemoPath } from '../demo-path';
+import { CHANGES_WINDOW, NEXT_STEPS, OFFERS, workingBy } from '../offers';
 import { CHECK_REPLY_TIME, MAIN_CTA } from '../site';
 import { SampleReport } from '../sample-report';
 import { ScrollReveal } from '../scroll-reveal';
@@ -29,8 +28,9 @@ export default function WhatWeDo() {
    <p>Use the tools you already have where possible. Anything bigger gets a fixed quote first.</p>
    <SystemExplorer />
   </section>
-  <section className="s-section" id="process"><p className="eyebrow">From first call to live</p><h2>How it works.</h2>
-   <DemoPath source="what-we-do" compact />
+  <section className="s-section" id="process"><p className="eyebrow">From free plan to live</p><h2>How it works.</h2>
+   <ol className="mw-qw-list">{NEXT_STEPS.map((step) => <li key={step.day}><strong>{step.day}: {step.title}.</strong> {step.body}</li>)}</ol>
+   <p className="s-small">Want to see it first? Bigger jobs can start with a <a href="/demos">free demo</a>.</p>
    <DeliveryTabs />
    <p><a className="s-details-link" href="/prices#next">{CHANGES_WINDOW.name}, what’s included and the cost calculator →</a></p>
   </section>
