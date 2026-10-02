@@ -11,15 +11,28 @@ import { Breadcrumbs } from '../../breadcrumbs';
 import { SiteFooter, SiteHeader } from '../../site-chrome';
 import { NICHE_GUIDES, getNicheGuide } from '../niches';
 import { KitIcon, NICHE_ICONS } from '../../brand-kit/kit-icon';
+import { CUSTOMER_TYPES, getCustomerType } from '../../customer-types';
+import { TypePage } from '../type-page';
+import { OFFERS } from '../../offers';
 
 export const dynamicParams = false;
 
+/** Four customer-type pages (trades, appointments, creators, offices) plus the trade guides. */
 export function generateStaticParams() {
-  return NICHE_GUIDES.map((guide) => ({ niche: guide.id }));
+  return [...CUSTOMER_TYPES.map((type) => ({ niche: type.id })), ...NICHE_GUIDES.map((guide) => ({ niche: guide.id }))];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ niche: string }> }): Promise<Metadata> {
   const { niche } = await params;
+  const type = getCustomerType(niche);
+  if (type) {
+    return {
+      title: `${type.shortName}: your problems, the fix, the price`,
+      description: fitDescription(`${type.lede} Named recipes from ${OFFERS[0].price}, what’s included, and a free plan.`),
+      alternates: { canonical: `/for/${type.id}` },
+      openGraph: { title: `${type.title} — Maz Works`, description: fitDescription(type.lede), url: `/for/${type.id}`, images: [OG_IMAGE] },
+    };
+  }
   const guide = getNicheGuide(niche);
   if (!guide) return {};
   return {
@@ -32,22 +45,25 @@ export async function generateMetadata({ params }: { params: Promise<{ niche: st
 
 export default async function NichePage({ params }: { params: Promise<{ niche: string }> }) {
   const { niche } = await params;
+  const type = getCustomerType(niche);
+  if (type) return <TypePage type={type} />;
   const guide = getNicheGuide(niche);
   if (!guide) notFound();
   const checkHref = `/free-plan?src=for-${guide.id}`;
+  const parent = CUSTOMER_TYPES.find((item) => item.niches.includes(guide.id));
 
   return (
     <main>
       <SiteHeader /><ServiceSchema path={`/for/${guide.id}`} />
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="niche-title">
-        <Breadcrumbs items={[{ href: '/for', label: 'Who it’s for' }, { label: guide.shortName }]} />
+        <Breadcrumbs items={[{ href: '/for', label: 'Who it’s for' }, ...(parent ? [{ href: `/for/${parent.id}`, label: parent.shortName }] : []), { label: guide.shortName }]} />
         <span className="mw-niche-badge" aria-hidden="true"><KitIcon name={NICHE_ICONS[guide.id] ?? 'spark'} size={56} /></span>
         <p className="eyebrow">{guide.name}</p>
         <h1 id="niche-title">{guide.title}.</h1>
         <p>{guide.lede}</p>
         <div className="mw-actions">
-          <a className="button button-signal" href={checkHref}>Get a free plan and price</a>
+          <a className="button button-signal" href={checkHref}>Get my free plan</a>
         </div>
         <p className="mw-hero-note">Free · no call needed. Not your trade? Every kind of business is welcome.</p>
       </section>
@@ -68,7 +84,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <p className="eyebrow">See it working</p>
         <h2 id="niche-day-title">What changes in your day.</h2>
         <Scenes systems={systemsForTrade(guide.id)} />
-        <SystemBuilder presetTrade={guide.id} />
+        <SystemBuilder presetTrade={parent?.id ?? guide.id} />
       </section>
 
       <section className="mw-qw-section" aria-labelledby="niche-self-check-title">
@@ -84,10 +100,10 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <h2 id="niche-fix-title">Fixed prices, agreed first.</h2>
         <ul className="mw-qw-list">
           {guide.fixes.map((fix) => (
-            <li key={fix.name} className="mw-example"><strong>{fix.name} · {fix.price}</strong><p className="mw-example-seen">{fix.body}</p><a className="mw-example-fix" href={`/free-plan?src=for-${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form`}>Get a free plan for this →</a></li>
+            <li key={fix.name} className="mw-example"><strong>{fix.name} · {fix.price}</strong><p className="mw-example-seen">{fix.body}</p><a className="mw-example-fix" href={`/free-plan?src=for-${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form`}>Get my free plan for this →</a></li>
           ))}
         </ul>
-        <p className="mw-qw-lead"><a href="/prices">See all prices</a></p>
+        <p className="mw-qw-lead"><a href="/prices">See all prices</a>{parent ? <> · <a href={`/for/${parent.id}`}>Every fix for {parent.shortName.toLowerCase()}</a></> : null}</p>
       </section>
 
       {guide.visuals ? (
@@ -120,7 +136,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
           <p>Tell me the job. I&apos;ll send a plan and a fixed price.</p>
         </div>
         <div className="mw-actions">
-          <a className="button button-signal" href={checkHref}>Get the free plan and price</a>
+          <a className="button button-signal" href={checkHref}>Get my free plan</a>
         </div>
       </section>
 
