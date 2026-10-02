@@ -19,3 +19,12 @@ test('unrecognised sources and unrelated links stay unchanged', () => {
     assert.equal(linkedInHref(href, '?src=linkedin-post'), href);
   }
 });
+
+test('outreach tags (li-3, em-trades, call-offices, fu-2) survive to the free plan; junk does not', () => {
+  for (const source of ['li-3', 'em-trades', 'call-offices', 'fu-2', 'dm-creators']) {
+    assert.equal(linkedInHref('/free-plan?src=for-trades&trade=trades#leak-check-form', `?src=${source}`), `/free-plan?src=${source}&trade=trades#leak-check-form`);
+  }
+  for (const source of ['li-', 'li-<script>', 'xx-3', 'li-thisisfartoolongtobeatag']) {
+    assert.equal(linkedInHref('/free-plan?src=for-trades', `?src=${encodeURIComponent(source)}`), '/free-plan?src=for-trades');
+  }
+});

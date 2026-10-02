@@ -3,6 +3,7 @@ import { SiteFooter, SiteHeader } from '../site-chrome';
 import { ServiceSchema } from '../service-schema';
 import { StickyCheckCta } from '../sticky-cta';
 import { DemoBusiness } from '../demo-business';
+import { CampaignLink } from '../campaign-link';
 import { CASE_STUDIES } from '../case-studies';
 import { CHECK_REPLY_TIME, MAIN_CTA } from '../site';
 import { STARTER_GUARANTEE, getMenuJob } from '../offers';
@@ -29,7 +30,7 @@ export function TypePage({ type }: { type: CustomerType }) {
         <h1 id="type-title">{type.title}.</h1>
         <p>{type.lede}</p>
         <div className="mw-actions">
-          <a className="button button-signal s-button-lg" href={`${checkHref}#leak-check-form`}>{MAIN_CTA}</a>
+          <CampaignLink className="button button-signal s-button-lg" href={`${checkHref}#leak-check-form`}>{MAIN_CTA}</CampaignLink>
         </div>
         <p className="mw-hero-note">Free · a plan and a fixed price, usually within {CHECK_REPLY_TIME} · no call needed.</p>
       </section>
@@ -53,11 +54,11 @@ export function TypePage({ type }: { type: CustomerType }) {
               <strong>{recipe.name}</strong>
               <b>{recipe.offer.price}</b>
               <span>{recipe.what}</span>
-              <a className="mw-service-link" href={`/free-plan?src=for-${type.id}&trade=${type.id}&package=${encodeURIComponent(recipe.offer.name)}#leak-check-form`}>{MAIN_CTA} <span aria-hidden="true">→</span></a>
+              <CampaignLink className="mw-service-link" href={`/free-plan?src=for-${type.id}&trade=${type.id}&package=${encodeURIComponent(recipe.offer.name)}#leak-check-form`}>{MAIN_CTA} <span aria-hidden="true">→</span></CampaignLink>
             </li>
           ))}
         </ul>
-        <p className="s-small">{STARTER_GUARANTEE} <a href="/prices#included">What’s always included →</a></p>
+        <p className="s-small">{STARTER_GUARANTEE} <a href="/prices#always-included">What’s always included →</a></p>
       </section>
 
       <section className="s-section" id="how" aria-labelledby="type-how-title">
@@ -81,10 +82,10 @@ export function TypePage({ type }: { type: CustomerType }) {
           <p>
             <a className="s-details-link" href="/prices">See the details: every job, the cost calculator, what’s included and what happens next →</a>
           </p>
-          {niches.length ? <p><a className="s-details-link" href={`/for/${niches[0].id}`}>Guide for {niches.map((guide) => guide.shortName.toLowerCase()).join(', ')} →</a></p> : null}
+          {niches.length ? <p><a className="s-details-link" href={`/for/${niches[0].id}`}>Guide for {niches.map((guide) => guide.shortName).join(', ')} →</a></p> : null}
         </div>
         <div className="mw-actions">
-          <a className="button button-signal" href={`${checkHref}#leak-check-form`}>{MAIN_CTA}</a>
+          <CampaignLink className="button button-signal" href={`${checkHref}#leak-check-form`}>{MAIN_CTA}</CampaignLink>
         </div>
       </section>
 

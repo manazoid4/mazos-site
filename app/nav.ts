@@ -1,3 +1,4 @@
+import { NICHE_GUIDES } from './for/niches';
 import { CUSTOMER_TYPES } from './customer-types';
 
 /**
@@ -33,6 +34,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
     links: [
       { href: '/prices', label: 'Packages and prices' },
       { href: '/what-we-do', label: 'What we do' },
+      { href: '/what-we-do#example', label: 'Example plan' },
       { href: '/free-plan', label: 'Get my free plan' },
       { href: '/contact', label: 'Bigger jobs' },
     ],
@@ -41,7 +43,8 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
     title: 'Who it’s for',
     links: [
       ...CUSTOMER_TYPES.map((type) => ({ href: `/for/${type.id}`, label: type.name })),
-      { href: '/for', label: 'Trade guides' },
+      ...NICHE_GUIDES.map((guide) => ({ href: `/for/${guide.id}`, label: guide.shortName })),
+      { href: '/for', label: 'All kinds of business' },
     ],
   },
   {
@@ -49,7 +52,20 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
     links: [
       { href: '/faq', label: 'FAQ' },
       { href: '/work/scrap-finance-partners', label: 'Client work' },
-      { href: '/lab', label: 'My own products' },
+      { href: '/terms', label: 'Terms of work' },
+      { href: '/privacy', label: 'Privacy' },
+      { href: '/site-map', label: 'Site map' },
+    ],
+  },
+  {
+    // Kept apart from the service on purpose (29 Sep rebuild): Objects is a
+    // concept range and the Lab holds Maz's own products, so neither competes
+    // with the one thing a small business can buy today.
+    title: 'Other projects',
+    links: [
+      { href: '/3d-printing', label: 'Objects (concept range)' },
+      { href: '/3d-printing#architecture-property', label: 'Architecture models' },
+      { href: '/lab', label: 'Lab: my own products' },
     ],
   },
 ];

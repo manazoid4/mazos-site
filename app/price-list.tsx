@@ -130,7 +130,7 @@ export function PriceList({ checkHref }: { checkHref: string }) {
         <AutomationMenu checkHref={checkHref} />
       </Fold>
 
-      <Fold id="included" title="Always included, whichever step you pick">
+      <Fold id="always-included" title="Always included, whichever step you pick">
         <AlwaysIncluded />
         <ul className="s-promises" aria-label="Included with every package">
           {PROMISES.map((promise) => <li key={promise.title}><strong>{promise.title}</strong><span>{promise.body}</span></li>)}

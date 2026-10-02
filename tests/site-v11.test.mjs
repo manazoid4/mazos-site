@@ -57,16 +57,16 @@ test('four customer types, each with pains, recipes, a calculator preset and rea
   }
 });
 
-test('each type page exports with the pain table, recipes, prices, animations and one main button', async () => {
+test('each type page is short: pains → fix, three priced recipes, a labelled demo business and one main button (polish, 2 Oct)', async () => {
   for (const type of types.CUSTOMER_TYPES) {
     const html = await readPage(`/for/${type.id}`);
-    assert.match(html, /Pick the line that sounds like you/, `${type.id}: pain table`);
-    assert.match(html, /Named recipes, not abstract packages/, `${type.id}: recipes`);
+    assert.match(html, /Your problem, and the job that fixes it/, `${type.id}: pains`);
+    assert.match(html, /Three ways in/, `${type.id}: recipes`);
     for (const recipe of type.recipes) assert.ok(html.includes(recipe.name.replace(/&/g, '&amp;')), `${type.id}: ${recipe.name}`);
-    assert.match(html, /class="ex ex-steps"/, `${type.id}: next steps animation`);
-    assert.match(html, /class="ex ex-tweaks"/, `${type.id}: tweaks timeline`);
-    assert.match(html, /id="own-vs-rent"/, `${type.id}: own vs rent`);
-    assert.match(html, /Start with typical numbers/, `${type.id}: calculator preset`);
+    assert.match(html, /Demo business, not a client/, `${type.id}: labelled demo business`);
+    // Next steps, tweaks, own-vs-rent and the calculator are said once, on /prices.
+    for (const moved of [/class="ex ex-steps"/, /class="ex ex-tweaks"/, /id="own-vs-rent"/]) assert.doesNotMatch(html, moved, `${type.id}: ${moved} belongs on /prices`);
+    assert.match(html, /href="\/prices"/, `${type.id}: link to the details`);
     assert.match(html, new RegExp(`href="/free-plan\\?src=for-${type.id}&amp;trade=${type.id}#leak-check-form">Get my free plan<`), `${type.id}: main button`);
     assert.doesNotMatch(html, /quick fix/i, `${type.id}: banned wording`);
     assert.doesNotMatch(html, /\bAI\b/, `${type.id}: no AI copy`);
@@ -81,7 +81,7 @@ test('the homepage asks "What do you run?" and reaches every type page and the l
   const html = await readPage('/');
   assert.match(html, /What do you run\?/);
   for (const type of types.CUSTOMER_TYPES) assert.match(html, new RegExp(`href="/for/${type.id}"`));
-  assert.match(html, /class="s-ladder s-ladder-mini"/);
+  assert.match(html, /href="\/prices"/);
   assert.match(html, /href="#check">Get my free plan</);
   assert.doesNotMatch(html, /href="\/brand-kit"/, 'creators link goes to /for/creators now');
   const hub = await readPage('/for');

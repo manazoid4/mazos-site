@@ -6,6 +6,7 @@ import { CallLink } from './analytics';
 import { StickyCheckCta } from './sticky-cta';
 import { HeroDemo } from './hero-demo';
 import { Scenes } from './scenes';
+import { getSystem } from './systems';
 import { ScrollReveal } from './scroll-reveal';
 import { CUSTOMER_TYPES } from './customer-types';
 import { KitIcon } from './brand-kit/kit-icon';
@@ -38,7 +39,7 @@ export default function Page() {
     <h1 id="intro-title">Systems that turn enquiries <em>into bookings</em> and take the admin off you.</h1>
     <p className="s-lede">Automation, connected tools and custom software. Start with one job from {STARTER.price}.</p>
     <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">{MAIN_CTA}</a><a className="text-link" href="/demos">Or see a free demo first <span aria-hidden="true">→</span></a></div>
-    <p className="s-face-cta"><img src="/maz.webp" alt="" width={56} height={56} /><span><strong>Manazir Hussain</strong>, Computer Science graduate (Swansea). I plan and build every job myself, and usually reply within {CHECK_REPLY_TIME}.</span></p>
+    <p className="s-face-cta"><img src="/maz.webp" alt="" width={56} height={56} /><span><strong>Manazir Hussain</strong>, Computer Science graduate (Swansea). I plan and build every job myself.</span></p>
    </div><HeroDemo />
   </section>
   <section className="s-section" id="build" aria-labelledby="build-title">
@@ -50,7 +51,7 @@ export default function Page() {
    <p><a className="s-details-link" href="/prices">Every price, websites and what’s included →</a></p>
   </section>
   <section className="s-section" id="how" data-reveal aria-labelledby="how-title">
-   <p className="eyebrow">See it working</p><h2 id="how-title">What changes in your day.</h2><Scenes />
+   <p className="eyebrow">See it working</p><h2 id="how-title">What changes in your day.</h2><Scenes systems={['enquiries', 'reminders', 'reviews'].map((id) => getSystem(id))} />
   </section>
   <section className="s-section s-check" id="check" aria-labelledby="check-title">
    <div className="s-check-copy"><p className="eyebrow">Your free plan</p><h2 id="check-title">Tell me the job. I’ll send a plan and a price.</h2>
@@ -67,7 +68,7 @@ export default function Page() {
           <div>
             <p className="eyebrow">Who you’re dealing with</p>
             <h2 id="about-title">I’m Manazir. I plan it and build it myself.</h2>
-            <p>Maz Works is me: I plan, build and test every job. Email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+            <p>Email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
             <p><a className="button button-dark s-linkedin" href={LINKEDIN_URL} rel="me noopener" target="_blank">Connect on LinkedIn</a></p>
           </div>
         </div>
