@@ -1,5 +1,8 @@
 # Maz Works
 
+> ## 🎯 Goals: start here → [GOALS.md](GOALS.md)
+> **More paid jobs per week with less of Maz's time.** Clear offer · trust without fake proof · one easy first step · fast reply and quote · leads worked every week.
+
 > ## 📘 Playbooks: start here
 > Working on this with any agent (Codex, Gemini, OpenCode, Claude)? Open **[PLAYBOOKS.md](PLAYBOOKS.md)**: one page with the start prompt and links to every playbook.
 >
