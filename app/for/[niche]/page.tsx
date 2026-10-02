@@ -1,7 +1,6 @@
 import { ServiceSchema } from '../../service-schema';
 import { getSystem, systemsForTrade } from '../../systems';
 import { Scenes } from '../../scenes';
-import { SystemBuilder } from '../../system-builder';
 import { ScrollReveal } from '../../scroll-reveal';
 import { fitDescription } from '../../seo';
 import { OG_IMAGE } from '../../seo';
@@ -83,8 +82,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
       <section className="mw-qw-section" id="day" aria-labelledby="niche-day-title">
         <p className="eyebrow">See it working</p>
         <h2 id="niche-day-title">What changes in your day.</h2>
-        <Scenes systems={systemsForTrade(guide.id)} />
-        <SystemBuilder presetTrade={parent?.id ?? guide.id} />
+        <Scenes systems={systemsForTrade(guide.id).slice(0, 1)} />
       </section>
 
       <section className="mw-qw-section" aria-labelledby="niche-self-check-title">
@@ -103,7 +101,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
             <li key={fix.name} className="mw-example"><strong>{fix.name} · {fix.price}</strong><p className="mw-example-seen">{fix.body}</p><a className="mw-example-fix" href={`/free-plan?src=for-${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form`}>Get my free plan →</a></li>
           ))}
         </ul>
-        <p className="mw-qw-lead"><a href="/prices">See all prices</a>{parent ? <> · <a href={`/for/${parent.id}`}>Every fix for {parent.shortName.toLowerCase()}</a></> : null}</p>
+        <p className="mw-qw-lead"><a className="s-details-link" href="/prices">See the details: every price and what’s included →</a>{parent ? <> <a className="s-details-link" href={`/for/${parent.id}`}>Every fix for {parent.shortName.toLowerCase()} →</a></> : null}</p>
       </section>
 
       {guide.visuals ? (
