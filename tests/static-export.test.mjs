@@ -180,7 +180,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.doesNotMatch(html, /\/contact\?service=/, 'homepage price cards lead to the free plan form, not a second form');
 
   const pricesAgain = await readPage('/prices');
-  for (const [name, price] of [['Starter Automation', '£149'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450'], ['Creator Starter', '£149'], ['Creator Launch', '£595'], ['Website', 'From £1,495']]) {
+  for (const [name, price] of [['Starter Automation', '£149'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450'], ['Starter for creators', '£149'], ['Launch Page', '£595'], ['Website', 'From £1,495']]) {
     assert.match(pricesAgain, new RegExp(name));
     assert.match(pricesAgain, new RegExp(price));
   }

@@ -16,7 +16,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How much does it cost?',
-    answer: `A one-day set-up is ${SETUP_PRICE}. Starter Automation is ${OFFERS[0].price} for one job from the automation menu, set up to run itself. A Business System, where three jobs are joined up with a weekly report, starts from ${OFFERS[1].price.replace('From ', '')}. Custom Software starts from ${OFFERS[2].price.replace('From ', '')}. For creators, Creator Starter is ${getOffer('creator-starter').price} and Creator Launch is ${getOffer('creator-launch').price}. A full Website starts from ${getOffer('website').price.replace('From ', '')}. Care plans are ${CARE_PLANS[0].price} or ${CARE_PLANS[1].price}. No VAT added.`,
+    answer: `A one-day set-up is ${SETUP_PRICE}. Starter Automation is ${OFFERS[0].price} for one job from the automation menu, set up to run itself. A Business System, where three jobs are joined up with a weekly report, starts from ${OFFERS[1].price.replace('From ', '')}. Custom Software starts from ${OFFERS[2].price.replace('From ', '')}. A Launch Page (one page that books, sells or takes enquiries) is ${getOffer('creator-launch').price}, and a Website (a Launch Page plus four more pages) starts from ${getOffer('website').price.replace('From ', '')}. Creators get the same prices: their Starter is comment-to-get-it. Every package includes free one-day set-ups. Care plans are ${CARE_PLANS[0].price} or ${CARE_PLANS[1].price}. No VAT added.`,
   },
   {
     question: `What can the ${OFFERS[0].price} Starter do?`,

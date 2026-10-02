@@ -1,4 +1,4 @@
-import { CHANGES_WINDOW, NEXT_STEPS, OFFERS, getExtra } from './offers';
+import { CHANGES_WINDOW, NEXT_STEPS, OFFERS, PACKAGE_VALUE, formatPrice } from './offers';
 import './explainers.css';
 
 /**
@@ -13,14 +13,14 @@ import './explainers.css';
 export function TilesJoin() {
   const starter = OFFERS[0];
   const system = OFFERS[1];
-  const three = starter.from * 3;
+  const value = PACKAGE_VALUE['business-system']!;
   return (
     <figure className="ex ex-tiles" aria-labelledby="ex-tiles-caption">
       <div className="ex-tiles-row" aria-hidden="true">
         {['Missed calls', 'Quotes', 'Reviews'].map((job, index) => <span key={job} className="ex-tile" style={{ ['--i' as string]: index }}>{job}<small>{starter.price}</small></span>)}
         <span className="ex-tile ex-tile-sum">{system.name}<small>{system.price} · weekly report in</small></span>
       </div>
-      <figcaption id="ex-tiles-caption" className="s-small">Three jobs on their own would be £{three.toLocaleString('en-GB')} and three separate set-ups. Joined up they share one customer list and cost {system.price.toLowerCase()}, with the {getExtra('Weekly report').price} weekly report included.</figcaption>
+      <figcaption id="ex-tiles-caption" className="s-small">Bought one by one, three jobs plus the weekly report, team training, three set-ups and a month of care come to {formatPrice(value.total)}. Joined up as a {system.name} they share one customer list and cost {system.price.toLowerCase()}.</figcaption>
     </figure>
   );
 }

@@ -120,9 +120,9 @@ export const CUSTOMER_TYPES: CustomerType[] = [
       { pain: 'Booking calls is messy', setup: 'Booking link everywhere', starter: 'online-booking', system: 'Paid booking with reminders' },
     ],
     recipes: [
-      { name: 'Creator Starter: comment to get it', offer: creatorStarter, jobs: ['keyword-dm', 'email-list'], what: 'Someone comments a word, gets your free resource and joins your list. Link-in-bio sorted on two platforms.' },
-      { name: 'Creator Launch: coaching-call funnel', offer: creatorLaunch, jobs: ['online-booking', 'email-list'], what: 'One page that books and takes payment for calls, in your look, with a welcome series.' },
-      { name: 'Creator Launch: digital download', offer: creatorLaunch, jobs: ['email-list'], what: 'One page that sells a download, sends it automatically and grows your list.' },
+      { name: 'Starter for creators: comment to get it', offer: creatorStarter, jobs: ['keyword-dm', 'email-list'], what: 'Someone comments a word, gets your free resource and joins your list. Profile tidy and your link everywhere included.' },
+      { name: 'Launch Page: coaching-call funnel', offer: creatorLaunch, jobs: ['online-booking', 'email-list'], what: 'One page that books and takes payment for calls, in your look, with a welcome series.' },
+      { name: 'Launch Page: digital download', offer: creatorLaunch, jobs: ['email-list'], what: 'One page that sells a download, sends it automatically and grows your list.' },
     ],
     calculator: { perWeek: 20, share: 30, value: 60, label: 'A typical creator: 20 DMs a week asking about prices, 3 in 10 never answered, £60 a sale' },
     scenes: ['keyword-dm', 'booking', 'enquiries'],

@@ -1579,3 +1579,8 @@ form label:has(> input[type="checkbox"]), form label:has(> input[type="radio"]) 
   .mw-site-footer .mw-footer-groups p { font-size: .75rem; }
 }
 .db-phones { max-width: 320px; }
+
+/* Offer v12: what the parts would cost bought one by one. */
+.s-price-value { margin: .35rem 0 0; font-size: .9rem; color: var(--muted); }
+.s-price-value s { font-weight: 700; color: inherit; }
+.s-price-value span { display: block; font-size: .8rem; }
