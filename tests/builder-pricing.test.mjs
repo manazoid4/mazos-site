@@ -20,9 +20,9 @@ test('nothing picked: start with Starter Automation', () => {
   assert.equal(quote.totalLabel, getOffer('starter').price);
 });
 
-test('a standard add-on can be bought alone at its own price', () => {
-  const quote = plan('reminders');
-  assert.equal(quote.total, priceAmount(getExtra('Appointment reminders').price));
+test('a one-day set-up can be bought alone at its own price (Offer v11)', () => {
+  const quote = quotePlan([{ name: 'Review QR card', offerName: 'Review QR card' }]);
+  assert.equal(quote.total, priceAmount(getExtra('Review QR card').price));
   assert.equal(quote.lines.length, 1);
   assert.ok(!quote.lines.some((line) => line.label.startsWith('Starter')));
 });
@@ -42,9 +42,9 @@ test('an extra job to build uses Extra automation, never on its own', () => {
   }
 });
 
-test('add-ons and a Starter add up line by line', () => {
-  const quote = plan('enquiries', 'reminders', 'reviews');
-  const expected = getOffer('starter').from + priceAmount(getExtra('Appointment reminders').price) + priceAmount(getExtra('Review requests').price);
+test('a Starter, an extra job and a set-up add up line by line', () => {
+  const quote = quotePlan([getSystem('enquiries'), getSystem('reminders'), { name: 'Review QR card', offerName: 'Review QR card' }]);
+  const expected = getOffer('starter').from + priceAmount(getExtra('Extra automation').price) + priceAmount(getExtra('Review QR card').price);
   assert.equal(quote.total, expected);
   assert.ok(quote.total <= getOffer('business-system').from);
 });
@@ -88,18 +88,19 @@ test('every offer has one track and a full spec: who, included, excluded, delive
   }
 });
 
-test('brand work and website work stay separate, and the bundle is cheaper than both', () => {
-  const kit = getOffer('brand-kit');
-  const page = getOffer('sales-page');
-  assert.equal(kit.track, 'brand');
-  assert.ok(kit.excludes.some((line) => /website/i.test(line)), 'the kit must exclude the website');
-  assert.ok(!kit.includes.some((line) => /website|payment|Google/i.test(line)), 'no website, payments or Google in the kit');
-  assert.ok(getOffer('brand-sales-page').from < kit.from + page.from, 'the bundle must reward buying both');
+test('creators get two steps: a list they own first, then a page that sells (Offer v11)', () => {
+  const starter = getOffer('creator-starter');
+  const launch = getOffer('creator-launch');
+  assert.equal(starter.track, 'automation');
+  assert.ok(starter.excludes.some((line) => /sales page|payments/i.test(line)), 'Creator Starter must exclude the sales page');
+  assert.ok(launch.includes.some((line) => /brand look/i.test(line)), 'Creator Launch carries the brand look');
+  assert.ok(launch.from > starter.from, 'the launch costs more than the starter');
+  assert.ok(starter.guarantee, 'the starter carries the 30-day guarantee');
 });
 
-test('no add-on is priced below the £95 floor, and care covers real time', () => {
-  for (const extra of EXTRAS) assert.ok(priceAmount(extra.price) >= 95, `${extra.name} is under the floor`);
-  assert.ok(priceAmount(CARE_PLANS[0].price) >= 49);
+test('no one-day set-up or add-on is priced below the £49 floor, and care covers real time', () => {
+  for (const extra of EXTRAS) assert.ok(priceAmount(extra.price) >= 49, `${extra.name} is under the floor`);
+  assert.ok(priceAmount(CARE_PLANS[0].price) >= 39);
   assert.ok(!/unlimited/i.test(JSON.stringify(CHANGES_WINDOW)), 'changes are never unlimited');
   assert.doesNotMatch(PAYMENT_TERMS, /half|deposit/i);
 });
