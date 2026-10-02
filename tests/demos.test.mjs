@@ -34,7 +34,7 @@ test('changes after go-live are fenced so they never become free new work', asyn
   assert.match(await readPage('/demos'), /href="\/prices#next"/);
   const demos = await readPage('/prices');
   assert.match(demos, /Priced first, so it stays fair/);
-  assert.match(demos, /A new page, job or feature: I price it first/);
+  assert.match(demos, /A new page, task or feature: I price it first/);
   assert.match(demos, /fixed free for 90 days/);
   assert.match(demos, /up to two rounds/);
 });

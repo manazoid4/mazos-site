@@ -75,8 +75,8 @@ async function internalTargetExists(urlPath) {
 test('homepage positions Maz Works as a systems builder, not a website-fix shop (Maz, 27 Sep)', async () => {
   const html = await readPage('/');
   // Conversion rebuild (29 Sep): the hero leads with one concrete outcome, then the positioning line.
-  assert.match(html, /Systems that turn enquiries (<em>)?into bookings(<\/em>)? and take the admin off you/);
-  assert.match(html, /Start with one job from/);
+  assert.match(html, /Every enquiry answered and every booking confirmed, (<em>)?without you chasing/);
+  assert.match(html, /Start with one task for/);
   assert.match(html, /Automation, connected tools and custom software/);
   assert.match(html, /For small businesses and teams, in any trade/);
   for (const smallTime of [/website fix/i, /small fixes/i, /quick fix/i, /Enquiry Repair/, /fix what’s broken/i, /Maz Works is new/i]) {
@@ -623,5 +623,5 @@ test('terms and privacy pages exist, are linked from every footer and match the 
 
 test('free demos are fenced to bigger jobs; small jobs get a written plan', async () => {
   const demos = await readPage('/demos');
-  assert.match(demos, /Smaller jobs get a written plan instead/);
+  assert.match(demos, /Smaller jobs go straight to the fixed price/);
 });

@@ -30,7 +30,7 @@ export default function PricesPage() {
         <p className="s-lede">Fixed prices, agreed before any work starts. No VAT added. Not sure what you need? The {FREE_STEP.short} tells you, within {CHECK_REPLY_TIME}.</p>
         <div className="s-actions">
           <a className="button button-signal s-button-lg" href="/free-plan">Get my free plan</a>
-          <a className="text-link" href="/demos">Or see a free demo first <span aria-hidden="true">→</span></a>
+          <a className="text-link" href="/what-we-do#systems">See how it works <span aria-hidden="true">→</span></a>
         </div>
       </section>
 

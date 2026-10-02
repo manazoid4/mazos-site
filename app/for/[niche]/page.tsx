@@ -1,5 +1,5 @@
 import { ServiceSchema } from '../../service-schema';
-import { getSystem, systemsForTrade } from '../../systems';
+import { systemsForTrade } from '../../systems';
 import { Scenes } from '../../scenes';
 import { ScrollReveal } from '../../scroll-reveal';
 import { fitDescription } from '../../seo';
@@ -13,6 +13,7 @@ import { KitIcon, NICHE_ICONS } from '../../brand-kit/kit-icon';
 import { CUSTOMER_TYPES, getCustomerType } from '../../customer-types';
 import { TypePage } from '../type-page';
 import { OFFERS } from '../../offers';
+import { StraightAnswers } from '../../straight-answers';
 
 export const dynamicParams = false;
 
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ niche: st
   if (!guide) return {};
   return {
     title: `${guide.shortName}: business systems`,
-    description: fitDescription(`${guide.lede} Real examples, a 60-second self-check and what I’d set up, with fixed prices.`),
+    description: fitDescription(`${guide.lede} What I’d set up and the fixed price.`),
     alternates: { canonical: `/for/${guide.id}` },
     openGraph: { title: `${guide.title} — Maz Works`, description: fitDescription(guide.lede), url: `/for/${guide.id}`, images: [OG_IMAGE] },
   };
@@ -64,33 +65,13 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <div className="mw-actions">
           <a className="button button-signal" href={checkHref}>Get my free plan</a>
         </div>
-        <p className="mw-hero-note">Free · no call needed. Not your trade? Every kind of business is welcome.</p>
-      </section>
-
-      <section className="mw-qw-section" aria-labelledby="niche-examples-title">
-        <p className="eyebrow">Real examples</p>
-        <h2 id="niche-examples-title">Where customers slip away.</h2>
-        <p className="mw-qw-lead">Real things I found at UK businesses. Names left out.</p>
-        <ul className="mw-qw-list">
-          {guide.examples.map((example) => {
-            const system = getSystem(example.system);
-            return <li key={example.found} className="mw-example"><strong>{example.cost}</strong><p className="mw-example-seen">What I saw: {example.found}</p><a className="mw-example-fix" href={`/what-we-do#${system.id}`}>The fix: {system.name} →</a></li>;
-          })}
-        </ul>
+        <p className="mw-hero-note">{`Free plan, no call needed. Most start with one task at ${OFFERS[0].price}. Manazir plans and builds it himself.`}</p>
       </section>
 
       <section className="mw-qw-section" id="day" aria-labelledby="niche-day-title">
         <p className="eyebrow">See it working</p>
         <h2 id="niche-day-title">What changes in your day.</h2>
         <Scenes systems={systemsForTrade(guide.id).slice(0, 1)} />
-      </section>
-
-      <section className="mw-qw-section" aria-labelledby="niche-self-check-title">
-        <p className="eyebrow">Check yours in 60 seconds</p>
-        <h2 id="niche-self-check-title">Three quick tests on your phone.</h2>
-        <ol className="mw-qw-list">
-          {guide.selfCheck.map((step) => <li key={step}>{step}</li>)}
-        </ol>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="niche-fix-title">
@@ -126,6 +107,8 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
       ) : null}
 
       <p className="mw-related mw-related-quiet"><a href="/for"><strong>Other trades →</strong> <span>Salons, groomers, garages, cafés, clinics and architects.</span></a></p>
+
+      <StraightAnswers />
 
       <section className="mw-resource-cta" aria-labelledby="niche-cta-title">
         <div>

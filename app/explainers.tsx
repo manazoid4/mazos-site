@@ -1,4 +1,4 @@
-import { CHANGES_WINDOW, NEXT_STEPS, OFFERS, PACKAGE_VALUE, formatPrice } from './offers';
+import { CHANGES_WINDOW, NEXT_STEPS } from './offers';
 import './explainers.css';
 
 /**
@@ -8,22 +8,6 @@ import './explainers.css';
  * Counted with the hero demo and the storyboards in scenes.tsx, that is the
  * full set of eight.
  */
-
-/** Three Starter tiles slide together into one line: why £149 × 3 becomes a £595 System. */
-export function TilesJoin() {
-  const starter = OFFERS[0];
-  const system = OFFERS[1];
-  const value = PACKAGE_VALUE['business-system']!;
-  return (
-    <figure className="ex ex-tiles" aria-labelledby="ex-tiles-caption">
-      <div className="ex-tiles-row" aria-hidden="true">
-        {['Missed calls', 'Quotes', 'Reviews'].map((job, index) => <span key={job} className="ex-tile" style={{ ['--i' as string]: index }}>{job}<small>{starter.price}</small></span>)}
-        <span className="ex-tile ex-tile-sum">{system.name}<small>{system.price} · weekly report in</small></span>
-      </div>
-      <figcaption id="ex-tiles-caption" className="s-small">Bought one by one, three jobs plus the weekly report, team training, three set-ups and a month of care come to {formatPrice(value.total)}. Joined up as a {system.name} they share one customer list and cost {system.price.toLowerCase()}.</figcaption>
-    </figure>
-  );
-}
 
 /** A 90-day bar: the 30-day tweaks window fills, then the fix promise runs to day 90. */
 export function TweaksTimeline() {

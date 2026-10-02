@@ -5,8 +5,9 @@ import { StickyCheckCta } from '../sticky-cta';
 import { DemoBusiness } from '../demo-business';
 import { CampaignLink } from '../campaign-link';
 import { CASE_STUDIES } from '../case-studies';
-import { CHECK_REPLY_TIME, MAIN_CTA } from '../site';
-import { STARTER_GUARANTEE, getMenuJob } from '../offers';
+import { MAIN_CTA } from '../site';
+import { OFFERS, STARTER_GUARANTEE, getMenuJob } from '../offers';
+import { StraightAnswers } from '../straight-answers';
 import { NICHE_GUIDES } from './niches';
 import type { CustomerType } from '../customer-types';
 
@@ -32,12 +33,12 @@ export function TypePage({ type }: { type: CustomerType }) {
         <div className="mw-actions">
           <CampaignLink className="button button-signal s-button-lg" href={`${checkHref}#leak-check-form`}>{MAIN_CTA}</CampaignLink>
         </div>
-        <p className="mw-hero-note">Free · a plan and a fixed price, usually within {CHECK_REPLY_TIME} · no call needed.</p>
+        <p className="mw-hero-note">{`Free plan, no call needed. Most start with one task at ${OFFERS[0].price}. Manazir plans and builds it himself.`}</p>
       </section>
 
       <section className="s-section" id="pains" aria-labelledby="type-pains-title">
         <p className="eyebrow">Sound familiar?</p>
-        <h2 id="type-pains-title">Your problem, and the job that fixes it.</h2>
+        <h2 id="type-pains-title">Your problem, and the task that fixes it.</h2>
         <ul className="s-painfix">
           {type.pains.filter((row) => row.starter).slice(0, 3).map((row) => (
             <li key={row.pain}><span>“{row.pain}”</span><strong>{getMenuJob(row.starter!).name}</strong></li>
@@ -80,9 +81,10 @@ export function TypePage({ type }: { type: CustomerType }) {
           <p className="eyebrow">Free first step</p>
           <h2 id="type-cta-title">Tell me the job. I’ll send a plan and a fixed price.</h2>
           <p>
-            <a className="s-details-link" href="/prices">See the details: every job, the cost calculator, what’s included and what happens next →</a>
+            <a className="s-details-link" href="/prices">See the details: every task, the cost calculator, what’s included and what happens next →</a>
           </p>
           {niches.length ? <p><a className="s-details-link" href={`/for/${niches[0].id}`}>Guide for {niches.map((guide) => guide.shortName).join(', ')} →</a></p> : null}
+          <StraightAnswers inline />
         </div>
         <div className="mw-actions">
           <CampaignLink className="button button-signal" href={`${checkHref}#leak-check-form`}>{MAIN_CTA}</CampaignLink>
