@@ -1,4 +1,5 @@
 'use client';
+import { MAIN_CTA } from './site';
 
 import { useState } from 'react';
 import { CUSTOMER_TYPES } from './customer-types';
@@ -7,7 +8,7 @@ import { HEADACHE_PICKS, getSystem } from './systems';
 
 const TRADES = [...CUSTOMER_TYPES.map((type) => ({ id: type.id, label: `${type.name}: ${type.examples.split(',').slice(0, 2).join(',').toLowerCase()}…` })), { id: 'other', label: 'Something else, all welcome' }];
 
-/** Where "Send me this plan" lands: the free plan form, pre-filled and tagged src=builder. */
+/** Where the builder's main button lands: the free plan form, pre-filled and tagged src=builder. */
 export function builderHref(trade: string, headaches: string[]): string {
   const systems = [...new Set(headaches.map((id) => HEADACHE_PICKS.find((pick) => pick.id === id)?.system).filter(Boolean))] as string[];
   const quote = quotePlan(systems.map((id) => getSystem(id)));
@@ -73,7 +74,7 @@ export function SystemBuilder({ presetTrade = '' }: { presetTrade?: string }) {
         <p className="s-small">{quote.note} Working by: {quote.workingBy.toLowerCase()}.</p>
       </div>
       {/* ConversionTracker records this as 'CTA clicked'; the systems travel in the URL. */}
-      <a className="button button-signal" href={builderHref(trade, headaches)}>Send me this plan</a>
+      <a className="button button-signal" href={builderHref(trade, headaches)}>{MAIN_CTA}</a>
       <p className="s-small">Opens the free plan form with your picks filled in. No call, no obligation.</p>
       <noscript>
         <p className="s-small">Or see each system: {HEADACHE_PICKS.map((pick, index) => <span key={pick.id}>{index ? ' · ' : ''}<a href={`/what-we-do#${pick.system}`}>{pick.label}</a></span>)}</p>

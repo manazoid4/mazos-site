@@ -17,7 +17,7 @@ const EXTRA_GROUPS = [
   {
     title: 'Get started',
     links: [
-      { href: '/free-plan', label: 'Free plan and price' },
+      { href: '/free-plan', label: 'Get my free plan' },
       { href: '/contact', label: 'Bigger jobs and contact' },
       { href: '/demos', label: 'Free demo' },
       { href: '/whats-new', label: 'What’s new' },

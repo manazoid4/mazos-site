@@ -56,7 +56,7 @@ test('the free plan form puts the problem taps first, with typing and the websit
   assert.match(source, /required=\{!hydrated\}/);
   assert.ok(form.indexOf('mw-quick-picks') < form.indexOf('name="name"'), 'problem taps come before name and email');
   assert.doesNotMatch(form, /name="business"|name="nextStep"/);
-  assert.match(form, /Get my free plan and price/);
+  assert.match(form, />Get my free plan</);
 });
 
 test('the Leak Check reuses the resilient enquiry delivery path', async () => {

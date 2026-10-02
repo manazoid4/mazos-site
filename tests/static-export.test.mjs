@@ -98,28 +98,27 @@ test('homepage has one way in: the free check form, with the call as the fallbac
   assert.match(html, /class="s-sticky/);
 });
 
-test('homepage keeps the fixed terms with its package strip', async () => {
+test('the fixed terms are said once, on /prices, and the homepage links there (polish, 2 Oct)', async () => {
   const html = await readPage('/');
-  const strip = html.match(/<ul class="s-trust"[\s\S]*?<\/ul>/)?.[0];
-  assert.ok(strip, 'terms strip must sit under the hero');
-  for (const item of [/One fixed price/, /No contracts/, /Free demo first/]) {
-    assert.match(strip, item);
-  }
-  assert.ok(html.indexOf('class="s-trust"') < html.indexOf('id="trades"'), 'terms come before the rest of the page');
+  const prices = await readPage('/prices');
+  const strip = prices.match(/<ul class="s-promises"[\s\S]*?<\/ul>/)?.[0];
+  assert.ok(strip, 'terms live on /prices');
+  for (const item of [/One fixed price/, /No contracts/]) assert.match(strip, item);
+  assert.match(html, /href="\/prices"/);
   assert.match(html, /I’m Manazir. I plan it and build it myself/);
+  assert.match(html, /class="s-face-cta"/, 'face and credential next to the main button');
 });
 
-test('homepage shows six trade links and a labelled missed-call example (29 Sep rebuild)', async () => {
+test('trade guides stay reachable and the homepage shows a labelled missed-call example', async () => {
   const html = await readPage('/');
+  // Trade guides are one tap away in the shared menu and footer; the /for hub lists all six.
   for (const guide of ['salons-and-beauty', 'dog-groomers', 'garages', 'cafes-and-food', 'clinics-and-therapists', 'architects']) {
-    assert.match(html, new RegExp(`href="/for/${guide}"`));
+    assert.match(await readPage('/for'), new RegExp(`href="/for/${guide}"`));
   }
   assert.match(html, /class="s-demo"/);
   assert.match(html, /Missed-call text-back, Starter Automation £149\. Not a real customer\./);
   assert.match(html, /What changes in your day\./);
   assert.match(html, /Illustrations of how it works, not real customers\./);
-  // The example plan comes before the form, so owners see what they get first.
-  assert.ok(html.includes('href="/what-we-do#example"'));
 });
 
 test('what-we-do shows a clearly labelled example report, not a real client', async () => {
@@ -157,20 +156,22 @@ test('homepage proof is limited to real, honestly labelled work', async () => {
 
 test('homepage sells one first step: Starter, four popular add-ons, bigger jobs and a link to every price (28 Sep)', async () => {
   const html = await readPage('/');
+  // Polish (2 Oct): the homepage shows the first step's price on each type tile; every other price is one tap away on /prices.
+  assert.match(html, /£149/);
+  const prices = await readPage('/prices');
   for (const [name, price] of [['Starter Automation', '£149'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450']]) {
-    assert.match(html, new RegExp(name));
-    assert.match(html, new RegExp(price, 'i'));
+    assert.match(prices, new RegExp(name));
+    assert.match(prices, new RegExp(price, 'i'));
   }
-  assert.match(html, /href="\/prices#websites"/, 'websites and sales pages are one tap from the homepage');
+  assert.match(prices, /id="websites"/, 'websites and sales pages are on /prices');
   for (const id of ['trades', 'appointments', 'creators', 'offices']) assert.ok(html.includes(`/for/${id}`), `homepage tile for ${id}`);
   // The full comparison and all twelve add-ons live on /prices, so the phone page stays short.
   assert.doesNotMatch(html, /id="compare"/);
   assert.doesNotMatch(html, /Team training/);
   assert.match(html, /href="\/prices"/);
-  assert.match(html, /Keep It Running[\s\S]{0,30}£39\/month/);
+  assert.match(prices, /Keep It Running[\s\S]{0,30}£39\/month/);
   assert.doesNotMatch(html, /\bAI\b/, 'AI is used behind the scenes, never advertised (Maz, 27 Sep)');
   assert.match(html, /Free Plan &amp; Fixed Quote/);
-  assert.match(html, /send you (?:<!-- -->)?£50(?:<!-- -->)? when they become a paying client/);
   // Offer v11 (2 Oct): £149, £595, £2,450 and £39/month are the live prices; £19/month, the £395 Brand Kit and unlimited changes are retired.
   for (const retired of [/£150/, /£395/, /£249/, /Quick Win/, /£19\/month/, /founding/i, /Contact Setup/, /Enquiry Check/, /Customer Journey Review/, /From £495/, /From £950/, /From £1,500/, /£1,250/, /Custom Software &amp; Websites/, /unlimited changes/i]) {
     assert.doesNotMatch(html, retired, `retired offer still on homepage: ${retired}`);
@@ -178,15 +179,15 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.doesNotMatch(html, /href="\/quick-win"/);
   assert.doesNotMatch(html, /\/contact\?service=/, 'homepage price cards lead to the free plan form, not a second form');
 
-  const prices = await readPage('/prices');
+  const pricesAgain = await readPage('/prices');
   for (const [name, price] of [['Starter Automation', '£149'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450'], ['Creator Starter', '£149'], ['Creator Launch', '£595'], ['Website', 'From £1,495']]) {
-    assert.match(prices, new RegExp(name));
-    assert.match(prices, new RegExp(price));
+    assert.match(pricesAgain, new RegExp(name));
+    assert.match(pricesAgain, new RegExp(price));
   }
-  for (const id of ['systems', 'creators', 'websites', 'ladder', 'automation-menu', 'always-included', 'own-vs-rent', 'set-ups']) assert.match(prices, new RegExp(`id="${id}"`));
-  assert.match(prices, /What’s included, and what isn’t/, 'every package shows what it excludes');
-  for (const id of ['compare', 'extras']) assert.match(prices, new RegExp(`id="${id}"`));
-  assert.match(prices, /What’s not included/);
+  for (const id of ['systems', 'creators', 'websites', 'ladder', 'automation-menu', 'always-included', 'own-vs-rent', 'set-ups']) assert.match(pricesAgain, new RegExp(`id="${id}"`));
+  assert.match(pricesAgain, /What’s included, and what isn’t/, 'every package shows what it excludes');
+  for (const id of ['compare', 'extras']) assert.match(pricesAgain, new RegExp(`id="${id}"`));
+  assert.match(pricesAgain, /What’s not included/);
   assert.match(prices, /Google listing tidy[\s\S]{0,300}£49/);
   assert.match(prices, /Extra website page[\s\S]{0,300}£295/);
   assert.match(prices, /Team training[\s\S]{0,300}£95/);
@@ -456,19 +457,13 @@ test('every sitemap entry points at a page that was actually exported', async ()
   assert.deepEqual(broken, [], `sitemap points at missing pages: ${broken.join(', ')}`);
 });
 
-test('retired Quick Win page stays reachable but noindexed and points to Starter Automation', async () => {
-  const html = await readPage('/quick-win');
-  assert.match(html, /noindex/);
-  assert.match(html, /Starter Automation/);
-  assert.match(html, /£149/);
-  assert.match(html, /\?service=repair#contact/);
-  assert.doesNotMatch(html, /£150/);
-
+test('retired Quick Win page redirects to /prices and is never linked', async () => {
+  const vercel = JSON.parse(await readFile(path.join(exportRoot, '..', 'vercel.json'), 'utf8'));
+  assert.ok(vercel.redirects.some((r) => r.source === '/quick-win' && r.destination === '/prices' && r.permanent), 'missing /quick-win → /prices redirect');
   const home = await readPage('/');
   assert.doesNotMatch(home, /href="\/quick-win"/);
-
   const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
-  assert.doesNotMatch(sitemap, /<loc>[^<]+\/quick-win(?:\/)?<\/loc>/);
+  assert.doesNotMatch(sitemap, /quick-win/);
 });
 
 test('retired offer terms are gone from every public page', async () => {
@@ -491,7 +486,7 @@ test('the guarantee, no-VAT and referral lines appear where Maz\'s decisions req
   const home = await readPage('/');
   const faq = await readPage('/faq');
   assert.match(home, /No VAT added/);
-  assert.match(home, /send you (?:<!-- -->)?£50(?:<!-- -->)? when they become a paying client/);
+  // The referral offer lives in the FAQ (homepage kept under 600 words, 2 Oct).
   assert.match(faq, /No VAT added/);
   assert.match(faq, /£50 by bank transfer, no limit/);
   assert.doesNotMatch(faq, /deposit|final payment|pay the rest/i, 'no payment-split wording (Maz, 1 Oct)');
@@ -573,7 +568,7 @@ test('six wayfinding helps big sites use are in place', async () => {
   for (const href of ['/for/architects', '/for/garages', '/work/jobfilter', '/free-plan', '/whats-new']) assert.ok(map.includes(`href="${href}"`), `site map missing ${href}`);
   // 3. What's new stays reachable from the site map; the footer links the site map (29 Sep: off the main nav).
   const news = await readPage('/whats-new');
-  assert.match(news, /Easier to find your way around/);
+  assert.match(news, /Pick your kind of business/, 'what’s new shows the latest real update');
   assert.ok(home.includes('href="/site-map"'));
   assert.ok(!home.includes('href="/whats-new"'), 'What’s new is for buyers only once rewritten; kept off the nav for now');
   // 4. A helpful not-found page.

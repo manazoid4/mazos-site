@@ -18,7 +18,7 @@ main {
 }
 
 .mw-nav-cta {
-  min-height: 40px !important;
+  min-height: 44px !important;
   padding-inline: 12px;
   border-color: var(--soft-line);
   background: transparent;
@@ -1535,7 +1535,7 @@ main {
 .s-pains tbody th { font-weight: 700; width: 30%; }
 .s-pains td:nth-child(3) { font-weight: 750; }
 .s-recipes { list-style: none; margin-top: 16px; display: grid; gap: 12px; }
-.s-recipes li { display: grid; gap: 4px; padding: 16px; border: 1px solid var(--line); border-left: 6px solid var(--signal); background: var(--surface); }
+.s-recipes li { display: grid; gap: 4px; padding: 14px 16px; border: 1px solid var(--line); border-left: 6px solid var(--signal); background: var(--surface); }
 .s-recipes strong { font-size: 1.05rem; }
 .s-recipes b { font-size: 1.6rem; font-weight: 850; letter-spacing: -.03em; line-height: 1; }
 .s-recipes span { color: var(--muted); font-size: .95rem; line-height: 1.45; }
@@ -1544,3 +1544,38 @@ main {
 @media (min-width: 721px) { .s-recipes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .mw-hub-types .mw-hub-examples { font-size: .82rem; opacity: .85; }
 .ce-preset { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 10px 0 4px; }
+
+/* Site polish (2 Oct): short type pages, demo business, single details link */
+.s-painfix { list-style: none; margin-top: 16px; display: grid; gap: 8px; }
+.s-painfix li { display: grid; gap: 2px; padding: 10px 14px; border: 1px solid var(--line); background: var(--surface); }
+.s-painfix span { color: var(--muted, #555); }
+.s-painfix strong::before { content: "→ "; }
+.db { margin-top: 12px; display: grid; gap: 10px; }
+.db-phones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; color: var(--ink); }
+.db-phone { width: 100%; height: auto; display: block; }
+.db figcaption { font-size: .92rem; line-height: 1.5; }
+.db figcaption em { display: block; margin-top: 4px; font-style: normal; font-weight: 750; font-size: .82rem; letter-spacing: .02em; text-transform: uppercase; }
+.s-study { margin-top: 12px; padding: 14px 16px; border-left: 4px solid var(--signal); background: var(--surface); }
+.s-details-link { display: inline-flex; align-items: center; min-height: 44px; font-weight: 750; }
+.s-fold { margin-top: 12px; border: 1px solid var(--line); background: var(--surface); }
+.s-fold > summary { min-height: 52px; display: flex; align-items: center; padding: 12px 16px; font-weight: 800; cursor: pointer; }
+.s-fold > div { padding: 0 16px 16px; }
+.s-face-cta { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+.s-face-cta img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex: none; }
+.s-face-cta span { font-size: .9rem; line-height: 1.4; }
+
+/* Tap targets at least 44px (audit 2 Oct, finding 4) */
+.mw-site-header .mw-menu-button, .mw-site-header .mw-nav-cta { min-height: 44px; }
+.mw-crumbs a { display: inline-flex; align-items: center; min-height: 44px; }
+.mw-example-fix { display: inline-flex; align-items: center; min-height: 44px; }
+input[type="range"] { min-height: 44px; }
+.s-check input[type="checkbox"], .mw-form input[type="checkbox"], form input[type="checkbox"], form input[type="radio"] { min-width: 24px; min-height: 24px; }
+form label:has(> input[type="checkbox"]), form label:has(> input[type="radio"]) { min-height: 44px; display: flex; align-items: center; gap: 10px; }
+
+/* Compact footer on phones: three columns, same links, still 44px targets (polish 2 Oct) */
+@media (max-width: 520px) {
+  .mw-site-footer .mw-footer-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 12px; }
+  .mw-site-footer .mw-footer-groups a { font-size: .8rem; line-height: 1.2; }
+  .mw-site-footer .mw-footer-groups p { font-size: .75rem; }
+}
+.db-phones { max-width: 320px; }
