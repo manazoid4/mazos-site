@@ -4,11 +4,11 @@
  * names come from app/offers.ts; nothing here hard-codes a price.
  * Pains are written in the owner's words; none name a real business.
  */
-import { AUTOMATION_MENU, CREATOR_OFFERS, OFFERS, SETUP_PRICE, WEB_OFFERS, getMenuJob, getOffer, type CustomerTypeId, type Offer } from './offers';
+import { AUTOMATION_MENU, CREATOR_OFFERS, OFFERS, WEB_OFFERS, getMenuJob, getOffer, type CustomerTypeId, type Offer } from './offers';
 
 export type PainRow = {
   pain: string;
-  /** One-day set-up (£49) that eases it, or null. */
+  /** One-day set-up that eases it (free with a Starter), or null. */
   setup: string | null;
   /** Automation-menu job id that fixes it (a Starter). */
   starter: string | null;
@@ -166,7 +166,7 @@ export function isCustomerType(id: string): id is CustomerTypeId {
 /** The rung names a pain row points at, for the pain table. */
 export function painCells(row: PainRow): { setup: string; starter: string; system: string } {
   return {
-    setup: row.setup ? `${row.setup} · ${SETUP_PRICE}` : '—',
+    setup: row.setup ? `${row.setup} · free with a ${starter.name}` : '—',
     starter: row.starter ? `${getMenuJob(row.starter).name} · ${starter.price}` : '—',
     system: row.system ?? '—',
   };

@@ -6,7 +6,7 @@
  * and the enquiry email shows it under "Draft reply".
  */
 import { CUSTOMER_TYPES, getCustomerType } from '../customer-types';
-import { ALWAYS_INCLUDED, CARE_PLANS, CHANGES_WINDOW, NEXT_STEPS, OFFERS, SETUP_PRICE, STARTER_GUARANTEE, getExtra, getMenuJob, getOffer, type Offer } from '../offers';
+import { ALWAYS_INCLUDED, CARE_PLANS, CHANGES_WINDOW, NEXT_STEPS, OFFERS, STARTER_GUARANTEE, getExtra, getMenuJob, getOffer, type Offer } from '../offers';
 import { HEADACHE_PICKS, getSystem } from '../systems';
 import { CHECK_REPLY_TIME } from '../site';
 
@@ -111,7 +111,7 @@ export function draftFreePlan(input: DraftInput): Draft {
     `What happens next: ${NEXT_STEPS.map((step) => `${step.day}: ${step.title.toLowerCase()}`).join(' · ')}.`,
     `After that: ${CHANGES_WINDOW.short}, and a 90-day fix promise. Help afterwards is optional (${CARE_PLANS[0].name} ${CARE_PLANS[0].price}).`,
     '',
-    `Costs you pay directly, if any: a texting or booking app's own fee. I tell you before anything is switched on. Small set-ups are ${SETUP_PRICE} each. No VAT added.`,
+    `Costs you pay directly, if any: a texting or booking app's own fee. I tell you before anything is switched on. Two one-day set-ups come free with a Starter. No VAT added.`,
     '',
     `Reply "yes" and I'll send the written scope sheet, or ask me anything first.`,
     '',

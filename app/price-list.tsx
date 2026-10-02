@@ -1,4 +1,4 @@
-import { ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, OWN_VS_RENT, PACKAGE_VALUE, formatPrice, PROMISES, STARTER_GUARANTEE, TRACKS, UPGRADE_CREDITS, type Offer } from './offers';
+import { ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, OWN_VS_RENT, PACKAGE_VALUE, PRICE_MATCH, formatPrice, PROMISES, STARTER_GUARANTEE, TRACKS, UPGRADE_CREDITS, type Offer } from './offers';
 import { PackageLink } from './package-link';
 import { NextSteps, TilesJoin, TweaksTimeline } from './explainers';
 import { CostCalculator } from './cost-calculator';
@@ -118,7 +118,7 @@ function Fold({ id, title, children }: { id: string; title: string; children: Re
 export function PriceList({ checkHref }: { checkHref: string }) {
   return (
     <>
-      <h3 className="s-track-title" id="ladder">Five steps, one for every size of job</h3>
+      <h3 className="s-track-title" id="ladder">Four steps, one for every size of job</h3>
       <Ladder />
 
       {LANES.map((lane) => (
@@ -133,6 +133,7 @@ export function PriceList({ checkHref }: { checkHref: string }) {
         </div>
       ))}
       <p className="s-small">{STARTER_GUARANTEE} {UPGRADE_CREDITS.join(' ')}</p>
+      <p className="s-guarantee" id="price-match"><strong>UK price match.</strong> {PRICE_MATCH}</p>
 
       <Fold id="automation-menu" title="The automation menu: what each job does">
         <p className="s-small">A Starter is one of these. A Business System is three joined up, plus the weekly report.</p>

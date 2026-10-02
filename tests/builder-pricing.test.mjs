@@ -20,11 +20,13 @@ test('nothing picked: start with Starter Automation', () => {
   assert.equal(quote.totalLabel, getOffer('starter').price);
 });
 
-test('a one-day set-up can be bought alone at its own price (Offer v11)', () => {
+test('a one-day set-up is never sold alone: it rides free with a Starter (Maz, 2 Oct)', () => {
   const quote = quotePlan([{ name: 'Review QR card', offerName: 'Review QR card' }]);
-  assert.equal(quote.total, priceAmount(getExtra('Review QR card').price));
-  assert.equal(quote.lines.length, 1);
-  assert.ok(!quote.lines.some((line) => line.label.startsWith('Starter')));
+  assert.equal(quote.offer.id, 'starter');
+  assert.equal(quote.total, getOffer('starter').from);
+  assert.ok(quote.lines.some((line) => /Review QR card/.test(line.label) && line.price === 'Included'));
+  const three = quotePlan(['Review QR card', 'Quote template', 'Saved replies'].map((name) => ({ name, offerName: name })));
+  assert.equal(three.total, getOffer('starter').from + priceAmount(getExtra('Saved replies').price), 'the third set-up costs £49');
 });
 
 test('the first job that needs building is Starter Automation', () => {
@@ -44,7 +46,7 @@ test('an extra job to build uses Extra automation, never on its own', () => {
 
 test('a Starter, an extra job and a set-up add up line by line', () => {
   const quote = quotePlan([getSystem('enquiries'), getSystem('reminders'), { name: 'Review QR card', offerName: 'Review QR card' }]);
-  const expected = getOffer('starter').from + priceAmount(getExtra('Extra automation').price) + priceAmount(getExtra('Review QR card').price);
+  const expected = getOffer('starter').from + priceAmount(getExtra('Extra automation').price);
   assert.equal(quote.total, expected);
   assert.ok(quote.total <= getOffer('business-system').from);
 });
