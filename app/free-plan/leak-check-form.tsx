@@ -9,6 +9,8 @@ import { CHECK_PICK_EVENT } from '../package-link';
 import { ALL_OFFERS, CREATOR_EXTRAS, EXTRAS } from '../offers';
 import { HEADACHE_PICKS, SYSTEMS } from '../systems';
 import { NICHE_GUIDES } from '../for/niches';
+import { TYPE_IDS } from '../customer-types';
+import { draftFreePlan } from './draft';
 
 type SubmitState = 'idle' | 'sending' | 'sent' | 'error';
 type FailureReason = 'rejected' | 'timeout' | 'network';
@@ -75,7 +77,7 @@ export function LeakCheckForm() {
     choose(params.get('package'));
     const ids = [...(params.get('systems') || '').split(','), ...params.getAll('headache').map((id) => HEADACHE_PICKS.find((pick) => pick.id === id)?.system || '')];
     const names = [...new Set(ids)].map((id) => SYSTEMS.find((system) => system.id === id)?.name).filter(Boolean) as string[];
-    const trade = [...NICHE_GUIDES.map((guide) => guide.id), 'creator', 'other'].includes(params.get('trade') || '') ? params.get('trade')! : '';
+    const trade = [...TYPE_IDS, ...NICHE_GUIDES.map((guide) => guide.id), 'creator', 'other'].includes(params.get('trade') || '') ? params.get('trade')! : '';
     if (names.length || trade) {
       setPlan({ systems: names.join(', '), trade });
       const box = formRef.current?.querySelector<HTMLTextAreaElement>('[name="problem"]');
@@ -174,8 +176,12 @@ export function LeakCheckForm() {
 
     setSubmitState('sending');
 
+    // Free-plan autopilot (C9): a drafted reply Maz can approve in two minutes, built only from offers.ts.
+    const draft = draftFreePlan({ name, trade: plan.trade, systems: plan.systems, package: pkg, problem: task });
+
     const result = await sendPlanEnquiry({
       request_id: requestId.current,
+      draft: `${draft.subject}\n\n${draft.text}`,
       name,
       email,
       website,

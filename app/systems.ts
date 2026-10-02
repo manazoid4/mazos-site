@@ -104,7 +104,7 @@ export function systemPrice(system: System): string {
   return `${offer.name}, ${offer.price}${system.id === 'weekly' ? ' · included with Business System' : ''}`;
 }
 export function systemsForTrade(trade: string): System[] {
-  const ids = trade === 'garages' || trade === 'architects' ? ['enquiries', 'quotes', 'weekly'] : trade === 'cafes-and-food' ? ['enquiries','reviews','booking'] : ['missed-calls','reminders','rebooking'];
+  const ids = trade === 'trades' ? ['missed-calls', 'quotes', 'reviews'] : trade === 'offices' || trade === 'garages' || trade === 'architects' ? ['enquiries', 'quotes', 'weekly'] : trade === 'creators' ? ['keyword-dm', 'booking', 'enquiries'] : trade === 'cafes-and-food' ? ['enquiries','reviews','booking'] : ['missed-calls','reminders','rebooking'];
   return ids.map(id => SYSTEMS.find(system => system.id === id)!);
 }
 export function getSystem(id: string): System {

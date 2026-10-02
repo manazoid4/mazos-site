@@ -41,7 +41,7 @@ export default function PricesPage() {
         <h2 id="prices-list-title" className="s-visually-hidden">Packages, add-ons and terms</h2>
         <PriceList checkHref="/free-plan" />
         <div className="s-actions">
-          <a className="button button-signal" href="/free-plan">Get a free plan and price</a>
+          <a className="button button-signal" href="/free-plan">Get my free plan</a>
         </div>
       </section>
       <section className="s-section" id="changes" aria-labelledby="changes-title">

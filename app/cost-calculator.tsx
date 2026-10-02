@@ -46,10 +46,13 @@ function Slider({ id, label, value, max, step, money, onChange }: { id: string; 
  * Monthly = per week × share lost × job value × 52 ÷ 12.
  * Prices come from offers.ts; nothing is hard-coded here.
  */
-export function CostCalculator() {
+export type CalculatorPreset = { perWeek: number; share: number; value: number; label: string };
+
+export function CostCalculator({ preset }: { preset?: CalculatorPreset } = {}) {
   const [perWeek, setPerWeek] = useState(0);
   const [share, setShare] = useState(0);
   const [value, setValue] = useState(0);
+  const usePreset = () => { if (!preset) return; setPerWeek(preset.perWeek); setShare(preset.share); setValue(preset.value); };
   const ready = perWeek > 0 && share > 0 && value > 0;
   const monthly = ready ? Math.round((perWeek * (share / 100) * value * 52) / 12) : 0;
   const shown = useCountUp(monthly);
@@ -62,6 +65,7 @@ export function CostCalculator() {
       <p className="eyebrow">Your numbers, your estimate</p>
       <h3 id="calc-title">What are missed enquiries costing you?</h3>
       <p className="ce-lede">Drag the sliders. Nothing is saved or sent.</p>
+      {preset ? <p className="ce-preset"><button type="button" className="ce-chip" onClick={usePreset}>Start with typical numbers</button> <span className="s-small">{preset.label}. Then drag to yours.</span></p> : null}
 
       <Slider id="ce-week" label="Calls or enquiries you get a week" value={perWeek} max={60} step={1} onChange={setPerWeek} />
       <div className="ce-slider">
@@ -84,7 +88,7 @@ export function CostCalculator() {
               <div><span>{STARTER.name}, once</span><i className="ce-bar-cost" style={{ width: `${costShare}%` }} /></div>
             </div>
             <p className="ce-pay">{days > 365 ? `${STARTER.name} would take over a year to pay for itself on these numbers.` : `${STARTER.name} (${STARTER.price}) would pay for itself in about ${days} ${days === 1 ? 'day' : 'days'}.`}</p>
-            <a className="button button-signal" href={`/free-plan?package=${encodeURIComponent(STARTER.name)}&src=estimator#leak-check-form`}>Get a free plan for this</a>
+            <a className="button button-signal" href={`/free-plan?package=${encodeURIComponent(STARTER.name)}&src=estimator#leak-check-form`}>Get my free plan for this</a>
           </>
         ) : (
           <p className="ce-hint">Move the sliders to see your number. The sum: per week × share lost × job value × 52 ÷ 12. Compare it with {STARTER.name} at {STARTER.price} once.</p>

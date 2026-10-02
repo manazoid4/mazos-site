@@ -1,5 +1,6 @@
 import { ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, OWN_VS_RENT, PROMISES, STARTER_GUARANTEE, TRACKS, UPGRADE_CREDITS, type Offer } from './offers';
 import { PackageLink } from './package-link';
+import { TilesJoin } from './explainers';
 
 /** "Buy now" only appears once Maz has pasted a Stripe payment link into BUY_LINKS. */
 export function BuyNow({ name }: { name: string }) {
@@ -105,6 +106,7 @@ export function PriceList({ checkHref }: { checkHref: string }) {
           <div className="s-prices">
             {lane.offers.map((offer) => <OfferCard offer={offer} checkHref={checkHref} key={offer.id} />)}
           </div>
+          {lane.id === 'systems' ? <TilesJoin /> : null}
         </div>
       ))}
       <p className="s-small">{STARTER_GUARANTEE} {UPGRADE_CREDITS.join(' ')}</p>
