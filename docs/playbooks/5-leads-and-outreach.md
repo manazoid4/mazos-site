@@ -5,7 +5,7 @@ Lead data (names, contacts, evidence) lives only in the PRIVATE repo `manazoid4/
 ## Finding leads (Lead Quality v2)
 - Find a repeated business problem with evidence and a named paid fix, not website cosmetics.
 - Tiers: Gold 8 to 10, Silver 6 to 7, then Bench. Gold does not need a limited company. Ltd status only decides whether cold email is allowed.
-- Creators and makers are valid leads. Someone good at their craft who sells by DM or a marketplace link, with no own website or branded profile, is a Brand Kit lead (£395). Upsell later to booking, email list and DM replies.
+- Creators and makers are valid leads. Someone good at their craft who sells by DM or a marketplace link, with no own website or branded profile, is a creator lead: usually the Sales Page, or Brand + Sales Page if their look is inconsistent (prices in `app/offers.ts`). Upsell later to DM replies, a welcome email series and Keep It Growing.
 
 ## Reaching the owner
 1. Find the owner by name first (Companies House officers, LinkedIn company page, About or Team page, reviews). Note name, profile URL and one personal hook in HubSpot.

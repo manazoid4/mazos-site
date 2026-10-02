@@ -6,7 +6,7 @@ import { trackConversion } from '../analytics';
 import { EnquiryRecovery } from '../enquiry-recovery';
 import { NATIVE_FORM_ENDPOINT, buildRecoveryMailto, sendPlanEnquiry } from '../enquiry';
 import { CHECK_PICK_EVENT } from '../package-link';
-import { BRAND_KIT, BRAND_KIT_EXTRAS, EXTRAS, OFFERS } from '../offers';
+import { ALL_OFFERS, BRAND_KIT_EXTRAS, EXTRAS } from '../offers';
 import { HEADACHE_PICKS, SYSTEMS } from '../systems';
 import { NICHE_GUIDES } from '../for/niches';
 
@@ -34,7 +34,7 @@ export const QUICK_PICKS = [
 ] as const;
 
 /** Packages and add-ons a price card may name. Anything else in `?package=` is ignored. */
-const KNOWN_PACKAGES: string[] = [...OFFERS.map((offer) => offer.name), ...EXTRAS.map((extra) => extra.name), BRAND_KIT.name, ...BRAND_KIT_EXTRAS.map((extra) => extra.name)];
+const KNOWN_PACKAGES: string[] = [...ALL_OFFERS.map((offer) => offer.name), ...EXTRAS.map((extra) => extra.name), ...BRAND_KIT_EXTRAS.map((extra) => extra.name)];
 
 /**
  * Auto-reply for the no-JavaScript route only. FormSubmit does not send
@@ -331,7 +331,7 @@ export function LeakCheckForm() {
           <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
             {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Get my free plan and price'}
           </button>
-          <p>I reply myself within {CHECK_REPLY_TIME} with a plan and fixed price. Free, no obligation.</p>
+          <p>I reply myself within {CHECK_REPLY_TIME} with a plan and fixed price. Free, no obligation. <a href="/privacy">How I use your details</a>.</p>
           <p className="mw-form-status" role="status" aria-live="polite">
             {submitState === 'sent' && (
               <>

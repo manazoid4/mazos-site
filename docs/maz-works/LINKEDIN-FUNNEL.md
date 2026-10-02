@@ -2,7 +2,7 @@
 
 One path from LinkedIn to a paid job:
 
-profile or post → **www.mazworks.uk/linkedin** → 15-minute call → free demo by the date agreed on the call → full plan and fixed price → build → 2 months of unlimited changes.
+profile or post → **www.mazworks.uk/linkedin** → 15-minute call → free demo by the date agreed on the call → full plan and fixed price → build → 30 days of tweaks and a 90-day fix promise.
 
 Every link carries a tag (`src=` on the site, `utm_source=` on the call link), so each request shows which LinkedIn spot sent it.
 
@@ -25,7 +25,7 @@ Research behind this: a 15-site audit plus LinkedIn best practice (Justin Welsh,
 ## Headline (pick one, 220 characters max)
 
 ```
-I build the systems UK small businesses run on | Free demo before you pay | Fixed price, 2 months of unlimited changes
+I build the systems UK small businesses run on | Free demo before you pay | Fixed price, 30 days of tweaks
 ```
 
 ```
@@ -37,7 +37,7 @@ Founder, Maz Works | Fewer missed enquiries and no-shows | Free demo first, then
 - Keep the text on the right half; your photo covers the bottom left.
 - Background: sand `#efe9dd`.
 - Line 1, ink `#1b1c19`: `See it working before you pay.`
-- Line 2 on a yellow `#ffd23f` pill: `Free demo · Fixed price · 2 months of changes`
+- Line 2 on a yellow `#ffd23f` pill: `Free demo · Fixed price · 30 days of tweaks`
 - Canva's free plan is enough. It takes about 5 minutes.
 
 ## About (paste as is)
@@ -54,7 +54,7 @@ What I set up:
 
 How it works. We have a 15-minute call. We agree what a demo should show and the date you get it. You get a free working demo by that date. If you like it, I send the full plan and one fixed price, with every item listed.  
 
-After it goes live you get 2 months of unlimited changes to what I built. Anything new is priced first, so it stays fair for both of us.
+After it goes live you get 30 days of tweaks to what I built, and anything not working as agreed is fixed free for 90 days. Anything new is priced first, so it stays fair for both of us.
 
 Automation from £195. No VAT added, no contracts, and you own everything I build.
 
@@ -100,7 +100,7 @@ I would rather show you the fix than describe it. So here is how I work now:
 
 • A 15-minute call about the job that costs you time
 • A free working demo, built around your business, by a date we agree on the call
-• If you like it, one fixed price with every item listed, then 2 months of unlimited changes once it is live
+• If you like it, one fixed price with every item listed, then 30 days of tweaks once it is live
 
 No slides and no obligation. The link is in the comments.
 

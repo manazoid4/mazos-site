@@ -44,7 +44,7 @@ export function SiteFooter() {
       </div>
 
       <div className="mw-footer-bottom">
-        <span>© 2026 Maz Works · <a href="/site-map">Site map</a></span>
+        <span>© 2026 Maz Works · <a href="/site-map">Site map</a> · <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a></span>
         <a className="mw-back-top" href="#main-content">Back to top ↑</a>
         <span>Fixed quotes · No VAT added</span>
       </div>
