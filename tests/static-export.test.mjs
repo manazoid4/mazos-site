@@ -395,7 +395,7 @@ test('runtime and static-host hardening stay explicit', async () => {
 test('project memory keeps the Maz Works Knowledge Vault identity canonical', async () => {
   const [readme, handoff] = await Promise.all([
     readFile(path.join(root, 'README.md'), 'utf8'),
-    readFile(path.join(root, 'docs', 'maz-works', 'HANDOFF.md'), 'utf8'),
+    readFile(path.join(root, 'docs', 'archive', 'HANDOFF.md'), 'utf8'),
   ]);
 
   assert.match(readme, /Maz Works Knowledge Vault/);
