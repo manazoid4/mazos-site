@@ -18,13 +18,14 @@ export default function WhatWeDo() {
   <section className="s-hero s-hero-short" id="main-content" tabIndex={-1}>
    <p className="eyebrow">What we do</p><h1>The systems your business runs on.</h1>
    <p className="s-lede">Enquiries answered. Bookings confirmed. Follow-ups sent. Less chasing for you.</p>
+   <div className="s-actions"><a className="button button-signal s-button-lg" href="/free-plan">{MAIN_CTA}</a></div>
    <nav className="s-actions" aria-label="Choose a package">{OFFERS.map(offer=><a className="button" key={offer.id} href={`#${offer.id}`}>{offer.name} · {offer.price}</a>)}</nav>
   </section>
   <section className="s-section" id="packages" aria-labelledby="packages-title"><p className="eyebrow">Three sizes of job</p><h2 id="packages-title">Pick the size, see the price.</h2>
    <ul className="s-recipes">{OFFERS.map((offer)=><li key={offer.id} id={offer.id}><strong>{offer.name}</strong><b>{offer.price}</b><span>{offer.body}</span><small>Working by: {workingBy(offer.id)}.</small></li>)}</ul>
   </section>
   <p className="s-section s-small"><a href="/prices">See every price, add-on and what’s not included →</a></p>
-  <section className="s-section" id="systems"><p className="eyebrow">Jobs you can hand over</p><h2>Pick a job. Watch it run.</h2>
+  <section className="s-section" id="systems"><p className="eyebrow">Tasks you can hand over</p><h2>Pick a task. Watch it run.</h2>
    <p>Use the tools you already have where possible. Anything bigger gets a fixed quote first.</p>
    <SystemExplorer />
   </section>

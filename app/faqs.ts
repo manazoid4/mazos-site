@@ -16,19 +16,15 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How much does it cost?',
-    answer: `Starter Automation is ${OFFERS[0].price} for one job from the automation menu, set up to run itself, with two one-day set-ups free. A Business System, where three jobs are joined up with a weekly report, starts from ${OFFERS[1].price.replace('From ', '')}. Custom Software starts from ${OFFERS[2].price.replace('From ', '')}. A Launch Page (one page that books, sells or takes enquiries) is ${getOffer('creator-launch').price}, and a Website (a Launch Page plus four more pages) starts from ${getOffer('website').price.replace('From ', '')}. Creators get the same prices: their Starter is comment-to-get-it. Every package includes free one-day set-ups. Care plans are ${CARE_PLANS[0].price} or ${CARE_PLANS[1].price}. No VAT added.`,
+    answer: `Starter Automation is ${OFFERS[0].price} for one task from the automation menu, set up to run itself, with two one-day set-ups free. A Business System, where three jobs are joined up with a weekly report, starts from ${OFFERS[1].price.replace('From ', '')}. Custom Software starts from ${OFFERS[2].price.replace('From ', '')}. A Launch Page (one page that books, sells or takes enquiries) is ${getOffer('creator-launch').price}, and a Website (a Launch Page plus four more pages) starts from ${getOffer('website').price.replace('From ', '')}. Creators get the same prices: their Starter is comment-to-get-it. Every package includes free one-day set-ups. Care plans are ${CARE_PLANS[0].price} or ${CARE_PLANS[1].price}. No VAT added.`,
   },
   {
     question: `What can the ${OFFERS[0].price} Starter do?`,
-    answer: `One job from the automation menu, set up to run itself on the tools you already use: missed-call text-back, appointment reminders, review requests, quote follow-up, payment reminders, online booking and more. Usually working within 7 working days of you adding me to your apps. ${STARTER_GUARANTEE}`,
-  },
-  {
-    question: 'How do the optional extras work?',
-    answer: `One-day set-ups are small things set up in a day, like a review QR card, a quote template or your booking link added everywhere. They come free with every package (two with a Starter), and more are ${SETUP_PRICE} each. Add-ons like Extra automation (${getExtra('Extra automation').price}) add to a package. Everything goes on the same invoice, so there are no surprise costs.`,
+    answer: `One task from the automation menu, set up to run itself on the tools you already use: missed-call text-back, appointment reminders, review requests, quote follow-up, payment reminders, online booking and more. Usually working within 7 working days of you adding me to your apps. ${STARTER_GUARANTEE}`,
   },
   {
     question: 'Can I buy an add-on on its own?',
-    answer: `Add-ons go with a package. One-day set-ups, like a Google listing tidy or a review QR card, come free with every package, so they are not sold on their own. Anything that runs on its own is a job from the automation menu: the first is Starter Automation (${OFFERS[0].price}), and Extra automation (${getExtra('Extra automation').price}) adds another to a package.`,
+    answer: `Add-ons go with a package, on the same invoice, so there are no surprise costs. One-day set-ups (small things like a review QR card, a quote template or your booking link added everywhere) come free with every package: two with a Starter, three with a Business System, and more are ${SETUP_PRICE} each. Anything that runs on its own is a task from the automation menu: the first is Starter Automation (${OFFERS[0].price}), and Extra automation (${getExtra('Extra automation').price}) adds another.`,
   },
   {
     question: 'What isn’t included?',
@@ -45,6 +41,10 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   {
     question: 'Do I own what you build?',
     answer: 'Yes. Every account stays yours. I never need your passwords; add me as a user, then remove me after.',
+  },
+  {
+    question: 'What if you’re ill or stop trading?',
+    answer: 'Everything I build runs in accounts in your name, with a short written guide, so it keeps working without me. You can remove my access at any time, and anyone you choose can pick it up from the guide.',
   },
   {
     question: 'Is this only for certain trades?',

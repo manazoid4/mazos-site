@@ -3,7 +3,7 @@ import { SiteFooter, SiteHeader } from '../site-chrome';
 import { CREATOR_OFFERS, CHANGES_WINDOW, OFFERS, PROMISES } from '../offers';
 import { DemoPath } from '../demo-path';
 import { CampaignLink } from '../campaign-link';
-import { CHECK_REPLY_TIME } from '../site';
+import { CHECK_REPLY_TIME, MAIN_CTA } from '../site';
 
 const STARTER = OFFERS[0];
 
@@ -31,6 +31,7 @@ export default function LinkedInPage() {
           <p className="eyebrow">You found me on LinkedIn</p>
           <h1 id="li-title">Hi, I’m Maz. I build the systems that stop enquiries slipping away.</h1>
           <p className="s-lede">{`Missed calls, slow replies, no-shows, chasing quotes. I set it up once so it runs on its own. From ${STARTER.price}, fixed price agreed first.`}</p>
+          <div className="s-actions"><CampaignLink className="button button-signal s-button-lg" href="/free-plan?src=linkedin#leak-check-form">{MAIN_CTA}</CampaignLink></div>
           <p className="s-small">Trainer, maker or creator? <CampaignLink href="/for/creators?src=linkedin">{`See ${CREATOR_OFFERS[0].name} · ${CREATOR_OFFERS[0].price}`}</CampaignLink>.</p>
         </div>
       </section>

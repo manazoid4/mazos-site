@@ -42,7 +42,7 @@ export default function FaqPage() {
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="faq-title">
         <p className="eyebrow">FAQ</p>
         <h1 id="faq-title">Questions? Straight answers.</h1>
-        <p>Quick, plain answers before you book a call.</p>
+        <p>Plain answers. No call needed.</p>
         <div className="mw-actions">
           <a className="button button-signal" href="/free-plan">Get my free plan</a>
         </div>

@@ -36,9 +36,9 @@ export default function Page() {
   <SiteHeader />
   <section className="s-hero s-hero-split" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
    <div><p className="eyebrow">For small businesses and teams, in any trade</p>
-    <h1 id="intro-title">Systems that turn enquiries <em>into bookings</em> and take the admin off you.</h1>
-    <p className="s-lede">Automation, connected tools and custom software. Start with one job from {STARTER.price}.</p>
-    <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">{MAIN_CTA}</a><a className="text-link" href="/demos">Or see a free demo first <span aria-hidden="true">→</span></a></div>
+    <h1 id="intro-title">Every enquiry answered and every booking confirmed, <em>without you chasing</em>.</h1>
+    <p className="s-lede">I set up the replies, reminders and follow-ups you do by hand, on apps you already use. Start with one task for {STARTER.price}.</p>
+    <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">{MAIN_CTA}</a><a className="text-link" href="/what-we-do#systems">See how it works <span aria-hidden="true">→</span></a></div>
     <p className="s-face-cta"><img src="/maz.webp" alt="" width={56} height={56} /><span><strong>Manazir Hussain</strong>, Computer Science graduate (Swansea). I plan and build every job myself.</span></p>
    </div><HeroDemo />
   </section>
@@ -46,7 +46,7 @@ export default function Page() {
    <p className="eyebrow">What do you run?</p><h2 id="build-title">Pick yours. See your problems, the fix and the price.</h2>
    <ul className="s-types" aria-label="Kinds of business">{CUSTOMER_TYPES.map(type => <li key={type.id}><a href={`/for/${type.id}`}>
     <span className="s-type-icon" aria-hidden="true"><KitIcon name={type.icon} /></span>
-    <strong>{type.name}</strong><span>{type.examples}</span><em>{type.recipes[0].name.split(':')[1]?.trim() ?? type.recipes[0].name} · {type.recipes[0].offer.price}</em>
+    <strong>{type.name}</strong><span>{type.examples}</span><em>{type.recipes[0].name.split(': ')[1]?.trim() ?? type.recipes[0].name} · {type.recipes[0].offer.price}</em>
    </a></li>)}</ul>
    <p><a className="s-details-link" href="/prices">Every price, websites and what’s included →</a></p>
   </section>
@@ -56,10 +56,10 @@ export default function Page() {
   <section className="s-section s-check" id="check" aria-labelledby="check-title">
    <div className="s-check-copy"><p className="eyebrow">Your free plan</p><h2 id="check-title">Tell me the job. I’ll send a plan and a price.</h2>
     <ul className="s-check-list">
-     <li><strong>{FREE_STEP.name}: {FREE_STEP.price}.</strong> I tell you what to automate first, or if it isn’t worth it.</li>
+     <li><strong>{FREE_STEP.name}: {FREE_STEP.price}.</strong> What to automate first, or if it isn’t worth it.</li>
      <li><strong>A written scope sheet and fixed price</strong> before you pay anything.</li>
     </ul>
-    <p className="s-small"><CallLink href={BOOKING_URL} className="text-link" placement="free-plan">Want to see it first? Book a free demo call →</CallLink></p>
+    <p className="s-small"><CallLink href={BOOKING_URL} className="text-link" placement="free-plan">Prefer to talk? Book a 15-minute call →</CallLink></p>
    </div><LeakCheckForm />
   </section>
       <section className="s-section s-about" id="about" aria-labelledby="about-title">

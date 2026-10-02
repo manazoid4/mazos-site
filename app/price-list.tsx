@@ -1,6 +1,6 @@
-import { ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, OWN_VS_RENT, PACKAGE_VALUE, PRICE_MATCH, formatPrice, PROMISES, STARTER_GUARANTEE, TRACKS, UPGRADE_CREDITS, type Offer } from './offers';
+import { ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, CHOOSER, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, OWN_VS_RENT, PACKAGE_VALUE, PRICE_MATCH, formatPrice, PROMISES, SAME_PRICE_NOTE, STARTER_GUARANTEE, UPGRADE_CREDITS, type Offer } from './offers';
 import { PackageLink } from './package-link';
-import { NextSteps, TilesJoin, TweaksTimeline } from './explainers';
+import { NextSteps, TweaksTimeline } from './explainers';
 import { CostCalculator } from './cost-calculator';
 import { SystemBuilder } from './system-builder';
 import { ChangesWindow } from './demo-path';
@@ -87,7 +87,7 @@ export function OwnVsRent() {
   );
 }
 
-/** The 16 jobs "automation" means. */
+/** The 16 tasks "automation" means. */
 export function AutomationMenu({ checkHref, only }: { checkHref: string; only?: string[] }) {
   const jobs = only ? AUTOMATION_MENU.filter((job) => only.includes(job.id)) : AUTOMATION_MENU;
   return (
@@ -118,6 +118,12 @@ function Fold({ id, title, children }: { id: string; title: string; children: Re
 export function PriceList({ checkHref }: { checkHref: string }) {
   return (
     <>
+      <h3 className="s-track-title" id="need">What do you need?</h3>
+      <ul className="s-chooser" aria-label="What do you need?">
+        {CHOOSER.map((row) => <li key={row.need}><a href={row.href}><strong>{row.need}</strong><span>{row.answer}</span></a></li>)}
+      </ul>
+      <p className="s-small">{SAME_PRICE_NOTE}</p>
+
       <h3 className="s-track-title" id="ladder">Four steps, one for every size of job</h3>
       <Ladder />
 
@@ -129,7 +135,6 @@ export function PriceList({ checkHref }: { checkHref: string }) {
           <div className="s-prices">
             {lane.offers.map((offer) => <OfferCard offer={offer} checkHref={checkHref} key={offer.id} />)}
           </div>
-          {lane.id === 'systems' ? <TilesJoin /> : null}
         </div>
       ))}
       <p className="s-small">{STARTER_GUARANTEE} {UPGRADE_CREDITS.join(' ')}</p>
@@ -147,6 +152,10 @@ export function PriceList({ checkHref }: { checkHref: string }) {
         </ul>
         <div className="s-guarantee">
           <strong>Dates and upgrades.</strong> {DELIVERY_PROMISE} You own everything I build.
+        </div>
+              <div className="s-not-included">
+          <h3>What’s not included</h3>
+          <ul>{NOT_INCLUDED.map((item) => <li key={item}>{item}</li>)}</ul>
         </div>
       </Fold>
 
@@ -198,15 +207,6 @@ export function PriceList({ checkHref }: { checkHref: string }) {
         <SystemBuilder />
       </Fold>
 
-      <Fold id="kinds" title="Four kinds of work, and what’s not included">
-        <ul className="s-tracks" aria-label="Four kinds of work">
-          {TRACKS.map((track) => <li key={track.id}><strong>{track.name}</strong><span>{track.is}</span><small>{track.example}</small></li>)}
-        </ul>
-        <div className="s-not-included">
-          <h3>What’s not included</h3>
-          <ul>{NOT_INCLUDED.map((item) => <li key={item}>{item}</li>)}</ul>
-        </div>
-      </Fold>
     </>
   );
 }
