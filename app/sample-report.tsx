@@ -34,7 +34,7 @@ const FINDINGS = [
 ];
 
 export function SampleReport() {
-  const reminders = getExtra('Appointment reminders');
+  const reminders = getExtra('Extra automation');
   const [withReminders, setWithReminders] = useState(true);
   const total = OFFERS[0].from + (withReminders ? priceAmount(reminders.price) : 0);
 
@@ -66,7 +66,7 @@ export function SampleReport() {
         <ul className="sp-quote">
           <li><span><strong>{OFFERS[0].name}</strong> every enquiry lands in one list and gets an instant reply</span><b>{OFFERS[0].price}</b></li>
           <li className={withReminders ? 'is-on' : ''}>
-            <label><input type="checkbox" checked={withReminders} onChange={(event) => setWithReminders(event.target.checked)} /><span><strong>Add-on:</strong> appointment reminders switched on</span></label>
+            <label><input type="checkbox" checked={withReminders} onChange={(event) => setWithReminders(event.target.checked)} /><span><strong>Extra automation:</strong> appointment reminders switched on</span></label>
             <b>{reminders.price}</b>
           </li>
         </ul>

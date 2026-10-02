@@ -58,7 +58,7 @@ export default function Page() {
    <SystemBuilder />
    <ul className="s-trust">{PROMISES.map(term => <li key={term.title}><strong>{term.title}</strong><span>{term.body}</span></li>)}</ul>
    <p className="s-small" id="trades">Your trade: {NICHE_GUIDES.map((guide, i) => <span key={guide.id}>{i ? ' · ' : ''}<a href={`/for/${guide.id}`}>{guide.shortName}</a></span>)}. <a href="/brand-kit">Trainer, maker or creator? See creator options</a>. Any trade welcome.</p>
-   <p className="s-small">Need somewhere customers can book or buy? <a href="/prices#websites">{getOffer('sales-page').name} {getOffer('sales-page').price}, full {getOffer('website').name} {getOffer('website').price.toLowerCase()}</a>, with the system built in.</p>
+   <p className="s-small">Need somewhere customers can book or buy? <a href="/prices#websites">{getOffer('website').name} {getOffer('website').price.toLowerCase()}</a>, with the system built in, or <a href="/prices#creators">{getOffer('creator-launch').name} {getOffer('creator-launch').price}</a> for creators.</p>
   </section>
   <section className="s-section" id="how" data-reveal aria-labelledby="how-title">
    <p className="eyebrow">See it working</p><h2 id="how-title">What changes in your day.</h2><Scenes />

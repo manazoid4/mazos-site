@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
-import { BRAND_KIT, CHANGES_WINDOW, OFFERS, PROMISES } from '../offers';
+import { CREATOR_OFFERS, CHANGES_WINDOW, OFFERS, PROMISES } from '../offers';
 import { DemoPath } from '../demo-path';
 import { CampaignLink } from '../campaign-link';
 import { CHECK_REPLY_TIME } from '../site';
@@ -31,7 +31,7 @@ export default function LinkedInPage() {
           <p className="eyebrow">You found me on LinkedIn</p>
           <h1 id="li-title">Hi, I’m Maz. I build the systems that stop enquiries slipping away.</h1>
           <p className="s-lede">{`Missed calls, slow replies, no-shows, chasing quotes. I set it up once so it runs on its own. From ${STARTER.price}, fixed price agreed first.`}</p>
-          <p className="s-small">Trainer, maker or creator? <CampaignLink href="/brand-kit?src=linkedin">{`See the ${BRAND_KIT.name} · ${BRAND_KIT.price}`}</CampaignLink>.</p>
+          <p className="s-small">Trainer, maker or creator? <CampaignLink href="/brand-kit?src=linkedin">{`See ${CREATOR_OFFERS[0].name} · ${CREATOR_OFFERS[0].price}`}</CampaignLink>.</p>
         </div>
       </section>
 

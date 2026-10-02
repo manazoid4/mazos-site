@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { EXTRAS } from './offers';
+import { OFFERS, getMenuJob } from './offers';
 
-const TEXT_BACK = EXTRAS.find((extra) => extra.name === 'Missed-call text-back')!;
+const TEXT_BACK = { name: getMenuJob('missed-call').name, price: `${OFFERS[0].name} ${OFFERS[0].price}` };
 
 /** 0 ready to call · 1 missed call · 2 text arrived · 3 booked */
 type Step = 0 | 1 | 2 | 3;
