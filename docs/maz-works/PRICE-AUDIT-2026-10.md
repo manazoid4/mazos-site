@@ -8,11 +8,11 @@ Maz asked for three things. First, creator pricing and website pricing should ma
 |---|---|---|
 | Creator £149 got five things; business £149 got one job | Creator Starter: DM job + link-in-bio + 5 templates + covers | Same **Starter £149** for everyone: one job + **2 free set-ups**. The creator version is "Starter for creators" (comment-to-get-it + profile tidy + link everywhere) |
 | One page with brand look = £595 for creators only; a business wanting one page had to buy a £1,495 website | Creator Launch £595 vs Website from £1,495 (no brand) | **Launch Page £595 for any business or creator**. **Website = Launch Page + 4 more pages**, from £1,495 (would be £1,775 bought as Launch Page + 4 × £295) |
-| Business System looked dearer than its parts (3 × £149 = £447 vs £595) | Explainer said so on /prices | System now adds team training, 3 set-ups and a month of Keep It Running free. **Bought one by one: £865, package from £595** |
+| Business System looked dearer than its parts (3 × £149 = £447 vs £595) | Explainer said so on /prices | System now adds team training, 3 set-ups and a month of Keep It Running free. **Bought one by one: £773, package from £595** |
 | /what-we-do "How it works" told people to book a call; every button says "no call needed" | Demo path | Free-plan steps (Day 0 → Day 7); demo is a side link |
 | /demos repeated "90-day fix promise" twice | | Fixed |
 
-No headline price changed: £49, £149, £595, £1,495, £2,450, £39/£149 a month all stay.
+No headline package price changed: £149, £595, £1,495, £2,450, £39/£149 a month all stay.
 
 ## 2. Can they get it cheaper elsewhere? (checked 2 Oct 2026)
 
@@ -39,6 +39,6 @@ Short answer: **some pieces, yes, and nobody can stop that.** The tools are free
 
 ## 4. Decisions (approved by Maz, 2 Oct, all built)
 
-1. **Price-match promise**: "Found the same done-for-you job cheaper from a UK business? Send me the quote. I'll match it, or tell you plainly what's different." Strong trust signal; fence it to UK businesses, same scope, one-off price.
-2. **Stop selling £49 set-ups on their own?** They're the most undercut item. v12 keeps them on sale but gives them free in packages. Dropping them would make the ladder Free → £149 → £595.
-3. **Extra automation £145 vs Starter £149**: a £4 gap reads oddly. Option: £99 per extra job to make adding jobs feel generous (that's a price cut, so it's your call).
+1. **UK price match** (built, `PRICE_MATCH`): "Found the same done-for-you job cheaper from a UK business? Send me the quote. I'll match it, or tell you plainly what's different." Strong trust signal; fence it to UK businesses, same scope, one-off price.
+2. **£49 set-ups no longer sold on their own.** They're the most undercut item. Now free in every package (two with a Starter or Launch Page, three with a Business System), £49 each beyond that. The ladder is Free → Starter £149 → Business System from £595 → Custom from £2,450.
+3. **Extra automation £99** (was £145), so adding jobs feels generous. The example plan is now £149 + £99 = £248.
