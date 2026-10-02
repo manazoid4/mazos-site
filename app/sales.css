@@ -1355,7 +1355,8 @@ main {
 .s-before-after p + p { border-left: 1px solid var(--line); }
 .s-system-detail { border-top: 1px solid var(--line); padding: 28px 0; scroll-margin-top: 90px; }
 .s-system-detail p { margin: 12px 0; }
-.s-demo-tick, .s-level-working { background: var(--ok); color: var(--surface); }
+.s-demo-tick { background: var(--ok); color: var(--surface); }
+.s-level-working { background: #d9efdc; color: var(--ink); }
 .s-home .s-hero-split > .s-small { grid-column: 1 / -1; }
 @media (max-width: 680px) {
  .s-package-detail .s-board-steps, .s-before-after { grid-template-columns: 1fr; }

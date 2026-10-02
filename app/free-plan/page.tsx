@@ -10,11 +10,11 @@ import { SampleReport } from '../sample-report';
 import { LeakCheckForm } from './leak-check-form';
 import { NICHE_GUIDES } from '../for/niches';
 
-const PAGE_URL = `${SITE_URL}/leak-check`;
+const PAGE_URL = `${SITE_URL}/free-plan`;
 
 export const metadata: Metadata = {
   title: { absolute: 'Free plan and fixed quote | Maz Works' },
-  description: fitDescription(`Tell me the job that eats your week or loses you customers. I reply within ${CHECK_REPLY_TIME} with a plan and a fixed price, from ${OFFERS[0].price}. Free, no obligation, no call needed.`),
+  description: fitDescription(`Tell me the job that eats your week or loses you customers. I usually reply within ${CHECK_REPLY_TIME} with a plan and a fixed price, from ${OFFERS[0].price}. Free, no obligation, no call needed.`),
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: 'Free Plan & Fixed Quote — Maz Works',
@@ -63,7 +63,7 @@ export default function LeakCheckPage() {
           <a className="button button-signal" href="#leak-check-form">Get my free plan and price</a>
           <a className="button" href="#leak-check-return-title">See an example</a>
         </div>
-        <p className="mw-hero-note">Written by me · emailed within {CHECK_REPLY_TIME} · no call needed</p>
+        <p className="mw-hero-note">Written by me · usually emailed within {CHECK_REPLY_TIME} · no call needed</p>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="leak-check-send-title">

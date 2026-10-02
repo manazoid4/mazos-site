@@ -192,9 +192,9 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(prices, /Team training[\s\S]{0,300}£95/);
   assert.match(prices, /Keep It Running[\s\S]{0,30}£49\/month/);
   assert.match(prices, /Keep It Growing[\s\S]{0,30}£195\/month/);
-  assert.match(prices, /\/leak-check\?package=Starter%20Automation#leak-check-form/);
+  assert.match(prices, /\/free-plan\?package=Starter%20Automation#leak-check-form/);
   assert.doesNotMatch(prices, /\bAI\b/);
-  assert.match(prices, /\/leak-check\?package=Team%20training#leak-check-form/, 'every add-on can pre-fill the free plan form');
+  assert.match(prices, /\/free-plan\?package=Team%20training#leak-check-form/, 'every add-on can pre-fill the free plan form');
   assert.match(prices, /<title>Prices and packages \| Maz Works/);
   assert.match(prices, /Every Maz Works price in one place/);
 
@@ -204,14 +204,14 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
 });
 
 test('the free plan form lets owners tap their problem, and only the no-JavaScript route asks for an auto-reply', async () => {
-  for (const route of ['/', '/leak-check']) {
+  for (const route of ['/', '/free-plan']) {
     const html = await readPage(route);
     assert.match(html, /name="_autoresponse" value="Thanks, I&#x27;ve got your message\. [^"]*within 1 working day/, `${route} form sends no instant confirmation`);
     for (const pick of ['Missed calls', 'Slow replies to enquiries', 'No-shows', 'Chasing quotes']) {
       assert.match(html, new RegExp(`<button type="button" aria-pressed="false"[^>]*>${pick}</button>`), `${route} missing quick pick ${pick}`);
     }
   }
-  const source = await readFile(path.join(root, 'app', 'leak-check', 'leak-check-form.tsx'), 'utf8');
+  const source = await readFile(path.join(root, 'app', 'free-plan', 'leak-check-form.tsx'), 'utf8');
   // FormSubmit ignores _autoresponse on AJAX, so the in-page route must neither send it nor promise an email.
   assert.doesNotMatch(source, /_autoresponse: AUTO_REPLY/);
   assert.doesNotMatch(source, /confirmation is on its way/i);
@@ -219,7 +219,7 @@ test('the free plan form lets owners tap their problem, and only the no-JavaScri
 });
 
 test('the free-check reply promise is 1 working day everywhere (Maz confirmed 27 Sep)', async () => {
-  for (const route of ['/', '/leak-check', '/contact', '/faq']) {
+  for (const route of ['/', '/free-plan', '/contact', '/faq']) {
     const html = await readPage(route);
     assert.doesNotMatch(html, /5 working days/, `${route} still promises 5 working days`);
     assert.doesNotMatch(html, /2 working days/, `${route} still promises 2 working days`);
@@ -473,7 +473,7 @@ test('retired Quick Win page stays reachable but noindexed and points to Starter
 
 test('retired offer terms are gone from every public page', async () => {
   const routes = [
-    '/', '/leak-check', '/faq',
+    '/', '/free-plan', '/faq',
     '/for/salons-and-beauty', '/for/dog-groomers', '/for/garages', '/for/cafes-and-food', '/for/clinics-and-therapists',
   ];
   // £795 was the retired Growth System; from 27 Sep (Offer v8) it is the Business System price.
@@ -503,7 +503,7 @@ test('case studies route to a plan and fixed price, not a blanket free demo', as
   for (const route of ['/work/jobfilter', '/work/scrap-finance-partners']) {
     const html = (await readPage(route)).replace(/\/demos.{0,40}?Free demo/g, '');
     assert.doesNotMatch(html, /free (live )?demo/i, `${route} still offers a free demo`);
-    assert.match(html, /\/leak-check\?src=case-[a-z-]+#leak-check-form/, `${route} should lead to the free plan form`);
+    assert.match(html, /\/free-plan\?src=case-[a-z-]+#leak-check-form/, `${route} should lead to the free plan form`);
   }
 });
 
@@ -539,9 +539,9 @@ test('no public page or shipped script leaks Maz\'s personal details', async () 
 test('every main page is one tap from the key routes, and the trade guides have a hub', async () => {
   // Navigation audit, 27 Sep: guides were only linked from inside the quote form
   // and phones only saw "Free quote". Now every page carries the same map.
-  for (const route of ['/', '/leak-check', '/contact', '/faq', '/lab', '/3d-printing', '/for', '/for/architects']) {
+  for (const route of ['/', '/free-plan', '/contact', '/faq', '/lab', '/3d-printing', '/for', '/for/architects']) {
     const html = await readPage(route);
-    for (const href of ['/prices', '/for', '/3d-printing', '/faq', '/leak-check', '/for/architects', '/3d-printing#architecture-property']) {
+    for (const href of ['/prices', '/for', '/3d-printing', '/faq', '/free-plan', '/for/architects', '/3d-printing#architecture-property']) {
       assert.ok(html.includes(`href="${href}"`), `${route} is missing a link to ${href}`);
     }
     assert.match(html, /class="mw-menu-button"[^>]*aria-expanded="false"/, `${route} has no phone menu button`);
@@ -570,7 +570,7 @@ test('six wayfinding helps big sites use are in place', async () => {
   for(const id of ['starter','business-system','custom']) assert.ok(home.includes(`/what-we-do#${id}`));
   // 2. Human site map lists every trade guide and case study.
   const map = await readPage('/site-map');
-  for (const href of ['/for/architects', '/for/garages', '/work/jobfilter', '/leak-check', '/whats-new']) assert.ok(map.includes(`href="${href}"`), `site map missing ${href}`);
+  for (const href of ['/for/architects', '/for/garages', '/work/jobfilter', '/free-plan', '/whats-new']) assert.ok(map.includes(`href="${href}"`), `site map missing ${href}`);
   // 3. What's new stays reachable from the site map; the footer links the site map (29 Sep: off the main nav).
   const news = await readPage('/whats-new');
   assert.match(news, /Easier to find your way around/);
@@ -612,7 +612,7 @@ test('the hero demo animation survives CSS minification', async () => {
 
 // 2 Oct: the site collects personal details, so it needs a privacy notice; and every job needs written terms.
 test('terms and privacy pages exist, are linked from every footer and match the price list', async () => {
-  const [home, terms, privacy, leak, sitemap] = await Promise.all([readPage('/'), readPage('/terms'), readPage('/privacy'), readPage('/leak-check'), readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8')]);
+  const [home, terms, privacy, leak, sitemap] = await Promise.all([readPage('/'), readPage('/terms'), readPage('/privacy'), readPage('/free-plan'), readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8')]);
   for (const href of ['/terms', '/privacy']) {
     assert.match(home, new RegExp(`href="${href}"`), `footer links ${href}`);
     assert.match(sitemap, new RegExp(`${href}</loc>`));

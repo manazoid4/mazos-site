@@ -43,7 +43,7 @@ const structuredData = {
       priceRange: PRICE_RANGE,
       description: 'Business automation, booking and enquiry systems, Google Business Profile setup, automated follow-up, review systems, custom software and websites for UK small businesses, with fixed quotes. Also customer-growth systems, rebuilds and physical products.',
       makesOffer: [
-        { '@type': 'Offer', name: FREE_STEP.name, price: '0', priceCurrency: 'GBP', url: `${SITE_URL}/leak-check` },
+        { '@type': 'Offer', name: FREE_STEP.name, price: '0', priceCurrency: 'GBP', url: `${SITE_URL}/free-plan` },
         ...ALL_OFFERS.map((offer) => ({
           '@type': 'Offer',
           name: offer.name,

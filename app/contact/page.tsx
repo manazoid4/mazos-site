@@ -23,9 +23,9 @@ export default function ContactPage() {
       <section className="s-hero s-hero-short" id="main-content" tabIndex={-1} aria-labelledby="contact-page-title">
         <p className="eyebrow">Contact</p>
         <h1 id="contact-page-title">Tell me what you need built.</h1>
-        <p className="s-lede">One line is enough. I reply within {CHECK_REPLY_TIME} with the next step and a fixed price.</p>
+        <p className="s-lede">One line is enough. I usually reply within {CHECK_REPLY_TIME} with the next step; the fixed price follows once I understand the job.</p>
         <div className="s-actions">
-          <a className="button button-signal s-button-lg" href="/leak-check?src=contact#leak-check-form">Get a free plan and price</a>
+          <a className="button button-signal s-button-lg" href="/free-plan?src=contact#leak-check-form">Get a free plan and price</a>
         </div>
         <p className="s-note">Want a bigger build or private demo? Use the form below.</p>
       </section>
