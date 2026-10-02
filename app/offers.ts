@@ -524,7 +524,7 @@ export function workingBy(id: OfferId): string {
   return id === 'starter' ? 'Within 7 working days of access' : 'Date agreed in your fixed quote';
 }
 /** Scales with the job, costs nothing unless a sale happens (Offer v10; was a flat £40). */
-export const REFERRAL_REWARD = '10% of their first project';
+export const REFERRAL_REWARD = '£50';
 
 export function priceAmount(price: string): number { return Number(price.replace(/[^0-9.]/g, '')); }
 export function formatPrice(amount: number): string { return `£${amount.toLocaleString('en-GB')}`; }
