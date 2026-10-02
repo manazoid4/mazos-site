@@ -7,9 +7,9 @@ for (const name of ['offers','systems']) {
  const source = await fs.readFile(`app/${name}.ts`,'utf8');
  modules[name]={};new Function('exports','require',ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText)(modules[name],()=>modules.offers);
 }
-test('all eleven systems map to an actual offer or extra and explain 3–4 steps',()=>{
- assert.equal(modules.systems.SYSTEMS.length,11);
- for(const system of modules.systems.SYSTEMS){assert.ok([...modules.offers.OFFERS,...modules.offers.EXTRAS].some(offer=>offer.name===system.offerName));assert.ok(system.steps.length>=3&&system.steps.length<=4);assert.ok(system.headache&&system.result&&system.trades.length);}
+test('all twelve systems map to an actual offer or extra and explain 3–4 steps',()=>{
+ assert.equal(modules.systems.SYSTEMS.length,12);
+ for(const system of modules.systems.SYSTEMS){assert.ok([...modules.offers.ALL_OFFERS,...modules.offers.EXTRAS].some(offer=>offer.name===system.offerName));assert.ok(system.steps.length>=3&&system.steps.length<=4);assert.ok(system.headache&&system.result&&system.trades.length);}
 });
 test('all exported pages meet title, description and skip-target budgets',async()=>{
  const files=(await fs.readdir('out',{recursive:true})).filter(file=>file.endsWith('.html')&&!/404|500|_not-found/.test(file));
