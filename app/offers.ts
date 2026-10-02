@@ -633,8 +633,8 @@ export const PRICE_RANGE = `${OFFERS[0].price}–${OFFERS[2].price.replace(/^Fro
  */
 export const BUY_LINKS: Partial<Record<string, string>> = {
   // 'Starter Automation': 'https://buy.stripe.com/…',
-  // 'Creator Starter': 'https://buy.stripe.com/…',
-  // 'One-day set-up': 'https://buy.stripe.com/…',
+  // 'Starter for creators': 'https://buy.stripe.com/…',
+  // (One-day set-ups are not sold on their own since v12, so no link for them.)
 };
 
 export function getOffer(id: OfferId): Offer {
