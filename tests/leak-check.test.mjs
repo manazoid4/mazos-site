@@ -22,7 +22,7 @@ async function readPage(route) {
 }
 
 test('the Free Plan & Fixed Quote has a dedicated shareable acquisition page', async () => {
-  const html = await readPage('/leak-check');
+  const html = await readPage('/free-plan');
 
   assert.match(html, /Free Plan &amp; Fixed Quote/);
   assert.doesNotMatch(html, /Customer Journey Review|Booking &amp; Enquiry Check/);
@@ -37,11 +37,11 @@ test('the Free Plan & Fixed Quote has a dedicated shareable acquisition page', a
   assert.match(html, /A fixed price, starting from £195/);
   assert.doesNotMatch(html, /hacked/i);
   assert.match(html, /cal\.com\/mazworks\/quick-chat/);
-  assert.match(html, /rel="canonical" href="https:\/\/www\.mazworks\.uk\/leak-check"/);
+  assert.match(html, /rel="canonical" href="https:\/\/www\.mazworks\.uk\/free-plan"/);
 });
 
 test('the free plan form puts the problem taps first, with typing and the website optional', async () => {
-  const html = await readPage('/leak-check');
+  const html = await readPage('/free-plan');
   const form = /<form[^>]*id="leak-check-form"[\s\S]*?<\/form>/.exec(html)?.[0] || '';
 
   assert.ok(form, 'free check form should be present');
@@ -52,7 +52,7 @@ test('the free plan form puts the problem taps first, with typing and the websit
   // Chips need JavaScript, so the static HTML keeps the text box required for no-JS visitors;
   // the source drops it once hydrated, when a tap is enough.
   assert.match(form, /<textarea[^>]*name="problem"[^>]*required/, 'no-JS visitors must still describe the job');
-  const source = await readFile(path.join(root, 'app', 'leak-check', 'leak-check-form.tsx'), 'utf8');
+  const source = await readFile(path.join(root, 'app', 'free-plan', 'leak-check-form.tsx'), 'utf8');
   assert.match(source, /required=\{!hydrated\}/);
   assert.ok(form.indexOf('mw-quick-picks') < form.indexOf('name="name"'), 'problem taps come before name and email');
   assert.doesNotMatch(form, /name="business"|name="nextStep"/);
@@ -60,7 +60,7 @@ test('the free plan form puts the problem taps first, with typing and the websit
 });
 
 test('the Leak Check reuses the resilient enquiry delivery path', async () => {
-  const source = await readFile(path.join(root, 'app', 'leak-check', 'leak-check-form.tsx'), 'utf8');
+  const source = await readFile(path.join(root, 'app', 'free-plan', 'leak-check-form.tsx'), 'utf8');
 
   assert.match(source, /NATIVE_FORM_ENDPOINT/);
   assert.match(source, /sendPlanEnquiry/);
@@ -77,7 +77,7 @@ test('homepage and shared navigation send the free first step to the dedicated p
   assert.match(home, /id="check"/);
   assert.match(home, /id="leak-check-form"/);
   assert.match(home, /href="#check">Get a free plan and price/);
-  assert.match(home, /href="\/leak-check">Free plan</);
+  assert.match(home, /href="\/free-plan">Free plan</);
   // One name for the free first step everywhere (29 Sep): "free plan", never "leak check" in visible copy.
   assert.doesNotMatch(home.replace(/<[^>]+>/g, ' '), /leak check/i);
   assert.doesNotMatch(home, /\?service=leak-check#contact/);

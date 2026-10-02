@@ -49,7 +49,7 @@ export function ConversionTracker() {
  useEffect(() => {
   const click = (event: MouseEvent) => { const link = (event.target as Element).closest?.('a'); if (!link) return;
    const href = link.getAttribute('href') || '';
-   if (href.includes('/leak-check') || href === '#check') trackConversion('CTA clicked', {placement: link.closest('section')?.id || 'navigation',page:location.pathname});
+   if (href.includes('/free-plan') || href === '#check') trackConversion('CTA clicked', {placement: link.closest('section')?.id || 'navigation',page:location.pathname});
   };
   document.addEventListener('click', click);
   const observer = new IntersectionObserver(entries => { for (const entry of entries) if (entry.isIntersecting) {trackConversion('What-we-do section viewed',{section:entry.target.id});observer.unobserve(entry.target);} },{threshold:0.1});

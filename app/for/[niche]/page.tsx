@@ -34,7 +34,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
   const { niche } = await params;
   const guide = getNicheGuide(niche);
   if (!guide) notFound();
-  const checkHref = `/leak-check?src=for-${guide.id}`;
+  const checkHref = `/free-plan?src=for-${guide.id}`;
 
   return (
     <main>
@@ -84,7 +84,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <h2 id="niche-fix-title">Fixed prices, agreed first.</h2>
         <ul className="mw-qw-list">
           {guide.fixes.map((fix) => (
-            <li key={fix.name} className="mw-example"><strong>{fix.name} · {fix.price}</strong><p className="mw-example-seen">{fix.body}</p><a className="mw-example-fix" href={`/leak-check?src=for-${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form`}>Get a free plan for this →</a></li>
+            <li key={fix.name} className="mw-example"><strong>{fix.name} · {fix.price}</strong><p className="mw-example-seen">{fix.body}</p><a className="mw-example-fix" href={`/free-plan?src=for-${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form`}>Get a free plan for this →</a></li>
           ))}
         </ul>
         <p className="mw-qw-lead"><a href="/prices">See all prices</a></p>

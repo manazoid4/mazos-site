@@ -34,7 +34,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/prices', label: 'Packages and prices' },
       { href: '/what-we-do', label: 'What we do' },
       { href: '/what-we-do#example', label: 'Example plan' },
-      { href: '/leak-check', label: 'Free plan and price' },
+      { href: '/free-plan', label: 'Free plan and price' },
       { href: '/contact', label: 'Bigger jobs' },
     ],
   },

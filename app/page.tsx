@@ -2,7 +2,7 @@ import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, LINKEDIN_URL } from './si
 import { SystemBuilder } from './system-builder';
 import { WalkthroughVideo } from './walkthrough-video';
 import { SiteFooter, SiteHeader } from './site-chrome';
-import { LeakCheckForm } from './leak-check/leak-check-form';
+import { LeakCheckForm } from './free-plan/leak-check-form';
 import { CallLink } from './analytics';
 import { StickyCheckCta } from './sticky-cta';
 import { HeroDemo } from './hero-demo';
@@ -45,7 +45,7 @@ export default function Page() {
     <h1 id="intro-title">Systems that turn enquiries <em>into bookings</em> and take the admin off you.</h1>
     <p className="s-lede">Automation, connected tools and custom software. Start with one job from {STARTER.price}.</p>
     <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">Get a free plan and price</a><a className="text-link" href="/demos">Or see a free demo first <span aria-hidden="true">→</span></a></div>
-    <p className="s-note">I reply within {CHECK_REPLY_TIME}. No call needed.</p>
+    <p className="s-note">I usually reply within {CHECK_REPLY_TIME}. No call needed.</p>
    </div><HeroDemo />
    <p className="s-small">Examples across packages: enquiries answered, bookings confirmed, quotes followed up. Each job is scoped and priced first.</p>
   </section>

@@ -97,7 +97,7 @@ export default function WhatsNewPage() {
           <p>I’ll send a plan and a fixed price. No call needed.</p>
         </div>
         <div className="mw-actions">
-          <a className="button button-signal" href="/leak-check?src=whats-new">Get a free plan and price</a>
+          <a className="button button-signal" href="/free-plan?src=whats-new">Get a free plan and price</a>
           <a className="text-link" href="/site-map">Site map <span aria-hidden="true">→</span></a>
         </div>
       </section>

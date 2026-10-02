@@ -56,7 +56,7 @@ const TERMS: { title: string; body: string[] }[] = [
     title: 'Other companies’ apps',
     body: [
       THIRD_PARTY_NOTE,
-      'If an app you use changes or stops working, fixing it is covered by the 90-day fix promise or a care plan, or I price it first.',
+      'If another company changes or breaks an app you use, that isn’t my build: I quote the fix first. It’s free within the first 30 days, or covered by a care plan.',
     ],
   },
   {

@@ -36,5 +36,12 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/leak-check",
+      "destination": "/free-plan",
+      "permanent": true
+    }
   ]
 }

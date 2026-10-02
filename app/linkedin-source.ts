@@ -4,7 +4,7 @@ export function linkedInHref(href: string, search: string): string {
   if (!source || !['linkedin', 'linkedin-profile', 'linkedin-featured', 'linkedin-post', 'linkedin-company'].includes(source)) return href;
   const base = 'https://www.mazworks.uk';
   const url = new URL(href, base);
-  if (url.origin === base && ['/leak-check', '/brand-kit'].includes(url.pathname)) {
+  if (url.origin === base && ['/free-plan', '/brand-kit'].includes(url.pathname)) {
     url.searchParams.set('src', source);
     return `${url.pathname}${url.search}${url.hash}`;
   }
