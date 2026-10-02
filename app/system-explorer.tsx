@@ -55,7 +55,7 @@ export function SystemExplorer() {
       {LIST.map((system, index) => {
         const isActive = active === system.id;
         return (
-          <article key={system.id} id={system.id} role="tabpanel" aria-labelledby={`se-tab-${system.id}`} className="se-panel" data-tone={index % 6} hidden={live && !isActive}>
+          <div key={system.id} id={system.id} role="tabpanel" aria-labelledby={`se-tab-${system.id}`} className="se-panel" data-tone={index % 6} hidden={live && !isActive}>
             <h3>{system.name}</h3>
             <p className="se-headache"><strong>The headache:</strong> {system.headache}.</p>
             <ol className="se-steps">
@@ -73,7 +73,7 @@ export function SystemExplorer() {
               <a className="se-try" href="/demos">See a free demo first →</a>
               {live ? <button type="button" className="se-replay" onClick={() => play(system.id)}>Replay</button> : null}
             </div>
-          </article>
+          </div>
         );
       })}
     </div>
