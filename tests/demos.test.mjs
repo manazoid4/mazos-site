@@ -30,7 +30,9 @@ test('free demo page explains the call-first route and books a call', async () =
 });
 
 test('changes after go-live are fenced so they never become free new work', async () => {
-  const demos = await readPage('/demos');
+  // Said once, on /prices (polish, 2 Oct); /demos links there.
+  assert.match(await readPage('/demos'), /href="\/prices#next"/);
+  const demos = await readPage('/prices');
   assert.match(demos, /Priced first, so it stays fair/);
   assert.match(demos, /A new page, job or feature: I price it first/);
   assert.match(demos, /fixed free for 90 days/);

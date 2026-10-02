@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description:
     'A working RotaReason v1 demo: ask for rota changes in plain English, check staffing constraints, and preview safe schedule changes before applying them.',
   alternates: { canonical: '/rotareason' },
+  // An own-product demo, not something a small business buys today: kept out of search (audit 2 Oct).
+  robots: { index: false, follow: true },
 };
 
 export default function RotaReasonPage() {

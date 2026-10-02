@@ -6,7 +6,7 @@ import { CONTACT_EMAIL, LINKEDIN_URL } from './site';
 export function SiteHeader() {
   return (
     <header className="site-header mw-site-header">
-      <a className="brand" href="/" aria-label="Maz Works, Manazir Hussain: home">
+      <a className="brand" href="/">
         <span className="brand-mark">MW</span>
         <span><strong>Maz Works</strong><small>Manazir Hussain</small></span>
       </a>

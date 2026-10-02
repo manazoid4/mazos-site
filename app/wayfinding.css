@@ -5,7 +5,7 @@
 .mw-site-header nav { gap: 18px; }
 .mw-site-header nav a.mw-nav-link { display: inline-flex; }
 .mw-menu { position: relative; display: none; }
-.mw-menu-button { min-height: 40px; padding: 0 12px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-size: .8rem; font-weight: 700; cursor: pointer; }
+.mw-menu-button { min-height: 44px; padding: 0 12px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-size: .8rem; font-weight: 700; cursor: pointer; }
 .mw-menu-icon, .mw-menu-icon::before, .mw-menu-icon::after { display: block; width: 14px; height: 2px; background: currentColor; position: relative; }
 .mw-menu-icon::before, .mw-menu-icon::after { content: ""; position: absolute; left: 0; }
 .mw-menu-icon::before { top: -5px; }

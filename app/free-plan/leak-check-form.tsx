@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { CHECK_REPLY_TIME, CONTACT_EMAIL } from '../site';
+import { CHECK_REPLY_TIME, CONTACT_EMAIL, MAIN_CTA } from '../site';
 import { trackConversion } from '../analytics';
 import { EnquiryRecovery } from '../enquiry-recovery';
 import { NATIVE_FORM_ENDPOINT, buildRecoveryMailto, sendPlanEnquiry } from '../enquiry';
@@ -339,7 +339,7 @@ export function LeakCheckForm() {
 
         <div className="mw-form-submit">
           <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
-            {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Get my free plan and price'}
+            {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : MAIN_CTA}
           </button>
           <p>I usually reply myself within {CHECK_REPLY_TIME} with a plan and fixed price. Free, no obligation. <a href="/privacy">How I use your details</a>.</p>
           <p className="mw-form-status" role="status" aria-live="polite">

@@ -35,7 +35,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/prices', label: 'Packages and prices' },
       { href: '/what-we-do', label: 'What we do' },
       { href: '/what-we-do#example', label: 'Example plan' },
-      { href: '/free-plan', label: 'Free plan and price' },
+      { href: '/free-plan', label: 'Get my free plan' },
       { href: '/contact', label: 'Bigger jobs' },
     ],
   },
@@ -74,6 +74,6 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
 export const HOME_SECTIONS: NavLink[] = [
   { href: '#build', label: 'What I build' },
   { href: '#how', label: 'See it working' },
-  { href: '#check', label: 'Free plan and prices' },
+  { href: '#check', label: 'Get my free plan' },
   { href: '#about', label: 'About Maz' },
 ];

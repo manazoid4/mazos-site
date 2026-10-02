@@ -9,21 +9,20 @@ export const dynamic = 'force-static';
 export default function sitemap(): MetadataRoute.Sitemap {
   const updated = new Date('2026-09-21');
   return [
-    { url: `${SITE_URL}/what-we-do`, lastModified: new Date('2026-09-30'), changeFrequency: 'monthly', priority: 0.95 },
-    { url: SITE_URL, lastModified: new Date('2026-09-28'), changeFrequency: 'monthly', priority: 1 },
-    { url: `${SITE_URL}/free-plan`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.95 },
-    { url: `${SITE_URL}/prices`, lastModified: new Date('2026-09-28'), changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE_URL}/what-we-do`, lastModified: new Date('2026-10-02'), changeFrequency: 'monthly', priority: 0.95 },
+    { url: SITE_URL, lastModified: new Date('2026-10-02'), changeFrequency: 'monthly', priority: 1 },
+    { url: `${SITE_URL}/free-plan`, lastModified: new Date('2026-10-02'), changeFrequency: 'monthly', priority: 0.95 },
+    { url: `${SITE_URL}/prices`, lastModified: new Date('2026-10-02'), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/contact`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/lab`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.5 },
     { url: `${SITE_URL}/demos`, lastModified: updated, changeFrequency: 'monthly', priority: 0.95 },
     { url: `${SITE_URL}/3d-printing`, lastModified: updated, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${SITE_URL}/for`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${SITE_URL}/for`, lastModified: new Date('2026-10-02'), changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITE_URL}/site-map`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.3 },
-    { url: `${SITE_URL}/whats-new`, lastModified: new Date('2026-09-27'), changeFrequency: 'weekly', priority: 0.4 },
+    { url: `${SITE_URL}/whats-new`, lastModified: new Date('2026-10-02'), changeFrequency: 'weekly', priority: 0.4 },
     { url: `${SITE_URL}/faq`, lastModified: updated, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE_URL}/terms`, lastModified: new Date('2026-10-02'), changeFrequency: 'yearly', priority: 0.3 },
     { url: `${SITE_URL}/privacy`, lastModified: new Date('2026-10-02'), changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${SITE_URL}/rotareason`, lastModified: updated, changeFrequency: 'monthly', priority: 0.7 },
     ...CUSTOMER_TYPES.map((type) => ({
       url: `${SITE_URL}/for/${type.id}`,
       lastModified: new Date('2026-10-02'),
@@ -32,7 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...NICHE_GUIDES.map((guide) => ({
       url: `${SITE_URL}/for/${guide.id}`,
-      lastModified: new Date('2026-09-26'),
+      lastModified: new Date('2026-10-02'),
       changeFrequency: 'monthly' as const,
       priority: 0.85,
     })),

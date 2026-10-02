@@ -11,7 +11,8 @@ export type MazWorksUpdate = {
  * Customer-facing changes only. Keep this newest-first and factual: no invented
  * outcomes, usage numbers or performance claims.
  */
-export const MAZ_WORKS_UPDATES: MazWorksUpdate[] = [
+const ALL_UPDATES: MazWorksUpdate[] = [
+ { id:'pick-your-business',publishedAt:'2026-10-02',label:'NEW',title:'Pick your kind of business, see your fix and price',summary:'Trades, appointment businesses, creators and small offices each get one short page: your problems, three fixed-price ways in and a demo business.',items:['One short page per kind of business, with the problem, the fix and the price.','Every price on one page, with the details folded away until you want them.','One main button everywhere: Get my free plan.'] },
  { id:'build-my-system',publishedAt:'2026-09-30',label:'NEW',title:'Build your own system and see the price',summary:'Pick your trade and what costs you time, and see the systems and a fixed price straight away.',items:['Build my system: tap your headaches and send the plan straight to the free plan form.','A cost calculator that uses only your own numbers.','The phone on the homepage now plays: call, get the text, book.','Each trade guide shows its three most useful systems working.','The free plan form is now two short steps with a summary before you send.'] },
  { id:'systems-and-free-plan',publishedAt:'2026-09-30',label:'BETTER',title:'See the system before you ask',summary:'A shorter homepage and a fuller walkthrough of each package.',items:['See what happens from first enquiry to the next action, with prices alongside.','Free-plan requests now use an instant confirmation email, with a personal reply within 1 working day.'] },
   {
@@ -92,6 +93,9 @@ export const MAZ_WORKS_UPDATES: MazWorksUpdate[] = [
     ],
   },
 ];
+
+/** Only the last three updates are shown (audit 2 Oct): this page stays short and current. */
+export const MAZ_WORKS_UPDATES: MazWorksUpdate[] = ALL_UPDATES.slice(0, 3);
 
 export const LATEST_MAZ_WORKS_UPDATE = MAZ_WORKS_UPDATES[0];
 

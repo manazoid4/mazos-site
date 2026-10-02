@@ -1,4 +1,5 @@
 'use client';
+import { MAIN_CTA } from './site';
 
 import { useEffect, useRef, useState } from 'react';
 import { SYSTEMS, systemPrice } from './systems';
@@ -54,7 +55,7 @@ export function SystemExplorer() {
       {LIST.map((system, index) => {
         const isActive = active === system.id;
         return (
-          <article key={system.id} id={system.id} role="tabpanel" aria-labelledby={`se-tab-${system.id}`} className="se-panel" data-tone={index % 6} hidden={live && !isActive}>
+          <div key={system.id} id={system.id} role="tabpanel" aria-labelledby={`se-tab-${system.id}`} className="se-panel" data-tone={index % 6} hidden={live && !isActive}>
             <h3>{system.name}</h3>
             <p className="se-headache"><strong>The headache:</strong> {system.headache}.</p>
             <ol className="se-steps">
@@ -68,11 +69,11 @@ export function SystemExplorer() {
             <p className={`se-result${!live || (isActive && step >= system.steps.length) ? ' is-on' : ''}`}><strong>{system.result}</strong></p>
             <p className="se-price">{systemPrice(system)}</p>
             <div className="se-actions">
-              <a className="button button-signal" href={`/free-plan?package=${encodeURIComponent(system.offerName)}`}>Ask for this system</a>
+              <a className="button button-signal" href={`/free-plan?package=${encodeURIComponent(system.offerName)}`}>{MAIN_CTA}</a>
               <a className="se-try" href="/demos">See a free demo first →</a>
               {live ? <button type="button" className="se-replay" onClick={() => play(system.id)}>Replay</button> : null}
             </div>
-          </article>
+          </div>
         );
       })}
     </div>

@@ -1,6 +1,10 @@
 import { ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, OWN_VS_RENT, PROMISES, STARTER_GUARANTEE, TRACKS, UPGRADE_CREDITS, type Offer } from './offers';
 import { PackageLink } from './package-link';
-import { TilesJoin } from './explainers';
+import { NextSteps, TilesJoin, TweaksTimeline } from './explainers';
+import { CostCalculator } from './cost-calculator';
+import { SystemBuilder } from './system-builder';
+import { ChangesWindow } from './demo-path';
+import { MAIN_CTA } from './site';
 
 /** "Buy now" only appears once Maz has pasted a Stripe payment link into BUY_LINKS. */
 export function BuyNow({ name }: { name: string }) {
@@ -32,7 +36,7 @@ export function OfferCard({ offer, checkHref }: { offer: Offer; checkHref: strin
         <p><strong>Changes:</strong> {offer.changes}</p>
         <p><strong>Next step:</strong> {offer.upsell}</p>
       </details>
-      <PackageLink href={checkHref} pick={offer.name}>Get my free plan for this <span aria-hidden="true">→</span></PackageLink>
+      <PackageLink href={checkHref} pick={offer.name}>Get my free plan <span aria-hidden="true">→</span></PackageLink>
       <BuyNow name={offer.name} />
     </article>
   );
@@ -93,6 +97,16 @@ export function AutomationMenu({ checkHref, only }: { checkHref: string; only?: 
  * own-vs-rent, care plans and what's not included.
  * Lives on /prices so the homepage can stay a short page that sells one first step.
  */
+/** A folded section on /prices (audit 2 Oct: lanes first, everything else one tap away). */
+function Fold({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
+  return (
+    <details className="s-fold" id={id}>
+      <summary>{title}</summary>
+      <div>{children}</div>
+    </details>
+  );
+}
+
 export function PriceList({ checkHref }: { checkHref: string }) {
   return (
     <>
@@ -111,17 +125,26 @@ export function PriceList({ checkHref }: { checkHref: string }) {
       ))}
       <p className="s-small">{STARTER_GUARANTEE} {UPGRADE_CREDITS.join(' ')}</p>
 
-      <h3 className="s-track-title" id="automation-menu">What “automation” means: pick from the menu</h3>
-      <p className="s-small">A Starter is one of these. A Business System is three joined up, plus the weekly report.</p>
-      <AutomationMenu checkHref={checkHref} />
+      <Fold id="automation-menu" title="The automation menu: what each job does">
+        <p className="s-small">A Starter is one of these. A Business System is three joined up, plus the weekly report.</p>
+        <AutomationMenu checkHref={checkHref} />
+      </Fold>
 
-      <div className="s-compare" id="compare">
-        <h3>Compare packages</h3>
-        <p className="s-small s-compare-hint">Swipe the table to see all three.</p>
+      <Fold id="always-included" title="Always included, whichever step you pick">
+        <AlwaysIncluded />
+        <ul className="s-promises" aria-label="Included with every package">
+          {PROMISES.map((promise) => <li key={promise.title}><strong>{promise.title}</strong><span>{promise.body}</span></li>)}
+        </ul>
+        <div className="s-guarantee">
+          <strong>Dates and upgrades.</strong> {DELIVERY_PROMISE} You own everything I build.
+        </div>
+      </Fold>
+
+      <Fold id="compare" title="Compare the three packages">
         <div className="s-compare-scroll" tabIndex={0} role="region" aria-label="Package comparison table">
           <table>
             <thead>
-              <tr><th scope="col"><span className="s-visually-hidden">What you get</span></th>{OFFERS.map((offer) => <th scope="col" key={offer.id} tabIndex={0}>{offer.name}</th>)}</tr>
+              <tr><th scope="col"><span className="s-visually-hidden">What you get</span></th>{OFFERS.map((offer) => <th scope="col" key={offer.id}>{offer.name}</th>)}</tr>
             </thead>
             <tbody>
               {COMPARISON.map(({ row, values }) => (
@@ -130,46 +153,50 @@ export function PriceList({ checkHref }: { checkHref: string }) {
             </tbody>
           </table>
         </div>
-      </div>
+      </Fold>
 
-      <h3 className="s-track-title" id="always-included">Always included, whichever step you pick</h3>
-      <AlwaysIncluded />
-
-      <ul className="s-tracks" aria-label="Four kinds of work">
-        {TRACKS.map((track) => <li key={track.id}><strong>{track.name}</strong><span>{track.is}</span><small>{track.example}</small></li>)}
-      </ul>
-
-      <ul className="s-promises" aria-label="Included with every package">
-        {PROMISES.map((promise) => <li key={promise.title}><strong>{promise.title}</strong><span>{promise.body}</span></li>)}
-      </ul>
-
-      <div className="s-extras" id="extras">
-        <h3>One-day set-ups and add-ons</h3>
-        {EXTRA_GROUPS.map((group) => (
-          <div className="s-extras-group" key={group.id} id={group.id}>
-            <h4>{group.title}</h4>
-            <p className="s-small">{group.note}</p>
-            <ul>
-              {group.items.map((extra) => <li key={extra.name}><div><strong>{extra.name}</strong><span>{extra.what}</span><PackageLink href={checkHref} pick={extra.name}>Ask for this <span aria-hidden="true">→</span></PackageLink></div><strong className="s-extras-price">{extra.price}</strong></li>)}
-            </ul>
+      <Fold id="extras" title="One-day set-ups, add-ons and care">
+        <div className="s-extras">
+          {EXTRA_GROUPS.map((group) => (
+            <div className="s-extras-group" key={group.id} id={group.id}>
+              <h4>{group.title}</h4>
+              <p className="s-small">{group.note}</p>
+              <ul>
+                {group.items.map((extra) => <li key={extra.name}><div><strong>{extra.name}</strong><span>{extra.what}</span><PackageLink href={checkHref} pick={extra.name}>{MAIN_CTA} <span aria-hidden="true">→</span></PackageLink></div><strong className="s-extras-price">{extra.price}</strong></li>)}
+              </ul>
+            </div>
+          ))}
+          <div className="s-extras-care" id="care">
+            <h4>After it’s built</h4>
+            {CARE_PLANS.map((plan) => <p key={plan.id}><strong>{plan.name}, {plan.price}.</strong> {plan.body}</p>)}
           </div>
-        ))}
-        <div className="s-extras-care" id="care">
-          <h4>After it’s built</h4>
-          {CARE_PLANS.map((plan) => <p key={plan.id}><strong>{plan.name}, {plan.price}.</strong> {plan.body}</p>)}
         </div>
-      </div>
+      </Fold>
 
-      <OwnVsRent />
+      <Fold id="numbers" title="What is it costing you now? Own it vs rent it">
+        <CostCalculator />
+        <OwnVsRent />
+      </Fold>
 
-      <div className="s-not-included">
-        <h3>What’s not included</h3>
-        <ul>{NOT_INCLUDED.map((item) => <li key={item}>{item}</li>)}</ul>
-      </div>
+      <Fold id="next" title="What happens next, and the 30 days of tweaks">
+        <NextSteps />
+        <TweaksTimeline />
+        <ChangesWindow />
+      </Fold>
 
-      <div className="s-guarantee">
-        <strong>Dates and upgrades.</strong> {DELIVERY_PROMISE} You own everything I build.
-      </div>
+      <Fold id="build" title="Build your own: tap your headaches, see the price">
+        <SystemBuilder />
+      </Fold>
+
+      <Fold id="kinds" title="Four kinds of work, and what’s not included">
+        <ul className="s-tracks" aria-label="Four kinds of work">
+          {TRACKS.map((track) => <li key={track.id}><strong>{track.name}</strong><span>{track.is}</span><small>{track.example}</small></li>)}
+        </ul>
+        <div className="s-not-included">
+          <h3>What’s not included</h3>
+          <ul>{NOT_INCLUDED.map((item) => <li key={item}>{item}</li>)}</ul>
+        </div>
+      </Fold>
     </>
   );
 }
