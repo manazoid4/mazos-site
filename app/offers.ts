@@ -441,19 +441,21 @@ export const CHANGES_WINDOW = {
 
 /**
  * The free demo (Maz, 30 Sep): not a self-serve toy and not a blanket promise.
+ * Fenced 2 Oct: demos only for jobs from the Business System / Sales Page up.
+ * A demo for a £195 job costs more time than the job pays; small jobs get a written plan.
  * A short call first; on the call we agree what the demo shows and the date it
  * arrives. Then the full plan, then the build, then the changes window.
  */
 export const DEMO_STEPS: { title: string; body: string; note: string }[] = [
   { title: 'Book a 15-minute call', body: 'Tell me the job that costs you time or customers. No slides, no pressure.', note: 'Free' },
-  { title: 'We agree the demo', body: 'On the call we agree what the demo shows and the date you get it. If a demo won’t help, I say so and send a plan instead.', note: 'Date agreed on the call' },
+  { title: 'We agree the demo', body: 'For bigger jobs (a Business System, Sales Page, Website or Custom Software) we agree what the demo shows and the date you get it. Smaller jobs get a written plan instead, which is quicker for you.', note: 'Date agreed on the call' },
   { title: 'Your free demo arrives', body: 'A working demo built around your business, sent by the date we agreed. Try it on your own phone.', note: 'Free, no obligation' },
   { title: 'Happy with it? Your full plan', body: 'A written plan and one fixed price. Every item listed and invoiced clearly. No extra charges later.', note: 'Nothing to pay yet' },
   { title: 'I build it, you see it working', body: 'You see it working before it goes live, then you get 30 days of tweaks.', note: 'Fixed price' },
 ];
 
 export const PROMISES: { title: string; body: string }[] = [
-  { title: 'Free demo first', body: 'After a short call, you get a working demo. No charge.' },
+  { title: 'Free demo first', body: 'After a short call, a working demo for bigger jobs, or a written plan for small ones. No charge.' },
   { title: 'One fixed price', body: 'You know the full cost before any work starts.' },
   { title: 'No contracts', body: 'Every package is a one-off. Care plans are monthly, cancel any time.' },
 ];

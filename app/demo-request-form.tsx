@@ -209,7 +209,7 @@ export function DemoRequestForm() {
         <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
           {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Send enquiry'}
         </button>
-        <p>Sent directly from this form to my inbox. No account or booking step.</p>
+        <p>Sent directly from this form to my inbox. No account or booking step. <a href="/privacy">How I use your details</a>.</p>
         <p id="business-enquiry-error" className="mw-form-status mw-form-error" role="alert">{validationError}</p>
         <p className="mw-form-status" role="status" aria-live="polite">
           {submitState === 'sent' && (

@@ -68,6 +68,7 @@ export function NewsletterSignup() {
           </div>
           {/* Honeypot: hidden from people and screen readers, filled only by bots. */}
           <input className="mw-newsletter-trap" name="website" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+          <p className="s-small">Unsubscribe any time. <a href="/privacy">Privacy</a>.</p>
           {message ? <p className="mw-newsletter-error" id="newsletter-message" role="alert">{message}</p> : null}
         </form>
       )}
