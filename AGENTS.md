@@ -31,6 +31,7 @@ Start: read the private `manazoid4/unified-memory-database` → `handoffs/LATEST
 ## Working with Maz (read every session)
 
 - **Start and end with the handover.** Read `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/HANDOVER.md` first (public summary: `docs/maz-works/SESSION-HANDOVER.md`). Before a session ends with work open, overwrite the private `HANDOVER.md` (4 sentence summary, Maz's open to-dos, next work), then update the public copy with no lead names or contact details.
+- **Every PR has a "Test it yourself" checklist** (Maz, 2 Oct): what works now, then plain tick-box steps he can do on his phone or browser, each with the result he should see, then what's not done. Template: `.github/pull_request_template.md`.
 - **Always end every reply with a one-paragraph summary** in plain words (Maz, 28 Sep, repeated several times). Keep replies short: what he must do, and what changed. Details belong in PRs.
 - **Remind him of his open to-dos** at the start and end of each session. He asks for this; he forgets things like posting. The list lives in the private memory repo: `manazoid4/unified-memory-database` → `spine/projects/mazworks-site/STATUS.md` → "Maz's open to-dos". If a session ends with one still open, schedule a reminder with `send_later`.
 - Prefer free tiers and say plainly when something costs money.
