@@ -39,7 +39,7 @@ export function TypePage({ type }: { type: CustomerType }) {
         <p className="eyebrow">Sound familiar?</p>
         <h2 id="type-pains-title">Your problem, and the job that fixes it.</h2>
         <ul className="s-painfix">
-          {type.pains.filter((row) => row.starter).slice(0, 4).map((row) => (
+          {type.pains.filter((row) => row.starter).slice(0, 3).map((row) => (
             <li key={row.pain}><span>“{row.pain}”</span><strong>{getMenuJob(row.starter!).name}</strong></li>
           ))}
         </ul>
