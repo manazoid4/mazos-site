@@ -23,7 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/faq`, lastModified: updated, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE_URL}/terms`, lastModified: new Date('2026-10-02'), changeFrequency: 'yearly', priority: 0.3 },
     { url: `${SITE_URL}/privacy`, lastModified: new Date('2026-10-02'), changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${SITE_URL}/rotareason`, lastModified: updated, changeFrequency: 'monthly', priority: 0.7 },
     ...CUSTOMER_TYPES.map((type) => ({
       url: `${SITE_URL}/for/${type.id}`,
       lastModified: new Date('2026-10-02'),

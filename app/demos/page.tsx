@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { CHANGES_WINDOW, DELIVERY_PROMISE } from '../offers';
 import { CHECK_REPLY_TIME } from '../site';
-import { ChangesWindow, DemoPath } from '../demo-path';
+import { DemoPath } from '../demo-path';
 
 const DEMO_DESCRIPTION = 'Book a 15-minute call and get a free working demo built around your business, by a date we agree. Then one fixed price and 30 days of tweaks.';
 
@@ -43,15 +43,10 @@ export default function DemosPage() {
         <h1 id="demos-title">A free demo, <em>built around your business</em>.</h1>
         <p className="s-lede">A short call first. Then a working demo of your system, by a date we agree on the call. Only if you like it do we talk price.</p>
         <DemoPath source="demos" />
-        <p className="s-small">Prefer to write it down? <a href="/free-plan?src=demos-page#leak-check-form">Get my free plan instead</a>. I usually reply within {CHECK_REPLY_TIME}.</p>
+        <p className="s-small">I usually reply within {CHECK_REPLY_TIME}.</p>
       </section>
 
-      <section className="s-section" id="changes" aria-labelledby="changes-title">
-        <p className="eyebrow">After it goes live</p>
-        <h2 id="changes-title">{CHANGES_WINDOW.name}, no extra charge.</h2>
-        <ChangesWindow />
-        
-      </section>
+      <p className="s-section s-small"><a className="s-details-link" href="/prices#next">After it goes live: {CHANGES_WINDOW.name} and the 90-day fix promise →</a></p>
 
       <section className="s-section" id="questions" aria-labelledby="questions-title">
         <p className="eyebrow">Straight answers</p>

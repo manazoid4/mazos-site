@@ -60,7 +60,7 @@ export default function LeakCheckPage() {
         <h1 id="leak-check-title">Tell me the job. I’ll send a plan and a price.</h1>
         <p>Tell me what you keep chasing, copying or doing by hand. I’ll tell you what I’d change and what it costs.</p>
         <div className="mw-actions">
-          <a className="button button-signal" href="#leak-check-form">Get my free plan and price</a>
+          <a className="button button-signal" href="#leak-check-form">Get my free plan</a>
           <a className="button" href="#leak-check-return-title">See an example</a>
         </div>
         <p className="mw-hero-note">Written by me · usually emailed within {CHECK_REPLY_TIME} · no call needed</p>

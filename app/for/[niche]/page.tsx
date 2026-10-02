@@ -100,7 +100,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <h2 id="niche-fix-title">Fixed prices, agreed first.</h2>
         <ul className="mw-qw-list">
           {guide.fixes.map((fix) => (
-            <li key={fix.name} className="mw-example"><strong>{fix.name} · {fix.price}</strong><p className="mw-example-seen">{fix.body}</p><a className="mw-example-fix" href={`/free-plan?src=for-${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form`}>Get my free plan for this →</a></li>
+            <li key={fix.name} className="mw-example"><strong>{fix.name} · {fix.price}</strong><p className="mw-example-seen">{fix.body}</p><a className="mw-example-fix" href={`/free-plan?src=for-${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form`}>Get my free plan →</a></li>
           ))}
         </ul>
         <p className="mw-qw-lead"><a href="/prices">See all prices</a>{parent ? <> · <a href={`/for/${parent.id}`}>Every fix for {parent.shortName.toLowerCase()}</a></> : null}</p>

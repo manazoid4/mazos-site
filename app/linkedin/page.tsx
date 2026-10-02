@@ -37,9 +37,9 @@ export default function LinkedInPage() {
 
       <section className="s-section" aria-labelledby="li-demo-title">
         <p className="eyebrow">See it before you pay</p>
-        <h2 id="li-demo-title">Start with a free demo.</h2>
+        <h2 id="li-demo-title">Start with a free plan.</h2>
         <DemoPath source="linkedin" />
-        <p className="s-small">Prefer to write it down? <CampaignLink href="/free-plan?src=linkedin#leak-check-form">Get my free plan</CampaignLink>. I usually reply within {CHECK_REPLY_TIME}.</p>
+        <p className="s-small">I usually reply within {CHECK_REPLY_TIME}.</p>
         <div className="s-faq"><details>
           <summary>What do the 30 days of tweaks cover?</summary>
           <p>{CHANGES_WINDOW.body}</p>

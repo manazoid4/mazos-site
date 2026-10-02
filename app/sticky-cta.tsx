@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { CHECK_REPLY_TIME } from './site';
+import { CHECK_REPLY_TIME, MAIN_CTA } from './site';
 
 /**
  * Phone-only bar that keeps the free plan one tap away (Batch 3). It appears
@@ -30,7 +30,7 @@ export function StickyCheckCta({ href, hideWhenVisible }: { href: string; hideWh
 
   return (
     <div className={`s-sticky${hidden ? ' s-sticky-hidden' : ''}`} aria-hidden={hidden || undefined}>
-      <a className="button button-signal" href={href} tabIndex={hidden ? -1 : undefined}>Free plan and price</a>
+      <a className="button button-signal" href={href} tabIndex={hidden ? -1 : undefined}>{MAIN_CTA}</a>
       <span>Free · reply in {CHECK_REPLY_TIME}</span>
     </div>
   );

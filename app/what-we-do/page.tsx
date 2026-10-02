@@ -1,13 +1,11 @@
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { CHANGES_WINDOW, OFFERS, workingBy } from '../offers';
-import { ChangesWindow, DemoPath } from '../demo-path';
-import { CHECK_REPLY_TIME } from '../site';
+import { DemoPath } from '../demo-path';
+import { CHECK_REPLY_TIME, MAIN_CTA } from '../site';
 import { SampleReport } from '../sample-report';
 import { ScrollReveal } from '../scroll-reveal';
 import { ServiceSchema } from '../service-schema';
-import { SystemBuilder } from '../system-builder';
-import { CostCalculator } from '../cost-calculator';
 import { DeliveryTabs } from '../delivery-tabs';
 import { SystemExplorer } from '../system-explorer';
 import { StickyCheckCta } from '../sticky-cta';
@@ -23,15 +21,12 @@ export default function WhatWeDo() {
    <p className="s-lede">Enquiries answered. Bookings confirmed. Follow-ups sent. Less chasing for you.</p>
    <nav className="s-actions" aria-label="Choose a package">{OFFERS.map(offer=><a className="button" key={offer.id} href={`#${offer.id}`}>{offer.name} · {offer.price}</a>)}</nav>
   </section>
-  <section className="s-section s-build" id="build-my-system" aria-labelledby="build-my-system-title"><p className="eyebrow">Your business, your plan</p><h2 id="build-my-system-title">Build your system in two taps.</h2>
-   <div className="s-build-grid"><SystemBuilder /></div>
-  </section>
   {OFFERS.map((offer,index)=><section className="s-section s-package-detail" id={offer.id} key={offer.id} aria-labelledby={`${offer.id}-title`} style={{ viewTransitionName: `package-${offer.id}` }}>
    <p className="eyebrow">{index === 0 ? 'Start with one repeated job' : index === 1 ? 'Join up several jobs' : 'When normal apps do not fit'}</p>
    <h2 id={`${offer.id}-title`}>{offer.name}</h2><p className="s-price-amount">{offer.price}</p><p>{offer.body}</p>
    <ul>{offer.bullets.map(bullet=><li key={bullet}>{bullet}</li>)}</ul>
    <p><strong>Working by: {workingBy(offer.id)}.</strong></p>
-   <a className="button button-signal" href={`/free-plan?package=${encodeURIComponent(offer.name)}`}>Get my free plan for this</a>
+   <a className="button button-signal" href={`/free-plan?package=${encodeURIComponent(offer.name)}`}>{MAIN_CTA}</a>
   </section>)}
   <p className="s-section s-small"><a href="/prices">See every price, add-on and what’s not included →</a></p>
   <section className="s-section" id="systems"><p className="eyebrow">Jobs you can hand over</p><h2>Pick a job. Watch it run.</h2>
@@ -40,12 +35,11 @@ export default function WhatWeDo() {
   </section>
   <section className="s-section" id="process"><p className="eyebrow">From first call to live</p><h2>How it works.</h2>
    <DemoPath source="what-we-do" />
-   <h3>{CHANGES_WINDOW.name}</h3><ChangesWindow />
-   <CostCalculator />
+   <p><a className="s-details-link" href="/prices#next">{CHANGES_WINDOW.name}, what’s included and the cost calculator →</a></p>
    <DeliveryTabs />
   </section>
   <section className="s-section" id="example"><h2>An example of the plan you get.</h2><SampleReport /></section>
-  <section className="s-final"><h2>Start with the job that costs you time.</h2><p>A personal reply, usually within {CHECK_REPLY_TIME}.</p><a className="button button-signal" href="/free-plan">Get my free plan</a></section>
+  <section className="s-final"><h2>Start with the job that costs you time.</h2><p>A personal reply, usually within {CHECK_REPLY_TIME}.</p><a className="button button-signal" href="/free-plan">{MAIN_CTA}</a></section>
   <SiteFooter /><StickyCheckCta href="/free-plan" /><ScrollReveal />
  </main>;
 }

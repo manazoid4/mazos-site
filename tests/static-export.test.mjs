@@ -456,19 +456,13 @@ test('every sitemap entry points at a page that was actually exported', async ()
   assert.deepEqual(broken, [], `sitemap points at missing pages: ${broken.join(', ')}`);
 });
 
-test('retired Quick Win page stays reachable but noindexed and points to Starter Automation', async () => {
-  const html = await readPage('/quick-win');
-  assert.match(html, /noindex/);
-  assert.match(html, /Starter Automation/);
-  assert.match(html, /£149/);
-  assert.match(html, /\?service=repair#contact/);
-  assert.doesNotMatch(html, /£150/);
-
+test('retired Quick Win page redirects to /prices and is never linked', async () => {
+  const vercel = JSON.parse(await readFile(path.join(exportRoot, '..', 'vercel.json'), 'utf8'));
+  assert.ok(vercel.redirects.some((r) => r.source === '/quick-win' && r.destination === '/prices' && r.permanent), 'missing /quick-win → /prices redirect');
   const home = await readPage('/');
   assert.doesNotMatch(home, /href="\/quick-win"/);
-
   const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
-  assert.doesNotMatch(sitemap, /<loc>[^<]+\/quick-win(?:\/)?<\/loc>/);
+  assert.doesNotMatch(sitemap, /quick-win/);
 });
 
 test('retired offer terms are gone from every public page', async () => {

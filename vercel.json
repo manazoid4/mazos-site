@@ -42,6 +42,11 @@
       "source": "/leak-check",
       "destination": "/free-plan",
       "permanent": true
+    },
+    {
+      "source": "/quick-win",
+      "destination": "/prices",
+      "permanent": true
     }
   ]
 }
