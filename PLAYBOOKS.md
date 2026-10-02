@@ -19,6 +19,7 @@ Task: <what you want>
 | 3 | [Design and pages](docs/playbooks/3-design-and-pages.md) | new page, component, colour, icon |
 | 4 | [Forms and conversion](docs/playbooks/4-forms-and-conversion.md) | forms, funnels, tracking |
 | 5 | [Leads and outreach](docs/playbooks/5-leads-and-outreach.md) | lead rules, HubSpot, email |
+| 10 | [Research and CRO](docs/playbooks/10-research-and-cro.md) | any research, audit or "why aren't people enquiring?" question (method: `docs/maz-works/RESEARCH-HANDBOOK.md`) |
 
 ## Daily engines (copy-paste prompts)
 | # | Playbook | Output | Best agent |
