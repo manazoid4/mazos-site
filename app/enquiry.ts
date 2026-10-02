@@ -23,7 +23,7 @@ export const ENQUIRY_SERVICES = [
   { id: 'reviews', label: `Review requests and customer reminders (${OFFERS[0].name} ${OFFERS[0].price})` },
   { id: 'care', label: `Care plan (${CARE_PLANS[0].name} ${CARE_PLANS[0].price}, or ${CARE_PLANS[1].name} ${CARE_PLANS[1].price})` },
   { id: 'rebuild', label: 'Rebuild of an existing site or system' },
-  { id: 'google-profile', label: `Google listing tidy (one-day set-up, ${getExtra('Google listing tidy').price})` },
+  { id: 'google-profile', label: `Google listing tidy (one-day set-up, free with a Starter ${getOffer('starter').price})` },
   { id: 'bundle', label: 'Starter plus optional extras' },
   { id: 'objects', label: 'Tap-to-review stands and signs' },
   { id: 'brand-kit', label: `Starter for creators: keyword DM, free resource, email list (${getOffer('creator-starter').price})` },

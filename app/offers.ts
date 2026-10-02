@@ -48,6 +48,9 @@
  * - Business System adds team training and a first month of Keep It Running,
  *   so it is clearly cheaper than buying the parts (PACKAGE_VALUE).
  * Competitor check behind it: docs/maz-works/PRICE-AUDIT-2026-10.md.
+ * Approved by Maz (2 Oct) on top: a UK price match (PRICE_MATCH), one-day
+ * set-ups no longer sold on their own (free inside packages, £49 each for
+ * more), and Extra automation down from £145 to £99.
  *
  * AI (Maz, 27 Sep): may be used behind the scenes to build or run things, but
  * is never advertised or sold as an offer. No 'AI assistant' or 'AI agent' copy.
@@ -114,7 +117,11 @@ export const ALWAYS_INCLUDED: { title: string; body: string }[] = [
   { title: '30 days of tweaks + 90-day fix promise', body: 'Two rounds of tweaks, and anything I built that isn’t working as agreed is fixed free for 90 days.' },
   { title: '30-day “still working?” check', body: 'I check in a month later and fix anything that drifted.' },
   { title: 'No contracts, no monthly fee', body: 'One-off price. Care plans are optional and cancel any time.' },
+  { title: 'UK price match', body: 'Found the same done-for-you job cheaper from a UK business? Send me their written quote. I’ll match it, or tell you plainly what’s different.' },
 ];
+
+/** Price match (Maz, 2 Oct): fenced to a written quote from a UK business for the same scope, as a one-off price. */
+export const PRICE_MATCH = 'Found the same done-for-you job cheaper from a UK business? Send me their written quote for the same scope as a one-off price. I’ll match it, or tell you plainly what’s different.';
 
 /** Starter money-back guarantee (competitors offer 30-day refunds; we match it, fenced to our build). */
 export const STARTER_GUARANTEE = 'If your Starter job hasn’t run on a real customer within 30 days of going live, you get a full refund.';
@@ -341,13 +348,12 @@ export const LANES: { id: string; title: string; offers: Offer[]; note: string }
 ];
 
 /**
- * The fix ladder: the same five steps for every kind of business, so a buyer
+ * The fix ladder: the same four steps for every kind of business, so a buyer
  * always knows what the next rung costs.
  */
 export const LADDER: { step: string; what: string; price: string; href: string }[] = [
   { step: 'Free plan', what: 'I look at your setup and send 3 fixes and the right step.', price: FREE_STEP.price, href: '/free-plan' },
-  { step: 'One-day set-up', what: 'One small thing set up in a day. No ongoing work.', price: '£49', href: '/prices#set-ups' },
-  { step: 'Starter', what: 'One job from the automation menu that runs by itself.', price: OFFERS[0].price, href: '/prices#systems' },
+  { step: 'Starter', what: 'One job from the automation menu that runs by itself, plus 2 one-day set-ups free.', price: OFFERS[0].price, href: '/prices#systems' },
   { step: 'Business System', what: 'Three jobs joined up, plus a weekly report.', price: OFFERS[1].price.toLowerCase(), href: '/prices#systems' },
   { step: 'Custom', what: 'Software, a portal or an app built for you.', price: OFFERS[2].price.toLowerCase(), href: '/prices#systems' },
 ];
@@ -398,8 +404,8 @@ export const SETUP_PRICE = '£49';
 export const EXTRA_GROUPS: { id: string; title: string; note: string; items: Extra[] }[] = [
   {
     id: 'set-ups',
-    title: `One-day set-ups, ${SETUP_PRICE} each`,
-    note: 'One small thing, set up in a day, on tools you already have. Free with every package (two with a Starter or Launch Page, three with a Business System), or buy one on its own.',
+    title: 'One-day set-ups, free with every package',
+    note: `One small thing, set up in a day, on tools you already have. Two come free with a Starter or Launch Page, three with a Business System. Want more? ${SETUP_PRICE} each, added to a package. Not sold on their own.`,
     items: [
       { name: 'Booking link everywhere', price: SETUP_PRICE, what: 'Your booking or quote link added to Instagram, your Google listing and WhatsApp, with a voicemail that mentions it.' },
       { name: 'Google listing tidy', price: SETUP_PRICE, what: 'Your Google Maps listing checked and filled in properly: hours, photos, services and booking link.' },
@@ -416,7 +422,7 @@ export const EXTRA_GROUPS: { id: string; title: string; note: string; items: Ext
     title: 'Add to a package',
     note: 'Bigger set-ups that only make sense alongside a package. They go on the same invoice.',
     items: [
-      { name: 'Extra automation', price: '£145', what: 'One more job from the automation menu, added to a package.' },
+      { name: 'Extra automation', price: '£99', what: 'One more job from the automation menu, added to a package.' },
       { name: 'Weekly report', price: '£145', what: 'One simple email each week: enquiries, bookings, quotes waiting and money due. Included with a Business System.' },
       { name: 'Extra website page', price: '£295', what: 'One more page on your site or sales page, for a service or an offer, written and styled to match.' },
       { name: 'Team training', price: '£95', what: 'A one-hour video call showing your staff how everything works, plus a short written guide to keep.' },
@@ -650,13 +656,16 @@ export type PlanQuote = {
   note: string;
 };
 
+/** One-day set-ups that come free with a Starter. */
+const INCLUDED_SETUPS = 2;
+
 /** Three or more jobs to build is a Business System, whatever the parts add up to. */
 const BUSINESS_SYSTEM_JOBS = 3;
 
 /**
  * Prices a set of chosen jobs by the offer rules above, for the
  * "Build my system" tool. Everything is read from this file:
- * - a one-day set-up or add-on can be bought alone at its own price;
+ * - one-day set-ups are never sold alone: two ride free with a Starter, £49 each after that;
  * - a job from the automation menu is Starter Automation, and each further
  *   one is Extra automation (which only ever adds to a package);
  * - asking for a package (Business System, Custom) quotes that package;
@@ -676,13 +685,19 @@ export function quotePlan(jobs: PlanJob[]): PlanQuote {
   if (packageJob) return packageQuote(packageJob, packageJob.id === 'business-system' ? 'Everything you picked joined up, with the weekly report included. Exact price in your scope sheet.' : 'Scoped with you first. Exact price in your scope sheet.');
   if (!unique.length) return { offer: starter, lines: [{ label: `${starter.name}: one job of your choice`, price: starter.price }], total: starter.from, totalLabel: starter.price, workingBy: workingBy('starter'), note: 'Pick what costs you time and the plan builds itself.' };
   const lines: PlanQuote['lines'] = [];
+  const setupNames = new Set(EXTRA_GROUPS[0].items.map(item => item.name));
+  const setups: string[] = [];
   let builds = 0;
   for (const job of unique) {
     const extra = EXTRAS.find(item => item.name === job.offerName && item.name !== extraJob.name);
+    if (extra && setupNames.has(extra.name)) { setups.push(extra.name); continue; }
     if (extra) { lines.push({ label: extra.name, price: extra.price }); continue; }
     lines.push(builds === 0 ? { label: `${starter.name}: ${job.name.toLowerCase()}`, price: starter.price } : { label: `${extraJob.name}: ${job.name.toLowerCase()}`, price: extraJob.price });
     builds++;
   }
+  // One-day set-ups are not sold on their own (Maz, 2 Oct): they ride free with a Starter, £49 each beyond two.
+  if (setups.length && !builds) { lines.unshift({ label: `${starter.name}: one job of your choice`, price: starter.price }); builds = 1; }
+  setups.forEach((name, index) => lines.push({ label: `${name} (one-day set-up)`, price: index < INCLUDED_SETUPS ? 'Included' : SETUP_PRICE }));
   const total = lines.reduce((sum, line) => sum + priceAmount(line.price), 0);
   if (total > business.from) return packageQuote(business, `Your picks add up to ${formatPrice(total)} on their own, more than a ${business.name}, so I would quote that instead, with the weekly report included.`);
   if (builds >= BUSINESS_SYSTEM_JOBS) return packageQuote(business, `${builds} jobs to build is a ${business.name}: joined up, with the weekly report included.`);

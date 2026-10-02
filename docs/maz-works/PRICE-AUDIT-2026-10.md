@@ -37,7 +37,7 @@ Short answer: **some pieces, yes, and nobody can stop that.** The tools are free
 - `/for/creators`: "Starter for creators" and "Launch Page", same prices as everyone.
 - FAQ, enquiry form options and schema follow `app/offers.ts`.
 
-## 4. Decisions for Maz (not built)
+## 4. Decisions (approved by Maz, 2 Oct, all built)
 
 1. **Price-match promise**: "Found the same done-for-you job cheaper from a UK business? Send me the quote. I'll match it, or tell you plainly what's different." Strong trust signal; fence it to UK businesses, same scope, one-off price.
 2. **Stop selling £49 set-ups on their own?** They're the most undercut item. v12 keeps them on sale but gives them free in packages. Dropping them would make the ladder Free → £149 → £595.
