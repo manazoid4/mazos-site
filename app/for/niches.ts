@@ -6,7 +6,7 @@
  * These are examples of businesses this applies to, not a limit: the same
  * review and systems work for any UK business customers book, call or enquire with.
  */
-import { EXTRAS, OFFERS } from '../offers';
+import { EXTRAS, OFFERS, WEB_OFFERS } from '../offers';
 
 const offer = (id: string) => {
   const found = OFFERS.find((item) => item.id === id);
@@ -21,6 +21,7 @@ const addOn = (name: string, body: string) => {
 /** Starter is ONE job (Offer v9). Anything more is a priced add-on or a Business System. */
 const starter = (body: string) => ({ name: offer('starter').name, price: offer('starter').price, body, pick: offer('starter').name });
 const system = (body: string) => ({ name: offer('business-system').name, price: offer('business-system').price, body, pick: offer('business-system').name });
+const website = (body: string) => { const w = WEB_OFFERS.find((item) => item.id === 'website')!; return { name: w.name, price: w.price, body, pick: w.name }; };
 const custom = (body: string) => ({ name: offer('custom').name, price: offer('custom').price, body, pick: offer('custom').name });
 
 export type NicheGuide = {
@@ -106,7 +107,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
     fixes: [
       starter('One job set up to run itself: every quote or MOT request logged in one list with an instant reply.'),
       addOn('Quote follow-up', 'A friendly reminder goes out if the customer goes quiet after a quote.'),
-      custom('A new site with online booking and job updates built in, when your current one can’t do it.'),
+      website('A new site with online booking and job updates built in, when your current one can’t do it.'),
     ],
   },
   {
@@ -129,7 +130,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
     fixes: [
       starter('One job set up to run itself: orders, bookings and messages gathered in one place with an automatic reply.'),
       addOn('Review requests', 'Customers are asked for a Google review after each visit.'),
-      custom('A phone-first site with menu, hours, ordering or table booking built in, when your current one can’t do it.'),
+      website('A phone-first site with menu, hours, ordering or table booking built in, when your current one can’t do it.'),
     ],
   },
   {
@@ -174,7 +175,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
     fixes: [
       starter('One job set up to run itself: a project enquiry captured in one place, acknowledged automatically and passed to you with the key details already collected.'),
       system('Enquiry, qualification, consultation, proposal and follow-up joined up so new-project admin does not start from scratch every time.'),
-      custom('A portfolio or practice site with project pages, enquiry flow or a client-facing tool built around how your practice actually works.'),
+      website('A portfolio or practice site with project pages, enquiry flow or a client-facing tool built around how your practice actually works.'),
     ],
     visuals: [
       { src: '/architecture/massing-model.svg', alt: 'Illustrative axonometric of a simple 1:500 massing model on a site base, with a QR plaque that opens the project page', caption: 'A simple massing model with a QR or tap plaque that opens the project page.' },

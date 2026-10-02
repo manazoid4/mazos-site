@@ -110,7 +110,7 @@ export const OFFERS: Offer[] = [
       'New paid apps or text costs (you pay those companies directly)',
       'Cleaning up old data or changes to your website',
     ],
-    delivery: 'Working within 7 working days of access.',
+    delivery: 'Usually working within 7 working days of you adding me to your apps and approving the messages.',
     changes: TWEAKS,
     upsell: 'Its price comes off a Business System booked within 60 days.',
   },
@@ -424,7 +424,7 @@ export const COMPARISON: { row: string; values: [string, string, string] }[] = [
 export const CHANGES_WINDOW = {
   name: '30 days of tweaks and a 90-day fix promise',
   short: '30 days of tweaks',
-  body: 'For 30 days after it goes live, send me tweaks to what I built, in up to two rounds. And for 90 days, anything not working the way we agreed is fixed free.',
+  body: 'For 30 days after it goes live, send me tweaks to what I built, in up to two rounds. And for 90 days, anything I built that isn’t working the way we agreed is fixed free. If another company changes their app, I quote that fix first (free within the first 30 days).',
   covered: [
     'Wording, messages and email or text templates',
     'Timings, reminders, steps and who gets notified',
@@ -436,7 +436,7 @@ export const CHANGES_WINDOW = {
     'Connecting a new app, or rebuilding after you switch apps',
     'Paid app or text-message costs, which you pay directly',
   ],
-  howItWorks: 'Send each round of tweaks in one email. I reply within 1 working day and agree a date. After 30 days, a care plan covers changes, or I price them first.',
+  howItWorks: 'Send each round of tweaks in one email. I usually reply within 1 working day and agree a date. After 30 days, a care plan covers changes, or I price them first.',
 } as const;
 
 /**
@@ -500,7 +500,7 @@ export const PAYMENT_TERMS = 'A free plan and fixed price before any work. You p
 export const THIRD_PARTY_NOTE = 'If you need a paid app, like a texting service, you pay that company directly and I tell you the cost up front. You own everything.';
 
 /** A delivery promise, not a payment guarantee (no "you don't pay the rest" wording: Maz, 1 Oct). */
-export const DELIVERY_PROMISE = 'Starter Automation is working within 7 working days of access. Every other job has a date in its fixed quote.';
+export const DELIVERY_PROMISE = 'Starter Automation is usually working within 7 working days of you adding me to your apps. Every other job has a date in its fixed quote.';
 
 /** Upgrade credits that make the next sale the natural one. */
 export const UPGRADE_CREDITS = [
@@ -521,7 +521,7 @@ export function getExtra(name: string): Extra {
   return extra;
 }
 export function workingBy(id: OfferId): string {
-  return id === 'starter' ? 'Within 7 working days of access' : 'Date agreed in your fixed quote';
+  return id === 'starter' ? 'Usually within 7 working days of you adding me to your apps' : 'Date agreed in your fixed quote';
 }
 /** Scales with the job, costs nothing unless a sale happens (Offer v10; was a flat £40). */
 export const REFERRAL_REWARD = '£50';

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: { title: 'For creators — Maz Works', url: '/brand-kit', images: [OG_IMAGE] },
 };
 
-const ask = (name: string) => `/leak-check?package=${encodeURIComponent(name)}&src=brand-kit#leak-check-form`;
+const ask = (name: string) => `/free-plan?package=${encodeURIComponent(name)}&src=brand-kit#leak-check-form`;
 
 export default function BrandKitPage() {
   return (
@@ -33,7 +33,7 @@ export default function BrandKitPage() {
 
       <section className="s-hero bk-hero" id="main-content" tabIndex={-1} aria-labelledby="bk-title">
         <p className="eyebrow">For creators, coaches and makers</p>
-        <h1 id="bk-title">You’ve built the following. <em>Now turn it into bookings and sales.</em></h1>
+        <h1 id="bk-title">You’ve got followers. <em>Now turn them into bookings and sales.</em></h1>
         <p className="s-lede">Your content earns trust. I build the path from a post to a paid session or resource, with every buyer added to an email list you own.</p>
         <div className="bk-cta">
           <CampaignLink className="button button-signal s-button-lg" href={ask(BUNDLE.name)}>{`Get the ${BUNDLE.name} · ${BUNDLE.price}`}</CampaignLink>
@@ -60,8 +60,8 @@ export default function BrandKitPage() {
         <p className="eyebrow">Pick what you need</p>
         <h2 id="bk-options-title">Look the part, sell from one page, or both.</h2>
         <div className="s-prices">
-          <OfferCard offer={SALES_PAGE} checkHref="/leak-check" />
-          {BRAND_OFFERS.map((offer) => <OfferCard offer={offer} checkHref="/leak-check" key={offer.id} />)}
+          <OfferCard offer={SALES_PAGE} checkHref="/free-plan" />
+          {BRAND_OFFERS.map((offer) => <OfferCard offer={offer} checkHref="/free-plan" key={offer.id} />)}
         </div>
         <p className="s-small">{UPGRADE_CREDITS[1]}</p>
       </section>

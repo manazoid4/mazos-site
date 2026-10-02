@@ -93,7 +93,7 @@
 .sp-fix { border-left: 6px solid #ff8a5c; }
 .sp-fix summary .s-level, .s-level-fix { background: #ffb08a; }
 .sp-working { border-left: 6px solid #8fe3b8; }
-.s-level-working { background: #8fe3b8; }
+.s-level-working { background: #8fe3b8; color: var(--ink); }
 .s-level-fix { color: var(--ink); }
 .sp-quote { list-style: none; display: grid; gap: 8px; padding: 0; margin: 8px 0 4px; }
 .sp-quote li { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 12px 14px; background: #fff; border: 2px solid var(--ink); border-radius: 12px; transition: background-color 160ms ease-out, opacity 160ms ease-out; }

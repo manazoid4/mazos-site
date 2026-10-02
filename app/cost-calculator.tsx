@@ -84,7 +84,7 @@ export function CostCalculator() {
               <div><span>{STARTER.name}, once</span><i className="ce-bar-cost" style={{ width: `${costShare}%` }} /></div>
             </div>
             <p className="ce-pay">{days > 365 ? `${STARTER.name} would take over a year to pay for itself on these numbers.` : `${STARTER.name} (${STARTER.price}) would pay for itself in about ${days} ${days === 1 ? 'day' : 'days'}.`}</p>
-            <a className="button button-signal" href={`/leak-check?package=${encodeURIComponent(STARTER.name)}&src=estimator#leak-check-form`}>Get a free plan for this</a>
+            <a className="button button-signal" href={`/free-plan?package=${encodeURIComponent(STARTER.name)}&src=estimator#leak-check-form`}>Get a free plan for this</a>
           </>
         ) : (
           <p className="ce-hint">Move the sliders to see your number. The sum: per week × share lost × job value × 52 ÷ 12. Compare it with {STARTER.name} at {STARTER.price} once.</p>

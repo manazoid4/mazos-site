@@ -8,7 +8,7 @@ export type MazWorksFaq = {
 export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   {
     question: 'Is the plan really free? What’s the catch?',
-    answer: `It’s free. Tell me the job you want off your plate and I reply within ${CHECK_REPLY_TIME} with a plan and a fixed price. If it isn’t worth automating, I say so. No call, no automated sales emails, no obligation.`,
+    answer: `It’s free. Tell me the job you want off your plate and I usually reply within ${CHECK_REPLY_TIME} with a plan and a fixed price. If it isn’t worth automating, I say so. No call, no automated sales emails, no obligation.`,
   },
   {
     question: 'What do you actually build?',

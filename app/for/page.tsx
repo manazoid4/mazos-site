@@ -46,7 +46,7 @@ export default function ForHubPage() {
         ))}
       </ul>
 
-      <a className="for-else" href="/leak-check?src=for-hub&trade=other#leak-check-form"><span className="mw-hub-icon"><KitIcon name="spark" /></span><span><strong>Something else?</strong> Every kind of business is welcome. Tell me what you do.</span></a>
+      <a className="for-else" href="/free-plan?src=for-hub&trade=other#leak-check-form"><span className="mw-hub-icon"><KitIcon name="spark" /></span><span><strong>Something else?</strong> Every kind of business is welcome. Tell me what you do.</span></a>
 
       <SiteFooter />
     </main>

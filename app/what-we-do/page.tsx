@@ -31,7 +31,7 @@ export default function WhatWeDo() {
    <h2 id={`${offer.id}-title`}>{offer.name}</h2><p className="s-price-amount">{offer.price}</p><p>{offer.body}</p>
    <ul>{offer.bullets.map(bullet=><li key={bullet}>{bullet}</li>)}</ul>
    <p><strong>Working by: {workingBy(offer.id)}.</strong></p>
-   <a className="button button-signal" href={`/leak-check?package=${encodeURIComponent(offer.name)}`}>Get a free plan for this</a>
+   <a className="button button-signal" href={`/free-plan?package=${encodeURIComponent(offer.name)}`}>Get a free plan for this</a>
   </section>)}
   <p className="s-section s-small"><a href="/prices">See every price, add-on and what’s not included →</a></p>
   <section className="s-section" id="systems"><p className="eyebrow">Jobs you can hand over</p><h2>Pick a job. Watch it run.</h2>
@@ -45,7 +45,7 @@ export default function WhatWeDo() {
    <DeliveryTabs />
   </section>
   <section className="s-section" id="example"><h2>An example of the plan you get.</h2><SampleReport /></section>
-  <section className="s-final"><h2>Start with the job that costs you time.</h2><p>A personal reply within {CHECK_REPLY_TIME}.</p><a className="button button-signal" href="/leak-check">Get a free plan and price</a></section>
-  <SiteFooter /><StickyCheckCta href="/leak-check" /><ScrollReveal />
+  <section className="s-final"><h2>Start with the job that costs you time.</h2><p>A personal reply, usually within {CHECK_REPLY_TIME}.</p><a className="button button-signal" href="/free-plan">Get a free plan and price</a></section>
+  <SiteFooter /><StickyCheckCta href="/free-plan" /><ScrollReveal />
  </main>;
 }

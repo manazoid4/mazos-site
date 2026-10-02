@@ -31,7 +31,7 @@ export default function PricesPage() {
         <h1 id="prices-title">Every price, in one place.</h1>
         <p className="s-lede">Fixed prices, agreed before any work starts. No VAT added. Not sure what you need? The {FREE_STEP.short} tells you, within {CHECK_REPLY_TIME}.</p>
         <div className="s-actions">
-          <a className="button button-signal s-button-lg" href="/leak-check">Get a free plan and price</a>
+          <a className="button button-signal s-button-lg" href="/free-plan">Get a free plan and price</a>
           <a className="button" href="/demos">Or see a free demo first</a>
         </div>
       </section>
@@ -39,9 +39,9 @@ export default function PricesPage() {
       <section className="s-section" id="pricing" aria-labelledby="prices-list-title">
         <PricingViewTracker targetId="pricing" />
         <h2 id="prices-list-title" className="s-visually-hidden">Packages, add-ons and terms</h2>
-        <PriceList checkHref="/leak-check" />
+        <PriceList checkHref="/free-plan" />
         <div className="s-actions">
-          <a className="button button-signal" href="/leak-check">Get a free plan and price</a>
+          <a className="button button-signal" href="/free-plan">Get a free plan and price</a>
         </div>
       </section>
       <section className="s-section" id="changes" aria-labelledby="changes-title">
