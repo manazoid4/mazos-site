@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 
 const DESTINATIONS = [
@@ -15,10 +16,11 @@ export function TouchDemo() {
   return (
     <section className="objects-section objects-demo" id="demo" aria-labelledby="demo-title">
       <div className="objects-demo-copy">
-        <p className="objects-kicker">Interaction demonstration</p>
-        <h2 id="demo-title">One object. Three clear next steps.</h2>
-        <p>Select an example disc to see the destination it represents. This illustrates the customer journey—it does not detect NFC or represent a completed order.</p>
-        <div className="objects-demo-discs" role="group" aria-label="Choose an example NFC disc">
+        <p className="objects-kicker">A tap in everyday life</p>
+        <h2 id="demo-title">They tap. Your page opens.</h2>
+        <p>A café menu, a shop review or a salon booking. Choose an example below to see what your customer could open.</p>
+        <figure className="objects-demo-stand"><Image src="/objects/touch-three-hero.webp" alt="Concept visual: three-disc stand for menu, reviews and bookings" width={1536} height={1024} sizes="(max-width: 680px) 90vw, 40vw" loading="lazy" unoptimized /><figcaption>Concept visual · Hold your phone near a disc</figcaption></figure>
+        <div className="objects-demo-discs" role="group" aria-label="Choose an example page">
           {DESTINATIONS.map((destination) => (
             <button key={destination.id} type="button" className={selectedId === destination.id ? 'is-active' : ''} onClick={() => setSelectedId(destination.id)} aria-pressed={selectedId === destination.id}>
               <span aria-hidden="true">{destination.symbol}</span>
@@ -28,11 +30,11 @@ export function TouchDemo() {
         </div>
       </div>
       <div className="objects-destination" aria-live="polite">
-        <div className="objects-browser-bar"><span /><span /><span /><strong>Example destination</strong></div>
+        <div className="objects-browser-bar"><span /><span /><span /><strong>Example on a phone</strong></div>
         <p>{selected.url}</p>
         <h3>{selected.title}</h3>
         <span>{selected.body}</span>
-        <button type="button" disabled>Example only</button>
+        <small>Illustration only. No order or booking is made.</small>
       </div>
     </section>
   );

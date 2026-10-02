@@ -20,7 +20,7 @@ const SelectionContext = createContext<SelectionContextValue | null>(null);
 export function TouchSelectionProvider({ children }: { children: ReactNode }) {
   const [bundleId, selectBundle] = useState<TouchBundleId>('touch-three');
   const [artwork, setArtwork] = useState(false);
-  const [intendedUses, setIntendedUses] = useState<IntendedUseId[]>(['website']);
+  const [intendedUses, setIntendedUses] = useState<IntendedUseId[]>([]);
   const [businessName, setBusinessName] = useState('');
 
   const value = useMemo<SelectionContextValue>(() => ({

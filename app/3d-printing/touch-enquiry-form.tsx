@@ -23,15 +23,10 @@ export function TouchEnquiryForm() {
     toggleIntendedUse,
   } = useSelectedTouchBundle();
   const [detailsOpen, setDetailsOpen] = useState(false);
-  const [selectionError, setSelectionError] = useState('');
+  const [helpChoosing, setHelpChoosing] = useState(false);
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
 
   function continueToDetails() {
-    if (intendedUses.length === 0 || !businessName.trim()) {
-      setSelectionError('Choose at least one use and add the business-name text for the object.');
-      return;
-    }
-    setSelectionError('');
     setDetailsOpen(true);
     window.setTimeout(() => document.getElementById('enquiry-details')?.focus(), 0);
   }
@@ -49,13 +44,7 @@ export function TouchEnquiryForm() {
     const helpFindingLinks = data.get('helpFindingLinks') === 'yes';
     const honey = String(data.get('_honey') || '').trim();
 
-    if (intendedUses.length === 0) {
-      setSelectionError('Choose at least one use before sending the enquiry.');
-      window.setTimeout(() => document.querySelector<HTMLInputElement>('input[name="intendedUses"]')?.focus(), 0);
-      return;
-    }
-    if (!name || !email || !businessName.trim()) return;
-    setSelectionError('');
+    if (!name || !email) return;
     setSubmitState('sending');
 
     try {
@@ -66,13 +55,14 @@ export function TouchEnquiryForm() {
           name,
           email,
           bundle: bundle.name,
+          help_choosing: helpChoosing ? 'Yes — bundle is a starting estimate only' : 'No',
           bundle_id: bundleId,
           physical_contents: bundle.contents.join(' | '),
-          intended_uses: intendedUses.map((id) => INTENDED_USES.find((item) => item.id === id)?.label ?? id).join(', '),
+          intended_uses: intendedUses.map((id) => INTENDED_USES.find((item) => item.id === id)?.label ?? id).join(', ') || 'Help me choose',
           artwork: artwork
             ? `Yes — £${TOUCH_PRICING.artworkAddOnPrice}; one supplied design, basic placement and one proof revision`
             : 'No',
-          business_name: businessName.trim(),
+          business_name: businessName.trim() || 'To be agreed',
           destination_links: destinationLinks || 'Not supplied at enquiry stage',
           help_finding_links: helpFindingLinks ? 'Yes' : 'No',
           notes: notes || 'None supplied',
@@ -86,8 +76,8 @@ export function TouchEnquiryForm() {
       });
 
       const payload = await response.json().catch(() => null) as { success?: boolean | string; message?: string } | null;
-      const rejected = payload?.success === false || payload?.success === 'false';
-      if (!response.ok || rejected) throw new Error(payload?.message || 'Unable to send enquiry');
+      const confirmed = payload?.success === true || payload?.success === 'true';
+      if (!response.ok || !confirmed) throw new Error(payload?.message || 'Unable to send enquiry');
 
       form.reset();
       setSubmitState('sent');
@@ -100,13 +90,13 @@ export function TouchEnquiryForm() {
     <section className="objects-section objects-personalise" id="personalise" aria-labelledby="personalise-title">
       <header className="objects-section-heading">
         <p className="objects-kicker">Personalise / Enquire</p>
-        <h2 id="personalise-title">Start with the object. Send the links later if needed.</h2>
-        <p>Your choices stay visible as you move through the form. Artwork is requested by email reply—there is no upload step here.</p>
+        <h2 id="personalise-title" tabIndex={-1}>Let’s make it yours.</h2>
+        <p>Tell us what you have in mind. We’ll help with the details and ask for any artwork by email reply.</p>
       </header>
 
       <div className="objects-enquiry-layout">
         <form className="objects-form" onSubmit={submitEnquiry}>
-          <fieldset>
+          <fieldset disabled={submitState === 'sending'}>
             <legend><span>01</span> Choose the object</legend>
             <div className="objects-choice-grid">
               {TOUCH_PRICING.bundles.map((option) => (
@@ -118,8 +108,9 @@ export function TouchEnquiryForm() {
             </div>
           </fieldset>
 
-          <fieldset>
-            <legend><span>02</span> What should it help with?</legend>
+          <label className="objects-help-toggle"><input type="checkbox" checked={helpChoosing} onChange={(event) => setHelpChoosing(event.target.checked)} disabled={submitState === 'sending'} /><span>Help me choose — this bundle is just a starting point</span></label>
+          <fieldset disabled={submitState === 'sending'}>
+            <legend><span>02</span> What should it help with? (optional)</legend>
             <div className="objects-use-grid">
               {INTENDED_USES.map((use) => (
                 <label key={use.id} className={intendedUses.includes(use.id) ? 'is-selected' : ''}>
@@ -130,11 +121,11 @@ export function TouchEnquiryForm() {
             </div>
           </fieldset>
 
-          <fieldset>
+          <fieldset disabled={submitState === 'sending'}>
             <legend><span>03</span> Add your text</legend>
             <label className="objects-field">
-              <span>Business-name text</span>
-              <input name="businessName" value={businessName} onChange={(event) => setBusinessName(event.target.value)} required placeholder="For example: North Street Coffee" />
+              <span>Name on your stand (optional)</span>
+              <input name="businessName" value={businessName} onChange={(event) => setBusinessName(event.target.value)} placeholder="For example: North Street Coffee" />
             </label>
             <label className="objects-artwork-toggle">
               <input type="checkbox" name="artwork" value="yes" checked={artwork} onChange={(event) => setArtwork(event.target.checked)} />
@@ -146,7 +137,7 @@ export function TouchEnquiryForm() {
             {!detailsOpen && (
               <button className="objects-button objects-button-signal" type="button" onClick={continueToDetails}>Continue to contact details</button>
             )}
-            <p role="alert">{selectionError}</p>
+            <p>No payment now. Design and final quote agreed first.</p>
           </div>
 
           {detailsOpen && (
@@ -157,7 +148,7 @@ export function TouchEnquiryForm() {
                 <label className="objects-field"><span>Email</span><input name="email" type="email" autoComplete="email" required disabled={submitState === 'sending'} /></label>
               </div>
               <label className="objects-field">
-                <span>Destination links <small>optional at enquiry stage</small></span>
+                <span>Your links <small>optional at enquiry stage</small></span>
                 <textarea name="destinationLinks" rows={3} disabled={submitState === 'sending'} placeholder="Paste any menu, review, booking, social or website links you already have." />
               </label>
               <label className="objects-help-toggle">
@@ -181,6 +172,7 @@ export function TouchEnquiryForm() {
           )}
         </form>
 
+        <div className="objects-mobile-summary" aria-live="polite"><span>{helpChoosing ? 'Starting point: ' : ''}{bundle.name}<small>Delivery quoted separately</small></span><strong>£{estimate}</strong><a href="#personalise-title">Enquire</a></div>
         <aside className="objects-selection-summary" aria-label="Current product estimate">
           <p>Your selection</p>
           <h3>{bundle.name}</h3>
@@ -189,7 +181,7 @@ export function TouchEnquiryForm() {
             <div><dt>Artwork</dt><dd>{artwork ? `+£${TOUCH_PRICING.artworkAddOnPrice}` : 'Not added'}</dd></div>
             <div className="objects-estimate"><dt>Product estimate</dt><dd>£{estimate}</dd></div>
           </dl>
-          <p>{businessName.trim() || 'Business-name text not added yet'}</p>
+          <p>{businessName.trim() || 'You can decide the name later'}</p>
           <small>Delivery and nonstandard requests are confirmed separately.</small>
         </aside>
       </div>
