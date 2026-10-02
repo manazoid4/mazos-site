@@ -5,7 +5,7 @@ Every change must help a visitor understand, trust or buy faster, or help Maz re
 
 | # | Goal | Done when | Where it's tracked |
 |---|---|---|---|
-| 1 | **Clear offer.** A visitor sees their problem, the fix, the price and what's included. | A trades owner, a salon owner and a creator each find their problem, price and what's included, and reach the main action in 2 taps or fewer. | Prices only in `app/offers.ts`; pricing rules in `docs/maz-works/OFFER-V10.md` (v11 under review) |
+| 1 | **Clear offer.** A visitor sees their problem, the fix, the price and what's included. | A trades owner, a salon owner and a creator each find their problem, price and what's included, and reach the main action in 2 taps or fewer. | Prices only in `app/offers.ts`; pricing rules in `docs/maz-works/OFFER-V11.md` |
 | 2 | **Trust without fake proof.** Real work, plain promises, no invented results. | Every claim on the site can be checked; demo businesses are clearly labelled demos; real case studies added as permission comes in. | `AGENTS.md` rules, case studies in `/work/*` |
 | 3 | **One easy first step.** Free Plan & Fixed Quote is the single main action everywhere. | One main button on every page; a test enquiry arrives in the inbox with its source. | `/free-plan`, enquiry form |
 | 4 | **Fast reply, fast quote.** Maz answers within one working day with a consistent plan and price. | A test enquiry becomes a drafted free plan Maz can send in about 2 minutes. | Sales engine (plan v3, block C) |
