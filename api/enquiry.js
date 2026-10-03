@@ -26,7 +26,7 @@ export async function deliverEnquiry(body, fetchImpl = fetch) {
       return typeof result.id === 'string';
     } catch { return false; }
   };
-  const fields = ['name', 'email', 'problem', 'website', 'interested_in', 'systems', 'trade', 'source'];
+  const fields = ['name', 'email', 'problem', 'website', 'referred_by', 'interested_in', 'systems', 'trade', 'source'];
   const draft = body.draft ? `\n\n----- Draft reply (approve, tweak, send) -----\n${body.draft}` : '';
   const accepted = await send({ to: ['info@mazworks.uk'], reply_to: body.email,
     subject: `Maz Works — free plan and quote${body.interested_in && body.interested_in !== 'Not chosen' ? ` — ${body.interested_in}` : ''}`,
@@ -52,7 +52,7 @@ export async function syncHubSpot(body, fetchImpl = fetch) {
   if (!token) return false;
   const [firstname, ...rest] = String(body.name || '').trim().split(/\s+/);
   const properties = { email: body.email, firstname, lastname: rest.join(' ') || undefined, website: body.website || undefined, lifecyclestage: 'lead', hs_lead_status: 'NEW',
-    message: [body.problem, body.interested_in && body.interested_in !== 'Not chosen' ? `Interested in: ${body.interested_in}` : '', body.trade ? `Type: ${body.trade}` : '', body.source ? `Source: ${body.source}` : ''].filter(Boolean).join('\n') };
+    message: [body.problem, body.interested_in && body.interested_in !== 'Not chosen' ? `Interested in: ${body.interested_in}` : '', body.trade ? `Type: ${body.trade}` : '', body.referred_by ? `Referred by: ${body.referred_by}` : '', body.source ? `Source: ${body.source}` : ''].filter(Boolean).join('\n') };
   for (const key of Object.keys(properties)) if (properties[key] === undefined) delete properties[key];
   const headers = { authorization: `Bearer ${token}`, 'content-type': 'application/json' };
   const create = await fetchImpl('https://api.hubapi.com/crm/v3/objects/contacts', { method: 'POST', headers, body: JSON.stringify({ properties }), signal: AbortSignal.timeout(9000) });
@@ -94,7 +94,7 @@ export default async function handler(req, res, fetchImpl = fetch) {
     const body = JSON.parse(raw);
     if (!body || typeof body !== 'object' || Array.isArray(body)) return reply(400,{ok:false});
     if (body._honey) return reply(200, {ok:true,confirmationSent:false});
-    const fields = ['name','email','problem','website','interested_in','systems','trade','source','request_id','draft'];
+    const fields = ['name','email','problem','website','referred_by','interested_in','systems','trade','source','request_id','draft'];
     if (fields.some(field => body[field] !== undefined && (typeof body[field] !== 'string' || body[field].length > 4000))) return reply(400,{ok:false});
     if (!body.name?.trim() || !body.problem?.trim() || !/^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/.test(body.email || '') || body.name.length > 120) return reply(400,{ok:false});
     if (body.request_id && !/^[a-zA-Z0-9-]{1,64}$/.test(body.request_id)) return reply(400,{ok:false});
