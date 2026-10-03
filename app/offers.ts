@@ -544,7 +544,7 @@ export const DEMO_STEPS: { title: string; body: string; note: string }[] = [
 ];
 
 export const PROMISES: { title: string; body: string }[] = [
-  { title: 'Free demo first', body: 'After a short call, a working preview for bigger jobs, or a written plan for small ones. No charge.' },
+  { title: 'Free plan first', body: 'Start with the free plan. Bigger jobs can include a working preview before you pay; smaller jobs get the written plan and fixed price straight away. No call needed.' },
   { title: 'One fixed price', body: 'A written scope sheet before any work, so you know the full cost.' },
   { title: 'No contracts', body: 'Every package is a one-off you own. Care plans are monthly, cancel any time.' },
 ];
