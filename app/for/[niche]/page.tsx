@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ niche: st
   const type = getCustomerType(niche);
   if (type) {
     return {
-      title: `${type.shortName}: your problems, the fix, the price`,
+      title: `${type.shortName}: what to set up and the price`,
       description: fitDescription(`${type.lede} Named recipes from ${OFFERS[0].price}, what’s included, and a free plan.`),
       alternates: { canonical: `/for/${type.id}` },
       openGraph: { title: `${type.title} — Maz Works`, description: fitDescription(type.lede), url: `/for/${type.id}`, images: [OG_IMAGE] },

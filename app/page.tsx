@@ -43,7 +43,7 @@ export default function Page() {
    </div><HeroDemo />
   </section>
   <section className="s-section" id="build" aria-labelledby="build-title">
-   <p className="eyebrow">What do you run?</p><h2 id="build-title">Pick yours. See your problems, the fix and the price.</h2>
+   <p className="eyebrow">What do you run?</p><h2 id="build-title">Pick yours. See your problems, what I’d set up and the price.</h2>
    <ul className="s-types" aria-label="Kinds of business">{CUSTOMER_TYPES.map(type => <li key={type.id}><a href={`/for/${type.id}`}>
     <span className="s-type-icon" aria-hidden="true"><KitIcon name={type.icon} /></span>
     <strong>{type.name}</strong><span>{type.examples}</span><em>{type.recipes[0].name.split(': ')[1]?.trim() ?? type.recipes[0].name} · {type.recipes[0].offer.price}</em>
