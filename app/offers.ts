@@ -116,7 +116,7 @@ export const ALWAYS_INCLUDED: { title: string; body: string }[] = [
   { title: 'Short written guide', body: 'One page: what runs, when, and what to do if something changes.' },
   { title: '30 days of tweaks + 90-day fix promise', body: 'Two rounds of tweaks, and anything I built that isn’t working as agreed is fixed free for 90 days.' },
   { title: '30-day “still working?” check', body: 'I check in a month later and fix anything that drifted.' },
-  { title: 'No contracts, no monthly fee', body: 'One-off price. Care plans are optional and cancel any time.' },
+  { title: 'No contracts, no monthly fee', body: 'One-off price. Texts or app costs, if any, are a few pounds a month paid by you straight to the provider. Care plans are optional and cancel any time.' },
   { title: 'UK price match', body: 'Found the same done-for-you job cheaper from a UK business? Send me their written quote. I’ll match it, or tell you plainly what’s different.' },
 ];
 
@@ -544,7 +544,7 @@ export const DEMO_STEPS: { title: string; body: string; note: string }[] = [
 ];
 
 export const PROMISES: { title: string; body: string }[] = [
-  { title: 'Free demo first', body: 'After a short call, a working preview for bigger jobs, or a written plan for small ones. No charge.' },
+  { title: 'Free plan first', body: 'A written plan and a fixed price, no call needed. Bigger builds also get a working preview. No charge.' },
   { title: 'One fixed price', body: 'A written scope sheet before any work, so you know the full cost.' },
   { title: 'No contracts', body: 'Every package is a one-off you own. Care plans are monthly, cancel any time.' },
 ];
