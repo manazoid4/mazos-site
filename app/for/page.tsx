@@ -10,7 +10,7 @@ import { KitIcon, NICHE_ICONS } from '../brand-kit/kit-icon';
 
 export const metadata: Metadata = {
   title: 'Who it’s for: pick your business',
-  description: fitDescription(`Trades, appointments, creators or offices: pick yours and see your problems, the fix and the price. Named recipes from ${OFFERS[0].price}, plus guides by trade.`),
+  description: fitDescription(`Trades, appointments, creators or offices: pick yours and see your problems, what I’d set up and the price. Named recipes from ${OFFERS[0].price}, plus guides by trade.`),
   alternates: { canonical: '/for' },
   openGraph: { title: 'Who it’s for — Maz Works', url: '/for', images: [OG_IMAGE] },
 };

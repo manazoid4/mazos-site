@@ -15,7 +15,7 @@ const STARTER = OFFERS[0];
  */
 export const metadata: Metadata = {
   title: 'Hello from LinkedIn',
-  description: 'Book a short call and get a free working demo built around your business.',
+  description: 'Get a free written plan and a fixed price for your business. No call needed.',
   alternates: { canonical: '/linkedin' },
   robots: { index: false, follow: true },
 };
