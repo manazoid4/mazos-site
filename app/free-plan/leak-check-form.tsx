@@ -146,6 +146,7 @@ export function LeakCheckForm() {
     const email = String(data.get('email') || '').trim();
     const task = String(data.get('problem') || '').trim();
     const website = String(data.get('website') || '').trim();
+    const referredBy = String(data.get('referred_by') || '').trim();
     const honey = String(data.get('_honey') || '').trim();
     const page = window.location.pathname === '/' ? 'homepage' : window.location.pathname.replace(/^\//, '');
     const source = new URLSearchParams(window.location.search).get('src')?.trim() || `direct (${page})`;
@@ -172,6 +173,7 @@ export function LeakCheckForm() {
       ['Email', email],
       ['The job', task],
       ['Website', website],
+      ['Referred by', referredBy],
       ['Interested in', pkg],
       ['Source', source],
     ]));
@@ -187,6 +189,7 @@ export function LeakCheckForm() {
       name,
       email,
       website,
+      referred_by: referredBy,
       service: SERVICE_LABEL,
       problem: task,
       interested_in: pkg || 'Not chosen',

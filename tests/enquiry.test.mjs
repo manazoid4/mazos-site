@@ -91,6 +91,17 @@ test('both enquiry forms fail safely with a recoverable email fallback', async (
   }
 });
 
+test('free-plan referral attribution survives the JavaScript submit path', async () => {
+  const source = await readSource('app', 'free-plan', 'leak-check-form.tsx');
+  const api = await readSource('api', 'enquiry.js');
+
+  assert.match(source, /data\.get\('referred_by'\)/);
+  assert.match(source, /referred_by: referredBy/);
+  assert.match(source, /\['Referred by', referredBy\]/);
+  assert.match(api, /'referred_by'/);
+  assert.match(api, /Referred by:/);
+});
+
 test('both forms can send a second enquiry without a page reload', async () => {
   const demoForm = await readSource('app', 'demo-request-form.tsx');
   const touchForm = await readSource('app', '3d-printing', 'touch-enquiry-form.tsx');

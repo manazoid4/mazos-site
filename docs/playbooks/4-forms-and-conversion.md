@@ -1,7 +1,7 @@
 # 4. Forms, funnels and conversion
 
 ## The forms
-- Free plan form `/leak-check` (`app/leak-check/leak-check-form.tsx`): 2 steps. Step 1 is tap-to-pick problems (`QUICK_PICKS`), an optional note and an optional website or Instagram. Step 2 is name and email. It works without JavaScript (native post).
+- Free plan form `/free-plan` (`app/free-plan/leak-check-form.tsx`): 2 steps. Step 1 is tap-to-pick problems (`QUICK_PICKS`), an optional note and an optional website or Instagram. Step 2 is name and email. It works without JavaScript (native post).
 - Contact form (`app/demo-request-form.tsx`, on `/contact`): name, email, what you need. Everything else sits under "Optional details". Service ids live in `app/enquiry.ts`; they are stable deep-link keys, so add, never rename.
 - Delivery: `api/enquiry.js` sends an instant confirmation through Resend with FormSubmit as the fallback. Tests: `tests/enquiry*.test.mjs`. Do not promise an auto-reply in the success message unless proven.
 - Links pre-fill the form: `?package=<name>` (only real package or add-on names, see `KNOWN_PACKAGES`), `?trade=<id>` (a niche id, `creator` or `other`), `?src=<channel>`.
