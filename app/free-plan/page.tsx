@@ -81,7 +81,8 @@ export default function LeakCheckPage() {
         <ul className="mw-qw-list">
           {RETURN.map((item) => <li key={item}>{item}</li>)}
         </ul>
-        <h3 style={{ marginTop: 28 }}>What happens after you send it</h3>
+        <h3 style={{ marginTop: 28 }}>If you say yes to the plan</h3>
+        <p className="mw-qw-lead">Your plan and price usually arrive within {CHECK_REPLY_TIME}. Nothing happens unless you reply yes. Then it runs like this, counted from the day you approve the scope sheet:</p>
         <NextSteps />
         <div className="s-report-wrap"><SampleReport /></div>
         <p className="mw-qw-lead">Sometimes the answer is: &quot;This isn&apos;t worth automating yet.&quot; If the tool you already pay for can do it, I’ll tell you.</p>
