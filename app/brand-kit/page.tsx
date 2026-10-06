@@ -26,7 +26,7 @@ export default function BrandKitMovedPage() {
       <section className="s-hero s-hero-short" id="main-content" tabIndex={-1} aria-labelledby="bk-moved-title">
         <p className="eyebrow">This page has moved</p>
         <h1 id="bk-moved-title">Creators, coaches and makers now have their own page.</h1>
-        <p className="s-lede">{`${STARTER.name} ${STARTER.price} and ${LAUNCH.name} ${LAUNCH.price}, with your problems, the fix and the price on one page.`}</p>
+        <p className="s-lede">{`${STARTER.name} ${STARTER.price} and ${LAUNCH.name} ${LAUNCH.price}, with your problems, what I’d set up and the price on one page.`}</p>
         <div className="s-actions"><a className="button button-signal s-button-lg" href="/for/creators">Go to the creators page</a></div>
       </section>
       <SiteFooter />
