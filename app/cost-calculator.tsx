@@ -1,10 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { OFFERS, formatPrice, priceAmount } from './offers';
+import { OFFERS, formatPrice, getOffer, priceAmount } from './offers';
 import './interactive.css';
 
-const STARTER = OFFERS[0];
 const SHARES = [10, 20, 30, 50];
 
 /** Eases the big number toward its target so the sliders feel alive. */
@@ -56,6 +55,8 @@ export function CostCalculator({ preset, trade, buildLink = true }: { preset?: C
   const ready = perWeek > 0 && share > 0 && value > 0;
   const monthly = ready ? Math.round((perWeek * (share / 100) * value * 52) / 12) : 0;
   const shown = useCountUp(monthly);
+  // Creators are sold their own starter, so the estimate and the CTA use it on /for/creators.
+  const STARTER = trade === 'creators' ? getOffer('creator-starter') : OFFERS[0];
   const starter = priceAmount(STARTER.price);
   const days = monthly > 0 ? Math.max(1, Math.ceil(starter / (monthly / 30))) : 0;
   const costShare = monthly > 0 ? Math.min(100, Math.max(4, (starter / monthly) * 100)) : 0;
