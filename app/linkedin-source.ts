@@ -14,7 +14,8 @@ const CAMPAIGN_KEY = 'mw-campaign';
 export function rememberCampaign(search: string): void {
   const source = new URLSearchParams(search).get('src');
   if (!isCampaignTag(source)) return;
-  try { sessionStorage.setItem(CAMPAIGN_KEY, source); } catch { /* storage blocked */ }
+  // First touch wins: keep the tag that brought them, even if they open a second campaign link.
+  try { if (!isCampaignTag(sessionStorage.getItem(CAMPAIGN_KEY))) sessionStorage.setItem(CAMPAIGN_KEY, source); } catch { /* storage blocked */ }
 }
 
 /** The campaign remembered on landing, if any. */

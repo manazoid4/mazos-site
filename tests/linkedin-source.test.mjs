@@ -38,6 +38,8 @@ test('first-touch campaign: only real tags are remembered, and blocked storage n
   assert.equal(rememberedCampaign(), '');
   rememberCampaign('?src=li-demo1');
   assert.equal(rememberedCampaign(), 'li-demo1');
+  rememberCampaign('?src=li-demo2');
+  assert.equal(rememberedCampaign(), 'li-demo1', 'first touch wins');
   globalThis.sessionStorage = { getItem: () => { throw new Error('blocked'); }, setItem: () => { throw new Error('blocked'); } };
   assert.doesNotThrow(() => rememberCampaign('?src=li-demo2'));
   assert.equal(rememberedCampaign(), '');
