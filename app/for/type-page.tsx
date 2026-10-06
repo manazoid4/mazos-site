@@ -8,6 +8,7 @@ import { CASE_STUDIES } from '../case-studies';
 import { MAIN_CTA } from '../site';
 import { OFFERS, STARTER_GUARANTEE, getMenuJob } from '../offers';
 import { StraightAnswers } from '../straight-answers';
+import { CalculatorReveal } from '../calculator-reveal';
 import { NICHE_GUIDES } from './niches';
 import type { CustomerType } from '../customer-types';
 
@@ -66,6 +67,7 @@ export function TypePage({ type }: { type: CustomerType }) {
         <p className="eyebrow">See it working</p>
         <h2 id="type-how-title">What changes in your day.</h2>
         <DemoBusiness type={type.id} />
+        <div id="cost"><CalculatorReveal preset={type.calculator} trade={type.id} /></div>
         {studies.map((study) => (
           <blockquote className="s-study" key={study.business}>
             <strong>{study.business}</strong> · {study.built}
@@ -81,7 +83,7 @@ export function TypePage({ type }: { type: CustomerType }) {
           <p className="eyebrow">Free first step</p>
           <h2 id="type-cta-title">Tell me the job. I’ll send a plan and a fixed price.</h2>
           <p>
-            <a className="s-details-link" href="/prices">See the details: every task, the cost calculator, what’s included and what happens next →</a>
+            <a className="s-details-link" href="/prices">See the details: every task, what’s included and what happens next →</a>
           </p>
           {niches.length ? <p><a className="s-details-link" href={`/for/${niches[0].id}`}>Guide for {niches.map((guide) => guide.shortName).join(', ')} →</a></p> : null}
           <StraightAnswers inline />

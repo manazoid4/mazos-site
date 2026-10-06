@@ -48,7 +48,7 @@ function Slider({ id, label, value, max, step, money, onChange }: { id: string; 
  */
 export type CalculatorPreset = { perWeek: number; share: number; value: number; label: string };
 
-export function CostCalculator({ preset }: { preset?: CalculatorPreset } = {}) {
+export function CostCalculator({ preset, trade, buildLink = true }: { preset?: CalculatorPreset; trade?: string; buildLink?: boolean } = {}) {
   const [perWeek, setPerWeek] = useState(0);
   const [share, setShare] = useState(0);
   const [value, setValue] = useState(0);
@@ -88,13 +88,13 @@ export function CostCalculator({ preset }: { preset?: CalculatorPreset } = {}) {
               <div><span>{STARTER.name}, once</span><i className="ce-bar-cost" style={{ width: `${costShare}%` }} /></div>
             </div>
             <p className="ce-pay">{days > 365 ? `${STARTER.name} would take over a year to pay for itself on these numbers.` : `${STARTER.name} (${STARTER.price}) would pay for itself in about ${days} ${days === 1 ? 'day' : 'days'}.`}</p>
-            <a className="button button-signal" href={`/free-plan?package=${encodeURIComponent(STARTER.name)}&src=estimator#leak-check-form`}>Get my free plan</a>
+            <a className="button button-signal" href={`/free-plan?package=${encodeURIComponent(STARTER.name)}&src=estimator${trade ? `-${trade}&trade=${trade}` : ''}#leak-check-form`}>Get my free plan</a>
           </>
         ) : (
           <p className="ce-hint">Move the sliders to see your number. The sum: per week × share lost × job value × 52 ÷ 12. Compare it with {STARTER.name} at {STARTER.price} once.</p>
         )}
       </div>
-      <p className="s-small">An estimate from what you entered, not a promise of results. <a href="#build-my-system">Build my system →</a></p>
+      <p className="s-small">An estimate from what you entered, not a promise of results.{buildLink ? <> <a href="#build-my-system">Build my system →</a></> : null}</p>
     </div>
   );
 }
