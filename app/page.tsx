@@ -38,7 +38,7 @@ export default function Page() {
    <div><p className="eyebrow">For small businesses and teams, in any trade</p>
     <h1 id="intro-title">Every enquiry answered and every booking confirmed, <em>without you chasing</em>.</h1>
     <p className="s-lede">I set up the replies, reminders and follow-ups you do by hand, on apps you already use. Start with one task for {STARTER.price}.</p>
-    <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">{MAIN_CTA}</a><a className="text-link" href="/what-we-do#systems">See how it works <span aria-hidden="true">→</span></a></div>
+    <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">{MAIN_CTA}</a><a className="text-link" href="#demo-video">Watch it work (30s) <span aria-hidden="true">→</span></a></div>
     <p className="s-face-cta"><img src="/maz.webp" alt="" width={56} height={56} /><span><strong>Manazir Hussain</strong>, Computer Science graduate (Swansea). I plan and build every job myself.</span></p>
    </div><HeroDemo />
   </section>
@@ -51,7 +51,7 @@ export default function Page() {
    <p><a className="s-details-link" href="/prices">Every price, websites and what’s included →</a></p>
   </section>
   <section className="s-section" id="how" data-reveal aria-labelledby="how-title">
-   <p className="eyebrow">See it working</p><h2 id="how-title">What changes in your day.</h2><Scenes systems={['enquiries', 'reminders', 'reviews'].map((id) => getSystem(id))} />
+   <p className="eyebrow">See it working</p><h2 id="how-title">What changes in your day.</h2><WalkthroughVideo /><Scenes systems={['enquiries', 'reminders', 'reviews'].map((id) => getSystem(id))} />
   </section>
   <section className="s-section s-check" id="check" aria-labelledby="check-title">
    <div className="s-check-copy"><p className="eyebrow">Your free plan</p><h2 id="check-title">Tell me the job. I’ll send a plan and a price.</h2>
@@ -72,7 +72,6 @@ export default function Page() {
             <p><a className="button button-dark s-linkedin" href={LINKEDIN_URL} rel="me noopener" target="_blank">Connect on LinkedIn</a></p>
           </div>
         </div>
-        <WalkthroughVideo />
         <p className="s-small">Work you can open yourself:</p>
         <div className="s-proof">
           {PROOF.map((item) => (
