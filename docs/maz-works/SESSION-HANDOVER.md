@@ -2,6 +2,14 @@
 
 > Start here: the private handoff index (`unified-memory-database/handoffs/LATEST.md`) holds research, plans and build prompts. This public file keeps only the last 3 entries; older ones are in `docs/archive/SESSION-HANDOVER-history.md`.
 
+## 7 Oct: site sprint merged
+- Live now:
+  - heating and plumbing page (#120);
+  - cost calculator on every /for page (#121);
+  - "If you say yes to the plan" timeline on /free-plan (#122);
+  - campaign tags that survive any route to the form (#123).
+- Next tasks wait on Maz's answers: a demo phone line, Vercel Analytics, and a code-rendered demo video.
+
 ## 2 Oct: PR tidy (Claude)
 - #103 friction pass rebased onto Offer v10. Brand Kit, FAQ and FAQ-page edits dropped in favour of v10/#108 copy; homepage, contact, leak-check and what-we-do shortening kept. 114 tests, typecheck and build pass.
 - #104 outreach pack closed: it named real prospects in this public repo and used v9 prices. Full text kept privately in `unified-memory-database` (`spine/projects/mazworks-site/OUTREACH-COPY-PASTE-v9-PRIVATE.md`). Next: a templates-only pack that reads prices from `app/offers.ts`.
