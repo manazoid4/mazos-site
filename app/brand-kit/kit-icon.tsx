@@ -1,5 +1,6 @@
 /** Bold line icons for the creators page. Decorative: the label next to each one carries the meaning. */
 const PATHS: Record<string, string> = {
+  drop: 'M12 3c3 4.4 6 7.6 6 11a6 6 0 0 1-12 0c0-3.4 3-6.6 6-11Z',
   dumbbell: 'M6 7v10M3 9v6M18 7v10M21 9v6M6 12h12',
   bolt: 'M13 2 4 14h7l-1 8 9-12h-7z',
   gift: 'M4 11h16v10H4zM3 7h18v4H3zM12 7v14M12 7c-2-4-6-3-5 0M12 7c2-4 6-3 5 0',
@@ -29,7 +30,7 @@ const PATHS: Record<string, string> = {
   repeat: 'M17 2l3 3-3 3M4 11V9a4 4 0 0 1 4-4h12M7 22l-3-3 3-3M20 13v2a4 4 0 0 1-4 4H4',
 };
 
-export const NICHE_ICONS: Record<string, string> = { 'salons-and-beauty': 'scissors', 'dog-groomers': 'dog', garages: 'wrench', 'cafes-and-food': 'cup', 'clinics-and-therapists': 'heart', architects: 'ruler' };
+export const NICHE_ICONS: Record<string, string> = { 'heating-and-plumbing': 'drop', 'salons-and-beauty': 'scissors', 'dog-groomers': 'dog', garages: 'wrench', 'cafes-and-food': 'cup', 'clinics-and-therapists': 'heart', architects: 'ruler' };
 
 export function KitIcon({ name, size = 28 }: { name: string; size?: number }) {
   return (
