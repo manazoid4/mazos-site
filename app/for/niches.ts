@@ -47,6 +47,18 @@ export type NicheGuide = {
 
 export const NICHE_GUIDES: NicheGuide[] = [
   {
+    id: 'heating-and-plumbing',
+    shortName: 'Heating and plumbing',
+    name: 'Heating, plumbing and gas engineers',
+    title: 'Win the heating and plumbing jobs you miss while you’re on a job',
+    lede: 'You can’t answer the phone with your hands in a boiler. If nobody gets back to the caller, they ring the next engineer on Google, and quotes you sent last week go quiet.',
+    fixes: [
+      starter('One task set up to run itself: miss a call on a job and the caller gets a text straight away with a link to book or ask for a quote.'),
+      menuJob('Quote follow-up', 'No reply to a quote? A friendly reminder goes out after 3 and 7 days, in your words, and stops when they reply.'),
+      system('Missed-call text-back, quote follow-up and review requests joined up, with a weekly report, so new work keeps coming in while you’re on the tools.'),
+    ],
+  },
+  {
     id: 'salons-and-beauty',
     shortName: 'Salons and beauty',
     name: 'Salons and beauty',
