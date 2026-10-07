@@ -14,6 +14,7 @@ import { CUSTOMER_TYPES, getCustomerType } from '../../customer-types';
 import { TypePage } from '../type-page';
 import { OFFERS } from '../../offers';
 import { StraightAnswers } from '../../straight-answers';
+import { CalculatorReveal } from '../../calculator-reveal';
 
 export const dynamicParams = false;
 
@@ -49,7 +50,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
   if (type) return <TypePage type={type} />;
   const guide = getNicheGuide(niche);
   if (!guide) notFound();
-  const checkHref = `/free-plan?src=for-${guide.id}`;
+  const checkHref = `/free-plan?src=for-${guide.id}&trade=${guide.id}`;
   const parent = CUSTOMER_TYPES.find((item) => item.niches.includes(guide.id));
 
   return (
@@ -79,11 +80,17 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <h2 id="niche-fix-title">Fixed prices, agreed first.</h2>
         <ul className="mw-qw-list">
           {guide.fixes.map((fix) => (
-            <li key={fix.name} className="mw-example"><strong>{fix.name} · {fix.price}</strong><p className="mw-example-seen">{fix.body}</p><a className="mw-example-fix" href={`/free-plan?src=for-${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form`}>Get my free plan →</a></li>
+            <li key={fix.name} className="mw-example"><strong>{fix.name} · {fix.price}</strong><p className="mw-example-seen">{fix.body}</p><a className="mw-example-fix" href={`/free-plan?src=for-${guide.id}&trade=${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form`}>Get my free plan →</a></li>
           ))}
         </ul>
         <p className="mw-qw-lead"><a className="s-details-link" href="/prices">See the details: every price and what’s included →</a>{parent ? <> <a className="s-details-link" href={`/for/${parent.id}`}>Every fix for {parent.shortName.toLowerCase()} →</a></> : null}</p>
       </section>
+
+      {parent ? (
+        <section className="mw-qw-section" id="cost" aria-label="What missed enquiries cost you">
+          <CalculatorReveal preset={parent.calculator} trade={guide.id} />
+        </section>
+      ) : null}
 
       {guide.visuals ? (
         <section className="mw-qw-section" aria-labelledby="niche-visuals-title">
@@ -106,7 +113,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <p className="mw-related"><a href={guide.related.href}><strong>{guide.related.label} →</strong> <span>{guide.related.body}</span></a></p>
       ) : null}
 
-      <p className="mw-related mw-related-quiet"><a href="/for"><strong>Other trades →</strong> <span>Salons, groomers, garages, cafés, clinics and architects.</span></a></p>
+      <p className="mw-related mw-related-quiet"><a href="/for"><strong>Other trades →</strong> <span>Heating and plumbing, salons, groomers, garages, cafés, clinics and architects.</span></a></p>
 
       <StraightAnswers />
 

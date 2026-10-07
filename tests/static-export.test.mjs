@@ -469,7 +469,7 @@ test('retired Quick Win page redirects to /prices and is never linked', async ()
 test('retired offer terms are gone from every public page', async () => {
   const routes = [
     '/', '/free-plan', '/faq',
-    '/for/salons-and-beauty', '/for/dog-groomers', '/for/garages', '/for/cafes-and-food', '/for/clinics-and-therapists',
+    '/for/heating-and-plumbing', '/for/salons-and-beauty', '/for/dog-groomers', '/for/garages', '/for/cafes-and-food', '/for/clinics-and-therapists',
   ];
   // £795 was the retired Growth System; from 27 Sep (Offer v8) it is the Business System price.
   // Offer v11: £595 is the Business System and Creator Launch; the old £395 Brand Kit, £19/month and unlimited changes are retired.
