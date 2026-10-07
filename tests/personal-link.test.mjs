@@ -11,6 +11,10 @@ test('business names are kept readable and cut down to plain words', () => {
   assert.equal(cleanBusinessName('<script>alert(1)</script>'), 'script alert 1 script');
   assert.equal(cleanBusinessName('Visit www.evil.com/pay now'), 'Visit www evil com pay now');
   assert.ok(cleanBusinessName('A'.repeat(200)).length <= BIZ_MAX);
+  assert.equal(cleanBusinessName('Call 07700 900123 now'), null);
+  assert.equal(cleanBusinessName('1234 5678 ab'), null);
+  assert.equal(cleanBusinessName('Unit 4 Motors'), 'Unit 4 Motors');
+  assert.ok(!/[\uD800-\uDBFF]$/.test(cleanBusinessName('a'.repeat(39) + '𝒜𝒜')));
   for (const empty of [null, undefined, '', '   ', '12', '!!!', 'x']) assert.equal(cleanBusinessName(empty), null);
 });
 

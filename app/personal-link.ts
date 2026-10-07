@@ -3,14 +3,16 @@
  *   https://www.mazworks.uk/for/<trade>?biz=Smith+Plumbing&src=call-heat
  * The trade page then shows the missed-call example with that business name in it.
  * The name only ever renders as text (React escapes it), and is cut down to letters,
- * numbers, spaces, & ' and hyphens, at most 40 characters, so a link can't be used
- * to show a web address or a long message on mazworks.uk.
+ * numbers, spaces, & ' and hyphens (anything else becomes a space), at most 40
+ * characters and fewer than 5 digits, so a link can't be used to show a web address,
+ * a phone number or a long message on mazworks.uk.
  */
 export const BIZ_MAX = 40;
 
 export function cleanBusinessName(raw: string | null | undefined): string | null {
   if (!raw) return null;
-  const name = raw.replace(/[^\p{L}\p{N} &'’-]/gu, ' ').replace(/\s+/g, ' ').trim().slice(0, BIZ_MAX).trim();
+  const name = Array.from(raw.replace(/[^\p{L}\p{N} &'’-]/gu, ' ').replace(/\s+/g, ' ').trim()).slice(0, BIZ_MAX).join('').trim();
+  if ((name.match(/\p{N}/gu) ?? []).length >= 5) return null;
   return /\p{L}.*\p{L}/u.test(name) ? name : null;
 }
 

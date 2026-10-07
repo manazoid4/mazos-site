@@ -15,7 +15,7 @@ export function PersonalPreview({ trade }: { trade: string }) {
   if (!business) return null;
   return (
     <section className="s-section s-personal" id="your-preview" aria-labelledby="personal-title">
-      <p className="eyebrow">Made for {business}</p>
+      <p className="eyebrow">Preview for {business}</p>
       <h2 id="personal-title">A missed call at {business}, answered for you.</h2>
       <p>Tap Call and play your customer. This is an example preview, not built yet.</p>
       <HeroDemo business={business} />
