@@ -1,0 +1,118 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Maz Works demo scene</title>
+<style>
+:root{--paper:#f6f6f3;--surface:#fff;--ink:#151615;--muted:#5d605b;--signal:#ff6b1a;--ok:#0f7a4f;--mono:"Cascadia Mono","SFMono-Regular",Consolas,monospace;--sans:"Aptos","Segoe UI Variable",Arial,system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+body{width:1280px;height:720px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.stage{position:relative;width:1280px;height:720px}
+.tag{position:absolute;left:64px;top:44px;font:700 20px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tag b{color:var(--signal)}
+.cap{position:absolute;left:64px;top:200px;width:560px;font-size:56px;line-height:1.1;font-weight:850;letter-spacing:-.02em;opacity:0}
+.cap small{display:block;margin-top:22px;font-size:26px;line-height:1.35;font-weight:500;color:var(--muted);letter-spacing:0}
+.steps{position:absolute;left:64px;bottom:56px;display:flex;gap:12px;font:700 18px var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.steps span{padding:10px 14px;border:3px solid var(--ink);background:var(--surface);opacity:.35}
+.phone{position:absolute;left:760px;top:44px;width:430px;height:632px;border:5px solid var(--ink);border-radius:44px;background:var(--surface);box-shadow:0 30px 60px rgba(20,22,18,.16);overflow:hidden}
+.bar{display:flex;justify-content:space-between;padding:18px 28px;font:700 18px var(--mono)}
+.screen{position:absolute;inset:60px 0 0 0;padding:0 24px}
+.call{display:flex;flex-direction:column;align-items:center;margin-top:80px;text-align:center}
+.avatar{width:120px;height:120px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:54px}
+.call h3{margin-top:26px;font-size:34px}.call p{margin-top:8px;font:700 20px var(--mono);color:var(--muted)}
+.ring{position:absolute;left:50%;top:80px;width:120px;height:120px;margin-left:-60px;border:4px solid var(--signal);border-radius:50%;opacity:0}
+.decline{margin-top:60px;padding:14px 30px;border-radius:40px;background:#c2410c;color:#fff;font:800 22px var(--sans)}
+.row{display:flex;gap:14px;align-items:center;padding:16px;border:3px solid var(--ink);margin-bottom:16px;opacity:0}
+.row i{font:900 24px var(--mono);width:44px;height:44px;border-radius:50%;background:#c2410c;color:#fff;display:grid;place-items:center;font-style:normal}
+.row strong{display:block;font-size:24px}.row small{font:700 17px var(--mono);color:var(--muted)}
+.label{font:700 16px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ok);margin:0 0 8px 4px;opacity:0}
+.bubble{padding:16px 18px;border-radius:20px 20px 4px 20px;background:var(--ink);color:#fff;font-size:24px;line-height:1.35;opacity:0;transform-origin:100% 100%}
+.bubble u{color:var(--signal);font-weight:800}
+.tap{position:absolute;width:56px;height:56px;border-radius:50%;background:rgba(255,107,26,.45);border:4px solid var(--signal);opacity:0}
+.book h3{font-size:30px;margin-top:20px}.book p{font:700 18px var(--mono);color:var(--muted);margin:6px 0 20px}
+.slots{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.slot{padding:16px;border:3px solid var(--ink);font:800 24px var(--sans);text-align:center}
+.slot.pick{background:var(--ink);color:#fff}
+.confirm{position:absolute;left:24px;right:24px;top:360px;padding:22px;background:var(--ok);color:#fff;font-size:30px;font-weight:850;text-align:center;opacity:0}
+.confirm small{display:block;margin-top:6px;font:700 18px var(--mono)}
+.diary{position:absolute;left:760px;top:196px;width:430px;padding:22px;border:5px solid var(--ink);background:var(--surface);box-shadow:0 30px 60px rgba(20,22,18,.16);opacity:0}
+.diary h4{font:700 18px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.diary div{margin-top:14px;padding:16px;border-left:10px solid var(--signal);background:var(--paper);font-size:28px;font-weight:850}
+.diary small{display:block;font:700 18px var(--mono);color:var(--muted);margin-top:4px}
+.end{position:absolute;inset:0;background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:center;padding:0 96px;opacity:0}
+.end h2{font-size:72px;line-height:1.05;letter-spacing:-.02em;max-width:1000px}
+.end p{margin-top:28px;font-size:30px;color:#d6d8d3}
+.end .btn{display:inline-block;margin-top:36px;align-self:flex-start;padding:20px 34px;background:var(--signal);color:var(--ink);font-size:34px;font-weight:900}
+.end small{position:absolute;left:96px;bottom:40px;font:700 18px var(--mono);color:#a7aaa4}
+</style>
+<div class="stage" id="stage">
+  <div class="tag"><b>Maz Works</b> · example, not a real customer</div>
+  <div class="cap" id="c1">A customer rings while you are on a job.</div>
+  <div class="cap" id="c2">You cannot answer. The call is missed.</div>
+  <div class="cap" id="c3">A text goes out on its own.<small>Sorry we missed you. Book a time here.</small></div>
+  <div class="cap" id="c4">They pick a time that suits them.</div>
+  <div class="cap" id="c5">It lands in your diary.<small>No chasing. No phone tag.</small></div>
+  <div class="steps" id="steps"><span>Missed call</span><span>Instant text</span><span>Booked</span></div>
+  <div class="phone" id="phone">
+    <div class="bar"><span>2:14</span><span id="app">Phone</span></div>
+    <div class="screen" id="s-call"><div class="ring" id="ring"></div><div class="call"><div class="avatar">?</div><h3>New caller</h3><p id="calltxt">calling…</p><div class="decline">Ringing</div></div></div>
+    <div class="screen" id="s-msg">
+      <div class="row" id="missed"><i>✕</i><span><strong>Missed call</strong><small>New caller · 2:14pm</small></span></div>
+      <p class="label" id="auto">Sent automatically</p>
+      <div class="bubble" id="bub">Sorry we missed you! We are with a customer. Book here and pick a time that suits: <u>yourbusiness.co.uk/book</u></div>
+    </div>
+    <div class="tap" id="tap1" style="left:230px;top:290px"></div>
+    <div class="screen book" id="s-book"><h3>Pick a time</h3><p>Your Business · Tuesday</p>
+      <div class="slots"><div class="slot">9:00</div><div class="slot pick" id="pick">10:30</div><div class="slot">12:00</div><div class="slot">2:30</div></div>
+      <div class="confirm" id="conf">Booked<small>Tuesday 10:30 · text confirmation sent</small></div>
+    </div>
+  </div>
+  <div class="diary" id="diary"><h4>Your diary</h4><div>Tuesday 10:30<small>New booking · from the missed call</small></div></div>
+  <div class="end" id="end"><h2>Missed call. Instant text. Booked.</h2><p>I build the systems small businesses run on, so enquiries become customers.</p><span class="btn">Get my free plan</span><small>mazworks.uk · example scene, not a real customer</small></div>
+</div>
+<script>
+// Everything is driven by seek(seconds), so every frame is the same however it is rendered.
+// Each element gets ONE animation over the whole 30s; keys are [seconds, styles], held between keys.
+const LEN = 30;
+const $ = (id) => document.getElementById(id);
+const anims = [];
+const track = (el, keys, opts = {}) => {
+  el = typeof el === 'string' ? $(el) : el;
+  const frames = [];
+  if (keys[0][0] > 0) frames.push({ ...keys[0][1], offset: 0 });
+  keys.forEach(([t, styles]) => frames.push({ ...styles, offset: t / LEN }));
+  if (keys[keys.length - 1][0] < LEN) frames.push({ ...keys[keys.length - 1][1], offset: 1 });
+  const a = el.animate(frames, { duration: LEN * 1000, fill: 'both', easing: 'linear', ...opts });
+  a.pause();
+  anims.push(a);
+};
+const fade = (id, inAt, outAt, d = .4, from = 'translateY(14px)') => track(id, [
+  [Math.max(inAt, 0), { opacity: inAt <= 0 ? 1 : 0, transform: inAt <= 0 ? 'none' : from }], [inAt + d, { opacity: 1, transform: 'none' }],
+  ...(outAt < LEN ? [[outAt, { opacity: 1, transform: 'none' }], [outAt + d, { opacity: 0, transform: 'none' }]] : []),
+]);
+// Captions (mirrored in the CUES list of render-demo-video.mjs)
+fade('c1', 0, 3.6); fade('c2', 4, 8.6); fade('c3', 9, 14.6); fade('c4', 15, 20.6); fade('c5', 21, 25.6);
+// Phone: call screen 0-8s, messages 8-15.2s, booking 15.2-26s
+fade('s-call', 0, 7.8, .2, 'none');
+fade('s-msg', 8, 15, .2, 'none');
+fade('s-book', 15.2, 26, .2, 'none');
+fade('missed', 8.2, LEN, .5);
+fade('auto', 10, LEN, .4, 'none');
+fade('bub', 10.3, LEN, .5, 'scale(.9)');
+track('tap1', [[13.6, { opacity: 0, transform: 'scale(1.6)' }], [14.1, { opacity: 1, transform: 'scale(1)' }], [14.9, { opacity: 0, transform: 'scale(1)' }]]);
+track('pick', [[17.8, { background: '#ffffff', color: '#151615' }], [18.1, { background: '#151615', color: '#ffffff' }]]);
+fade('conf', 19.5, LEN, .5);
+fade('phone', 0, 26);
+fade('diary', 21.5, 26, .6, 'translateY(20px)');
+fade('steps', 0, 26);
+fade('end', 26, LEN, .6, 'none');
+track('calltxt', [[5, { color: '#5d605b' }], [5.2, { color: '#c2410c' }]]);
+// Ringing pulse, 0-6s
+track('ring', Array.from({ length: 6 }, (_, i) => [[i, { opacity: .9, transform: 'scale(.8)' }], [i + .95, { opacity: 0, transform: 'scale(2.2)' }]]).flat().concat([[6, { opacity: 0, transform: 'scale(.8)' }]]));
+// Progress chips light up at each beat
+[[8.2, 0], [10.3, 1], [19.5, 2]].forEach(([t, i]) => track($('steps').children[i], [[t, { opacity: .35, background: '#ffffff' }], [t + .3, { opacity: 1, background: '#ff6b1a' }]]));
+window.seek = (t) => {
+  anims.forEach((a) => { a.currentTime = t * 1000; });
+  $('calltxt').textContent = t >= 5 ? 'no answer' : 'calling…';
+  $('app').textContent = t < 8 ? 'Phone' : t < 15.2 ? 'Messages' : 'Book';
+};
+window.seek(0);
+</script>
