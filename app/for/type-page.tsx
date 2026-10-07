@@ -1,3 +1,4 @@
+import { PersonalPreview } from '../personal-preview';
 import { Breadcrumbs } from '../breadcrumbs';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { ServiceSchema } from '../service-schema';
@@ -37,6 +38,7 @@ export function TypePage({ type }: { type: CustomerType }) {
         <p className="mw-hero-note">{`Free plan, no call needed. Most start with one task at ${OFFERS[0].price}. Manazir plans and builds it himself.`}</p>
       </section>
 
+      <PersonalPreview trade={type.id} />
       <section className="s-section" id="pains" aria-labelledby="type-pains-title">
         <p className="eyebrow">Sound familiar?</p>
         <h2 id="type-pains-title">Your problem, and the task that fixes it.</h2>

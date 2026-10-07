@@ -113,5 +113,15 @@ Call (if the first contact was written): use the call script, starting at step 2
 
 ---
 
+## Personal preview link (any route)
+Send the lead their trade page with their business name on it. The page then shows the missed-call example with their name in the text, labelled "an example preview, not built yet", and a "Get my free plan" button.
+
+`https://www.mazworks.uk/for/<trade>?biz=<Business+Name>&src=<tag>`
+
+- `<trade>`: one of the `/for` pages (for example `heating-and-plumbing`, `garages`, `salons-and-beauty`, `trades`).
+- `<Business+Name>`: spaces become `+`, and `&` becomes `%26`. Letters, numbers, spaces, `&`, apostrophes and hyphens only, 40 characters at most; anything else is dropped.
+- `<tag>`: the usual campaign tag (`call-x`, `em-x`, `dm-x`, `fu-x`), so the free plan request shows where it came from.
+- Example: `https://www.mazworks.uk/for/heating-and-plumbing?biz=Smith+%26+Sons+Plumbing&src=call-heat`
+
 ## Tracking (every contact)
 HubSpot is the only list: tiered company name (GOLD / SILVER / BENCH), the owner as the contact, a Task for each step, the evidence URL in the task, lead status `Attempted to contact` after the first message, and the `📞 PITCH + SCRIPT` note. The `?src=` tag on the link shows up in the enquiry email, so you can see which route worked.

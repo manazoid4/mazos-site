@@ -20,7 +20,7 @@ const ANNOUNCE = ['Tap Call to ring the business.', 'Missed call. The business i
  * Every row keeps its space from the first paint, so nothing shifts.
  * Labelled as an example: not a real customer.
  */
-export function HeroDemo() {
+export function HeroDemo({ business }: { business?: string } = {}) {
   const [live, setLive] = useState(false);
   const [step, setStep] = useState<Step>(3);
   const [played, setPlayed] = useState(false);
@@ -77,7 +77,7 @@ export function HeroDemo() {
           <li className={`s-demo-row s-demo-text${on(2)}`}>
             <span className="s-demo-label">Sent automatically</span>
             {live ? null : <span className="s-demo-dots"><i /><i /><i /></span>}
-            <span className="s-demo-bubble">Sorry we missed you! We’re with a customer. Book here and pick a time that suits: {live && step === 2 ? <button type="button" className="s-demo-book" onClick={() => setStep(3)}>Book</button> : <u>yourbusiness.co.uk/book</u>}</span>
+            <span className="s-demo-bubble">{business ? `Sorry we missed you, it’s ${business}! We’re with a customer. Book here and pick a time that suits:` : 'Sorry we missed you! We’re with a customer. Book here and pick a time that suits:'} {live && step === 2 ? <button type="button" className="s-demo-book" onClick={() => setStep(3)}>Book</button> : <u>yourbusiness.co.uk/book</u>}</span>
             <small className="s-demo-delivered">Delivered ✓</small>
           </li>
           <li className={`s-demo-row s-demo-booked${on(3)}`}>
@@ -88,7 +88,7 @@ export function HeroDemo() {
         {live ? <p className="s-visually-hidden" aria-live="polite">{played ? ANNOUNCE[step] : ''}</p> : null}
       </div>
       <figcaption id="demo-caption" className="s-small">
-        <span className="s-demo-tag">Example</span> {`${TEXT_BACK.name}, ${TEXT_BACK.price}. Not a real customer.`}
+        <span className="s-demo-tag">Example</span> {business ? `${TEXT_BACK.name} for ${business}, ${TEXT_BACK.price}. A preview, not built yet.` : `${TEXT_BACK.name}, ${TEXT_BACK.price}. Not a real customer.`}
       </figcaption>
     </figure>
   );

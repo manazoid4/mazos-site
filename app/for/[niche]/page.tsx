@@ -1,3 +1,4 @@
+import { PersonalPreview } from '../../personal-preview';
 import { ServiceSchema } from '../../service-schema';
 import { systemsForTrade } from '../../systems';
 import { Scenes } from '../../scenes';
@@ -69,6 +70,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <p className="mw-hero-note">{`Free plan, no call needed. Most start with one task at ${OFFERS[0].price}. Manazir plans and builds it himself.`}</p>
       </section>
 
+      <PersonalPreview trade={guide.id} />
       <section className="mw-qw-section" id="day" aria-labelledby="niche-day-title">
         <p className="eyebrow">See it working</p>
         <h2 id="niche-day-title">What changes in your day.</h2>

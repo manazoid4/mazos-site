@@ -1592,3 +1592,5 @@ form label:has(> input[type="checkbox"]), form label:has(> input[type="radio"]) 
 .s-chooser strong { font-size: 1.05rem; }
 .s-chooser span { color: var(--muted); }
 @media (min-width: 760px) { .s-chooser { grid-template-columns: repeat(3, 1fr); } }
+.s-personal .s-demo { margin: 20px auto 0; }
+.s-personal-cta { margin-top: 20px; text-align: center; }
