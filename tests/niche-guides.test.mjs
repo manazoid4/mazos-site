@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const exportRoot = path.join(process.cwd(), 'out');
-const NICHES = ['salons-and-beauty', 'dog-groomers', 'garages', 'cafes-and-food', 'clinics-and-therapists', 'architects'];
+const NICHES = ['heating-and-plumbing', 'salons-and-beauty', 'dog-groomers', 'garages', 'cafes-and-food', 'clinics-and-therapists', 'architects'];
 
 test('each niche guide exports with prices, a priced second task and a tagged free-plan link (no website-fix examples, conversion fixes 2 Oct)', async () => {
   for (const id of NICHES) {

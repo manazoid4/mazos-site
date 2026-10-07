@@ -50,7 +50,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
   if (type) return <TypePage type={type} />;
   const guide = getNicheGuide(niche);
   if (!guide) notFound();
-  const checkHref = `/free-plan?src=for-${guide.id}`;
+  const checkHref = `/free-plan?src=for-${guide.id}&trade=${guide.id}`;
   const parent = CUSTOMER_TYPES.find((item) => item.niches.includes(guide.id));
 
   return (
@@ -113,7 +113,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <p className="mw-related"><a href={guide.related.href}><strong>{guide.related.label} →</strong> <span>{guide.related.body}</span></a></p>
       ) : null}
 
-      <p className="mw-related mw-related-quiet"><a href="/for"><strong>Other trades →</strong> <span>Salons, groomers, garages, cafés, clinics and architects.</span></a></p>
+      <p className="mw-related mw-related-quiet"><a href="/for"><strong>Other trades →</strong> <span>Heating and plumbing, salons, groomers, garages, cafés, clinics and architects.</span></a></p>
 
       <StraightAnswers />
 
