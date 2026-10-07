@@ -15,9 +15,9 @@ export function WalkthroughVideo() {
   if (!WALKTHROUGH_VIDEO) return null;
   return (
     <figure className="s-video" id="demo-video">
-      <video controls preload="none" playsInline poster={WALKTHROUGH_VIDEO.poster} width={1280} height={720} aria-label="30 second example with captions and no sound: a missed call turns into a booking on its own. Not a real customer.">
+      <video controls preload="none" playsInline poster={WALKTHROUGH_VIDEO.poster} width={1280} height={720} aria-label="30 second example, no sound: a missed call becomes a booking on its own. Not a real customer.">
         <source src={WALKTHROUGH_VIDEO.src} type="video/mp4" />
-        <track kind="captions" src={WALKTHROUGH_VIDEO.captions} srcLang="en" label="English" default />
+        <track kind="captions" src={WALKTHROUGH_VIDEO.captions} srcLang="en" label="English" />
       </video>
     </figure>
   );

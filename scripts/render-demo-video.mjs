@@ -1,6 +1,7 @@
 // Renders the 30 second demo (missed call -> instant text -> booked) from code:
 //   node scripts/render-demo-video.mjs
-// Needs Playwright (Chromium) and ffmpeg on the machine; neither is a repo dependency.
+// Needs Playwright (Chromium) and ffmpeg (with libx264 + libwebp) on the machine; neither is a
+// repo dependency. Re-render on a machine with the same fonts so the text does not reflow.
 // Output: public/video/demo.mp4 (720p H.264, no audio, under 2 MB), demo-poster.webp, demo.vtt.
 // Change the words in scripts/demo-video/scene.html AND CUES below, then re-run.
 import { createRequire } from 'node:module';
@@ -11,7 +12,14 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const require = createRequire(import.meta.url);
-const { chromium } = require('playwright');
+let chromium;
+try {
+  ({ chromium } = require('playwright'));
+  execFileSync('ffmpeg', ['-version'], { stdio: 'ignore' });
+} catch {
+  console.error('Needs Playwright and ffmpeg: npm i --no-save playwright && npx playwright install chromium, plus ffmpeg on PATH.');
+  process.exit(1);
+}
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const out = path.join(root, 'public', 'video');
 const FPS = 24;
@@ -32,26 +40,30 @@ const stamp = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s 
 
 mkdirSync(out, { recursive: true });
 const frames = mkdtempSync(path.join(tmpdir(), 'mw-demo-'));
-const browser = await chromium.launch();
 try {
-  const page = await browser.newPage({ viewport: { width: 1280, height: 720 }, deviceScaleFactor: 1 });
-  await page.goto(pathToFileURL(path.join(root, 'scripts', 'demo-video', 'scene.html')).href);
-  const total = FPS * SECONDS;
-  for (let i = 0; i < total; i++) {
-    await page.evaluate((t) => window.seek(t), i / FPS);
-    await page.screenshot({ path: path.join(frames, `f${String(i).padStart(4, '0')}.png`) });
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 720 }, deviceScaleFactor: 1 });
+    await page.goto(pathToFileURL(path.join(root, 'scripts', 'demo-video', 'scene.html')).href);
+    const total = FPS * SECONDS;
+    for (let i = 0; i < total; i++) {
+      await page.evaluate((t) => window.seek(t), i / FPS);
+      await page.screenshot({ path: path.join(frames, `f${String(i).padStart(4, '0')}.png`) });
+    }
+    await page.evaluate((t) => window.seek(t), POSTER_AT);
+    await page.screenshot({ path: path.join(frames, 'poster.png') });
+  } finally {
+    await browser.close();
   }
-  await page.evaluate((t) => window.seek(t), POSTER_AT);
-  await page.screenshot({ path: path.join(frames, 'poster.png') });
+  // High profile, level 4.0 (few reference frames) so older Android phones decode it too.
+  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-framerate', String(FPS), '-i', path.join(frames, 'f%04d.png'),
+    '-c:v', 'libx264', '-preset', 'veryslow', '-profile:v', 'high', '-level', '4.0', '-crf', '30', '-pix_fmt', 'yuv420p',
+    '-movflags', '+faststart', '-an', path.join(out, 'demo.mp4')]);
+  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', path.join(frames, 'poster.png'), '-quality', '80', path.join(out, 'demo-poster.webp')]);
 } finally {
-  await browser.close();
+  rmSync(frames, { recursive: true, force: true });
 }
-execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-framerate', String(FPS), '-i', path.join(frames, 'f%04d.png'),
-  '-c:v', 'libx264', '-preset', 'veryslow', '-crf', '30', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', '-an',
-  path.join(out, 'demo.mp4')]);
-execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', path.join(frames, 'poster.png'), '-quality', '80', path.join(out, 'demo-poster.webp')]);
 writeFileSync(path.join(out, 'demo.vtt'), `WEBVTT\n\n${CUES.map(([a, b, text], i) => `${i + 1}\n${stamp(a)} --> ${stamp(b)}\n${text}\n`).join('\n')}`);
-rmSync(frames, { recursive: true, force: true });
 const size = statSync(path.join(out, 'demo.mp4')).size;
 console.log(`demo.mp4 ${(size / 1024).toFixed(0)} KB`);
 if (size > MAX_BYTES) throw new Error('demo.mp4 is over 2 MB: raise the CRF or lower FPS');
