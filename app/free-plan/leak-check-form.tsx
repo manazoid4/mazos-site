@@ -10,6 +10,7 @@ import { ALL_OFFERS, CREATOR_EXTRAS, EXTRAS } from '../offers';
 import { HEADACHE_PICKS, SYSTEMS } from '../systems';
 import { NICHE_GUIDES } from '../for/niches';
 import { TYPE_IDS } from '../customer-types';
+import { rememberedCampaign } from '../linkedin-source';
 import { draftFreePlan } from './draft';
 
 type SubmitState = 'idle' | 'sending' | 'sent' | 'error';
@@ -149,7 +150,10 @@ export function LeakCheckForm() {
     const referredBy = String(data.get('referred_by') || '').trim();
     const honey = String(data.get('_honey') || '').trim();
     const page = window.location.pathname === '/' ? 'homepage' : window.location.pathname.replace(/^\//, '');
-    const source = new URLSearchParams(window.location.search).get('src')?.trim() || `direct (${page})`;
+    const pageSource = new URLSearchParams(window.location.search).get('src')?.trim() || `direct (${page})`;
+    // First touch wins: a LinkedIn/outreach tag from landing survives any route to the form (sticky bar, calculator, menu).
+    const campaign = rememberedCampaign();
+    const source = campaign && campaign !== pageSource ? `${campaign} → ${pageSource}` : pageSource;
 
     const missing = !task ? 'problem' : !name ? 'name' : !email ? 'email' : '';
     if (missing) {
