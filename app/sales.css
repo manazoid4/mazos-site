@@ -1468,7 +1468,7 @@ main {
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }
-.s-video { margin: 20px 0; max-width: 860px; }
+.s-video { margin: 20px 0 28px; max-width: 860px; scroll-margin-top: 90px; }
 .s-video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 3px solid var(--ink); background: var(--ink); }
 .mw-demo-form[data-sent] :is(.mw-form-summary, .mw-form-row, .mw-form-kicker, .mw-form-picked, .mw-form-submit > button, .mw-form-submit > p:not([role])) { display: none; }
 
