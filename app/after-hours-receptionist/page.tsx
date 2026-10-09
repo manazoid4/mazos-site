@@ -75,7 +75,7 @@ export default function AfterHoursPage() {
           <p className="ah-price"><strong>{AFTER_HOURS.price}</strong><span>{AFTER_HOURS.setup} · month to month</span></p>
           <div className="mw-actions">
             <a className="button button-signal" href={demoHref}>{MAIN_CTA}</a>
-            <a className="button" href="#try">Play an example call</a>
+            <a className="button" href="/receptionist-demo">Talk to the receptionist</a>
           </div>
           <p className="mw-hero-note">{`${AFTER_HOURS.guarantee} Manazir sets it up himself.`}</p>
         </div>
