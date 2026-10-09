@@ -8,4 +8,4 @@ Post one a day (or every other day), in this order. Each folder has the picture(
 4. **Infographic: how working with Maz Works goes** → `4-how-it-works/` (1 picture(s))
 5. **Infographic: what you pay and when** → `5-what-you-pay/` (1 picture(s))
 
-Overview of all pictures in order: `overview.png`.
+Overview of all pictures in order: `overview.png`. Short hook lines for every post: `../posts/HOOKS.md`.
