@@ -69,6 +69,7 @@ export function VoiceDesk() {
   const typed = useRef<HTMLInputElement>(null);
   const log = useRef<HTMLOListElement>(null);
   const card = useRef<HTMLDivElement>(null);
+  const endBtn = useRef<HTMLButtonElement>(null);
   const starter = useMemo(() => createDesk(config).hints(), [config]);
 
   useEffect(() => {
@@ -90,7 +91,10 @@ export function VoiceDesk() {
   }, []);
 
   useEffect(() => { log.current?.lastElementChild?.scrollIntoView({ block: 'nearest' }); }, [lines, interim]);
-  useEffect(() => { if (summary) card.current?.querySelector('.vd-summary')?.scrollIntoView({ block: 'nearest' }); }, [summary]);
+  // The Start button leaves when a call begins and the summary arrives when it ends: move focus on so keyboard users aren't dropped.
+  const idle = phase === 'ready' || phase === 'ended';
+  useEffect(() => { if (!idle) endBtn.current?.focus(); }, [idle]);
+  useEffect(() => { if (summary) card.current?.querySelector<HTMLElement>('.vd-summary')?.focus(); }, [summary]);
 
   const later = (fn: () => void, ms: number) => { const id = window.setTimeout(fn, ms); timers.current.push(id); return id; };
   const clearTimers = () => { timers.current.forEach((id) => window.clearTimeout(id)); timers.current = []; };
@@ -274,7 +278,7 @@ export function VoiceDesk() {
         {phase === 'ready'
           ? <button type="button" className="button button-signal vd-start" onClick={() => begin()}>Start the call</button>
           : phase !== 'ended'
-            ? <button type="button" className="button vd-end" onClick={endCall}>End call</button>
+            ? <button type="button" className="button vd-end" ref={endBtn} onClick={endCall}>End call</button>
             : null}
       </div>
 
@@ -311,7 +315,7 @@ export function VoiceDesk() {
       {note ? <p className="vd-note">{note}</p> : null}
 
       {summary ? (
-        <div className={`vd-summary${summary.urgent ? ' is-urgent' : ''}`}>
+        <div className={`vd-summary${summary.urgent ? ' is-urgent' : ''}`} tabIndex={-1}>
           <span className="vd-tag">What the owner would get by email (in this demo nothing is sent)</span>
           <strong>{summary.title}</strong>
           <dl>{summary.rows.map(([key, value]) => <div key={key}><dt>{key}</dt><dd>{value}</dd></div>)}</dl>
