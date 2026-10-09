@@ -49,7 +49,7 @@ section { scroll-margin-top: 80px; }
 .hero-copy-block .eyebrow { margin-bottom: 25px; }
 .hero-copy { max-width: 720px; margin-top: 28px; color: var(--muted); font-size: clamp(1.03rem, 1.6vw, 1.3rem); }
 .hero-actions { margin-top: 34px; display: flex; align-items: center; flex-wrap: wrap; gap: 20px 28px; }
-.button { min-height: 50px; display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border: 1px solid var(--line); font-size: .8rem; font-weight: 850; text-decoration: none; transition: background-color 98ms ease-out, color 98ms ease-out; }
+.button { min-height: 50px; display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border: 1px solid var(--line); font-size: .9rem; font-weight: 850; text-decoration: none; transition: background-color 98ms ease-out, color 98ms ease-out; }
 .button-dark { background: var(--ink); color: var(--surface); }
 .button-dark:hover { background: var(--surface); color: var(--ink); }
 .button-signal { background: var(--signal); color: var(--ink); }
