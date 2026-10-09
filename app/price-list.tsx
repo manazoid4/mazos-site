@@ -28,7 +28,7 @@ export function OfferCard({ offer, checkHref }: { offer: Offer; checkHref: strin
         <div><dt>After</dt><dd>{runningCost(offer)}</dd></div>
       </dl>
       <ul>{offer.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
-      {offer.guarantee ? <p className="s-price-guarantee"><strong>Guarantee:</strong> {offer.guarantee}</p> : null}
+      {offer.guarantee ? <p className="s-price-guarantee"><strong>Promise:</strong> {offer.guarantee}</p> : null}
       <details className="s-offer-spec">
         <summary>What’s included, and what isn’t</summary>
         <p><strong>Best for:</strong> {offer.forWho}</p>
