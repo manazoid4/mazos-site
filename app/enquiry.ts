@@ -21,7 +21,7 @@ export const ENQUIRY_SERVICES = [
   { id: 'sales-page', label: `Launch Page: one page that books, sells or takes enquiries (${getOffer('creator-launch').price})` },
   { id: 'brand-sales-page', label: `Launch Page: one page that books, sells or takes enquiries (${getOffer('creator-launch').price})` },
   { id: 'reviews', label: `Review requests and customer reminders (${OFFERS[0].name} ${OFFERS[0].price})` },
-  { id: 'after-hours', label: `${AFTER_HOURS.name}: calls answered when you’re closed (${AFTER_HOURS.price})` },
+  { id: 'after-hours', label: `${AFTER_HOURS.name}: calls answered when you can’t pick up (${AFTER_HOURS.price})` },
   { id: 'care', label: `Care plan (${CARE_PLANS[0].name} ${CARE_PLANS[0].price}, or ${CARE_PLANS[1].name} ${CARE_PLANS[1].price})` },
   { id: 'rebuild', label: 'Rebuild of an existing site or system' },
   { id: 'google-profile', label: `Google listing tidy (one-day set-up, free with a Starter ${getOffer('starter').price})` },

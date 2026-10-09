@@ -13,13 +13,13 @@ import { ValueCheck } from './value-check';
 import './receptionist.css';
 
 const TITLE = 'After-hours call answering for small businesses | Maz Works';
-const DESCRIPTION = fitDescription(`Stop sending after-hours callers to voicemail. Your calls answered in your business name, messages taken and a summary emailed to you. ${AFTER_HOURS.price}, free demo first.`);
+const DESCRIPTION = fitDescription(`Stop sending missed calls to voicemail. When you can’t pick up, day or night, calls are answered in your business name, messages taken and a summary emailed to you. ${AFTER_HOURS.price}, free demo first.`);
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: AFTER_HOURS.href },
-  openGraph: { title: 'Calls answered when you’re closed', description: DESCRIPTION, url: AFTER_HOURS.href, type: 'website', images: [OG_IMAGE] },
+  openGraph: { title: 'Calls answered when you can’t pick up', description: DESCRIPTION, url: AFTER_HOURS.href, type: 'website', images: [OG_IMAGE] },
 };
 
 const json = (data: unknown) => JSON.stringify(data).replace(/</g, '\\u003c');
@@ -40,8 +40,8 @@ export default function AfterHoursPage() {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: AFTER_HOURS.name,
-    serviceType: 'After-hours call answering',
-    description: 'Calls answered outside business hours in the business’s name: common questions answered, messages taken, urgent-call rules followed and a summary emailed to the owner.',
+    serviceType: 'Missed-call and after-hours call answering',
+    description: 'Calls the owner can’t pick up, day or night, answered in the business’s name: common questions answered, messages taken, urgent-call rules followed and a summary emailed to the owner.',
     provider: { '@id': `${SITE_URL}/#maz-works` },
     areaServed: { '@type': 'Country', name: 'United Kingdom' },
     url: `${SITE_URL}${AFTER_HOURS.href}`,
@@ -70,8 +70,8 @@ export default function AfterHoursPage() {
         <div className="ah-hero-copy">
           <Breadcrumbs items={[{ href: '/services', label: 'Jobs I set up' }, { label: AFTER_HOURS.name }]} />
           <p className="eyebrow">{AFTER_HOURS.name} · new</p>
-          <h1 id="ah-title">Calls answered when <em>you’re closed</em>.</h1>
-          <p className="ah-lede">When you’re closed, your calls are answered in your business name. Common questions get answered, details get taken, and you get a clear summary by email.</p>
+          <h1 id="ah-title">Calls answered when <em>you can’t pick up</em>.</h1>
+          <p className="ah-lede">Busy on a job in the day or closed at night, your calls are answered in your business name. Common questions get answered, details get taken, and you get a clear summary by email.</p>
           <p className="ah-price"><strong>{AFTER_HOURS.price}</strong><span>{AFTER_HOURS.setup} · month to month</span></p>
           <div className="mw-actions">
             <a className="button button-signal" href={demoHref}>{MAIN_CTA}</a>
@@ -91,8 +91,8 @@ export default function AfterHoursPage() {
         <p className="eyebrow">Before and after</p>
         <h2 id="ah-compare-title">Voicemail loses the caller. An answer keeps them.</h2>
         <div className="ah-compare">
-          <div className="ah-compare-col ah-before"><h3>Voicemail tonight</h3><ul>{COMPARE.map((row) => <li key={row.before}>{row.before}</li>)}</ul></div>
-          <div className="ah-compare-col ah-after"><h3>With after-hours cover</h3><ul>{COMPARE.map((row) => <li key={row.after}>{row.after}</li>)}</ul></div>
+          <div className="ah-compare-col ah-before"><h3>Voicemail</h3><ul>{COMPARE.map((row) => <li key={row.before}>{row.before}</li>)}</ul></div>
+          <div className="ah-compare-col ah-after"><h3>With your receptionist</h3><ul>{COMPARE.map((row) => <li key={row.after}>{row.after}</li>)}</ul></div>
         </div>
       </section>
 
@@ -153,7 +153,7 @@ export default function AfterHoursPage() {
 
       <section className="s-section" id="answers" aria-labelledby="ah-faq-title">
         <p className="eyebrow">Questions</p>
-        <h2 id="ah-faq-title">What owners ask about after-hours cover.</h2>
+        <h2 id="ah-faq-title">What owners ask about it.</h2>
         <div className="s-faq">{FAQS.map((faq) => <details key={faq.q}><summary>{faq.q}</summary><p>{faq.a}</p></details>)}</div>
         <p className="s-small">More detail in the <a href="/privacy">privacy notice</a> and <a href="/terms">terms of work</a>.</p>
       </section>
@@ -161,7 +161,7 @@ export default function AfterHoursPage() {
       <section className="mw-resource-cta" id="get-demo" aria-labelledby="ah-cta-title">
         <div>
           <p className="eyebrow">Free first step</p>
-          <h2 id="ah-cta-title">See if after-hours cover would work for your business.</h2>
+          <h2 id="ah-cta-title">See if it would work for your business.</h2>
           <p>Tell me your business and hours. I’ll send a free demo answering as you, and tell you plainly if your phone setup works with it.</p>
         </div>
         <div className="mw-actions">

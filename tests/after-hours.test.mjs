@@ -20,7 +20,7 @@ test('the receptionist page shows the price, both CTAs, safety and FAQ', async (
   const html = await read('after-hours-receptionist');
   const page = text(html);
   assert.match(page, /£79\/month/);
-  assert.match(page, /Calls answered when\s+you’re\s+closed/);
+  assert.match(page, /Calls answered when\s+you can’t\s+pick\s+up/);
   assert.doesNotMatch(page, /never miss|first ring|every call answered|guarantee[sd]? (more|bookings|leads)/i);
   assert.match(html, /href="\/free-plan\?src=after-hours&amp;package=After-Hours%20Receptionist#leak-check-form"/);
   assert.match(page, /Get my free demo/);
@@ -56,7 +56,7 @@ test('the offer is wired in: homepage, services, prices, enquiry, footer, sitema
   for (const route of ['index', 'services', 'prices']) {
     assert.match(await read(route), /href="\/after-hours-receptionist"/, `${route} links the receptionist page`);
   }
-  assert.match(await read('contact'), /After-Hours Receptionist: calls answered when you’re closed \(£79\/month\)/);
+  assert.match(await read('contact'), /After-Hours Receptionist: calls answered when you can’t pick up \(£79\/month\)/);
   const sitemap = await readFile(path.join(out, 'sitemap.xml'), 'utf8');
   assert.match(sitemap, /\/after-hours-receptionist</);
   const form = await readFile(path.join(root, 'app', 'free-plan', 'leak-check-form.tsx'), 'utf8');
