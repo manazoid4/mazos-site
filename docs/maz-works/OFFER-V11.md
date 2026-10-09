@@ -1,3 +1,5 @@
+> **Superseded in parts by Offer v12 (2 Oct) and PRICE-AUDIT-2026-10.md; current prices live in app/offers.ts.**
+
 # Offer v11 (2 Oct 2026): pick your business, see your fix, see the price
 
 **Status: proposed. Prices need Maz's go before this merges.** Source of truth for every number: `app/offers.ts`. This page explains the why.
