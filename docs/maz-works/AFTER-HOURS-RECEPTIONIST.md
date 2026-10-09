@@ -26,7 +26,7 @@ Sources opened: ringcentral.com/ai-receptionist.html, smith.ai/ai-receptionist, 
 
 ## Before merging (Maz)
 - [ ] Phone provider account set up (Telnyx or Twilio, UK number KYC) and one demo number answering as a test business.
-- [ ] Confirm you are happy to deliver: monthly tuning, same-working-day greeting changes, 30-day transcript retention.
+- [ ] Confirm you are happy to deliver: monthly tuning, greeting changes within 2 working days, 30-day transcript retention.
 - [ ] Payment: monthly Stripe subscription link for £79 (not yet in `BUY_LINKS`).
 
 ## Next

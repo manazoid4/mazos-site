@@ -606,6 +606,8 @@ export const AFTER_HOURS = {
   minutes: 300,
   setup: 'Set-up included',
   terms: 'Month to month. No long contract. Cancel with a month’s notice.',
+  /** What the £79 covers, so nobody wonders about hidden running costs. */
+  covers: 'Your receptionist number, the voice and up to 300 call minutes (about 100 calls) are included. Your own phone provider may charge for forwarding calls, so check your tariff.',
   guarantee: 'You hear it answering as your business before your first month is billed.',
   included: [
     { title: 'Answers when you’re closed', body: 'Evenings, weekends and bank holidays, on the hours you set.' },
@@ -613,7 +615,7 @@ export const AFTER_HOURS = {
     { title: 'Common questions answered', body: 'Opening hours, areas, services and prices, only from what you give me.' },
     { title: 'Clear messages', body: 'Name, number, what they need and how soon, read back to the caller to check.' },
     { title: 'Summary by email', body: 'After every call, or one tidy digest first thing in the morning.' },
-    { title: 'Urgent-call rules', body: 'You decide what counts as urgent and whether it texts or rings you.' },
+    { title: 'Urgent-call rules', body: 'You decide what counts as urgent. Those calls are flagged and sent to you straight away.' },
     { title: 'Holidays and opening hours', body: 'Closed for a week? Tell me and the greeting and hours change.' },
     { title: 'Nuisance calls kept short', body: 'Obvious sales and spam calls are kept short and flagged where it can tell.' },
     { title: 'Monthly tuning', body: 'I review your calls each month and improve the answers where callers got stuck.' },

@@ -34,7 +34,7 @@ export const STEPS = [
 
 export const TRUST = [
   { icon: 'rules', title: 'Follows your rules', body: 'It only answers from the information you approve. Anything else becomes a message.' },
-  { icon: 'urgent', title: 'Urgent calls reach you', body: 'You choose the words and situations that matter, and whether it texts or rings you.' },
+  { icon: 'urgent', title: 'Urgent calls reach you', body: 'You choose the words and situations that matter. Those calls are flagged and sent to you straight away.' },
   { icon: 'honest', title: 'Sticks to what it knows', body: 'It answers only from the information you approve. If a question isn’t covered, it takes a message instead of guessing.' },
   { icon: 'clear', title: 'Clear with callers', body: 'It says it’s an automated receptionist for your business. Callers can leave a message for you instead.' },
   { icon: 'record', title: 'Recording only with notice', body: 'Call recording is off unless you want it. If it’s on, callers are told at the start.' },
@@ -52,11 +52,11 @@ export const FAQS = [
   { q: 'Can I change the greeting or opening hours?', a: 'Yes. Email me and I update it, usually within 2 working days. Holidays and closures are included in the monthly price.' },
   { q: 'Are calls recorded?', a: 'Only if you want them to be. If recording is on, callers are told at the start of the call. Otherwise you get the written summary only.' },
   { q: 'How is my customers’ information handled?', a: 'Call details go to you by email and are used only to run your service. To answer and summarise calls, the audio passes through a telephone provider and a speech-processing provider. I never sell caller details or share them for marketing. Transcripts are kept for 30 days by default, then deleted, and you can ask for them to be deleted sooner. Details are in the privacy notice.' },
-  { q: 'Will it work with my phone number?', a: 'Usually, yes. Most UK phone providers let you forward calls when you’re closed. I check your setup in the free demo stage and tell you plainly before you pay anything.' },
-  { q: 'What if I get lots of calls?', a: `${AFTER_HOURS.minutes} call minutes a month are included. If you regularly need more, I tell you and we agree a price first. You are never billed for extra minutes by surprise.` },
+  { q: 'Will it work with my phone number?', a: 'Yes, if your line can forward calls, which most UK mobiles, landlines and office phone systems can. Tell me your provider and I’ll send the exact steps before you pay. If it won’t work with your line, you pay nothing.' },
+  { q: 'What if I get lots of calls?', a: `${AFTER_HOURS.covers} If you regularly need more, I tell you and we agree a price first. You are never billed for extra minutes by surprise.` },
   { q: 'Can it work only after hours?', a: 'Yes, that’s what this is. It answers only during the hours you mark as closed, plus any holidays you add.' },
   { q: 'Can I use it for overflow during the day later?', a: 'Daytime overflow, for when you’re busy with a customer, is what comes next. Tell me in the form if you want it and I’ll let you know when it’s ready.' },
-  { q: 'Can I cancel?', a: `Yes. ${AFTER_HOURS.terms} Turn off call forwarding and your phone works as it did before.` },
+  { q: 'Can I cancel?', a: `Yes. ${AFTER_HOURS.terms} Once forwarding is off, your phone works as it did before, and nothing is billed after your notice month.` },
 ];
 
 /** What happens after the visitor asks for the free demo. */

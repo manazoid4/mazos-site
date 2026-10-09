@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Breadcrumbs } from '../breadcrumbs';
 import { AFTER_HOURS } from '../offers';
 import { OG_IMAGE, fitDescription } from '../seo';
-import { CHECK_REPLY_TIME, MAIN_CTA, SITE_URL } from '../site';
+import { CHECK_REPLY_TIME, CONTACT_EMAIL, MAIN_CTA, SITE_URL } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { ScrollReveal } from '../scroll-reveal';
 import { StickyCheckCta } from '../sticky-cta';
@@ -77,7 +77,7 @@ export default function AfterHoursPage() {
             <a className="button button-signal" href={demoHref}>{MAIN_CTA}</a>
             <a className="button" href="#try">Play an example call</a>
           </div>
-          <p className="mw-hero-note">{`${AFTER_HOURS.guarantee} Manazir sets it up himself.`}</p>
+          <p className="mw-hero-note">{`${AFTER_HOURS.guarantee} Manazir Hussain, the owner, sets it up himself. Questions? `}<a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
         </div>
         <NightCall />
       </section>
@@ -112,7 +112,7 @@ export default function AfterHoursPage() {
               <p className="ah-card-price"><strong>{AFTER_HOURS.price}</strong><span>{AFTER_HOURS.setup}. No VAT added.</span></p>
             </header>
             <ul className="ah-included">{AFTER_HOURS.included.map((item) => <li key={item.title}><strong>{item.title}</strong><span>{item.body}</span></li>)}</ul>
-            <p className="ah-card-terms">{`${AFTER_HOURS.minutes} call minutes a month included. ${AFTER_HOURS.terms}`}</p>
+            <p className="ah-card-terms">{`${AFTER_HOURS.covers} ${AFTER_HOURS.terms}`}</p>
             <a className="button button-signal ah-card-cta" href={demoHref}>{MAIN_CTA}</a>
             <p className="ah-card-terms">{AFTER_HOURS.guarantee}</p>
           </article>
