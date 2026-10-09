@@ -104,7 +104,7 @@
 @media (max-width: 560px) {
   .vd { border-width: 2px; border-radius: 16px; padding: 13px; }
   .vd-name { font-size: 1.35rem; }
-  .vd-call-pill { font-size: .7rem; }
+  .vd-call-pill { font-size: .73rem; }
   .vd-stage { padding: 30px 12px 22px; }
   .vd-suggestions { display: grid; grid-template-columns: 1fr 1fr; }
   .vd-suggestions strong { grid-column: 1 / -1; }
