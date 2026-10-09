@@ -538,7 +538,9 @@ test('every main page is one tap from the key routes, and the trade guides have 
   for (const route of ['/', '/free-plan', '/contact', '/faq', '/lab', '/3d-printing', '/for', '/for/architects']) {
     const html = await readPage(route);
     for (const href of ['/prices', '/for', '/3d-printing', '/faq', '/free-plan', '/for/architects', '/3d-printing#architecture-property']) {
-      assert.ok(html.includes(`href="${href}"`), `${route} is missing a link to ${href}`);
+      // The free-plan link may carry ?src=… and #leak-check-form (9 Oct: nav and footer land on the form).
+      const linked = html.includes(`href="${href}"`) || (href === '/free-plan' && html.includes('href="/free-plan?'));
+      assert.ok(linked, `${route} is missing a link to ${href}`);
     }
     assert.match(html, /class="mw-menu-button"[^>]*aria-expanded="false"/, `${route} has no phone menu button`);
   }
