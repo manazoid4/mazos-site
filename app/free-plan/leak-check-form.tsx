@@ -67,7 +67,7 @@ const KNOWN_PACKAGES: string[] = [...ALL_OFFERS.map((offer) => offer.name), ...E
  * autoresponses for AJAX submissions (checked 28 Sep: none arrived; its docs
  * say so), so the in-page route never promises an email confirmation.
  */
-export const AUTO_REPLY = `Thanks, I've got your message. I'll read it myself and email you a short plan and a fixed price within ${CHECK_REPLY_TIME}. No call needed and no obligation. If anything changes, email ${CONTACT_EMAIL}. Manazir, Maz Works`;
+export const AUTO_REPLY = `Thanks, I've got your message. I'll read it myself and email you a working demo with your business name and a fixed price, usually within ${CHECK_REPLY_TIME}. No call needed and no obligation. If anything changes, email ${CONTACT_EMAIL}. Manazir, Maz Works`;
 
 export function LeakCheckForm() {
   const requestId = useRef('');
@@ -310,12 +310,12 @@ export function LeakCheckForm() {
         <p id="leak-check-err-problem" className="mw-field-error" role="alert">{errors.problem}</p>
 
         <label>
-          <span>Website or Instagram <small>(if you have one)</small></span>
+          <span>Business name or website <small>(optional)</small></span>
           <input
             name="website"
             inputMode="url"
             autoComplete="url"
-            placeholder="yourbusiness.co.uk or @yourname"
+            placeholder="Smith Plumbing or yourbusiness.co.uk"
             disabled={submitState === 'sending'}
           />
         </label>

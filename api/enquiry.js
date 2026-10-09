@@ -88,9 +88,9 @@ export async function syncHubSpot(body, fetchImpl = fetch) {
  * replies, Maz cancels the rest in Resend (the ids are in the Resend log).
  */
 export const FOLLOW_UPS = [
-  { in: 'in 2 days', subject: 'Did my plan land?', text: (name) => `Hi ${name},\n\nJust checking the plan reached you. If anything in it is unclear, reply with one line and I'll fix it.\n\nManazir, Maz Works` },
+  { in: 'in 2 days', subject: 'Did you try the demo?', text: (name) => `Hi ${name},\n\nJust checking the demo reached you and worked on your phone. If anything is unclear, reply with one line and I'll fix it.\n\nManazir, Maz Works` },
   { in: 'in 5 days', subject: 'One question', text: (name) => `Hi ${name},\n\nWhat's the one thing that would make this an easy yes? Price, timing, a worry about your apps? Tell me and I'll answer straight.\n\nManazir, Maz Works` },
-  { in: 'in 9 days', subject: 'Leaving this with you', text: (name) => `Hi ${name},\n\nI'll leave it here so I'm not in your way. The plan stands whenever you're ready, and the written scope sheet comes before you pay anything. Reply any time.\n\nManazir, Maz Works` },
+  { in: 'in 9 days', subject: 'Leaving this with you', text: (name) => `Hi ${name},\n\nI'll leave it here so I'm not in your way. The demo and price stand whenever you're ready, and the written scope sheet comes before you pay anything. Reply any time.\n\nManazir, Maz Works` },
 ];
 export async function scheduleFollowUps(body, send) {
   if (process.env.FOLLOW_UP_EMAILS !== 'on' || !body.email) return false;

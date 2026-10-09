@@ -5,6 +5,15 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs';
 
+// Prices live only in app/offers.ts: refuse to render a slide whose £ figures aren't there.
+const offersText = fs.readFileSync(path.resolve('app/offers.ts'), 'utf8');
+for (const f of fs.readdirSync(path.dirname(fileURLToPath(import.meta.url))).filter((n) => n.endsWith('.html'))) {
+  const html = fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), f), 'utf8');
+  for (const price of html.match(/£[\d,]+/g) ?? []) {
+    if (!offersText.includes(price)) throw new Error(`${f}: ${price} is not in app/offers.ts. Update the slide to the current price.`);
+  }
+}
+
 const src = path.dirname(fileURLToPath(import.meta.url));
 const li = path.resolve(src, '..', 'linkedin');
 const jobs = [];
