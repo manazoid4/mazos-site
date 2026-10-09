@@ -3,6 +3,7 @@ import { CASE_STUDY_PROJECTS } from './projects';
 import { NICHE_GUIDES } from './for/niches';
 import { CUSTOMER_TYPES } from './customer-types';
 import { SITE_URL } from './site';
+import { SERVICE_JOBS } from './services/jobs';
 
 export const dynamic = 'force-static';
 
@@ -23,6 +24,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/faq`, lastModified: updated, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE_URL}/terms`, lastModified: new Date('2026-10-02'), changeFrequency: 'yearly', priority: 0.3 },
     { url: `${SITE_URL}/privacy`, lastModified: new Date('2026-10-02'), changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${SITE_URL}/services`, lastModified: new Date('2026-10-09'), changeFrequency: 'monthly', priority: 0.9 },
+    ...SERVICE_JOBS.map((job) => ({
+      url: `${SITE_URL}/services/${job.id}`,
+      lastModified: new Date('2026-10-09'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.85,
+    })),
     ...CUSTOMER_TYPES.map((type) => ({
       url: `${SITE_URL}/for/${type.id}`,
       lastModified: new Date('2026-10-02'),

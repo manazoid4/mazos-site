@@ -196,7 +196,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(prices, /\/free-plan\?package=Starter%20Automation#leak-check-form/);
   assert.doesNotMatch(prices, /\bAI\b/);
   assert.match(prices, /\/free-plan\?package=Team%20training#leak-check-form/, 'every add-on can pre-fill the free plan form');
-  assert.match(prices, /<title>Prices and packages \| Maz Works/);
+  assert.match(prices, /<title>Automation prices for UK small businesses \| Maz Works/);
   assert.match(prices, /Every Maz Works price in one place/);
 
   const contact = await readPage('/contact');
