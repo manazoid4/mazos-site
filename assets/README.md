@@ -1,3 +1,5 @@
+> **Posting? Start in [`promo/ready-to-post/`](promo/ready-to-post/README.md)**: numbered folders in posting order, pictures numbered in slide order, each with `post.txt` (post text + first-comment link). `overview.png` shows them all in a row.
+
 # Assets
 
 Everything made for posting and branding, in one place. Copies only: the site still uses `public/` and `app/`.
