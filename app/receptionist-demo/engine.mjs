@@ -203,7 +203,8 @@ const URGENT_LINE = 'I’ve marked this as urgent for the owner.';
 const ANON = 'Caller (no name given)';
 const isDanger = (text) => has(String(text).toLowerCase(), DANGER);
 const aOrAn = (name) => (/^[A-Z0-9]{2,}$/.test(name) ? /^[FHLMNRSX]/.test(name) : /^[aeiou]/i.test(name)) ? 'an' : 'a';
-const shown = (name) => (/^[A-Z0-9]{2,}$/.test(name) ? name : name.toLowerCase());
+/** Lower-case for mid-sentence use, but keep acronyms: "EV charger" → "EV charger", "Deep clean" → "deep clean". */
+const shown = (name) => name.split(' ').map((word) => (/^[A-Z0-9]{2,}$/.test(word) ? word : word.toLowerCase())).join(' ');
 
 /**
  * One call. `greet()` starts it; `reply(text)` takes what the caller said and
@@ -231,7 +232,17 @@ export function createDesk(input) {
   const answered = [];
   const note = (list, item) => { if (!list.includes(item)) list.push(item); };
 
-  const findService = (text) => config.services.find((service) => service.name.toLowerCase().split(/\s+/).some((word) => word.length > 2 && new RegExp(`(^|\\W)${escape(word)}`, 'i').test(text)));
+  /** The service sharing the most words with what was said ("boiler repair" beats "boiler service"). */
+  const findService = (text) => {
+    let best;
+    let bestScore = 0;
+    for (const service of config.services) {
+      const words = service.name.toLowerCase().split(/\s+/).filter((word) => word.length > 2 || /^[a-z0-9]{2}$/i.test(word) && word === word.toUpperCase());
+      const score = words.filter((word) => new RegExp(`(^|\\W)${escape(word)}`, 'i').test(text)).length;
+      if (score > bestScore) { best = service; bestScore = score; }
+    }
+    return best;
+  };
   const askName = (lead) => {
     if (caller && (number || noNumber)) { stage = 'more'; return `${lead} I’ve added that to your message. Anything else?`; }
     if (caller) { stage = 'number'; return `${lead} ${NUMBER_ASK}`; }
@@ -250,6 +261,10 @@ export function createDesk(input) {
     }
     if (isClosing(text)) return finish();
     if (/^(hi|hello|hey|good (evening|morning|afternoon))[\s!.,?]*$/.test(t)) return 'Hello. How can I help?';
+    if (has(t, ['take a message', 'leave a message', 'pass a message', 'pass on a message'])) {
+      note(wants, 'Left a message');
+      return askName('Of course.');
+    }
     if (has(t, ['real person', 'human', 'robot', 'automated', 'machine', 'are you real'])) {
       note(answered, 'Said it is an automated receptionist');
       return `No, I’m the automated receptionist for ${config.name}. I can answer common questions or take a message for the team. How can I help?`;
@@ -411,14 +426,14 @@ export function createDesk(input) {
     return open(text);
   }
 
-  const firstHint = () => (config.hours ? 'Are you open on Saturday?' : `Do you do ${shown(config.services[0]?.name ?? 'repairs')}?`);
+  const firstHint = () => (config.hours ? 'Are you open on Saturday?' : config.services[0] ? `Do you do ${shown(config.services[0].name)}?` : 'Can you take a message?');
   const openHints = () => {
     const hints = [firstHint()];
     const priced = config.services.find((service) => service.price);
     if (priced) hints.push(`How much is ${aOrAn(priced.name)} ${shown(priced.name)}?`);
     const word = config.urgent[0];
     if (word) hints.push(/^(broken down|breakdown)$/.test(word) ? 'It’s urgent, I’ve broken down' : `It’s urgent: ${word}`);
-    if (hints.length < 2) hints.push(config.services[0] ? `Do you do ${shown(config.services[0].name)}?` : 'Can you take a message?');
+    if (hints.length < 2) hints.push(config.services[0] ? `Do you do ${shown(config.services[0].name)}?` : hints[0] === 'Can you take a message?' ? 'Are you open tomorrow?' : 'Can you take a message?');
     return hints.slice(0, 3);
   };
 

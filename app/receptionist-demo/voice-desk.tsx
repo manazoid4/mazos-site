@@ -1,14 +1,16 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
 import { AFTER_HOURS } from '../offers';
 import { MAIN_CTA } from '../site';
 import { DEFAULT_CONFIG, cleanConfig, createDesk, decodeConfig, spoken } from './engine.mjs';
+import { TryYours, focusTryYours } from './try-yours';
 
 type Line = { who: 'desk' | 'caller'; text: string };
 type Phase = 'ready' | 'ringing' | 'speaking' | 'listening' | 'thinking' | 'waiting' | 'ended';
 type Desk = ReturnType<typeof createDesk>;
 type Summary = ReturnType<Desk['summary']>;
+type Source = 'default' | 'link' | 'typed';
 
 /* The browser's own speech tools. Not in TypeScript's DOM types yet. */
 type Recogniser = {
@@ -26,20 +28,23 @@ const recogniserClass = (): (new () => Recogniser) | null => {
 };
 
 
-/** One small icon per call state, so the state reads without the words. Motion lives in CSS and stops for reduced-motion. */
-function StateIcon({ phase }: { phase: Phase }) {
-  if (phase === 'listening') return <span className="vd-bars" aria-hidden="true"><i /><i /><i /></span>;
-  if (phase === 'thinking') return <span className="vd-dots" aria-hidden="true"><i /><i /><i /></span>;
+/** The picture inside the presence core. Colour, icon and the status line carry the state when motion is off. */
+function CoreIcon({ phase }: { phase: Phase }) {
   const paths: Record<string, string> = {
-    speaking: 'M4 9v6h4l5 4V5L8 9H4zM16 8.5a5 5 0 0 1 0 7',
-    waiting: 'M12 3a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3zM5 11a7 7 0 0 0 14 0M12 18v3',
+    speaking: 'M4 9v6h4l5 4V5L8 9H4zM16 8.5a5 5 0 0 1 0 7M18.6 6a8.5 8.5 0 0 1 0 12',
+    listening: 'M12 3a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3zM5 11a7 7 0 0 0 14 0M12 18v3',
+    thinking: 'M6 12h.01M12 12h.01M18 12h.01',
+    ended: 'M5 12.5l4.5 4.5L19 7.5',
   };
+  paths.waiting = paths.listening;
   return (
-    <svg className={`vd-icon${phase === 'ringing' ? ' vd-ring' : ''}`} viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
       <path d={paths[phase] ?? 'M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z'} />
     </svg>
   );
 }
+
+const clock = (seconds: number) => `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
 
 /**
  * A pretend after-hours call you can have out loud, in the browser.
@@ -49,7 +54,9 @@ function StateIcon({ phase }: { phase: Phase }) {
  */
 export function VoiceDesk() {
   const [config, setConfig] = useState(cleanConfig(DEFAULT_CONFIG));
-  const [custom, setCustom] = useState(false);
+  const [source, setSource] = useState<Source>('default');
+  const [seconds, setSeconds] = useState(0);
+  const [madeAt, setMadeAt] = useState('');
   const [lines, setLines] = useState<Line[]>([]);
   const [phase, setPhase] = useState<Phase>('ready');
   const [interim, setInterim] = useState('');
@@ -70,13 +77,19 @@ export function VoiceDesk() {
   const typed = useRef<HTMLInputElement>(null);
   const log = useRef<HTMLOListElement>(null);
   const card = useRef<HTMLDivElement>(null);
+  const presence = useRef<HTMLDivElement>(null);
+  const start = useRef<HTMLButtonElement>(null);
+  const decay = useRef(0);
+  const boundarySeen = useRef(false);
+  const focusStart = useRef(false);
+  const startedAt = useRef(0);
   const mic = useRef<HTMLButtonElement>(null);
   const starter = useMemo(() => createDesk(config).hints(), [config]);
 
   useEffect(() => {
     const code = new URLSearchParams(window.location.hash.slice(1)).get('c');
     const fromLink = code ? decodeConfig(code) : null;
-    if (fromLink) { setConfig(fromLink); setCustom(true); }
+    if (fromLink) { setConfig(fromLink); setSource('link'); }
     setSpeech({ talk: 'speechSynthesis' in window, listen: Boolean(recogniserClass()) });
     if (!('speechSynthesis' in window)) return undefined;
     // Voices often load after the page does, so look again when the list changes.
@@ -87,7 +100,7 @@ export function VoiceDesk() {
     };
     pick();
     synth.addEventListener('voiceschanged', pick);
-    return () => { synth.removeEventListener('voiceschanged', pick); live.current = false; stopListening(); stopSpeech(); };
+    return () => { synth.removeEventListener('voiceschanged', pick); live.current = false; window.clearTimeout(decay.current); stopListening(); stopSpeech(); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -96,6 +109,27 @@ export function VoiceDesk() {
   const idle = phase === 'ready' || phase === 'ended';
   useEffect(() => { if (!idle) (mic.current ?? typed.current)?.focus(); }, [idle]);
   useEffect(() => { if (summary) card.current?.querySelector<HTMLElement>('.vd-summary')?.focus(); }, [summary]);
+  // Call timer: counts up while live, then keeps the final length.
+  useEffect(() => {
+    if (idle) return undefined;
+    startedAt.current = Date.now();
+    setSeconds(0);
+    const id = window.setInterval(() => setSeconds(Math.floor((Date.now() - startedAt.current) / 1000)), 1000);
+    return () => { window.clearInterval(id); setSeconds(Math.floor((Date.now() - startedAt.current) / 1000)); };
+  }, [idle]);
+  // After "Make my demo", the cursor goes to Start.
+  useEffect(() => { if (focusStart.current && phase === 'ready') { focusStart.current = false; start.current?.focus(); } }, [config, phase]);
+  // The pulse fallback only belongs to the receptionist speaking.
+  useEffect(() => { if (phase !== 'speaking') presence.current?.removeAttribute('data-pulse'); }, [phase]);
+
+  /** Moves the presence core. Written straight to the element (never React state), because it changes on every spoken word. */
+  const bump = () => {
+    const el = presence.current;
+    if (!el) return;
+    el.style.setProperty('--level', '1');
+    window.clearTimeout(decay.current);
+    decay.current = window.setTimeout(() => el.style.setProperty('--level', '0.12'), 110);
+  };
 
   const later = (fn: () => void, ms: number) => { const id = window.setTimeout(fn, ms); timers.current.push(id); return id; };
   const clearTimers = () => { timers.current.forEach((id) => window.clearTimeout(id)); timers.current = []; };
@@ -121,7 +155,10 @@ export function VoiceDesk() {
     stopSpeech();
     setNudge('');
     setPhase('ended');
-    if (desk.current) setSummary(desk.current.summary());
+    if (desk.current) {
+      setSummary(desk.current.summary());
+      setMadeAt(new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }));
+    }
   };
 
   const listen = () => {
@@ -139,6 +176,7 @@ export function VoiceDesk() {
     r.onresult = (event) => {
       if (rec.current !== r) return;
       setPhase('listening');
+      bump();
       let text = '';
       for (let i = event.resultIndex; i < event.results.length; i += 1) {
         text += event.results[i][0].transcript;
@@ -190,8 +228,11 @@ export function VoiceDesk() {
       // "Thinking" only shows if speech is slow to start (over 150ms).
       const slow = later(() => setPhase('thinking'), 150);
       utterance.onstart = () => { window.clearTimeout(slow); setPhase('speaking'); };
+      utterance.onboundary = () => { boundarySeen.current = true; presence.current?.removeAttribute('data-pulse'); bump(); };
       utterance.onend = go;
       utterance.onerror = go;
+      boundarySeen.current = false;
+      later(() => { if (!boundarySeen.current) presence.current?.setAttribute('data-pulse', '1'); }, 400);
       later(() => setPhase('speaking'), 1500);
       later(go, 2500 + spokenText.split(/\s+/).length * 450);
       window.speechSynthesis.speak(utterance);
@@ -254,6 +295,29 @@ export function VoiceDesk() {
     listen();
   };
 
+  /** A visitor typed their own business: swap the desk, reset any finished call, and send them to Start. */
+  const madeDemo = (made: typeof config) => {
+    stopSpeech();
+    stopListening();
+    live.current = false;
+    desk.current = null;
+    setConfig(made);
+    setSource('typed');
+    setLines([]);
+    setSummary(null);
+    setHints([]);
+    setNudge('');
+    setNote('');
+    setSeconds(0);
+    setPhase('ready');
+    focusStart.current = true;
+  };
+
+  /** Escape hangs up. Nothing traps focus, so Tab still leaves the card. */
+  const keys = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Escape' && live.current) { event.preventDefault(); endCall(); }
+  };
+
   const toggleVoice = () => {
     voiceRef.current = !voiceRef.current;
     setVoiceOn(voiceRef.current);
@@ -270,67 +334,91 @@ export function VoiceDesk() {
     ended: 'Call ended',
   }[phase];
 
+  const truth = source === 'link' ? `Demo made by Maz Works for ${config.name}. Not ${config.name}’s real phone line.`
+    : source === 'typed' ? `Demo made from the details you typed. Not ${config.name}’s real phone line.`
+    : 'Demo · not a real phone line';
   const chips = phase === 'ready' ? starter : phase === 'ended' ? [] : hints;
   const micLabel = phase === 'speaking' || phase === 'thinking' ? 'Interrupt' : phase === 'listening' ? 'Stop listening' : 'Talk';
-  const planHref = `/free-plan?src=voice-demo&package=${encodeURIComponent(AFTER_HOURS.name)}${custom ? `&business=${encodeURIComponent(config.name)}` : ''}#leak-check-form`;
+  const planHref = `/free-plan?src=voice-demo&package=${encodeURIComponent(AFTER_HOURS.name)}${source !== 'default' ? `&business=${encodeURIComponent(config.name)}` : ''}#leak-check-form`;
 
   return (
-    <div className="vd" ref={card}>
-      <p className="vd-truth">{custom ? `Demo made by Maz Works for ${config.name}. Not ${config.name}’s real phone line.` : 'Demo · not a real phone line'}</p>
+    <div className="vd" ref={card} onKeyDown={keys}>
+      <p className="vd-truth">{truth}</p>
       <div className="vd-head">
         <div>
           <h2 className="vd-name">{config.name}</h2>
           <p className="vd-closed"><span aria-hidden="true">●</span> Closed now{config.hours ? ` · open ${config.hours}` : ''}</p>
         </div>
-        {phase === 'ready' ? <button type="button" className="button button-signal vd-start" onClick={() => begin()}>Start the call</button> : null}
+        <span className={`vd-timer${idle ? '' : ' is-live'}`}>{phase === 'ready' ? 'Demo' : <><span className="vd-sr">{phase === 'ended' ? 'Call length ' : 'Call time '}</span>{clock(seconds)}</>}</span>
       </div>
 
-      <p className={`vd-status vd-status-${phase}`} role="status"><StateIcon phase={phase} /><span>{status}</span></p>
-
-      <ol className="vd-log" ref={log} tabIndex={0} aria-live="polite" aria-label="Call so far">
-        {lines.length === 0 ? <li className="vd-empty">Press “Start the call”, or tap a suggestion below, then talk as if you were a customer ringing after hours.</li> : null}
-        {lines.map((line, index) => (
-          <li key={index} className={`vd-line vd-${line.who}`}><span className="vd-who">{line.who === 'desk' ? 'Receptionist' : 'You'}</span><span className="vd-said">{line.text}</span></li>
-        ))}
-        {interim ? <li className="vd-line vd-caller vd-interim" aria-hidden="true"><span className="vd-who">You</span><span className="vd-said">{interim}</span></li> : null}
-      </ol>
-
-      {chips.length ? (
-        <div className="vd-hints" role="group" aria-label="Things you could say">
-          <span className="vd-hint-label">Try saying</span>
-          {chips.map((chip) => <button key={chip} type="button" className="vd-chip" disabled={phase === 'ringing'} onClick={() => sendChip(chip)}>{chip}</button>)}
+      <div className="vd-stage">
+        <div className={`vd-presence vd-p-${phase}`} ref={presence} aria-hidden="true">
+          <span className="vd-pr vd-pr1" /><span className="vd-pr vd-pr2" /><span className="vd-orbit"><i /></span>
+          <span className="vd-core"><CoreIcon phase={phase} /></span>
         </div>
-      ) : null}
+        <p className={`vd-status vd-status-${phase}`} role="status">{status}</p>
+        {phase === 'ready' ? (
+          <button type="button" ref={start} className="vd-start" onClick={() => begin()}>
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" /></svg>
+            Start the call
+          </button>
+        ) : null}
+      </div>
 
-      {phase !== 'ready' && phase !== 'ended' ? (
-        <div className="vd-controls">
-          <div className="vd-row">
-            {speech.listen ? <button type="button" ref={mic} className={`vd-mic${phase === 'listening' ? ' is-on' : ''}`} onClick={micTap} aria-label={micLabel} title={micLabel}><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><path d="M12 3a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3zM5 11a7 7 0 0 0 14 0M12 18v3" /></svg></button> : null}
-            <form className="vd-type" onSubmit={sendTyped}>
-              <label className="vd-sr" htmlFor="vd-typed">Type what you’d say</label>
-              <input id="vd-typed" ref={typed} autoComplete="off" placeholder="Or type what you’d say…" />
-              <button type="submit" className="button">Send</button>
-            </form>
+      <div className="vd-talk">
+        <ol className="vd-log" ref={log} tabIndex={0} aria-live="polite" aria-label="Call so far">
+          {lines.length === 0 ? <li className="vd-empty">Press “Start the call”, or tap a suggestion, then talk as if you were a customer ringing after hours.</li> : null}
+          {lines.map((line, index) => (
+            <li key={index} className={`vd-line vd-${line.who}`}><span className="vd-who">{line.who === 'desk' ? 'Receptionist' : 'You'}</span><span className="vd-said">{line.text}</span></li>
+          ))}
+          {interim ? <li className="vd-line vd-caller vd-interim" aria-hidden="true"><span className="vd-who">You</span><span className="vd-said">{interim}</span></li> : null}
+        </ol>
+
+        {chips.length ? (
+          <div className="vd-hints" role="group" aria-label="Things you could say">
+            <span className="vd-hint-label">Try saying</span>
+            {chips.map((chip) => <button key={chip} type="button" className="vd-chip" disabled={phase === 'ringing'} onClick={() => sendChip(chip)}>{chip}</button>)}
           </div>
-          <div className="vd-foot">
-            <button type="button" className="vd-voice" onClick={toggleVoice} aria-pressed={!voiceOn}>{voiceOn ? 'Mute the receptionist' : 'Turn voice back on'}</button>
-            <button type="button" className="button vd-end" onClick={endCall}>End call</button>
+        ) : null}
+
+        {phase !== 'ready' && phase !== 'ended' ? (
+          <div className="vd-controls">
+            <div className="vd-row">
+              {speech.listen ? <button type="button" ref={mic} className={`vd-mic${phase === 'listening' ? ' is-on' : ''}`} onClick={micTap} aria-label={micLabel} title={micLabel}><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><path d="M12 3a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3zM5 11a7 7 0 0 0 14 0M12 18v3" /></svg></button> : null}
+              <form className="vd-type" onSubmit={sendTyped}>
+                <label className="vd-sr" htmlFor="vd-typed">Type what you’d say</label>
+                <input id="vd-typed" ref={typed} autoComplete="off" placeholder="Or type what you’d say…" />
+                <button type="submit" className="button">Send</button>
+              </form>
+            </div>
+            <div className="vd-foot">
+              <button type="button" className="vd-voice" onClick={toggleVoice} aria-pressed={!voiceOn}>{voiceOn ? 'Mute the receptionist' : 'Turn voice back on'}</button>
+              <button type="button" className="button vd-end" onClick={endCall}>End call (Esc)</button>
+            </div>
           </div>
-        </div>
-      ) : null}
-      {note ? <p className="vd-note">{note}</p> : null}
+        ) : null}
+        {note ? <p className="vd-note">{note}</p> : null}
+      </div>
 
       {summary ? (
         <div className={`vd-summary${summary.urgent ? ' is-urgent' : ''}`} tabIndex={-1}>
-          <span className="vd-tag">What the owner would get by email (in this demo nothing is sent)</span>
-          <strong>{summary.title}</strong>
+          <div className="vd-mhead">
+            <span className="vd-tag">Message for {config.name} · {madeAt}</span>
+            <span className="vd-stamp">Demo · not sent</span>
+          </div>
+          <strong className="vd-subject">{summary.title}{summary.urgent ? <span className="vd-urgent">Urgent</span> : null}</strong>
           <dl>{summary.rows.map(([key, value]) => <div key={key}><dt>{key}</dt><dd>{value}</dd></div>)}</dl>
+          <p className="vd-real">With the real service, a message like this reaches your inbox after every call.</p>
           <div className="vd-actions">
             <a className="button button-signal" href={planHref}>{MAIN_CTA}</a>
             <button type="button" className="button" onClick={() => begin()}>Call again</button>
           </div>
+          {source === 'default' ? <button type="button" className="vd-link" onClick={focusTryYours}>Try it as your business</button> : null}
         </div>
       ) : null}
+
+      {idle ? <div className="vd-trywrap"><TryYours onMade={madeDemo} /></div> : null}
 
       <p className="vd-small">
         A demo that runs in your browser. Nothing is recorded or sent to Maz Works. {speech.listen ? 'Your browser’s own speech service turns your voice into text (in Chrome that is Google’s). ' : ''}

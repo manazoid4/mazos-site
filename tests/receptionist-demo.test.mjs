@@ -293,3 +293,19 @@ test('the service page hero opens the talk-to-it demo', async () => {
   assert.match(html, /Talk to the receptionist/);
   assert.ok(html.includes('href="/receptionist-demo"'));
 });
+
+test('try-it-as-your-business presets: the closest service wins, acronyms survive, no prices invented', async () => {
+  const { presetConfig, PRESETS } = await import('../app/receptionist-demo/presets.mjs');
+  const plumber = presetConfig('Smith & Sons Plumbing', 'plumbing');
+  assert.equal(plumber.name, 'Smith & Sons Plumbing');
+  assert.ok(plumber.services.every((service) => !service.price));
+  assert.match(talk(['do you do boiler repair'], plumber).said[1], /we do boiler repair\./);
+  assert.match(talk(['how much is a boiler repair'], plumber).said[1], /won’t guess/);
+  assert.match(talk(['can you fit an EV charger'], presetConfig('Volt Electrical', 'electrician')).said[1], /we do EV charger/);
+  for (const bad of ['www.example.com', 'Call 0906 123 4567', '   ']) assert.equal(presetConfig(bad, 'garage'), null, bad);
+  const other = presetConfig('Bean There Cafe', 'other');
+  const { desk } = talk([], other);
+  assert.deepEqual(desk.hints(), ['Can you take a message?', 'Are you open tomorrow?']);
+  assert.match(talk(['Can you take a message?'], other).said[1], /^Of course\. Can I take your name\?$/);
+  assert.ok(PRESETS.length >= 8);
+});
