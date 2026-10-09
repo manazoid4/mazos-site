@@ -105,7 +105,7 @@
 .vd-summary :focus-visible { outline-color: var(--ink); }
 .vd-mhead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; }
 .vd-summary .vd-tag { color: var(--signal-text); }
-.vd-stamp { font-family: var(--mono); font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; border: 1px dashed var(--muted); padding: 2px 8px; color: var(--muted); }
+.vd-stamp { font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; border: 1px dashed var(--muted); padding: 2px 8px; color: var(--muted); }
 .vd-subject { display: flex; align-items: center; gap: 10px; font-size: 1.15rem; }
 .vd-urgent { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; background: #b4462f; color: #fff; padding: 2px 8px; border-radius: 99px; }
 .vd-summary dl { margin: 0; display: grid; gap: 6px; }
