@@ -161,3 +161,5 @@
   .ah-compare-col, .ah-trust-icon, .ah-bar { transition: none; }
 }
 @media (max-width: 520px) { .ah-card { box-shadow: 5px 5px 0 var(--signal); margin-right: 5px; } }
+.ah-talk { margin-top: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.ah-talk span { color: var(--muted); }

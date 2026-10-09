@@ -1,0 +1,54 @@
+/* Talk-to-it demo + link maker. Night card, same tokens as /after-hours-receptionist. */
+.vd-page { --night: #1b1d22; --night-2: #262932; --glow: #ffb36b; }
+.vd-hero { padding: clamp(28px, 5vw, 56px) 0 18px; max-width: 760px; }
+.vd-hero h1 { font-size: clamp(2rem, 5vw, 3.4rem); margin: 12px 0; }
+.vd-hero p:last-child { color: var(--charcoal); }
+
+.vd { max-width: 760px; border: 3px solid var(--ink); border-radius: 18px; background: var(--night); color: #f3f1ec; padding: clamp(14px, 3vw, 24px); display: grid; gap: 14px; }
+.vd-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.vd-tag { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--glow); }
+.vd-name { font-size: clamp(1.4rem, 3vw, 2rem); color: #f3f1ec; margin: 4px 0; }
+.vd-closed { font-size: .9rem; color: #b9b6ae; }
+.vd-closed span { color: var(--glow); }
+.vd-start, .vd-end { min-height: 52px; }
+.vd-end { background: transparent; color: #f3f1ec; border-color: #f3f1ec; }
+.vd-log { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; min-height: 220px; max-height: 420px; overflow-y: auto; align-content: start; }
+.vd-empty { color: #b9b6ae; padding: 18px 0; }
+.vd-line { display: grid; gap: 3px; max-width: 88%; }
+.vd-desk { justify-self: start; }
+.vd-caller { justify-self: end; text-align: right; }
+.vd-who { font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: #b9b6ae; }
+.vd-said { padding: 10px 14px; border-radius: 14px; line-height: 1.4; }
+.vd-desk .vd-said { background: #f3f1ec; color: var(--ink); border-bottom-left-radius: 4px; }
+.vd-caller .vd-said { background: var(--night-2); border: 1px solid #4a4e59; border-bottom-right-radius: 4px; }
+.vd-interim .vd-said { opacity: .7; font-style: italic; }
+.vd-controls { display: grid; gap: 10px; border-top: 1px solid #3a3d46; padding-top: 12px; }
+.vd-status { font-weight: 800; }
+.vd-status-listening { color: var(--glow); }
+.vd-row { display: flex; gap: 10px; align-items: center; }
+.vd-mic { flex: 0 0 56px; height: 56px; border-radius: 50%; border: 2px solid var(--glow); background: var(--glow); color: var(--ink); display: grid; place-items: center; cursor: pointer; }
+.vd-mic:disabled { background: transparent; color: var(--glow); animation: vd-pulse 1.1s ease-in-out infinite; }
+@keyframes vd-pulse { 50% { box-shadow: 0 0 0 8px rgba(255, 179, 107, .25); } }
+.vd-type { flex: 1; display: flex; gap: 8px; }
+.vd-type input { flex: 1; min-width: 0; min-height: 48px; border: 2px solid #f3f1ec; border-radius: 10px; background: transparent; color: #f3f1ec; font: inherit; padding: 8px 12px; }
+.vd-type .button { background: #f3f1ec; color: var(--ink); }
+.vd-voice { justify-self: start; background: none; border: 0; color: #b9b6ae; text-decoration: underline; font: inherit; font-size: .85rem; cursor: pointer; padding: 4px 0; }
+.vd-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.vd-note { color: var(--glow); }
+.vd-summary { background: var(--surface); color: var(--ink); border-left: 6px solid var(--signal); border-radius: 12px; padding: 14px 16px; display: grid; gap: 8px; }
+.vd-summary.is-urgent { border-left-color: #b4462f; }
+.vd-summary .vd-tag { color: var(--signal-text); }
+.vd-summary dl { margin: 0; display: grid; gap: 6px; }
+.vd-summary dl div { display: grid; grid-template-columns: 7.5em 1fr; gap: 8px; border-top: 1px solid var(--soft-line); padding-top: 6px; }
+.vd-summary dt { color: var(--muted); }
+.vd-summary dd { margin: 0; font-weight: 700; }
+.vd-small { font-size: .82rem; color: #b9b6ae; }
+.vd + .mw-resource-cta { margin-top: 40px; }
+
+.vm { max-width: 760px; display: grid; gap: 14px; border: 3px solid var(--ink); background: var(--surface); padding: clamp(16px, 3vw, 24px); }
+.vm label { display: grid; gap: 6px; font-weight: 750; }
+.vm input, .vm textarea { font: inherit; font-weight: 400; border: 2px solid var(--ink); padding: 10px 12px; min-height: 48px; background: var(--paper); }
+.vm-out { border-top: 1px solid var(--soft-line); padding-top: 14px; display: grid; gap: 10px; }
+.vm-link { font-family: var(--mono); font-size: .78rem; word-break: break-all; background: var(--paper); padding: 10px; border: 1px solid var(--soft-line); }
+
+@media (prefers-reduced-motion: reduce) { .vd-mic:disabled { animation: none; } }

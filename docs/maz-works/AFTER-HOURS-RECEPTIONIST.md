@@ -31,3 +31,8 @@ Sources opened: ringcentral.com/ai-receptionist.html, smith.ai/ai-receptionist, 
 
 ## Next
 Daytime overflow cover (copy says "comes next"), a real recorded demo call with consent, and a public test number.
+
+## Free talk-to-it demo (9 Oct 2026)
+- `/receptionist-demo`: a pretend after-hours call, out loud, in the browser. Speech uses the browser's own tools (free); answers come from `app/receptionist-demo/engine.mjs` (rules, only the business's own details, never guesses a price, urgent → 999 line). Typing works where speech doesn't. Not indexed.
+- `/receptionist-demo/make`: Maz fills in a prospect's name, hours, services (prices only if they publish them), urgent words → copies their personal link. Details live in the link's `#c=` hash, nothing is stored.
+- Cost £0. Paid clients still need a real number + a more natural voice (about £5–10/month each).
