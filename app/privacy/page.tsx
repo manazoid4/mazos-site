@@ -11,7 +11,7 @@ import { SiteFooter, SiteHeader } from '../site-chrome';
  * Update it whenever a form, processor or tracker changes.
  */
 const PAGE_URL = `${SITE_URL}/privacy`;
-const UPDATED = '2 October 2026';
+const UPDATED = '9 October 2026';
 
 export const metadata: Metadata = {
   title: 'Privacy',
@@ -35,6 +35,14 @@ const SECTIONS: { title: string; body: string[] }[] = [
       'Private client demos: one essential cookie keeps you signed in to your demo, and nothing else.',
       'Clients: the details needed to plan, build, invoice and support your job.',
       'Outreach research: public business details, such as your website, Google listing and Companies House record, so I can suggest something specific.',
+    ],
+  },
+  {
+    title: 'After-hours call answering',
+    body: [
+      'If you ring a business that uses my After-Hours Receptionist, the call is answered for that business. The business decides what is asked and is responsible for your details; I run the service for them.',
+      'What is kept: your name and number, what you asked for, and a written summary sent to the business by email. Calls are recorded only if the business turns recording on, and then you are told at the start of the call.',
+      'Call audio is handled by a telephone provider and a speech-processing provider chosen for the service. Transcripts are kept for 30 days by default, then deleted, unless the business asks for a different period.',
     ],
   },
   {

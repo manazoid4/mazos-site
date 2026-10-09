@@ -589,6 +589,43 @@ export const CARE_PLANS = [
 /** The entry care plan, for one-line mentions. */
 export const CARE_PLAN = CARE_PLANS[0];
 
+/**
+ * After-Hours Receptionist (launched 9 Oct 2026): a monthly call-answering
+ * service, separate from the one-off packages. Answers when the business is
+ * closed, takes details, answers the owner's own FAQs and emails a summary.
+ * Bounded on purpose: no payments, no advice, not an emergency service.
+ * Daytime overflow cover is "next", not sold yet. Never call it AI on the site.
+ */
+export const AFTER_HOURS = {
+  id: 'after-hours-receptionist',
+  name: 'After-Hours Receptionist',
+  price: '£79/month',
+  monthly: 79,
+  href: '/after-hours-receptionist',
+  /** Fair-use minutes included each month. Over that, the price is agreed first, never billed by surprise. */
+  minutes: 300,
+  setup: 'Set-up included',
+  terms: 'Month to month. No long contract. Cancel with a month’s notice.',
+  guarantee: 'You hear it answering as your business before your first month is billed.',
+  included: [
+    { title: 'Answers when you’re closed', body: 'Evenings, weekends and bank holidays, on the hours you set.' },
+    { title: 'Your own greeting', body: 'In your business name, worded the way you’d say it.' },
+    { title: 'Common questions answered', body: 'Opening hours, areas, services and prices, only from what you give me.' },
+    { title: 'Clear messages', body: 'Name, number, what they need and how soon, read back to the caller to check.' },
+    { title: 'Summary by email', body: 'After every call, or one tidy digest first thing in the morning.' },
+    { title: 'Urgent-call rules', body: 'You decide what counts as urgent and whether it texts or rings you.' },
+    { title: 'Holidays and opening hours', body: 'Closed for a week? Tell me and the greeting and hours change.' },
+    { title: 'Nuisance calls kept short', body: 'Obvious sales and spam calls are ended politely and flagged.' },
+    { title: 'Monthly tuning', body: 'I read your calls each month and improve the answers where callers got stuck.' },
+  ],
+  notIncluded: [
+    'Taking payments or card details.',
+    'Medical, legal or financial advice. It takes a message instead.',
+    'Replacing emergency services. Callers in an emergency are told to ring 999 or the right service.',
+    'Daytime overflow cover. That comes next; ask if you want it.',
+  ],
+} as const;
+
 /** How the work is actually set up, in plain words (homepage "How I set it up"). */
 export const DELIVERY: { title: string; body: string }[] = [
   { title: 'Built on what you already use', body: 'Your booking app, email, calendar or accounts software. If a new app is needed, you pay that company directly and I tell you the cost first.' },
