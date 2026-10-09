@@ -9,7 +9,7 @@ import './home-visuals.css';
 import { ScrollReveal } from './scroll-reveal';
 import { CUSTOMER_TYPES } from './customer-types';
 import { KitIcon } from './brand-kit/kit-icon';
-import { FREE_STEP, OFFERS, getMenuJob } from './offers';
+import { CARE_PLAN, FREE_STEP, OFFERS, getMenuJob } from './offers';
 const STARTER = OFFERS[0];
 /** Before / after: one row per Starter job (ids are menu jobs in offers.ts). */
 const CHANGES = [
@@ -21,7 +21,7 @@ const STEPS = [
   { title: 'Free plan', body: `Reply within ${CHECK_REPLY_TIME}.` },
   { title: 'Fixed price', body: 'In a written scope sheet.' },
   { title: 'Built, then shown', body: 'Working before you pay.' },
-  { title: 'Care is optional', body: 'Only if you want it.' },
+  { title: 'Care is optional', body: `Only if you want it, from ${CARE_PLAN.price}.` },
 ] as const;
 const PROOF = [
   {
