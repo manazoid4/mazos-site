@@ -36,7 +36,8 @@ test('urgent words point to 999 and mark the call urgent', () => {
   assert.match(said[1], /mark this as urgent/);
   assert.doesNotMatch(said[1], /999/);
   assert.ok(desk.summary().urgent);
-  assert.match(said[4], /Is that correct/);
+  assert.match(said[3], /Is that correct/);
+  assert.match(said[4], /confirmed/);
 });
 
 test('it says it is automated when asked', () => {
