@@ -125,7 +125,7 @@ Post:
 Want to see it working before you decide?
 
 I'll send a working demo with your business name on it.
-It's free, within 1 working day.
+It's free, usually within 1 working day.
 
 It's an example on my test setup until you say yes.
 You get a fixed price before any work starts.
