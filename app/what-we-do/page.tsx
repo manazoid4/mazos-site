@@ -18,7 +18,7 @@ export default function WhatWeDo() {
   <section className="s-hero s-hero-short" id="main-content" tabIndex={-1}>
    <p className="eyebrow">What we do</p><h1>The systems your business runs on.</h1>
    <p className="s-lede">Enquiries answered. Bookings confirmed. Follow-ups sent. Less chasing for you.</p>
-   <div className="s-actions"><a className="button button-signal s-button-lg" href="/free-plan">{MAIN_CTA}</a></div>
+   <div className="s-actions"><a className="button button-signal s-button-lg" href="/free-plan#leak-check-form">{MAIN_CTA}</a></div>
    <nav className="s-actions" aria-label="Choose a package">{OFFERS.map(offer=><a className="button" key={offer.id} href={`#${offer.id}`}>{offer.name} · {offer.price}</a>)}</nav>
   </section>
   <section className="s-section" id="packages" aria-labelledby="packages-title"><p className="eyebrow">Three sizes of job</p><h2 id="packages-title">Pick the size, see the price.</h2>
@@ -36,7 +36,7 @@ export default function WhatWeDo() {
    <p><a className="s-details-link" href="/prices#next">{CHANGES_WINDOW.name}, what’s included and the cost calculator →</a></p>
   </section>
   <section className="s-section" id="example"><h2>An example of the plan you get.</h2><SampleReport /></section>
-  <section className="s-final"><h2>Start with the job that costs you time.</h2><p>A personal reply, usually within {CHECK_REPLY_TIME}.</p><a className="button button-signal" href="/free-plan">{MAIN_CTA}</a></section>
-  <SiteFooter /><StickyCheckCta href="/free-plan" /><ScrollReveal />
+  <section className="s-final"><h2>Start with the job that costs you time.</h2><p>A personal reply, usually within {CHECK_REPLY_TIME}.</p><a className="button button-signal" href="/free-plan#leak-check-form">{MAIN_CTA}</a></section>
+  <SiteFooter /><StickyCheckCta href="/free-plan#leak-check-form" /><ScrollReveal />
  </main>;
 }

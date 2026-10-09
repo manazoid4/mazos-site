@@ -13,7 +13,7 @@ export function SiteHeader() {
       <nav aria-label="Primary navigation">
         <NavLinks />
         <SiteMenu />
-        <a className="mw-nav-cta" href="/free-plan">Free plan</a>
+        <a className="mw-nav-cta" href="/free-plan?src=nav#leak-check-form">Free plan</a>
       </nav>
     </header>
   );

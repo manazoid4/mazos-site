@@ -3,13 +3,23 @@
 **North star: more paid jobs per week with less of Maz's time.**
 Every change must help a visitor understand, trust or buy faster, or help Maz reply, quote or deliver faster. If it doesn't, it doesn't ship.
 
-| # | Goal | Done when | Where it's tracked |
-|---|---|---|---|
-| 1 | **Clear offer.** A visitor sees their problem, the fix, the price and what's included. | A trades owner, a salon owner and a creator each find their problem, price and what's included, and reach the main action in 2 taps or fewer. | Prices only in `app/offers.ts`; pricing rules in `docs/maz-works/OFFER-V11.md` |
-| 2 | **Trust without fake proof.** Real work, plain promises, no invented results. | Every claim on the site can be checked; demo businesses are clearly labelled demos; real case studies added as permission comes in. | `AGENTS.md` rules, case studies in `/work/*` |
-| 3 | **One easy first step.** Free Plan & Fixed Quote is the single main action everywhere. | One main button on every page; a test enquiry arrives in the inbox with its source. | `/free-plan`, enquiry form |
-| 4 | **Fast reply, fast quote.** Maz answers within one working day with a consistent plan and price. | A test enquiry becomes a drafted free plan Maz can send in about 2 minutes. | Sales engine (plan v3, block C) |
-| 5 | **Leads worked every week.** Owners contacted by name through the right route, followed up once. | Gold and Silver leads each have a HubSpot task, pitch note and one follow-up. | Private leads repo + HubSpot (never in this repo) |
+## Start here (current work, 9 Oct 2026)
+- **Live work:** the open PR on `ccr-13ded85e-8hqfpk` ("seven goals"); its body has the task list and "Test it yourself".
+- **Quality bar:** [`docs/maz-works/REFERENCE-BRIEF.md`](docs/maz-works/REFERENCE-BRIEF.md) (references, patterns, acceptance criteria).
+- **Prices:** `app/offers.ts` only; decisions in [`docs/maz-works/PRICE-AUDIT-2026-10.md`](docs/maz-works/PRICE-AUDIT-2026-10.md) (Offer v12; `OFFER-V11.md` is history).
+- **Latest handover:** [`docs/maz-works/SESSION-HANDOVER.md`](docs/maz-works/SESSION-HANDOVER.md) (public); the full one with to-dos is in the private memory repo.
+- **How to work:** [`AGENTS.md`](AGENTS.md) (rules) · [`PLAYBOOKS.md`](PLAYBOOKS.md) (how-tos).
+
+## The seven goals (Maz, 9 Oct 2026)
+| # | Goal | Done when |
+|---|---|---|
+| 1 | **Design.** Mobile layout, infographics, homepage video, interactive examples. | Every visual answers one distinct question, is labelled as a demo, and reads well at 390px; Lighthouse mobile ≥ 95. |
+| 2 | **Readability.** Who I help, what I sell, the benefit, the next step. | At 390px the first screen shows audience, outcome, "from £", and "Get my free plan". |
+| 3 | **Pricing.** Packages, inclusions, exclusions, upfront and ongoing costs. | Each package card shows what's in, what's not, when you pay, and what it costs after; no price outside `app/offers.ts`. |
+| 4 | **Lead conversion.** Real proof, simple enquiry that always arrives. | Every main button lands on the form; a test enquiry arrives with its source and package; failures tell the visitor what to do. |
+| 5 | **Google visibility.** Service pages, foundations, internal links, buying questions. | A page per main job, unique titles in the buyer's words, FAQ answers to cost/time/breaks/tie-in, valid schema. |
+| 6 | **Promotion and sales.** Infographics, reusable posts, prospect research, enquiry → quote → follow-up. | Finished assets + copy in `docs/maz-works/promo/`, process written down, nothing posted without Maz. |
+| 7 | **Repository clarity.** One starting point. | This page links current work; old plans marked done / superseded; history kept. |
 
 ## Rules that never change
 - Maz Works builds the systems small businesses run on: automation, connected tools and custom software that win customers and take admin off the owner. **Not** a website-fix shop.

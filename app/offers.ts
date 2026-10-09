@@ -94,6 +94,8 @@ export type Offer = {
   excludes: string[];
   /** When it is working, said plainly. */
   delivery: string;
+  /** When you pay, from the decided rule: under £1,000 one invoice before go-live; £1,000+ signed-off stages. */
+  payment: string;
   /** Rounds of changes before launch, then the shared changes policy. */
   changes: string;
   /** The natural next step, so each sale can lead to the next. */
@@ -102,6 +104,7 @@ export type Offer = {
   guarantee?: string;
 };
 
+const PAY_ONE_INVOICE = 'One invoice, once you’ve seen it working and before it goes live. Due within 7 days.';
 const TWEAKS = '30 days of tweaks after go-live (two rounds), and anything not working as agreed fixed free for 90 days.';
 
 /**
@@ -159,6 +162,7 @@ export const OFFERS: Offer[] = [
       'Cleaning up old data or changes to your website',
     ],
     delivery: 'Usually working within 7 working days of you adding me to your apps and approving the messages.',
+    payment: PAY_ONE_INVOICE,
     changes: TWEAKS,
     upsell: 'Its price comes off a Business System booked within 60 days.',
     guarantee: STARTER_GUARANTEE,
@@ -193,6 +197,7 @@ export const OFFERS: Offer[] = [
       'Moving more than 1,000 old records, or paid app costs',
     ],
     delivery: 'Date agreed in your scope sheet, usually 2 to 3 weeks after access.',
+    payment: `${PAY_ONE_INVOICE} If your scope comes to £1,000 or more, it’s billed in signed-off stages instead.`,
     changes: TWEAKS,
     upsell: 'Keep It Growing, to keep adding tasks each month.',
   },
@@ -223,6 +228,7 @@ export const OFFERS: Offer[] = [
       'Hosting and third-party fees (at cost, paid by you)',
     ],
     delivery: 'A dated plan in your scope sheet, billed in stages.',
+    payment: 'Two or three stages, each one signed off by you, as set out in your scope sheet.',
     changes: TWEAKS,
     upsell: 'Keep It Growing for ongoing improvements.',
   },
@@ -258,6 +264,7 @@ export const CREATOR_OFFERS: Offer[] = [
       'Brand design beyond colours you already use',
     ],
     delivery: 'Usually working within 7 working days of you adding me to your accounts.',
+    payment: PAY_ONE_INVOICE,
     changes: TWEAKS,
     upsell: 'Its price comes off a Launch Page booked within 60 days.',
     guarantee: STARTER_GUARANTEE,
@@ -293,6 +300,7 @@ export const CREATOR_OFFERS: Offer[] = [
       'App, domain and payment fees (paid by you, told up front)',
     ],
     delivery: 'Live within 15 working days of your content and access.',
+    payment: PAY_ONE_INVOICE,
     changes: `Two rounds of changes before launch, then ${TWEAKS.charAt(0).toLowerCase()}${TWEAKS.slice(1)}`,
     upsell: 'A Website when you need more pages: the Launch Page price comes off within 60 days.',
   },
@@ -329,6 +337,7 @@ export const WEB_OFFERS: Offer[] = [
       'Blog posts, ongoing search work, ads, or domain and hosting fees',
     ],
     delivery: 'Live by the date in your scope sheet, usually 4 to 6 weeks, billed in two stages.',
+    payment: 'Two stages, each one signed off by you, as set out in your scope sheet.',
     changes: `Two rounds of changes per page before launch, then ${TWEAKS.charAt(0).toLowerCase()}${TWEAKS.slice(1)}`,
     upsell: 'A Business System behind it, or Keep It Growing.',
   },
@@ -473,7 +482,8 @@ export const COMPARISON: { row: string; values: [string, string, string] }[] = [
   { row: 'Uses the tools you already have', values: ['Yes', 'Yes', 'Where it makes sense'] },
   { row: 'Customer details in one place', values: ['No', 'Included', 'Included'] },
   { row: 'Weekly report email', values: [`Add-on, ${getExtra('Weekly report').price}`, 'Included', 'Included'] },
-  { row: 'Money-back guarantee', values: ['30 days', 'Scope sheet + staged payments', 'Scope sheet + staged payments'] },
+  { row: 'Guarantee', values: ['30-day money-back', 'Scope sheet + 90-day fix promise', 'Scope sheet + 90-day fix promise'] },
+  { row: 'When you pay', values: ['One invoice, before go-live', 'One invoice, before go-live', 'Signed-off stages'] },
   { row: 'Working by', values: ['7 working days', 'Date in your scope sheet', 'Date in your scope sheet'] },
   { row: 'You own everything', values: ['Yes', 'Yes', 'Yes'] },
 ];
@@ -585,6 +595,21 @@ export const DELIVERY: { title: string; body: string }[] = [
 
 /** Shown on the site. Internal detail: under £1,000 = one invoice before go-live, 7-day terms; £1,000+ = two or three signed-off stages. */
 export const PAYMENT_TERMS = 'A free plan, a written scope sheet and a fixed price before any work. You pay when you’ve seen it working, before it goes live. Bigger jobs are billed in stages you sign off. No VAT added.';
+
+/**
+ * What it keeps costing after the build, derived from CARE_PLANS (never typed).
+ * Business System includes a first month of Keep It Running (Offer v12).
+ */
+export function runningCost(offer: Offer): string {
+  const care = `${CARE_PLANS[0].name} is optional, ${CARE_PLANS[0].price}.`;
+  if (offer.id === 'business-system') return `First month of ${CARE_PLANS[0].name} included, then optional care at ${CARE_PLANS[0].price}.`;
+  if (offer.id === 'creator-launch' || offer.id === 'website') return `Nothing monthly from me. ${care} Domain and hosting are paid by you.`;
+  if (offer.id === 'custom') return `Nothing monthly from me. ${care} Hosting and other tools are paid by you at cost.`;
+  return `Nothing monthly from me. ${care}`;
+}
+
+/** Running costs that are never ours, in one line. No figures: each is quoted in the scope sheet. */
+export const RUNNING_COSTS_NOTE = 'Running costs that aren’t ours: texts, booking apps, domain and hosting are paid by you directly to those companies. Each one is quoted in your scope sheet before you pay anything.';
 
 export const THIRD_PARTY_NOTE = 'If you need a paid app, like a texting service, you pay that company directly and I tell you the cost up front. You own everything.';
 

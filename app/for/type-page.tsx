@@ -8,6 +8,7 @@ import { CASE_STUDIES } from '../case-studies';
 import { MAIN_CTA } from '../site';
 import { OFFERS, STARTER_GUARANTEE, getMenuJob } from '../offers';
 import { StraightAnswers } from '../straight-answers';
+import { JobLinks } from '../services/job-links';
 import { CalculatorReveal } from '../calculator-reveal';
 import { NICHE_GUIDES } from './niches';
 import type { CustomerType } from '../customer-types';
@@ -45,6 +46,7 @@ export function TypePage({ type }: { type: CustomerType }) {
             <li key={row.pain}><span>“{row.pain}”</span><strong>{getMenuJob(row.starter!).name}</strong></li>
           ))}
         </ul>
+        <JobLinks typeId={type.id} who={type.shortName.toLowerCase()} inline />
       </section>
 
       <section className="s-section" id="recipes" aria-labelledby="type-recipes-title">

@@ -117,8 +117,9 @@ test('trade guides stay reachable and the homepage shows a labelled missed-call 
   }
   assert.match(html, /class="s-demo"/);
   assert.match(html, /Missed-call text-back, Starter Automation £149\. Not a real customer\./);
-  assert.match(html, /What changes in your day\./);
-  assert.match(html, /Illustrations of how it works, not real customers\./);
+  // The Enquiries/Reminders/Reviews tabs left the homepage (9 Oct): a before/after panel replaced them.
+  assert.match(html, /class="hv-ba"/);
+  assert.match(html, /Example of what changes, not a client result\./);
 });
 
 test('what-we-do shows a clearly labelled example report, not a real client', async () => {
@@ -196,7 +197,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(prices, /\/free-plan\?package=Starter%20Automation#leak-check-form/);
   assert.doesNotMatch(prices, /\bAI\b/);
   assert.match(prices, /\/free-plan\?package=Team%20training#leak-check-form/, 'every add-on can pre-fill the free plan form');
-  assert.match(prices, /<title>Prices and packages \| Maz Works/);
+  assert.match(prices, /<title>Automation prices for UK small businesses \| Maz Works/);
   assert.match(prices, /Every Maz Works price in one place/);
 
   const contact = await readPage('/contact');
@@ -537,7 +538,9 @@ test('every main page is one tap from the key routes, and the trade guides have 
   for (const route of ['/', '/free-plan', '/contact', '/faq', '/lab', '/3d-printing', '/for', '/for/architects']) {
     const html = await readPage(route);
     for (const href of ['/prices', '/for', '/3d-printing', '/faq', '/free-plan', '/for/architects', '/3d-printing#architecture-property']) {
-      assert.ok(html.includes(`href="${href}"`), `${route} is missing a link to ${href}`);
+      // The free-plan link may carry ?src=… and #leak-check-form (9 Oct: nav and footer land on the form).
+      const linked = html.includes(`href="${href}"`) || (href === '/free-plan' && html.includes('href="/free-plan?'));
+      assert.ok(linked, `${route} is missing a link to ${href}`);
     }
     assert.match(html, /class="mw-menu-button"[^>]*aria-expanded="false"/, `${route} has no phone menu button`);
   }

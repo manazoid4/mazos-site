@@ -99,7 +99,7 @@ Maz Works adapts those patterns to its own evidence and settled offer. It does n
 4. Image-led Scrap Finance Partners client-work flagship.
 5. Compact selected-work index for Agent Nudge and OpenFlowKit.
 6. One merged “What I build / How I work” section.
-7. A restrained client offer with the bounded demo and £75 + £75 terms.
+7. A restrained client offer: packages and prices come only from `app/offers.ts` (see `docs/maz-works/PRICE-AUDIT-2026-10.md`).
 8. Short About and one contact block with Hire / Client / Collaborate routes.
 9. Footer with GitHub and, only when verified, LinkedIn.
 
@@ -115,7 +115,7 @@ Technology lists remain secondary to decisions and evidence.
 
 ## First-five-seconds contract
 
-Visitors should see Maz Works, Manazir Hussain, “useful software, AI tools and automation around real problems,” a clear route into selected work, and credible shipped evidence without reading a ledger of claims.
+Visitors should see Maz Works, Manazir Hussain, “automation, connected tools and custom software for small businesses” (no AI in the offer: AGENTS.md), a clear route into selected work, and credible shipped evidence without reading a ledger of claims.
 
 ## Directions evaluated
 
