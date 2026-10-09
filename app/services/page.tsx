@@ -44,7 +44,7 @@ export default function ServicesPage() {
       <section className="mw-qw-section" aria-labelledby="services-monthly-title">
         <p className="eyebrow">Monthly service · new</p>
         <h2 id="services-monthly-title">{AFTER_HOURS.name}, {AFTER_HOURS.price}.</h2>
-        <a className="s-teaser" href={AFTER_HOURS.href}><span className="s-teaser-tag">{AFTER_HOURS.setup}</span><strong>Never miss another call after hours.</strong><span>When you’re closed, calls are answered in your business name, messages taken and a summary emailed to you.</span><span className="s-teaser-go" aria-hidden="true">→</span></a>
+        <a className="s-teaser" href={AFTER_HOURS.href}><span className="s-teaser-tag">{AFTER_HOURS.setup}</span><strong>Calls answered when you’re closed.</strong><span>When you’re closed, calls are answered in your business name, messages taken and a summary emailed to you.</span><span className="s-teaser-go" aria-hidden="true">→</span></a>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="services-list-title">

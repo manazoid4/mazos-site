@@ -615,8 +615,8 @@ export const AFTER_HOURS = {
     { title: 'Summary by email', body: 'After every call, or one tidy digest first thing in the morning.' },
     { title: 'Urgent-call rules', body: 'You decide what counts as urgent and whether it texts or rings you.' },
     { title: 'Holidays and opening hours', body: 'Closed for a week? Tell me and the greeting and hours change.' },
-    { title: 'Nuisance calls kept short', body: 'Obvious sales and spam calls are ended politely and flagged.' },
-    { title: 'Monthly tuning', body: 'I read your calls each month and improve the answers where callers got stuck.' },
+    { title: 'Nuisance calls kept short', body: 'Obvious sales and spam calls are kept short and flagged where it can tell.' },
+    { title: 'Monthly tuning', body: 'I review your calls each month and improve the answers where callers got stuck.' },
   ],
   notIncluded: [
     'Taking payments or card details.',
