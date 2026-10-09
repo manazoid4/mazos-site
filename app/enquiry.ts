@@ -56,7 +56,7 @@ export function readServiceFromLocation(): EnquiryServiceId | null {
   return match ? match.id : null;
 }
 
-export type EnquiryResult = { ok: true; confirmationSent?: boolean } | { ok: false; reason: 'rejected' | 'timeout' | 'network' };
+export type EnquiryResult = { ok: true; confirmationSent?: boolean } | { ok: false; reason: 'rejected' | 'timeout' | 'network'; status?: number };
 
 /** Posts the enquiry and normalises FormSubmit's `success: "false"` body into a real failure. */
 export async function sendEnquiry(payload: Record<string, string>, timeoutMs = SUBMIT_TIMEOUT_MS): Promise<EnquiryResult> {
@@ -101,14 +101,20 @@ export function buildRecoveryMailto(subject: string, fields: Array<[string, stri
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
+/**
+ * Must exceed vercel.json maxDuration (30s) for api/enquiry.js, whose worst case is ~18s (see api/enquiry.js).
+ * If this fired first, the FormSubmit fallback would send a second copy after the owner mail already went.
+ */
+export const API_TIMEOUT_MS = 35000;
+
 /** Transactional first; native/AJAX FormSubmit remains the independently usable fallback. */
 export async function sendPlanEnquiry(payload: Record<string, string>): Promise<EnquiryResult> {
   try {
-    const response = await fetch('/api/enquiry', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload), signal: AbortSignal.timeout(20000) });
+    const response = await fetch('/api/enquiry', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload), signal: AbortSignal.timeout(API_TIMEOUT_MS) });
     const result = await response.json();
     if (response.ok && result.ok === true) return { ok: true, confirmationSent: result.confirmationSent === true };
     // Validation and abuse rejections must not bypass the server via fallback.
-    if (response.status === 400 || response.status === 413 || response.status === 429) return {ok:false,reason:'rejected'};
+    if (response.status === 400 || response.status === 413 || response.status === 429) return {ok:false,reason:'rejected',status:response.status};
   } catch { /* A static host, unavailable function or network timeout can use the existing transport. */ }
   return sendEnquiry(payload);
 }

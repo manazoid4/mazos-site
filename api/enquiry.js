@@ -11,6 +11,20 @@ export function allowRequest(ip, now = Date.now()) {
   item.count++; buckets.set(key, item);
   return item.count <= 5;
 }
+/**
+ * Timing budget (keep in step with vercel.json maxDuration and SUBMIT/API timeouts in app/enquiry.ts):
+ * owner mail <=9s, then one parallel stage <=9s => worst case ~18s. maxDuration is 30s; the client waits 35s,
+ * so the FormSubmit fallback can only fire if the function really never answered.
+ */
+const PAGE_HOSTS = /^(www\.mazworks\.uk|[a-z0-9-]+\.vercel\.app)$/;
+export function cleanPageUrl(value) {
+  if (typeof value !== 'string') return '';
+  try {
+    const url = new URL(value.trim().slice(0, 500));
+    if (url.protocol !== 'https:' || url.username || url.password || !PAGE_HOSTS.test(url.hostname)) return '';
+    return `${url.origin}${url.pathname}${url.search}`.slice(0, 300);
+  } catch { return ''; }
+}
 export async function deliverEnquiry(body, fetchImpl = fetch) {
   const key = process.env.RESEND_API_KEY;
   if (!key) return { ok: false, confirmationSent: false };
@@ -28,18 +42,23 @@ export async function deliverEnquiry(body, fetchImpl = fetch) {
   };
   const fields = ['name', 'email', 'problem', 'website', 'referred_by', 'interested_in', 'systems', 'trade', 'source'];
   const draft = body.draft ? `\n\n----- Draft reply (approve, tweak, send) -----\n${body.draft}` : '';
+  const page = cleanPageUrl(body._url);
   const accepted = await send({ to: ['info@mazworks.uk'], reply_to: body.email,
     subject: `Maz Works — free plan and quote${body.interested_in && body.interested_in !== 'Not chosen' ? ` — ${body.interested_in}` : ''}`,
-    text: fields.filter(field => body[field]).map(field => `${field}: ${body[field]}`).join('\n\n') + draft,
+    text: fields.filter(field => body[field]).map(field => `${field}: ${body[field]}`).join('\n\n') + (page ? `\n\nsubmitted_from: ${page}` : '') + draft,
   }, 'owner');
   if (!accepted) return { ok: false, confirmationSent: false };
-  // Sales engine (C12): both are no-ops until the env vars exist, so nothing here can fail the enquiry.
-  await syncHubSpot(body, fetchImpl).catch(() => false);
-  await scheduleFollowUps(body, send).catch(() => false);
-  const confirmationSent = await send({ to: [body.email], reply_to: 'info@mazworks.uk',
-    subject: 'Your Maz Works free plan request',
-    text: `Thanks ${body.name}, I've got your request.\n\nI'll read it myself and email you a short plan and fixed price within ${CHECK_REPLY_TIME}. No call needed, no obligation.\n\nThis confirmation is the same kind of instant reply I set up for clients.\n\nIf anything changes, reply to this email.\n\nManazir, Maz Works`,
-  }, 'visitor');
+  // The owner has the enquiry, so everything below runs concurrently and can never fail it.
+  // Total time is owner (<=9s) + one parallel stage (<=9s), not the sum of every call.
+  const [, , confirmation] = await Promise.allSettled([
+    syncHubSpot(body, fetchImpl),
+    scheduleFollowUps(body, send),
+    send({ to: [body.email], reply_to: 'info@mazworks.uk',
+      subject: 'Your Maz Works free plan request',
+      text: `Thanks ${body.name}, I've got your request.\n\nI'll read it myself and email you a short plan and fixed price within ${CHECK_REPLY_TIME}. No call needed, no obligation.\n\nThis confirmation is the same kind of instant reply I set up for clients.\n\nIf anything changes, reply to this email.\n\nManazir, Maz Works`,
+    }, 'visitor'),
+  ]);
+  const confirmationSent = confirmation.status === 'fulfilled' && confirmation.value === true;
   return { ok: true, confirmationSent };
 }
 /**
@@ -55,10 +74,11 @@ export async function syncHubSpot(body, fetchImpl = fetch) {
     message: [body.problem, body.interested_in && body.interested_in !== 'Not chosen' ? `Interested in: ${body.interested_in}` : '', body.trade ? `Type: ${body.trade}` : '', body.referred_by ? `Referred by: ${body.referred_by}` : '', body.source ? `Source: ${body.source}` : ''].filter(Boolean).join('\n') };
   for (const key of Object.keys(properties)) if (properties[key] === undefined) delete properties[key];
   const headers = { authorization: `Bearer ${token}`, 'content-type': 'application/json' };
-  const create = await fetchImpl('https://api.hubapi.com/crm/v3/objects/contacts', { method: 'POST', headers, body: JSON.stringify({ properties }), signal: AbortSignal.timeout(9000) });
+  const signal = AbortSignal.timeout(9000); // shared, so create + update together stay within 9s
+  const create = await fetchImpl('https://api.hubapi.com/crm/v3/objects/contacts', { method: 'POST', headers, body: JSON.stringify({ properties }), signal });
   if (create.ok) return true;
   if (create.status !== 409) return false;
-  const update = await fetchImpl(`https://api.hubapi.com/crm/v3/objects/contacts/${encodeURIComponent(body.email)}?idProperty=email`, { method: 'PATCH', headers, body: JSON.stringify({ properties }), signal: AbortSignal.timeout(9000) });
+  const update = await fetchImpl(`https://api.hubapi.com/crm/v3/objects/contacts/${encodeURIComponent(body.email)}?idProperty=email`, { method: 'PATCH', headers, body: JSON.stringify({ properties }), signal });
   return update.ok;
 }
 
@@ -75,11 +95,8 @@ export const FOLLOW_UPS = [
 export async function scheduleFollowUps(body, send) {
   if (process.env.FOLLOW_UP_EMAILS !== 'on' || !body.email) return false;
   const name = String(body.name || '').trim().split(/\s+/)[0] || 'there';
-  let scheduled = 0;
-  for (const [index, step] of FOLLOW_UPS.entries()) {
-    const ok = await send({ to: [body.email], reply_to: 'info@mazworks.uk', subject: step.subject, text: step.text(name), scheduled_at: step.in }, `follow-up-${index + 1}`);
-    if (ok) scheduled++;
-  }
+  const results = await Promise.all(FOLLOW_UPS.map((step, index) => send({ to: [body.email], reply_to: 'info@mazworks.uk', subject: step.subject, text: step.text(name), scheduled_at: step.in }, `follow-up-${index + 1}`)));
+  const scheduled = results.filter(Boolean).length;
   return scheduled === FOLLOW_UPS.length;
 }
 
@@ -94,7 +111,7 @@ export default async function handler(req, res, fetchImpl = fetch) {
     const body = JSON.parse(raw);
     if (!body || typeof body !== 'object' || Array.isArray(body)) return reply(400,{ok:false});
     if (body._honey) return reply(200, {ok:true,confirmationSent:false});
-    const fields = ['name','email','problem','website','referred_by','interested_in','systems','trade','source','request_id','draft'];
+    const fields = ['name','email','problem','website','referred_by','interested_in','systems','trade','source','request_id','_url','draft'];
     if (fields.some(field => body[field] !== undefined && (typeof body[field] !== 'string' || body[field].length > 4000))) return reply(400,{ok:false});
     if (!body.name?.trim() || !body.problem?.trim() || !/^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/.test(body.email || '') || body.name.length > 120) return reply(400,{ok:false});
     if (body.request_id && !/^[a-zA-Z0-9-]{1,64}$/.test(body.request_id)) return reply(400,{ok:false});
