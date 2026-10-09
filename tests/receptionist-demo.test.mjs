@@ -32,9 +32,10 @@ test('it never guesses a price it was not given', () => {
   assert.equal(desk.stage, 'name');
 });
 
-test('urgent words point to 999 and mark the call urgent', () => {
+test('business-urgent words are flagged for the owner without a 999 referral', () => {
   const { said, desk } = talk(['my car has broken down outside', 'Priya', '07700 900456', 'yes', 'no']);
-  assert.match(said[1], /ring 999/);
+  assert.match(said[1], /marked this as urgent/);
+  assert.doesNotMatch(said[1], /999/);
   assert.ok(desk.summary().urgent);
   assert.match(said[5], /urgent/);
 });
@@ -128,12 +129,13 @@ test('urgent words are heard at the name, number and confirm stages', () => {
   assert.match(name.desk.summary().rows[0][1], /No details left/);
 
   const number = talk([...NUMBER_LINES, 'I am stuck in the road']);
-  assert.match(number.said[3], /ring 999/);
+  assert.match(number.said[3], /marked this as urgent/);
+  assert.doesNotMatch(number.said[3], /999/);
   assert.match(number.said[3], /best number/);
   assert.equal(number.desk.stage, 'number');
 
   const confirm = talk([...NUMBER_LINES, '07700 900123', 'the car is blocking the road']);
-  assert.match(confirm.said[4], /ring 999.*read that back: 07700 900123/);
+  assert.match(confirm.said[4], /urgent.*read that back: 07700 900123/);
   assert.equal(confirm.desk.stage, 'confirm');
   assert.ok(confirm.desk.summary().urgent);
 });
@@ -268,4 +270,26 @@ test('replies stay short and never say AI', () => {
     assert.doesNotMatch(line, /\bAI\b/);
     assert.ok((line.match(/[.?!](\s|$)/g) ?? []).length <= 4, line);
   }
+});
+
+test('possible danger gets the 999 line; everyday trade words do not', () => {
+  for (const line of ['my van is on fire', 'I can smell gas in the kitchen', 'someone is injured', 'there is smoke coming from the boiler']) {
+    assert.match(talk([line]).said[1], /ring 999 now/, line);
+  }
+  for (const line of ['do you do emergency call-outs', 'can you fit a smoke alarm', 'my back hurts when I lift']) {
+    assert.doesNotMatch(talk([line]).said[1], /999/, line);
+  }
+});
+
+test('the goodbye never promises a callback without a confirmed number', () => {
+  const { said, desk } = talk(['book an mot', 'Sam', "I'd rather not say", "no that's all"]);
+  assert.match(said.at(-1), /couldn’t take a number/);
+  assert.doesNotMatch(said.at(-1), /call you back/);
+  assert.match(desk.summary().rows.at(-1)[1], /No number left/);
+});
+
+test('the service page hero opens the talk-to-it demo', async () => {
+  const html = await readFile(path.join(root, 'out', 'after-hours-receptionist.html'), 'utf8');
+  assert.match(html, /Talk to the receptionist/);
+  assert.ok(html.includes('href="/receptionist-demo"'));
 });

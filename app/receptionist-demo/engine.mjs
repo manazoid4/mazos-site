@@ -196,8 +196,12 @@ export function decodeConfig(code) {
 
 const NAME_ASK = 'Can I take your name?';
 const NUMBER_ASK = 'What’s the best number to call you on?';
-const URGENT_LINE = 'If anyone is in danger, please ring 999. I’ve marked this as urgent for the owner.';
+/** Words that mean someone may be hurt or at risk: these get the 999 line. Business-urgent words (the owner's list) only get flagged. */
+const DANGER = ['in danger', 'injured', 'bleeding', 'unconscious', 'not breathing', 'can’t breathe', "can't breathe", 'on fire', 'a fire', 'house fire', 'smoke coming', 'full of smoke', 'gas leak', 'smell gas', 'smell of gas', 'carbon monoxide', 'collapsed', 'ring 999', 'call 999'];
+const DANGER_LINE = 'If anyone is in danger, please ring 999 now. I’ve also marked this as urgent for the owner.';
+const URGENT_LINE = 'I’ve marked this as urgent for the owner.';
 const ANON = 'Caller (no name given)';
+const isDanger = (text) => has(String(text).toLowerCase(), DANGER);
 const aOrAn = (name) => (/^[A-Z0-9]{2,}$/.test(name) ? /^[FHLMNRSX]/.test(name) : /^[aeiou]/i.test(name)) ? 'an' : 'a';
 const shown = (name) => (/^[A-Z0-9]{2,}$/.test(name) ? name : name.toLowerCase());
 
@@ -240,9 +244,9 @@ export function createDesk(input) {
 
   function open(text) {
     const t = text.toLowerCase();
-    if (config.urgent.length && has(t, config.urgent)) {
+    if (isDanger(t) || (config.urgent.length && has(t, config.urgent))) {
       markUrgent(text);
-      return askName('Thanks for telling me. If anyone is in danger, please ring 999. I’ll mark this as urgent for the owner.');
+      return askName(`Thanks for telling me. ${isDanger(t) ? DANGER_LINE : URGENT_LINE}`);
     }
     if (isClosing(text)) return finish();
     if (/^(hi|hello|hey|good (evening|morning|afternoon))[\s!.,?]*$/.test(t)) return 'Hello. How can I help?';
@@ -295,16 +299,19 @@ export function createDesk(input) {
 
   function finish() {
     stage = 'done';
-    return caller
-      ? `Thanks for calling${named ? `, ${firstName()}` : ''}. ${urgent ? 'The owner has your details marked as urgent.' : `The team will be in touch ${config.callback}.`} Goodbye.`
-      : `Thanks for calling ${config.name}. Goodbye.`;
+    const thanks = `Thanks for calling${named ? `, ${firstName()}` : ` ${config.name}`}.`;
+    if (!caller) return `${thanks} Goodbye.`;
+    // Never promise a callback without a number the caller confirmed.
+    if (!number) return `${thanks} I couldn’t take a number, so if you need a reply, please ring back when we’re open. Goodbye.`;
+    return `${thanks} ${urgent ? 'Your message is marked urgent for the owner.' : `The team will get your message and can call you back ${config.callback}.`} Goodbye.`;
   }
 
   /** Urgent words at the name, number or confirm question: 999 line first, then the question again. */
   function interruptUrgent(text) {
     markUrgent(text);
+    const line = isDanger(text) ? DANGER_LINE : URGENT_LINE;
     const again = stage === 'name' ? NAME_ASK : stage === 'number' ? NUMBER_ASK : readBack();
-    return `${URGENT_LINE} ${again}`;
+    return `${line} ${again}`;
   }
 
   function takeName(text) {
@@ -424,7 +431,7 @@ export function createDesk(input) {
       const text = String(said || '').trim();
       if (stage === 'done') return '';
       if (!text) return 'Sorry, I didn’t catch that. Could you say it again?';
-      if (config.urgent.length && has(text, config.urgent)) {
+      if (isDanger(text) || (config.urgent.length && has(text, config.urgent))) {
         return stage === 'name' || stage === 'number' || stage === 'confirm' ? interruptUrgent(text) : open(text);
       }
       if (stage === 'name') return takeName(text);
