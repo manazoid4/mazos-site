@@ -149,7 +149,7 @@ export function createDesk(input) {
       wants.push(`Urgent: ${text.trim()}`);
       return askName(safetyConcern
         ? 'If someone is in immediate danger, please call 999. I can also take a message marked urgent for the owner.'
-        : 'I’ll mark this as urgent for the owner. Can I take the details?');
+        : 'I’ll mark this as urgent for the owner.');
     }
     if (has(t, ['real person', 'human', 'robot', 'automated', 'machine', 'are you real'])) {
       answered.push('Said it is an automated receptionist');
