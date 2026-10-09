@@ -171,8 +171,10 @@ test('after two corrections the number is kept but flagged', () => {
 });
 
 test('garbage is never stored as the number', () => {
-  const { said, desk } = talk([...NUMBER_LINES, 'what', 'I said seven']);
+  // Three tries, not two (RC13).
+  const { said, desk } = talk([...NUMBER_LINES, 'what', 'I said seven', 'it is seven']);
   assert.match(said[3], /digit by digit/);
+  assert.equal(talk([...NUMBER_LINES, 'what', 'I said seven']).desk.stage, 'number');
   assert.equal(desk.stage, 'more');
   const rows = desk.summary().rows;
   assert.equal(rows[0][1], 'Sam');
@@ -308,4 +310,261 @@ test('try-it-as-your-business presets: the closest service wins, acronyms surviv
   assert.deepEqual(desk.hints(), ['Can you take a message?', 'Are you open tomorrow?']);
   assert.match(talk(['Can you take a message?'], other).said[1], /^Of course\. Can I take your name\?$/);
   assert.ok(PRESETS.length >= 8);
+});
+
+// Conversation QA fixes (9 Oct 2026): one test per root cause group.
+const CALLBACK = /will call you|can call you|call you back (on|after|within)/;
+const PLUMBER = {
+  name: 'Pipeline Plumbing', hours: 'Monday to Friday 7am to 6pm', areas: 'Leeds and within 15 miles', callback: 'after 7am on the next working day',
+  services: [{ name: 'Boiler service', price: 'from £89' }, { name: 'Leak repair' }, { name: 'Unblocking', price: 'from £75' }],
+  urgent: ['leak', 'flooding', 'no heating', 'burst pipe'],
+};
+const DENTAL = {
+  name: 'Bright Smile Dental', hours: 'Monday to Friday 9am to 5:30pm', services: [{ name: 'Check-up', price: 'from £25' }, { name: 'Emergency appointment' }],
+  urgent: ['toothache', 'swelling', 'swollen', 'knocked out tooth'],
+};
+
+test('RC1 danger: real emergencies get 999 before any service answer, trade words do not', () => {
+  for (const line of ['my dad had a heart attack', 'she is choking', 'he passed out', 'my throat is closing up', 'I can’t breathe', 'there is a gas smell from the boiler', 'it smells of gas', 'the house is full of smoke', 'he is bleeding', 'someone has collapsed']) {
+    assert.match(talk([line], PLUMBER).said[1], /ring 999 now/, line);
+  }
+  // Danger beats the service match: never "Yes, we do boiler service".
+  assert.doesNotMatch(talk(['gas smell from the boiler'], PLUMBER).said[1], /Yes, we do/);
+  for (const line of ['I need the brakes bleeding', 'my radiators need bleeding', 'can you service a fire alarm', 'there is a fire alarm test tomorrow']) {
+    assert.doesNotMatch(talk([line], PLUMBER).said[1], /999/, line);
+  }
+});
+
+test('RC2 urgent words: inflections, spacing and plain "urgent" are caught, service questions are not', () => {
+  for (const line of ['the kitchen is flooded', 'my pipe is leaking everywhere', 'a pipe has burst under the sink', 'the heating has gone off']) {
+    const { said, desk } = talk([line], PLUMBER);
+    assert.match(said[1], /marked this as urgent/, line);
+    assert.doesNotMatch(said[1], /999/, line);
+    assert.ok(desk.summary().urgent, line);
+  }
+  assert.ok(talk(['my tooth ache is awful'], DENTAL).desk.summary().urgent);
+  assert.ok(talk(['my son knocked out a front tooth'], DENTAL).desk.summary().urgent);
+  // "emergency" in a call beats the "Emergency appointment" service answer.
+  const emergency = talk(['emergency, my tooth is throbbing'], DENTAL);
+  assert.match(emergency.said[1], /marked this as urgent/);
+  assert.doesNotMatch(emergency.said[1], /Yes, we do/);
+  assert.ok(talk(['I need someone asap'], { name: 'Code Club', services: [{ name: 'Tutoring' }], urgent: [] }).desk.summary().urgent);
+  for (const line of ['do you do emergency call-outs', 'do you offer emergency appointments', 'it is not urgent']) assert.ok(!talk([line], DENTAL).desk.summary().urgent, line);
+  assert.ok(!talk(['can you fit a smoke alarm']).desk.summary().urgent);
+});
+
+test('RC3 negatives first: "yeah no" and "that\'s not right" never confirm a number', () => {
+  for (const no of ['yeah no', 'no', 'nope', 'not right', 'that’s wrong', 'yeah that’s not right']) {
+    const { said, desk } = talk([...NUMBER_LINES, '07700 900123', no]);
+    assert.match(said[4], /right number/, no);
+    assert.equal(desk.stage, 'number', no);
+  }
+  const bye = talk(['do you do brakes', 'yes', 'Sam', '07700 900123', 'yes', 'yeah no']);
+  assert.equal(bye.desk.stage, 'done');
+  // At the offer, any reply starting with no/nah declines, however long.
+  const offer = talk(['how much is an MOT', 'no I just wanted the price thanks']);
+  assert.match(offer.said[2], /^No problem\. Is there anything else/);
+  assert.equal(offer.desk.stage, 'more');
+  assert.equal(talk(['how much is an MOT', 'nah that is fine for now']).desk.stage, 'more');
+});
+
+test('RC4 no callback is promised before a number is confirmed', () => {
+  for (const line of ['can I book in for an MOT', 'how much is a clutch', 'I need to cancel my MOT']) {
+    assert.doesNotMatch(talk([line]).said[1], CALLBACK, line);
+    assert.match(talk([line]).said[1], /take your details|can take your details/, line);
+  }
+  const { said, desk } = talk([...NUMBER_LINES, '07700 900124', 'no', '07700 900125', 'no', '07700 900126', 'no', 'no that is all']);
+  assert.match(said[8], /couldn’t confirm/);
+  assert.doesNotMatch(said[8], CALLBACK);
+  assert.doesNotMatch(said.at(-1), CALLBACK);
+  assert.equal(desk.summary().rows.at(-1)[1], 'Number not confirmed: check it before ringing');
+});
+
+test('RC5/RC6 names: greetings and intros are stripped, numbers and refusals are not names', () => {
+  const name = (line) => talk(['book in', line]).desk.summary().rows[0][1];
+  for (const [said, want] of [['hiya its Dave', 'Dave'], ['thanks it’s Sam', 'Sam'], ["it's me, Sam", 'Sam'], ['this is Sam speaking', 'Sam'], ['no, it’s Sam', 'Sam'], ['It’s Sam', 'Sam'], ["my name's Sam Jones", 'Sam Jones'], ['yeah hi, my name is priya patel', 'Priya Patel']]) {
+    assert.equal(name(said), want, said);
+  }
+  assert.equal(talk(['book in', 'I’m nine']).desk.stage, 'name');
+  assert.equal(talk(['book in', 'no']).desk.summary().rows[0][1], 'Caller (no name given)');
+  const both = talk(['book in', 'my name is Sam Jones, 07700 900123', 'yes']);
+  assert.equal(both.desk.summary().rows[0][1], 'Sam Jones · 07700 900123');
+  assert.equal(both.desk.stage, 'more');
+  const hint = talk(['book in', talk(['book in']).desk.hints()[0]]);
+  assert.equal(hint.desk.summary().rows[0][1], 'Sam');
+});
+
+test('RC7 questions at the name, number and confirm stages are answered, then the question is asked again', () => {
+  for (const [before, ask] of [[['book in'], /Can I take your name\?$/], [[...NUMBER_LINES], /best number to call you on\?$/], [[...NUMBER_LINES, '07700 900123'], /Is that right\?$/]]) {
+    const { said, desk } = talk([...before, 'erm so how much is an MOT']);
+    assert.match(said.at(-1), /from £45/);
+    assert.match(said.at(-1), ask);
+  }
+  // The stage does not move while the side question is answered.
+  assert.equal(talk([...NUMBER_LINES, 'how much is an MOT']).desk.stage, 'number');
+  assert.equal(talk([...NUMBER_LINES, '07700 900123', 'are you open on saturday']).desk.stage, 'confirm');
+  assert.match(talk(['book in', 'sorry what was that']).said[2], /Can I take your name\?$/);
+  assert.match(talk([...NUMBER_LINES, '07700 900123', 'pardon']).said[3 + 1], /read that back: 07700 900123/);
+  assert.match(talk(['book in', 'what']).said[2], /didn’t catch that/);
+});
+
+test('RC8 services match whole words and plurals only; prices hear everyday phrasing', () => {
+  assert.doesNotMatch(talk(['my mother rang about her car']).said[1], /Yes, we do/);
+  assert.match(talk(['do you do M.O.T.s']).said[1], /Yes, we do MOT/);
+  assert.match(talk(['do you do brake pads']).said[1], /we do brakes/);
+  assert.match(talk(['do you do tires']).said[1], /we do tyres/);
+  const salon = { name: 'Curl & Co', hours: '9 to 5', services: [{ name: 'Cut', price: 'from £28' }, { name: 'Colour' }] };
+  assert.doesNotMatch(talk(['I cut my hand on a tin of paint'], salon).said[1], /Yes, we do/);
+  assert.match(talk(['do you do a cut'], salon).said[1], /Yes, we do cut/);
+  for (const line of ['roughly how many quid for an MOT', 'what would an MOT set me back', 'what do you charge for an MOT', 'how dear is an MOT']) {
+    assert.match(talk([line]).said[1], /MOT is from £45/, line);
+  }
+  assert.match(talk(['how much is a diagnostic']).said[1], /from £40/);
+});
+
+test('RC9 branch order: cancel, hours, "open now" and "do you cover brakes"', () => {
+  const cancel = talk(['I need to cancel my MOT appointment']);
+  assert.match(cancel.said[1], /can’t change the diary/);
+  assert.match(cancel.desk.summary().rows.find(([label]) => label === 'Wants')[1], /^Cancel or change: MOT$/);
+  assert.match(talk(['can I move my appointment to thursday']).said[1], /can’t change the diary/);
+  assert.match(talk(['are you open now']).said[1], /^We’re closed right now\. We’re open Monday to Friday/);
+  assert.match(talk(['are you open']).said[1], /^We’re closed right now/);
+  assert.doesNotMatch(talk(['are you open on saturday']).said[1], /closed/);
+  assert.match(talk(['do you cover brakes']).said[1], /Yes, we do brakes/);
+  assert.match(talk(['do you cover Leeds']).said[1], /We cover the town/);
+  assert.match(talk(['hello are you still there']).said[1], /still here/);
+});
+
+test('RC10 asked if it is a bot, a scam or a person: honest answers, never the word AI', () => {
+  for (const line of ['are you a bot', 'are you AI', 'are you a robot', 'is this a recording', 'are you a computer', 'are you real']) {
+    const reply = talk([line]).said[1];
+    assert.match(reply, /^No, I’m the automated receptionist for Harbour Street Garage/, line);
+    assert.doesNotMatch(reply, /\bAI\b/);
+  }
+  assert.match(talk(['is this a scam']).said[1], /^No, this is the automated receptionist for Harbour Street Garage\. If you’d rather check, look up their number and ring back when they’re open\. Can I help with anything\?$/);
+  for (const line of ['can I speak to a real person please', 'can I speak to the owner', 'I want to talk to someone']) {
+    const { said, desk } = talk([line]);
+    assert.match(said[1], /^There’s nobody here right now, but I can take a message and the team will see it after 8am on the next working day\. Can I take your name\?$/, line);
+    assert.equal(desk.stage, 'name');
+  }
+});
+
+test('RC11 goodbyes without new content end the call', () => {
+  for (const bye of ['that’s everything thanks', 'that’s it', 'I’m all right thanks', 'I’m alright', 'you’re alright', 'nah you’re alright', 'no I’m good', 'ta', 'cheers', 'thanks bye', 'yeah no']) {
+    assert.equal(talk(['do you do brakes', 'yes', 'Sam', '07700 900123', 'yes', bye]).desk.stage, 'done', bye);
+  }
+  assert.equal(talk(['nah you’re alright']).desk.stage, 'done');
+  // New content in the same breath is not a goodbye.
+  assert.notEqual(talk(['do you do brakes', 'no', 'I’m all right but do you do MOT']).desk.stage, 'done');
+  assert.notEqual(talk(['thanks, how much is an MOT']).desk.stage, 'done');
+});
+
+test('RC13 spoken numbers: plus forty four, heard "to" and "for", three tries, UK only', () => {
+  assert.equal(digitsFrom('plus forty four seven seven oh oh nine oh oh one two three'), '447700900123');
+  assert.notEqual(digitsFrom('oh seven seven oh oh nine oh oh one to three'), '07700900123');
+  assert.equal(digitsFrom('oh seven seven oh oh nine oh oh one to three', true), '07700900123');
+  assert.equal(digitsFrom('seven for two', true), '742');
+  assert.equal(digitsFrom('I want to book for friday', true), '');
+  for (const heard of ['plus forty four seven seven oh oh nine oh oh one two three', 'plus four four seven seven oh oh nine oh oh one two three', 'oh seven seven oh oh nine oh oh one to three']) {
+    assert.match(talk([...NUMBER_LINES, heard]).said[3], /read that back: 07700 900123/, heard);
+  }
+  // Said in two goes.
+  assert.match(talk([...NUMBER_LINES, 'oh seven seven oh oh nine oh oh one two', 'three']).said[4], /07700 900123/);
+  // Two misses still try again; the third gives up.
+  assert.equal(talk([...NUMBER_LINES, 'blah', 'blah']).desk.stage, 'number');
+  assert.equal(talk([...NUMBER_LINES, 'blah', 'blah', 'blah']).desk.stage, 'more');
+  // Not a UK number.
+  for (const foreign of ['+1 212 555 0147', 'plus one two one two five five five oh one four seven', '001 212 555 0147']) {
+    const { said, desk } = talk([...NUMBER_LINES, foreign]);
+    assert.equal(said[3], 'Sorry, I can only take a UK number in this demo. What’s the best UK number?', foreign);
+    assert.equal(desk.stage, 'number');
+  }
+});
+
+test('RC14 urgent words said with a number or name keep them', () => {
+  const number = talk([...NUMBER_LINES, '07700 900123 the car is blocking the road']);
+  assert.match(number.said[3], /marked this as urgent.*read that back: 07700 900123/);
+  assert.equal(number.desk.stage, 'confirm');
+  assert.equal(talk([...NUMBER_LINES, '07700 900123 the car is blocking the road', 'yes']).desk.summary().rows[0][1], 'Sam · 07700 900123');
+  const name = talk(['book in', 'Sam, my car has broken down']);
+  assert.equal(name.desk.stage, 'number');
+  assert.equal(name.desk.summary().rows[0][1], 'Sam');
+  assert.match(name.said[2], /best number/);
+  // Nothing name-like in the urgent line: still asks for the name.
+  assert.equal(talk(['book in', 'my car has broken down']).desk.stage, 'name');
+});
+
+test('RC15 the owner\'s Wants row is short, link-free and honest', () => {
+  const long = talk(['I just wanted to say please call me back about the job see www.cheap-seo.example/offer or http://bad.example/x '.repeat(30)]);
+  const wants = long.desk.summary().rows.find(([label]) => label === 'Wants')[1];
+  assert.ok(wants.length <= 160, String(wants.length));
+  assert.ok(wants.endsWith('…'));
+  assert.doesNotMatch(wants, /www\.|https?:|\.example/);
+  for (const filler of ['um', 'erm', '...', 'uh']) {
+    const { said, desk } = talk([filler]);
+    assert.equal(said[1], 'Sorry, I didn’t catch that. Could you say it again?', filler);
+    assert.ok(!desk.summary().rows.some(([label]) => label === 'Wants'));
+  }
+  assert.doesNotMatch(talk(['how much is it']).desk.summary().rows.find(([label]) => label === 'Wants')[1], /Price for (it|how)/);
+});
+
+test('a confirmed number with no name still gives the owner a caller and a next step', () => {
+  const { desk } = talk(['book an mot', '07700 900123', 'yes', 'bye']);
+  assert.equal(desk.stage, 'done');
+  const rows = desk.summary().rows;
+  assert.deepEqual(rows[0], ['Caller', 'Caller (no name given) · 07700 900123']);
+  assert.deepEqual(rows[1], ['Number check', 'Confirmed by caller']);
+  assert.match(rows.at(-1)[1], /^Call back after 8am/);
+  // And "no that's all" at the name question keeps the number.
+  assert.equal(talk(['book an mot', '07700 900123', 'yes', 'no that’s all']).desk.summary().rows[0][1], 'Caller (no name given) · 07700 900123');
+});
+
+test('a name said on its own at the start is an introduction, not a message', () => {
+  for (const [line, first] of [['It is Sam', 'Sam'], ['Priya Patel', 'Priya'], ['hello, I’m Dave', 'Dave']]) {
+    const { said, desk } = talk([line]);
+    assert.equal(said[1], `Thanks, ${first}. How can I help?`);
+    assert.ok(!desk.summary().rows.some(([label]) => label === 'Wants'), line);
+    assert.equal(desk.stage, 'open');
+  }
+  const then = talk(['Priya Patel', 'book an mot']);
+  assert.match(then.said[2], /best number/);
+  assert.equal(then.desk.summary().rows[0][1], 'Priya Patel');
+  // A service or a real request is never mistaken for a name.
+  assert.match(talk(['Tyres']).said[1], /Yes, we do tyres/);
+  assert.match(talk(['Hello']).said[1], /^Hello\. How can I help\?$/);
+});
+
+test('hints() only suggests lines the engine handles well (walked four levels deep)', () => {
+  const configs = [DEFAULT_CONFIG, PLUMBER, DENTAL, { name: 'Code Club', services: [{ name: 'Tutoring' }] }, { name: 'Bean There Cafe', services: [] }];
+  const replay = (config, lines) => { const desk = createDesk(config); desk.greet(); lines.forEach((line) => desk.reply(line)); return desk; };
+  const walk = (config, path, depth) => {
+    const before = replay(config, path);
+    if (!depth || before.stage === 'done') return;
+    for (const hint of before.hints()) {
+      const desk = replay(config, path);
+      const stage = desk.stage;
+      const reply = desk.reply(hint);
+      const label = `${config.name}: ${[...path, hint].join(' > ')} => ${reply}`;
+      assert.doesNotMatch(reply, /\bAI\b|^$/, label);
+      // Without opening hours, saying so is the honest answer to "Are you open tomorrow?".
+      if (stage === 'open' && (config.hours || !/^Are you open/.test(hint))) assert.doesNotMatch(reply, /can’t answer|won’t guess|take a message for the team/, label);
+      if (stage === 'name') assert.equal(desk.summary().rows[0][1].split(' · ')[0], 'Sam', label);
+      if (stage === 'number') assert.match(reply, /read that back/, label);
+      if (stage === 'confirm' && /^Yes/.test(hint)) assert.equal(desk.stage, 'more', label);
+      if (stage === 'confirm' && /^No/.test(hint)) assert.match(reply, /read that back/, label);
+      if (stage === 'offer') assert.equal(desk.stage, /^Yes/.test(hint) ? (before.summary().rows[0][1].startsWith('No details') ? 'name' : desk.stage) : 'more', label);
+      if (stage === 'more' && /^No, that/.test(hint)) assert.equal(desk.stage, 'done', label);
+      if (stage === 'more' && !/^No, that/.test(hint)) assert.doesNotMatch(reply, /can’t answer/, label);
+      walk(config, [...path, hint], depth - 1);
+    }
+  };
+  for (const config of configs) walk(config, [], 4);
+});
+
+test('a partial match on a multi-word service is never claimed as that service', async () => {
+  const { presetConfig } = await import('../app/receptionist-demo/presets.mjs');
+  const plumber = presetConfig('Smith & Sons Plumbing', 'plumbing');
+  const reply = talk(['do you fit new boilers'], plumber).said[1];
+  assert.match(reply, /We do boiler service and boiler repair\..*Is it one of those\?/);
+  assert.doesNotMatch(reply, /Yes, we do/);
 });

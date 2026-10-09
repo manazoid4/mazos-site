@@ -374,6 +374,7 @@ export function createDesk(input) {
   /** The service sharing the most whole words with what was said ("boiler repair" beats "boiler service"). Plurals count, prefixes don't. */
   const findService = (text) => {
     const said = text.replace(/\b((?:[a-z]\.){2,})/g, (dotted) => dotted.replace(/\./g, ''));
+    nearServices = [];
     if (INJURY.test(said)) return undefined;
     let best;
     let bestScore = 0;
@@ -384,10 +385,14 @@ export function createDesk(input) {
         const pattern = escape(base).replace(/-/g, '[ -]?').replace(/tyre/, 't[yi]re');
         return new RegExp(`(^|[^a-z0-9])${pattern}(?:s|es)?(?![a-z0-9])`, 'i').test(said);
       }).length;
-      if (score > bestScore) { best = service; bestScore = score; }
+      // A multi-word service only counts when every word was said ("fit new boilers" is not "Boiler service").
+      if (score === words.length && score > bestScore) { best = service; bestScore = score; }
+      else if (score > 0 && score < words.length) nearServices.push(service.name);
     }
     return best;
   };
+  /** Services that share a word with what was said, when none matched fully. */
+  let nearServices = [];
   const askName = (lead) => {
     if (caller && (number || noNumber)) { stage = 'more'; return `${lead} I’ve added that to your message. Anything else?`; }
     if (caller) { stage = 'number'; return `${lead} ${NUMBER_ASK}`; }
@@ -493,6 +498,11 @@ export function createDesk(input) {
       caller = intro;
       named = true;
       return `Thanks, ${firstName()}. How can I help?`;
+    }
+    if (nearServices.length) {
+      const list = nearServices.map(shown);
+      note(wants, `Asked about: ${clip(text)}`);
+      return `We do ${list.length > 1 ? `${list.slice(0, -1).join(', ')} and ${list.at(-1)}` : list[0]}. If it’s something else, I can take a message for the team. Is it one of those?`;
     }
     note(wants, `Message: ${clip(text)}`);
     return ask('I can’t answer that one myself, but I can take a message for the team.');
