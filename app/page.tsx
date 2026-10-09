@@ -50,7 +50,7 @@ export default function Page() {
     <h1 id="intro-title">Every enquiry answered and every booking confirmed, <em>without you chasing</em>.</h1>
     <p className="s-lede">I set up the replies, reminders and follow-ups you do by hand, on apps you already use. Start with one task for {STARTER.price}.</p>
     <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">{MAIN_CTA}</a><a className="text-link" href="#demo-video">Watch it work (30s) <span aria-hidden="true">→</span></a></div>
-    <p className="s-face-cta"><img src="/maz.webp" alt="" width={56} height={56} /><span><strong>Manazir Hussain</strong>, Computer Science graduate. I plan and build every job myself.</span></p>
+    <p className="s-face-cta"><img src="/maz.webp" alt="" width={56} height={56} /><span><strong>Manazir Hussain</strong>, Computer Science graduate (Swansea University). I plan and build every job myself.</span></p>
    </div><HeroDemo />
   </section>
   <section className="s-section" id="build" aria-labelledby="build-title">
