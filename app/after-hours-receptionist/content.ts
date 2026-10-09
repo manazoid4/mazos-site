@@ -19,7 +19,7 @@ export const BEST_FOR = [
 
 /** Before and after, one row per moment that changes. */
 export const COMPARE = [
-  { before: 'The caller hits voicemail and rings the next business on Google.', after: 'The call is answered in your business name, first ring.' },
+  { before: 'The caller hits voicemail and rings the next business on Google.', after: 'The call is answered in your business name.' },
   { before: '“Are you open Saturday?” goes unanswered until Monday.', after: 'Common questions are answered there and then, from your own info.' },
   { before: 'Three missed calls, no messages, no idea who they were.', after: 'Name, number and what they need, read back to check.' },
   { before: 'A morning of ringing people back with no context.', after: 'One clear summary in your inbox before you open.' },
@@ -35,8 +35,8 @@ export const STEPS = [
 export const TRUST = [
   { icon: 'rules', title: 'Follows your rules', body: 'It only answers from the information you approve. Anything else becomes a message.' },
   { icon: 'urgent', title: 'Urgent calls reach you', body: 'You choose the words and situations that matter, and whether it texts or rings you.' },
-  { icon: 'honest', title: 'Never bluffs', body: 'If it doesn’t know, it says so and takes a message. It never makes up prices or promises.' },
-  { icon: 'clear', title: 'Clear with callers', body: 'It says it’s an automated receptionist for your business. Callers can always leave a message for you.' },
+  { icon: 'honest', title: 'Sticks to what it knows', body: 'It answers only from the information you approve. If a question isn’t covered, it takes a message instead of guessing.' },
+  { icon: 'clear', title: 'Clear with callers', body: 'It says it’s an automated receptionist for your business. Callers can leave a message for you instead.' },
   { icon: 'record', title: 'Recording only with notice', body: 'Call recording is off unless you want it. If it’s on, callers are told at the start.' },
   { icon: 'control', title: 'You stay in control', body: 'Change the greeting, hours or answers by email. Switch it off by turning off call forwarding.' },
 ];
@@ -47,16 +47,16 @@ export const FAQS = [
   { q: 'What does it actually do?', a: 'When you’re closed, your calls forward to it. It greets callers in your business name, answers the common questions you’ve given it, takes a clear message, follows your urgent-call rules and emails you a summary.' },
   { q: 'Does it replace me or my staff?', a: 'No. It covers the hours when nobody can answer, so callers get a reply instead of voicemail. You still ring people back and do the work.' },
   { q: 'Can it answer questions about my business?', a: 'Yes, from the information you give me: hours, services, areas, “from” prices and how to book. If a caller asks something it hasn’t been given, it says so and takes a message.' },
-  { q: 'Is it a real person?', a: 'No. It’s an automated receptionist with a natural voice, and it says so. Callers can always leave a message for you instead.' },
+  { q: 'Is it a real person?', a: 'No. It’s an automated receptionist with a natural voice, and it says so. Callers can leave a message for you instead. Like any automated system it can occasionally mishear, which is why every call comes with a summary and I review calls each month.' },
   { q: 'What happens if someone needs urgent help?', a: `You set what counts as urgent, like a leak or a car stuck on a driveway, and it texts or rings you. ${EMERGENCY_NOTE}` },
-  { q: 'Can I change the greeting or opening hours?', a: 'Yes. Email me and I update it, usually the same working day. Holidays and closures are included in the monthly price.' },
+  { q: 'Can I change the greeting or opening hours?', a: 'Yes. Email me and I update it, usually within 2 working days. Holidays and closures are included in the monthly price.' },
   { q: 'Are calls recorded?', a: 'Only if you want them to be. If recording is on, callers are told at the start of the call. Otherwise you get the written summary only.' },
   { q: 'How is my customers’ information handled?', a: 'Call details go to you by email and are used only to run your service. To answer and summarise calls, the audio passes through a telephone provider and a speech-processing provider. I never sell caller details or share them for marketing. Transcripts are kept for 30 days by default, then deleted, and you can ask for them to be deleted sooner. Details are in the privacy notice.' },
   { q: 'Will it work with my phone number?', a: 'Usually, yes. Most UK phone providers let you forward calls when you’re closed. I check your setup in the free demo stage and tell you plainly before you pay anything.' },
   { q: 'What if I get lots of calls?', a: `${AFTER_HOURS.minutes} call minutes a month are included. If you regularly need more, I tell you and we agree a price first. You are never billed for extra minutes by surprise.` },
-  { q: 'Can it work only after hours?', a: 'That’s exactly what this is. It answers only during the hours you mark as closed, plus any holidays you add.' },
+  { q: 'Can it work only after hours?', a: 'Yes, that’s what this is. It answers only during the hours you mark as closed, plus any holidays you add.' },
   { q: 'Can I use it for overflow during the day later?', a: 'Daytime overflow, for when you’re busy with a customer, is what comes next. Tell me in the form if you want it and I’ll let you know when it’s ready.' },
-  { q: 'Can I cancel?', a: `Yes. ${AFTER_HOURS.terms} Turn off call forwarding and your phone works exactly as before.` },
+  { q: 'Can I cancel?', a: `Yes. ${AFTER_HOURS.terms} Turn off call forwarding and your phone works as it did before.` },
 ];
 
 /** What happens after the visitor asks for the free demo. */
@@ -99,9 +99,9 @@ export const SCENARIOS: Scenario[] = [
     lines: [
       { who: 'desk', text: 'Good evening, Harbour Street Garage. We’re closed right now. How can I help?' },
       { who: 'caller', text: 'My car’s broken down outside your yard and it’s blocking the road.' },
-      { who: 'desk', text: 'Thanks for telling me. If anyone is in danger, please ring 999. I’m alerting the owner now. Can I take your name and number?' },
+      { who: 'desk', text: 'Thanks for telling me. If anyone is in danger, please ring 999. I’ll pass this to the owner as urgent. Can I take your name and number?' },
       { who: 'caller', text: 'Priya, 07700 900456.' },
-      { who: 'desk', text: 'Thanks Priya. The owner has your number and will ring you shortly.' },
+      { who: 'desk', text: 'Thanks Priya. I’ve sent your details to the owner as urgent.' },
     ],
     summary: { title: 'Urgent: breakdown at the yard', rows: [['Caller', 'Priya · 07700 900456'], ['Rule used', 'Breakdown on site → text owner'], ['Told caller', 'Ring 999 if in danger']], flag: 'Owner texted at 10:18pm' },
   },

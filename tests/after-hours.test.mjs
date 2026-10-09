@@ -20,7 +20,8 @@ test('the receptionist page shows the price, both CTAs, safety and FAQ', async (
   const html = await read('after-hours-receptionist');
   const page = text(html);
   assert.match(page, /£79\/month/);
-  assert.match(page, /Never miss another call/);
+  assert.match(page, /Calls answered when\s+you’re\s+closed/);
+  assert.doesNotMatch(page, /never miss|first ring|every call answered|guarantee[sd]? (more|bookings|leads)/i);
   assert.match(html, /href="\/free-plan\?src=after-hours&amp;package=After-Hours%20Receptionist#leak-check-form"/);
   assert.match(page, /Get my free demo/);
   assert.match(html, /href="#try"/);

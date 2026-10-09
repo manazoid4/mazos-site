@@ -13,13 +13,13 @@ import { ValueCheck } from './value-check';
 import './receptionist.css';
 
 const TITLE = 'After-hours call answering for small businesses | Maz Works';
-const DESCRIPTION = fitDescription(`Never miss another call after hours. Your calls answered in your business name, messages taken and a summary emailed to you. ${AFTER_HOURS.price}, free demo first.`);
+const DESCRIPTION = fitDescription(`Stop sending after-hours callers to voicemail. Your calls answered in your business name, messages taken and a summary emailed to you. ${AFTER_HOURS.price}, free demo first.`);
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: AFTER_HOURS.href },
-  openGraph: { title: 'Never miss another call after hours', description: DESCRIPTION, url: AFTER_HOURS.href, type: 'website', images: [OG_IMAGE] },
+  openGraph: { title: 'Calls answered when you’re closed', description: DESCRIPTION, url: AFTER_HOURS.href, type: 'website', images: [OG_IMAGE] },
 };
 
 const json = (data: unknown) => JSON.stringify(data).replace(/</g, '\\u003c');
@@ -70,7 +70,7 @@ export default function AfterHoursPage() {
         <div className="ah-hero-copy">
           <Breadcrumbs items={[{ href: '/services', label: 'Jobs I set up' }, { label: AFTER_HOURS.name }]} />
           <p className="eyebrow">{AFTER_HOURS.name} · new</p>
-          <h1 id="ah-title">Never miss another call <em>after hours</em>.</h1>
+          <h1 id="ah-title">Calls answered when <em>you’re closed</em>.</h1>
           <p className="ah-lede">When you’re closed, your calls are answered in your business name. Common questions get answered, details get taken, and you get a clear summary by email.</p>
           <p className="ah-price"><strong>{AFTER_HOURS.price}</strong><span>{AFTER_HOURS.setup} · month to month</span></p>
           <div className="mw-actions">
