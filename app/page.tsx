@@ -5,13 +5,24 @@ import { LeakCheckForm } from './free-plan/leak-check-form';
 import { CallLink } from './analytics';
 import { StickyCheckCta } from './sticky-cta';
 import { HeroDemo } from './hero-demo';
-import { Scenes } from './scenes';
-import { getSystem } from './systems';
+import './home-visuals.css';
 import { ScrollReveal } from './scroll-reveal';
 import { CUSTOMER_TYPES } from './customer-types';
 import { KitIcon } from './brand-kit/kit-icon';
-import { FREE_STEP, OFFERS } from './offers';
+import { FREE_STEP, OFFERS, getMenuJob } from './offers';
 const STARTER = OFFERS[0];
+/** Before / after: one row per Starter job (ids are menu jobs in offers.ts). */
+const CHANGES = [
+  { job: 'missed-call', icon: 'phone', before: 'Missed calls ring someone else.', after: 'The caller gets a text with your booking link.' },
+  { job: 'reminders', icon: 'calendar', before: 'You send reminders by hand.', after: 'Reminders go out on their own.' },
+  { job: 'reviews', icon: 'star', before: 'Reviews never get asked for.', after: 'A review request follows every job.' },
+] as const;
+const STEPS = [
+  { title: 'Free plan', body: `Reply within ${CHECK_REPLY_TIME}.` },
+  { title: 'Fixed price', body: 'In a written scope sheet.' },
+  { title: 'Built, then shown', body: 'Working before you pay.' },
+  { title: 'Care is optional', body: 'Only if you want it.' },
+] as const;
 const PROOF = [
   {
     name: 'JobFilter',
@@ -51,7 +62,14 @@ export default function Page() {
    <p><a className="s-details-link" href="/prices">Every price, websites and what’s included →</a></p>
   </section>
   <section className="s-section" id="how" data-reveal aria-labelledby="how-title">
-   <p className="eyebrow">See it working</p><h2 id="how-title">What changes in your day.</h2><WalkthroughVideo /><Scenes systems={['enquiries', 'reminders', 'reviews'].map((id) => getSystem(id))} />
+   <p className="eyebrow">See it working</p><h2 id="how-title">One missed call, start to finish.</h2><WalkthroughVideo />
+   <h3 className="hv-h3" id="changes-title">What changes for you</h3>
+   <div className="hv-ba">
+    <div className="hv-col hv-before"><h3>Today</h3><ul>{CHANGES.map(c => <li key={c.job}><span className="hv-icon" aria-hidden="true"><KitIcon name={c.icon} size={22} /></span>{c.before}</li>)}</ul></div>
+    <span className="hv-arrow" aria-hidden="true">↓</span>
+    <div className="hv-col hv-after"><h3>Set up</h3><ul>{CHANGES.map(c => <li key={c.job}><span className="hv-icon" aria-hidden="true"><KitIcon name={c.icon} size={22} /></span><span><strong>{getMenuJob(c.job).name}</strong>{c.after}</span></li>)}</ul></div>
+   </div>
+   <p className="s-small">Example of what changes, not a client result.</p>
   </section>
   <section className="s-section s-check" id="check" aria-labelledby="check-title">
    <div className="s-check-copy"><p className="eyebrow">Your free plan</p><h2 id="check-title">Tell me the job. I’ll send a plan and a price.</h2>
@@ -61,6 +79,8 @@ export default function Page() {
     </ul>
     <p className="s-small"><CallLink href={BOOKING_URL} className="text-link" placement="free-plan">Prefer to talk? Book a 15-minute call →</CallLink></p>
    </div><LeakCheckForm />
+   <div className="hv-steps-wrap"><h3 className="hv-h3" id="steps-title">How working together goes</h3>
+    <ol className="hv-steps" aria-labelledby="steps-title">{STEPS.map((step, i) => <li key={step.title}><span className="hv-n" aria-hidden="true">{i + 1}</span><strong>{step.title}</strong><span>{step.body}</span></li>)}</ol></div>
   </section>
       <section className="s-section s-about" id="about" aria-labelledby="about-title">
         <div className="s-about-head">

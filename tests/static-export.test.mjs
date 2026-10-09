@@ -117,8 +117,9 @@ test('trade guides stay reachable and the homepage shows a labelled missed-call 
   }
   assert.match(html, /class="s-demo"/);
   assert.match(html, /Missed-call text-back, Starter Automation £149\. Not a real customer\./);
-  assert.match(html, /What changes in your day\./);
-  assert.match(html, /Illustrations of how it works, not real customers\./);
+  // The Enquiries/Reminders/Reviews tabs left the homepage (9 Oct): a before/after panel replaced them.
+  assert.match(html, /class="hv-ba"/);
+  assert.match(html, /Example of what changes, not a client result\./);
 });
 
 test('what-we-do shows a clearly labelled example report, not a real client', async () => {

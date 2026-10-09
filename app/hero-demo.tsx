@@ -32,7 +32,7 @@ export function HeroDemo() {
     const element = root.current;
     if (!element) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) { setPlayed(true); return; }
-    setStep(0);
+    // Keep the finished thread on screen (never a blank phone); replay it once after a pause.
     const observer = new IntersectionObserver(([entry]) => {
       if (!entry.isIntersecting) return;
       observer.disconnect();
@@ -40,11 +40,11 @@ export function HeroDemo() {
       const run = (next: Step) => {
         if (element.hasAttribute('data-offscreen')) { timer.current = window.setTimeout(() => run(next), 500); return; }
         setStep(next);
-        if (next < 3) timer.current = window.setTimeout(() => run((next + 1) as Step), next === 0 ? 500 : 1100);
+        if (next < 3) timer.current = window.setTimeout(() => run((next + 1) as Step), 1100);
         else setPlayed(true);
       };
-      timer.current = window.setTimeout(() => run(1), 400);
-    }, { threshold: 0.4 });
+      timer.current = window.setTimeout(() => run(1), 3000);
+    }, { threshold: 0.6 });
     observer.observe(element);
     return () => { observer.disconnect(); window.clearTimeout(timer.current); };
   }, []);
