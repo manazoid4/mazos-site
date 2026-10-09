@@ -25,7 +25,7 @@ export default function ReceptionistDemoPage() {
       <section className="vd-hero" id="main-content" tabIndex={-1} aria-labelledby="vd-title">
         <p className="eyebrow">{AFTER_HOURS.name} · demo</p>
         <h1 id="vd-title">Ring it after hours. Out loud.</h1>
-        <p>Press start, allow the microphone, and talk like a customer would. Works best in Chrome or Safari. You can type instead if you’d rather.</p>
+        <p>Start the browser demo, ask a question and see the example message an owner could receive. No real call is placed. Chrome tends to offer the best microphone support; typing works too.</p>
       </section>
       <VoiceDesk />
       <section className="mw-resource-cta" aria-labelledby="vd-cta-title">
