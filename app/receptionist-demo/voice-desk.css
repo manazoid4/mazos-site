@@ -52,3 +52,72 @@
 .vm-link { font-family: var(--mono); font-size: .78rem; word-break: break-all; background: var(--paper); padding: 10px; border: 1px solid var(--soft-line); }
 
 @media (prefers-reduced-motion: reduce) { .vd-mic:disabled { animation: none; } }
+
+
+/* Finished interactive call experience: visual hierarchy first, decoration second. */
+.vd { max-width: 960px; gap: 18px; border-radius: 24px; padding: clamp(16px, 3.5vw, 30px); background: #181b21; }
+.vd-head { padding-bottom: 8px; border-bottom: 1px solid #414651; }
+.vd-closed { margin: 6px 0 0; }
+.vd-call-pill { font: 750 .78rem/1 var(--mono); letter-spacing: .08em; background: #313640; color: #fff3df; border: 1px solid #555c69; padding: 11px 14px; border-radius: 100px; white-space: nowrap; }
+.vd-stage { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; padding: clamp(24px, 5vw, 44px) 18px 26px; border-radius: 20px; border: 1px solid #4a4e58; background: radial-gradient(ellipse at 50% 10%, rgba(255,179,107,.13), transparent 62%), #232731; overflow: hidden; }
+.vd-orb { isolation: isolate; position: relative; width: clamp(122px, 30vw, 165px); height: clamp(122px, 30vw, 165px); display: grid; place-items: center; margin: 0 0 10px; border-radius: 50%; background: radial-gradient(circle at 28% 24%, #ffeacb 0%, #ffc486 28%, #db8d53 65%, #80493c 100%); box-shadow: inset -13px -16px 28px rgba(38,29,36,.3), inset 8px 8px 26px rgba(255,255,255,.26), 0 20px 50px rgba(0,0,0,.28); transition: transform .35s ease, filter .35s ease, box-shadow .35s ease; }
+.vd-orb::before, .vd-orb::after { content: ''; position: absolute; z-index: -1; inset: -13px; border: 1px solid rgba(255,190,125,.22); border-radius: 50%; }
+.vd-orb::after { inset: -28px; opacity: .4; }
+.vd-orb-core { display: flex; align-items: center; justify-content: center; gap: 4px; width: 72px; height: 60px; }
+.vd-orb-core span { display: block; width: 5px; height: 18px; border-radius: 10px; background: rgba(48,34,34,.7); transition: height .24s ease; }
+.vd-orb-core span:nth-child(2), .vd-orb-core span:nth-child(6) { height: 28px; }
+.vd-orb-core span:nth-child(3), .vd-orb-core span:nth-child(5) { height: 38px; }
+.vd-orb-core span:nth-child(4) { height: 49px; }
+.vd-stage-listening .vd-orb { filter: hue-rotate(16deg); box-shadow: inset -13px -16px 28px rgba(38,29,36,.3), 0 0 0 8px rgba(255,179,107,.12), 0 20px 50px rgba(0,0,0,.28); }
+.vd-stage-listening .vd-orb::before { animation: vd-orb-ring 1.8s ease-out infinite; }
+.vd-stage-speaking .vd-orb-core span { animation: vd-orb-bars .8s ease-in-out infinite alternate; }
+.vd-stage-speaking .vd-orb-core span:nth-child(2n) { animation-delay: -.38s; }
+.vd-stage-speaking .vd-orb-core span:nth-child(3n) { animation-delay: -.62s; }
+.vd-stage-ended .vd-orb { filter: saturate(.4); transform: scale(.82); }
+@keyframes vd-orb-ring { 0% { opacity: .8; transform: scale(.94); } 100% { opacity: 0; transform: scale(1.22); } }
+@keyframes vd-orb-bars { from { height: 10px; } to { height: 43px; } }
+.vd-stage .vd-status { margin: 0; color: #fff7ea; font-size: clamp(1.15rem, 2vw, 1.5rem); letter-spacing: -.02em; }
+.vd-stage-note { max-width: 40ch; min-height: 2.6em; margin: 0; color: #d5d0c6; line-height: 1.5; }
+.vd-stage .vd-start, .vd-stage .vd-end { min-height: 50px; border-radius: 9px; padding-inline: 20px; margin-top: 5px; }
+.vd-stage .vd-end { color: #fff7ea; }
+.vd-controls { gap: 16px; }
+.vd-suggestions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.vd-suggestions strong { flex: 0 0 auto; font-size: .9rem; margin-right: 4px; }
+.vd-suggestions button { cursor: pointer; color: #fff5e9; font: inherit; font-size: .86rem; line-height: 1.3; border: 1px solid #7a7e87; border-radius: 20px; background: #292e39; min-height: 44px; padding: 8px 13px; }
+.vd-suggestions button:hover { background: #454a56; }
+.vd-suggestions button:focus-visible, .vd-stage button:focus-visible, .vd-mic:focus-visible, .vd-type :focus-visible, .vd-voice:focus-visible { outline: 3px solid #ffc486; outline-offset: 3px; }
+.vd-mic:disabled { cursor: default; animation: none; opacity: .68; }
+.vd-mic[disabled] { border-color: #fff0de; }
+.vd-type input { border-color: #aaacb1; }
+.vd-type .button { min-width: 68px; border-radius: 8px; }
+.vd-conversation { background: #22252e; border: 1px solid #434852; border-radius: 16px; padding: clamp(12px, 2vw, 18px); }
+.vd-conversation-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+.vd-conversation-head h3 { margin: 0; color: #fff7ea; font-size: 1rem; }
+.vd-conversation-head span { font: 400 .75rem/1.5 var(--mono); color: #c6c1b8; }
+.vd-log { min-height: 80px; max-height: 290px; gap: 12px; scrollbar-gutter: stable; padding-right: 6px; }
+.vd-line { max-width: min(88%, 650px); }
+.vd-said { overflow-wrap: anywhere; line-height: 1.55; }
+.vd-note { border: 1px solid rgba(255,179,107,.35); background: rgba(255,179,107,.1); padding: 12px 14px; border-radius: 10px; }
+.vd-summary { gap: 12px; padding: 20px; border: 1px solid var(--soft-line); border-left: 6px solid var(--signal); }
+.vd-summary .button { justify-self: start; margin-top: 8px; }
+.vd-small { line-height: 1.6; color: #dad5cb; margin: 0; }
+@media (max-width: 560px) {
+  .vd { border-width: 2px; border-radius: 16px; padding: 13px; }
+  .vd-name { font-size: 1.35rem; }
+  .vd-call-pill { font-size: .7rem; }
+  .vd-stage { padding: 30px 12px 22px; }
+  .vd-suggestions { display: grid; grid-template-columns: 1fr 1fr; }
+  .vd-suggestions strong { grid-column: 1 / -1; }
+  .vd-suggestions button { text-align: left; font-size: .81rem; }
+  .vd-row { gap: 8px; }
+  .vd-mic { flex-basis: 50px; height: 50px; }
+  .vd-type { gap: 5px; }
+  .vd-type input { font-size: 16px; min-height: 50px; padding: 8px; }
+  .vd-type .button { min-width: 54px; padding-inline: 8px; }
+  .vd-summary dl div { grid-template-columns: 1fr; gap: 2px; }
+  .vd-conversation-head { align-items: start; flex-direction: column; gap: 2px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vd-orb, .vd-orb-core span { transition: none; }
+  .vd-stage-speaking .vd-orb-core span, .vd-stage-listening .vd-orb::before { animation: none; }
+}
