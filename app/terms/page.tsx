@@ -80,9 +80,9 @@ const TERMS: { title: string; body: string[] }[] = [
     ],
   },
   {
-    title: 'Free plans and demos',
+    title: 'Free demos and previews',
     body: [
-      'The free plan and any free demo cost nothing and commit you to nothing. A demo stays mine until you buy the work it shows, so please do not use it with real customers before then.',
+      'The free demo and any bigger-build preview cost nothing and commit you to nothing. A demo stays mine until you buy the work it shows, so please do not use it with real customers before then.',
     ],
   },
   {

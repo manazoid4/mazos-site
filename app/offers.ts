@@ -11,7 +11,7 @@
  * Offer v11 (2 Oct 2026, PROPOSED: prices need Maz's go before merge).
  * Built from the offer map and competitor teardown in the private handoff
  * folder `handoffs/2026-10-02-offer-v11/`. What changed and why:
- * - One fix ladder for every customer: Free plan £0 → One-day set-up £49 →
+ * - One fix ladder for every customer: Free demo £0 → One-day set-up £49 →
  *   Starter £149 → Business System from £595 → Custom from £2,450. A buyer
  *   picks their business type, sees their problems, then the step that fixes them.
  * - "Automation" is now a menu of 16 plain-English jobs (AUTOMATION_MENU).
@@ -59,10 +59,10 @@
 export const POSITIONING = 'Automation, connected tools and custom software for UK small businesses.';
 
 export const FREE_STEP = {
-  name: 'Free Plan & Fixed Quote',
-  short: 'free plan and quote',
+  name: 'Free Demo & Fixed Price',
+  short: 'free demo and price',
   price: '£0',
-  body: 'Tell me the job that eats your week or loses you customers. I reply with a plan, a fixed price and a written scope sheet.',
+  body: 'Tell me the job that eats your week or loses you customers. Usually within 1 working day you get a working demo of it with your business name on, plus a fixed price and a written scope sheet.',
 } as const;
 
 /** The four kinds of work. Every offer belongs to one, and the copy never blurs them. */
@@ -377,7 +377,7 @@ export const SAME_PRICE_NOTE = `Two things cost ${CREATOR_OFFERS[1].price}: a ${
  * always knows what the next rung costs.
  */
 export const LADDER: { step: string; what: string; price: string; href: string }[] = [
-  { step: 'Free plan', what: 'A plan, what to leave alone, and a fixed price.', price: FREE_STEP.price, href: '/free-plan' },
+  { step: 'Free demo', what: 'A working demo with your business name, and a fixed price.', price: FREE_STEP.price, href: '/free-plan' },
   { step: 'Starter', what: 'One task from the automation menu that runs by itself, plus 2 one-day set-ups free.', price: OFFERS[0].price, href: '/prices#systems' },
   { step: 'Business System', what: 'Three tasks joined up, plus a weekly report.', price: OFFERS[1].price.toLowerCase(), href: '/prices#systems' },
   { step: 'Custom', what: 'Software, a portal or an app built for you.', price: OFFERS[2].price.toLowerCase(), href: '/prices#systems' },
@@ -538,10 +538,10 @@ export const CHANGES_WINDOW = {
  * for. Day 0 is the day the scope sheet is approved.
  */
 export const NEXT_STEPS: { day: string; title: string; body: string }[] = [
-  { day: 'Day 0', title: 'Free plan and scope sheet', body: 'You tell me the job. I send a plan, a fixed price and a written scope sheet. Nothing to pay.' },
-  { day: 'Day 1', title: 'You add me to your apps', body: 'As a user, never with passwords. I confirm the messages and timings with you.' },
-  { day: 'Day 3', title: 'Working preview', body: 'You see it run on a real example on your own phone.' },
-  { day: 'Day 7', title: 'Live, then 30 days of tweaks', body: 'Invoice when you’ve seen it working. Then two rounds of tweaks and a 90-day fix promise.' },
+  { day: 'Day 0', title: 'Free demo and fixed price', body: 'You tell me the job. Usually within 1 working day I send a working demo with your business name on, a fixed price and a written scope sheet. Nothing to pay.' },
+  { day: 'Day 1', title: 'You say yes and add me to your apps', body: 'As a user, never with passwords. I confirm the messages and timings with you.' },
+  { day: 'Day 3', title: 'Set up on your apps, shown working', body: 'You see it run on your own apps and your own phone, before you pay.' },
+  { day: 'Day 7', title: 'Live, then care is optional', body: 'Invoice when you’ve seen it working. Then 30 days of tweaks (two rounds) and a 90-day fix promise. Ongoing care is only if you want it.' },
 ];
 
 /**
@@ -550,15 +550,15 @@ export const NEXT_STEPS: { day: string; title: string; body: string }[] = [
  * A demo for a £149 job costs more time than the job pays; small jobs get a written plan.
  */
 export const DEMO_STEPS: { title: string; body: string; note: string }[] = [
-  { title: 'Get your free plan', body: 'Tell me the job in a few taps. I email a plan and a fixed price, usually within 1 working day. No call needed.', note: 'Free' },
-  { title: 'Bigger build? A preview', body: 'For a Business System, Launch Page, Website or Custom Software, your plan says what the free preview shows and when you get it. Smaller jobs go straight to the fixed price, which is quicker for you.', note: 'Date in your plan' },
-  { title: 'Your free demo arrives', body: 'A clickable preview of one screen, built around your business, sent by the date we agreed. Try it on your own phone.', note: 'Free, no obligation' },
+  { title: 'Start with the free demo', body: 'Tell me the job in a few taps. I send a working demo with your business name and a fixed price, usually within 1 working day. No call needed.', note: 'Free' },
+  { title: 'Bigger build? A preview', body: 'For a Business System, Launch Page, Website or Custom Software, your scope sheet says what the bigger-build preview shows and when you get it. Smaller jobs go straight to the fixed price, which is quicker for you.', note: 'Date in your scope sheet' },
+  { title: 'Your bigger-build preview arrives', body: 'A clickable preview of one screen, built around your business, sent by the date we agreed. Try it on your own phone.', note: 'Free, no obligation' },
   { title: 'Happy with it? Your scope sheet', body: 'A written plan and one fixed price. Every item listed and invoiced clearly. No extra charges from me beyond the quote.', note: 'Nothing to pay yet' },
   { title: 'I build it, you see it working', body: 'You see it working before it goes live, then you get 30 days of tweaks.', note: 'Fixed price' },
 ];
 
 export const PROMISES: { title: string; body: string }[] = [
-  { title: 'Free plan first', body: 'A written plan and a fixed price, no call needed. Bigger builds also get a working preview. No charge.' },
+  { title: 'Free demo first', body: 'A working demo and a fixed price, no call needed. Bigger builds also get a working preview. No charge.' },
   { title: 'One fixed price', body: 'A written scope sheet before any work, so you know the full cost.' },
   { title: 'No contracts', body: 'Every package is a one-off you own. Care plans are monthly, cancel any time.' },
 ];
@@ -598,7 +598,7 @@ export const DELIVERY: { title: string; body: string }[] = [
 ];
 
 /** Shown on the site. Internal detail: under £1,000 = one invoice before go-live, 7-day terms; £1,000+ = two or three signed-off stages. */
-export const PAYMENT_TERMS = 'A free plan, a written scope sheet and a fixed price before any work. You pay when you’ve seen it working, before it goes live. Bigger jobs are billed in stages you sign off. No VAT added.';
+export const PAYMENT_TERMS = 'A free demo, a written scope sheet and a fixed price before any work. You pay when you’ve seen it working, before it goes live. Bigger jobs are billed in stages you sign off. No VAT added.';
 
 /**
  * What it keeps costing after the build, derived from CARE_PLANS (never typed).

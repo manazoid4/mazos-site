@@ -21,12 +21,12 @@ async function readPage(route) {
   throw new Error(`Missing static page for ${route}`);
 }
 
-test('the Free Plan & Fixed Quote has a dedicated shareable acquisition page', async () => {
+test('the Free Demo & Fixed Price has a dedicated shareable acquisition page', async () => {
   const html = await readPage('/free-plan');
 
-  assert.match(html, /Free Plan &amp; Fixed Quote/);
+  assert.match(html, /Free Demo &amp; Fixed Price/);
   assert.doesNotMatch(html, /Customer Journey Review|Booking &amp; Enquiry Check/);
-  assert.match(html, /Tap what fits, then tell me where to send your plan\. No call needed\./);
+  assert.match(html, /Tap what fits, then tell me where to send your demo\. No call needed\./);
   assert.match(html, /within 1 working day/i);
   assert.doesNotMatch(html, /5 working days/i);
   assert.match(html, /any UK business/);
@@ -56,7 +56,7 @@ test('the free plan form puts the problem taps first, with typing and the websit
   assert.match(source, /required=\{!hydrated\}/);
   assert.ok(form.indexOf('mw-quick-picks') < form.indexOf('name="name"'), 'problem taps come before name and email');
   assert.doesNotMatch(form, /name="business"|name="nextStep"/);
-  assert.match(form, />Get my free plan</);
+  assert.match(form, />Get my free demo</);
 });
 
 test('the Leak Check reuses the resilient enquiry delivery path', async () => {
@@ -76,9 +76,9 @@ test('homepage and shared navigation send the free first step to the dedicated p
   // The homepage carries the check form itself; shared navigation points at the dedicated page.
   assert.match(home, /id="check"/);
   assert.match(home, /id="leak-check-form"/);
-  assert.match(home, /href="#check">Get my free plan/);
-  assert.match(home, /href="\/free-plan\?src=nav#leak-check-form">Free plan</);
-  // One name for the free first step everywhere (29 Sep): "free plan", never "leak check" in visible copy.
+  assert.match(home, /href="#check">Get my free demo/);
+  assert.match(home, /href="\/free-plan\?src=nav#leak-check-form">Free demo</);
+  // One name for the free first step everywhere (29 Sep): "free demo", never "leak check" in visible copy.
   assert.doesNotMatch(home.replace(/<[^>]+>/g, ' '), /leak check/i);
   assert.doesNotMatch(home, /\?service=leak-check#contact/);
 });

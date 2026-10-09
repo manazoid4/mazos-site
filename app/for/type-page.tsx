@@ -35,7 +35,7 @@ export function TypePage({ type }: { type: CustomerType }) {
         <div className="mw-actions">
           <CampaignLink className="button button-signal s-button-lg" href={`${checkHref}#leak-check-form`}>{MAIN_CTA}</CampaignLink>
         </div>
-        <p className="mw-hero-note">{`Free plan, no call needed. Most start with one task at ${OFFERS[0].price}. Manazir plans and builds it himself.`}</p>
+        <p className="mw-hero-note">{`Free demo, no call needed. Most start with one task at ${OFFERS[0].price}. Manazir plans and builds it himself.`}</p>
       </section>
 
       <section className="s-section" id="pains" aria-labelledby="type-pains-title">
@@ -83,7 +83,7 @@ export function TypePage({ type }: { type: CustomerType }) {
       <section className="mw-resource-cta" aria-labelledby="type-cta-title">
         <div>
           <p className="eyebrow">Free first step</p>
-          <h2 id="type-cta-title">Tell me the job. I’ll send a plan and a fixed price.</h2>
+          <h2 id="type-cta-title">Tell me the job. I’ll send a demo and a fixed price.</h2>
           <p>
             <a className="s-details-link" href="/prices">See the details: every task, what’s included and what happens next →</a>
           </p>

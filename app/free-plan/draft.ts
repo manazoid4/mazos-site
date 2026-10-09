@@ -98,7 +98,9 @@ export function draftFreePlan(input: DraftInput): Draft {
   const lines: string[] = [
     `Hi ${first},`,
     '',
-    `Thanks for the message. Here is the plan, in plain words.`,
+    `Thanks for the message. Here is your free demo and fixed price, in plain words.`,
+    '',
+    `Your demo: [paste the demo link here]. It uses your business name and is built from a template on my test setup, so it is not on your apps yet.`,
     '',
     `What I'd set up first: ${recipe} (${offer.price}).`,
     `What it does: ${offer.body}`,
@@ -125,7 +127,7 @@ export function draftFreePlan(input: DraftInput): Draft {
     offer,
     jobs,
     price: offer.price,
-    subject: `Your free plan: ${recipe}, ${offer.price}`,
+    subject: `Your free demo: ${recipe}, ${offer.price}`,
     text: lines.filter((line, index, all) => !(line === '' && all[index - 1] === '')).join('\n'),
   };
 }

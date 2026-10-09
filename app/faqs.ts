@@ -7,8 +7,8 @@ export type MazWorksFaq = {
 
 export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   {
-    question: 'Is the plan really free? What’s the catch?',
-    answer: `It’s free. Tell me the job you want off your plate and I usually reply within ${CHECK_REPLY_TIME} with a plan and a fixed price. If it isn’t worth automating, I say so. No call, no automated sales emails, no obligation.`,
+    question: 'What’s in the free demo?',
+    answer: `Tell me the job you want off your plate and, usually within ${CHECK_REPLY_TIME}, I send a working demo of it with your business name on, plus a fixed price and a written scope sheet. It’s built from a template on my own test setup, so it’s not on your apps yet; that happens once you say yes. There’s no catch: no call, no automated sales emails, no obligation. If it isn’t worth automating, I say so.`,
   },
   {
     question: 'What do you actually build?',
@@ -87,7 +87,7 @@ const pick = (question: string) => {
 };
 
 export const HOMEPAGE_FAQS = [
-  pick('Is the plan really free? What’s the catch?'),
+  pick('What’s in the free demo?'),
   pick('Can I buy an add-on on its own?'),
   pick('What isn’t included?'),
   pick('Is this only for certain trades?'),

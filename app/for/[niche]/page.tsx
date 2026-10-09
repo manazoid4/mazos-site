@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ niche: st
   if (type) {
     return {
       title: `${type.shortName}: what to set up and the price`,
-      description: fitDescription(`${type.lede} Named recipes from ${OFFERS[0].price}, what’s included, and a free plan.`),
+      description: fitDescription(`${type.lede} Named recipes from ${OFFERS[0].price}, what’s included, and a free demo.`),
       alternates: { canonical: `/for/${type.id}` },
       openGraph: { title: `${type.title} — Maz Works`, description: fitDescription(type.lede), url: `/for/${type.id}`, images: [OG_IMAGE] },
     };
@@ -68,7 +68,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <div className="mw-actions">
           <a className="button button-signal" href={checkHref}>{MAIN_CTA}</a>
         </div>
-        <p className="mw-hero-note">{`Free plan, no call needed. Most start with one task at ${OFFERS[0].price}. Manazir plans and builds it himself.`}</p>
+        <p className="mw-hero-note">{`Free demo, no call needed. Most start with one task at ${OFFERS[0].price}. Manazir plans and builds it himself.`}</p>
       </section>
 
       <section className="mw-qw-section" id="day" aria-labelledby="niche-day-title">
@@ -82,7 +82,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <h2 id="niche-fix-title">Fixed prices, agreed first.</h2>
         <ul className="mw-qw-list">
           {guide.fixes.map((fix) => (
-            <li key={fix.name} className="mw-example"><strong>{fix.name} · {fix.price}</strong><p className="mw-example-seen">{fix.body}</p><a className="mw-example-fix" href={`/free-plan?src=for-${guide.id}&trade=${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form`}>Get my free plan →</a></li>
+            <li key={fix.name} className="mw-example"><strong>{fix.name} · {fix.price}</strong><p className="mw-example-seen">{fix.body}</p><a className="mw-example-fix" href={`/free-plan?src=for-${guide.id}&trade=${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form`}>Get my free demo →</a></li>
           ))}
         </ul>
         <p className="mw-qw-lead"><a className="s-details-link" href="/prices">See the details: every price and what’s included →</a>{parent ? <> <a className="s-details-link" href={`/for/${parent.id}`}>Every fix for {parent.shortName.toLowerCase()} →</a></> : null}</p>
@@ -125,7 +125,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <div>
           <p className="eyebrow">Free first step</p>
           <h2 id="niche-cta-title">Not sure where to start?</h2>
-          <p>Tell me the job. I&apos;ll send a plan and a fixed price.</p>
+          <p>Tell me the job. I&apos;ll send a working demo and a fixed price.</p>
         </div>
         <div className="mw-actions">
           <a className="button button-signal" href={checkHref}>{MAIN_CTA}</a>

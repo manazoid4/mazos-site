@@ -44,7 +44,7 @@ export async function deliverEnquiry(body, fetchImpl = fetch) {
   const draft = body.draft ? `\n\n----- Draft reply (approve, tweak, send) -----\n${body.draft}` : '';
   const page = cleanPageUrl(body._url);
   const accepted = await send({ to: ['info@mazworks.uk'], reply_to: body.email,
-    subject: `Maz Works — free plan and quote${body.interested_in && body.interested_in !== 'Not chosen' ? ` — ${body.interested_in}` : ''}`,
+    subject: `Maz Works — free demo and quote${body.interested_in && body.interested_in !== 'Not chosen' ? ` — ${body.interested_in}` : ''}`,
     text: fields.filter(field => body[field]).map(field => `${field}: ${body[field]}`).join('\n\n') + (page ? `\n\nsubmitted_from: ${page}` : '') + draft,
   }, 'owner');
   if (!accepted) return { ok: false, confirmationSent: false };
@@ -54,8 +54,8 @@ export async function deliverEnquiry(body, fetchImpl = fetch) {
     syncHubSpot(body, fetchImpl),
     scheduleFollowUps(body, send),
     send({ to: [body.email], reply_to: 'info@mazworks.uk',
-      subject: 'Your Maz Works free plan request',
-      text: `Thanks ${body.name}, I've got your request.\n\nI'll read it myself and email you a short plan and fixed price within ${CHECK_REPLY_TIME}. No call needed, no obligation.\n\nThis confirmation is the same kind of instant reply I set up for clients.\n\nIf anything changes, reply to this email.\n\nManazir, Maz Works`,
+      subject: 'Your Maz Works free demo request',
+      text: `Thanks ${body.name}, I've got your request.\n\nI'll read it myself and send you a working demo with your business name on it, plus a fixed price, usually within ${CHECK_REPLY_TIME}. No call needed, no obligation.\n\nThis confirmation is the same kind of instant reply I set up for clients.\n\nIf anything changes, reply to this email.\n\nManazir, Maz Works`,
     }, 'visitor'),
   ]);
   const confirmationSent = confirmation.status === 'fulfilled' && confirmation.value === true;

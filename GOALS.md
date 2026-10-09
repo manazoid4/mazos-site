@@ -14,7 +14,7 @@ Every change must help a visitor understand, trust or buy faster, or help Maz re
 | # | Goal | Done when |
 |---|---|---|
 | 1 | **Design.** Mobile layout, infographics, homepage video, interactive examples. | Every visual answers one distinct question, is labelled as a demo, and reads well at 390px; Lighthouse mobile ≥ 95. |
-| 2 | **Readability.** Who I help, what I sell, the benefit, the next step. | At 390px the first screen shows audience, outcome, "from £", and "Get my free plan". |
+| 2 | **Readability.** Who I help, what I sell, the benefit, the next step. | At 390px the first screen shows audience, outcome, "from £", and "Get my free demo". |
 | 3 | **Pricing.** Packages, inclusions, exclusions, upfront and ongoing costs. | Each package card shows what's in, what's not, when you pay, and what it costs after; no price outside `app/offers.ts`. |
 | 4 | **Lead conversion.** Real proof, simple enquiry that always arrives. | Every main button lands on the form; a test enquiry arrives with its source and package; failures tell the visitor what to do. |
 | 5 | **Google visibility.** Service pages, foundations, internal links, buying questions. | A page per main job, unique titles in the buyer's words, FAQ answers to cost/time/breaks/tie-in, valid schema. |

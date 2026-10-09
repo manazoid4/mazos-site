@@ -23,7 +23,7 @@ export default function StartPage() {
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="start-title">
         <p className="eyebrow">Thank you · payment received</p>
         <h1 id="start-title">Now tell me the job, and I’ll get started.</h1>
-        <p>Three taps and one line is enough. I confirm by email within {CHECK_REPLY_TIME}, then follow the steps below. Not paid yet? Start with the <a href="/free-plan">free plan</a> instead.</p>
+        <p>Three taps and one line is enough. I confirm by email within {CHECK_REPLY_TIME}, then follow the steps below. Not paid yet? Start with the <a href="/free-plan">free demo</a> instead.</p>
       </section>
       <section className="mw-qw-section" aria-labelledby="start-form-title">
         <p className="eyebrow">Your intake</p>

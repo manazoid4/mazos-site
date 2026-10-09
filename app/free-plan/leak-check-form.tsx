@@ -6,7 +6,7 @@ import { trackConversion } from '../analytics';
 import { EnquiryRecovery } from '../enquiry-recovery';
 import { NATIVE_FORM_ENDPOINT, buildRecoveryMailto, sendPlanEnquiry } from '../enquiry';
 import { CHECK_PICK_EVENT } from '../package-link';
-import { ALL_OFFERS, CREATOR_EXTRAS, EXTRAS } from '../offers';
+import { ALL_OFFERS, CREATOR_EXTRAS, EXTRAS, FREE_STEP } from '../offers';
 import { HEADACHE_PICKS, SYSTEMS } from '../systems';
 import { NICHE_GUIDES } from '../for/niches';
 import { TYPE_IDS } from '../customer-types';
@@ -27,9 +27,9 @@ const FAILURE_COPY: Record<FailureReason, string> = {
 type FieldName = 'problem' | 'name' | 'email';
 
 const FIELD_MESSAGES = {
-  problem: 'Tap at least one problem above, or add a line about the job, so I know what to plan.',
+  problem: 'Tap at least one problem above, or add a line about the job, so I know what to build your demo around.',
   name: 'Add your name so I know who to reply to.',
-  email: 'Add an email so I can send your plan.',
+  email: 'Add an email so I can send your demo.',
   emailFormat: 'That email looks incomplete. It should look like name@example.co.uk.',
 } as const;
 
@@ -43,7 +43,7 @@ function fieldMessage(field: FieldName, value: string): string {
   return '';
 }
 
-const SERVICE_LABEL = 'Free Plan & Fixed Quote';
+const SERVICE_LABEL = FREE_STEP.name;
 
 /** One tap instead of typing: the problems owners name most. Each adds a line to the text box. */
 export const QUICK_PICKS = [
@@ -187,7 +187,7 @@ export function LeakCheckForm() {
 
     setErrors({ problem: '', name: '', email: '' });
 
-    const subject = `Maz Works — free plan and quote — ${website || name}`;
+    const subject = `Maz Works — free demo and price — ${website || name}`;
     setRecoveryHref(buildRecoveryMailto(subject, [
       ['Name', name],
       ['Email', email],
@@ -264,22 +264,22 @@ export function LeakCheckForm() {
         }
       }}
     >
-      <input type="hidden" name="_subject" value="Maz Works — free plan and quote" />
+      <input type="hidden" name="_subject" value="Maz Works — free demo and price" />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="service" value={SERVICE_LABEL} />
       <input type="hidden" name="_autoresponse" value={AUTO_REPLY} />
       <input type="hidden" name="interested_in" value={pkg || 'Not chosen'} />
       <input type="hidden" name="systems" value={plan.systems} />
       <input type="hidden" name="trade" value={plan.trade} />
-      <p className="mw-form-kicker">Tap what fits, then tell me where to send your plan. No call needed.</p>
+      <p className="mw-form-kicker">Tap what fits, then tell me where to send your demo. No call needed.</p>
       {pkg ? (
         <p className="mw-form-picked">Asking about: <strong>{pkg}</strong> <button type="button" className="text-link" onClick={() => setPkg('')}>Clear</button></p>
       ) : null}
-      {plan.systems ? <p className="mw-form-picked">Your plan: <strong>{plan.systems}</strong></p> : null}
+      {plan.systems ? <p className="mw-form-picked">Your demo: <strong>{plan.systems}</strong></p> : null}
 
       {hydrated && submitState !== 'sent' ? (
         <div className="mw-form-progress" aria-hidden="true">
-          <span>Step {step} of 2 · {step === 1 ? 'The job' : 'Where to send your plan'}</span>
+          <span>Step {step} of 2 · {step === 1 ? 'The job' : 'Where to send your demo'}</span>
           <i><b style={{ transform: `scaleX(${step / 2})` }} /></i>
         </div>
       ) : null}
@@ -374,11 +374,11 @@ export function LeakCheckForm() {
           <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
             {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : MAIN_CTA}
           </button>
-          <p>I usually reply myself within {CHECK_REPLY_TIME} with a plan and fixed price. Free, no obligation. <a href="/privacy">How I use your details</a>.</p>
+          <p>I usually reply myself within {CHECK_REPLY_TIME} with a working demo of your first job and a fixed price. Free, no obligation. <a href="/privacy">How I use your details</a>.</p>
           <p className="mw-form-status" role="status" aria-live="polite">
             {submitState === 'sent' && (
               <>
-                <span className="mw-form-tick" aria-hidden="true">✓</span> <strong>Got it, thank you.</strong> {confirmationSent ? "Check your inbox. The confirmation is the same kind of instant reply I set up for clients. " : "Your request arrived safely. The instant confirmation email did not go out this time. "} What happens next: I read it myself, look at how you work now, and email your plan and fixed price from {CONTACT_EMAIL} within {CHECK_REPLY_TIME}. Nothing to pay and no call unless you want one. If it hasn’t arrived by then, check your junk folder.{' '}
+                <span className="mw-form-tick" aria-hidden="true">✓</span> <strong>Got it, thank you.</strong> {confirmationSent ? "Check your inbox. The confirmation is the same kind of instant reply I set up for clients. " : "Your request arrived safely. The instant confirmation email did not go out this time. "} What happens next: I read it myself, look at how you work now, and send your demo and fixed price from {CONTACT_EMAIL}, usually within {CHECK_REPLY_TIME}. Nothing to pay and no call unless you want one. If it hasn’t arrived by then, check your junk folder.{' '}
                 <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); setStep(1); window.setTimeout(() => focusField('problem'), 0); }}>Send another</button>
               </>
             )}

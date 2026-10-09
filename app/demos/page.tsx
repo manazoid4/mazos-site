@@ -6,30 +6,30 @@ import { CHANGES_WINDOW, DELIVERY_PROMISE } from '../offers';
 import { CHECK_REPLY_TIME } from '../site';
 import { DemoPath } from '../demo-path';
 
-const DEMO_DESCRIPTION = 'Bigger build? Start with the free plan, then see a working preview built around your business before you pay. One fixed price and 30 days of tweaks.';
+const DEMO_DESCRIPTION = 'Bigger build? Start with the free demo, then see a working preview of the full build before you pay. One fixed price, 30 days of tweaks.';
 
 export const metadata: Metadata = {
-  title: 'Free demo, built around your business',
+  title: 'Bigger build demos',
   description: DEMO_DESCRIPTION,
   alternates: { canonical: '/demos' },
   openGraph: { images: [OG_IMAGE],
-    title: 'Free demo, built around your business — Maz Works',
-    description: fitDescription('Start with the free plan, then see a working preview of a bigger build before you pay.'),
+    title: 'Bigger build demos — Maz Works',
+    description: fitDescription('Start with the free demo, then see a working preview of a bigger build before you pay.'),
     url: '/demos',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free demo, built around your business — Maz Works',
-    description: fitDescription('Start with the free plan, then see a working preview of a bigger build before you pay.'),
+    title: 'Bigger build demos — Maz Works',
+    description: fitDescription('Start with the free demo, then see a working preview of a bigger build before you pay.'),
     images: [OG_IMAGE.url],
   },
 };
 
 const FAQ = [
-  ['Is the demo really free?', 'Yes. You pay nothing for the plan or the preview, and you are under no obligation to go ahead.'],
-  ['When do I get it?', 'The date is in your free plan, based on what the preview needs to show. Prefer to talk it through? A 15-minute call is optional.'],
-  ['What if a demo won’t help?', 'Some jobs are clearer as a written plan. If so, the plan and fixed price are all you need.'],
-  ['What happens after the demo?', 'If you like it, I send the full plan with one fixed price. Every item is listed and invoiced clearly, with no extra charges later.'],
+  ['Is the preview really free?', 'Yes. You pay nothing for the free demo or the bigger-build preview, and you are under no obligation to go ahead.'],
+  ['When do I get it?', 'The date is in your scope sheet, based on what the preview needs to show. Prefer to talk it through? A 15-minute call is optional.'],
+  ['What if a demo won’t help?', 'Some jobs are clearer as the free demo and a fixed price alone. If so, that is all you need.'],
+  ['What happens after the demo?', 'If you like it, I send the full scope sheet with one fixed price. Every item is listed and invoiced clearly, with no extra charges later.'],
   ['What counts as a tweak in the 30 days?', 'Anything that adjusts what I built: wording, timings, steps, notifications, small layout changes, in up to two rounds. Anything not working as agreed is fixed free for 90 days. Something new, like another page, system or app, is priced first so it stays fair.'],
 ];
 
@@ -39,9 +39,9 @@ export default function DemosPage() {
       <SiteHeader />
 
       <section className="s-hero s-hero-short" id="main-content" tabIndex={-1} aria-labelledby="demos-title">
-        <p className="eyebrow">See it before you pay</p>
+        <p className="eyebrow">Bigger build demos</p>
         <h1 id="demos-title">Bigger build? <em>See it working</em> before you pay.</h1>
-        <p className="s-lede">Start with the free plan: no call needed. If your job is a Business System, Launch Page, Website or Custom Software, a free working preview comes next, by a date we agree. Smaller jobs get the written plan and a fixed price straight away.</p>
+        <p className="s-lede">Start with the free demo: no call needed. If your job is a Business System, Launch Page, Website or Custom Software, a free working preview of the full build comes next, by a date we agree. Smaller jobs go straight from the free demo to a fixed price.</p>
         <DemoPath source="demos" />
         <p className="s-small">I usually reply within {CHECK_REPLY_TIME}.</p>
       </section>
