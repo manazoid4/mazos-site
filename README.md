@@ -16,7 +16,7 @@
 
 > **Lead and sales work:** follow Lead Quality v2, see [`docs/maz-works/LEAD-QUALITY.md`](docs/maz-works/LEAD-QUALITY.md). Offers and prices live only in `app/offers.ts`.
 
-Public portfolio and client-acquisition site for [Maz Works](https://mazworks.uk), Manazir Hussain's independent web, automation and AI/software studio.
+Public portfolio and client-acquisition site for [Maz Works](https://mazworks.uk), Manazir Hussain's studio: automation, connected tools and custom software that win customers and take admin off small-business owners.
 
 Maz Works is positioned around a simple idea: start with the real business problem, then build the smallest useful system that solves it. The site combines practical project proof with Manazir's earlier background in complaints, escalations and operations.
 
@@ -29,18 +29,7 @@ Maz Works is positioned around a simple idea: start with the real business probl
 
 ## Homepage structure
 
-- Hero — websites, automation and AI tools around real business problems
-- Services — Websites, Automation, AI & software
-- Useful starting points — enquiries, admin, sales follow-up, customer operations, opportunities and controlled AI
-- Measurable impact — response time, admin hours, follow-up coverage, team capacity, dropped work and pipeline/workload signals
-- Selected work — JobFilter, Scrap Finance Partners, Agent Nudge and MAZ Pocket
-- How it works — problem → live demo → Teams/demo walkthrough → agreed scope → finish/test/handover
-- Founding offers — transparent entry pricing
-- About — operations and investigations background behind the build
-- Professional background — ManyPets and Glide experience kept compact and relevant
-- Practical AI — guardrails and human control where decisions matter
-- FAQ — removes common first-contact objections
-- Contact — short live-demo request form with demo-link or Microsoft Teams walkthrough preference
+Current order and copy live in `app/page.tsx`; the rules for them in `GOALS.md` and `AGENTS.md`. (The older section list that stood here described the 2025 portfolio site and was removed on 9 Oct 2026; see git history.)
 
 Large project screenshots are deliberately omitted from the homepage so the work stays easy to scan. Deeper detail remains available through case-study and project links.
 
