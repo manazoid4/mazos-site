@@ -94,7 +94,7 @@ const norm = (text) => String(text).toLowerCase().replace(/[’‘`]/g, "'");
 
 const NUMBER_WORDS = new Set([...Object.keys(WORD_DIGITS), 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety', 'hundred', 'thousand', 'double', 'treble', 'triple', 'plus']);
 /** Greetings and intros that come before a name, stripped one after another: "hiya, its Dave". */
-const LEAD_IN = /^(?:hi+|hiya|hello|hey+|heya|thanks|thank you|yeah|yes|yep|ok|okay|no|nope|nah|sure|well|sorry|um+|uh+|er+m?|oh|so|it'?s|it is|its|this is|i'?m|i am|im|my name is|my name'?s|my names|name'?s|name is|call me|me(?=\s*,))\b[\s,.!:;-]*/i;
+const LEAD_IN = /^(?:hi+|hiya|hello|hey+|heya|thanks|thank you|yeah|yes|yep|ok|okay|no|nope|nah|sure|well|sorry|um+|uh+|er+m?|oh|so|it'?s me|it is me|this is me|it'?s|it is|its|this is|i'?m|i am|im|my name is|my name'?s|my names|name'?s|name is|call me)\b[\s,.!:;-]*/i;
 const TRAIL_OUT = /[\s,.!]*\b(?:here|speaking|calling|again|please|thanks|thank you|mate|cheers)\s*$/i;
 const NOT_NAMES = /^(yes|yeah|no|ok|okay|um|uh|er|erm|hello|hi|hey|what|sorry|pardon|why|thanks|thank|you|please|sure|bye|cheers|it|its|is|me|name|my|am|not|so|well|now|just|and|that|this|the|a|an|there|help|look|listen|urgent|emergency|asap|quickly|hurry|actually|anyway|speaking|here)$/i;
 const PROFANE = /\b(fuck|shit|piss|cunt|bollock|twat|wank|arse|bastard|bitch|dick)/i;
@@ -530,7 +530,7 @@ export function createDesk(input) {
     const digits = digitsFrom(text, true);
     const early = ukNumber(digits);
     if (early) {
-      const rest = validName(text.replace(/\+?\d[\d\s]*/g, ' ').replace(new RegExp(`\\b(${Object.keys(WORD_DIGITS).join('|')}|double|treble|triple|on|and|my|number|is)\\b`, 'gi'), ' ').replace(/[,.]/g, ' ').trim());
+      const rest = validName(text.replace(/\+?\d[\d\s]*/g, ' ').replace(new RegExp(`\\b(${Object.keys(WORD_DIGITS).join('|')}|double|treble|triple|on|and|my|names?|number|is)\\b`, 'gi'), ' ').replace(/[,.]/g, ' ').trim());
       if (rest) { caller = rest; named = true; }
       held = early;
       stage = 'confirm';
