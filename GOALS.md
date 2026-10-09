@@ -18,7 +18,7 @@ Every change must help a visitor understand, trust or buy faster, or help Maz re
 | 3 | **Pricing.** Packages, inclusions, exclusions, upfront and ongoing costs. | Each package card shows what's in, what's not, when you pay, and what it costs after; no price outside `app/offers.ts`. |
 | 4 | **Lead conversion.** Real proof, simple enquiry that always arrives. | Every main button lands on the form; a test enquiry arrives with its source and package; failures tell the visitor what to do. |
 | 5 | **Google visibility.** Service pages, foundations, internal links, buying questions. | A page per main job, unique titles in the buyer's words, FAQ answers to cost/time/breaks/tie-in, valid schema. |
-| 6 | **Promotion and sales.** Infographics, reusable posts, prospect research, enquiry → quote → follow-up. | Finished assets + copy in `docs/maz-works/promo/`, process written down, nothing posted without Maz. |
+| 6 | **Promotion and sales.** Infographics, reusable posts, prospect research, enquiry → quote → follow-up. | Finished assets + copy in `assets/promo/`, process written down, nothing posted without Maz. |
 | 7 | **Repository clarity.** One starting point. | This page links current work; old plans marked done / superseded; history kept. |
 
 ## Rules that never change
