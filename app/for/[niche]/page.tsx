@@ -16,6 +16,7 @@ import { TypePage } from '../type-page';
 import { OFFERS } from '../../offers';
 import { StraightAnswers } from '../../straight-answers';
 import { CalculatorReveal } from '../../calculator-reveal';
+import { JobLinks } from '../../services/job-links';
 
 export const dynamicParams = false;
 
@@ -92,6 +93,8 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
           <CalculatorReveal preset={parent.calculator} trade={guide.id} />
         </section>
       ) : null}
+
+      {parent ? <JobLinks typeId={parent.id} who={guide.shortName.toLowerCase()} /> : null}
 
       {guide.visuals ? (
         <section className="mw-qw-section" aria-labelledby="niche-visuals-title">

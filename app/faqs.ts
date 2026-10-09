@@ -47,6 +47,18 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
     answer: 'Everything I build runs in accounts in your name, with a short written guide, so it keeps working without me. You can remove my access at any time, and anyone you choose can pick it up from the guide.',
   },
   {
+    question: 'What if an app I use changes or it stops working?',
+    answer: `For 90 days after it goes live, anything I built that isn’t working the way we agreed is fixed free. If another company changes their app, I quote that fix first (free within the first 30 days). ${CHANGES_WINDOW.howItWorks}`,
+  },
+  {
+    question: 'Am I tied in?',
+    answer: `No. Every package is a one-off you own, with no contract. ${CARE_PLANS[0].name} (${CARE_PLANS[0].price}) and ${CARE_PLANS[1].name} (${CARE_PLANS[1].price}) are monthly, optional and can be cancelled any time.`,
+  },
+  {
+    question: 'What will the texts or apps cost each month?',
+    answer: 'Paid apps and text-message costs are paid directly to the provider, not to me. I put the expected cost in your scope sheet before you pay, so there are no surprises. You own the accounts.',
+  },
+  {
     question: 'Is this only for certain trades?',
     answer: 'No. If your business has customers, enquiries and admin, it fits: trades, salons, clinics, cafés, shops, agencies, charities and professional services, anywhere in the UK.',
   },

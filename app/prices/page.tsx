@@ -14,7 +14,7 @@ const [STARTER, SYSTEM, CUSTOM] = OFFERS;
 const lower = (price: string) => price.replace(/^From/, 'from');
 
 export const metadata: Metadata = {
-  title: { absolute: 'Prices and packages | Maz Works' },
+  title: { absolute: 'Automation prices for UK small businesses | Maz Works' },
   description: fitDescription(`Every Maz Works price in one place. ${STARTER.name} ${STARTER.price}, ${SYSTEM.name} ${lower(SYSTEM.price)}, ${CUSTOM.name} ${lower(CUSTOM.price)}, ${getOffer('creator-launch').name} ${getOffer('creator-launch').price}, free one-day set-ups and ${CARE_PLAN.name} ${CARE_PLAN.price}. Fixed quote first, no VAT added.`),
   alternates: { canonical: PAGE_URL },
   openGraph: { title: 'Maz Works prices', description: fitDescription(`Automation from ${STARTER.price}. Free one-day set-ups with every package. UK price match. No VAT added.`), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
