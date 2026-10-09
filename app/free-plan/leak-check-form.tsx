@@ -14,10 +14,12 @@ import { rememberedCampaign } from '../linkedin-source';
 import { draftFreePlan } from './draft';
 
 type SubmitState = 'idle' | 'sending' | 'sent' | 'error';
-type FailureReason = 'rejected' | 'timeout' | 'network';
+type FailureReason = 'rejected' | 'timeout' | 'network' | 'invalid' | 'busy';
 
 const FAILURE_COPY: Record<FailureReason, string> = {
   rejected: 'Delivery was not confirmed.',
+  invalid: 'Something in the form was not accepted. Please check your email address and that your name and message are filled in, then try again.',
+  busy: 'Lots of requests just now. Please wait a minute and try again.',
   timeout: 'That took too long to send.',
   network: 'That could not reach me — your connection may have dropped.',
 };
@@ -235,7 +237,7 @@ export function LeakCheckForm() {
       return;
     }
 
-    setFailureReason(result.reason);
+    setFailureReason(result.status === 400 ? 'invalid' : result.status === 429 ? 'busy' : result.reason);
     setSubmitState('error');
   }
 
