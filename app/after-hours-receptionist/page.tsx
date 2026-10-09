@@ -131,7 +131,7 @@ export default function AfterHoursPage() {
         <p className="ah-sub">Pick a caller. Watch how the call goes, then see the summary the owner gets.</p>
         <CallDemo />
         <div className="ah-try-cta">
-          <p><strong>Want to hear it as your business?</strong> I’ll set up a free demo with your name and greeting, usually within {CHECK_REPLY_TIME}.</p>
+          <p><strong>Want to hear it as your business?</strong> I’ll reply within {CHECK_REPLY_TIME}, then set up a free demo with your name and greeting.</p>
           <a className="button button-signal" href={demoHref}>{MAIN_CTA}</a>
         </div>
       </section>
