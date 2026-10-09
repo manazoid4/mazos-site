@@ -10,7 +10,7 @@ import { DeliveryTabs } from '../delivery-tabs';
 import { StickyCheckCta } from '../sticky-cta';
 export const metadata: Metadata = {
  title: 'What we do: systems that work for you',
- description: 'See how enquiries, bookings and follow-ups work together. Three packages, clear prices, and a free plan for your business.',
+ description: 'See how enquiries, bookings and follow-ups work together. Three packages, clear prices, and a free demo for your business.',
  alternates: {canonical:'/what-we-do'},
 };
 export default function WhatWeDo() {
@@ -29,13 +29,13 @@ export default function WhatWeDo() {
    <p>Use the tools you already have where possible. Anything bigger gets a fixed quote first.</p>
    <SystemExplorer />
   </section>
-  <section className="s-section" id="process"><p className="eyebrow">From free plan to live</p><h2>How it works.</h2>
+  <section className="s-section" id="process"><p className="eyebrow">From free demo to live</p><h2>How it works.</h2>
    <ol className="mw-qw-list">{NEXT_STEPS.map((step) => <li key={step.day}><strong>{step.day}: {step.title}.</strong> {step.body}</li>)}</ol>
    <p className="s-small">Want to see it first? Bigger jobs can start with a <a href="/demos">free demo</a>.</p>
    <DeliveryTabs />
    <p><a className="s-details-link" href="/prices#next">{CHANGES_WINDOW.name}, what’s included and the cost calculator →</a></p>
   </section>
-  <section className="s-section" id="example"><h2>An example of the plan you get.</h2><SampleReport /></section>
+  <section className="s-section" id="example"><h2>An example of the scope sheet and price you get.</h2><SampleReport /></section>
   <section className="s-final"><h2>Start with the job that costs you time.</h2><p>A personal reply, usually within {CHECK_REPLY_TIME}.</p><a className="button button-signal" href="/free-plan#leak-check-form">{MAIN_CTA}</a></section>
   <SiteFooter /><StickyCheckCta href="/free-plan#leak-check-form" /><ScrollReveal />
  </main>;

@@ -6,7 +6,7 @@ Rules (Maz's posting style): hook first, 3 to 5 short lines, the ask on its own 
 
 ## 1. Carousel 1: missed calls to booked jobs (trades)
 
-Images: `li-carousel1-1.png` to `li-carousel1-5.png`
+Images: `carousel-missed-calls/slide-1.png` to `slide-5.png` (or `carousel.pdf`)
 
 Post:
 
@@ -21,20 +21,20 @@ It carries your booking or quote link.
 The example in the slides is not a client.
 It shows the idea, the steps and the price.
 
-Want the free plan?
+Want the free demo?
 ```
 
 First comment:
 
 ```
-Free plan and fixed price: https://www.mazworks.uk/free-plan?src=li-carousel1
+Free demo and fixed price: https://www.mazworks.uk/free-plan?src=li-carousel1
 ```
 
 ---
 
 ## 2. Carousel 2: no-shows to reminders (salons, clinics, appointments)
 
-Images: `li-carousel2-1.png` to `li-carousel2-5.png`
+Images: `carousel-no-shows/slide-1.png` to `slide-5.png` (or `carousel.pdf`)
 
 Post:
 
@@ -47,27 +47,27 @@ Customers confirm or move it by reply.
 The slides show an example, not a client.
 They cover the steps and the price.
 
-Want the free plan?
+Want the free demo?
 ```
 
 First comment:
 
 ```
-Free plan and fixed price: https://www.mazworks.uk/free-plan?src=li-carousel2
+Free demo and fixed price: https://www.mazworks.uk/free-plan?src=li-carousel2
 ```
 
 ---
 
 ## 3. Infographic: how working with Maz Works goes
 
-Image: `info-how-it-goes.png`
+Image: `infographics/how-it-works.png`
 
 Post:
 
 ```
 Wondering what happens after you ask?
 
-1. Free plan: you tell me the job
+1. Free demo: you tell me the job
 2. Fixed price: a written scope sheet first
 3. Built and shown working before you pay
 4. Care only if you want it
@@ -75,20 +75,20 @@ Wondering what happens after you ask?
 No surprises.
 Nothing to pay at the start.
 
-Want the free plan?
+Want the free demo?
 ```
 
 First comment:
 
 ```
-Free plan and fixed price: https://www.mazworks.uk/free-plan?src=li-info1
+Free demo and fixed price: https://www.mazworks.uk/free-plan?src=li-info1
 ```
 
 ---
 
 ## 4. Infographic: what you pay and when
 
-Image: `info-what-you-pay.png`
+Image: `infographics/what-you-pay.png`
 
 Post:
 
@@ -99,20 +99,46 @@ Starter Automation is one job at a fixed price.
 A Business System starts higher and covers three jobs.
 Custom Software starts higher again.
 
-The plan and scope sheet are free.
+The working demo and scope sheet are free.
 No working, no invoice. You see it working on your own phone before you pay anything.
 If I can’t get it working the way we agreed, you don’t pay.
 Care is optional.
 
-Want the free plan?
+Want the free demo?
 ```
 
 First comment:
 
 ```
-Free plan and fixed price: https://www.mazworks.uk/free-plan?src=li-info2
+Free demo and fixed price: https://www.mazworks.uk/free-plan?src=li-info2
 ```
 
 ---
 
-Audit before posting: prices on the images match `app/offers.ts` (Starter, Business System from, Custom Software from, care); the posts name no figures, so they cannot drift. Posts 3 and 4 use numbered lines and plain sentences, not dashes. If the numbered list in post 3 clashes with Maz's style, swap it for four short lines.
+## 5. Free demo offer (hero)
+
+Image: `infographics/free-demo.png` (1080x1080) or `infographics/free-demo-1080x1350.png` (portrait)
+
+Post:
+
+```
+Want to see it working before you decide?
+
+I'll send a working demo with your business name on it.
+It's free, usually within 1 working day.
+
+It's an example on my test setup until you say yes.
+You get a fixed price before any work starts.
+
+Want the free demo?
+```
+
+First comment:
+
+```
+Free demo and fixed price: https://www.mazworks.uk/free-plan?src=li-demo-offer
+```
+
+---
+
+Audit before posting: prices on the images match `app/offers.ts` (Starter, Business System from, Custom Software from, care); the posts name no figures (the free-demo slide shows none either), so they cannot drift. Posts 3 and 4 use numbered lines and plain sentences, not dashes. If the numbered list in post 3 clashes with Maz's style, swap it for four short lines.

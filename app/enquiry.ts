@@ -37,7 +37,7 @@ export const DEFAULT_SERVICE_ID: EnquiryServiceId = 'unsure';
 /** Next step the visitor actually wants. */
 export const ENQUIRY_NEXT_STEPS = [
   'A fixed quote for a specific job',
-  'A free plan and fixed price',
+  'A free demo and fixed price',
   'A 15-minute call',
   'Just answer my question first',
 ] as const;

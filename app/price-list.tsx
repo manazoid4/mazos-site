@@ -41,7 +41,7 @@ export function OfferCard({ offer, checkHref }: { offer: Offer; checkHref: strin
         <p><strong>Changes:</strong> {offer.changes}</p>
         <p><strong>Next step:</strong> {offer.upsell}</p>
       </details>
-      <PackageLink href={checkHref} pick={offer.name}>Get my free plan <span aria-hidden="true">→</span></PackageLink>
+      <PackageLink href={checkHref} pick={offer.name}>Get my free demo <span aria-hidden="true">→</span></PackageLink>
       <BuyNow name={offer.name} />
     </article>
   );

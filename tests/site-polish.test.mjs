@@ -20,13 +20,13 @@ const mainWithoutFooter = (html) => {
 const words = (html) => text(mainWithoutFooter(html)).split(/\s+/).filter(Boolean).length;
 const TYPES = ['trades', 'appointments', 'creators', 'offices'];
 
-test('one main action: every primary button says "Get my free plan"', async () => {
-  const banned = /Send me this plan|Ask for this system|Free plan and price|Get my free plan and price|Get my free plan for this|Book a call for your free demo|Get my free plan instead/;
+test('one main action: every primary button says "Get my free demo"', async () => {
+  const banned = /Send me this plan|Ask for this system|Free demo and price|Get my free demo and price|Get my free demo for this|Book a call for your free demo|Get my free demo instead|Get my free plan/;
   for (const route of ['index', 'prices', 'free-plan', 'demos', 'linkedin', 'what-we-do', ...TYPES.map((t) => `for/${t}`)]) {
     const html = await read(route);
     assert.doesNotMatch(html, banned, `${route} still has an old button label`);
     const signals = [...html.matchAll(/class="[^"]*button-signal[^"]*"[^>]*>([^<]*)</g)].map((m) => m[1].trim()).filter(Boolean);
-    for (const label of signals) assert.equal(label, 'Get my free plan', `${route}: primary button "${label}"`);
+    for (const label of signals) assert.equal(label, 'Get my free demo', `${route}: primary button "${label}"`);
   }
 });
 

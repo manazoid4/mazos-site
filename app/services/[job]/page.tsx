@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ job: stri
   const job = getServiceJob(id);
   if (!job) return {};
   const menu = getMenuJob(id);
-  const description = fitDescription(`${menu.what} Starter Automation ${OFFERS[0].price}, fixed price, free plan first. For UK small businesses.`);
+  const description = fitDescription(`${menu.what} Starter Automation ${OFFERS[0].price}, fixed price, free demo first. For UK small businesses.`);
   return {
     title: { absolute: job.title },
     description,
@@ -72,7 +72,7 @@ export default async function ServiceJobPage({ params }: { params: Promise<{ job
         <div className="mw-actions">
           <a className="button button-signal" href={ctaHref}>{MAIN_CTA}</a>
         </div>
-        <p className="mw-hero-note">{`Free plan, no call needed. Starter Automation is ${starter.price}, fixed. Manazir plans and builds it himself.`}</p>
+        <p className="mw-hero-note">{`Free demo, no call needed. Starter Automation is ${starter.price}, fixed. Manazir plans and builds it himself.`}</p>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="job-does-title">
@@ -131,7 +131,7 @@ export default async function ServiceJobPage({ params }: { params: Promise<{ job
         <div>
           <p className="eyebrow">Free first step</p>
           <h2 id="job-cta-title">Want {menu.name.toLowerCase()} in your business?</h2>
-          <p>Tell me the job. I’ll send a plan and a fixed price.</p>
+          <p>Tell me the job. I’ll send a working demo and a fixed price.</p>
         </div>
         <div className="mw-actions">
           <a className="button button-signal" href={ctaHref}>{MAIN_CTA}</a>

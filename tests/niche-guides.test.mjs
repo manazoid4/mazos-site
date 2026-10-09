@@ -16,7 +16,7 @@ test('each niche guide exports with prices, a priced second task and a tagged fr
     assert.doesNotMatch(html, /£150 fixed/, `${id}: retired Quick Win price`);
     assert.doesNotMatch(html, /Quick Win/, `${id}: retired Quick Win name`);
     assert.doesNotMatch(html, /hacked/i, `${id}: must not say hacked`);
-    assert.match(html, /Free plan, no call needed\. Most start with one task at £149\./, `${id}: price and person on the first screen`);
+    assert.match(html, /Free demo, no call needed\. Most start with one task at £149\./, `${id}: price and person on the first screen`);
     assert.doesNotMatch(html, /Another job/, `${id}: second task is named as an add-on`);
     assert.match(html, new RegExp(`/free-plan\\?src=for-${id}`), `${id}: tagged free check link`);
     assert.match(html, /Starter Automation<!-- --> · <!-- -->£149/, `${id}: Starter shown`);

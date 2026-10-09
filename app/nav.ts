@@ -20,7 +20,7 @@ export const PRIMARY_NAV: NavLink[] = [
 /** Phone menu: short on purpose, one screen, no scrolling. The full map lives in the footer and /site-map. */
 export const MENU_LINKS: NavLink[] = [
   { href: '/prices', label: 'Packages and prices' },
-  { href: '/demos', label: 'Free demo' },
+  { href: '/demos', label: 'Bigger build demos' },
   { href: '/what-we-do', label: 'What we do' },
   { href: '/for', label: 'Who it’s for' },
   { href: '/work/scrap-finance-partners', label: 'Client work' },
@@ -36,7 +36,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/what-we-do', label: 'What we do' },
       { href: '/services', label: 'Jobs I set up' },
       { href: '/what-we-do#example', label: 'Example plan' },
-      { href: '/free-plan?src=footer#leak-check-form', label: 'Get my free plan' },
+      { href: '/free-plan?src=footer#leak-check-form', label: 'Get my free demo' },
       { href: '/contact', label: 'Bigger jobs' },
     ],
   },
@@ -75,6 +75,6 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
 export const HOME_SECTIONS: NavLink[] = [
   { href: '#build', label: 'What I build' },
   { href: '#how', label: 'See it working' },
-  { href: '#check', label: 'Get my free plan' },
+  { href: '#check', label: 'Get my free demo' },
   { href: '#about', label: 'About Maz' },
 ];

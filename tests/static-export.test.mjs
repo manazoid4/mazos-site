@@ -172,7 +172,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(html, /href="\/prices"/);
   assert.match(prices, /Keep It Running[\s\S]{0,30}£39\/month/);
   assert.doesNotMatch(html, /\bAI\b/, 'AI is used behind the scenes, never advertised (Maz, 27 Sep)');
-  assert.match(html, /Free Plan &amp; Fixed Quote/);
+  assert.match(html, /Free Demo &amp; Fixed Price/);
   // Offer v11 (2 Oct): £149, £595, £2,450 and £39/month are the live prices; £19/month, the £395 Brand Kit and unlimited changes are retired.
   for (const retired of [/£150/, /£395/, /£249/, /Quick Win/, /£19\/month/, /founding/i, /Contact Setup/, /Enquiry Check/, /Customer Journey Review/, /From £495/, /From £950/, /From £1,500/, /£1,250/, /Custom Software &amp; Websites/, /unlimited changes/i]) {
     assert.doesNotMatch(html, retired, `retired offer still on homepage: ${retired}`);
@@ -495,10 +495,10 @@ test('the guarantee, no-VAT and referral lines appear where Maz\'s decisions req
 
 // 30 Sep: the free demo is real now, but only after a call (date agreed on the call).
 // Case study bodies still lead to the free plan form; the shared nav may link /demos.
-test('case studies route to a plan and fixed price, not a blanket free demo', async () => {
+test('case studies route to a plan and fixed price, not a blanket free live demo', async () => {
   for (const route of ['/work/jobfilter', '/work/scrap-finance-partners']) {
-    const html = (await readPage(route)).replace(/\/demos.{0,40}?Free demo/g, '');
-    assert.doesNotMatch(html, /free (live )?demo/i, `${route} still offers a free demo`);
+    const html = (await readPage(route)).replace(/\/demos.{0,40}?Bigger build demos/g, '');
+    assert.doesNotMatch(html, /free live demo/i, `${route} still offers a free live demo`);
     assert.match(html, /\/free-plan\?src=case-[a-z-]+#leak-check-form/, `${route} should lead to the free plan form`);
   }
 });
@@ -626,5 +626,5 @@ test('terms and privacy pages exist, are linked from every footer and match the 
 
 test('free demos are fenced to bigger jobs; small jobs get a written plan', async () => {
   const demos = await readPage('/demos');
-  assert.match(demos, /Smaller jobs go straight to the fixed price/);
+  assert.match(demos, /Smaller jobs go straight from the free demo to a fixed price/);
 });

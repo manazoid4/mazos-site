@@ -5,7 +5,7 @@ import { OFFERS, getExtra, formatPrice, priceAmount } from './offers';
 import './interactive.css';
 
 /**
- * A clearly labelled, interactive example of the free plan and fixed quote.
+ * A clearly labelled, interactive example of the scope sheet and fixed price that follow the free demo.
  * The business is fictional; the kind of plan matches what a real reply looks like.
  * - Findings open and close (native <details>, so it works without JavaScript).
  * - The quote is a little builder: switch the add-on on or off and watch the
@@ -29,7 +29,7 @@ const FINDINGS = [
     level: 'Working well',
     title: 'Online booking itself',
     evidence: 'The booking page is quick and clear on a phone.',
-    impact: 'No change needed. The plan builds on it.',
+    impact: 'No change needed. The demo builds on it.',
   },
 ];
 
@@ -39,10 +39,10 @@ export function SampleReport() {
   const total = OFFERS[0].from + (withReminders ? priceAmount(reminders.price) : 0);
 
   return (
-    <article className="s-report sp" aria-label="Example plan and quote for a fictional business">
+    <article className="s-report sp" aria-label="Example scope sheet and fixed price for a fictional business">
       <header>
         <span className="s-report-badge">Example</span>
-        <p><strong>Plan and fixed quote: Hollybank Hair</strong></p>
+        <p><strong>Scope sheet and fixed price: Hollybank Hair</strong></p>
         <p className="s-small">A fictional business, made up to show the format. Tap a finding to open it.</p>
       </header>
       <div className="sp-findings">
@@ -71,7 +71,7 @@ export function SampleReport() {
           </li>
         </ul>
         <p className="sp-total" aria-live="polite"><strong>Total {formatPrice(total)}</strong> · No VAT added · Working within 7 working days of access.</p>
-        <p className="s-small">If nothing is worth automating, the plan says so.</p>
+        <p className="s-small">If nothing is worth automating, I say so.</p>
         <a className="button" href="/free-plan?src=example-plan#leak-check-form">Get one like this for my business</a>
       </footer>
     </article>

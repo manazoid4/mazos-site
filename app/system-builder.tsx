@@ -70,12 +70,12 @@ export function SystemBuilder({ presetTrade = '' }: { presetTrade?: string }) {
         <ul className="s-builder-lines">
           {quote.lines.map((line) => <li key={line.label}><span>{line.label}</span><strong>{line.price}</strong></li>)}
         </ul>
-        <p className="s-builder-total"><span>Your plan</span><strong>{quote.totalLabel}</strong></p>
+        <p className="s-builder-total"><span>Your price</span><strong>{quote.totalLabel}</strong></p>
         <p className="s-small">{quote.note} Working by: {quote.workingBy.toLowerCase()}.</p>
       </div>
       {/* ConversionTracker records this as 'CTA clicked'; the systems travel in the URL. */}
       <a className="button button-signal" href={builderHref(trade, headaches)}>{MAIN_CTA}</a>
-      <p className="s-small">Opens the free plan form with your picks filled in. No call, no obligation.</p>
+      <p className="s-small">Opens the free demo form with your picks filled in. No call, no obligation.</p>
       <noscript>
         <p className="s-small">Or see each system: {HEADACHE_PICKS.map((pick, index) => <span key={pick.id}>{index ? ' · ' : ''}<a href={`/what-we-do#${pick.system}`}>{pick.label}</a></span>)}</p>
       </noscript>

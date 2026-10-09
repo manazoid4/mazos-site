@@ -18,7 +18,7 @@ const CHANGES = [
   { job: 'reviews', icon: 'star', before: 'Reviews never get asked for.', after: 'A review request follows every job.' },
 ] as const;
 const STEPS = [
-  { title: 'Free plan', body: `Reply within ${CHECK_REPLY_TIME}.` },
+  { title: 'Free demo', body: `A working demo with your business name, usually within ${CHECK_REPLY_TIME}.` },
   { title: 'Fixed price', body: 'In a written scope sheet.' },
   { title: 'Built, then shown', body: 'Working before you pay.' },
   { title: 'Care is optional', body: `Only if you want it, from ${CARE_PLAN.price}.` },
@@ -48,7 +48,7 @@ export default function Page() {
   <section className="s-hero s-hero-split" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
    <div><p className="eyebrow">For small businesses and teams, in any trade</p>
     <h1 id="intro-title">Every enquiry answered and every booking confirmed, <em>without you chasing</em>.</h1>
-    <p className="s-lede">I set up the replies, reminders and follow-ups you do by hand, on apps you already use. Start with one task for {STARTER.price}.</p>
+    <p className="s-lede">I set up the replies, reminders and follow-ups you do by hand, on apps you already use. Start with one task for {STARTER.price}, after a free demo.</p>
     <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">{MAIN_CTA}</a><a className="text-link" href="#demo-video">Watch it work (30s) <span aria-hidden="true">→</span></a></div>
     <p className="s-face-cta"><img src="/maz.webp" alt="" width={56} height={56} /><span><strong>Manazir Hussain</strong>, Computer Science graduate (Swansea University). I plan and build every job myself.</span></p>
    </div><HeroDemo />
@@ -72,9 +72,9 @@ export default function Page() {
    <p className="s-small">Example of what changes, not a client result.</p>
   </section>
   <section className="s-section s-check" id="check" aria-labelledby="check-title">
-   <div className="s-check-copy"><p className="eyebrow">Your free plan</p><h2 id="check-title">Tell me the job. I’ll send a plan and a price.</h2>
+   <div className="s-check-copy"><p className="eyebrow">Your free demo</p><h2 id="check-title">Tell me the job. I’ll send a working demo and a price.</h2>
     <ul className="s-check-list">
-     <li><strong>{FREE_STEP.name}: {FREE_STEP.price}.</strong> What to automate first, or if it isn’t worth it.</li>
+     <li><strong>{FREE_STEP.name}: {FREE_STEP.price}.</strong> A working demo of your first job, or a straight answer if it isn’t worth it.</li>
      <li><strong>A written scope sheet and fixed price</strong> before you pay anything.</li>
     </ul>
     <p className="s-small"><CallLink href={BOOKING_URL} className="text-link" placement="free-plan">Prefer to talk? Book a 15-minute call →</CallLink></p>
