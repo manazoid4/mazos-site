@@ -234,7 +234,8 @@ export function VoiceDesk() {
       boundarySeen.current = false;
       later(() => { if (!boundarySeen.current) presence.current?.setAttribute('data-pulse', '1'); }, 400);
       later(() => setPhase('speaking'), 1500);
-      later(go, 2500 + spokenText.split(/\s+/).length * 450);
+      // Backstop for engines that never fire onend: stop the voice first so the mic never opens over it.
+      later(() => { if (!moved && token === turn.current) window.speechSynthesis.cancel(); go(); }, 2500 + spokenText.split(/\s+/).length * 450);
       window.speechSynthesis.speak(utterance);
     } else {
       later(() => setPhase('thinking'), 150);
