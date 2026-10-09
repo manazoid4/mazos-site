@@ -12,8 +12,10 @@
 .vd-closed { font-size: .9rem; color: #b9b6ae; }
 .vd-closed span { color: var(--glow); }
 .vd-start, .vd-end { min-height: 52px; }
+.vd-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
 .vd-end { background: transparent; color: #f3f1ec; border-color: #f3f1ec; }
 .vd-log { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; min-height: 220px; max-height: 420px; overflow-y: auto; align-content: start; }
+.vd-log:has(> .vd-empty) { min-height: 0; }
 .vd-empty { color: #b9b6ae; padding: 18px 0; }
 .vd-line { display: grid; gap: 3px; max-width: 88%; }
 .vd-desk { justify-self: start; }

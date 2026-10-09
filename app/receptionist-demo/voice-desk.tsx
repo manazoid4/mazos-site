@@ -16,6 +16,7 @@ type Recogniser = {
   onresult: ((event: { resultIndex: number; results: ArrayLike<ArrayLike<{ transcript: string }> & { isFinal: boolean }> }) => void) | null;
   onerror: ((event: { error: string }) => void) | null;
   onend: (() => void) | null;
+  onaudiostart: (() => void) | null;
   start(): void; stop(): void; abort(): void;
 };
 const recogniserClass = (): (new () => Recogniser) | null => {
@@ -69,7 +70,7 @@ export function VoiceDesk() {
   const typed = useRef<HTMLInputElement>(null);
   const log = useRef<HTMLOListElement>(null);
   const card = useRef<HTMLDivElement>(null);
-  const endBtn = useRef<HTMLButtonElement>(null);
+  const mic = useRef<HTMLButtonElement>(null);
   const starter = useMemo(() => createDesk(config).hints(), [config]);
 
   useEffect(() => {
@@ -93,7 +94,7 @@ export function VoiceDesk() {
   useEffect(() => { log.current?.lastElementChild?.scrollIntoView({ block: 'nearest' }); }, [lines, interim]);
   // The Start button leaves when a call begins and the summary arrives when it ends: move focus on so keyboard users aren't dropped.
   const idle = phase === 'ready' || phase === 'ended';
-  useEffect(() => { if (!idle) endBtn.current?.focus(); }, [idle]);
+  useEffect(() => { if (!idle) (mic.current ?? typed.current)?.focus(); }, [idle]);
   useEffect(() => { if (summary) card.current?.querySelector<HTMLElement>('.vd-summary')?.focus(); }, [summary]);
 
   const later = (fn: () => void, ms: number) => { const id = window.setTimeout(fn, ms); timers.current.push(id); return id; };
@@ -110,7 +111,7 @@ export function VoiceDesk() {
   function stopListening() {
     const r = rec.current;
     rec.current = null;
-    if (r) { r.onresult = null; r.onerror = null; r.onend = null; try { r.abort(); } catch { /* already stopped */ } }
+    if (r) { r.onresult = null; r.onerror = null; r.onend = null; r.onaudiostart = null; try { r.abort(); } catch { /* already stopped */ } }
     setInterim('');
   }
 
@@ -133,8 +134,11 @@ export function VoiceDesk() {
     rec.current = r;
     r.lang = 'en-GB'; r.interimResults = true; r.continuous = false; r.maxAlternatives = 1;
     let heard = '';
+    // "Listening" only shows once the microphone is really open, so a blocked mic never flashes it.
+    r.onaudiostart = () => { if (rec.current === r) setPhase('listening'); };
     r.onresult = (event) => {
       if (rec.current !== r) return;
+      setPhase('listening');
       let text = '';
       for (let i = event.resultIndex; i < event.results.length; i += 1) {
         text += event.results[i][0].transcript;
@@ -159,7 +163,8 @@ export function VoiceDesk() {
       if (heard.trim()) handle(heard);
       else setPhase('waiting');
     };
-    try { r.start(); setPhase('listening'); } catch { rec.current = null; setPhase('waiting'); }
+    setPhase('waiting');
+    try { r.start(); } catch { rec.current = null; setPhase('waiting'); }
   };
 
   const say = (text: string, then?: () => void) => {
@@ -220,6 +225,8 @@ export function VoiceDesk() {
     setHints(desk.current.hints());
     const greeting = desk.current.greet();
     if (first) { setLines([{ who: 'desk', text: greeting }]); handle(first); return; }
+    // iOS only lets a page speak if speech starts inside the tap, so start a silent line now; the greeting follows the ring.
+    if (voiceRef.current && 'speechSynthesis' in window) window.speechSynthesis.speak(new SpeechSynthesisUtterance(' '));
     setPhase('ringing');
     later(() => say(greeting), 800);
   };
@@ -275,16 +282,12 @@ export function VoiceDesk() {
           <h2 className="vd-name">{config.name}</h2>
           <p className="vd-closed"><span aria-hidden="true">●</span> Closed now{config.hours ? ` · open ${config.hours}` : ''}</p>
         </div>
-        {phase === 'ready'
-          ? <button type="button" className="button button-signal vd-start" onClick={() => begin()}>Start the call</button>
-          : phase !== 'ended'
-            ? <button type="button" className="button vd-end" ref={endBtn} onClick={endCall}>End call</button>
-            : null}
+        {phase === 'ready' ? <button type="button" className="button button-signal vd-start" onClick={() => begin()}>Start the call</button> : null}
       </div>
 
       <p className={`vd-status vd-status-${phase}`} role="status"><StateIcon phase={phase} /><span>{status}</span></p>
 
-      <ol className="vd-log" ref={log} aria-live="polite" aria-label="Call so far">
+      <ol className="vd-log" ref={log} tabIndex={0} aria-live="polite" aria-label="Call so far">
         {lines.length === 0 ? <li className="vd-empty">Press “Start the call”, or tap a suggestion below, then talk as if you were a customer ringing after hours.</li> : null}
         {lines.map((line, index) => (
           <li key={index} className={`vd-line vd-${line.who}`}><span className="vd-who">{line.who === 'desk' ? 'Receptionist' : 'You'}</span><span className="vd-said">{line.text}</span></li>
@@ -302,14 +305,17 @@ export function VoiceDesk() {
       {phase !== 'ready' && phase !== 'ended' ? (
         <div className="vd-controls">
           <div className="vd-row">
-            {speech.listen ? <button type="button" className={`vd-mic${phase === 'listening' ? ' is-on' : ''}`} onClick={micTap} aria-label={micLabel} title={micLabel}><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><path d="M12 3a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3zM5 11a7 7 0 0 0 14 0M12 18v3" /></svg></button> : null}
+            {speech.listen ? <button type="button" ref={mic} className={`vd-mic${phase === 'listening' ? ' is-on' : ''}`} onClick={micTap} aria-label={micLabel} title={micLabel}><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><path d="M12 3a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3zM5 11a7 7 0 0 0 14 0M12 18v3" /></svg></button> : null}
             <form className="vd-type" onSubmit={sendTyped}>
               <label className="vd-sr" htmlFor="vd-typed">Type what you’d say</label>
               <input id="vd-typed" ref={typed} autoComplete="off" placeholder="Or type what you’d say…" />
               <button type="submit" className="button">Send</button>
             </form>
           </div>
-          <button type="button" className="vd-voice" onClick={toggleVoice} aria-pressed={!voiceOn}>{voiceOn ? 'Mute the receptionist' : 'Turn voice back on'}</button>
+          <div className="vd-foot">
+            <button type="button" className="vd-voice" onClick={toggleVoice} aria-pressed={!voiceOn}>{voiceOn ? 'Mute the receptionist' : 'Turn voice back on'}</button>
+            <button type="button" className="button vd-end" onClick={endCall}>End call</button>
+          </div>
         </div>
       ) : null}
       {note ? <p className="vd-note">{note}</p> : null}
