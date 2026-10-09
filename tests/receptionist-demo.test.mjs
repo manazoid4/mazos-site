@@ -31,7 +31,7 @@ test('it never guesses a price it was not given', () => {
   assert.equal(desk.stage, 'name');
 });
 
-test('urgent words point to 999 and mark the call urgent', () => {
+test('business urgency is not automatically an emergency-services referral', () => {
   const { said, desk } = talk(['my car has broken down outside', 'Priya', '07700 900456', 'yes', 'no']);
   assert.match(said[1], /mark this as urgent/);
   assert.doesNotMatch(said[1], /999/);
