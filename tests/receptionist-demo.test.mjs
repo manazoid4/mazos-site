@@ -32,7 +32,7 @@ test('it never guesses a price it was not given', () => {
 });
 
 test('urgent words point to 999 and mark the call urgent', () => {
-  const { said, desk } = talk(['my car has broken down outside', 'Priya', '07700 900456', 'no']);
+  const { said, desk } = talk(['my car has broken down outside', 'Priya', '07700 900456', 'yes', 'no']);
   assert.match(said[1], /mark this as urgent/);
   assert.doesNotMatch(said[1], /999/);
   assert.ok(desk.summary().urgent);
@@ -112,5 +112,5 @@ test('safety warnings distinguish business urgency from immediate danger', () =>
 test('demo page offers a direct talking experience from the service hero', async () => {
   const html = await readFile(path.join(root, 'out', 'after-hours-receptionist.html'), 'utf8');
   assert.match(html, /Talk to the receptionist/);
-  assert.match(html, /href="\\/receptionist-demo"/);
+  assert.ok(html.includes('href="/receptionist-demo"'));
 });
