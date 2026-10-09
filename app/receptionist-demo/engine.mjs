@@ -61,7 +61,8 @@ export function nameFrom(text) {
   return words.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
 }
 
-const has = (text, words) => words.some((word) => new RegExp(`\\b${word}\\b`, 'i').test(text));
+const escape = (word) => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const has = (text, words) => words.some((word) => new RegExp(`(^|\\W)${escape(word)}(\\W|$)`, 'i').test(text));
 const YES = ['yes', 'yeah', 'yep', 'please', 'sure', 'ok', 'okay', 'go on', 'that would be great'];
 const NO = ['no', 'nope', 'nothing', "that's all", 'thats all', 'that is all', 'no thanks', 'bye', 'goodbye', 'cheers'];
 
@@ -72,7 +73,7 @@ export function cleanConfig(input) {
   const services = Array.isArray(raw.services) ? raw.services : [];
   const config = {
     name: text(raw.name, 60) || DEFAULT_CONFIG.name,
-    hours: text(raw.hours, 160) || DEFAULT_CONFIG.hours,
+    hours: text(raw.hours, 160) || (raw.name ? '' : DEFAULT_CONFIG.hours),
     services: services
       .map((service) => ({ name: text(service?.name, 40), price: text(service?.price, 40) || undefined }))
       .filter((service) => service.name)
@@ -119,7 +120,7 @@ export function createDesk(input) {
   const wants = [];
   const answered = [];
 
-  const findService = (text) => config.services.find((service) => service.name.toLowerCase().split(/\s+/).some((word) => word.length > 2 && new RegExp(`\\b${word}`, 'i').test(text)));
+  const findService = (text) => config.services.find((service) => service.name.toLowerCase().split(/\s+/).some((word) => word.length > 2 && new RegExp(`(^|\\W)${escape(word)}`, 'i').test(text)));
   const askName = (lead) => {
     if (caller && number) { stage = 'more'; return `${lead} I’ve added that to your message. Anything else?`; }
     stage = 'name';
@@ -128,7 +129,7 @@ export function createDesk(input) {
 
   function open(text) {
     const t = text.toLowerCase();
-    if (config.urgent.length && has(t, config.urgent.map((word) => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))) {
+    if (config.urgent.length && has(t, config.urgent)) {
       urgent = true;
       wants.push(`Urgent: ${text.trim()}`);
       return askName('Thanks for telling me. If anyone is in danger, please ring 999. I’ll mark this as urgent for the owner.');
@@ -138,6 +139,7 @@ export function createDesk(input) {
       return `No, I’m the automated receptionist for ${config.name}. I can answer common questions or take a message for the team. How can I help?`;
     }
     if (has(t, ['open', 'opening', 'hours', 'close', 'closing', 'what time', 'when are you'])) {
+      if (!config.hours) { wants.push('Asked about opening hours'); return askName('I don’t have the opening hours to hand, so I won’t guess. The team can let you know.'); }
       answered.push('Opening hours');
       return `We’re open ${config.hours}. Is there anything else I can help with?`;
     }

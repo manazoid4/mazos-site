@@ -59,3 +59,11 @@ test('demo pages are not indexed and say how speech is handled', async () => {
   assert.match(await readFile(path.join(root, 'out', 'receptionist-demo', 'make.html'), 'utf8'), /noindex/);
   assert.match(await readFile(path.join(root, 'out', 'after-hours-receptionist.html'), 'utf8'), /href="\/receptionist-demo"/);
 });
+
+test('custom links never borrow the example hours, and odd service names are safe', () => {
+  const config = decodeConfig(encodeConfig({ name: 'Code Club', services: [{ name: 'C++ tutoring' }, { name: 'Python (beginners)' }] }));
+  assert.equal(config.hours, '');
+  const { said } = talk(['what time do you open', 'do you teach c++ tutoring'], config);
+  assert.match(said[1], /won’t guess/);
+  assert.doesNotThrow(() => talk(['python (beginners)?', 'yes'], config));
+});

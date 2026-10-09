@@ -166,7 +166,7 @@ export function VoiceDesk() {
         <div>
           <p className="vd-tag">{custom ? 'Your demo' : 'Example business'}</p>
           <h2 className="vd-name">{config.name}</h2>
-          <p className="vd-closed"><span aria-hidden="true">●</span> Closed now · open {config.hours}</p>
+          <p className="vd-closed"><span aria-hidden="true">●</span> Closed now{config.hours ? ` · open ${config.hours}` : ''}</p>
         </div>
         {phase === 'ready' || phase === 'ended'
           ? <button type="button" className="button button-signal vd-start" onClick={start}>{phase === 'ended' ? 'Call again' : 'Start the call'}</button>
