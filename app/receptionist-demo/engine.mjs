@@ -46,6 +46,18 @@ export function digitsFrom(text) {
 }
 
 /** UK-style grouping for reading back: 07700 900123. */
+export function normaliseUkNumber(input) {
+  const digits = digitsFrom(input);
+  if (digits.length === 12 && digits.startsWith('44')) return `0${digits.slice(2)}`;
+  return digits;
+}
+
+/** Demo capture accepts complete UK numbers only, never an unverified phrase. */
+export function validPhone(input) {
+  const digits = normaliseUkNumber(input);
+  return /^0[1-9]\d{9}$/.test(digits);
+}
+
 export function formatNumber(digits) {
   if (digits.length === 11 && digits.startsWith('0')) return `${digits.slice(0, 5)} ${digits.slice(5)}`;
   return digits;
@@ -111,11 +123,13 @@ export function decodeConfig(code) {
  */
 export function createDesk(input) {
   const config = cleanConfig(input);
-  /** @type {'open'|'offer'|'name'|'number'|'more'|'done'} */
+  /** @type {'open'|'offer'|'name'|'number'|'confirm-number'|'more'|'done'} */
   let stage = 'open';
   let caller = '';
   let number = '';
   let numberTries = 0;
+  let nameTries = 0;
+  let proposedNumber = '';
   let urgent = false;
   const wants = [];
   const answered = [];
@@ -129,10 +143,13 @@ export function createDesk(input) {
 
   function open(text) {
     const t = text.toLowerCase();
-    if (config.urgent.length && has(t, config.urgent)) {
+    const safetyConcern = has(t, ['injured', 'injury', 'bleeding', 'unconscious', 'in danger', 'fire', 'smoke', '999']);
+    if ((config.urgent.length && has(t, config.urgent)) || safetyConcern) {
       urgent = true;
       wants.push(`Urgent: ${text.trim()}`);
-      return askName('Thanks for telling me. If anyone is in danger, please ring 999. I’ll mark this as urgent for the owner.');
+      return askName(safetyConcern
+        ? 'If someone is in immediate danger, please call 999. I can also take a message marked urgent for the owner.'
+        : 'I’ll mark this as urgent for the owner. Can I take the details?');
     }
     if (has(t, ['real person', 'human', 'robot', 'automated', 'machine', 'are you real'])) {
       answered.push('Said it is an automated receptionist');
@@ -175,9 +192,9 @@ export function createDesk(input) {
 
   function finish() {
     stage = 'done';
-    return caller
-      ? `Thanks for calling, ${caller.split(' ')[0]}. ${urgent ? 'The owner has your details marked as urgent.' : `The team will be in touch ${config.callback}.`} Goodbye.`
-      : `Thanks for calling ${config.name}. Goodbye.`;
+    return caller && number
+      ? `Thanks for calling, ${caller.split(' ')[0]}. ${urgent ? 'Your message is marked urgent for the owner.' : `The team will get your message and can call you back ${config.callback}.`} Goodbye.`
+      : `Thanks for calling ${config.name}. ${caller ? 'I could not confirm your callback number; please contact the team directly if you need a response. ' : ''}Goodbye.`;
   }
 
   return {
@@ -195,17 +212,42 @@ export function createDesk(input) {
         return open(text);
       }
       if (stage === 'name') {
-        caller = nameFrom(text) || 'Caller';
+        const parsedName = nameFrom(text);
+        nameTries += 1;
+        if (!parsedName || /^(yes|no|okay|please|sure|thanks|caller)$/i.test(parsedName)) {
+          return nameTries >= 3
+            ? (stage = 'more', 'I could not catch a name. Is there anything else?')
+            : 'Sorry, could you repeat your name?';
+        }
+        caller = parsedName;
         stage = 'number';
-        return `Thanks, ${caller.split(' ')[0]}. What’s the best number to call you on?`;
+        return `Thanks, ${caller.split(' ')[0]}. What’s the best UK number to call you on?`;
       }
       if (stage === 'number') {
-        const digits = digitsFrom(text);
         numberTries += 1;
-        if (digits.length < 10 && numberTries < 2) return 'Sorry, could you say the number again, digit by digit?';
-        number = digits.length >= 10 ? formatNumber(digits) : text;
-        stage = 'more';
-        return `Thanks. That’s ${number}. ${urgent ? 'I’ve marked this as urgent for the owner.' : `The team will call you back ${config.callback}.`} Is there anything else?`;
+        if (!validPhone(text)) {
+          if (numberTries >= 3) {
+            stage = 'more';
+            return 'I could not confirm a usable number, so I will not guess. Please contact the business directly if you need a reply. Anything else?';
+          }
+          return 'Sorry, I need a full UK phone number. Please say or type it digit by digit.';
+        }
+        proposedNumber = formatNumber(normaliseUkNumber(text));
+        stage = 'confirm-number';
+        return `I heard ${proposedNumber}. Is that correct? Say yes or no.`;
+      }
+      if (stage === 'confirm-number') {
+        if (has(text, YES)) {
+          number = proposedNumber;
+          stage = 'more';
+          return `Thanks, I’ve confirmed ${number}. ${urgent ? 'Your message is marked urgent.' : 'I’ll put that in the message for the team.'} Anything else?`;
+        }
+        if (has(text, NO)) {
+          proposedNumber = '';
+          stage = 'number';
+          return 'No problem. Please say or type the number again, digit by digit.';
+        }
+        return 'Please say yes if that number is correct, or no to try again.';
       }
       if (stage === 'more') {
         if (has(text, NO) && !has(text, ['how', 'what', 'when', 'do you'])) return finish();
@@ -218,10 +260,10 @@ export function createDesk(input) {
       const title = urgent ? 'Urgent call' : wants.length ? 'New enquiry' : 'Question answered';
       /** @type {[string, string][]} */
       const rows = [];
-      rows.push(['Caller', caller ? `${caller}${number ? ` · ${number}` : ''}` : 'No details left']);
+      rows.push(['Caller', caller ? `${caller}${number ? ` · ${number}` : ' · callback number not confirmed'}` : 'No details left']);
       if (wants.length) rows.push(['Wants', wants.join('; ')]);
       if (answered.length) rows.push(['Answered', answered.join('; ')]);
-      rows.push(['Next step', caller ? (urgent ? 'Urgent: ring back now' : `Call back ${config.callback}`) : 'Nothing to do']);
+      rows.push(['Next step', caller && number ? (urgent ? 'Urgent: owner to review and call back' : `Call back ${config.callback}`) : wants.length ? 'No verified callback number: review message; no callback possible' : 'Nothing to do']);
       return { title, urgent, rows };
     },
   };
