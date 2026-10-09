@@ -9,7 +9,7 @@ import './home-visuals.css';
 import { ScrollReveal } from './scroll-reveal';
 import { CUSTOMER_TYPES } from './customer-types';
 import { KitIcon } from './brand-kit/kit-icon';
-import { CARE_PLAN, FREE_STEP, OFFERS, getMenuJob } from './offers';
+import { AFTER_HOURS, CARE_PLAN, FREE_STEP, OFFERS, getMenuJob } from './offers';
 const STARTER = OFFERS[0];
 /** Before / after: one row per Starter job (ids are menu jobs in offers.ts). */
 const CHANGES = [
@@ -54,12 +54,13 @@ export default function Page() {
    </div><HeroDemo />
   </section>
   <section className="s-section" id="build" aria-labelledby="build-title">
-   <p className="eyebrow">What do you run?</p><h2 id="build-title">Pick yours. See your problems, what I’d set up and the price.</h2>
+   <p className="eyebrow">What do you run?</p><h2 id="build-title">Pick yours. See the problems, set-up and price.</h2>
    <ul className="s-types" aria-label="Kinds of business">{CUSTOMER_TYPES.map(type => <li key={type.id}><a href={`/for/${type.id}`}>
     <span className="s-type-icon" aria-hidden="true"><KitIcon name={type.icon} /></span>
     <strong>{type.name}</strong><span>{type.examples}</span><em>{type.recipes[0].name.split(': ')[1]?.trim() ?? type.recipes[0].name} · {type.recipes[0].offer.price}</em>
    </a></li>)}</ul>
-   <p><a className="s-details-link" href="/prices">Every price, websites and what’s included →</a></p>
+   <p><a className="s-details-link" href="/prices">Every price and what’s included →</a></p>
+   <a className="s-teaser s-teaser-slim" href={AFTER_HOURS.href}><span className="s-teaser-tag">New</span><strong>After-hours call answering {AFTER_HOURS.price}</strong><span className="s-teaser-go" aria-hidden="true">→</span></a>
   </section>
   <section className="s-section" id="how" data-reveal aria-labelledby="how-title">
    <p className="eyebrow">See it working</p><h2 id="how-title">One missed call, start to finish.</h2><WalkthroughVideo />

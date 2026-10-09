@@ -30,3 +30,13 @@
 .hv-play-icon::after { content: ""; margin-left: 6px; border-style: solid; border-width: 13px 0 13px 22px; border-color: transparent transparent transparent var(--ink); }
 .hv-play:focus-visible { outline: 4px solid var(--signal); outline-offset: -8px; }
 .hv-vcap { margin-top: 10px; font-size: 1rem; line-height: 1.4; }
+
+/* Offer teaser card (homepage, /services): one link, dark night motif to match /after-hours-receptionist. */
+.s-teaser { margin-top: 18px; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; max-width: 720px; padding: 16px 18px; border: 3px solid var(--ink); background: #1b1d22; color: #f3f1ec; text-decoration: none; transition: transform 160ms ease-out, box-shadow 160ms ease-out; }
+.s-teaser > * { grid-column: 1; }
+.s-teaser-tag { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: #ffb36b; }
+.s-teaser strong { font-size: 1.15rem; }
+.s-teaser span:not(.s-teaser-tag):not(.s-teaser-go) { color: #d8d5cd; }
+.s-teaser-go { grid-column: 2; grid-row: 1 / span 3; font-size: 1.6rem; font-weight: 800; color: #ffb36b; }
+.s-teaser:hover { transform: translateY(-2px); box-shadow: 6px 6px 0 var(--signal); }
+@media (prefers-reduced-motion: reduce) { .s-teaser { transition: none; } }

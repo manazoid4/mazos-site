@@ -1,4 +1,4 @@
-import { ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, CHOOSER, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, RUNNING_COSTS_NOTE, runningCost, OWN_VS_RENT, PACKAGE_VALUE, PRICE_MATCH, formatPrice, PROMISES, SAME_PRICE_NOTE, STARTER_GUARANTEE, UPGRADE_CREDITS, type Offer } from './offers';
+import { AFTER_HOURS, ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, CHOOSER, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, RUNNING_COSTS_NOTE, runningCost, OWN_VS_RENT, PACKAGE_VALUE, PRICE_MATCH, formatPrice, PROMISES, SAME_PRICE_NOTE, STARTER_GUARANTEE, UPGRADE_CREDITS, type Offer } from './offers';
 import { PackageLink } from './package-link';
 import { NextSteps, TweaksTimeline } from './explainers';
 import { CostCalculator } from './cost-calculator';
@@ -193,6 +193,10 @@ export function PriceList({ checkHref }: { checkHref: string }) {
           <div className="s-extras-care" id="care">
             <h4>After it’s built</h4>
             {CARE_PLANS.map((plan) => <p key={plan.id}><strong>{plan.name}, {plan.price}.</strong> {plan.body}</p>)}
+          </div>
+          <div className="s-extras-care" id="after-hours">
+            <h4>Monthly service</h4>
+            <p><strong>{AFTER_HOURS.name}, {AFTER_HOURS.price}.</strong> {`Calls answered when you’re closed: your FAQs answered, messages taken, urgent calls passed on and a summary emailed to you. ${AFTER_HOURS.setup}. ${AFTER_HOURS.terms}`} <a href={AFTER_HOURS.href}>How it works →</a></p>
           </div>
         </div>
       </Fold>

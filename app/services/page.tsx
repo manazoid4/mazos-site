@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '../breadcrumbs';
-import { OFFERS, getMenuJob } from '../offers';
+import { AFTER_HOURS, OFFERS, getMenuJob } from '../offers';
 import { OG_IMAGE, fitDescription } from '../seo';
 import { MAIN_CTA, SITE_URL } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { ScrollReveal } from '../scroll-reveal';
 import { SERVICE_JOBS } from './jobs';
+import '../home-visuals.css';
 
 const PAGE_URL = '/services';
 
@@ -38,6 +39,12 @@ export default function ServicesPage() {
           <a className="button button-signal" href={ctaHref}>{MAIN_CTA}</a>
         </div>
         <p className="mw-hero-note">{`Free demo, no call needed. One job is ${OFFERS[0].price} as a Starter Automation. Manazir plans and builds it himself.`}</p>
+      </section>
+
+      <section className="mw-qw-section" aria-labelledby="services-monthly-title">
+        <p className="eyebrow">Monthly service · new</p>
+        <h2 id="services-monthly-title">{AFTER_HOURS.name}, {AFTER_HOURS.price}.</h2>
+        <a className="s-teaser" href={AFTER_HOURS.href}><span className="s-teaser-tag">{AFTER_HOURS.setup}</span><strong>Never miss another call after hours.</strong><span>When you’re closed, calls are answered in your business name, messages taken and a summary emailed to you.</span><span className="s-teaser-go" aria-hidden="true">→</span></a>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="services-list-title">
