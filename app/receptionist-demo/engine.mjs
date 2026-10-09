@@ -530,7 +530,7 @@ export function createDesk(input) {
     const digits = digitsFrom(text, true);
     const early = ukNumber(digits);
     if (early) {
-      const rest = validName(text.replace(/\+?\d[\d\s]*/g, ' ').replace(new RegExp(`\\b(${Object.keys(WORD_DIGITS).join('|')}|double|treble|triple|on|and|my|names?|number|is)\\b`, 'gi'), ' ').replace(/[,.]/g, ' ').trim());
+      const rest = validName(norm(text).replace(/\+?\d[\d\s]*/g, ' ').replace(new RegExp(`\\b(${Object.keys(WORD_DIGITS).join('|')}|double|treble|triple|on|and|my|names?(?:'s)?|number|is)\\b`, 'gi'), ' ').replace(/[,.]/g, ' ').trim());
       if (rest) { caller = rest; named = true; }
       held = early;
       stage = 'confirm';
@@ -634,7 +634,7 @@ export function createDesk(input) {
   }
 
   const REPEAT = /^(?:(?:sorry|pardon|um|er) )*(?:what was that|what did you say|what was it|pardon me|pardon|come again|say that again|say again|(?:can|could) you (?:say|repeat) (?:that|it)(?: again)?|(?:can|could) you say (?:it )?again|repeat that|sorry what)(?: please| again)?$/;
-  const repeatLine = () => `Of course. ${stage === 'confirm' ? readBack() : lastAsk}`;
+  const repeatLine = () => `Of course. ${stage === 'confirm' ? readBack() : stage === 'name' ? NAME_ASK : stage === 'number' ? NUMBER_ASK : lastAsk}`;
 
   function respond(text) {
     if (stage === 'done') return '';
@@ -682,7 +682,7 @@ export function createDesk(input) {
     reply(said) {
       const out = respond(String(said || '').trim());
       const question = (out.match(/[^.?!]*\?/g) ?? []).pop();
-      if (question && !REPEAT.test(plain(String(said || '')))) lastAsk = question.trim();
+      if (question && out !== DIDNT_CATCH && !REPEAT.test(plain(String(said || '')))) lastAsk = question.trim();
       return out;
     },
     /** Two or three short things the caller could say right now. */
