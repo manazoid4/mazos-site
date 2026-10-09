@@ -1,4 +1,4 @@
-import { ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, CHOOSER, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, OWN_VS_RENT, PACKAGE_VALUE, PRICE_MATCH, formatPrice, PROMISES, SAME_PRICE_NOTE, STARTER_GUARANTEE, UPGRADE_CREDITS, type Offer } from './offers';
+import { ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, CHOOSER, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, RUNNING_COSTS_NOTE, runningCost, OWN_VS_RENT, PACKAGE_VALUE, PRICE_MATCH, formatPrice, PROMISES, SAME_PRICE_NOTE, STARTER_GUARANTEE, UPGRADE_CREDITS, type Offer } from './offers';
 import { PackageLink } from './package-link';
 import { NextSteps, TweaksTimeline } from './explainers';
 import { CostCalculator } from './cost-calculator';
@@ -22,6 +22,11 @@ export function OfferCard({ offer, checkHref }: { offer: Offer; checkHref: strin
       <p className="s-price-amount">{offer.price}</p>
       <PartsValue offer={offer} />
       <p>{offer.body}</p>
+      <dl className="s-price-facts">
+        <div><dt>Time</dt><dd>{offer.delivery}</dd></div>
+        <div><dt>You pay</dt><dd>{offer.payment}</dd></div>
+        <div><dt>After</dt><dd>{runningCost(offer)}</dd></div>
+      </dl>
       <ul>{offer.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
       {offer.guarantee ? <p className="s-price-guarantee"><strong>Guarantee:</strong> {offer.guarantee}</p> : null}
       <details className="s-offer-spec">
@@ -33,7 +38,6 @@ export function OfferCard({ offer, checkHref }: { offer: Offer; checkHref: strin
         <ul>{ALWAYS_INCLUDED.map((item) => <li key={item.title}>{item.title}</li>)}</ul>
         <p><strong>Not included</strong></p>
         <ul>{offer.excludes.map((item) => <li key={item}>{item}</li>)}</ul>
-        <p><strong>When:</strong> {offer.delivery}</p>
         <p><strong>Changes:</strong> {offer.changes}</p>
         <p><strong>Next step:</strong> {offer.upsell}</p>
       </details>
@@ -153,9 +157,10 @@ export function PriceList({ checkHref }: { checkHref: string }) {
         <div className="s-guarantee">
           <strong>Dates and upgrades.</strong> {DELIVERY_PROMISE} You own everything I build.
         </div>
-              <div className="s-not-included">
+        <div className="s-not-included">
           <h3>What’s not included</h3>
           <ul>{NOT_INCLUDED.map((item) => <li key={item}>{item}</li>)}</ul>
+          <p className="s-small">{RUNNING_COSTS_NOTE}</p>
         </div>
       </Fold>
 
