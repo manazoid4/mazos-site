@@ -22,6 +22,24 @@ const FAILURE_COPY: Record<FailureReason, string> = {
   network: 'That could not reach me — your connection may have dropped.',
 };
 
+type FieldName = 'problem' | 'name' | 'email';
+
+const FIELD_MESSAGES = {
+  problem: 'Tap at least one problem above, or add a line about the job, so I know what to plan.',
+  name: 'Add your name so I know who to reply to.',
+  email: 'Add an email so I can send your plan.',
+  emailFormat: 'That email looks incomplete. It should look like name@example.co.uk.',
+} as const;
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function fieldMessage(field: FieldName, value: string): string {
+  const text = value.trim();
+  if (!text) return FIELD_MESSAGES[field];
+  if (field === 'email' && !EMAIL_PATTERN.test(text)) return FIELD_MESSAGES.emailFormat;
+  return '';
+}
+
 const SERVICE_LABEL = 'Free Plan & Fixed Quote';
 
 /** One tap instead of typing: the problems owners name most. Each adds a line to the text box. */
@@ -54,8 +72,8 @@ export function LeakCheckForm() {
   const [confirmationSent, setConfirmationSent] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
-  const [validationError, setValidationError] = useState('');
-  const [invalidField, setInvalidField] = useState('');
+  // One inline message per field, shown right under it. Empty string = valid.
+  const [errors, setErrors] = useState<Record<FieldName, string>>({ problem: '', name: '', email: '' });
   const [failureReason, setFailureReason] = useState<FailureReason>('rejected');
   const [recoveryHref, setRecoveryHref] = useState(`mailto:${CONTACT_EMAIL}`);
   const [picked, setPicked] = useState<string[]>([]);
@@ -110,10 +128,7 @@ export function LeakCheckForm() {
     box.value = on
       ? [box.value.trim(), line].filter(Boolean).join(' ')
       : box.value.replace(line, '').replace(/\s{2,}/g, ' ').trim();
-    if (on && invalidField === 'problem') {
-      setInvalidField('');
-      setValidationError('');
-    }
+    if (on) setErrors((current) => (current.problem ? { ...current, problem: '' } : current));
   }
 
   function goToDetails() {
@@ -121,13 +136,11 @@ export function LeakCheckForm() {
     const site = formRef.current?.querySelector<HTMLInputElement>('[name="website"]');
     const task = box?.value.trim() || '';
     if (!task) {
-      setInvalidField('problem');
-      setValidationError('Tap at least one problem, or add a line about the job.');
+      setErrors((current) => ({ ...current, problem: FIELD_MESSAGES.problem }));
       focusField('problem');
       return;
     }
-    setValidationError('');
-    setInvalidField('');
+    setErrors((current) => ({ ...current, problem: '' }));
     setSummary({ task, website: site?.value.trim() || '' });
     setStep(2);
     window.setTimeout(() => focusField('name'), 0);
@@ -155,21 +168,21 @@ export function LeakCheckForm() {
     const campaign = rememberedCampaign();
     const source = campaign && campaign !== pageSource ? `${campaign} → ${pageSource}` : pageSource;
 
-    const missing = !task ? 'problem' : !name ? 'name' : !email ? 'email' : '';
-    if (missing) {
-      if (missing === 'problem') setStep(1);
-      setInvalidField(missing);
-      setValidationError(
-        missing === 'problem'
-          ? 'Tap at least one problem, or add a line about the job.'
-          : `Add your ${missing} so I can reply.`,
-      );
-      focusField(missing);
+    const found: Record<FieldName, string> = {
+      problem: fieldMessage('problem', task),
+      name: fieldMessage('name', name),
+      email: fieldMessage('email', email),
+    };
+    const firstInvalid = (['problem', 'name', 'email'] as const).find((field) => found[field]);
+    if (firstInvalid) {
+      if (firstInvalid === 'problem') setStep(1);
+      setErrors(found);
+      // Wait a tick so a step change has revealed the field before it takes focus.
+      window.setTimeout(() => focusField(firstInvalid), 0);
       return;
     }
 
-    setValidationError('');
-    setInvalidField('');
+    setErrors({ problem: '', name: '', email: '' });
 
     const subject = `Maz Works — free plan and quote — ${website || name}`;
     setRecoveryHref(buildRecoveryMailto(subject, [
@@ -235,11 +248,16 @@ export function LeakCheckForm() {
       method="post"
       ref={formRef}
       onSubmit={submitRequest}
+      // With JavaScript the messages below replace the browser's generic tooltips.
+      // Without it the browser's own required/email checks still run.
+      noValidate={hydrated}
       onInput={(event) => {
         if (!started.current) { started.current = true; trackConversion('Form started', { placement: window.location.pathname }); }
-        if ((event.target as HTMLInputElement).name === invalidField) {
-          setInvalidField('');
-          setValidationError('');
+        const target = event.target as HTMLInputElement;
+        const field = target.name as FieldName;
+        if (field === 'problem' || field === 'name' || field === 'email') {
+          // Clear the message as soon as the field is valid again.
+          setErrors((current) => (current[field] && !fieldMessage(field, target.value) ? { ...current, [field]: '' } : current));
         }
       }}
     >
@@ -281,11 +299,12 @@ export function LeakCheckForm() {
             rows={3}
             required={!hydrated}
             placeholder="For example: orders come by DM, customers forget appointments, chasing quotes"
-            aria-invalid={invalidField === 'problem' || undefined}
-            aria-describedby={invalidField === 'problem' ? 'leak-check-error' : undefined}
+            aria-invalid={errors.problem ? true : undefined}
+            aria-describedby={errors.problem ? 'leak-check-err-problem' : undefined}
             disabled={submitState === 'sending'}
           />
         </label>
+        <p id="leak-check-err-problem" className="mw-field-error" role="alert">{errors.problem}</p>
 
         <label>
           <span>Website or Instagram <small>(if you have one)</small></span>
@@ -317,10 +336,11 @@ export function LeakCheckForm() {
               name="name"
               autoComplete="name"
               required
-              aria-invalid={invalidField === 'name' || undefined}
-              aria-describedby={invalidField === 'name' ? 'leak-check-error' : undefined}
+              aria-invalid={errors.name ? true : undefined}
+              aria-describedby={errors.name ? 'leak-check-err-name' : undefined}
               disabled={submitState === 'sending'}
             />
+            <span id="leak-check-err-name" className="mw-field-error" role="alert">{errors.name}</span>
           </label>
           <label>
             <span>Email</span>
@@ -329,10 +349,11 @@ export function LeakCheckForm() {
               type="email"
               autoComplete="email"
               required
-              aria-invalid={invalidField === 'email' || undefined}
-              aria-describedby={invalidField === 'email' ? 'leak-check-error' : undefined}
+              aria-invalid={errors.email ? true : undefined}
+              aria-describedby={errors.email ? 'leak-check-err-email' : undefined}
               disabled={submitState === 'sending'}
             />
+            <span id="leak-check-err-email" className="mw-field-error" role="alert">{errors.email}</span>
           </label>
         </div>
         <label>
@@ -369,7 +390,6 @@ export function LeakCheckForm() {
           {submitState === 'error' && <EnquiryRecovery href={recoveryHref} />}
         </div>
       </div>
-      <p id="leak-check-error" className="mw-form-status mw-form-error" role="alert">{validationError}</p>
     </form>
   );
 }

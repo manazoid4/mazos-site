@@ -615,3 +615,23 @@ button.text-link {
   color: var(--muted);
   font-size: .82rem;
 }
+
+/* Inline field messages in the free-plan form (leak-check-form.tsx). Empty = hidden. */
+.mw-demo-form .mw-field-error,
+.mw-demo-form label .mw-field-error {
+  color: #a3241d;
+  font-family: inherit;
+  font-size: .78rem;
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 1.35;
+  text-transform: none;
+}
+
+.mw-demo-form .mw-field-error:empty {
+  display: none;
+}
+
+.mw-demo-form [aria-invalid="true"] {
+  border-color: #a3241d;
+}
