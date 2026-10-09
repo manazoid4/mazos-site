@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Breadcrumbs } from '../breadcrumbs';
 import { AFTER_HOURS } from '../offers';
 import { OG_IMAGE, fitDescription } from '../seo';
-import { CHECK_REPLY_TIME, MAIN_CTA, SITE_URL } from '../site';
+import { MAIN_CTA, SITE_URL } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { ScrollReveal } from '../scroll-reveal';
 import { StickyCheckCta } from '../sticky-cta';
@@ -70,12 +70,12 @@ export default function AfterHoursPage() {
         <div className="ah-hero-copy">
           <Breadcrumbs items={[{ href: '/services', label: 'Jobs I set up' }, { label: AFTER_HOURS.name }]} />
           <p className="eyebrow">{AFTER_HOURS.name} · new</p>
-          <h1 id="ah-title">Calls answered when <em>you’re closed</em>.</h1>
+          <h1 id="ah-title">Calls answered when <em>you’re closed</em>.</h1>
           <p className="ah-lede">When you’re closed, your calls are answered in your business name. Common questions get answered, details get taken, and you get a clear summary by email.</p>
           <p className="ah-price"><strong>{AFTER_HOURS.price}</strong><span>{AFTER_HOURS.setup} · month to month</span></p>
           <div className="mw-actions">
             <a className="button button-signal" href={demoHref}>{MAIN_CTA}</a>
-            <a className="button" href="#try">Play an example call</a>
+            <a className="button" href="/receptionist-demo">Talk to the receptionist</a>
           </div>
           <p className="mw-hero-note">{`${AFTER_HOURS.guarantee} Manazir sets it up himself.`}</p>
         </div>
@@ -117,7 +117,7 @@ export default function AfterHoursPage() {
             <p className="ah-card-terms">{AFTER_HOURS.guarantee}</p>
           </article>
           <div className="ah-side">
-            <h3>What one missed customer can cost</h3>
+            <h3>Would one booked job cover it?</h3>
             <ValueCheck />
             <h3 className="ah-side-h">Not included, said plainly</h3>
             <ul className="ah-not">{AFTER_HOURS.notIncluded.map((item) => <li key={item}>{item}</li>)}</ul>
@@ -131,10 +131,6 @@ export default function AfterHoursPage() {
         <p className="ah-sub">Pick a caller. Watch how the call goes, then see the summary the owner gets.</p>
         <CallDemo />
         <p className="ah-talk"><a className="button" href="/receptionist-demo">Talk to it out loud</a> <span>Have the call yourself, in your browser, with your microphone.</span></p>
-        <div className="ah-try-cta">
-          <p><strong>Want to hear it as your business?</strong> I’ll reply within {CHECK_REPLY_TIME}, then set up a free demo with your name and greeting.</p>
-          <a className="button button-signal" href={demoHref}>{MAIN_CTA}</a>
-        </div>
       </section>
 
       <section className="ah-section" id="safety" data-reveal aria-labelledby="ah-trust-title">
