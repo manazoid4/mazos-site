@@ -166,11 +166,15 @@ const refusesDetail = (text) => isNo(text) || /\b(rather not|prefer not|don'?t w
 export function safeText(value, max) {
   if (typeof value !== 'string') return '';
   const out = value
-    .replace(/\bhttps?:\/\/\S*/gi, ' ')
+    .normalize('NFKC')
+    .replace(/\s*[[({]\s*(?:\.|dot)\s*[\])}]\s*/gi, '.')
+    .replace(/\s+dot\s+(?=[a-z]{2,24}\b)/gi, '.')
+    .replace(/\b([a-z0-9-]+)\s?\.\s(?=(?:com|co|uk|net|org|io|me|app|shop|store|online|site)\b)/gi, '$1.')
+    .replace(/\b(?:https?|hxxps?):\/\/\S*/gi, ' ')
     .replace(/\bwww\.\S*/gi, ' ')
     .replace(/\S+@\S+/g, ' ')
     .replace(/\b[a-z][a-z0-9-]*(?:\.[a-z0-9-]+)+\/\S*/gi, ' ')
-    .replace(/\b[a-z0-9-]+\.(?:com|co\.uk|uk|net|org|io|me|app|info|biz|xyz|link|ly)\b\S*/gi, ' ')
+    .replace(/\b[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-z]{2,24}\b\S*/gi, ' ')
     .replace(/[<>]/g, '')
     .replace(/[\u0000-\u001f\u007f-\u009f]/g, ' ')
     .replace(/\s+/g, ' ')
@@ -178,13 +182,16 @@ export function safeText(value, max) {
   return out.slice(0, max).trim();
 }
 
-/** safeText, but refuses anything that looks like a phone or card number (5+ digits in a row). */
-const NUMBERISH = /\d(?:[\s().,-]?\d){4,}/;
+/** safeText, but refuses anything that looks like a phone or card number: 5+ digits in a row, digit groups split by " / " and the like, or 4+ spoken digits. */
+const NUMBERISH = /\d(?:[\s().,-]?\d){4,}|\d{3,}[\s().,/-]{1,3}\d{3,}/;
+const DIGIT_WORDS = /\b(?:(?:oh|zero|nought|one|two|three|four|five|six|seven|eight|nine|double|triple|treble)[\s,-]+){3,}(?:oh|zero|nought|one|two|three|four|five|six|seven|eight|nine)\b/i;
+const numberish = (text) => NUMBERISH.test(text) || DIGIT_WORDS.test(text);
 const noNumbers = (value, max) => {
   const out = safeText(value, max);
-  return NUMBERISH.test(out) ? '' : out;
+  return numberish(out) ? '' : out;
 };
-const PRICE = /^(from |about |around )?£\s?\d{1,5}(\.\d{2})?( ?(\+|per|an?|\/)\s?\w+)?$/i;
+/** "£45", "from £120", "£60 per hour", "£30+". The amount has no leading zero and is under £10,000; any unit is a word, never more digits. */
+const PRICE = /^(from |about |around )?£ ?([1-9]\d{0,2},\d{3}|[1-9]\d{0,3})(\.\d{2})?( ?\+| (per|an?) [a-z]+| ?\/ ?[a-z]+)?$/i;
 
 /** Normalises a config from a link: drops empty parts, keeps strings short and plain. */
 export function cleanConfig(input) {
@@ -234,7 +241,7 @@ const NUMBER_ASK = 'What’s the best number to call you on?';
 const NOT_UK = 'Sorry, I can only take a UK number in this demo. What’s the best UK number?';
 const DIDNT_CATCH = 'Sorry, I didn’t catch that. Could you say it again?';
 /** Words that mean someone may be hurt or at risk: these get the 999 line. Business-urgent words (the owner's list) only get flagged. */
-const DANGER = new RegExp(String.raw`(?:^|\W)(?:heart attack|chest pains?|chok(?:ing|ed)|passed out|faint(?:ed|ing)|not breathing|(?:can'?t|cannot|can not) breathe|throat (?:is )?(?:closing|swelling)|stroke|seizure|overdos(?:e|ed)|gas smell|smells? (?:of )?gas|leaking gas|gas leak|caught fire|there(?:'s| is) a fire(?! (?:alarm|extinguisher|door|exit|safety|risk|drill|certificate))|house fire|on fire|smoke coming|full of smoke|carbon monoxide|collapsed|unconscious|in danger|injured|blood everywhere|(?:a )?lot of blood|bleeding (?:heavily|badly)|(?:is|am) bleeding|(?:face|tongue|lips?) (?:is |are )?swelling|anaphyla\w+|ring 999|call 999|dial 999)(?=\W|$)`, 'i');
+const DANGER = new RegExp(String.raw`(?:^|\W)(?:heart attack|chest pains?|(?:is ?n'?t|is not|not|stopped|struggling to|difficulty|trouble|hard to) breath(?:e|ing)|no pulse|unresponsive|(?:can'?t|cannot) wake (?:him|her|them|my \w+) up|(?:turned|turning|going|gone) blue|lips are blue|allergic reaction|electric shock|electrocut\w*|sparks? (?:coming|flying|everywhere)|sparking|burning smell|smells? (?:of )?burning|(?:see|seen) (?:the )?flames|flames (?:coming|everywhere)|(?:there(?:'s| is)|lots of|full of) smoke|smoke (?:coming|everywhere|pouring)|co alarm (?:is )?(?:going off|sounding|beeping|went off)|water (?:\w+ ){0,3}(?:fuse ?box|consumer unit|electrics|sockets?)|(?:fell|fallen) (?:off|from) (?:a |the )?(?:ladder|roof)|head injury|hit (?:his|her|my|their) head|having a (?:fit|seizure)|kill (?:myself|himself|herself)|suicid\w*|end (?:my|his|her) life|hurt (?:myself|himself|herself)|(?:he|she|they)(?:'s| is| are) bleeding|bleeding (?:a lot|everywhere)|chok(?:ing|ed)|passed out|faint(?:ed|ing)|not breathing|(?:can'?t|cannot|can not) breathe|throat (?:is )?(?:closing|swelling)|stroke|seizure|overdos(?:e|ed)|gas smell|smells? (?:of )?gas|leaking gas|gas leak|caught fire|there(?:'s| is) a fire(?! (?:alarm|extinguisher|door|exit|safety|risk|drill|certificate))|house fire|on fire|smoke coming|full of smoke|carbon monoxide|collapsed|unconscious|in danger|injured|blood everywhere|(?:a )?lot of blood|bleeding (?:heavily|badly)|(?:is|am) bleeding|(?:face|tongue|lips?) (?:is |are )?swelling|anaphyla\w+|ring 999|call 999|dial 999)(?=\W|$)`, 'i');
 const DANGER_LINE = 'If anyone is in danger, please ring 999 now. I’ve also marked this as urgent for the owner.';
 const URGENT_LINE = 'I’ve marked this as urgent for the owner.';
 const ANON = 'Caller (no name given)';

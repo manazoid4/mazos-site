@@ -568,3 +568,21 @@ test('a partial match on a multi-word service is never claimed as that service',
   assert.match(reply, /We do boiler service and boiler repair\..*Is it one of those\?/);
   assert.doesNotMatch(reply, /Yes, we do/);
 });
+
+test('red team: everyday emergency wording gets the 999 line, trade jargon does not', () => {
+  const danger = ["he isn't breathing", "she's stopped breathing", 'struggling to breathe', "he's bleeding", 'allergic reaction', 'he was electrocuted', 'sparks coming from the socket', 'burning smell from the fuse box', 'I can see flames', 'the CO alarm is going off', 'he fell off a ladder', 'I want to kill myself', 'she is having a fit', "my dad's unresponsive", 'water pouring into the fuse box', "there's smoke", "can't wake him up"];
+  const safe = ['I need a boiler fitted', 'can you bleed the radiators', 'my smoke alarm needs a new battery', 'flame failure on the boiler', 'fit a new socket', 'my CO alarm needs replacing'];
+  for (const line of danger) { const desk = createDesk({}); desk.greet(); assert.match(JSON.stringify(desk.reply(line)), /999/, line); }
+  for (const line of safe) { const desk = createDesk({}); desk.greet(); assert.doesNotMatch(JSON.stringify(desk.reply(line)), /999/, line); }
+});
+
+test('red team: no phone numbers through prices or names, no disguised links', () => {
+  const config = cleanConfig({ name: 'Acme', hours: 'Mon-Fri 8.30am-5.30pm, Sat 9am-12.30pm', services: [
+    { name: 'Boiler', price: 'from £0770/0900123' }, { name: 'Gas', price: '£12 a 345678' }, { name: 'Labour', price: '£60 per hour' }, { name: 'Rewire', price: '£1,200' },
+    { name: 'Call 0770 / 090 / 0123' }, { name: 'ring oh seven seven double oh nine' }, { name: 'acme dot com' }, { name: 'acme[.]co.uk/x' }, { name: 'ａｃｍｅ．ｃｏｍ' }, { name: 'acme. shop' }, { name: 'visit acme.online' },
+  ] });
+  assert.equal(config.hours, 'Mon-Fri 8.30am-5.30pm, Sat 9am-12.30pm');
+  const text = JSON.stringify(config.services);
+  assert.doesNotMatch(text, /0770|345678|acme|ａｃｍｅ|seven/i);
+  assert.deepEqual(config.services.filter((s) => s.price).map((s) => s.price), ['£60 per hour', '£1,200']);
+});
