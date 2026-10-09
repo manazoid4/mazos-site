@@ -7,7 +7,7 @@ import { CHECK_REPLY_TIME } from '../site';
  * results, and no "AI" wording (Maz, 27 Sep): it is an automated receptionist.
  */
 
-export const CHIPS = ['After-hours cover', 'Takes messages', 'Answers your FAQs', 'Email summaries', 'Urgent-call rules', 'Monthly tuning included'];
+export const CHIPS = ['Day and night cover', 'Takes messages', 'Answers your FAQs', 'Email summaries', 'Urgent-call rules', 'Monthly tuning included'];
 
 export const BEST_FOR = [
   { label: 'Salons and beauty', href: '/for/salons-and-beauty' },
@@ -28,7 +28,7 @@ export const COMPARE = [
 export const STEPS = [
   { title: 'I learn your business', body: 'Your hours, services, areas, prices you’re happy to share, and the questions people always ask.' },
   { title: 'We set the rules', body: 'Your greeting, what it can answer, what counts as urgent and who it tells.' },
-  { title: 'Calls are answered after hours', body: 'Your calls forward to it when you close. During the day nothing changes.' },
+  { title: 'Calls you miss are answered', body: 'If you don’t pick up, the call goes to it. Answer as normal when you can; nothing else changes.' },
   { title: 'You get the summary', body: 'Each call arrives by email with who, what and how urgent, so you ring back with context.' },
 ];
 
@@ -41,21 +41,20 @@ export const TRUST = [
   { icon: 'control', title: 'You stay in control', body: 'Change the greeting, hours or answers by email. Switch it off by turning off call forwarding.' },
 ];
 
-export const EMERGENCY_NOTE = 'An after-hours receptionist takes messages and answers everyday questions. It is not an emergency service: callers in an emergency are told to ring 999 or the right urgent service.';
+export const EMERGENCY_NOTE = 'The receptionist takes messages and answers everyday questions. It is not an emergency service: callers in an emergency are told to ring 999 or the right urgent service.';
 
 export const FAQS = [
-  { q: 'What does it actually do?', a: 'When you’re closed, your calls forward to it. It greets callers in your business name, answers the common questions you’ve given it, takes a clear message, follows your urgent-call rules and emails you a summary.' },
-  { q: 'Does it replace me or my staff?', a: 'No. It covers the hours when nobody can answer, so callers get a reply instead of voicemail. You still ring people back and do the work.' },
+  { q: 'What does it actually do?', a: 'Any call you don’t pick up goes to it, whether you’re on a job or closed for the night. It greets callers in your business name, answers the common questions you’ve given it, takes a clear message, follows your urgent-call rules and emails you a summary.' },
+  { q: 'Does it replace me or my staff?', a: 'No. It covers the calls nobody can answer, so callers get a reply instead of voicemail. You still ring people back and do the work.' },
   { q: 'Can it answer questions about my business?', a: 'Yes, from the information you give me: hours, services, areas, “from” prices and how to book. If a caller asks something it hasn’t been given, it says so and takes a message.' },
   { q: 'Is it a real person?', a: 'No. It’s an automated receptionist with a natural voice, and it says so. Callers can leave a message for you instead. Like any automated system it can occasionally mishear, which is why every call comes with a summary and I review calls each month.' },
   { q: 'What happens if someone needs urgent help?', a: `You set what counts as urgent, like a leak or a car stuck on a driveway, and it texts or rings you. ${EMERGENCY_NOTE}` },
   { q: 'Can I change the greeting or opening hours?', a: 'Yes. Email me and I update it, usually within 2 working days. Holidays and closures are included in the monthly price.' },
   { q: 'Are calls recorded?', a: 'Only if you want them to be. If recording is on, callers are told at the start of the call. Otherwise you get the written summary only.' },
   { q: 'How is my customers’ information handled?', a: 'Call details go to you by email and are used only to run your service. To answer and summarise calls, the audio passes through a telephone provider and a speech-processing provider. I never sell caller details or share them for marketing. Transcripts are kept for 30 days by default, then deleted, and you can ask for them to be deleted sooner. Details are in the privacy notice.' },
-  { q: 'Will it work with my phone number?', a: 'Usually, yes. Most UK phone providers let you forward calls when you’re closed. I check your setup in the free demo stage and tell you plainly before you pay anything.' },
+  { q: 'Will it work with my phone number?', a: 'Usually, yes. Most UK phone providers let you send calls on when you don’t answer. I check your setup in the free demo stage and tell you plainly before you pay anything.' },
   { q: 'What if I get lots of calls?', a: `${AFTER_HOURS.minutes} call minutes a month are included. If you regularly need more, I tell you and we agree a price first. You are never billed for extra minutes by surprise.` },
-  { q: 'Can it work only after hours?', a: 'Yes, that’s what this is. It answers only during the hours you mark as closed, plus any holidays you add.' },
-  { q: 'Can I use it for overflow during the day later?', a: 'Daytime overflow, for when you’re busy with a customer, is what comes next. Tell me in the form if you want it and I’ll let you know when it’s ready.' },
+  { q: 'Does it answer in the day as well as after hours?', a: 'Yes, both, for the same price. In the day it only gets the calls you don’t pick up, so you still answer as normal when you can. When you’re closed it says so and takes a message.' },
   { q: 'Can I cancel?', a: `Yes. ${AFTER_HOURS.terms} Turn off call forwarding and your phone works as it did before.` },
 ];
 

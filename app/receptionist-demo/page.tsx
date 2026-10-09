@@ -31,7 +31,7 @@ export default function ReceptionistDemoPage() {
       <section className="mw-resource-cta" aria-labelledby="vd-cta-title">
         <div>
           <p className="eyebrow">{AFTER_HOURS.price}</p>
-          <h2 id="vd-cta-title">Want this answering your phone when you’re closed?</h2>
+          <h2 id="vd-cta-title">Want this answering your phone when you can’t?</h2>
           <p>{`${AFTER_HOURS.guarantee} `}<a href={AFTER_HOURS.href}>How it works →</a></p>
         </div>
         <div className="mw-actions"><a className="button button-signal" href={demoHref}>{MAIN_CTA}</a></div>

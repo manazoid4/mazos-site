@@ -43,4 +43,8 @@ Full audit, costs, competitor check and roadmap: private memory repo `handoffs/2
 - **Not built on purpose:** paid realtime voice on the public page (an open page on a per-minute service is an uncapped bill), a mic waveform (second microphone stream and permission prompt), open-mic interrupting (the browser would hear its own voice).
 - **Running cost per answered minute** (vendor pages, 9 Oct, $1 = £0.75): Telnyx Voice AI about 4.6p, Twilio + Vapi about 6.9p, Twilio + OpenAI realtime about 4.4p (assumption-heavy). 300 minutes is roughly £15 to £23 a month before alerts. The bigger cost is Maz's time on set-up and monthly tuning.
 - **Phone networks:** UK mobile networks divert *when unanswered*; none publishes a time-of-day divert. "After hours only" therefore means switching forwarding on each evening or answering missed calls at any time. Decision for Maz before the first client.
-- **Before the first paid line:** provider account with a spend cap (no Telnyx spend-limit feature was found; use prepaid with auto top-up off), £79 Stripe link, ICO fee, a short data note for clients. Runbook comes with sprint 2.
+- **Before the first paid line:** provider account with a spend cap (no Telnyx spend-limit feature was found; use prepaid with auto top-up off), £79 Stripe link, ICO fee (tier 1: £52 a year, £47 by direct debit, ico.org.uk, checked 9 Oct 2026), a short data note for clients. Runbook comes with sprint 2.
+
+
+## Decision: day and night cover (Maz, 9 Oct 2026)
+It answers any call the owner can't pick up: busy on a job in the day, or closed at night. Same £79/month, same 300 minutes. Set up with the phone's "divert when unanswered" setting, so there is one setting and no evening switching. The name and URL stay as they are. Site copy: "Calls answered when you can't pick up."
