@@ -250,8 +250,8 @@ export function VoiceDesk() {
   const suggestions = [
     'When are you open?',
     config.services[0] ? `Do you do ${config.services[0].name}?` : 'What services do you offer?',
-    config.services.find((service) => service.price)
-      ? `How much is ${config.services.find((service) => service.price)?.name}?`
+    config.services.find((service: { name: string; price?: string }) => service.price)
+      ? `How much is ${config.services.find((service: { name: string; price?: string }) => service.price)?.name}?`
       : 'Can I book an appointment?',
   ];
   const demoHref = `/free-plan?src=voice-demo&package=${encodeURIComponent(AFTER_HOURS.name)}#leak-check-form`;
