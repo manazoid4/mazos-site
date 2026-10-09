@@ -130,6 +130,7 @@ export default function AfterHoursPage() {
         <h2 id="ah-try-title">Play an example call.</h2>
         <p className="ah-sub">Pick a caller. Watch how the call goes, then see the summary the owner gets.</p>
         <CallDemo />
+        <p className="ah-talk"><a className="button" href="/receptionist-demo">Talk to it out loud</a> <span>Have the call yourself, in your browser, with your microphone.</span></p>
         <div className="ah-try-cta">
           <p><strong>Want to hear it as your business?</strong> I’ll reply within {CHECK_REPLY_TIME}, then set up a free demo with your name and greeting.</p>
           <a className="button button-signal" href={demoHref}>{MAIN_CTA}</a>
