@@ -48,7 +48,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'What if an app I use changes or it stops working?',
-    answer: `For 90 days after it goes live, anything I built that isn’t working the way we agreed is fixed free. If another company changes their app, I quote that fix first (free within the first 30 days). ${CHANGES_WINDOW.howItWorks}`,
+    answer: `For 90 days after it goes live, anything I built that isn’t working the way we agreed is fixed free. If another company changes their app, that isn’t my build: I quote the fix first, or a care plan covers it. ${CHANGES_WINDOW.howItWorks}`,
   },
   {
     question: 'Am I tied in?',

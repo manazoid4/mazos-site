@@ -30,7 +30,7 @@
  * - Value that was always given but never shown is now on every card
  *   (ALWAYS_INCLUDED), plus five new items that cost ≤30 min per client
  *   once templated: walkthrough video, review QR card, 30-day check, written
- *   scope sheet before payment, and a Starter money-back guarantee.
+ *   scope sheet before payment, and the "no working, no invoice" promise (9 Oct; was a money-back).
  * - Still true from v10: 30 days of tweaks (two rounds) + 90-day fix promise,
  *   never "unlimited"; one invoice when the client has seen it working; jobs of
  *   £1,000+ billed in stages; never "half now, half later".
@@ -126,8 +126,12 @@ export const ALWAYS_INCLUDED: { title: string; body: string }[] = [
 /** Price match (Maz, 2 Oct): fenced to a written quote from a UK business for the same scope, as a one-off price. */
 export const PRICE_MATCH = 'Found the same done-for-you job cheaper from a UK business? Send me their written quote for the same scope as a one-off price. I’ll match it, or tell you plainly what’s different.';
 
-/** Starter money-back guarantee (competitors offer 30-day refunds; we match it, fenced to our build). */
-export const STARTER_GUARANTEE = 'If your Starter task hasn’t run on a real customer within 30 days of going live, you get a full refund.';
+/**
+ * The promise (Maz, 9 Oct): no free work, no refunds on finished work, but no risk for the client.
+ * They see it working before they pay; if it can't be made to work as agreed, they don't pay.
+ * Replaces the 30-day money-back, which depended on the client's own customers.
+ */
+export const STARTER_GUARANTEE = 'No working, no invoice. You see it working on your own phone before you pay anything. If I can’t get it working the way we agreed, you don’t pay.';
 
 /**
  * The systems ladder: automation and custom software. Order matters (cards,
@@ -482,7 +486,7 @@ export const COMPARISON: { row: string; values: [string, string, string] }[] = [
   { row: 'Uses the tools you already have', values: ['Yes', 'Yes', 'Where it makes sense'] },
   { row: 'Customer details in one place', values: ['No', 'Included', 'Included'] },
   { row: 'Weekly report email', values: [`Add-on, ${getExtra('Weekly report').price}`, 'Included', 'Included'] },
-  { row: 'Guarantee', values: ['30-day money-back', 'Scope sheet + 90-day fix promise', 'Scope sheet + 90-day fix promise'] },
+  { row: 'Promise', values: ['No working, no invoice', 'No working, no invoice', 'Each stage signed off before you pay'] },
   { row: 'When you pay', values: ['One invoice, before go-live', 'One invoice, before go-live', 'Signed-off stages'] },
   { row: 'Working by', values: ['7 working days', 'Date in your scope sheet', 'Date in your scope sheet'] },
   { row: 'You own everything', values: ['Yes', 'Yes', 'Yes'] },
@@ -514,7 +518,7 @@ export const OWN_VS_RENT: { row: string; own: string; rent: string }[] = [
 export const CHANGES_WINDOW = {
   name: '30 days of tweaks and a 90-day fix promise',
   short: '30 days of tweaks',
-  body: 'For 30 days after it goes live, send me tweaks to what I built, in up to two rounds. And for 90 days, anything I built that isn’t working the way we agreed is fixed free. If another company changes their app, I quote that fix first (free within the first 30 days).',
+  body: 'For 30 days after it goes live, send me tweaks to what I built, in up to two rounds. And for 90 days, anything I built that isn’t working the way we agreed is fixed free. If another company changes their app, that isn’t my build: I quote the fix first, or a care plan covers it.',
   covered: [
     'Wording, messages and email or text templates',
     'Timings, reminders, steps and who gets notified',

@@ -55,7 +55,7 @@ export function ScopeSheet() {
           <p>{sheet.offer.delivery}</p>
           <h2>Changes</h2>
           <p>{sheet.offer.changes}</p>
-          {sheet.offer.guarantee ? <><h2>Guarantee</h2><p>{sheet.offer.guarantee}</p></> : null}
+          {sheet.offer.guarantee ? <><h2>Promise</h2><p>{sheet.offer.guarantee}</p></> : null}
         </div>
       </div>
 

@@ -13,7 +13,7 @@ Post:
 ```
 You can't answer the phone when you're up a ladder.
 
-So the caller rings the next business on the list.
+If nobody picks up, they ring the next number on the list.
 
 A text can go out the moment you miss the call.
 It carries your booking or quote link.
@@ -100,7 +100,8 @@ A Business System starts higher and covers three jobs.
 Custom Software starts higher again.
 
 The plan and scope sheet are free.
-You pay once you've seen it working.
+No working, no invoice. You see it working on your own phone before you pay anything.
+If I can’t get it working the way we agreed, you don’t pay.
 Care is optional.
 
 Want the free plan?
