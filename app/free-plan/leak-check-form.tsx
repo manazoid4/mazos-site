@@ -31,7 +31,8 @@ const FIELD_MESSAGES = {
   emailFormat: 'That email looks incomplete. It should look like name@example.co.uk.',
 } as const;
 
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// The browser's own type=email rule (HTML spec), plus a dot in the domain so "sam@gmail" is caught too.
+const EMAIL_PATTERN = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
 function fieldMessage(field: FieldName, value: string): string {
   const text = value.trim();
