@@ -29,7 +29,7 @@ export default function PricesPage() {
         <h1 id="prices-title">Every price, in one place.</h1>
         <p className="s-lede">Fixed prices, agreed before any work starts. No VAT added. Not sure what you need? The {FREE_STEP.short} tells you, within {CHECK_REPLY_TIME}.</p>
         <div className="s-actions">
-          <a className="button button-signal s-button-lg" href="/free-plan">Get my free plan</a>
+          <a className="button button-signal s-button-lg" href="/free-plan?src=prices-hero#leak-check-form">Get my free plan</a>
           <a className="text-link" href="/what-we-do#systems">See how it works <span aria-hidden="true">→</span></a>
         </div>
       </section>
@@ -39,7 +39,7 @@ export default function PricesPage() {
         <h2 id="prices-list-title" className="s-visually-hidden">Packages, add-ons and terms</h2>
         <PriceList checkHref="/free-plan" />
         <div className="s-actions">
-          <a className="button button-signal" href="/free-plan">Get my free plan</a>
+          <a className="button button-signal" href="/free-plan?src=prices#leak-check-form">Get my free plan</a>
         </div>
       </section>
       <SiteFooter />

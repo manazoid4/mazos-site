@@ -8,6 +8,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Breadcrumbs } from '../../breadcrumbs';
 import { SiteFooter, SiteHeader } from '../../site-chrome';
+import { MAIN_CTA } from '../../site';
 import { NICHE_GUIDES, getNicheGuide } from '../niches';
 import { KitIcon, NICHE_ICONS } from '../../brand-kit/kit-icon';
 import { CUSTOMER_TYPES, getCustomerType } from '../../customer-types';
@@ -50,7 +51,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
   if (type) return <TypePage type={type} />;
   const guide = getNicheGuide(niche);
   if (!guide) notFound();
-  const checkHref = `/free-plan?src=for-${guide.id}&trade=${guide.id}`;
+  const checkHref = `/free-plan?src=for-${guide.id}&trade=${guide.id}#leak-check-form`;
   const parent = CUSTOMER_TYPES.find((item) => item.niches.includes(guide.id));
 
   return (
@@ -64,7 +65,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <h1 id="niche-title">{guide.title}.</h1>
         <p>{guide.lede}</p>
         <div className="mw-actions">
-          <a className="button button-signal" href={checkHref}>Get my free plan</a>
+          <a className="button button-signal" href={checkHref}>{MAIN_CTA}</a>
         </div>
         <p className="mw-hero-note">{`Free plan, no call needed. Most start with one task at ${OFFERS[0].price}. Manazir plans and builds it himself.`}</p>
       </section>
@@ -124,7 +125,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
           <p>Tell me the job. I&apos;ll send a plan and a fixed price.</p>
         </div>
         <div className="mw-actions">
-          <a className="button button-signal" href={checkHref}>Get my free plan</a>
+          <a className="button button-signal" href={checkHref}>{MAIN_CTA}</a>
         </div>
       </section>
 

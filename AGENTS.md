@@ -25,6 +25,9 @@ Rules: branch + PR, never push to main. Never invent testimonials, clients or re
 
 **Playbooks:** `PLAYBOOKS.md` (repo root) links every playbook: site changes, offer and voice, design, forms, leads, Instagram, LinkedIn, coding briefs, weekly review. Read the one for your job.
 
+## Agent structure (Maz, 9 Oct 2026)
+For Mazworks, use one lead with cost-efficient delegated specialists, reserve Opus for major planning and judgement, read Unified Memory at startup, and save decisions and checkpoints after meaningful batches. Detail (roles, what the CLI supports, memory routine): private memory repo `topics/mazworks-agent-structure.md`.
+
 ## Handoffs (all agents, 2 Oct 2026)
 Start: read the private `manazoid4/unified-memory-database` → `handoffs/LATEST.md`, then this file. Finish: save research, plan and a copy-paste **build prompt** (or `result.md` with PR links and proof) in a dated `handoffs/YYYY-MM-DD-slug/` folder, update `handoffs/INDEX.md` and `LATEST.md`, push via PR, add one line to `docs/maz-works/SESSION-HANDOVER.md` (public, no names). Report to Maz in at most 5 short bullets. Old handoffs live in `docs/archive/`.
 
