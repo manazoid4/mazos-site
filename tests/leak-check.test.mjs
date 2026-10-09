@@ -77,7 +77,7 @@ test('homepage and shared navigation send the free first step to the dedicated p
   assert.match(home, /id="check"/);
   assert.match(home, /id="leak-check-form"/);
   assert.match(home, /href="#check">Get my free plan/);
-  assert.match(home, /href="\/free-plan">Free plan</);
+  assert.match(home, /href="\/free-plan\?src=nav#leak-check-form">Free plan</);
   // One name for the free first step everywhere (29 Sep): "free plan", never "leak check" in visible copy.
   assert.doesNotMatch(home.replace(/<[^>]+>/g, ' '), /leak check/i);
   assert.doesNotMatch(home, /\?service=leak-check#contact/);
