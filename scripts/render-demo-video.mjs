@@ -34,7 +34,7 @@ const CUES = [
   [9, 15, 'A text goes out on its own: sorry we missed you, book a time here.'],
   [15, 21, 'They pick a time that suits them.'],
   [21, 26, 'It lands in your diary. No chasing, no phone tag.'],
-  [26, 30, 'Missed call. Instant text. Booked. Get my free plan at mazworks.uk. This is an example, not a real customer.'],
+  [26, 30, 'Missed call. Instant text. Booked. Get my free demo at mazworks.uk. This is an example, not a real customer.'],
 ];
 const stamp = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}.000`;
 
