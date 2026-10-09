@@ -35,9 +35,9 @@ export const STEPS = [
 export const TRUST = [
   { icon: 'rules', title: 'Follows your rules', body: 'It only answers from the information you approve. Anything else becomes a message.' },
   { icon: 'urgent', title: 'Urgent calls reach you', body: 'You choose the words and situations that matter. Those calls are flagged and sent to you straight away.' },
-  { icon: 'honest', title: 'Sticks to what it knows', body: 'It answers only from the information you approve. If a question isn’t covered, it takes a message instead of guessing.' },
+  { icon: 'honest', title: 'Sticks to what it knows', body: 'It answers only from the information you approve. If a question isn’t covered, it takes a message instead of guessing. It can still mishear, so every call comes with a summary.' },
   { icon: 'clear', title: 'Clear with callers', body: 'It says it’s an automated receptionist for your business. Callers can leave a message for you instead.' },
-  { icon: 'record', title: 'Recording only with notice', body: 'Call recording is off unless you want it. If it’s on, callers are told at the start.' },
+  { icon: 'record', title: 'Recording off by default', body: 'Call recording is off unless you want it. If it’s on, callers are told before recording starts.' },
   { icon: 'control', title: 'You stay in control', body: 'Change the greeting, hours or answers by email. Switch it off by turning off call forwarding.' },
 ];
 
@@ -50,8 +50,8 @@ export const FAQS = [
   { q: 'Is it a real person?', a: 'No. It’s an automated receptionist with a natural voice, and it says so. Callers can leave a message for you instead. Like any automated system it can occasionally mishear, which is why every call comes with a summary and I review calls each month.' },
   { q: 'What happens if someone needs urgent help?', a: `You set what counts as urgent, like a leak or a car stuck on a driveway, and it texts or rings you. ${EMERGENCY_NOTE}` },
   { q: 'Can I change the greeting or opening hours?', a: 'Yes. Email me and I update it, usually within 2 working days. Holidays and closures are included in the monthly price.' },
-  { q: 'Are calls recorded?', a: 'Only if you want them to be. If recording is on, callers are told at the start of the call. Otherwise you get the written summary only.' },
-  { q: 'How is my customers’ information handled?', a: 'Call details go to you by email and are used only to run your service. To answer and summarise calls, the audio passes through a telephone provider and a speech-processing provider. I never sell caller details or share them for marketing. Transcripts are kept for 30 days by default, then deleted, and you can ask for them to be deleted sooner. Details are in the privacy notice.' },
+  { q: 'Are calls recorded?', a: 'Only if you want them to be. Recording is off by default. If you turn it on, callers are told before recording starts, and recordings are deleted after 30 days like transcripts. Otherwise you get the written summary only.' },
+  { q: 'How is my customers’ information handled?', a: 'Call details go to you by email and are used only to run your service. To answer and summarise calls, the audio passes through a telephone provider and a speech-processing provider. I never sell caller details or share them for marketing. Transcripts are kept for 30 days by default, then deleted, and you can ask for them to be deleted sooner. You get a written data processing agreement that names every provider involved. Details are in the privacy notice.' },
   { q: 'Will it work with my phone number?', a: 'Yes, if your line can forward calls, which most UK mobiles, landlines and office phone systems can. Tell me your provider and I’ll send the exact steps before you pay. If it won’t work with your line, you pay nothing.' },
   { q: 'What if I get lots of calls?', a: `${AFTER_HOURS.covers} If you regularly need more, I tell you and we agree a price first. You are never billed for extra minutes by surprise.` },
   { q: 'Can it work only after hours?', a: 'Yes, that’s what this is. It answers only during the hours you mark as closed, plus any holidays you add.' },

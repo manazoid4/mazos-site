@@ -174,7 +174,7 @@ export function VoiceDesk() {
       </div>
 
       <ol className="vd-log" ref={log} aria-live="polite" aria-label="Call so far">
-        {lines.length === 0 ? <li className="vd-empty">Press “Start the call”, then talk as if you were a customer ringing after hours. Try asking about opening hours, a price, or say it’s urgent.</li> : null}
+        {lines.length === 0 ? <li className="vd-empty">Press “Start the call”, then talk as if you were a customer ringing after hours. Try asking about opening hours, a price, or say it’s urgent. Please don’t give real personal details: it’s a demo.</li> : null}
         {lines.map((line, index) => (
           <li key={index} className={`vd-line vd-${line.who}`}><span className="vd-who">{line.who === 'desk' ? 'Receptionist' : 'You'}</span><span className="vd-said">{line.text}</span></li>
         ))}

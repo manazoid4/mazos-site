@@ -42,7 +42,8 @@ const SECTIONS: { title: string; body: string[] }[] = [
     body: [
       'If you ring a business that uses my After-Hours Receptionist, the call is answered for that business. The business decides what is asked and is responsible for your details; I run the service for them.',
       'What is kept: your name and number, what you asked for, and a written summary sent to the business by email. Calls are recorded only if the business turns recording on, and then you are told at the start of the call.',
-      'Call audio is handled by a telephone provider and a speech-processing provider chosen for the service. Transcripts are kept for 30 days by default, then deleted, unless the business asks for a different period.',
+      'Call audio is handled by a telephone provider and a speech-processing provider chosen for the service. Each business gets a written data processing agreement that names them, where they process data and the safeguards for any transfer outside the UK. Transcripts, and recordings if turned on, are kept for 30 days by default, then deleted, unless the business asks for a different period.',
+      'The talk-to-it demo on this site runs in your browser. Nothing you say is sent to or stored by Maz Works, but your browser may use its own speech service (in Chrome, Google’s) to turn your voice into text.',
     ],
   },
   {
