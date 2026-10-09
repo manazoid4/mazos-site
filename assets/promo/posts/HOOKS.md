@@ -35,7 +35,7 @@ Stop losing jobs to voicemail.
 An empty chair is an hour you can't sell twice.
 ```
 ```
-Fewer no-shows. Zero chasing.
+Reminders go out on their own. You stop chasing.
 ```
 ```
 The reminder goes out. You don't lift a finger.
