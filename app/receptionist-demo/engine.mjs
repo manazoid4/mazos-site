@@ -30,12 +30,23 @@ export const DEFAULT_CONFIG = {
 
 const WORD_DIGITS = { zero: '0', oh: '0', o: '0', nought: '0', one: '1', two: '2', three: '3', four: '4', five: '5', six: '6', seven: '7', eight: '8', nine: '9' };
 
-/** Turns "oh seven seven double oh 900123" into "07700900123". */
-export function digitsFrom(text) {
-  const words = String(text).toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean);
+/**
+ * Turns "oh seven seven double oh 900123" into "07700900123". "plus forty four" gives 44.
+ * With `loose`, a heard "to", "too" or "for" between two digit words counts as 2 or 4.
+ * @param {string} text
+ * @param {boolean} [loose]
+ */
+export function digitsFrom(text, loose = false) {
+  let said = String(text).toLowerCase();
+  // "oh yeah, oh seven…": the first "oh" is a filler, not a zero.
+  if (loose) said = said.replace(/\b(?:oh|o)[,.]? (?=(?:yeah|yes|sorry|um+|er+m?|right|ok|okay|well|so|hmm|sure|no|hi|hello)\b)/g, ' ');
+  const words = said.replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean);
+  const digitWord = (word) => word !== undefined && (/^\d+$/.test(word) || word in WORD_DIGITS || word === 'double' || word === 'treble' || word === 'triple');
   let out = '';
   for (let i = 0; i < words.length; i += 1) {
     const word = words[i];
+    if (word === 'forty' && words[i + 1] === 'four' && (!out || words[i - 1] === 'plus')) { out += '44'; i += 1; continue; }
+    if (loose && (word === 'to' || word === 'too' || word === 'for') && digitWord(words[i - 1]) && digitWord(words[i + 1])) { out += word === 'for' ? '4' : '2'; continue; }
     if ((word === 'double' || word === 'treble' || word === 'triple') && i + 1 < words.length) {
       const next = WORD_DIGITS[words[i + 1]] ?? (/^\d$/.test(words[i + 1]) ? words[i + 1] : '');
       if (next) { out += next.repeat(word === 'double' ? 2 : 3); i += 1; continue; }
