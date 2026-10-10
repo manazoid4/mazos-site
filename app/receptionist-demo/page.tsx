@@ -14,6 +14,7 @@ import './voice-desk.css';
 export const metadata: Metadata = {
   title: { absolute: 'Talk to an after-hours receptionist demo | Maz Works' },
   description: 'Have a pretend after-hours call out loud, in your browser, and see the summary the owner would get.',
+  alternates: { canonical: '/receptionist-demo' },
   robots: { index: false, follow: true },
 };
 

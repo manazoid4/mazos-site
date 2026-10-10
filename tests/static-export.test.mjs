@@ -383,9 +383,14 @@ test('runtime and static-host hardening stay explicit', async () => {
   assert.equal(packageJson.scripts.start, 'node scripts/serve-static.mjs');
 
   const headerNames = new Set(vercelConfig.headers[0].headers.map((header) => header.key));
+  // Permissions-Policy: microphone blocked everywhere, except the talk-to-it demo, which needs it for this site only.
+  const policies = vercelConfig.headers.flatMap((rule) => rule.headers.filter((header) => header.key === 'Permissions-Policy').map((header) => [rule.source, header.value]));
+  assert.deepEqual(policies, [
+    ['/((?!receptionist-demo).*)', 'camera=(), geolocation=(), microphone=()'],
+    ['/receptionist-demo(.*)', 'camera=(), geolocation=(), microphone=(self)'],
+  ]);
   for (const name of [
     'Content-Security-Policy',
-    'Permissions-Policy',
     'Referrer-Policy',
     'X-Content-Type-Options',
     'X-Frame-Options',

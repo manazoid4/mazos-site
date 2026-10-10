@@ -58,7 +58,7 @@
 @keyframes vd-in { from { opacity: 0; transform: translateY(8px); } }
 
 /* Talk column: transcript, suggestions, controls */
-.vd-talk { grid-area: talk; display: grid; gap: 14px; align-content: start; }
+.vd-talk { grid-area: talk; display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; align-content: start; min-width: 0; }
 .vd-log { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; min-height: 160px; max-height: 380px; overflow-y: auto; align-content: start; }
 .vd-log:has(> .vd-empty) { min-height: 0; }
 .vd-empty { color: var(--mute); padding: 4px 0; }
@@ -81,7 +81,7 @@
 .vd-mic { flex: 0 0 56px; height: 56px; border-radius: 50%; border: 2px solid var(--glow); background: var(--glow); color: var(--ink); display: grid; place-items: center; cursor: pointer; }
 .vd-mic.is-on { background: transparent; color: var(--glow); }
 .vd-type { flex: 1; min-width: 0; display: flex; gap: 8px; }
-.vd-type input { flex: 1; min-width: 0; min-height: 48px; border: 2px solid #f3f1ec; border-radius: 10px; background: transparent; color: #f3f1ec; font: inherit; padding: 8px 12px; }
+.vd-type input { flex: 1; width: 100%; min-width: 0; min-height: 48px; border: 2px solid #f3f1ec; border-radius: 10px; background: transparent; color: #f3f1ec; font: inherit; padding: 8px 12px; }
 .vd-type .button { background: #f3f1ec; color: var(--ink); }
 .vd-voice, .vd-link { min-height: 44px; background: none; border: 0; color: var(--mute); text-decoration: underline; font: inherit; font-size: .85rem; cursor: pointer; padding: 4px 0; }
 .vd-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -129,3 +129,6 @@
 .vm input, .vm textarea { font: inherit; font-weight: 400; border: 2px solid var(--ink); padding: 10px 12px; min-height: 48px; background: var(--paper); }
 .vm-out { border-top: 1px solid var(--soft-line); padding-top: 14px; display: grid; gap: 10px; }
 .vm-link { font-family: var(--mono); font-size: .78rem; word-break: break-all; background: var(--paper); padding: 10px; border: 1px solid var(--soft-line); }
+
+/* Long unbroken words (typed or from a link) wrap instead of widening the page. */
+.vd-truth, .vd-name, .vd-closed, .vd-said, .vd-summary dd, .vd-summary strong, .vd-chip { overflow-wrap: anywhere; }
