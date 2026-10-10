@@ -1,3 +1,4 @@
+import './home-visuals.css';
 import { KitIcon } from './brand-kit/kit-icon';
 
 /** One row of the "Today / Set up" graphic: the owner's pain, the menu job that fixes it, what happens instead. */

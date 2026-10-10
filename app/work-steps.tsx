@@ -1,3 +1,4 @@
+import './home-visuals.css';
 import { CARE_PLAN } from './offers';
 import { CHECK_REPLY_TIME } from './site';
 
