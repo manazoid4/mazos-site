@@ -5,6 +5,24 @@ import { OFFERS, getMenuJob } from './offers';
 
 const TEXT_BACK = { name: getMenuJob('missed-call').name, price: `${OFFERS[0].name} ${OFFERS[0].price}` };
 
+/**
+ * Optional wording for a trade page. Every field falls back to the homepage's
+ * missed-call example, so the homepage output is unchanged.
+ */
+export type HeroDemoCopy = {
+  /** Small line under "Missed call". */
+  caller?: string;
+  /** The text that goes out, ending just before the link. */
+  text?: string;
+  /** The link shown at the end of the text. */
+  link?: string;
+  /** Title and detail of the booking row. */
+  booked?: string;
+  bookedDetail?: string;
+  /** Caption under the phone (the example is always labelled as not a real customer). */
+  caption?: string;
+};
+
 /** 0 ready to call · 1 missed call · 2 text arrived · 3 booked */
 type Step = 0 | 1 | 2 | 3;
 const ANNOUNCE = ['Tap Call to ring the business.', 'Missed call. The business is with a customer.', 'A text arrived with a booking link. Tap Book.', 'Booked for Tuesday at 10:30, added to the diary.'];
@@ -20,7 +38,8 @@ const ANNOUNCE = ['Tap Call to ring the business.', 'Missed call. The business i
  * Every row keeps its space from the first paint, so nothing shifts.
  * Labelled as an example: not a real customer.
  */
-export function HeroDemo() {
+export function HeroDemo({ copy = {} }: { copy?: HeroDemoCopy }) {
+  const { caller = 'New caller · 2:14pm', text = 'Sorry we missed you! We’re with a customer. Book here and pick a time that suits: ', link = 'yourbusiness.co.uk/book', booked = 'New booking', bookedDetail = 'Tuesday 10:30 · added to your diary', caption = `${TEXT_BACK.name}, ${TEXT_BACK.price}. Not a real customer.` } = copy;
   const [live, setLive] = useState(false);
   const [step, setStep] = useState<Step>(3);
   const [played, setPlayed] = useState(false);
@@ -72,23 +91,23 @@ export function HeroDemo() {
         <ol className="s-demo-thread" aria-hidden={live ? undefined : true}>
           <li className={`s-demo-row s-demo-missed${on(1)}`}>
             <span className="s-demo-icon">✕</span>
-            <span><strong>Missed call</strong><small>New caller · 2:14pm</small></span>
+            <span><strong>Missed call</strong><small>{caller}</small></span>
           </li>
           <li className={`s-demo-row s-demo-text${on(2)}`}>
             <span className="s-demo-label">Sent automatically</span>
             {live ? null : <span className="s-demo-dots"><i /><i /><i /></span>}
-            <span className="s-demo-bubble">Sorry we missed you! We’re with a customer. Book here and pick a time that suits: {live && step === 2 ? <button type="button" className="s-demo-book" onClick={() => setStep(3)}>Book</button> : <u>yourbusiness.co.uk/book</u>}</span>
+            <span className="s-demo-bubble">{text}{live && step === 2 ? <button type="button" className="s-demo-book" onClick={() => setStep(3)}>Book</button> : <u>{link}</u>}</span>
             <small className="s-demo-delivered">Delivered ✓</small>
           </li>
           <li className={`s-demo-row s-demo-booked${on(3)}`}>
             <span className="s-demo-icon s-demo-tick">✓</span>
-            <span><strong>New booking</strong><small>Tuesday 10:30 · added to your diary</small></span>
+            <span><strong>{booked}</strong><small>{bookedDetail}</small></span>
           </li>
         </ol>
         {live ? <p className="s-visually-hidden" aria-live="polite">{played ? ANNOUNCE[step] : ''}</p> : null}
       </div>
       <figcaption id="demo-caption" className="s-small">
-        <span className="s-demo-tag">Example</span> {`${TEXT_BACK.name}, ${TEXT_BACK.price}. Not a real customer.`}
+        <span className="s-demo-tag">Example</span> {caption}
       </figcaption>
     </figure>
   );

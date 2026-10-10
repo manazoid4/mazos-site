@@ -1,4 +1,4 @@
-import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, LINKEDIN_URL, MAIN_CTA } from './site';
+import { BOOKING_URL, CONTACT_EMAIL, LINKEDIN_URL, MAIN_CTA } from './site';
 import { WalkthroughVideo } from './walkthrough-video';
 import { SiteFooter, SiteHeader } from './site-chrome';
 import { LeakCheckForm } from './free-plan/leak-check-form';
@@ -9,19 +9,16 @@ import './home-visuals.css';
 import { ScrollReveal } from './scroll-reveal';
 import { CUSTOMER_TYPES } from './customer-types';
 import { KitIcon } from './brand-kit/kit-icon';
-import { AFTER_HOURS, CARE_PLAN, FREE_STEP, OFFERS, getMenuJob } from './offers';
+import { AFTER_HOURS, FREE_STEP, OFFERS, getMenuJob } from './offers';
+import { BeforeAfter } from './before-after';
+import { WorkSteps } from './work-steps';
+import { ManazirLine } from './manazir-line';
 const STARTER = OFFERS[0];
 /** Before / after: one row per Starter job (ids are menu jobs in offers.ts). */
 const CHANGES = [
   { job: 'missed-call', icon: 'phone', before: 'Missed calls ring someone else.', after: 'The caller gets a text with your booking link.' },
   { job: 'reminders', icon: 'calendar', before: 'You send reminders by hand.', after: 'Reminders go out on their own.' },
   { job: 'reviews', icon: 'star', before: 'Reviews never get asked for.', after: 'A review request follows every job.' },
-] as const;
-const STEPS = [
-  { title: 'Free demo', body: `A working demo with your business name, usually within ${CHECK_REPLY_TIME}.` },
-  { title: 'Fixed price', body: 'In a written scope sheet.' },
-  { title: 'Built, then shown', body: 'Working before you pay.' },
-  { title: 'Care is optional', body: `Only if you want it, from ${CARE_PLAN.price}.` },
 ] as const;
 const PROOF = [
   {
@@ -50,7 +47,7 @@ export default function Page() {
     <h1 id="intro-title">Every enquiry answered and every booking confirmed, <em>without you chasing</em>.</h1>
     <p className="s-lede">I set up the replies, reminders and follow-ups you do by hand, on apps you already use. Start with one task for {STARTER.price}, after a free demo.</p>
     <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">{MAIN_CTA}</a><a className="text-link" href="#demo-video">Watch it work (30s) <span aria-hidden="true">→</span></a></div>
-    <p className="s-face-cta"><img src="/maz.webp" alt="" width={56} height={56} /><span><strong>Manazir Hussain</strong>, Computer Science graduate (Swansea University). I plan and build every job myself.</span></p>
+   <ManazirLine />
    </div><HeroDemo />
   </section>
   <section className="s-section" id="build" aria-labelledby="build-title">
@@ -65,11 +62,7 @@ export default function Page() {
   <section className="s-section" id="how" data-reveal aria-labelledby="how-title">
    <p className="eyebrow">See it working</p><h2 id="how-title">One missed call, start to finish.</h2><WalkthroughVideo />
    <h3 className="hv-h3" id="changes-title">What changes for you</h3>
-   <div className="hv-ba">
-    <div className="hv-col hv-before"><h3>Today</h3><ul>{CHANGES.map(c => <li key={c.job}><span className="hv-icon" aria-hidden="true"><KitIcon name={c.icon} size={22} /></span>{c.before}</li>)}</ul></div>
-    <span className="hv-arrow" aria-hidden="true">↓</span>
-    <div className="hv-col hv-after"><h3>Set up</h3><ul>{CHANGES.map(c => <li key={c.job}><span className="hv-icon" aria-hidden="true"><KitIcon name={c.icon} size={22} /></span><span><strong>{getMenuJob(c.job).name}</strong>{c.after}</span></li>)}</ul></div>
-   </div>
+   <BeforeAfter rows={CHANGES.map(c => ({ key: c.job, icon: c.icon, before: c.before, name: getMenuJob(c.job).name, after: c.after }))} />
    <p className="s-small">Example of what changes, not a client result.</p>
   </section>
   <section className="s-section s-check" id="check" aria-labelledby="check-title">
@@ -80,8 +73,7 @@ export default function Page() {
     </ul>
     <p className="s-small"><CallLink href={BOOKING_URL} className="text-link" placement="free-plan">Prefer to talk? Book a 15-minute call →</CallLink></p>
    </div><LeakCheckForm />
-   <div className="hv-steps-wrap"><h3 className="hv-h3" id="steps-title">How working together goes</h3>
-    <ol className="hv-steps" aria-labelledby="steps-title">{STEPS.map((step, i) => <li key={step.title}><span className="hv-n" aria-hidden="true">{i + 1}</span><strong>{step.title}</strong><span>{step.body}</span></li>)}</ol></div>
+   <WorkSteps />
   </section>
       <section className="s-section s-about" id="about" aria-labelledby="about-title">
         <div className="s-about-head">
