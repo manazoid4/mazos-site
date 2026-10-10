@@ -15,7 +15,8 @@ export const BEST_FOR = [
   { label: 'Garages', href: '/for/garages' },
   { label: 'Roofers', href: '/for/roofers' },
   { label: 'Builders', href: '/for/builders' },
-  { label: 'Plumbers and electricians', href: '/for/trades' },
+  { label: 'Plumbers', href: '/for/heating-and-plumbing' },
+  { label: 'Electricians', href: '/for/electricians' },
   { label: 'Small service businesses', href: '/for' },
 ];
 
