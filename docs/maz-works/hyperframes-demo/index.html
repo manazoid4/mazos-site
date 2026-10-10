@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0b1120; }
+      #root { width: 100%; height: 100%; position: relative; font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #f8fafc; }
+      .step { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; opacity: 0; }
+      .step h1 { font-size: 96px; font-weight: 700; letter-spacing: -0.03em; }
+      .step p { font-size: 40px; color: #94a3b8; margin-top: 24px; }
+      .tag { display: inline-block; font-size: 32px; padding: 12px 28px; border-radius: 999px; background: #22c55e; color: #052e16; margin-bottom: 32px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+      <div id="s1" class="step clip" data-start="0" data-duration="2" data-track-index="0">
+        <h1>New enquiry, 9:47pm</h1><p>You are off the clock.</p>
+      </div>
+      <div id="s2" class="step clip" data-start="2" data-duration="2" data-track-index="0">
+        <h1>Instant reply sent</h1><p>With your booking link.</p>
+      </div>
+      <div id="s3" class="step clip" data-start="4" data-duration="2" data-track-index="0">
+        <span class="tag">Booked</span><h1>Maz Works</h1><p>Systems that win customers.</p>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      ["#s1", "#s2", "#s3"].forEach((id, i) => {
+        tl.fromTo(id, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5 }, i * 2);
+      });
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
