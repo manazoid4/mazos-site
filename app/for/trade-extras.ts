@@ -1,0 +1,109 @@
+/**
+ * Per-page extras for the /for pages: what changes (three before/after rows),
+ * the wording shown on the hero phone, and which receptionist preset to demo.
+ * These are examples of what changes, never client results or statistics.
+ * Prices are never typed here (they come from app/offers.ts).
+ */
+import type { HeroDemoCopy } from '../hero-demo';
+import type { ChangeRow } from '../before-after';
+import { getMenuJob } from '../offers';
+
+const row = (job: string, icon: string, before: string, after: string): ChangeRow => ({ key: job, icon, before, name: getMenuJob(job).name, after });
+
+export type TradeExtras = {
+  changes: ChangeRow[];
+  demo: HeroDemoCopy;
+  /** Receptionist demo: preset id in app/receptionist-demo/presets.mjs, the name it answers as, and "Talk to it as ___". */
+  receptionist?: { preset: string; business: string; as: string };
+};
+
+const BOOKED = 'Tuesday 10:30 · added to your diary';
+
+export const TRADE_EXTRAS: Record<string, TradeExtras> = {
+  'heating-and-plumbing': {
+    changes: [
+      row('missed-call', 'phone', 'You can’t answer with your hands in a boiler, so the caller rings the next engineer.', 'The caller gets a text with a link to book or ask for a quote.'),
+      row('quote-follow-up', 'mail', 'Quotes you sent last week have gone quiet.', 'A friendly reminder goes out after 3 and 7 days, and stops when they reply.'),
+      row('reviews', 'star', 'Happy customers never get asked for a review.', 'A review request follows every finished job.'),
+    ],
+    demo: { text: 'Sorry we missed you, I’m on a job. Book a visit or ask for a quote here: ', link: 'yourplumbing.co.uk/book', booked: 'Boiler visit booked', bookedDetail: BOOKED },
+    receptionist: { preset: 'plumbing', business: 'Your plumbing firm', as: 'a plumber' },
+  },
+  'salons-and-beauty': {
+    changes: [
+      row('online-booking', 'chat', 'Bookings arrive by DM, phone and late-night forms.', 'Every booking lands in one place with an instant confirmation.'),
+      row('reminders', 'calendar', 'Clients forget, and the chair sits empty.', 'A reminder goes the day before; clients confirm or move by text.'),
+      row('rebooking', 'repeat', 'Regulars drift away and nobody nudges them back.', 'Past clients get a nudge when they’re due back.'),
+    ],
+    demo: { text: 'Sorry we missed you, we’re with a client. Book your appointment here: ', link: 'yoursalon.co.uk/book', booked: 'Cut and colour booked', bookedDetail: BOOKED },
+    receptionist: { preset: 'salon', business: 'Your salon', as: 'a salon' },
+  },
+  'dog-groomers': {
+    changes: [
+      row('missed-call', 'phone', 'You can’t answer mid-groom, so the owner rings the next groomer.', 'The owner gets a text with your booking link.'),
+      row('online-booking', 'paw', 'Bookings wait until you can stop and reply.', 'Owners book a slot themselves, day or night.'),
+      row('reminders', 'calendar', 'A forgotten appointment leaves a gap in your day.', 'A reminder goes out the day before.'),
+    ],
+    demo: { text: 'Sorry we missed you, we’re mid-groom. Book a slot here: ', link: 'yourgrooming.co.uk/book', booked: 'Groom booked', bookedDetail: BOOKED },
+  },
+  garages: {
+    changes: [
+      row('missed-call', 'phone', 'Drivers ring once, and if nobody answers they ring the next garage.', 'The caller gets a text with a link to book an MOT or ask for a quote.'),
+      row('one-list', 'mail', 'Quote and MOT requests arrive by phone, email and web form.', 'Each one is logged in a single list with an instant reply.'),
+      row('quote-follow-up', 'chat', 'Quotes go quiet once the car is on the ramp.', 'A friendly reminder goes out if the customer goes quiet.'),
+    ],
+    demo: { text: 'Sorry we missed you, we’re under a car. Book your MOT here: ', link: 'yourgarage.co.uk/mot', booked: 'MOT booked', bookedDetail: 'Thursday 9:00 · added to your diary' },
+    receptionist: { preset: 'garage', business: 'Your garage', as: 'a garage' },
+  },
+  'cafes-and-food': {
+    changes: [
+      row('one-list', 'mail', 'Orders, bookings and messages land in different places.', 'One list, with an automatic reply.'),
+      row('online-booking', 'calendar', 'Table bookings come by phone while you’re serving.', 'Customers book a table themselves, day or night.'),
+      row('reviews', 'star', 'Happy regulars never get asked for a review.', 'Customers are asked for a Google review after each visit.'),
+    ],
+    demo: { text: 'Sorry we missed you, we’re serving. Book a table here: ', link: 'yourcafe.co.uk/book', booked: 'Table booked', bookedDetail: 'Saturday 12:30 · added to your diary' },
+  },
+  'clinics-and-therapists': {
+    changes: [
+      row('one-list', 'mail', 'New enquiries wait while you’re with a patient.', 'Each one is acknowledged straight away with the next step.'),
+      row('online-booking', 'calendar', 'Booking means ringing and hoping someone answers.', 'Clients book themselves, day or night.'),
+      row('reminders', 'chat', 'A missed appointment leaves a gap you can’t refill.', 'A reminder goes out the day before; clients confirm or move by text.'),
+    ],
+    demo: { text: 'Sorry we missed your call, we’re with a patient. Book an appointment here: ', link: 'yourclinic.co.uk/book', booked: 'Appointment booked', bookedDetail: BOOKED },
+    receptionist: { preset: 'clinic', business: 'Your clinic', as: 'a clinic' },
+  },
+  architects: {
+    changes: [
+      row('one-list', 'mail', 'Project enquiries start from a blank email.', 'Each enquiry is captured with the key details and acknowledged automatically.'),
+      row('quote-follow-up', 'chat', 'Proposals go quiet after you send them.', 'A polite follow-up goes out, in your words.'),
+      row('milestones', 'pin', 'Clients ask where their project is up to.', 'Clients get an update at each stage, automatically.'),
+    ],
+    demo: { text: 'Thanks for calling, we’re in a meeting. Tell us about your project here: ', link: 'yourpractice.co.uk/enquiry', booked: 'Project enquiry', bookedDetail: 'Brief received · added to your list' },
+  },
+  // Customer-type pages derive their before/after rows from their own pains; only the phone and receptionist are set here.
+  trades: {
+    changes: [],
+    demo: { text: 'Sorry we missed you, I’m on a job. Get a quote or book here: ', link: 'yourbusiness.co.uk/quote', booked: 'Quote request in', bookedDetail: BOOKED },
+    receptionist: { preset: 'builder', business: 'Your trade business', as: 'a tradesperson' },
+  },
+  appointments: {
+    changes: [],
+    demo: { text: 'Sorry we missed you, we’re with a client. Book your appointment here: ', link: 'yourbusiness.co.uk/book', booked: 'Appointment booked', bookedDetail: BOOKED },
+    receptionist: { preset: 'salon', business: 'Your salon', as: 'a salon' },
+  },
+  creators: {
+    changes: [],
+    demo: { text: 'Thanks for calling! Book a call or grab the guide here: ', link: 'yourname.co.uk/book', booked: 'Call booked', bookedDetail: BOOKED },
+  },
+  offices: {
+    changes: [],
+    demo: { text: 'Sorry we missed you, we’re with a client. Tell us what you need here: ', link: 'yourfirm.co.uk/enquiry', booked: 'New enquiry', bookedDetail: 'Added to your one list · reply sent' },
+  },
+};
+
+/** Icons for before/after rows derived from menu jobs (kit-icon names). */
+export const JOB_ICONS: Record<string, string> = {
+  'missed-call': 'phone', 'online-booking': 'calendar', reminders: 'calendar', rebooking: 'repeat', waitlist: 'pin', reviews: 'star',
+  'quote-follow-up': 'mail', 'payment-reminders': 'cart', 'job-updates': 'chat', 'dm-replies': 'chat', 'keyword-dm': 'chat',
+  'email-list': 'mail', 'one-list': 'mail', onboarding: 'layers', milestones: 'pin', 'weekly-report': 'layers',
+};
