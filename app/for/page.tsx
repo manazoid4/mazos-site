@@ -1,3 +1,4 @@
+import { MAIN_CTA } from '../site';
 import { fitDescription } from '../seo';
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '../breadcrumbs';
@@ -7,6 +8,7 @@ import { NICHE_GUIDES } from './niches';
 import { OFFERS } from '../offers';
 import { CUSTOMER_TYPES } from '../customer-types';
 import { KitIcon, NICHE_ICONS } from '../brand-kit/kit-icon';
+import './trade-pages.css';
 
 export const metadata: Metadata = {
   title: 'Who it’s for: pick your business',
@@ -15,44 +17,51 @@ export const metadata: Metadata = {
   openGraph: { title: 'Who it’s for — Maz Works', url: '/for', images: [OG_IMAGE] },
 };
 
-export default function ForHubPage() {
+/** One tile: icon chip, name, one line, "See what I’d set up →". */
+function Tile({ href, icon, name, line, tag }: { href: string; icon: string; name: string; line: string; tag?: string }) {
   return (
-    <main>
+    <li>
+      <a className="tp-tile" href={href}>
+        <span className="tp-card-icon" aria-hidden="true"><KitIcon name={icon} /></span>
+        {tag ? <small className="tp-tile-tag">{tag}</small> : null}
+        <strong>{name}</strong>
+        <span>{line}</span>
+        <em>See what I’d set up <span aria-hidden="true">→</span></em>
+      </a>
+    </li>
+  );
+}
+
+export default function ForHubPage() {
+  // One even grid of every trade, each labelled with its kind of business (grouped rows left half-empty lines).
+  const typeOf = (id: string) => CUSTOMER_TYPES.find((type) => type.niches.includes(id))?.shortName;
+  return (
+    <main className="s-home">
       <SiteHeader />
-      <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="for-title">
-        <Breadcrumbs items={[{ label: 'Who it’s for' }]} />
+      <section className="s-hero s-hero-short tp-hero tp-hero-hub" id="main-content" tabIndex={-1} aria-labelledby="for-title">
+        <div className="tp-crumbs"><Breadcrumbs items={[{ label: 'Who it’s for' }]} /></div>
         <p className="eyebrow">Who it’s for</p>
         <h1 id="for-title">What do you run?</h1>
-        <p>Pick the one that sounds like you. Each page shows your problems, the step that fixes each one, and the price.</p>
+        <p className="s-lede">Pick the one that sounds like you. Each page shows your problems, the step that fixes each one, and the price.</p>
       </section>
 
-      <ul className="mw-hub mw-hub-types" aria-label="Kinds of business">
-        {CUSTOMER_TYPES.map((type) => (
-          <li key={type.id}>
-            <a href={`/for/${type.id}`}>
-              <span className="mw-hub-icon"><KitIcon name={type.icon} /></span>
-              <span className="mw-hub-name">{type.name}</span>
-              <strong>{type.title}</strong>
-              <span className="mw-hub-examples">{type.examples}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <section className="s-section" aria-labelledby="for-types-title">
+        <p className="eyebrow">Pick yours</p>
+        <h2 id="for-types-title">Four kinds of business.</h2>
+        <ul className="tp-tiles tp-tiles-4" aria-label="Kinds of business">
+          {CUSTOMER_TYPES.map((type) => <Tile key={type.id} href={`/for/${type.id}`} icon={type.icon} name={type.name} line={type.examples} />)}
+        </ul>
+      </section>
 
-      <h2 className="for-sub">Or go straight to your trade</h2>
-      <ul className="mw-hub">
-        {NICHE_GUIDES.map((guide) => (
-          <li key={guide.id}>
-            <a href={`/for/${guide.id}`}>
-              <span className="mw-hub-icon"><KitIcon name={NICHE_ICONS[guide.id] ?? 'spark'} /></span>
-              <span className="mw-hub-name">{guide.shortName}</span>
-              <strong>{guide.title}</strong>
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      <a className="for-else" href="/free-plan?src=for-hub&trade=other#leak-check-form"><span className="mw-hub-icon"><KitIcon name="spark" /></span><span><strong>Something else?</strong> Every kind of business is welcome. Tell me what you do.</span></a>
+      <section className="s-section" aria-labelledby="for-trades-title">
+        <p className="eyebrow">Or by trade</p>
+        <h2 id="for-trades-title">Go straight to your trade.</h2>
+        <ul className="tp-tiles tp-tiles-4" aria-label="Trades">
+          {NICHE_GUIDES.map((guide) => <Tile key={guide.id} href={`/for/${guide.id}`} icon={NICHE_ICONS[guide.id] ?? 'spark'} name={guide.shortName} line={guide.title} tag={typeOf(guide.id)} />)}
+          <li><a className="tp-tile tp-tile-else" href="/free-plan?src=for-hub&trade=other#leak-check-form"><span className="tp-card-icon" aria-hidden="true"><KitIcon name="spark" /></span><strong>Something else?</strong><span>Every kind of business is welcome. Tell me what you do.</span><em>{MAIN_CTA} <span aria-hidden="true">→</span></em></a></li>
+        </ul>
+        
+      </section>
 
       <SiteFooter />
     </main>

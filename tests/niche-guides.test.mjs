@@ -19,9 +19,9 @@ test('each niche guide exports with prices, a priced second task and a tagged fr
     assert.match(html, /Free demo, no call needed\. Most start with one task at £149\./, `${id}: price and person on the first screen`);
     assert.doesNotMatch(html, /Another job/, `${id}: second task is named as an add-on`);
     assert.match(html, new RegExp(`/free-plan\\?src=for-${id}`), `${id}: tagged free check link`);
-    assert.match(html, /Starter Automation<!-- --> · <!-- -->£149/, `${id}: Starter shown`);
+    assert.match(html, /<b class="tp-price">£149<\/b><\/div><h3>Starter Automation<\/h3>/, `${id}: Starter shown as a price card`);
     // Offer v9: Starter is one job. Anything more on a guide is a separately priced add-on or a bigger package.
-    const starter = /<strong>Starter Automation<!-- --> · <!-- -->£149<\/strong><p class="mw-example-seen">([^<]*)/.exec(html)?.[1] || '';
+    const starter = /<h3>Starter Automation<\/h3><p>([^<]*)/.exec(html)?.[1] || '';
     assert.match(starter, /^One task set up to run itself/, `${id}: Starter must read as one task`);
     assert.doesNotMatch(starter, /\b(plus|reminders? go out|follow-up|review requests)\b/i, `${id}: Starter line bundles a second job`);
     assert.doesNotMatch(html, /quoted in your free plan/, `${id}: fixed-price add-ons must show their price`);

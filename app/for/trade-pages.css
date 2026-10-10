@@ -1,0 +1,78 @@
+/* /for pages: split hero, price cards, before/after, receptionist card, index tiles. Borrows the homepage look. */
+.tp-hero { padding-top: clamp(8px, 1.5vw, 20px); }
+.tp-hero > .tp-crumbs { grid-column: 1 / -1; }
+.tp-hero .mw-crumbs { padding-top: 0; }
+.tp-hero h1 { font-size: clamp(1.9rem, 4.6vw, 3.3rem); max-width: 22ch; }
+.tp-hero-hub { padding-bottom: clamp(28px, 4vw, 44px); }
+.tp-hero-hub h1 { font-size: clamp(2rem, 5vw, 3.4rem); }
+.tp-eyebrow-icon { display: inline-block; vertical-align: -3px; margin-right: 8px; line-height: 0; }
+.tp-eyebrow-icon svg { width: 16px; height: 16px; }
+.tp-examples { margin-top: 10px; color: var(--muted); font-size: .95rem; }
+.tp-hero .s-demo { margin-top: 4px; }
+.tp-h2 { margin: 10px 0 22px; }
+.tp-ba .hv-ba { max-width: none; }
+.tp-ba .hv-col li { padding-block: 12px; }
+.tp-related { margin-top: var(--s-gap); }
+.tp-related + .tp-related { margin-top: 16px; }
+
+/* Price cards */
+.tp-cards { list-style: none; display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); margin-top: 6px; }
+@media (min-width: 721px) { .tp-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; } }
+.tp-cards li { display: flex; }
+.tp-card { display: flex; flex-direction: column; gap: 8px; width: 100%; padding: 16px 16px 6px; border: 1px solid var(--ink); background: var(--surface); box-shadow: var(--card-shadow); }
+.tp-card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.tp-card-icon { flex: none; width: 44px; height: 44px; display: inline-grid; place-items: center; border: 2px solid var(--ink); border-radius: 12px; background: var(--clay); }
+.tp-card-icon .bk-icon { width: 26px; height: 26px; }
+.tp-cards li:nth-child(3n + 2) .tp-card-icon { background: var(--sage); }
+.tp-cards li:nth-child(3n) .tp-card-icon { background: var(--mist); }
+.tp-price { padding: 4px 12px; border: 2px solid var(--ink); border-radius: 999px; background: var(--pill, #ffd23f); font-size: .95rem; font-weight: 800; line-height: 1.3; white-space: nowrap; }
+.tp-card h3 { margin: 6px 0 0; font-size: 1.1rem; line-height: 1.25; }
+.tp-card p { color: var(--muted); font-size: .92rem; line-height: 1.45; }
+.tp-card-go { margin-top: auto; padding-top: 4px; min-height: 44px; display: inline-flex; align-items: center; font-weight: 750; font-size: .92rem; color: var(--ink); }
+.tp-cards + .s-small { margin-top: 18px; }
+
+/* Link chips (jobs, replaces glued inline links) */
+.tp-jobs { margin-top: 24px; }
+.tp-jobs h2, .tp-jobs h3 { margin: 10px 0 14px; }
+.tp-links { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 10px; }
+.tp-links a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 14px; border: 1px solid var(--ink); background: var(--surface); color: var(--ink); font-weight: 700; font-size: .92rem; text-decoration: none; }
+.tp-links a:hover { background: var(--signal); }
+.hv-steps-wrap { margin-top: 36px; }
+.s-section > .hv-steps-wrap { margin-top: 0; }
+.tp-cards ~ .hv-steps-wrap { margin-top: 40px; }
+
+/* After-hours receptionist: one dark card, like the homepage teaser */
+.tp-after { margin-top: 32px; display: grid; gap: 16px 28px; padding: 20px 22px; border: 3px solid var(--ink); background: #1b1d22; color: #f3f1ec; }
+.s-section > .tp-after { margin-top: 0; }
+.tp-after h2, .tp-after h3 { margin: 6px 0 8px; font-size: clamp(1.25rem, 2.4vw, 1.6rem); line-height: 1.2; max-width: none; }
+.tp-after h2 a, .tp-after h3 a { color: #f3f1ec; text-decoration: none; }
+.tp-after p { color: #d8d5cd; max-width: 52ch; }
+.tp-after-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; }
+.tp-after-go { min-height: 48px; }
+.tp-after-demo { min-height: 44px; display: inline-flex; align-items: center; color: #ffb36b; font-weight: 750; }
+@media (min-width: 800px) { .tp-after { grid-template-columns: minmax(0, 1fr) auto; align-items: center; } .tp-after-links { flex-direction: column; align-items: stretch; } .tp-after-go { justify-content: center; } }
+
+/* /for index tiles */
+.tp-tiles { list-style: none; display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); margin-top: 6px; }
+@media (min-width: 560px) { .tp-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 960px) { .tp-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); } .tp-tiles-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.tp-tile { height: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 16px; border: 1px solid var(--ink); background: var(--surface); color: var(--ink); text-decoration: none; box-shadow: var(--card-shadow); transition: transform 98ms ease-out, box-shadow 98ms ease-out; }
+.tp-tile:hover, .tp-tile:focus-visible { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(20, 22, 18, .1); }
+.tp-tile strong { margin-top: 6px; font-size: 1.1rem; }
+.tp-tile > span:not(.tp-card-icon) { color: var(--muted); font-size: .9rem; line-height: 1.4; }
+.tp-tile em { margin-top: auto; padding-top: 10px; min-height: 44px; display: inline-flex; align-items: center; font-style: normal; font-weight: 750; font-size: .9rem; text-decoration: underline; text-underline-offset: .2em; }
+.tp-tiles li:nth-child(4n + 1) .tp-card-icon { background: var(--clay); }
+.tp-tiles li:nth-child(4n + 2) .tp-card-icon { background: var(--sage); }
+.tp-tiles li:nth-child(4n + 3) .tp-card-icon { background: var(--mist); }
+.tp-tiles li:nth-child(4n) .tp-card-icon { background: var(--wheat); }
+.tp-group { margin-top: 26px; }
+.tp-group h3 { margin: 0 0 10px; font-size: 1.05rem; }
+.tp-else { margin-top: 28px; display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 2px dashed var(--ink); background: var(--surface); color: var(--ink); text-decoration: none; min-height: 44px; }
+.tp-else .tp-card-icon { background: var(--wheat); }
+@media (prefers-reduced-motion: reduce) { .tp-tile { transition: none; } }
+.tp-ba .hv-ba, .s-section .hv-steps { max-width: none; }
+.tp-tile em, .tp-card-go, .tp-links a, .tp-after-go, .tp-after-demo { gap: 6px; }
+.tp-hero-hub .eyebrow { margin-top: 8px; }
+
+.tp-tile-tag { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.tp-tile-else { border-style: dashed; border-width: 2px; }
