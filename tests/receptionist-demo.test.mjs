@@ -586,3 +586,14 @@ test('red team: no phone numbers through prices or names, no disguised links', (
   assert.doesNotMatch(text, /0770|345678|acme|ａｃｍｅ|seven/i);
   assert.deepEqual(config.services.filter((s) => s.price).map((s) => s.price), ['£60 per hour', '£1,200']);
 });
+
+test('red team 2: details in the opener are kept, junk urgent words and hidden characters are dropped', () => {
+  const opener = talk(['my name is Sam and my number is 07700 900123, can you book an MOT', 'yes', 'no thanks']);
+  assert.match(opener.said[1], /read that back: 07700 900123/);
+  assert.deepEqual(opener.desk.summary().rows[0], ['Caller', 'Sam · 07700 900123']);
+  const config = cleanConfig({ name: 'Evil', urgent: ['the', 'ok', 'leak'], areas: '‮hello ٠٧٧٠٠٩٠٠١٢٣' });
+  assert.deepEqual(config.urgent, ['leak']);
+  assert.ok(!config.areas || !/[‮٠-٩]/.test(config.areas));
+  for (const line of ['he has been stabbed', 'someone with a knife is attacking me', 'my dad is hurt badly']) assert.match(talk([line]).said[1], /999/, line);
+  assert.doesNotMatch(talk(['I got a knife set for christmas, do you sharpen them']).said[1], /999/);
+});

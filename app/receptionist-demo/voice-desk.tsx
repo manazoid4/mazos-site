@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import { AFTER_HOURS } from '../offers';
 import { MAIN_CTA } from '../site';
 import { DEFAULT_CONFIG, cleanConfig, createDesk, decodeConfig, spoken } from './engine.mjs';
@@ -104,7 +104,8 @@ export function VoiceDesk() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => { log.current?.lastElementChild?.scrollIntoView({ block: 'nearest' }); }, [lines, interim]);
+  // Keep the newest line in view inside the transcript box only: never scroll the page (it jumped on load and stole the keyboard start point).
+  useEffect(() => { const el = log.current; if (el && lines.length) el.scrollTop = el.scrollHeight; }, [lines, interim]);
   // The Start button leaves when a call begins and the summary arrives when it ends: move focus on so keyboard users aren't dropped.
   const idle = phase === 'ready' || phase === 'ended';
   useEffect(() => { if (!idle) (mic.current ?? typed.current)?.focus(); }, [idle]);
@@ -315,9 +316,14 @@ export function VoiceDesk() {
   };
 
   /** Escape hangs up. Nothing traps focus, so Tab still leaves the card. */
-  const keys = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Escape' && live.current) { event.preventDefault(); endCall(); }
-  };
+  // Escape ends a live call wherever focus is: a tapped chip or the mic can unmount and drop focus to the page.
+  useEffect(() => {
+    if (idle) return undefined;
+    const onKey = (event: globalThis.KeyboardEvent) => { if (event.key === 'Escape' && live.current) { event.preventDefault(); endCall(); } };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idle]);
 
   const toggleVoice = () => {
     voiceRef.current = !voiceRef.current;
@@ -335,7 +341,7 @@ export function VoiceDesk() {
     ended: 'Call ended',
   }[phase];
 
-  const truth = source === 'link' ? `Demo made by Maz Works for ${config.name}. Not ${config.name}’s real phone line.`
+  const truth = source === 'link' ? `Demo made for ${config.name}. Not ${config.name}’s real phone line.`
     : source === 'typed' ? `Demo made from the details you typed. Not ${config.name}’s real phone line.`
     : 'Demo · not a real phone line';
   const chips = phase === 'ready' ? starter : phase === 'ended' ? [] : hints;
@@ -343,7 +349,7 @@ export function VoiceDesk() {
   const planHref = `/free-plan?src=voice-demo&package=${encodeURIComponent(AFTER_HOURS.name)}${source !== 'default' ? `&business=${encodeURIComponent(config.name)}` : ''}#leak-check-form`;
 
   return (
-    <div className="vd" ref={card} onKeyDown={keys}>
+    <div className="vd" ref={card}>
       <p className="vd-truth">{truth}</p>
       <div className="vd-head">
         <div>

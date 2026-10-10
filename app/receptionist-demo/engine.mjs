@@ -167,6 +167,9 @@ export function safeText(value, max) {
   if (typeof value !== 'string') return '';
   const out = value
     .normalize('NFKC')
+    .replace(/[\u0660-\u0669]/g, (d) => String(d.charCodeAt(0) - 0x0660))
+    .replace(/[\u06f0-\u06f9]/g, (d) => String(d.charCodeAt(0) - 0x06f0))
+    .replace(/[\u200b-\u200f\u202a-\u202e\u2066-\u2069\ufeff]/g, '')
     .replace(/\s*[[({]\s*(?:\.|dot)\s*[\])}]\s*/gi, '.')
     .replace(/\s+dot\s+(?=[a-z]{2,24}\b)/gi, '.')
     .replace(/\b([a-z0-9-]+)\s?\.\s(?=(?:com|co|uk|net|org|io|me|app|shop|store|online|site)\b)/gi, '$1.')
@@ -193,6 +196,9 @@ const noNumbers = (value, max) => {
 /** "£45", "from £120", "£60 per hour", "£30+". The amount has no leading zero and is under £10,000; any unit is a word, never more digits. */
 const PRICE = /^(from |about |around )?£ ?([1-9]\d{0,2},\d{3}|[1-9]\d{0,3})(\.\d{2})?( ?\+| (per|an?) [a-z]+| ?\/ ?[a-z]+)?$/i;
 
+/** Too common to be anyone's urgent word: a link with urgent: ['the'] would flag every line. */
+const STOPWORDS = new Set(['the', 'and', 'you', 'your', 'have', 'with', 'that', 'this', 'what', 'when', 'please', 'hello', 'thanks', 'okay', 'call', 'phone', 'want', 'need', 'like', 'just', 'about', 'there', 'here']);
+
 /** Normalises a config from a link: drops empty parts, keeps strings short and plain. */
 export function cleanConfig(input) {
   const raw = input && typeof input === 'object' ? input : {};
@@ -211,7 +217,7 @@ export function cleanConfig(input) {
       .filter((service) => service.name)
       .slice(0, 20),
     areas: noNumbers(raw.areas, 160) || undefined,
-    urgent: (Array.isArray(raw.urgent) ? raw.urgent : []).map((word) => noNumbers(word, 30).toLowerCase()).filter(Boolean).slice(0, 12),
+    urgent: (Array.isArray(raw.urgent) ? raw.urgent : []).map((word) => noNumbers(word, 30).toLowerCase()).filter((word) => /[a-z]{4,}/.test(word) && !STOPWORDS.has(word)).slice(0, 12),
     callback: noNumbers(raw.callback, 80) || 'on the next working day',
   };
   if (!config.services.length && !name) config.services = DEFAULT_CONFIG.services;
@@ -241,7 +247,7 @@ const NUMBER_ASK = 'What’s the best number to call you on?';
 const NOT_UK = 'Sorry, I can only take a UK number in this demo. What’s the best UK number?';
 const DIDNT_CATCH = 'Sorry, I didn’t catch that. Could you say it again?';
 /** Words that mean someone may be hurt or at risk: these get the 999 line. Business-urgent words (the owner's list) only get flagged. */
-const DANGER = new RegExp(String.raw`(?:^|\W)(?:heart attack|chest pains?|(?:is ?n'?t|is not|not|stopped|struggling to|difficulty|trouble|hard to) breath(?:e|ing)|no pulse|unresponsive|(?:can'?t|cannot) wake (?:him|her|them|my \w+) up|(?:turned|turning|going|gone) blue|lips are blue|allergic reaction|electric shock|electrocut\w*|sparks? (?:coming|flying|everywhere)|sparking|burning smell|smells? (?:of )?burning|(?:see|seen) (?:the )?flames|flames (?:coming|everywhere)|(?:there(?:'s| is)|lots of|full of) smoke|smoke (?:coming|everywhere|pouring)|co alarm (?:is )?(?:going off|sounding|beeping|went off)|water (?:\w+ ){0,3}(?:fuse ?box|consumer unit|electrics|sockets?)|(?:fell|fallen) (?:off|from) (?:a |the )?(?:ladder|roof)|head injury|hit (?:his|her|my|their) head|having a (?:fit|seizure)|kill (?:myself|himself|herself)|suicid\w*|end (?:my|his|her) life|hurt (?:myself|himself|herself)|(?:he|she|they)(?:'s| is| are) bleeding|bleeding (?:a lot|everywhere)|chok(?:ing|ed)|passed out|faint(?:ed|ing)|not breathing|(?:can'?t|cannot|can not) breathe|throat (?:is )?(?:closing|swelling)|stroke|seizure|overdos(?:e|ed)|gas smell|smells? (?:of )?gas|leaking gas|gas leak|caught fire|there(?:'s| is) a fire(?! (?:alarm|extinguisher|door|exit|safety|risk|drill|certificate))|house fire|on fire|smoke coming|full of smoke|carbon monoxide|collapsed|unconscious|in danger|injured|blood everywhere|(?:a )?lot of blood|bleeding (?:heavily|badly)|(?:is|am) bleeding|(?:face|tongue|lips?) (?:is |are )?swelling|anaphyla\w+|ring 999|call 999|dial 999)(?=\W|$)`, 'i');
+const DANGER = new RegExp(String.raw`(?:^|\W)(?:heart attack|chest pains?|(?:is ?n'?t|is not|not|stopped|struggling to|difficulty|trouble|hard to) breath(?:e|ing)|no pulse|unresponsive|(?:can'?t|cannot) wake (?:him|her|them|my \w+) up|(?:turned|turning|going|gone) blue|lips are blue|allergic reaction|electric shock|electrocut\w*|sparks? (?:coming|flying|everywhere)|sparking|burning smell|smells? (?:of )?burning|(?:see|seen) (?:the )?flames|flames (?:coming|everywhere)|(?:there(?:'s| is)|lots of|full of) smoke|smoke (?:coming|everywhere|pouring)|co alarm (?:is )?(?:going off|sounding|beeping|went off)|water (?:\w+ ){0,3}(?:fuse ?box|consumer unit|electrics|sockets?)|(?:fell|fallen) (?:off|from) (?:a |the )?(?:ladder|roof)|head injury|hit (?:his|her|my|their) head|having a (?:fit|seizure)|kill (?:myself|himself|herself)|suicid\w*|end (?:my|his|her) life|hurt (?:myself|himself|herself)|(?:he|she|they)(?:'s| is| are) bleeding|bleeding (?:a lot|everywhere)|chok(?:ing|ed)|passed out|faint(?:ed|ing)|not breathing|(?:can'?t|cannot|can not) breathe|throat (?:is )?(?:closing|swelling)|stroke|seizure|overdos(?:e|ed)|gas smell|smells? (?:of )?gas|leaking gas|gas leak|caught fire|there(?:'s| is) a fire(?! (?:alarm|extinguisher|door|exit|safety|risk|drill|certificate))|house fire|on fire|smoke coming|full of smoke|carbon monoxide|collapsed|unconscious|in danger|injured|blood everywhere|(?:a )?lot of blood|bleeding (?:heavily|badly)|(?:is|am) bleeding|(?:face|tongue|lips?) (?:is |are )?swelling|anaphyla\w+|stabbed|been attacked|attacking (?:me|us|him|her|them)|(?:has|with|pulled) a knife(?! set| block| sharpen)|(?:hurt|injured) (?:badly|bad|really badly)|(?:badly|seriously) hurt|ring 999|call 999|dial 999)(?=\W|$)`, 'i');
 const DANGER_LINE = 'If anyone is in danger, please ring 999 now. I’ve also marked this as urgent for the owner.';
 const URGENT_LINE = 'I’ve marked this as urgent for the owner.';
 const ANON = 'Caller (no name given)';
@@ -402,9 +408,23 @@ export function createDesk(input) {
   let nearServices = [];
   const askName = (lead) => {
     if (caller && (number || noNumber)) { stage = 'more'; return `${lead} I’ve added that to your message. Anything else?`; }
+    if (caller && held && !number) { stage = 'confirm'; return `${lead} ${readBack()}`; }
     if (caller) { stage = 'number'; return `${lead} ${NUMBER_ASK}`; }
     stage = 'name';
     return `${lead} ${NAME_ASK}`;
+  };
+  /** "My name is Sam and my number is 07700 900123, can you book an MOT": keep both, then deal with the request. */
+  const takeDetails = (text) => {
+    if (!['open', 'offer', 'more'].includes(stage)) return;
+    if (!caller) {
+      const said = norm(text).match(/\bmy name(?:'s| is)\s+([a-z' -]+?)(?=\s*(?:,|\.|\band\b|\bmy\b|\bcan\b|$))/i);
+      const name = said ? validName(said[1]) : '';
+      if (name) { caller = name; named = true; }
+    }
+    if (!number && !held) {
+      const found = ukNumber(digitsFrom(text, true));
+      if (found) held = found;
+    }
   };
   const markUrgent = (text) => { urgent = true; note(wants, `Urgent: ${clip(text)}`); };
   const readBack = () => `Let me read that back: ${formatNumber(held)}. Is that right?`;
@@ -566,6 +586,7 @@ export function createDesk(input) {
     }
     caller = name;
     named = true;
+    if (held && !number) { stage = 'confirm'; return `Thanks, ${firstName()}. ${readBack()}`; }
     if (number || noNumber) { stage = 'more'; return `Thanks, ${firstName()}. Is there anything else?`; }
     stage = 'number';
     return `Thanks, ${firstName()}. ${NUMBER_ASK}`;
@@ -697,6 +718,7 @@ export function createDesk(input) {
     greet() { return `Good evening, ${config.name}. We’re closed right now, but I can answer a question or take a message. How can I help?`; },
     /** @param {string} said */
     reply(said) {
+      takeDetails(String(said || ''));
       const out = respond(String(said || '').trim());
       const question = (out.match(/[^.?!]*\?/g) ?? []).pop();
       if (question && out !== DIDNT_CATCH && !REPEAT.test(plain(String(said || '')))) lastAsk = question.trim();
