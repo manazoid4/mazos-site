@@ -421,7 +421,10 @@ export function createDesk(input) {
       const name = said ? validName(said[1]) : '';
       if (name) { caller = name; named = true; }
     }
-    if (!number && !held) {
+    // Only a number introduced as theirs ("my number is…", "call me on…") or said first; never an order, part or reg number.
+    const introduced = /\b(?:my (?:phone |mobile |contact )?number|(?:phone|mobile)(?: number)?(?: is)?|call me (?:back )?on|ring me (?:back )?on|text me on|reach me on|contact me on)\b/i.test(norm(text));
+    const leading = /^\s*(?:\+?\d|oh\b|zero\b)/i.test(text);
+    if (!number && !held && (introduced || leading) && !/\b(?:order|reference|ref|part|account|invoice|reg(?:istration)?|policy|tracking)\b/i.test(norm(text))) {
       const found = ukNumber(digitsFrom(text, true));
       if (found) held = found;
     }

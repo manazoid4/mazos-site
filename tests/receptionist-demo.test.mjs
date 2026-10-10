@@ -597,3 +597,11 @@ test('red team 2: details in the opener are kept, junk urgent words and hidden c
   for (const line of ['he has been stabbed', 'someone with a knife is attacking me', 'my dad is hurt badly']) assert.match(talk([line]).said[1], /999/, line);
   assert.doesNotMatch(talk(['I got a knife set for christmas, do you sharpen them']).said[1], /999/);
 });
+
+test('an order or part number in the opener is never taken as the callback number', () => {
+  const { said, desk } = talk(['my name is Sam and order number is 01234567890, I need tyres', 'yes please']);
+  assert.doesNotMatch(said.join(' '), /read that back: 01234 567890/);
+  assert.equal(desk.stage, 'number');
+  const intro = talk(['hi, call me back on 07700 900123 about brakes', 'yes please', 'Jo']);
+  assert.match(intro.said[3], /read that back: 07700 900123/);
+});
