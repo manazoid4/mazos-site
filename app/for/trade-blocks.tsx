@@ -78,8 +78,9 @@ export function ReceptionistCard({ page, level = 2 }: { page: string; level?: 2 
         <p>Busy on a job, closed for the evening, or it’s a bank holiday? Calls you can’t pick up are answered, and you get a clear message to act on.</p>
       </div>
       <div className="tp-after-links">
-        <a className="tp-after-go" href={AFTER_HOURS.href}>See how it works <span aria-hidden="true">→</span></a>
+        <CampaignLink className="button button-signal tp-after-go" href={`/free-plan?src=for-${page}&package=${encodeURIComponent(AFTER_HOURS.name)}#leak-check-form`}>{MAIN_CTA}</CampaignLink>
         {match && demoHref ? <a className="tp-after-demo" href={demoHref}>Talk to it as {match.as} <span aria-hidden="true">→</span></a> : null}
+        <a className="tp-after-demo" href={AFTER_HOURS.href}>How it works <span aria-hidden="true">→</span></a>
       </div>
     </aside>
   );

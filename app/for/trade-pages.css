@@ -48,7 +48,7 @@
 .tp-after h2 a, .tp-after h3 a { color: #f3f1ec; text-decoration: none; }
 .tp-after p { color: #d8d5cd; max-width: 52ch; }
 .tp-after-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; }
-.tp-after-go { min-height: 44px; display: inline-flex; align-items: center; padding: 0 16px; border: 2px solid #f3f1ec; background: #f3f1ec; color: #1b1d22; font-weight: 800; text-decoration: none; }
+.tp-after-go { min-height: 48px; }
 .tp-after-demo { min-height: 44px; display: inline-flex; align-items: center; color: #ffb36b; font-weight: 750; }
 @media (min-width: 800px) { .tp-after { grid-template-columns: minmax(0, 1fr) auto; align-items: center; } .tp-after-links { flex-direction: column; align-items: stretch; } .tp-after-go { justify-content: center; } }
 

@@ -78,12 +78,12 @@ export const TRADE_EXTRAS: Record<string, TradeExtras> = {
       row('quote-follow-up', 'chat', 'Proposals go quiet after you send them.', 'A polite follow-up goes out, in your words.'),
       row('milestones', 'pin', 'Clients ask where their project is up to.', 'Clients get an update at each stage, automatically.'),
     ],
-    demo: { text: 'Thanks for calling, we’re in a meeting. Tell us about your project here: ', link: 'yourpractice.co.uk/enquiry', booked: 'Project enquiry', bookedDetail: 'Brief received · added to your list' },
+    demo: { text: 'Thanks for calling, we’re in a meeting. Tell us about your project here: ', link: 'yourpractice.co.uk/enquiry', booked: 'Project enquiry', bookedDetail: 'Brief received · added to your list', action: 'Send' },
   },
   // Customer-type pages derive their before/after rows from their own pains; only the phone and receptionist are set here.
   trades: {
     changes: [],
-    demo: { text: 'Sorry we missed you, I’m on a job. Get a quote or book here: ', link: 'yourbusiness.co.uk/quote', booked: 'Quote request in', bookedDetail: BOOKED },
+    demo: { text: 'Sorry we missed you, I’m on a job. Get a quote or book here: ', link: 'yourbusiness.co.uk/quote', booked: 'Quote request in', bookedDetail: BOOKED, action: 'Send' },
     receptionist: { preset: 'builder', business: 'Your trade business', as: 'a tradesperson' },
   },
   appointments: {
@@ -97,7 +97,7 @@ export const TRADE_EXTRAS: Record<string, TradeExtras> = {
   },
   offices: {
     changes: [],
-    demo: { text: 'Sorry we missed you, we’re with a client. Tell us what you need here: ', link: 'yourfirm.co.uk/enquiry', booked: 'New enquiry', bookedDetail: 'Added to your one list · reply sent' },
+    demo: { text: 'Sorry we missed you, we’re with a client. Tell us what you need here: ', link: 'yourfirm.co.uk/enquiry', booked: 'New enquiry', bookedDetail: 'Added to your one list · reply sent', action: 'Send' },
   },
 };
 

@@ -21,6 +21,8 @@ export type HeroDemoCopy = {
   bookedDetail?: string;
   /** Caption under the phone (the example is always labelled as not a real customer). */
   caption?: string;
+  /** Label of the button inside the text (default "Book"; "Send" for an enquiry form). */
+  action?: string;
 };
 
 /** 0 ready to call · 1 missed call · 2 text arrived · 3 booked */
@@ -39,7 +41,10 @@ const ANNOUNCE = ['Tap Call to ring the business.', 'Missed call. The business i
  * Labelled as an example: not a real customer.
  */
 export function HeroDemo({ copy = {} }: { copy?: HeroDemoCopy }) {
-  const { caller = 'New caller · 2:14pm', text = 'Sorry we missed you! We’re with a customer. Book here and pick a time that suits: ', link = 'yourbusiness.co.uk/book', booked = 'New booking', bookedDetail = 'Tuesday 10:30 · added to your diary', caption = `${TEXT_BACK.name}, ${TEXT_BACK.price}. Not a real customer.` } = copy;
+  const custom = Boolean(copy.booked);
+  const { caller = 'New caller · 2:14pm', text = 'Sorry we missed you! We’re with a customer. Book here and pick a time that suits: ', link = 'yourbusiness.co.uk/book', booked = 'New booking', bookedDetail = 'Tuesday 10:30 · added to your diary', caption = `${TEXT_BACK.name}, ${TEXT_BACK.price}. Not a real customer.`, action = 'Book' } = copy;
+  // Screen-reader steps follow the page's own outcome; the homepage keeps its original wording.
+  const announce = custom ? [ANNOUNCE[0], ANNOUNCE[1], `A text arrived with a link. Tap ${action}.`, `${booked}: ${bookedDetail}.`] : ANNOUNCE;
   const [live, setLive] = useState(false);
   const [step, setStep] = useState<Step>(3);
   const [played, setPlayed] = useState(false);
@@ -86,7 +91,7 @@ export function HeroDemo({ copy = {} }: { copy?: HeroDemoCopy }) {
             <button type="button" className="s-demo-call" onClick={call}>
               {step === 3 ? 'Try it: call again' : 'Call'}
             </button>
-          ) : <span className="s-demo-hint">{step === 1 ? 'Ringing… no answer' : 'Tap Book in the text'}</span>}
+          ) : <span className="s-demo-hint">{step === 1 ? 'Ringing… no answer' : `Tap ${action} in the text`}</span>}
         </div>
         <ol className="s-demo-thread" aria-hidden={live ? undefined : true}>
           <li className={`s-demo-row s-demo-missed${on(1)}`}>
@@ -96,7 +101,7 @@ export function HeroDemo({ copy = {} }: { copy?: HeroDemoCopy }) {
           <li className={`s-demo-row s-demo-text${on(2)}`}>
             <span className="s-demo-label">Sent automatically</span>
             {live ? null : <span className="s-demo-dots"><i /><i /><i /></span>}
-            <span className="s-demo-bubble">{text}{live && step === 2 ? <button type="button" className="s-demo-book" onClick={() => setStep(3)}>Book</button> : <u>{link}</u>}</span>
+            <span className="s-demo-bubble">{text}{live && step === 2 ? <button type="button" className="s-demo-book" onClick={() => setStep(3)}>{action}</button> : <u>{link}</u>}</span>
             <small className="s-demo-delivered">Delivered ✓</small>
           </li>
           <li className={`s-demo-row s-demo-booked${on(3)}`}>
@@ -104,7 +109,7 @@ export function HeroDemo({ copy = {} }: { copy?: HeroDemoCopy }) {
             <span><strong>{booked}</strong><small>{bookedDetail}</small></span>
           </li>
         </ol>
-        {live ? <p className="s-visually-hidden" aria-live="polite">{played ? ANNOUNCE[step] : ''}</p> : null}
+        {live ? <p className="s-visually-hidden" aria-live="polite">{played ? announce[step] : ''}</p> : null}
       </div>
       <figcaption id="demo-caption" className="s-small">
         <span className="s-demo-tag">Example</span> {caption}
