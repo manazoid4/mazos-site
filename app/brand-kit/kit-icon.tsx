@@ -30,7 +30,7 @@ const PATHS: Record<string, string> = {
   repeat: 'M17 2l3 3-3 3M4 11V9a4 4 0 0 1 4-4h12M7 22l-3-3 3-3M20 13v2a4 4 0 0 1-4 4H4',
 };
 
-export const NICHE_ICONS: Record<string, string> = { 'heating-and-plumbing': 'drop', 'salons-and-beauty': 'scissors', 'dog-groomers': 'dog', garages: 'wrench', 'cafes-and-food': 'cup', 'clinics-and-therapists': 'heart', architects: 'ruler' };
+export const NICHE_ICONS: Record<string, string> = { 'heating-and-plumbing': 'drop', 'salons-and-beauty': 'scissors', 'dog-groomers': 'dog', garages: 'wrench', 'cafes-and-food': 'cup', 'clinics-and-therapists': 'heart', architects: 'ruler', roofers: 'layers', builders: 'box', electricians: 'bolt' };
 
 export function KitIcon({ name, size = 28 }: { name: string; size?: number }) {
   return (

@@ -77,7 +77,7 @@ export const CUSTOMER_TYPES: CustomerType[] = [
     calculator: { perWeek: 15, share: 20, value: 250, label: 'A typical trade: 15 calls a week, 1 in 5 missed, £250 a job' },
     scenes: ['missed-calls', 'quotes', 'reviews'],
     menu: ['missed-call', 'quote-follow-up', 'payment-reminders', 'reviews', 'job-updates', 'weekly-report'],
-    niches: ['heating-and-plumbing', 'garages'],
+    niches: ['heating-and-plumbing', 'roofers', 'builders', 'electricians', 'garages'],
   },
   {
     id: 'appointments',

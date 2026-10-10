@@ -29,6 +29,33 @@ export const TRADE_EXTRAS: Record<string, TradeExtras> = {
     demo: { text: 'Sorry we missed you, I’m on a job. Book a visit or ask for a quote here: ', link: 'yourplumbing.co.uk/book', booked: 'Boiler visit booked', bookedDetail: BOOKED },
     receptionist: { preset: 'plumbing', business: 'Your plumbing firm', as: 'a plumber' },
   },
+  roofers: {
+    changes: [
+      row('missed-call', 'phone', 'You can’t answer on a roof, so the homeowner rings the next roofer.', 'The caller gets a text with a link to send photos and ask for a quote.'),
+      row('quote-follow-up', 'mail', 'Quotes sent after the last storm have gone quiet.', 'A friendly reminder goes out after 3 and 7 days, and stops when they reply.'),
+      row('reviews', 'star', 'Finished roofs never turn into Google reviews.', 'A review request follows every finished job.'),
+    ],
+    demo: { text: 'Sorry we missed you, I’m up on a roof. Send photos or ask for a quote here: ', link: 'yourroofing.co.uk/quote', booked: 'Quote request in', bookedDetail: 'Photos received · added to your list', action: 'Send' },
+    receptionist: { preset: 'roofer', business: 'Your roofing firm', as: 'a roofer' },
+  },
+  builders: {
+    changes: [
+      row('one-list', 'layers', 'Enquiries arrive by phone, website, email and Facebook.', 'Every enquiry lands in one list with an instant reply.'),
+      row('quote-follow-up', 'mail', 'Big quotes go unchased while you’re on site.', 'Quotes are chased after 3 and 7 days, and stop when they reply.'),
+      row('payment-reminders', 'cart', 'Stage payments slip and you end up chasing.', 'A nudge goes before and after each stage is due, with the pay link.'),
+    ],
+    demo: { text: 'Thanks for calling, we’re on site. Tell us about your project and book a visit here: ', link: 'yourbuilders.co.uk/visit', booked: 'Site visit requested', bookedDetail: 'Project details received · added to your list', action: 'Send' },
+    receptionist: { preset: 'builder', business: 'Your building firm', as: 'a builder' },
+  },
+  electricians: {
+    changes: [
+      row('missed-call', 'phone', 'You can’t pick up mid-job, so the caller tries the next electrician.', 'The caller gets a text with a link to book a visit or describe the job.'),
+      row('job-updates', 'chat', 'Customers ring to ask when you’re coming.', '“Booked”, “on the way” and “done” texts go out for you.'),
+      row('reviews', 'star', 'Happy customers never get asked for a review.', 'A review request follows every finished job.'),
+    ],
+    demo: { text: 'Sorry we missed you, I’m on a job. Book a visit or tell me what you need here: ', link: 'yourelectrics.co.uk/book', booked: 'Visit booked', bookedDetail: BOOKED },
+    receptionist: { preset: 'electrician', business: 'Your electrical firm', as: 'an electrician' },
+  },
   'salons-and-beauty': {
     changes: [
       row('online-booking', 'chat', 'Bookings arrive by DM, phone and late-night forms.', 'Every booking lands in one place with an instant confirmation.'),

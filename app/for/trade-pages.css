@@ -76,3 +76,5 @@
 
 .tp-tile-tag { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .tp-tile-else { border-style: dashed; border-width: 2px; }
+/* 10 trades + this tile: spanning two columns keeps every row full at 2 and 4 columns. */
+@media (min-width: 560px) { .tp-tiles-4 li:has(> .tp-tile-else) { grid-column: span 2; } }

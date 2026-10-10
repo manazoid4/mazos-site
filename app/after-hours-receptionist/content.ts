@@ -13,7 +13,9 @@ export const BEST_FOR = [
   { label: 'Salons and beauty', href: '/for/salons-and-beauty' },
   { label: 'Clinics and therapists', href: '/for/clinics-and-therapists' },
   { label: 'Garages', href: '/for/garages' },
-  { label: 'Trades', href: '/for/heating-and-plumbing' },
+  { label: 'Roofers', href: '/for/roofers' },
+  { label: 'Builders', href: '/for/builders' },
+  { label: 'Plumbers and electricians', href: '/for/trades' },
   { label: 'Small service businesses', href: '/for' },
 ];
 

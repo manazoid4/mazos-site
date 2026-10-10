@@ -605,3 +605,16 @@ test('an order or part number in the opener is never taken as the callback numbe
   const intro = talk(['hi, call me back on 07700 900123 about brakes', 'yes please', 'Jo']);
   assert.match(intro.said[3], /read that back: 07700 900123/);
 });
+
+test('roofer, builder and electrician pages exist, and roofers can talk to the receptionist as a roofer', async () => {
+  for (const id of ['roofers', 'builders', 'electricians']) {
+    const html = await readFile(path.join(root, 'out', 'for', `${id}.html`), 'utf8');
+    assert.match(html, /Get my free demo/, id);
+    assert.doesNotMatch(html.replace(/<script[\s\S]*?<\/script>/g, ''), /\bAI\b/, id);
+  }
+  assert.match(await readFile(path.join(root, 'out', 'for', 'roofers.html'), 'utf8'), /Talk to it as (?:<!-- -->)?a roofer/);
+  const { presetConfig } = await import('../app/receptionist-demo/presets.mjs');
+  const roofer = presetConfig('Top Tile Roofing', 'roofer');
+  assert.match(talk(['there is water coming in through the ceiling'], roofer).said[1], /urgent/);
+  assert.match(talk(['do you do guttering'], roofer).said[1], /we do guttering/);
+});

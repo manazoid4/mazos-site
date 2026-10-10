@@ -13,6 +13,7 @@ import { cleanConfig, safeText } from './engine.mjs';
 export const PRESETS = [
   { id: 'garage', label: 'Garage', services: ['MOT', 'Service', 'Tyres', 'Brakes', 'Diagnostics'], urgent: ['broken down', 'breakdown', 'stuck', 'accident'] },
   { id: 'plumbing', label: 'Plumbing and heating', services: ['Boiler service', 'Boiler repair', 'Leaks', 'Radiators', 'Bathrooms'], urgent: ['leak', 'leaking', 'no heating', 'no hot water', 'flooding', 'burst'] },
+  { id: 'roofer', label: 'Roofer', services: ['Roof repairs', 'New roofs', 'Flat roofs', 'Guttering', 'Chimney repairs'], urgent: ['roof leak', 'leak', 'leaking', 'storm damage', 'tiles off', 'water coming in'] },
   { id: 'electrician', label: 'Electrician', services: ['Rewiring', 'Fuse box', 'Sockets', 'Lighting', 'EV charger', 'Safety check'], urgent: ['no power', 'power cut', 'sparking', 'tripping'] },
   { id: 'salon', label: 'Hair, beauty or barber', services: ['Haircut', 'Colour', 'Blow dry', 'Nails', 'Brows', 'Beard trim'], urgent: ['reaction', 'allergic', 'swelling', 'swollen', 'burning', 'burnt'] },
   { id: 'clinic', label: 'Clinic or therapist', services: ['Appointment', 'Assessment', 'Massage', 'Physio', 'Follow-up'], urgent: ['severe pain', 'swelling'] },
