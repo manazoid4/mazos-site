@@ -2,6 +2,14 @@
 
 > Start here: the private handoff index (`unified-memory-database/handoffs/LATEST.md`) holds research, plans and build prompts. This public file keeps only the last 3 entries; older ones are in `docs/archive/SESSION-HANDOVER-history.md`.
 
+## 10 Oct: receptionist finish pass (#137 merged, #139 merged, #140)
+- #137 merged the finish pass: call screen with a voice visual that follows the speech, call timer, message-style summary, "Try it as your business" (name + trade, no prices invented), a receptionist rebuilt after a 308-call stress test (urgent and danger handling, number checks, honest answers), site-wide readability fixes. #139 (Maz's call): the receptionist answers missed calls day or night, same £79.
+- #140: fixes from an independent red-team pass (phone layout, Escape, link safety, details given in the first sentence). Before any paid line: phone provider with a spend cap, £79 payment link, ICO fee.
+
+## 9 Oct: receptionist audit + demo fixes (draft PR #137)
+- The talk-to-it demo now catches urgent calls at any step, checks and corrects the phone number, and doesn't hang up on "no". Personal links can't carry web addresses or premium numbers. Every screen says it's a demo, and "Get my free demo" sits inside the call summary.
+- Waiting on Maz: phone test and merge; decide "after hours only" vs "answers when you can't"; spend-capped phone provider, £79 payment link and ICO fee before any paid line. Audit and plans are in the private memory repo (`handoffs/2026-10-09-receptionist-audit/`).
+
 ## 7 Oct: site sprint merged
 - Live now:
   - heating and plumbing page (#120);

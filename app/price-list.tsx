@@ -196,7 +196,7 @@ export function PriceList({ checkHref }: { checkHref: string }) {
           </div>
           <div className="s-extras-care" id="after-hours">
             <h4>Monthly service</h4>
-            <p><strong>{AFTER_HOURS.name}, {AFTER_HOURS.price}.</strong> {`Calls answered when you’re closed: your FAQs answered, messages taken, urgent calls passed on and a summary emailed to you. ${AFTER_HOURS.setup}. ${AFTER_HOURS.terms}`} <a href={AFTER_HOURS.href}>How it works →</a></p>
+            <p><strong>{AFTER_HOURS.name}, {AFTER_HOURS.price}.</strong> {`Calls answered when you can’t pick up, day or night: your FAQs answered, messages taken, urgent calls passed on and a summary emailed to you. ${AFTER_HOURS.setup}. ${AFTER_HOURS.terms}`} <a href={AFTER_HOURS.href}>How it works →</a></p>
           </div>
         </div>
       </Fold>

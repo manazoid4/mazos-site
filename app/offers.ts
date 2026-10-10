@@ -591,10 +591,12 @@ export const CARE_PLAN = CARE_PLANS[0];
 
 /**
  * After-Hours Receptionist (launched 9 Oct 2026): a monthly call-answering
- * service, separate from the one-off packages. Answers when the business is
- * closed, takes details, answers the owner's own FAQs and emails a summary.
- * Bounded on purpose: no payments, no advice, not an emergency service.
- * Daytime overflow cover is "next", not sold yet. Never call it AI on the site.
+ * service, separate from the one-off packages. Answers any call the owner
+ * can't pick up: busy on a job in the day, or closed at night (Maz, 9 Oct:
+ * "answers when you can't, but also after hours"). Works by the phone's
+ * "divert when unanswered" setting, so one set-up covers day and night. Takes
+ * details, answers the owner's own FAQs and emails a summary. Bounded on
+ * purpose: no payments, no advice, not an emergency service. Never call it AI on the site.
  */
 export const AFTER_HOURS = {
   id: 'after-hours-receptionist',
@@ -608,7 +610,7 @@ export const AFTER_HOURS = {
   terms: 'Month to month. No long contract. Cancel with a month’s notice.',
   guarantee: 'You hear it answering as your business before your first month is billed.',
   included: [
-    { title: 'Answers when you’re closed', body: 'Evenings, weekends and bank holidays, on the hours you set.' },
+    { title: 'Answers when you can’t', body: 'Busy on a job in the day, or closed in the evening, at weekends and on bank holidays. Any call you don’t pick up goes to it.' },
     { title: 'Your own greeting', body: 'In your business name, worded the way you’d say it.' },
     { title: 'Common questions answered', body: 'Opening hours, areas, services and prices, only from what you give me.' },
     { title: 'Clear messages', body: 'Name, number, what they need and how soon, read back to the caller to check.' },
@@ -622,7 +624,6 @@ export const AFTER_HOURS = {
     'Taking payments or card details.',
     'Medical, legal or financial advice. It takes a message instead.',
     'Replacing emergency services. Callers in an emergency are told to ring 999 or the right service.',
-    'Daytime overflow cover. That comes next; ask if you want it.',
   ],
 } as const;
 

@@ -5,8 +5,8 @@
 
 /* Hero */
 .ah-hero { display: grid; gap: 32px; align-items: center; padding: clamp(28px, 5vw, 72px) 0 clamp(28px, 4vw, 48px); }
-.ah-hero h1 { font-size: clamp(2.1rem, 5.6vw, 4rem); max-width: 15ch; margin-top: 14px; }
-.ah-hero h1 em { font-style: normal; background: linear-gradient(transparent 62%, var(--glow) 62%); }
+.ah-hero h1 { font-size: clamp(2.1rem, 5.6vw, 4rem); max-width: 18ch; margin-top: 14px; text-wrap: balance; }
+.ah-hero h1 em { font-style: normal; white-space: nowrap; background: linear-gradient(transparent 62%, var(--glow) 62%); }
 .ah-lede { margin-top: 18px; max-width: 34em; font-size: clamp(1.05rem, 1.7vw, 1.25rem); color: var(--charcoal); }
 .ah-price { margin: 22px 0 6px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
 .ah-price strong { font-size: clamp(1.8rem, 3.4vw, 2.4rem); letter-spacing: -.03em; }
@@ -21,7 +21,7 @@
 .ah-moon { width: 18px; height: 18px; border-radius: 50%; box-shadow: inset -5px -2px 0 0 var(--glow); transform: rotate(-20deg); }
 .ah-clock { font-weight: 800; }
 .ah-sign { margin-left: auto; padding: 3px 9px; border: 1px solid #f3f1ec; border-radius: 99px; text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; }
-.ah-ring, .ah-bubble, .ah-mail { opacity: .18; transform: translateY(6px); transition: opacity 360ms ease-out, transform 360ms ease-out; }
+.ah-ring, .ah-bubble, .ah-mail { opacity: .4; transform: translateY(6px); transition: opacity 360ms ease-out, transform 360ms ease-out; }
 .ah-sign { opacity: .4; transition: opacity 360ms ease-out; }
 .ah-sign.is-on, .ah-ring.is-on, .ah-bubble.is-on, .ah-mail.is-on { opacity: 1; transform: none; }
 .ah-ring { display: flex; align-items: center; gap: 12px; background: var(--night-2); border-radius: 14px; padding: 12px 14px; }
@@ -142,8 +142,6 @@
 .ah-summary dd { margin: 0; font-weight: 700; }
 .ah-flag { font-weight: 800; color: #b4462f; }
 .ah-demo-note { font-size: .82rem; color: #b9b6ae; }
-.ah-try-cta { margin-top: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; border: 2px solid var(--ink); background: var(--surface); padding: 16px 18px; }
-.ah-try-cta p { max-width: 40em; }
 
 /* Trust */
 .ah-trust { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 12px; }

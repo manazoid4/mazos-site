@@ -14,6 +14,7 @@ import './voice-desk.css';
 export const metadata: Metadata = {
   title: { absolute: 'Talk to an after-hours receptionist demo | Maz Works' },
   description: 'Have a pretend after-hours call out loud, in your browser, and see the summary the owner would get.',
+  alternates: { canonical: '/receptionist-demo' },
   robots: { index: false, follow: true },
 };
 
@@ -25,13 +26,13 @@ export default function ReceptionistDemoPage() {
       <section className="vd-hero" id="main-content" tabIndex={-1} aria-labelledby="vd-title">
         <p className="eyebrow">{AFTER_HOURS.name} · demo</p>
         <h1 id="vd-title">Ring it after hours. Out loud.</h1>
-        <p>Press start, allow the microphone, and talk like a customer would. Works best in Chrome or Safari. You can type instead if you’d rather.</p>
+        <p>Press start and talk like a customer would. Or type, or tap a suggestion.</p>
       </section>
       <VoiceDesk />
       <section className="mw-resource-cta" aria-labelledby="vd-cta-title">
         <div>
           <p className="eyebrow">{AFTER_HOURS.price}</p>
-          <h2 id="vd-cta-title">Want this answering your phone when you’re closed?</h2>
+          <h2 id="vd-cta-title">Want this answering your phone when you can’t?</h2>
           <p>{`${AFTER_HOURS.guarantee} `}<a href={AFTER_HOURS.href}>How it works →</a></p>
         </div>
         <div className="mw-actions"><a className="button button-signal" href={demoHref}>{MAIN_CTA}</a></div>
