@@ -59,6 +59,42 @@ export const NICHE_GUIDES: NicheGuide[] = [
     ],
   },
   {
+    id: 'roofers',
+    shortName: 'Roofers',
+    name: 'Roofers and roofing contractors',
+    title: 'Win the roofing jobs that ring while you’re up a ladder',
+    lede: 'Leaks and storm damage don’t wait. If nobody answers, the homeowner rings the next roofer on Google, and the quotes you sent after the last storm go quiet.',
+    fixes: [
+      starter('One task set up to run itself: miss a call on the roof and the caller gets a text straight away with a link to send photos and ask for a quote.'),
+      menuJob('Quote follow-up', 'No reply to a quote? A friendly reminder goes out after 3 and 7 days, in your words, and stops when they reply.'),
+      system('Missed-call text-back, quote follow-up and review requests joined up, with a weekly report, so the work keeps coming in between jobs.'),
+    ],
+  },
+  {
+    id: 'builders',
+    shortName: 'Builders',
+    name: 'Builders, extensions and renovation firms',
+    title: 'Turn building enquiries into site visits without living on the phone',
+    lede: 'Big jobs start with a call or a form, then a site visit and a quote. Miss the call, or leave the quote unchased, and the job goes to whoever replied first.',
+    fixes: [
+      starter('One task set up to run itself: every enquiry from your phone, website and messages lands in one list with an instant reply.'),
+      menuJob('Quote follow-up', 'Quotes are chased for you after 3 and 7 days, and stop the moment the customer replies.'),
+      menuJob('Payment reminders', 'Stage payments are nudged before and after they’re due, with the payment link, so you stop chasing money.'),
+    ],
+  },
+  {
+    id: 'electricians',
+    shortName: 'Electricians',
+    name: 'Electricians and electrical contractors',
+    title: 'Answer every electrical enquiry, even with your hands in a fuse box',
+    lede: 'People ring when the power is off or a job can’t wait. If you can’t pick up, they try the next electrician, and certificate and quote enquiries pile up unanswered.',
+    fixes: [
+      starter('One task set up to run itself: miss a call and the caller gets a text with a link to book a visit or describe the job.'),
+      menuJob('Job update texts', '“Booked”, “on the way”, “done”: sent for you, so customers stop ringing for updates.'),
+      system('Missed-call text-back, quote follow-up and review requests joined up, with a weekly report, so you can stay on the tools.'),
+    ],
+  },
+  {
     id: 'salons-and-beauty',
     shortName: 'Salons and beauty',
     name: 'Salons and beauty',
